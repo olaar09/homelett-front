@@ -1,11 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { Icon } from "@iconify/react";
-import HomeChatInput from "./components/chatInput";
-import { ChangeEvent } from "react";
 import Chip from "../components/Chip";
 import SubjectList from "./components/SubjectItem";
+import HomeChatInput from "./components/chatInput";
 
 const dummy = [
   { title: "CSS 101", description: "Electrical theory and assertions" },
@@ -29,8 +27,17 @@ const dummyPro = [
 const Chat = () => {
   return (
     <>
-      <section className="flex items-center  h-full flex-col justify-end  pt-24 ">
-        <div className="flex items-center gap-x-3">
+      <section className="flex items-center  h-full flex-col justify-end relative ">
+        <div className="h-12 w-full  sticky top-0 bg-background left-0 right-0 px-6">
+          <div className="flex items-center h-full w-full">
+            <Icon
+              icon={"material-symbols:menu"}
+              className="text-3xl cursor-pointer"
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-x-3 pt-28">
           <div className="w-14 h-14">
             <Icon
               className="text-foreground text-6xl"
