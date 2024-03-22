@@ -74,7 +74,7 @@ const HomeChatInput: React.FC<HomeChatInputProps> = ({ onChange }) => {
         type="text"
         placeholder={placeholder}
         onChange={onChange}
-        className="pl-3 shadow pr-10 bg-transparent py-2 h-12 rounded-full border-[0.5px] border-secondary focus:outline-none focus:border-primary focus:border-2 w-full transition-all text-sm text-foreground placeholder:text-foreground-secondary"
+        className="pl-3 shadow pr-10 bg-transparent py-2 h-12 rounded-full ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150"
       />
       <div className="absolute inset-y-0 right-0 pr-0 flex items-center">
         <Icon
