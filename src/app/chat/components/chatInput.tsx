@@ -1,11 +1,6 @@
 "use client";
 
-import React, {
-  ChangeEventHandler,
-  FunctionComponent,
-  useEffect,
-  useState,
-} from "react";
+import React, { ChangeEventHandler, useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 
 // Define the props the component accepts
