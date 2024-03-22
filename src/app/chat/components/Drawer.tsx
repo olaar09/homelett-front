@@ -1,4 +1,5 @@
 // components/SlideOut.tsx
+import TextAvatar from "@/app/components/TextAvatar";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useState } from "react";
 
@@ -7,6 +8,11 @@ type DrawerProps = {
   setIsOpen: (status: boolean) => void;
 };
 
+const menus = [
+  { title: "Settings", icon: "material-symbols:settings" },
+  { title: "Profile", icon: "iconamoon:profile-fill" },
+  { title: "Logout", icon: "streamline:logout-1-solid" },
+];
 const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
   return (
     <aside className=" lg:hidden">
@@ -32,7 +38,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="">
+        <div className=" h-full flex flex-col">
           <div className="h-16 flex items-center justify-between bg-panel px-4 py-2">
             <div className="flex items-center gap-x-2">
               <Icon
@@ -49,9 +55,36 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
               className="text-2xl text-foreground-secondary"
             />
           </div>
-          <div className="mt-2 px-2">
+          <div className="mt-2 px-4 h-5">
             <h2 className="text-foreground-secondary text-xs ">Recent</h2>
-            <p>This is the content of the slide-out panel.</p>
+          </div>
+
+          <div className="flex-1 overflow-y-scroll">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => {
+              return (
+                <div className="px-4 border-b-[0.1px] border-b-foreground-secondary h-16 mt-4 flex gap-x-2 items-start">
+                  <TextAvatar character={"A"} />
+                  <div>
+                    <span>CSS 101</span>
+                    <p className="text-xs text-foreground-secondary">
+                      This is the content of the slide-out panel.
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="  flex flex-col justify-end pb-3">
+            {menus.map((menu) => {
+              return (
+                <div className="px-4 bg-panel mx-2 rounded-lg border-b-foreground-secondary h-16 mt-4 flex gap-x-2 items-center">
+                  <div className="flex items-center gap-x-2">
+                    <Icon icon={menu.icon} />
+                    <span>{menu.title}</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

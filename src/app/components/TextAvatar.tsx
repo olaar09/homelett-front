@@ -9,7 +9,7 @@ interface TextAvatarProps {
 
 const TextAvatar: React.FC<TextAvatarProps> = ({
   character,
-  bgColor = "orange",
+  bgColor = "gray",
 }) => {
   return (
     <div
