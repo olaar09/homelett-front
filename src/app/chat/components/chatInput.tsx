@@ -9,11 +9,11 @@ import React, {
 import { Icon } from "@iconify/react";
 
 // Define the props the component accepts
-type HomeChatInputProps = {
+type ChatInputProps = {
   onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
-const HomeChatInput: React.FC<HomeChatInputProps> = ({ onChange }) => {
+const ChatInput: React.FC<ChatInputProps> = ({ onChange }) => {
   const [placeholder, setPlaceholder] = useState<string>("");
   const messages = [
     "Summarize the last class",
@@ -86,4 +86,4 @@ const HomeChatInput: React.FC<HomeChatInputProps> = ({ onChange }) => {
   );
 };
 
-export default HomeChatInput;
+export default ChatInput;

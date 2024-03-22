@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import Chip from "../components/Chip";
+import Chip from "@/app/components/Chip";
 import SubjectList from "./components/SubjectItem";
 import HomeChatInput from "./components/ChatInput";
 import { useState } from "react";
