@@ -11,11 +11,11 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
   return (
     <aside className=" lg:hidden">
       <button
-        className="fixed top-4 left-4 z-30 p-2 text-white bg-background rounded hover:bg-background"
+        className="fixed top-4 left-4 z-10 p-2 text-white bg-background rounded hover:bg-background"
         onClick={() => setIsOpen(!isOpen)}
       >
         <Icon
-          icon={isOpen ? "fluent-mdl2:cancel" : "material-symbols:menu"}
+          icon={"material-symbols:menu"}
           className="text-3xl cursor-pointer"
         />
       </button>
@@ -28,13 +28,31 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
       )}
 
       <div
-        className={`fixed top-0 left-0 z-20 w-64 h-full bg-background shadow-lg transform transition-transform ${
+        className={`fixed top-0 left-0 z-20 w-3/4 h-full bg-background shadow-lg transform transition-transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="p-4 mt-12">
-          <h2 className="text-lg font-bold">Slide-Out Content</h2>
-          <p>This is the content of the slide-out panel.</p>
+        <div className="">
+          <div className="h-16 flex items-center justify-between bg-panel px-4 py-2">
+            <div className="flex items-center gap-x-2">
+              <Icon
+                icon={"simple-icons:poe"}
+                className=" text-foreground text-3xl"
+              />
+              <span className=" text-foreground text-2xl font-bold pb-[0.5px]">
+                AfterClass
+              </span>
+            </div>
+            <Icon
+              icon={"jam:write-f"}
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-2xl text-foreground-secondary"
+            />
+          </div>
+          <div className="mt-2 px-2">
+            <h2 className="text-foreground-secondary text-xs ">Recent</h2>
+            <p>This is the content of the slide-out panel.</p>
+          </div>
         </div>
       </div>
     </aside>

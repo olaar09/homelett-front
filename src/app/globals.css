@@ -10,6 +10,7 @@
   --foreground-rgb: 35, 12, 128;
   --background-rgb: 255, 255, 255;
   --link-rgb: 147, 147, 247;
+  --panel-rgb: 36, 36, 36;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,6 +22,7 @@
     --foreground-rgb: 255, 255, 255;
     --background-rgb: 24, 24, 24;
     --link-rgb: 147, 147, 247;
+    --panel-rgb: 36, 36, 36;
   }
 }
 

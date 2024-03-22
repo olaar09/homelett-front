@@ -17,6 +17,7 @@ const config: Config = {
         "foreground-secondary": "rgb(var(--foreground-secondary-rgb))",
         background: "rgb(var(--background-rgb))",
         link: "rgb(var(--link-rgb))",
+        panel: "rgb(var(--panel-rgb))",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
