@@ -3,7 +3,9 @@
 import { Icon } from "@iconify/react";
 import Chip from "../components/Chip";
 import SubjectList from "./components/SubjectItem";
-import HomeChatInput from "./components/chatInput";
+import HomeChatInput from "./components/ChatInput";
+import { useState } from "react";
+import Drawer from "./components/Drawer";
 
 const dummy = [
   { title: "CSS 101", description: "Electrical theory and assertions" },
@@ -25,17 +27,20 @@ const dummyPro = [
 ];
 
 const Chat = () => {
+  const [openDrawer, setOpenDrawer] = useState(false);
+
   return (
     <>
+      <Drawer isOpen={openDrawer} setIsOpen={setOpenDrawer} />
       <section className="flex items-center  h-full flex-col justify-end relative ">
-        <div className="h-12 w-full  sticky top-0 bg-background left-0 right-0 px-6">
+        {/*      <div className="h-12 w-full  sticky top-0 bg-background left-0 right-0 px-6">
           <div className="flex items-center h-full w-full">
             <Icon
               icon={"material-symbols:menu"}
               className="text-3xl cursor-pointer"
             />
           </div>
-        </div>
+        </div> */}
 
         <div className="flex items-center gap-x-3 pt-28">
           <div className="w-14 h-14">

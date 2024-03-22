@@ -19,9 +19,12 @@ const SubjectList: React.FC<SubjectListProps> = ({
           <span className="text-xs text-link font-bold ">View all</span>
         </div>
         <div className="flex flex-nowrap overflow-x-scroll  gap-x-3">
-          {items.map((item) => {
+          {items.map((item, index) => {
             return (
-              <div className="flex flex-col gap-y-2 shrink-0 border border-foreground-secondary rounded-lg w-6/12 px-2 pt-2 h-32">
+              <div
+                key={index}
+                className="flex flex-col gap-y-2 shrink-0 border border-foreground-secondary rounded-lg w-6/12 px-2 pt-2 h-32"
+              >
                 <TextAvatar
                   character={item.title.substring(0, 1)}
                   bgColor="orange"
