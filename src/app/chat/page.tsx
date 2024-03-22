@@ -72,9 +72,10 @@ const Chat = () => {
         </div>
       </section>
 
-      <div className="flex flex-col gap-y-4 mt-24 ">
+      <div className="flex flex-col gap-y-4 mt-24 px-6 ">
         <SubjectList items={dummy} sectionTitle={"Subjects "} />
         <SubjectList items={dummyPro} sectionTitle={"Professional "} />
+        <SubjectList items={dummyPro} sectionTitle={"Featured "} />
       </div>
     </>
   );
