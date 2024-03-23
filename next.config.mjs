@@ -1,13 +1,19 @@
 import nextPWA from "next-pwa";
+const runtimeCaching = require("next-pwa/cache");
+
 const withPWA = nextPWA({
   dest: "public",
 });
 
 /** @type {import('next').NextConfig} */
 const nextConfig = withPWA({
-  // next.js config
-  experimental: {
-    appDir: true, // <---- Comment and Uncomment this
+  reactStrictMode: true,
+  pwa: {
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+    runtimeCaching,
+    buildExcludes: [/middleware-manifest.json$/],
   },
 });
 
