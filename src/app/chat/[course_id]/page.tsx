@@ -6,10 +6,13 @@ import SubjectList from "../_components/SubjectItem";
 import HomeChatInput from "../_components/ChatInput";
 import { useState } from "react";
 import Drawer from "../_components/Drawer";
+import Link from "next/link";
+import StickyHead from "@/app/components/Header";
 
 const Chat = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [hasChat, setHasChat] = useState(false);
+  const [selectedSubject, setSelectedSubject] = useState("CSS 101");
 
   return (
     <section
@@ -19,13 +22,9 @@ const Chat = () => {
     >
       <Drawer isOpen={openDrawer} setIsOpen={setOpenDrawer} />
 
-      <div
-        className={`h-14 w-full top-3 bg-background left-0 right-0 px-4 border-b-[0.5px] border-b-foreground-secondary ${
-          hasChat ? "sticky" : "fixed "
-        }`}
-      >
-        <div className="flex justify-between">
-          <div className="flex gap-x-4 items-start ">
+      <StickyHead hasContent={hasChat}>
+        <div className="flex justify-between items-center">
+          <div className="flex gap-x-4 items-center ">
             <div
               onClick={() => setOpenDrawer(true)}
               className="flex items-center h-full w-8"
@@ -40,7 +39,7 @@ const Chat = () => {
               onClick={() => setOpenDrawer(true)}
               className="flex items-center gap-x-2  px-1 py-1 w-32 h-10"
             >
-              <span className="font-bold">CSS 101</span>
+              <span className="font-bold">{selectedSubject}</span>
               <Icon
                 icon={"ri:arrow-drop-down-line"}
                 className="text-3xl cursor-pointer "
@@ -48,12 +47,17 @@ const Chat = () => {
             </div>
           </div>
 
-          <div className="flex items-center bg-panel px-3 py-1 rounded-lg gap-x-2">
-            <Icon icon={"octicon:apps-16"} className="text-md cursor-pointer" />
-            <span className="text-sm">New subject</span>
-          </div>
+          <Link href={"/chat/select_course"}>
+            <div className="flex items-center bg-panel px-3 py-1 rounded-lg gap-x-2">
+              <Icon
+                icon={"octicon:apps-16"}
+                className="text-md cursor-pointer"
+              />
+              <span className="text-sm">New subject</span>
+            </div>
+          </Link>
         </div>
-      </div>
+      </StickyHead>
 
       <div className="flex items-center gap-x-3 ">
         <div className="w-14 h-14">

@@ -6,6 +6,8 @@ import SubjectList from "../_components/SubjectItem";
 import HomeChatInput from "../_components/ChatInput";
 import { useState } from "react";
 import Drawer from "../_components/Drawer";
+import Link from "next/link";
+import StickyHead from "@/app/components/Header";
 
 const dummy = [
   { title: "CSS 101", description: "Electrical theory and assertions" },
@@ -30,13 +32,25 @@ const Chat = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   return (
-    <>
+    <div>
+      <StickyHead hasContent={false}>
+        <Link href={"/chat/1"}>
+          <div className="flex items-center  py-1 rounded-lg gap-x-2">
+            <Icon
+              icon={"material-symbols:arrow-back-ios-rounded"}
+              className="text-md cursor-pointer text-2xl"
+            />
+            <span className="text-lg">Add a new subject</span>
+          </div>
+        </Link>
+      </StickyHead>
+
       <div className="flex flex-col gap-y-4 mt-24 px-6 ">
         <SubjectList items={dummy} sectionTitle={"Subjects "} />
         <SubjectList items={dummyPro} sectionTitle={"Professional "} />
         <SubjectList items={dummyPro} sectionTitle={"Featured "} />
       </div>
-    </>
+    </div>
   );
 };
 
