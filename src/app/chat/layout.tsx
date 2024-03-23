@@ -2,10 +2,10 @@
 
 import { Icon } from "@iconify/react";
 import Chip from "@/app/components/Chip";
-import SubjectList from "./components/SubjectItem";
-import HomeChatInput from "./components/ChatInput";
+import SubjectList from "./_components/SubjectItem";
+import HomeChatInput from "./_components/ChatInput";
 import { useState } from "react";
-import Drawer from "./components/Drawer";
+import Drawer from "./_components/Drawer";
 
 import Head from "next/head";
 import Image from "next/image";
