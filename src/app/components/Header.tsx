@@ -12,9 +12,7 @@ interface StickyHeadProps {
 const StickyHead: React.FC<StickyHeadProps> = ({ hasContent, children }) => {
   return (
     <div
-      className={`h-14 w-full top-3 bg-background left-0 right-0 px-4 border-b-[0.5px] border-b-foreground-secondary ${
-        hasContent ? "sticky" : "fixed "
-      }`}
+      className={`h-14 w-full fixed top-0 bg-background left-0 right-0 px-4 pt-2 border-b-[0.5px] border-b-foreground-secondary `}
     >
       {children}
     </div>
