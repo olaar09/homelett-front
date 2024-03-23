@@ -1,5 +1,4 @@
 interface ISubjectItem {
   title: string;
   description: string;
-  amount: number;
 }
