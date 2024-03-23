@@ -7,52 +7,49 @@ import HomeChatInput from "./components/ChatInput";
 import { useState } from "react";
 import Drawer from "./components/Drawer";
 
-const dummy = [
-  { title: "CSS 101", description: "Electrical theory and assertions" },
-];
-
-const dummyPro = [
-  {
-    title: "Beginner Python",
-    description: "Beginning python programming from scratch",
-  },
-  {
-    title: "Beginner Javascript",
-    description: "Beginning python programming from scratch",
-  },
-  {
-    title: "Beginner React",
-    description: "Beginning python programming from scratch",
-  },
-];
-
 const Chat = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [hasChat, setHasChat] = useState(false);
 
   return (
-    <>
+    <section
+      className={`flex items-center  h-screen flex-col relative ${
+        hasChat ? "justify-start" : "justify-center"
+      }`}
+    >
       <Drawer isOpen={openDrawer} setIsOpen={setOpenDrawer} />
-      <section className="flex items-center  h-full flex-col justify-end relative ">
-        {/*      <div className="h-12 w-full  sticky top-0 bg-background left-0 right-0 px-6">
-          <div className="flex items-center h-full w-full">
+
+      <div className="h-14 w-full  fixed top-3 bg-background left-0 right-0 px-6 border-b-[0.5px] border-b-foreground-secondary">
+        <div className="flex gap-x-4 items-center ">
+          <div
+            onClick={() => setOpenDrawer(true)}
+            className="flex items-center h-full"
+          >
             <Icon
               icon={"material-symbols:menu"}
               className="text-3xl cursor-pointer"
             />
           </div>
-        </div> */}
 
-        <div className="flex items-center gap-x-3 pt-28">
-          <div className="w-14 h-14">
+          <div className="flex items-center gap-x-2 bg-panel px-3 py-1 rounded-lg">
+            <span className="font-bold">CSS 101</span>
             <Icon
-              className="text-foreground text-6xl"
-              icon="simple-icons:poe"
+              icon={"ri:arrow-drop-down-line"}
+              className="text-3xl cursor-pointer"
             />
           </div>
-          <span className=" text-foreground font-bold text-4xl">ASK</span>
         </div>
+      </div>
 
-        <div className="flex flex-row  items-center justify-between gap-x-2 mt-4">
+      <div className="flex items-center gap-x-3 ">
+        <div className="w-14 h-14">
+          <Icon className="text-foreground text-6xl" icon="simple-icons:poe" />
+        </div>
+        <span className=" text-foreground font-bold text-4xl">ASK</span>
+      </div>
+
+      <div className="fixed bottom-5">
+        <div className="flex flex-row  items-center justify-between gap-x-2 mt-4 ">
           <div className="shrink-0">
             <Chip
               title="Write"
@@ -79,17 +76,11 @@ const Chat = () => {
           </div>
         </div>
 
-        <div className="text-black w-full px-6 pt-7">
+        <div className="text-black w-full px-0 pt-7">
           <HomeChatInput onChange={() => console.log("")} />
         </div>
-      </section>
-
-      <div className="flex flex-col gap-y-4 mt-24 px-6 ">
-        <SubjectList items={dummy} sectionTitle={"Subjects "} />
-        <SubjectList items={dummyPro} sectionTitle={"Professional "} />
-        <SubjectList items={dummyPro} sectionTitle={"Featured "} />
       </div>
-    </>
+    </section>
   );
 };
 

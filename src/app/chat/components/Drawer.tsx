@@ -29,7 +29,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
 
   return (
     <aside className=" lg:hidden">
-      <button
+      {/*   <button
         className="fixed top-4 left-4 z-10 p-2 text-white bg-background rounded hover:bg-background"
         onClick={() => setIsOpen(!isOpen)}
       >
@@ -37,7 +37,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
           icon={"material-symbols:menu"}
           className="text-3xl cursor-pointer"
         />
-      </button>
+      </button> */}
 
       {isOpen && (
         <div
