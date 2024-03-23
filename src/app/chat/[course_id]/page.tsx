@@ -19,7 +19,11 @@ const Chat = () => {
     >
       <Drawer isOpen={openDrawer} setIsOpen={setOpenDrawer} />
 
-      <div className="h-14 w-full  fixed top-3 bg-background left-0 right-0 px-4 border-b-[0.5px] border-b-foreground-secondary">
+      <div
+        className={`h-14 w-full top-3 bg-background left-0 right-0 px-4 border-b-[0.5px] border-b-foreground-secondary ${
+          hasChat ? "sticky" : "fixed "
+        }`}
+      >
         <div className="flex gap-x-4 items-center ">
           <div
             onClick={() => setOpenDrawer(true)}
