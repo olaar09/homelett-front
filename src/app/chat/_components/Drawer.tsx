@@ -9,7 +9,7 @@ type DrawerProps = {
 };
 
 const menus = [
-  { title: "Settings", icon: "material-symbols:settings" },
+  { title: "Explore", icon: "material-symbols:settings" },
   { title: "Profile", icon: "iconamoon:profile-fill" },
   { title: "Logout", icon: "streamline:logout-1-solid" },
 ];
