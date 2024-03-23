@@ -31,7 +31,10 @@ const Chat = () => {
             />
           </div>
 
-          <div className="flex items-center gap-x-2 bg-panel px-3 py-1 rounded-lg">
+          <div
+            onClick={() => setOpenDrawer(true)}
+            className="flex items-center gap-x-2 bg-panel px-3 py-1 rounded-lg"
+          >
             <span className="font-bold">CSS 101</span>
             <Icon
               icon={"ri:arrow-drop-down-line"}

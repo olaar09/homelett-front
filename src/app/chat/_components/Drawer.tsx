@@ -69,7 +69,9 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
             />
           </div>
           <div className="mt-2 px-4 h-5">
-            <h2 className="text-foreground-secondary text-xs ">Recent</h2>
+            <h2 className="text-foreground-secondary text-xs ">
+              Subscriptions
+            </h2>
           </div>
 
           <div className="flex-1 overflow-y-scroll">
