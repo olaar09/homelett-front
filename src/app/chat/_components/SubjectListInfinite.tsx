@@ -24,7 +24,11 @@ const SubjectListInfinite: React.FC<SubjectListInfiniteProps> = ({
         <div className="flex flex-wrap gap-y-5">
           {items.map((item, index) => {
             return (
-              <div onClick={() => onSelect(item)} className="w-6/12 px-3">
+              <div
+                key={index}
+                onClick={() => onSelect(item)}
+                className="w-6/12 px-3"
+              >
                 <div
                   key={index}
                   className="flex flex-col gap-y-2 shrink-0 border border-foreground-secondary rounded-lg  px-2 pt-2 h-36"

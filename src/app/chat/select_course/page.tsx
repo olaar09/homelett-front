@@ -79,11 +79,9 @@ const Chat = () => {
 
   const [completingPayment, setCompletingPayment] = useState(false);
 
-  type callback = (response?: any) => void;
-
   const config = {
     reference: new Date().getTime().toString(),
-    email: currentUser?.email,
+    email: "agboolar09@gmail.com",
     amount: (amount ?? 0) * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
     publicKey: "pk_test_0bd51a9b53a2c80ead3d84d11b27e4f51659e5f5",
   };
@@ -111,18 +109,21 @@ const Chat = () => {
   };
 
   const onSuccess = (reference: string) => {
-    handlePayment(reference);
+    message.success("Payment success");
+    console.log(reference);
+    // handlePayment(reference);
   };
 
   // you can call this function anything
   const onClose = () => {
     // implementation for  whatever you want to do when the Paystack dialog closed.
     console.log("closed");
+    message.error("Payment cancelled");
   };
 
   const onInitPayment = () => {
     try {
-      initializePayment(onSuccess, onClose);
+      initializePayment({ onSuccess, onClose });
     } catch (x) {
       message.error("Unable to initialize payment");
       console.log(x, "Error occured");
