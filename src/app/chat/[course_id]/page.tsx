@@ -19,7 +19,7 @@ const Chat = () => {
     >
       <Drawer isOpen={openDrawer} setIsOpen={setOpenDrawer} />
 
-      <div className="h-14 w-full  fixed top-3 bg-background left-0 right-0 px-6 border-b-[0.5px] border-b-foreground-secondary">
+      <div className="h-14 w-full  fixed top-3 bg-background left-0 right-0 px-4 border-b-[0.5px] border-b-foreground-secondary">
         <div className="flex gap-x-4 items-center ">
           <div
             onClick={() => setOpenDrawer(true)}
@@ -51,8 +51,8 @@ const Chat = () => {
         <span className=" text-foreground font-bold text-4xl">ASK</span>
       </div>
 
-      <div className="fixed bottom-5">
-        <div className="flex flex-row  items-center justify-between gap-x-2 mt-4 ">
+      <div className="fixed bottom-5  left-0 right-0 px-4">
+        <div className="flex flex-row  items-center justify-evenly gap-x-2 mt-4 ">
           <div className="shrink-0">
             <Chip
               title="Write"
@@ -79,7 +79,7 @@ const Chat = () => {
           </div>
         </div>
 
-        <div className="text-black w-full px-0 pt-7">
+        <div className="text-black w-full  pt-7">
           <HomeChatInput onChange={() => console.log("")} />
         </div>
       </div>
