@@ -6,6 +6,9 @@ const withPWA = nextPWA({
 /** @type {import('next').NextConfig} */
 const nextConfig = withPWA({
   // next.js config
+  experimental: {
+    appDir: true, // <---- Comment and Uncomment this
+  },
 });
 
 export default nextConfig;

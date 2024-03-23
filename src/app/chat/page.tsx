@@ -52,7 +52,7 @@ const Chat = () => {
           <span className=" text-foreground font-bold text-4xl">ASK</span>
         </div>
 
-        <div className="flex flex-row flex-nowrap  overflow-x-scroll w-full px-6 py-1 space-x-2 mt-10">
+        <div className="flex flex-row  items-center justify-between">
           <div className="shrink-0">
             <Chip
               title="Write"
