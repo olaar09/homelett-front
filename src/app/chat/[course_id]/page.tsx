@@ -27,7 +27,7 @@ const Chat = () => {
         <div className="flex gap-x-4 items-center ">
           <div
             onClick={() => setOpenDrawer(true)}
-            className="flex items-center h-full"
+            className="flex items-center h-full w-8"
           >
             <Icon
               icon={"material-symbols:menu"}
@@ -37,12 +37,12 @@ const Chat = () => {
 
           <div
             onClick={() => setOpenDrawer(true)}
-            className="flex items-center gap-x-2 bg-panel px-3 py-1 rounded-lg"
+            className="flex items-center gap-x-2 bg-panel px-3 py-1 rounded-lg w-32 h-10"
           >
             <span className="font-bold">CSS 101</span>
             <Icon
               icon={"ri:arrow-drop-down-line"}
-              className="text-3xl cursor-pointer"
+              className="text-3xl cursor-pointer "
             />
           </div>
         </div>
