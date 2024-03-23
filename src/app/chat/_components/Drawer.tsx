@@ -9,8 +9,8 @@ type DrawerProps = {
 };
 
 const menus = [
-  { title: "Explore", icon: "material-symbols:settings" },
-  { title: "Profile", icon: "iconamoon:profile-fill" },
+  { title: "Explore", icon: "octicon:apps-16" },
+  { title: "Profile", icon: "material-symbols:settings" },
   { title: "Logout", icon: "streamline:logout-1-solid" },
 ];
 const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
