@@ -24,26 +24,33 @@ const Chat = () => {
           hasChat ? "sticky" : "fixed "
         }`}
       >
-        <div className="flex gap-x-4 items-start ">
-          <div
-            onClick={() => setOpenDrawer(true)}
-            className="flex items-center h-full w-8"
-          >
-            <Icon
-              icon={"material-symbols:menu"}
-              className="text-3xl cursor-pointer"
-            />
+        <div className="flex justify-between">
+          <div className="flex gap-x-4 items-start ">
+            <div
+              onClick={() => setOpenDrawer(true)}
+              className="flex items-center h-full w-8"
+            >
+              <Icon
+                icon={"material-symbols:menu"}
+                className="text-3xl cursor-pointer"
+              />
+            </div>
+
+            <div
+              onClick={() => setOpenDrawer(true)}
+              className="flex items-center gap-x-2  px-1 py-1 w-32 h-10"
+            >
+              <span className="font-bold">CSS 101</span>
+              <Icon
+                icon={"ri:arrow-drop-down-line"}
+                className="text-3xl cursor-pointer "
+              />
+            </div>
           </div>
 
-          <div
-            onClick={() => setOpenDrawer(true)}
-            className="flex items-center gap-x-2 bg-panel px-3 py-1 rounded-lg w-32 h-10"
-          >
-            <span className="font-bold">CSS 101</span>
-            <Icon
-              icon={"ri:arrow-drop-down-line"}
-              className="text-3xl cursor-pointer "
-            />
+          <div className="flex items-center bg-panel px-3 py-1 rounded-lg gap-x-2">
+            <Icon icon={"octicon:apps-16"} className="text-md cursor-pointer" />
+            <span className="text-sm">New subject</span>
           </div>
         </div>
       </div>
