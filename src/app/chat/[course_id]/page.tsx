@@ -24,7 +24,7 @@ const Chat = () => {
           hasChat ? "sticky" : "fixed "
         }`}
       >
-        <div className="flex gap-x-4 items-center ">
+        <div className="flex gap-x-4 items-start ">
           <div
             onClick={() => setOpenDrawer(true)}
             className="flex items-center h-full w-8"
