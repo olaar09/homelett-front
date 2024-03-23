@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import type { Viewport } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,15 +28,16 @@ export const metadata: Metadata = {
     title: "AfterClass",
     images: "",
   },
-  /*   viewport: {
-    minimumScale: 1,
-    initialScale: 1,
-    width: "device-width",
-    userScalable: false,
-    viewportFit: "cover",
-  }, */
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  // Also supported by less commonly used
+  // interactiveWidget: 'resizes-visual',
+};
 /* <!-- apple splash screen images -->
 <!--
 <link rel='apple-touch-startup-image' href='/images/apple_splash_2048.png' sizes='2048x2732' />

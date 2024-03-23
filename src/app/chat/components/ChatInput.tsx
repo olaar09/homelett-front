@@ -69,7 +69,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onChange }) => {
         type="text"
         placeholder={placeholder}
         onChange={onChange}
-        className="pl-3 shadow pr-10 bg-transparent py-2 h-12 rounded-full ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150"
+        className="pl-3 shadow pr-10 bg-transparent py-2 h-12 rounded-full ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none"
       />
       <div className="absolute inset-y-0 right-0 pr-0 flex items-center">
         <Icon

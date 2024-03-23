@@ -52,7 +52,7 @@ const Chat = () => {
           <span className=" text-foreground font-bold text-4xl">ASK</span>
         </div>
 
-        <div className="flex flex-row  items-center justify-between">
+        <div className="flex flex-row  items-center justify-between gap-x-2 mt-4">
           <div className="shrink-0">
             <Chip
               title="Write"
@@ -79,7 +79,7 @@ const Chat = () => {
           </div>
         </div>
 
-        <div className="text-black w-full px-6">
+        <div className="text-black w-full px-6 pt-7">
           <HomeChatInput onChange={() => console.log("")} />
         </div>
       </section>

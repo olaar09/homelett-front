@@ -1,7 +1,7 @@
 // components/SlideOut.tsx
 import TextAvatar from "@/app/components/TextAvatar";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type DrawerProps = {
   isOpen: boolean;
@@ -14,6 +14,19 @@ const menus = [
   { title: "Logout", icon: "streamline:logout-1-solid" },
 ];
 const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
+  useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    if (isOpen) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, [isOpen]);
+
   return (
     <aside className=" lg:hidden">
       <button

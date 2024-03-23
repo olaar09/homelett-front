@@ -8,6 +8,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      utilities: {
+        ".no-scroll": {
+          overflow: "hidden",
+          height: "100%",
+        },
+      },
       colors: {
         primary: "rgb(var(--primary-rgb))",
         secondary: "rgb(var(--foreground-secondary-rgb))",

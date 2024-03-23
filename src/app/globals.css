@@ -79,6 +79,14 @@ html {
   animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
 }
 
+/* Add this to your global CSS file */
+.no-scroll {
+  overflow: hidden !important;
+  height: 35vh !important;
+  position: relative; /* Prevent scrolling on iOS */
+  width: 100% !important;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
