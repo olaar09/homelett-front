@@ -8,7 +8,8 @@ import Link from "next/link";
 import StickyHead from "@/app/components/Header";
 import SubjectListInfinite from "../_components/SubjectListInfinite";
 import { usePaystackPayment } from "react-paystack";
-import { message } from "antd";
+import { Spin, message } from "antd";
+import APIUtil from "@/services/APIUtil";
 
 const dummy = [
   { title: "CSS 101", description: "Electrical theory and assertions" },
@@ -74,15 +75,17 @@ const dummyPro = [
 
 const Chat = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [amount, setAmount] = useState(0);
+  const [selectedSubject, setSelectedSubject] = useState<ISubjectItem | null>(
+    null
+  );
   const [currentUser, setcurrentUser] = useState(null);
-
   const [completingPayment, setCompletingPayment] = useState(false);
+  const apiUtil = new APIUtil();
 
   const config = {
     reference: new Date().getTime().toString(),
     email: "agboolar09@gmail.com",
-    amount: (amount ?? 0) * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+    amount: (selectedSubject?.amount ?? 0) * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
     publicKey: "pk_test_0bd51a9b53a2c80ead3d84d11b27e4f51659e5f5",
   };
 
@@ -90,28 +93,29 @@ const Chat = () => {
   const completeTrx = async (reference: string) => {};
 
   useEffect(() => {
-    if (amount && amount > 0) {
+    if (selectedSubject && selectedSubject.amount > 0) {
       onInitPayment();
     }
-  }, [amount]);
+  }, [selectedSubject?.amount]);
 
-  const handlePayment = async (result: any) => {
+  const onSuccess = (reference: string) => {
+    completePayment(reference);
+  };
+
+  const completePayment = async (reference: string) => {
     try {
       setCompletingPayment(true);
-      await completeTrx(result?.reference ?? "");
-      message.success("Transaction successful");
+      await apiUtil.subjectService.addSubject({
+        paymentReference: reference,
+        subjectId: selectedSubject!.title,
+      });
+      message.success("Subject added");
       // await refreshUsr();
       setCompletingPayment(false);
     } catch (x) {
       message.error("Unable to complete transaction");
       setCompletingPayment(false);
     }
-  };
-
-  const onSuccess = (reference: string) => {
-    message.success("Payment success");
-    console.log(reference);
-    // handlePayment(reference);
   };
 
   // you can call this function anything
@@ -128,31 +132,33 @@ const Chat = () => {
       message.error("Unable to initialize payment");
       console.log(x, "Error occured");
     } finally {
-      setAmount(0);
+      setSelectedSubject(null);
     }
   };
 
   const onSubjectSelected = (subject: ISubjectItem) => {
-    setAmount(subject.amount);
+    setSelectedSubject(subject);
   };
 
   return (
     <div>
-      <StickyHead hasContent={true}>
-        <Link href={"/chat/1"}>
-          <div className="flex items-center  py-1 rounded-lg gap-x-2">
-            <Icon
-              icon={"material-symbols:arrow-back-ios-rounded"}
-              className="text-md cursor-pointer text-2xl"
-            />
-            <span className="text-lg">Add a new subject</span>
-          </div>
-        </Link>
-      </StickyHead>
+      <Spin spinning={completingPayment}>
+        <StickyHead hasContent={true}>
+          <Link href={"/chat/1"}>
+            <div className="flex items-center  py-1 rounded-lg gap-x-2">
+              <Icon
+                icon={"material-symbols:arrow-back-ios-rounded"}
+                className="text-md cursor-pointer text-2xl"
+              />
+              <span className="text-lg">Add a new subject</span>
+            </div>
+          </Link>
+        </StickyHead>
 
-      <div className="flex flex-col gap-y-4 mt-24  ">
-        <SubjectListInfinite onSelect={onSubjectSelected} items={dummyPro} />
-      </div>
+        <div className="flex flex-col gap-y-4 mt-24  ">
+          <SubjectListInfinite onSelect={onSubjectSelected} items={dummyPro} />
+        </div>
+      </Spin>
     </div>
   );
 };
