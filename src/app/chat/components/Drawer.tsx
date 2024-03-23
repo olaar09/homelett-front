@@ -73,9 +73,12 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
           </div>
 
           <div className="flex-1 overflow-y-scroll">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => {
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((val, index) => {
               return (
-                <div className="px-4 border-b-[0.1px] border-b-foreground-secondary h-16 mt-4 flex gap-x-2 items-start">
+                <div
+                  key={index}
+                  className="px-4 border-b-[0.1px] border-b-foreground-secondary h-16 mt-4 flex gap-x-2 items-start"
+                >
                   <TextAvatar character={"A"} />
                   <div>
                     <span>CSS 101</span>
@@ -88,9 +91,12 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
             })}
           </div>
           <div className="  flex flex-col justify-end pb-3">
-            {menus.map((menu) => {
+            {menus.map((menu, index) => {
               return (
-                <div className="px-4 bg-panel mx-2 rounded-lg border-b-foreground-secondary h-16 mt-4 flex gap-x-2 items-center">
+                <div
+                  key={index}
+                  className="px-4 bg-panel mx-2 rounded-lg border-b-foreground-secondary h-16 mt-4 flex gap-x-2 items-center"
+                >
                   <div className="flex items-center gap-x-2">
                     <Icon icon={menu.icon} />
                     <span>{menu.title}</span>

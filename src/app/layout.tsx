@@ -8,6 +8,7 @@ import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  manifest: "/manifest.json",
   title: "AfterClass",
   description: "Ask your lecture notes any question after class",
   applicationName: "AfterClass",
