@@ -10,7 +10,6 @@ import { usePaystackPayment } from "react-paystack";
 import { Spin, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
-import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
 import { useRequest } from "ahooks";
 import TextAvatar from "@/app/components/TextAvatar";
 
@@ -56,12 +55,12 @@ const Chat = () => {
     completePayment(reference);
   };
 
-  const completePayment = async (reference: string) => {
+  const completePayment = async (data: any) => {
     try {
       setCompletingPayment(true);
       await apiUtil.subjectService.addSubject({
-        paymentReference: reference,
-        subjectId: selectedSubject!.title,
+        paymentReference: data.reference,
+        subjectId: selectedSubject!.id,
       });
       message.success("Subject added");
       // await refreshUsr();
