@@ -8,11 +8,13 @@ import FirebaseContext from "./FirebaseContext";
 interface IAuthContext {
   currentUser: firebase.User | null;
   authenticated: boolean;
+  loading: boolean;
 }
 
-const FireBaseAuthContext = createContext<IAuthContext>({
+export const FireBaseAuthContext = createContext<IAuthContext>({
   currentUser: null,
   authenticated: false,
+  loading: false,
 });
 
 export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
@@ -28,14 +30,17 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
   useEffect(() => {
     const unsubscribe = firebase!.authService.firebaseInstance
       .auth()
-      .onAuthStateChanged((user) => {
-        console.log("STATE CHANGE", user);
+      .onAuthStateChanged(async (user) => {
         if (user) {
           setCurrentUser(user);
           if (path === "/") {
-            router.push("/chat/1");
+            router.push("/chat");
+          }
+          if (!currentUserProfile) {
+            await fetchCurrentUserProfile();
           }
         } else {
+          setCurrentUserProfile(null);
           setCurrentUser(null);
           if (path !== "/") {
             const queryParams = new URLSearchParams(params).toString();
@@ -47,8 +52,16 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
     return () => unsubscribe();
   }, [router]);
 
+  const fetchCurrentUserProfile = async () => {
+    setLoading(true);
+    // get profile
+    //  setLoading(false);
+  };
+
   return (
-    <FireBaseAuthContext.Provider value={{ currentUser, authenticated }}>
+    <FireBaseAuthContext.Provider
+      value={{ loading, currentUser, authenticated }}
+    >
       {children}
     </FireBaseAuthContext.Provider>
   );

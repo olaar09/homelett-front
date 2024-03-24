@@ -2,18 +2,26 @@
 
 import { Icon } from "@iconify/react";
 import Chip from "@/app/components/Chip";
-import SubjectList from "../_components/SubjectItem";
-import HomeChatInput from "../_components/ChatInput";
-import { useState } from "react";
-import Drawer from "../_components/Drawer";
+import SubjectList from "./_components/SubjectItem";
+import HomeChatInput from "./_components/ChatInput";
+import { useContext, useState } from "react";
+import Drawer from "./_components/Drawer";
 import Link from "next/link";
 import StickyHead from "@/app/components/Header";
+import {
+  FireBaseAuthContext,
+  FireBaseAuthProvider,
+} from "@/contexts/FireBaseAuthContext";
 
 const Chat = () => {
+  const auth = useContext(FireBaseAuthContext);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [hasChat, setHasChat] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState("CSS 101");
 
+  const onOpenDrawer = () => {
+    if (!auth.loading) setOpenDrawer(true);
+  };
   return (
     <section
       className={`flex items-center  h-screen flex-col relative ${
@@ -26,7 +34,7 @@ const Chat = () => {
         <div className="flex justify-between items-center">
           <div className="flex gap-x-4 items-center ">
             <div
-              onClick={() => setOpenDrawer(true)}
+              onClick={onOpenDrawer}
               className="flex items-center h-full w-8"
             >
               <Icon
@@ -35,16 +43,25 @@ const Chat = () => {
               />
             </div>
 
-            <div
-              onClick={() => setOpenDrawer(true)}
-              className="flex items-center gap-x-2  px-1 py-1 w-32 h-10"
-            >
-              <span className="font-bold">{selectedSubject}</span>
+            {!auth.loading && (
+              <div
+                onClick={onOpenDrawer}
+                className="flex items-center gap-x-2  px-1 py-1 w-32 h-10"
+              >
+                <span className="font-bold">{selectedSubject}</span>
+                <Icon
+                  icon={"ri:arrow-drop-down-line"}
+                  className="text-3xl cursor-pointer "
+                />
+              </div>
+            )}
+
+            {auth.loading && (
               <Icon
-                icon={"ri:arrow-drop-down-line"}
+                icon={"eos-icons:three-dots-loading"}
                 className="text-3xl cursor-pointer "
               />
-            </div>
+            )}
           </div>
 
           <Link href={"/chat/select_course"}>
@@ -95,7 +112,10 @@ const Chat = () => {
         </div>
 
         <div className="text-black w-full  pt-7">
-          <HomeChatInput onChange={() => console.log("")} />
+          <HomeChatInput
+            disabled={auth.loading}
+            onChange={() => console.log("")}
+          />
         </div>
       </div>
     </section>

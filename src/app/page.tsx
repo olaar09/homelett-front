@@ -8,13 +8,14 @@ import { message } from "antd";
 import { useContext, useState } from "react";
 import FirebaseContext from "@/contexts/FirebaseContext";
 import { FirebaseError } from "firebase/app";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
   const firebase = useContext(FirebaseContext);
   const query = useSearchParams();
+  const router = useRouter();
 
   const onChangeForm = (name: string, value: string) => {
     setForm({ ...form, [name]: value });
@@ -37,6 +38,7 @@ export default function Home() {
       }
 
       message.success("Login successful");
+      router.push("/chat/1");
     } catch (error) {
       if (error instanceof FirebaseError) {
         console.log(error.message);

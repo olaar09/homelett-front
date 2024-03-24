@@ -2,6 +2,7 @@
 import TextAvatar from "@/app/components/TextAvatar";
 import FirebaseContext from "@/contexts/FirebaseContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 
 type DrawerProps = {
@@ -11,6 +12,7 @@ type DrawerProps = {
 
 const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
   const services = useContext(FirebaseContext);
+  const router = useRouter();
 
   const menus = [
     { title: "Explore", icon: "octicon:apps-16" },
@@ -18,9 +20,10 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
     {
       title: "Logout",
       icon: "streamline:logout-1-solid",
-      click: () => {
+      click: async () => {
         setIsOpen(false);
-        services!.authService.logout();
+        await services!.authService.logout();
+        router.push("/");
       },
     },
   ];

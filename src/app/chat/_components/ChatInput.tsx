@@ -5,10 +5,11 @@ import { Icon } from "@iconify/react";
 
 // Define the props the component accepts
 type ChatInputProps = {
+  disabled: boolean;
   onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
-const ChatInput: React.FC<ChatInputProps> = ({ onChange }) => {
+const ChatInput: React.FC<ChatInputProps> = ({ onChange, disabled }) => {
   const [placeholder, setPlaceholder] = useState<string>("");
   const messages = [
     "Summarize the last class",
@@ -67,6 +68,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onChange }) => {
     <div className="relative w-full">
       <input
         type="text"
+        readOnly={disabled}
         placeholder={placeholder}
         onChange={onChange}
         className="pl-3 shadow pr-10 bg-transparent py-2 h-12 rounded-full ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none"
