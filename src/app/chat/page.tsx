@@ -13,9 +13,7 @@ import GroupCodeDrawer from "./_components/GroupCodeDrawer";
 const Chat = () => {
   const auth = useContext(FireBaseAuthContext);
   const [openDrawer, setOpenDrawer] = useState(false);
-
   const [hasChat, setHasChat] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState("CSS 101");
 
   const onOpenDrawer = () => {
     setOpenDrawer(true);

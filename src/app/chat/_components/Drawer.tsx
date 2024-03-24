@@ -1,5 +1,6 @@
 // components/SlideOut.tsx
 import TextAvatar from "@/app/components/TextAvatar";
+import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
 import FirebaseContext from "@/contexts/FirebaseContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useRouter } from "next/navigation";
@@ -12,6 +13,8 @@ type DrawerProps = {
 
 const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
   const services = useContext(FirebaseContext);
+  const auth = useContext(FireBaseAuthContext);
+
   const router = useRouter();
 
   const menus = [
@@ -89,22 +92,24 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
           </div>
 
           <div className="flex-1 overflow-y-scroll">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((val, index) => {
-              return (
-                <div
-                  key={index}
-                  className="px-4 border-b-[0.1px] border-b-foreground-secondary h-16 mt-4 flex gap-x-2 items-start"
-                >
-                  <TextAvatar character={"A"} />
-                  <div>
-                    <span>CSS 101</span>
-                    <p className="text-xs text-foreground-secondary">
-                      This is the content of the slide-out panel.
-                    </p>
+            {(auth.currentUserProfile?.subscribedSubjects ?? []).map(
+              (val, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="px-4 border-b-[0.1px] border-b-foreground-secondary h-16 mt-4 flex gap-x-2 items-start"
+                  >
+                    <TextAvatar character={"A"} />
+                    <div>
+                      <span className="truncate">{val.title}</span>
+                      <p className="text-xs text-foreground-secondary truncate">
+                        {val.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              }
+            )}
           </div>
           <div className="  flex flex-col justify-end pb-3">
             {menus.map((menu, index) => {
