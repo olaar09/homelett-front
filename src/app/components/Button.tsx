@@ -4,7 +4,7 @@ import React, { ChangeEventHandler } from "react";
 type InputFieldProps = {
   text: string;
   type: "button" | "submit" | "reset";
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const ACButton: React.FC<InputFieldProps> = ({
