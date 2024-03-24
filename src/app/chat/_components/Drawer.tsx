@@ -97,12 +97,15 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
                 return (
                   <div
                     key={index}
-                    className="px-4 border-b-[0.1px] border-b-foreground-secondary h-16 mt-4 flex gap-x-2 items-start"
+                    className="px-2 border-b-[0.1px] border-b-foreground-secondary h-16 mt-4 flex gap-x-6 items-start"
                   >
-                    <TextAvatar character={"A"} />
-                    <div>
+                    <div className="w-2">
+                      <TextAvatar character={"A"} />
+                    </div>
+
+                    <div className="flex-grow ml-4">
                       <span className="truncate">{val.title}</span>
-                      <p className="text-xs text-foreground-secondary truncate">
+                      <p className="text-xs text-foreground-secondary truncate whitespace-break-spaces">
                         {val.description}
                       </p>
                     </div>
