@@ -20,9 +20,8 @@ class SubjectService {
 
   async addSubject(newSubject: INewSubject): Promise<ISubjectItem> {
     try {
-      const addedSubject = await this.apiService.post(
-        "/add_subject",
-        newSubject
+      const addedSubject = await this.apiService.get(
+        `/add_subject?reference=${newSubject.paymentReference}&subject_id=${newSubject.subjectId}`
       );
       return addedSubject as ISubjectItem;
     } catch (error) {

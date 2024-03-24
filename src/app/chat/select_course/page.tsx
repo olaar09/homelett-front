@@ -12,6 +12,8 @@ import APIUtil from "@/services/APIUtil";
 import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
 import { useRequest } from "ahooks";
 import TextAvatar from "@/app/components/TextAvatar";
+import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
+import { useRouter } from "next/navigation";
 
 const Chat = () => {
   const [selectedSubject, setSelectedSubject] = useState<ISubjectItem | null>(
@@ -20,7 +22,9 @@ const Chat = () => {
 
   //const currentAuth = useContext(FireBaseAuthContext);
   const [completingPayment, setCompletingPayment] = useState(false);
+  const authContext = useContext(FireBaseAuthContext);
   const apiUtil = new APIUtil();
+  const router = useRouter();
 
   const listSubjects = async (): Promise<ISubjectItem[] | undefined> => {
     try {
@@ -63,7 +67,8 @@ const Chat = () => {
         subjectId: selectedSubject!.id,
       });
       message.success("Subject added");
-      // await refreshUsr();
+      await authContext.refreshProfile();
+      router.push("/chat");
       setCompletingPayment(false);
     } catch (x) {
       message.error("Unable to complete transaction");
