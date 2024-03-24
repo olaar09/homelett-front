@@ -36,7 +36,7 @@ const Chat = () => {
       <Drawer isOpen={openDrawer} setIsOpen={setOpenDrawer} />
       <GroupCodeDrawer
         onClose={() => console.log("")}
-        open={!auth.loading && notHasGroup}
+        open={auth && auth!.currentUser! && !auth.loading && notHasGroup}
         items={[]}
       />
 

@@ -16,7 +16,7 @@ class APIService {
 
   private async getIdToken(): Promise<string> {
     const user = firebase.auth().currentUser;
-    if (!user) throw new Error("User not authenticated");
+    if (!user) return "";
     return user.getIdToken();
   }
 
