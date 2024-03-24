@@ -38,7 +38,7 @@ export default function Home() {
       }
 
       message.success("Login successful");
-      router.push("/chat/1");
+      router.push("/chat");
     } catch (error) {
       if (error instanceof FirebaseError) {
         console.log(error.message);

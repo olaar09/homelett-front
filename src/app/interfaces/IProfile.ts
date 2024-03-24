@@ -3,11 +3,12 @@ import { ISubjectGroup } from "./ISubjectGroup";
 import { ISubjectItem } from "./ISubjectItem";
 
 export interface IProfile {
-  id: string;
+  id?: string;
   uid: string;
   user: firebase.User;
-  school: ISubjectGroup;
-  currentSubject: ISubjectItem;
-  currentSubjectId: string;
+  group?: ISubjectGroup;
+  groupId?: string;
+  currentSubject?: ISubjectItem;
+  currentSubjectId?: string;
   subscribedSubjects: ISubjectItem[];
 }

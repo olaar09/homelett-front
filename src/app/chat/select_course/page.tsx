@@ -10,6 +10,7 @@ import SubjectListInfinite from "../_components/SubjectListInfinite";
 import { usePaystackPayment } from "react-paystack";
 import { Spin, message } from "antd";
 import APIUtil from "@/services/APIUtil";
+import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
 
 const dummy = [
   { title: "CSS 101", description: "Electrical theory and assertions" },
@@ -144,7 +145,7 @@ const Chat = () => {
     <div>
       <Spin spinning={completingPayment}>
         <StickyHead hasContent={true}>
-          <Link href={"/chat/1"}>
+          <Link href={"/chat"}>
             <div className="flex items-center  py-1 rounded-lg gap-x-2">
               <Icon
                 icon={"material-symbols:arrow-back-ios-rounded"}

@@ -4,6 +4,7 @@ import firebase from "firebase/compat/app";
 import "firebase/auth";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FirebaseContext from "./FirebaseContext";
+import { message } from "antd";
 
 interface IAuthContext {
   currentUser: firebase.User | null;
@@ -20,7 +21,7 @@ export const FireBaseAuthContext = createContext<IAuthContext>({
 });
 
 export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
-  const firebase = useContext(FirebaseContext);
+  const firebaseInstance = useContext(FirebaseContext);
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   const [currentUserProfile, setCurrentUserProfile] = useState<null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -30,22 +31,25 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
   const params = useSearchParams();
 
   useEffect(() => {
-    const unsubscribe = firebase!.authService.firebaseInstance
+    const unsubscribe = firebaseInstance!.authService.firebaseInstance
       .auth()
       .onAuthStateChanged(async (user) => {
+        const queryParams = new URLSearchParams(params).toString();
         if (user) {
           setCurrentUser(user);
           if (path === "/") {
-            router.push("/chat");
+            router.push(`/chat${queryParams ? `?${queryParams}` : ""}`);
           }
           if (!currentUserProfile) {
-            await fetchCurrentUserProfile();
+            await fetchCurrentUserProfile(
+              user,
+              params.get("group") ?? undefined
+            );
           }
         } else {
           setCurrentUserProfile(null);
           setCurrentUser(null);
           if (path !== "/") {
-            const queryParams = new URLSearchParams(params).toString();
             router.push(`/${queryParams ? `?${queryParams}` : ""}`);
           }
         }
@@ -54,10 +58,45 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
     return () => unsubscribe();
   }, [router]);
 
-  const fetchCurrentUserProfile = async () => {
-    setLoading(true);
-    // get profile
-    //  setLoading(false);
+  const fetchCurrentUserProfile = async (
+    user: firebase.User,
+    group?: string
+  ) => {
+    try {
+      setLoading(true);
+      let profile;
+      profile = await firebaseInstance!.profileService.fetchProfile(user.uid);
+      if (!profile) {
+        let data;
+        if (group) {
+          data = {
+            uid: user.uid,
+            subscribedSubjects: [],
+            groupId: group,
+            user: user,
+          };
+        } else {
+          data = {
+            uid: user.uid,
+            subscribedSubjects: [],
+            user: {
+              email: user.email,
+              displayName: user.displayName,
+              uid: user.uid,
+            } as firebase.User,
+          };
+        }
+        profile = await firebaseInstance!.profileService.addOrUpdateProfile(
+          data
+        );
+      }
+      setCurrentUserProfile(profile);
+    } catch (error) {
+      message.error("An error occurred while fetching profile");
+      // call bugsnag
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

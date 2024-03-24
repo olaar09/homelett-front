@@ -34,10 +34,8 @@ export default class ProfileServices {
 
   async addOrUpdateProfile(profile: IProfile): Promise<void> {
     try {
-      await this.firestore
-        .collection("profiles")
-        .doc(profile.uid)
-        .set(profile, { merge: true });
+      const doc = this.firestore.collection("profiles").doc(profile.uid);
+      await doc.set({ ...profile, id: doc.id }, { merge: true });
       console.log("Profile added or updated successfully");
     } catch (error) {
       console.error("Error adding or updating profile:", error);
