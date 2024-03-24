@@ -2,16 +2,12 @@
 
 import { Icon } from "@iconify/react";
 import Chip from "@/app/components/Chip";
-import SubjectList from "./_components/SubjectItem";
 import HomeChatInput from "./_components/ChatInput";
 import { useContext, useState } from "react";
 import Drawer from "./_components/Drawer";
 import Link from "next/link";
 import StickyHead from "@/app/components/Header";
-import {
-  FireBaseAuthContext,
-  FireBaseAuthProvider,
-} from "@/contexts/FireBaseAuthContext";
+import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
 
 const Chat = () => {
   const auth = useContext(FireBaseAuthContext);
@@ -20,7 +16,7 @@ const Chat = () => {
   const [selectedSubject, setSelectedSubject] = useState("CSS 101");
 
   const onOpenDrawer = () => {
-    if (!auth.loading) setOpenDrawer(true);
+    setOpenDrawer(true);
   };
   return (
     <section
@@ -43,7 +39,7 @@ const Chat = () => {
               />
             </div>
 
-            {!auth.loading && (
+            {auth.currentUserProfile && (
               <div
                 onClick={onOpenDrawer}
                 className="flex items-center gap-x-2  px-1 py-1 w-32 h-10"
@@ -56,7 +52,7 @@ const Chat = () => {
               </div>
             )}
 
-            {auth.loading && (
+            {!auth.currentUserProfile && (
               <Icon
                 icon={"eos-icons:three-dots-loading"}
                 className="text-3xl cursor-pointer "

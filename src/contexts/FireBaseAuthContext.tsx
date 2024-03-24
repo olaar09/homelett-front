@@ -7,12 +7,14 @@ import FirebaseContext from "./FirebaseContext";
 
 interface IAuthContext {
   currentUser: firebase.User | null;
+  currentUserProfile: any;
   authenticated: boolean;
   loading: boolean;
 }
 
 export const FireBaseAuthContext = createContext<IAuthContext>({
   currentUser: null,
+  currentUserProfile: null,
   authenticated: false,
   loading: false,
 });
@@ -60,7 +62,7 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
 
   return (
     <FireBaseAuthContext.Provider
-      value={{ loading, currentUser, authenticated }}
+      value={{ loading, currentUser, authenticated, currentUserProfile }}
     >
       {children}
     </FireBaseAuthContext.Provider>
