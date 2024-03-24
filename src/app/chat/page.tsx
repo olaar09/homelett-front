@@ -25,7 +25,7 @@ const Chat = () => {
     !auth.currentUserProfile?.groups ||
     auth.currentUserProfile!.groups.length < 1;
 
-  console.log(auth.loading);
+  console.log(auth.currentUserProfile?.currentSubject);
 
   return (
     <section
@@ -58,7 +58,9 @@ const Chat = () => {
                 onClick={onOpenDrawer}
                 className="flex items-center gap-x-2  px-1 py-1 w-32 h-10"
               >
-                <span className="font-bold">{selectedSubject}</span>
+                <span className="font-bold truncate">
+                  {auth.currentUserProfile?.currentSubject?.title}
+                </span>
                 <Icon
                   icon={"ri:arrow-drop-down-line"}
                   className="text-3xl cursor-pointer "
