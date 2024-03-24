@@ -1,19 +1,30 @@
 // components/SlideOut.tsx
 import TextAvatar from "@/app/components/TextAvatar";
+import FirebaseContext from "@/contexts/FirebaseContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 type DrawerProps = {
   isOpen: boolean;
   setIsOpen: (status: boolean) => void;
 };
 
-const menus = [
-  { title: "Explore", icon: "octicon:apps-16" },
-  { title: "Profile", icon: "material-symbols:settings" },
-  { title: "Logout", icon: "streamline:logout-1-solid" },
-];
 const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
+  const services = useContext(FirebaseContext);
+
+  const menus = [
+    { title: "Explore", icon: "octicon:apps-16" },
+    { title: "Profile", icon: "material-symbols:settings" },
+    {
+      title: "Logout",
+      icon: "streamline:logout-1-solid",
+      click: () => {
+        setIsOpen(false);
+        services!.authService.logout();
+      },
+    },
+  ];
+
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     if (isOpen) {
@@ -97,6 +108,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
               return (
                 <div
                   key={index}
+                  onClick={menu.click}
                   className="px-4 bg-panel mx-2 rounded-lg border-b-foreground-secondary h-16 mt-4 flex gap-x-2 items-center"
                 >
                   <div className="flex items-center gap-x-2">

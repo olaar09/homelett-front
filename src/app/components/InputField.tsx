@@ -8,18 +8,21 @@ type InputFieldProps = {
   placeHolder: string;
   type: string;
   required?: boolean;
+  name: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
 const InputField: React.FC<InputFieldProps> = ({
   onChange,
   placeHolder,
+  name,
   type,
   required = true,
 }) => {
   return (
     <div className="relative w-full">
       <input
+        name={name}
         type={type}
         required={required}
         placeholder={placeHolder}

@@ -1,13 +1,51 @@
 "use client";
 
-import Image from "next/image";
 import { Icon } from "@iconify/react";
 import GoogleSignIn from "./components/Auth/GoogleSignin";
 import InputField from "./components/InputField";
 import ACButton from "./components/Button";
 import { message } from "antd";
+import { useContext, useState } from "react";
+import FirebaseContext from "@/contexts/FirebaseContext";
+import { FirebaseError } from "firebase/app";
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({ email: "", password: "" });
+  const firebase = useContext(FirebaseContext);
+  const onChangeForm = (name: string, value: string) => {
+    setForm({ ...form, [name]: value });
+  };
+
+  const onSubmitLogin = async (e: any) => {
+    console.log(form);
+
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await firebase!.authService.loginWithPassword(form.email, form.password);
+      message.success("Login successful");
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        switch (error.code) {
+          case "auth/invalid-credential":
+            message.error("Invalid login credentials");
+            break;
+
+          default:
+            //report to bugsnag
+            message.error("Authentication error, please contact support");
+            break;
+        }
+      } else {
+        console.log(typeof error);
+        message.error("An error occurred");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main className="flex flex-col h-screen items-center   overflow-y-clip pb-8">
       <div className="fade-container h-1/6">
@@ -52,26 +90,29 @@ export default function Home() {
 
         <form
           className="w-full"
-          onSubmit={(e: any) => {
-            e.preventDefault();
-            message.warning("Please Use Google sign in..");
-          }}
+          onSubmit={(e: any) => onSubmitLogin(e)}
           method="post"
         >
           <div className="w-full px-8 flex flex-col gap-y-6">
             <InputField
+              name="email"
               type="email"
               placeHolder="Email address"
-              onChange={() => {}}
+              onChange={(e) => onChangeForm("email", e.target.value)}
             />
             <InputField
+              name="password"
               type="password"
               required={true}
               placeHolder="Password"
-              onChange={() => {}}
+              onChange={(e) => onChangeForm("password", e.target.value)}
             />
 
-            <ACButton text={"Login with email"} type={"submit"} />
+            <ACButton
+              text={"Login with email"}
+              type={"submit"}
+              loading={loading}
+            />
           </div>
         </form>
       </section>
