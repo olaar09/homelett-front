@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import GoogleSignIn from "./components/Auth/GoogleSignin";
+import InputField from "./components/InputField";
 
 export default function Home() {
   return (
@@ -39,6 +40,19 @@ export default function Home() {
           <div className=" border-b-[0.5px] border-foreground-secondary flex-1 "></div>
           <span className=" text-foreground-secondary text-sm">Or</span>
           <div className=" border-b-[0.5px] border-foreground-secondary flex-1"></div>
+        </div>
+
+        <div className="w-full px-8 flex flex-col gap-y-6">
+          <InputField
+            type="email"
+            placeHolder="Email address"
+            onChange={() => {}}
+          />
+          <InputField
+            type="password"
+            placeHolder="Password"
+            onChange={() => {}}
+          />
         </div>
       </section>
 
