@@ -1,11 +1,6 @@
 import { INewSubject } from "@/app/interfaces/INewSubject";
 import ApiService from "./APIService";
-
-interface Subject {
-  id: string;
-  name: string;
-  // Define other properties of a subject as needed
-}
+import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
 
 class SubjectService {
   private apiService: ApiService;
@@ -14,22 +9,22 @@ class SubjectService {
     this.apiService = apiService;
   }
 
-  async listSubjects(): Promise<Subject[]> {
+  async listSubjects(): Promise<{ data: ISubjectItem[] }> {
     try {
-      const subjects = await this.apiService.get("/subjects");
-      return subjects as Subject[];
+      const subjects = await this.apiService.get("/user_subject_list");
+      return { data: subjects } as { data: ISubjectItem[] };
     } catch (error) {
       throw new Error(`Failed to list subjects: ${error}`);
     }
   }
 
-  async addSubject(newSubject: INewSubject): Promise<Subject> {
+  async addSubject(newSubject: INewSubject): Promise<ISubjectItem> {
     try {
       const addedSubject = await this.apiService.post(
         "/add_subject",
         newSubject
       );
-      return addedSubject as Subject;
+      return addedSubject as ISubjectItem;
     } catch (error) {
       throw new Error(`Failed to add a new subject: ${error}`);
     }

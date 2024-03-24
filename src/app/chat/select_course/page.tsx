@@ -2,7 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import Chip from "@/app/components/Chip";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Drawer from "../_components/Drawer";
 import Link from "next/link";
 import StickyHead from "@/app/components/Header";
@@ -11,6 +11,9 @@ import { usePaystackPayment } from "react-paystack";
 import { Spin, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
+import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
+import { useRequest } from "ahooks";
+import TextAvatar from "@/app/components/TextAvatar";
 
 const dummy = [
   { title: "CSS 101", description: "Electrical theory and assertions" },
@@ -75,13 +78,21 @@ const dummyPro = [
 ];
 
 const Chat = () => {
-  const [openDrawer, setOpenDrawer] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState<ISubjectItem | null>(
     null
   );
-  const [currentUser, setcurrentUser] = useState(null);
+
+  //const currentAuth = useContext(FireBaseAuthContext);
   const [completingPayment, setCompletingPayment] = useState(false);
   const apiUtil = new APIUtil();
+
+  const listSubjects = async (): Promise<{ data: ISubjectItem[] }> => {
+    return await apiUtil.subjectService.listSubjects();
+  };
+  const { data: subjectResponse, error, loading } = useRequest(listSubjects);
+  const data = subjectResponse?.data ?? [];
+
+  console.log(data, "RESPONSE");
 
   const config = {
     reference: new Date().getTime().toString(),
@@ -143,23 +154,44 @@ const Chat = () => {
 
   return (
     <div>
-      <Spin spinning={completingPayment}>
-        <StickyHead hasContent={true}>
-          <Link href={"/chat"}>
-            <div className="flex items-center  py-1 rounded-lg gap-x-2">
-              <Icon
-                icon={"material-symbols:arrow-back-ios-rounded"}
-                className="text-md cursor-pointer text-2xl"
-              />
-              <span className="text-lg">Add a new subject</span>
-            </div>
-          </Link>
-        </StickyHead>
+      <StickyHead hasContent={true}>
+        <Link href={"/chat"}>
+          <div className="flex items-center  py-1 rounded-lg gap-x-2">
+            <Icon
+              icon={"material-symbols:arrow-back-ios-rounded"}
+              className="text-md cursor-pointer text-2xl"
+            />
+            <span className="text-lg">Add a new subject</span>
+          </div>
+        </Link>
+      </StickyHead>
 
-        <div className="flex flex-col gap-y-4 mt-24  ">
-          <SubjectListInfinite onSelect={onSubjectSelected} items={[]} />
+      {(loading || !data) && (
+        <div className="animate-pulse flex flex-col gap-y-6 mt-24">
+          <div className="flex items-center flex-wrap gap-y-8">
+            {[1, 2, 3, 4, 8, 8, 8, 3].map((val, index) => {
+              return (
+                <div key={index} className="w-6/12 px-3">
+                  <div
+                    key={index}
+                    className="flex flex-col gap-y-2 shrink-0  bg-[#1D1D1D] rounded-lg  px-2 pt-2 h-36"
+                  >
+                    <TextAvatar character={""} bgColor="#181818" />
+                    <span className="text-sm truncate h-3 "></span>
+                    <span className="text-[0.85rem] h-8 text-foreground-secondary truncate-2-lines max-w-xs"></span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </Spin>
+      )}
+
+      {!loading && data && (
+        <div className="flex flex-col gap-y-4 mt-24  ">
+          <SubjectListInfinite onSelect={onSubjectSelected} items={data} />
+        </div>
+      )}
     </div>
   );
 };
