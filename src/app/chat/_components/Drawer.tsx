@@ -14,7 +14,6 @@ type DrawerProps = {
 const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
   const services = useContext(FirebaseContext);
   const auth = useContext(FireBaseAuthContext);
-
   const router = useRouter();
 
   const menus = [

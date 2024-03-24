@@ -37,7 +37,11 @@ const Chat = () => {
       message.error("unable to load data");
     }
   };
-  const { data, error, loading } = useRequest(listSubjects);
+  const { data, error, loading } = useRequest(() => listSubjects(), {
+    ready:
+      authContext.currentUser != null && authContext.currentUser != undefined,
+  });
+
   console.log(data, "RESPONSE");
 
   const config = {
