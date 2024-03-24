@@ -14,6 +14,7 @@ import { useRequest } from "ahooks";
 import TextAvatar from "@/app/components/TextAvatar";
 import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
 import { useRouter } from "next/navigation";
+import LoadingOverlay from "@/app/components/LoadingOverlay";
 
 const Chat = () => {
   const [selectedSubject, setSelectedSubject] = useState<ISubjectItem | null>(
@@ -100,6 +101,8 @@ const Chat = () => {
 
   return (
     <div>
+      <LoadingOverlay loading={completingPayment} />
+
       <StickyHead hasContent={true}>
         <Link href={"/chat"}>
           <div className="flex items-center  py-1 rounded-lg gap-x-2">
