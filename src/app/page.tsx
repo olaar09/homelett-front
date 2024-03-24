@@ -19,7 +19,7 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="flex-grow my-4 flex flex-col pt-6 items-center w-full">
+      <section className="flex-grow my-4 flex flex-col pt-4 items-center w-full">
         <div className="flex items-center gap-x-3   px-8">
           <div className="w-14 h-14">
             <Icon
