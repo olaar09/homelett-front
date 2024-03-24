@@ -93,10 +93,11 @@ html {
 
 .fade-container {
   position: relative;
-  max-height: 200px; /* Ensures container has a minimum height */
+  min-height: 150px; /* Ensures container has a minimum height */
   overflow: hidden;
   background-image: url("/home-img.png"); /* Path to your background image */
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
 }
 
@@ -106,7 +107,7 @@ html {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 50px; /* Height of the fade effect */
+  height: 150px; /* Height of the fade effect */
   background: linear-gradient(to bottom, transparent, rgb(24, 24, 24));
 }
 
