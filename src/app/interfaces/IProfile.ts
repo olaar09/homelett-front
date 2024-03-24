@@ -6,8 +6,7 @@ export interface IProfile {
   id?: string;
   uid: string;
   user: firebase.User;
-  group?: ISubjectGroup;
-  groupId?: string[];
+  groups?: ISubjectGroup[];
   currentSubject?: ISubjectItem;
   currentSubjectId?: string;
   subscribedSubjects: ISubjectItem[];

@@ -1,21 +1,23 @@
-// APIService.ts
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import firebase from "firebase/compat/app";
+import "firebase/auth";
 
 type RequestOptions = {
   method: "GET" | "POST" | "PUT" | "HEAD";
-  headers: HeadersInit;
-  body?: string;
+  data?: any;
 };
 
 class APIService {
   private apiBaseUrl: string;
-  private headers: HeadersInit;
 
   constructor(apiBaseUrl: string) {
     this.apiBaseUrl = apiBaseUrl;
-    this.headers = {
-      "Content-Type": "application/json",
-      // Include any other common headers like Authorization
-    };
+  }
+
+  private async getIdToken(): Promise<string> {
+    const user = firebase.auth().currentUser;
+    if (!user) throw new Error("User not authenticated");
+    return user.getIdToken();
   }
 
   private async request<T>(
@@ -24,12 +26,25 @@ class APIService {
   ): Promise<T> {
     const url = `${this.apiBaseUrl}${endpoint}`;
     try {
-      const response = await fetch(url, options);
+      const idToken = await this.getIdToken();
+
+      const axiosOptions: AxiosRequestConfig = {
+        url: url,
+        method: options.method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${idToken}`,
+        },
+        data: options.data,
+      };
+
       if (options.method === "HEAD") {
-        // For HEAD requests, we might only be interested in the status or headers
+        const response: AxiosResponse = await axios.head(url, axiosOptions);
         return response.headers as unknown as T;
       }
-      return (await response.json()) as T;
+
+      const response: AxiosResponse = await axios(axiosOptions);
+      return response.data as T;
     } catch (error) {
       console.error(`${options.method} request error: `, error);
       throw error;
@@ -37,27 +52,25 @@ class APIService {
   }
 
   public get<T>(endpoint: string): Promise<T> {
-    return this.request<T>(endpoint, { method: "GET", headers: this.headers });
+    return this.request<T>(endpoint, { method: "GET" });
   }
 
-  public post<T>(endpoint: string, data: Object): Promise<T> {
-    return this.request<T>(endpoint, {
+  public async post<T>(endpoint: string, data: Object): Promise<T> {
+    return await this.request<T>(endpoint, {
       method: "POST",
-      headers: this.headers,
-      body: JSON.stringify(data),
+      data: data,
     });
   }
 
   public put<T>(endpoint: string, data: Object): Promise<T> {
     return this.request<T>(endpoint, {
       method: "PUT",
-      headers: this.headers,
-      body: JSON.stringify(data),
+      data: data,
     });
   }
 
   public head<T>(endpoint: string): Promise<T> {
-    return this.request<T>(endpoint, { method: "HEAD", headers: this.headers });
+    return this.request<T>(endpoint, { method: "HEAD" });
   }
 }
 

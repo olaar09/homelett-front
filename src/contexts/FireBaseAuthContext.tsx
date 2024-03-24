@@ -19,7 +19,7 @@ export const FireBaseAuthContext = createContext<IAuthContext>({
   currentUser: null,
   currentUserProfile: null,
   authenticated: false,
-  loading: false,
+  loading: true,
   refreshProfile: async () => {},
 });
 
@@ -27,7 +27,7 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
   const firebaseInstance = useContext(FirebaseContext);
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   const [currentUserProfile, setCurrentUserProfile] = useState<null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const authenticated = !!currentUser;
   const router = useRouter();
   const path = usePathname();
@@ -44,10 +44,7 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
             router.push(`/chat${queryParams ? `?${queryParams}` : ""}`);
           }
           if (!currentUserProfile) {
-            await fetchCurrentUserProfile(
-              user,
-              params.get("group") ?? undefined
-            );
+            await fetchCurrentUserProfile(user);
           }
         } else {
           setCurrentUserProfile(null);
@@ -61,38 +58,21 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
     return () => unsubscribe();
   }, [router]);
 
-  const fetchCurrentUserProfile = async (
-    user: firebase.User,
-    group?: string
-  ) => {
+  const fetchCurrentUserProfile = async (user: firebase.User) => {
     try {
       setLoading(true);
       let profile;
       profile = await firebaseInstance!.profileService.fetchProfile(user.uid);
       if (!profile) {
-        let data;
-        const xuser = {
-          email: user.email,
-          displayName: user.displayName,
+        profile = await firebaseInstance!.profileService.addOrUpdateProfile({
           uid: user.uid,
-        };
-        if (group) {
-          data = {
+          subscribedSubjects: [],
+          user: {
+            email: user.email,
+            displayName: user.displayName,
             uid: user.uid,
-            subscribedSubjects: [],
-            groupId: group,
-            user: xuser as firebase.User,
-          };
-        } else {
-          data = {
-            uid: user.uid,
-            subscribedSubjects: [],
-            user: xuser as firebase.User,
-          };
-        }
-        profile = await firebaseInstance!.profileService.addOrUpdateProfile(
-          data
-        );
+          } as firebase.User,
+        });
       }
       setCurrentUserProfile(profile);
     } catch (error) {

@@ -14,15 +14,15 @@ class GroupAPIService {
       const groups = await this.apiService.get("/user_groups");
       return groups as ISubjectGroup[];
     } catch (error) {
-      throw new Error(`Failed to list subjects: ${error}`);
+      throw error;
     }
   }
 
   async adGroup(groupCode: string): Promise<void> {
     try {
-      await this.apiService.post("/add_group", groupCode);
+      await this.apiService.post("/add_group", { groupCode });
     } catch (error) {
-      throw new Error(`Failed to add a new subject: ${error}`);
+      throw error;
     }
   }
 }

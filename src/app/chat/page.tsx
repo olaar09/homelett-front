@@ -22,8 +22,10 @@ const Chat = () => {
   };
 
   const notHasGroup =
-    !auth.currentUserProfile?.groupId ||
-    auth.currentUserProfile!.groupId.length < 1;
+    !auth.currentUserProfile?.groups ||
+    auth.currentUserProfile!.groups.length < 1;
+
+  console.log(auth.loading);
 
   return (
     <section
@@ -34,7 +36,7 @@ const Chat = () => {
       <Drawer isOpen={openDrawer} setIsOpen={setOpenDrawer} />
       <GroupCodeDrawer
         onClose={() => console.log("")}
-        open={notHasGroup}
+        open={!auth.loading && notHasGroup}
         items={[]}
       />
 
