@@ -39,15 +39,13 @@ export default function Home() {
       message.success("Login successful");
     } catch (error) {
       if (error instanceof FirebaseError) {
-        switch (error.code) {
-          case "auth/invalid-credential":
-            message.error("Invalid login credentials");
-            break;
-
-          default:
-            //report to bugsnag
-            message.error("Authentication error, please contact support");
-            break;
+        if (error.code === "auth/invalid-credential") {
+          message.error("Invalid login credentials");
+        } else if (error.message === "EMAIL_EXISTS") {
+          message.error("Email already exists");
+        } else {
+          // bugsnag
+          message.error("Authentication error, please contact support");
         }
       } else {
         console.log(typeof error);
