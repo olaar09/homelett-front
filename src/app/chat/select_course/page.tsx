@@ -1,9 +1,8 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import Chip from "@/app/components/Chip";
 import { useContext, useEffect, useState } from "react";
-import Drawer from "../_components/Drawer";
+
 import Link from "next/link";
 import StickyHead from "@/app/components/Header";
 import SubjectListInfinite from "../_components/SubjectListInfinite";
@@ -15,68 +14,6 @@ import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
 import { useRequest } from "ahooks";
 import TextAvatar from "@/app/components/TextAvatar";
 
-const dummy = [
-  { title: "CSS 101", description: "Electrical theory and assertions" },
-];
-
-const dummyPro = [
-  {
-    title: "Beginner Python",
-    description: "Beginning python programming from scratch",
-    amount: 5000,
-  },
-  {
-    title: "Beginner Javascript",
-    description: "Beginning python programming from scratch",
-    amount: 3000,
-  },
-  {
-    title: "Beginner React",
-    description: "Beginning python programming from scratch",
-    amount: 3000,
-  },
-  {
-    title: "Beginner React",
-    description: "Beginning python programming from scratch",
-    amount: 5000,
-  },
-  {
-    title: "Beginner React",
-    description: "Beginning python programming from scratch",
-    amount: 5100,
-  },
-  {
-    title: "Beginner React",
-    description: "Beginning python programming from scratch",
-    amount: 5100,
-  },
-  {
-    title: "Beginner React",
-    description: "Beginning python programming from scratch",
-    amount: 1100,
-  },
-  {
-    title: "Beginner React",
-    description: "Beginning python programming from scratch",
-    amount: 1100,
-  },
-  {
-    title: "Beginner React",
-    description: "Beginning python programming from scratch",
-    amount: 1100,
-  },
-  {
-    title: "Beginner React",
-    description: "Beginning python programming from scratch",
-    amount: 1100,
-  },
-  {
-    title: "Beginner React",
-    description: "Beginning python programming from scratch",
-    amount: 1100,
-  },
-];
-
 const Chat = () => {
   const [selectedSubject, setSelectedSubject] = useState<ISubjectItem | null>(
     null
@@ -86,12 +23,17 @@ const Chat = () => {
   const [completingPayment, setCompletingPayment] = useState(false);
   const apiUtil = new APIUtil();
 
-  const listSubjects = async (): Promise<{ data: ISubjectItem[] }> => {
-    return await apiUtil.subjectService.listSubjects();
+  const listSubjects = async (): Promise<ISubjectItem[] | undefined> => {
+    try {
+      const data = await apiUtil.subjectService.listSubjects();
+      if (data) {
+        return data;
+      }
+    } catch (error) {
+      message.error("unable to load data");
+    }
   };
-  const { data: subjectResponse, error, loading } = useRequest(listSubjects);
-  const data = subjectResponse?.data ?? [];
-
+  const { data, error, loading } = useRequest(listSubjects);
   console.log(data, "RESPONSE");
 
   const config = {

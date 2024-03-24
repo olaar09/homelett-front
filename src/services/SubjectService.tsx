@@ -9,10 +9,10 @@ class SubjectService {
     this.apiService = apiService;
   }
 
-  async listSubjects(): Promise<{ data: ISubjectItem[] }> {
+  async listSubjects(): Promise<ISubjectItem[]> {
     try {
       const subjects = await this.apiService.get("/user_subject_list");
-      return { data: subjects } as { data: ISubjectItem[] };
+      return subjects as ISubjectItem[];
     } catch (error) {
       throw new Error(`Failed to list subjects: ${error}`);
     }
