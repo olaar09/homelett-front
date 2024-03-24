@@ -11,7 +11,6 @@ import "firebase/compat/auth";
 export default class AuthServices {
   public firebaseInstance;
   constructor(firebaseInstance: firebase.app.App) {
-    console.log("I AM HERE", firebaseInstance.auth);
     this.firebaseInstance = firebaseInstance;
   }
 

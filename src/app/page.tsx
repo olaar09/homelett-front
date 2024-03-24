@@ -15,15 +15,12 @@ export default function Home() {
   const [form, setForm] = useState({ email: "", password: "" });
   const firebase = useContext(FirebaseContext);
   const query = useSearchParams();
-  console.log(query.toString(), "QUERYUUU");
 
   const onChangeForm = (name: string, value: string) => {
     setForm({ ...form, [name]: value });
   };
 
   const onSubmitLogin = async (e: any) => {
-    console.log(form, "QUERYUUU");
-
     e.preventDefault();
     setLoading(true);
     try {
@@ -124,7 +121,11 @@ export default function Home() {
             />
 
             <ACButton
-              text={"Login with email"}
+              text={
+                query.get("is_new") === "true"
+                  ? "Sign up with email"
+                  : "Login with email"
+              }
               type={"submit"}
               loading={loading}
             />
