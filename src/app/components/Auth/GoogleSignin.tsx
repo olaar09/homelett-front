@@ -2,8 +2,9 @@
 import React from "react";
 import { auth } from "../../../utils/firebaseConfig"; // Adjust the path as necessary
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
-const GoogleSignin = () => {
+const GoogleSignIn = () => {
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
@@ -20,7 +21,18 @@ const GoogleSignin = () => {
     }
   };
 
-  return <button onClick={signInWithGoogle}>Sign in with Google</button>;
+  return (
+    <button
+      className=" flex items-center  justify-center gap-x-3 bg-foreground text-xl rounded-3xl text-foreground py-3 px-6 w-full"
+      onClick={signInWithGoogle}
+    >
+      <Icon className="text-lg " icon={"flat-color-icons:google"} />
+      <span className="text-foreground-inverted text-sm text-center block flex-grow">
+        {" "}
+        Continue with Google
+      </span>
+    </button>
+  );
 };
 
-export default GoogleSignin;
+export default GoogleSignIn;

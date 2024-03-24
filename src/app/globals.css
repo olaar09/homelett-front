@@ -6,6 +6,7 @@
   --primary-rgb: 35, 12, 128;
   --banner-rgb: 93, 92, 222;
   --banner-foreground-rgb: 255, 255, 255;
+  --foreground-inverted: 255, 255, 255;
   --foreground-secondary-rgb: 141, 150, 150;
   --foreground-rgb: 35, 12, 128;
   --background-rgb: 255, 255, 255;
@@ -18,6 +19,7 @@
     --primary-rgb: 59, 58, 190;
     --banner-rgb: 59, 58, 190;
     --banner-foreground-rgb: 24, 24, 24;
+    --foreground-inverted: 24, 24, 24;
     --foreground-secondary-rgb: 115, 125, 125;
     --foreground-rgb: 255, 255, 255;
     --background-rgb: 24, 24, 24;

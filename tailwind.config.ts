@@ -20,6 +20,7 @@ const config: Config = {
         banner: "rgb(var(--banner-rgb))",
         "banner-foreground": "rgb(var(--banner-foreground-rgb))",
         foreground: "rgb(var(--foreground-rgb))",
+        "foreground-inverted": "rgb(var(--foreground-inverted))",
         "foreground-secondary": "rgb(var(--foreground-secondary-rgb))",
         background: "rgb(var(--background-rgb))",
         link: "rgb(var(--link-rgb))",
