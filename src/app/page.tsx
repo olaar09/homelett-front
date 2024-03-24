@@ -9,9 +9,15 @@ import ACButton from "./components/Button";
 export default function Home() {
   return (
     <main className="flex flex-col h-screen items-center   overflow-y-clip pb-8">
-      <section className="z-10  w-full  h-1/6">
-        <span className="text-foreground">image here</span>
-      </section>
+      <div className="fade-container h-1/6">
+        <div className="content  text-transparent">
+          Your content goes here. This div will have fading edges. Your content
+          goes here. This div will have fading edges. Your content goes here.
+          This div will have fading edges. Your content goes here. This div will
+          have fading edges. Your content goes here. This div will have fading
+          edges.
+        </div>
+      </div>
 
       <section className="flex-grow my-4 flex flex-col pt-10 items-center w-full">
         <div className="flex items-center gap-x-3   px-8">
