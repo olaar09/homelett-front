@@ -9,6 +9,7 @@ type InputFieldProps = {
   type: string;
   required?: boolean;
   name: string;
+  value?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
@@ -17,6 +18,7 @@ const InputField: React.FC<InputFieldProps> = ({
   placeHolder,
   name,
   type,
+  value,
   required = true,
 }) => {
   return (
@@ -25,6 +27,7 @@ const InputField: React.FC<InputFieldProps> = ({
         name={name}
         type={type}
         required={required}
+        value={value}
         placeholder={placeHolder}
         onChange={onChange}
         className="pl-3 shadow pr-10 bg-transparent py-2 h-12 rounded-xl ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none"

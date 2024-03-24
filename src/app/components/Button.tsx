@@ -25,15 +25,19 @@ const ACButton: React.FC<InputFieldProps> = ({
       onClick={onClick}
     >
       <div className="flex items-center  justify-center gap-x-4 ">
-        <div className="w-3">
-          <Icon
-            icon={"mingcute:loading-fill"}
-            className={`animate-spin text-lg
+        {loading && (
+          <div
+            className={`${loading ? "w-3" : "w-0"} transition-all duration-150`}
+          >
+            <Icon
+              icon={"mingcute:loading-fill"}
+              className={`animate-spin text-lg
            transition-all duration-150
            ${loading ? "opacity-100" : "opacity-0"}`}
-          />
-        </div>
-        <span className="text-foreground text-sm text-center block ">
+            />
+          </div>
+        )}
+        <span className="text-foreground text-sm text-center block flex-grow">
           {" "}
           {text}
         </span>

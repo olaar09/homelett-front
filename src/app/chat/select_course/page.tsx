@@ -157,7 +157,7 @@ const Chat = () => {
         </StickyHead>
 
         <div className="flex flex-col gap-y-4 mt-24  ">
-          <SubjectListInfinite onSelect={onSubjectSelected} items={dummyPro} />
+          <SubjectListInfinite onSelect={onSubjectSelected} items={[]} />
         </div>
       </Spin>
     </div>

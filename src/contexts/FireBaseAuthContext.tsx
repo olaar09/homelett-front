@@ -5,10 +5,12 @@ import "firebase/auth";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FirebaseContext from "./FirebaseContext";
 import { message } from "antd";
+import { IProfile } from "@/app/interfaces/IProfile";
 
 interface IAuthContext {
+  refreshProfile: () => Promise<void>;
   currentUser: firebase.User | null;
-  currentUserProfile: any;
+  currentUserProfile?: IProfile | null;
   authenticated: boolean;
   loading: boolean;
 }
@@ -18,6 +20,7 @@ export const FireBaseAuthContext = createContext<IAuthContext>({
   currentUserProfile: null,
   authenticated: false,
   loading: false,
+  refreshProfile: async () => {},
 });
 
 export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
@@ -68,22 +71,23 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
       profile = await firebaseInstance!.profileService.fetchProfile(user.uid);
       if (!profile) {
         let data;
+        const xuser = {
+          email: user.email,
+          displayName: user.displayName,
+          uid: user.uid,
+        };
         if (group) {
           data = {
             uid: user.uid,
             subscribedSubjects: [],
             groupId: group,
-            user: user,
+            user: xuser as firebase.User,
           };
         } else {
           data = {
             uid: user.uid,
             subscribedSubjects: [],
-            user: {
-              email: user.email,
-              displayName: user.displayName,
-              uid: user.uid,
-            } as firebase.User,
+            user: xuser as firebase.User,
           };
         }
         profile = await firebaseInstance!.profileService.addOrUpdateProfile(
@@ -99,9 +103,19 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
     }
   };
 
+  const refreshProfile = async () => {
+    if (currentUser) await fetchCurrentUserProfile(currentUser);
+  };
+
   return (
     <FireBaseAuthContext.Provider
-      value={{ loading, currentUser, authenticated, currentUserProfile }}
+      value={{
+        loading,
+        refreshProfile,
+        currentUser,
+        authenticated,
+        currentUserProfile,
+      }}
     >
       {children}
     </FireBaseAuthContext.Provider>

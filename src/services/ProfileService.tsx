@@ -3,14 +3,18 @@ import { IProfile } from "@/app/interfaces/IProfile";
 import "firebase/auth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import APIService from "./APIService";
+import APIUtil from "./APIUtil";
 
 export default class ProfileServices {
   public firebaseInstance;
   public firestore;
+  private apiService;
 
   constructor(firebaseInstance: firebase.app.App) {
     this.firebaseInstance = firebaseInstance;
     this.firestore = firebaseInstance.firestore();
+    this.apiService = new APIUtil();
   }
 
   async fetchProfile(uid: string): Promise<any> {

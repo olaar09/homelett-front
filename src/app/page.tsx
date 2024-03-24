@@ -49,7 +49,7 @@ export default function Home() {
           message.error("Email already exists");
         } else {
           // bugsnag
-          message.error("Authentication error, please contact support");
+          message.error("Please check your internet, or contact support");
         }
       } else {
         console.log(typeof error);

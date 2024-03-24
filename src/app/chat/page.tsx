@@ -8,16 +8,23 @@ import Drawer from "./_components/Drawer";
 import Link from "next/link";
 import StickyHead from "@/app/components/Header";
 import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
+import GroupCodeDrawer from "./_components/GroupCodeDrawer";
 
 const Chat = () => {
   const auth = useContext(FireBaseAuthContext);
   const [openDrawer, setOpenDrawer] = useState(false);
+
   const [hasChat, setHasChat] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState("CSS 101");
 
   const onOpenDrawer = () => {
     setOpenDrawer(true);
   };
+
+  const notHasGroup =
+    !auth.currentUserProfile?.groupId ||
+    auth.currentUserProfile!.groupId.length < 1;
+
   return (
     <section
       className={`flex items-center  h-screen flex-col relative ${
@@ -25,6 +32,11 @@ const Chat = () => {
       }`}
     >
       <Drawer isOpen={openDrawer} setIsOpen={setOpenDrawer} />
+      <GroupCodeDrawer
+        onClose={() => console.log("")}
+        open={notHasGroup}
+        items={[]}
+      />
 
       <StickyHead hasContent={hasChat}>
         <div className="flex justify-between items-center">
@@ -39,7 +51,7 @@ const Chat = () => {
               />
             </div>
 
-            {auth.currentUserProfile && (
+            {auth.currentUserProfile?.currentSubjectId && (
               <div
                 onClick={onOpenDrawer}
                 className="flex items-center gap-x-2  px-1 py-1 w-32 h-10"
@@ -52,7 +64,7 @@ const Chat = () => {
               </div>
             )}
 
-            {!auth.currentUserProfile && (
+            {!auth.currentUserProfile?.currentSubjectId && (
               <Icon
                 icon={"eos-icons:three-dots-loading"}
                 className="text-3xl cursor-pointer "

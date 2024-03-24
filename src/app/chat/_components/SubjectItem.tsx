@@ -1,4 +1,5 @@
 import TextAvatar from "@/app/components/TextAvatar";
+import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
 
 type SubjectListProps = {
   sectionTitle: string;
