@@ -8,22 +8,37 @@ import { message } from "antd";
 import { useContext, useState } from "react";
 import FirebaseContext from "@/contexts/FirebaseContext";
 import { FirebaseError } from "firebase/app";
+import { useSearchParams } from "next/navigation";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
   const firebase = useContext(FirebaseContext);
+  const query = useSearchParams();
+  console.log(query.toString(), "QUERYUUU");
+
   const onChangeForm = (name: string, value: string) => {
     setForm({ ...form, [name]: value });
   };
 
   const onSubmitLogin = async (e: any) => {
-    console.log(form);
+    console.log(form, "QUERYUUU");
 
     e.preventDefault();
     setLoading(true);
     try {
-      await firebase!.authService.loginWithPassword(form.email, form.password);
+      if (query.get("is_new") === "true") {
+        await firebase!.authService.signUpWithPassword(
+          form.email,
+          form.password
+        );
+      } else {
+        await firebase!.authService.loginWithPassword(
+          form.email,
+          form.password
+        );
+      }
+
       message.success("Login successful");
     } catch (error) {
       if (error instanceof FirebaseError) {

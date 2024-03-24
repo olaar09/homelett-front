@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/auth";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FirebaseContext from "./FirebaseContext";
 
 interface IAuthContext {
@@ -23,6 +23,7 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
   const authenticated = !!currentUser;
   const router = useRouter();
   const path = usePathname();
+  const params = useSearchParams();
 
   useEffect(() => {
     const unsubscribe = firebase!.authService.firebaseInstance
@@ -36,8 +37,9 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
           }
         } else {
           setCurrentUser(null);
-          if (path !== "/login") {
-            router.push("/");
+          if (path !== "/") {
+            const queryParams = new URLSearchParams(params).toString();
+            router.push(`/${queryParams ? `?${queryParams}` : ""}`);
           }
         }
       });

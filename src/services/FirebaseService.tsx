@@ -21,8 +21,10 @@ const app = firebase.initializeApp(firebaseConfig);
 
 export class FirebaseServices {
   authService: AuthServices;
+  public firebaseInstance;
 
   constructor() {
+    this.firebaseInstance = app;
     this.authService = new AuthServices(app);
   }
 }

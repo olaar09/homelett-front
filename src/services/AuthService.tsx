@@ -32,6 +32,24 @@ export default class AuthServices {
     }
   };
 
+  async signUpWithPassword(
+    email: string,
+    password: string
+  ): Promise<firebase.auth.UserCredential> {
+    try {
+      await this.firebaseInstance
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+
+      const userCredential = await this.loginWithPassword(email, password);
+      console.log("User logged in successfully:", userCredential.user);
+      return userCredential;
+    } catch (error) {
+      console.error("Error logging in:", error);
+      throw error;
+    }
+  }
+
   // Method to log in with email and password
   async loginWithPassword(
     email: string,
@@ -52,7 +70,7 @@ export default class AuthServices {
   // Method to log out
   async logout(): Promise<void> {
     try {
-      await firebase.auth().signOut();
+      await this.firebaseInstance.auth().signOut();
       console.log("User logged out successfully");
     } catch (error) {
       console.error("Error logging out:", error);
