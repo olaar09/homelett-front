@@ -39,9 +39,11 @@ export default function Home() {
       message.success("Login successful");
     } catch (error) {
       if (error instanceof FirebaseError) {
+        console.log(error.message);
+
         if (error.code === "auth/invalid-credential") {
           message.error("Invalid login credentials");
-        } else if (error.message === "EMAIL_EXISTS") {
+        } else if (error.code === "auth/email-already-in-use") {
           message.error("Email already exists");
         } else {
           // bugsnag
