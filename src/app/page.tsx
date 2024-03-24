@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Icon } from "@iconify/react";
 import GoogleSignIn from "./components/Auth/GoogleSignin";
 import InputField from "./components/InputField";
+import ACButton from "./components/Button";
 
 export default function Home() {
   return (
@@ -52,6 +53,12 @@ export default function Home() {
             type="password"
             placeHolder="Password"
             onChange={() => {}}
+          />
+
+          <ACButton
+            text={"Login with email"}
+            type={"button"}
+            onClick={() => console.log("Clicked")}
           />
         </div>
       </section>
