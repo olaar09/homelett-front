@@ -37,6 +37,7 @@ const Chat = () => {
   };
 
   const onSubmitMessage = async () => {
+    setHasChat(true);
     setBusy(true);
     message.success("Sending message");
   };
@@ -44,8 +45,6 @@ const Chat = () => {
   const notHasGroup =
     !auth.currentUserProfile?.groups ||
     auth.currentUserProfile!.groups.length < 1;
-
-  console.log(auth.currentUserProfile?.currentSubject);
 
   return (
     <section
