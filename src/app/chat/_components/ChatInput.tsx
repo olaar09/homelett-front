@@ -35,7 +35,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
     let charIndex = 0;
     let isTyping = true;
     let timerId: ReturnType<typeof setTimeout>;
-    if (hasChat) {
+    if (busy) {
       setPlaceholder("");
       return;
     }
@@ -79,7 +79,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
 
     // Cleanup function to clear the timeout if the component unmounts
     return () => clearTimeout(timerId);
-  }, [hasChat]);
+  }, [busy, value]);
 
   return (
     <div className="relative w-full">
