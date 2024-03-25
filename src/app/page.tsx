@@ -5,7 +5,7 @@ import GoogleSignIn from "./components/Auth/GoogleSignin";
 import InputField from "./components/InputField";
 import ACButton from "./components/Button";
 import { message } from "antd";
-import { useContext, useState } from "react";
+import { Suspense, useContext, useState } from "react";
 import FirebaseContext from "@/contexts/FirebaseContext";
 import { FirebaseError } from "firebase/app";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -93,7 +93,9 @@ export default function Home() {
         </div>
 
         <div className="mt-12 w-10/12 mx-auto ">
-          <GoogleSignIn />
+          <Suspense fallback={<span>loading..</span>}>
+            <GoogleSignIn />
+          </Suspense>
         </div>
 
         <div className="my-4 gap-x-3 mt-9 flex items-center justify-between w-full px-8">

@@ -4,6 +4,7 @@ import "./globals.css";
 import type { Viewport } from "next";
 import FirebaseProvider from "@/contexts/FirebaseProvider";
 import { FireBaseAuthProvider } from "@/contexts/FireBaseAuthContext";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -60,7 +61,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <FirebaseProvider>
-          <FireBaseAuthProvider>{children} </FireBaseAuthProvider>
+          <Suspense fallback={<span>....</span>}>
+            <FireBaseAuthProvider>{children} </FireBaseAuthProvider>{" "}
+          </Suspense>
         </FirebaseProvider>
       </body>
     </html>
