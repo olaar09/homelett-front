@@ -9,14 +9,36 @@ import Link from "next/link";
 import StickyHead from "@/app/components/Header";
 import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
 import GroupCodeDrawer from "./_components/GroupCodeDrawer";
+import { message } from "antd";
+import { useRouter } from "next/navigation";
 
 const Chat = () => {
   const auth = useContext(FireBaseAuthContext);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [hasChat, setHasChat] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const router = useRouter();
+
+  const [textContent, setTextContent] = useState("");
 
   const onOpenDrawer = () => {
     setOpenDrawer(true);
+  };
+
+  const onSend = async () => {
+    if (!textContent) return message.warning("Enter a message to chat");
+    if (textContent.length < 2) return message.warning("Enter a valid message");
+    if (!auth.currentUserProfile?.currentSubjectId) {
+      message.success("You need to subscribe to a subject first");
+      return router.push("/chat/select_subject");
+    }
+
+    await onSubmitMessage();
+  };
+
+  const onSubmitMessage = async () => {
+    setBusy(true);
+    message.success("Sending message");
   };
 
   const notHasGroup =
@@ -76,7 +98,7 @@ const Chat = () => {
             )}
           </div>
 
-          <Link href={"/chat/select_course"}>
+          <Link href={"/chat/select_subject"}>
             <div className="flex items-center bg-panel px-3 py-1 rounded-lg gap-x-2">
               <Icon
                 icon={"octicon:apps-16"}
@@ -125,8 +147,11 @@ const Chat = () => {
 
         <div className="text-black w-full  pt-7">
           <HomeChatInput
+            busy={busy}
+            value={textContent}
             disabled={auth.loading}
-            onChange={() => console.log("")}
+            onChange={(e) => setTextContent(e.target?.value)}
+            onSend={onSend}
           />
         </div>
       </div>

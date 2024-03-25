@@ -6,16 +6,27 @@ import { Icon } from "@iconify/react";
 // Define the props the component accepts
 type ChatInputProps = {
   disabled: boolean;
+  busy: boolean;
+  value: string;
+  onSend: () => void;
   onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
-const ChatInput: React.FC<ChatInputProps> = ({ onChange, disabled }) => {
+const ChatInput: React.FC<ChatInputProps> = ({
+  onChange,
+  onSend,
+  value,
+  busy,
+  disabled,
+}) => {
   const [placeholder, setPlaceholder] = useState<string>("");
   const messages = [
     "Summarize the last class",
     "What was the topic of the first lecture",
     "Possible exam questions from all lectures",
   ];
+
+  const noSend = busy || value.length < 2;
 
   useEffect(() => {
     let currentMessageIndex = 0;
@@ -71,12 +82,20 @@ const ChatInput: React.FC<ChatInputProps> = ({ onChange, disabled }) => {
         readOnly={disabled}
         placeholder={placeholder}
         onChange={onChange}
+        value={value}
         className="pl-3 shadow pr-10 bg-transparent py-2 h-12 rounded-full ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none"
       />
-      <div className="absolute inset-y-0 right-0 pr-0 flex items-center">
+      <div
+        onClick={() => {
+          if (!noSend) onSend();
+        }}
+        className="absolute inset-y-0 right-0 pr-0 flex items-center"
+      >
         <Icon
           icon={"solar:round-arrow-right-bold"}
-          className="text-5xl text-gray-500"
+          className={`text-5xl  ${
+            noSend ? "text-foreground-secondary" : "text-primary"
+          }`}
         />
       </div>
     </div>
