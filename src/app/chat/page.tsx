@@ -39,6 +39,7 @@ const Chat = () => {
   const onSubmitMessage = async () => {
     setHasChat(true);
     setBusy(true);
+    setTextContent("");
     message.success("Sending message");
   };
 
@@ -146,6 +147,7 @@ const Chat = () => {
 
         <div className="text-black w-full  pt-7">
           <HomeChatInput
+            hasChat={hasChat}
             busy={busy}
             value={textContent}
             disabled={auth.loading}

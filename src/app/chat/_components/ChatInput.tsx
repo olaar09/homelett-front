@@ -7,6 +7,7 @@ import { Icon } from "@iconify/react";
 type ChatInputProps = {
   disabled: boolean;
   busy: boolean;
+  hasChat: boolean;
   value: string;
   onSend: () => void;
   onChange: ChangeEventHandler<HTMLInputElement>;
@@ -16,6 +17,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
   onChange,
   onSend,
   value,
+  hasChat,
   busy,
   disabled,
 }) => {
@@ -33,6 +35,10 @@ const ChatInput: React.FC<ChatInputProps> = ({
     let charIndex = 0;
     let isTyping = true;
     let timerId: ReturnType<typeof setTimeout>;
+    if (hasChat) {
+      setPlaceholder("");
+      return;
+    }
 
     const typeMessage = () => {
       if (isTyping) {
@@ -73,7 +79,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
 
     // Cleanup function to clear the timeout if the component unmounts
     return () => clearTimeout(timerId);
-  }, []);
+  }, [hasChat]);
 
   return (
     <div className="relative w-full">
@@ -92,7 +98,11 @@ const ChatInput: React.FC<ChatInputProps> = ({
         className="absolute inset-y-0 right-0 pr-0 flex items-center"
       >
         <Icon
-          icon={"solar:round-arrow-right-bold"}
+          icon={
+            busy
+              ? "eos-icons:three-dots-loading"
+              : "solar:round-arrow-right-bold"
+          }
           className={`text-5xl  ${
             noSend ? "text-foreground-secondary" : "text-primary"
           }`}
