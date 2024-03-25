@@ -6,9 +6,12 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FirebaseContext from "./FirebaseContext";
 import { message } from "antd";
 import { IProfile } from "@/app/interfaces/IProfile";
+import APIService from "@/services/APIService";
+import APIUtil from "@/services/APIUtil";
 
 interface IAuthContext {
   refreshProfile: () => Promise<void>;
+  updateChat: (chatId: string) => Promise<void>;
   currentUser: firebase.User | null;
   currentUserProfile?: IProfile | null;
   authenticated: boolean;
@@ -20,6 +23,7 @@ export const FireBaseAuthContext = createContext<IAuthContext>({
   currentUserProfile: null,
   authenticated: false,
   loading: true,
+  updateChat: async (chatId: string) => {},
   refreshProfile: async () => {},
 });
 
@@ -27,6 +31,7 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
   const firebaseInstance = useContext(FirebaseContext);
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   const [currentUserProfile, setCurrentUserProfile] = useState<null>(null);
+  const apiService = new APIUtil();
   const [loading, setLoading] = useState<boolean>(true);
   const authenticated = !!currentUser;
   const router = useRouter();
@@ -87,11 +92,19 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
     if (currentUser) await fetchCurrentUserProfile(currentUser);
   };
 
+  const updateChat = async (subjectId: string) => {
+    setLoading(true);
+    await apiService.profileService.updateActiveChat(subjectId);
+    await refreshProfile();
+    setLoading(false);
+  };
+
   return (
     <FireBaseAuthContext.Provider
       value={{
         loading,
         refreshProfile,
+        updateChat,
         currentUser,
         authenticated,
         currentUserProfile,

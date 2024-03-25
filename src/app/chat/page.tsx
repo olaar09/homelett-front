@@ -51,7 +51,7 @@ const Chat = () => {
               />
             </div>
 
-            {auth.currentUserProfile?.currentSubjectId && (
+            {!auth.loading && auth.currentUserProfile?.currentSubjectId && (
               <div
                 onClick={onOpenDrawer}
                 className="flex items-center gap-x-2  px-1 py-1 w-32 h-10"
@@ -66,11 +66,13 @@ const Chat = () => {
               </div>
             )}
 
-            {!auth.currentUserProfile?.currentSubjectId && (
-              <Icon
-                icon={"eos-icons:three-dots-loading"}
-                className="text-3xl cursor-pointer "
-              />
+            {(auth.loading || !auth.currentUserProfile?.currentSubjectId) && (
+              <div className="h-10 flex items-center">
+                <Icon
+                  icon={"eos-icons:three-dots-loading"}
+                  className="text-3xl cursor-pointer "
+                />
+              </div>
             )}
           </div>
 

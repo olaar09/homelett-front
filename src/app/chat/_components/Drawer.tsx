@@ -1,5 +1,6 @@
 // components/SlideOut.tsx
 import TextAvatar from "@/app/components/TextAvatar";
+import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
 import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
 import FirebaseContext from "@/contexts/FirebaseContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -42,6 +43,11 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
       document.body.style.overflow = originalStyle;
     };
   }, [isOpen]);
+
+  const onChangeChat = (subject: ISubjectItem) => {
+    setIsOpen(false);
+    auth.updateChat(subject.id);
+  };
 
   return (
     <aside className=" lg:hidden">
@@ -95,6 +101,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
               (val, index) => {
                 return (
                   <div
+                    onClick={() => onChangeChat(val)}
                     key={index}
                     className="px-2 border-b-[0.1px] border-b-foreground-secondary h-16 mt-4 flex gap-x-6 items-start"
                   >
