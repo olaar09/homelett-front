@@ -5,6 +5,7 @@ import type { Viewport } from "next";
 import FirebaseProvider from "@/contexts/FirebaseProvider";
 import { FireBaseAuthProvider } from "@/contexts/FireBaseAuthContext";
 import { Suspense } from "react";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -60,11 +61,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <FirebaseProvider>
-          <Suspense fallback={<span>....</span>}>
-            <FireBaseAuthProvider>{children} </FireBaseAuthProvider>{" "}
-          </Suspense>
-        </FirebaseProvider>
+        <GoogleOAuthProvider clientId="801456630743-5rb4c1hh82rvse95fek0bqt623gnclqg.apps.googleusercontent.com">
+          <FirebaseProvider>
+            <Suspense fallback={<span>....</span>}>
+              <FireBaseAuthProvider>{children} </FireBaseAuthProvider>{" "}
+            </Suspense>
+          </FirebaseProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );

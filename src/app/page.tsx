@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import GoogleSignIn from "./components/Auth/GoogleSignin";
+//import GoogleSignIn from "./components/Auth/GoogleSignin1";
 import InputField from "./components/InputField";
 import ACButton from "./components/Button";
 import { message } from "antd";
@@ -9,6 +9,7 @@ import { Suspense, useContext, useState } from "react";
 import FirebaseContext from "@/contexts/FirebaseContext";
 import { FirebaseError } from "firebase/app";
 import { useRouter, useSearchParams } from "next/navigation";
+import GoogleLoginButton from "./components/Auth/GoogleSignin";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -75,7 +76,10 @@ export default function Home() {
       <section className="flex-grow my-4 flex flex-col pt-4 items-center lg:w-4/12 mx-auto w-full">
         <div className="flex items-center gap-x-3   px-8">
           <div className="w-14 h-14">
-            <Icon className="text-primary text-6xl" icon="simple-icons:poe" />
+            <Icon
+              className="text-primary text-6xl opacity-60"
+              icon="simple-icons:poe"
+            />
           </div>
           <span className=" text-primary font-bold text-4xl">SequelBase</span>
         </div>
@@ -89,7 +93,7 @@ export default function Home() {
 
         <div className="mt-12 w-10/12 mx-auto ">
           <Suspense fallback={<span>loading..</span>}>
-            <GoogleSignIn />
+            <GoogleLoginButton />
           </Suspense>
         </div>
 
