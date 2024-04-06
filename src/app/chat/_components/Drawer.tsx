@@ -81,7 +81,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
                 className=" text-foreground text-3xl"
               />
               <span className=" text-foreground text-2xl font-bold pb-[0.5px]">
-                AfterClass
+                SequelBase
               </span>
             </div>
             <Icon

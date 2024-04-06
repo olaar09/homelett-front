@@ -63,32 +63,27 @@ export default function Home() {
   return (
     <main className="flex flex-col h-screen items-center   overflow-y-clip pb-8">
       <div className="fade-container h-1/6">
-        <div className="content  text-transparent">
+        {/*  <div className="content  text-transparent">
           Your content goes here. This div will have fading edges. Your content
           goes here. This div will have fading edges. Your content goes here.
           This div will have fading edges. Your content goes here. This div will
           have fading edges. Your content goes here. This div will have fading
           edges.
-        </div>
+        </div> */}
       </div>
 
-      <section className="flex-grow my-4 flex flex-col pt-4 items-center w-full">
+      <section className="flex-grow my-4 flex flex-col pt-4 items-center lg:w-4/12 mx-auto w-full">
         <div className="flex items-center gap-x-3   px-8">
           <div className="w-14 h-14">
-            <Icon
-              className="text-foreground text-6xl"
-              icon="simple-icons:poe"
-            />
+            <Icon className="text-primary text-6xl" icon="simple-icons:poe" />
           </div>
-          <span className=" text-foreground font-bold text-4xl">
-            AfterClass
-          </span>
+          <span className=" text-primary font-bold text-4xl">SequelBase</span>
         </div>
 
-        <div className="text-center mt-4  px-4">
+        <div className="text-center mt-4  px-4 mx-auto w-11/12">
           <span className="font-bold text-foreground  text-xl lg:text-md xs:text:md">
-            Generate possible exam questions and solve any assignment from your
-            lecture notes with AI
+            AI Co-Pilot for engineering and business teams to get things done
+            faster!
           </span>
         </div>
 
@@ -132,6 +127,7 @@ export default function Home() {
               }
               type={"submit"}
               loading={loading}
+              children={undefined}
             />
           </div>
         </form>
@@ -139,7 +135,7 @@ export default function Home() {
 
       <section className="px-6 flex items-center justify-center ">
         <span className=" text-foreground-secondary text-sm text-center">
-          By continuing, you are agreeing to AfterClass's{" "}
+          By continuing, you are agreeing to SequelBase's{" "}
           <span className=" text-banner"> terms of services </span> and{" "}
           <span className=" text-banner">Privacy Policy </span>
         </span>

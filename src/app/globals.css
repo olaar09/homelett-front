@@ -1,22 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
-  --primary-rgb: 35, 12, 128;
-  --banner-rgb: 93, 92, 222;
+  --primary-rgb: 51, 51, 255;
+  --banner-rgb: 51, 51, 255;
   --banner-foreground-rgb: 255, 255, 255;
   --foreground-inverted: 255, 255, 255;
   --foreground-secondary-rgb: 141, 150, 150;
-  --foreground-rgb: 35, 12, 128;
+  --foreground-rgb: 29, 29, 35;
   --background-rgb: 255, 255, 255;
-  --link-rgb: 147, 147, 247;
+  --link-rgb: 51, 51, 255;
   --panel-rgb: 36, 36, 36;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary-rgb: 59, 58, 190;
+    --primary-rgb: 51, 51, 255;
+    --banner-rgb: 51, 51, 255;
+    --banner-foreground-rgb: 255, 255, 255;
+    --foreground-inverted: 255, 255, 255;
+    --foreground-secondary-rgb: 141, 150, 150;
+    --foreground-rgb: 29, 29, 35;
+    --background-rgb: 255, 255, 255;
+    --link-rgb: 51, 51, 255;
+    --panel-rgb: 36, 36, 36;
+
+    /*     --primary-rgb: 59, 58, 190;
     --banner-rgb: 59, 58, 190;
     --banner-foreground-rgb: 24, 24, 24;
     --foreground-inverted: 24, 24, 24;
@@ -24,18 +33,30 @@
     --foreground-rgb: 255, 255, 255;
     --background-rgb: 24, 24, 24;
     --link-rgb: 147, 147, 247;
-    --panel-rgb: 36, 36, 36;
+    --panel-rgb: 36, 36, 36; */
   }
+}
+
+@font-face {
+  font-family: "appFont"; /* A name to use later */
+  src: url("/fonts/CircularBook.woff2"); /* IE9 Compat Modes */
+  src: url("/fonts/CircularBook.woff2") format("embedded-opentype"),
+    url("/fonts/CircularBook.woff2") format("woff2"),
+    url("/fonts/CircularBook.woff2") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+  font-family: appFont !important;
 }
 
 html {
   overflow: scroll;
   overflow-x: hidden;
+  font-family: appFont;
 }
 ::-webkit-scrollbar {
   width: 0; /* Remove scrollbar space */
@@ -108,7 +129,11 @@ html {
   left: 0;
   right: 0;
   height: 150px; /* Height of the fade effect */
-  background: linear-gradient(to bottom, transparent, rgb(24, 24, 24));
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgb(var(--background-rgb))
+  );
 }
 
 @layer utilities {

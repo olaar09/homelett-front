@@ -7,40 +7,49 @@ type InputFieldProps = {
   type: "button" | "submit" | "reset";
   onClick?: () => void;
   loading: boolean;
+  children: any;
 };
 
 const ACButton: React.FC<InputFieldProps> = ({
   onClick,
   text,
+  children,
   loading = false,
   type = "button",
 }) => {
   // Define the props the component accepts
 
+  const btnClicked = () => {
+    if (!loading && type === "button" && onClick) {
+      onClick();
+    }
+  };
+
   return (
     <button
       disabled={loading}
       type={type}
-      className=" bg-primary text-xl rounded-3xl text-foreground py-3 px-6 w-full"
-      onClick={onClick}
+      className=" bg-primary text-xl rounded-3xl text-foreground py-3 px-6 w-full h-12"
+      onClick={btnClicked}
     >
       <div className="flex items-center  justify-center gap-x-4 ">
         {loading && (
-          <div
-            className={`${loading ? "w-3" : "w-0"} transition-all duration-150`}
-          >
+          <div className={`${"w-10"} transition-all duration-150`}>
             <Icon
-              icon={"mingcute:loading-fill"}
-              className={`animate-spin text-lg
+              icon={"eos-icons:three-dots-loading"}
+              className={` text-2xl text-white
            transition-all duration-150
            ${loading ? "opacity-100" : "opacity-0"}`}
             />
           </div>
         )}
-        <span className="text-foreground text-sm text-center block flex-grow">
-          {" "}
-          {text}
-        </span>
+        {!loading && children && <>{children}</>}
+        {!loading && !children && (
+          <span className="text-white text-sm text-center block flex-grow">
+            {" "}
+            {text}
+          </span>
+        )}
       </div>
     </button>
   );

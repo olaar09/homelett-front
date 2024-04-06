@@ -10,7 +10,7 @@ class APIUtil {
   public profileService: ProfileAPIService;
 
   constructor() {
-    const service = new APIService("http://localhost:3001/api"); // Initialize ApiService
+    const service = new APIService("https://api.sequelbase.com/api"); // Initialize ApiService
     this.subjectService = new SubjectAPIService(service); // Use ApiService instance to initialize SubjectService
     this.groupService = new GroupAPIService(service);
     this.profileService = new ProfileAPIService(service);

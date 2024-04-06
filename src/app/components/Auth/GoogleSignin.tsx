@@ -19,13 +19,13 @@ const GoogleSignIn = () => {
   };
   return (
     <button
-      className=" flex items-center  justify-center gap-x-3 bg-foreground text-xl rounded-3xl text-foreground py-3 px-6 w-full"
+      className=" flex items-center  justify-center gap-x-3 bg-foreground-inverted text-xl rounded-3xl text-foreground py-3 px-6 w-full ring-1"
       onClick={onContinueWithGMail}
     >
       <Icon className="text-lg " icon={"flat-color-icons:google"} />
-      <span className="text-foreground-inverted text-sm text-center block flex-grow">
+      <span className="text-foreground text-sm text-center block flex-grow">
         {" "}
-        Continue with Google
+        Continue With Google
       </span>
     </button>
   );

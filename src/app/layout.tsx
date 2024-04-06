@@ -10,15 +10,15 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
-  title: "AfterClass",
+  title: "SequelBase",
   description: "Ask your lecture notes any question after class",
-  applicationName: "AfterClass",
+  applicationName: "SequelBase",
   appleWebApp: true,
   formatDetection: { telephone: false },
   icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
   openGraph: {
     type: "website",
-    title: "AfterClass",
+    title: "SequelBase",
     description: "",
     siteName: "",
     url: "",
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
   twitter: {
     site: "",
     siteId: "", // make unique
-    creator: "AfterClass Africa",
+    creator: "SequelBase INC",
     description: "Ask your lecture notes any question, after class",
-    title: "AfterClass",
+    title: "SequelBase",
     images: "",
   },
 };

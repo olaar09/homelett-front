@@ -1,6 +1,6 @@
 {
-  "name": "AfterClass",
-  "short_name": "AfterClass",
+  "name": "SequelBase",
+  "short_name": "SequelBase",
   "icons": [
     {
       "src": "/vercel.svg",
