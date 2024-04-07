@@ -10,6 +10,7 @@ interface ListItem {
   title: string;
   avatar: string;
   description: string;
+  category: string;
   isActive: boolean;
 }
 
@@ -26,11 +27,14 @@ const ConnectorModal: React.FC<{
       const data = response.data;
 
       const mapped = data!.map((sourceType: any) => {
+        console.log(sourceType.category);
+
         return {
           title: sourceType.name,
           avatar: sourceType.icon,
           description: sourceType.description,
           isActive: sourceType.is_active == 1,
+          category: sourceType.category,
         };
       });
 
@@ -40,6 +44,10 @@ const ConnectorModal: React.FC<{
     } catch (error) {
       console.log("none");
     }
+  };
+
+  const onSubmit = (data: any) => {
+    console.log(data);
   };
 
   const { data: dataSourceTypes, loading, refresh } = useRequest(fetchSources);
@@ -87,7 +95,7 @@ const ConnectorModal: React.FC<{
       >
         {selected && (
           <div style={{ height: 400, overflow: "auto" }}>
-            <DynamicComponent type={"database"} />
+            <DynamicComponent onSubmit={onSubmit} type={selected.category} />
           </div>
         )}
         {!selected && (

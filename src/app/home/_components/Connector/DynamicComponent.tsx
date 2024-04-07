@@ -12,7 +12,7 @@ const URLComponent = (props: any) => (
 
 // Mapping of type strings to components
 const componentMapping: { [key: string]: React.ElementType } = {
-  database: DBConnect,
+  relational: DBConnect,
   github: GitHubComponent,
   url: URLComponent,
   // Add other mappings as needed

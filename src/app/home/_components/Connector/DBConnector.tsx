@@ -4,13 +4,16 @@ import React, { useState } from "react";
 
 interface DBConnectorProps {
   loading: boolean;
-  onButtonClick: (
-    dataSourceNameValue: string,
-    datasourceConnectionValue: string
-  ) => void;
+  onSubmit: ({
+    dataSourceName,
+    dataSourceConnection,
+  }: {
+    dataSourceName: string;
+    dataSourceConnection: string;
+  }) => void;
 }
 
-const DBConnect: React.FC<DBConnectorProps> = ({ onButtonClick, loading }) => {
+const DBConnect: React.FC<DBConnectorProps> = ({ onSubmit, loading }) => {
   const [dataSourceName, setDataSourceName] = useState<string>("");
   const [dataSourceConnection, setdatasourceConnection] = useState<string>("");
 
@@ -32,7 +35,7 @@ const DBConnect: React.FC<DBConnectorProps> = ({ onButtonClick, loading }) => {
       />
       <div className="w-7/12 mx-auto ">
         <ACButton
-          onClick={() => onButtonClick(dataSourceName, dataSourceConnection)}
+          onClick={() => onSubmit({ dataSourceName, dataSourceConnection })}
           text={"Continue"}
           type={"button"}
           loading={loading}
