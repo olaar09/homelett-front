@@ -3,6 +3,7 @@ import { Modal, List, Avatar, Button } from "antd";
 import { useRequest } from "ahooks";
 import APIUtil from "@/services/APIUtil";
 import { Icon } from "@iconify/react";
+import DynamicComponent from "./DynamicComponent";
 
 // Define TypeScript interface for your item data
 interface ListItem {
@@ -86,7 +87,7 @@ const ConnectorModal: React.FC<{
       >
         {selected && (
           <div style={{ height: 400, overflow: "auto" }}>
-            <span className="text-black">Hello world</span>
+            <DynamicComponent type={"database"} />
           </div>
         )}
         {!selected && (
