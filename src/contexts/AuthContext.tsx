@@ -10,29 +10,44 @@ import APIService from "@/services/APIService";
 import APIUtil from "@/services/APIUtil";
 import { IAuthRequest } from "@/app/interfaces/IRegisterRequest";
 import { AxiosError } from "axios";
+import { IDatasourceItem } from "@/app/interfaces/IDatasourceItem";
 
 interface IAuthContext {
+  dataSources?: IDatasourceItem[] | null;
+  refreshDataSource: () => Promise<void>;
   refreshProfile: () => Promise<void>;
   currentUser: IAuthRequest | null;
   authenticated: boolean;
   loading: boolean;
+  loadingSources: boolean;
 }
 
 export const AuthContext = createContext<IAuthContext>({
+  dataSources: null,
   currentUser: null,
   authenticated: false,
   loading: true,
+  loadingSources: true,
   refreshProfile: async () => {},
+  refreshDataSource: async () => {},
 });
 
 export const AuthProvider: React.FC<any> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<IAuthRequest | null>(null);
+  const [dataSources, setDataSources] = useState<IDatasourceItem[] | null>(
+    null
+  );
   const apiService = new APIUtil();
   const [loading, setLoading] = useState<boolean>(true);
+  const [loadingSources, setLoadingSources] = useState<boolean>(true);
   const authenticated = !!currentUser;
   const router = useRouter();
   const path = usePathname();
   const params = useSearchParams();
+
+  useEffect(() => {
+    if (currentUser) fetchDataSource();
+  }, [currentUser]);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(params).toString();
@@ -46,6 +61,24 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
       fetchCurrentUserProfile();
     }
   }, [router]);
+
+  const fetchDataSource = async () => {
+    try {
+      setLoadingSources(true);
+      const dataSources = await apiService.datasourceService.listSources();
+      setDataSources(dataSources.data.data);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+
+        message.error(
+          `${error?.response?.data?.message ?? "Unable to complete request"}`
+        );
+      }
+    } finally {
+      setLoadingSources(false);
+    }
+  };
 
   const fetchCurrentUserProfile = async () => {
     const queryParams = new URLSearchParams(params).toString();
@@ -83,6 +116,10 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     }
   };
 
+  const refreshDataSource = async () => {
+    if (currentUser) await fetchDataSource();
+  };
+
   const refreshProfile = async () => {
     if (currentUser) await fetchCurrentUserProfile();
   };
@@ -91,7 +128,10 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     <AuthContext.Provider
       value={{
         loading,
+        loadingSources,
+        dataSources,
         refreshProfile,
+        refreshDataSource,
         currentUser,
         authenticated,
       }}

@@ -1,22 +1,23 @@
 import { INewSubject } from "@/app/interfaces/INewSubject";
 import ApiService from "./APIService";
 import { IAuthRequest } from "@/app/interfaces/IRegisterRequest";
+import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 
-class ProfileAPIService {
+class ChatHistoryAPIService {
   private apiService: ApiService;
 
   constructor(apiService: ApiService) {
     this.apiService = apiService;
   }
 
-  async loadProfile(): Promise<IAuthRequest> {
+  async getChatHistory(chatId: number): Promise<IChatHistoryItem[]> {
     try {
-      const user = await this.apiService.get("/user");
-      return user as IAuthRequest;
+      const user = await this.apiService.get(`/chats/${chatId}/history`);
+      return user as IChatHistoryItem[];
     } catch (error) {
       throw error;
     }
   }
 }
 
-export default ProfileAPIService;
+export default ChatHistoryAPIService;

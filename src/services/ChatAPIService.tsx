@@ -1,6 +1,5 @@
 import { INewSubject } from "@/app/interfaces/INewSubject";
 import ApiService from "./APIService";
-import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
 
 class ChatAPIService {
   private apiService: ApiService;

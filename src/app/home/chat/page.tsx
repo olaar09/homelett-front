@@ -13,6 +13,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
 import ChatInput from "../_components/ChatInput";
+import ConnectorModal from "../_components/Connector/Connector";
 
 const HeaderItem = ({
   withBg,
@@ -39,6 +40,7 @@ const HeaderItem = ({
 
 const Chat = () => {
   const [chats, setChats] = useState<IChat[]>([]);
+  const [openConnector, setOpenConnector] = useState<boolean>(false);
   const [userInput, setUserInput] = useState("");
 
   const currentAuth = useContext(AuthContext);
@@ -62,6 +64,19 @@ const Chat = () => {
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
 
+  useEffect(() => {
+    if (currentAuth) {
+      if (
+        (!currentAuth.dataSources || currentAuth.dataSources?.length < 1) &&
+        !currentAuth.loadingSources
+      ) {
+        console.log("ASDFGH", currentAuth.dataSources, currentAuth, loading);
+
+        onOpenConnector();
+      }
+    }
+  }, [currentAuth, currentAuth.loadingSources]);
+
   const onSendChat = () => {
     console.log("chat here");
   };
@@ -70,8 +85,24 @@ const Chat = () => {
     setUserInput(ev.target?.value);
   };
 
+  const onOpenConnector = () => {
+    setOpenConnector(true);
+  };
+
+  const onCloseConnector = () => {
+    if (!currentAuth.dataSources || currentAuth.dataSources?.length < 1) {
+      return;
+    }
+
+    setOpenConnector(false);
+  };
+
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col">
+      <LoadingOverlay
+        loading={currentAuth.loading || currentAuth.loadingSources}
+      />
+      <ConnectorModal visible={openConnector} onClose={onCloseConnector} />
       <section className="h-14  flex items-center justify-between px-6">
         <HeaderItem
           icon="devicon:mysql-wordmark"
