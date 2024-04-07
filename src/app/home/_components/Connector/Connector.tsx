@@ -13,6 +13,7 @@ interface ListItem {
   avatar: string;
   description: string;
   category: string;
+  id: number;
   isActive: boolean;
 }
 
@@ -35,6 +36,7 @@ const ConnectorModal: React.FC<{
         console.log(sourceType.category);
 
         return {
+          id: sourceType.id,
           title: sourceType.name,
           avatar: sourceType.icon,
           description: sourceType.description,
@@ -54,12 +56,16 @@ const ConnectorModal: React.FC<{
   const onSubmit = async (data: any) => {
     try {
       setSubmitting(true);
-      if (!data.dataSourceName || !data.dataSourceConnection) {
+      if (!data.connection_url || !data.datasource_name) {
         message.error("Please complete all fields");
         return;
       } else {
-        const response = await apiUtil.datasourceService.addSource(data);
+        await apiUtil.datasourceService.addSource({
+          ...data,
+          datasource_type_id: selected?.id,
+        });
         await auth.refreshDataSource();
+        message.success("Data source added");
         onClose();
       }
     } catch (error) {

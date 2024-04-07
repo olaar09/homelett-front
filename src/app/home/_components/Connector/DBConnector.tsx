@@ -5,11 +5,11 @@ import React, { useState } from "react";
 interface DBConnectorProps {
   loading: boolean;
   onSubmit: ({
-    dataSourceName,
-    dataSourceConnection,
+    datasource_name,
+    connection_url,
   }: {
-    dataSourceName: string;
-    dataSourceConnection: string;
+    datasource_name: string;
+    connection_url: string;
   }) => void;
 }
 
@@ -33,7 +33,9 @@ const DBConnect: React.FC<DBConnectorProps> = ({ onSubmit, loading }) => {
       <div className="flex flex-col w-full">
         <span className=" text-foreground">Connection string</span>
         <InputField
-          placeHolder={"Connection string"}
+          placeHolder={
+            "mysql+mysqlconnector://username:password@host:port/dbname"
+          }
           type={"text"}
           value={dataSourceConnection}
           name={"connection_url"}
@@ -43,7 +45,12 @@ const DBConnect: React.FC<DBConnectorProps> = ({ onSubmit, loading }) => {
 
       <div className="w-7/12 mx-auto ">
         <ACButton
-          onClick={() => onSubmit({ dataSourceName, dataSourceConnection })}
+          onClick={() =>
+            onSubmit({
+              datasource_name: dataSourceName,
+              connection_url: dataSourceConnection,
+            })
+          }
           text={"Continue"}
           type={"button"}
           loading={loading}
