@@ -39,25 +39,9 @@ const Chat = () => {
   };
 
   return (
-    <section>
-      <div className="flex items-center gap-x-3 ">
-        <div className="w-14 h-14">
-          <Icon className="text-foreground text-6xl" icon="simple-icons:poe" />
-        </div>
-        <span className=" text-foreground font-bold text-4xl">ASK</span>
-      </div>
-
-      <div className="fixed bottom-5  left-0 right-0 px-4">
-        <div className="text-black w-full  pt-7">
-          <HomeChatInput
-            hasChat={hasChat}
-            busy={busy}
-            value={textContent}
-            disabled={auth.loading}
-            onChange={(e) => setTextContent(e.target?.value)}
-            onSend={onSend}
-          />
-        </div>
+    <section className=" w-full bg-[#f9f9f9] min-h-screen">
+      <div className="flex items-center   h-full bg-red-500">
+        <span>Hello world</span>
       </div>
     </section>
   );
