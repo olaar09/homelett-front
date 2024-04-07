@@ -15,7 +15,7 @@ class ProfileAPIService {
       const user = await this.apiService.get("/user");
       return user as IAuthRequest;
     } catch (error) {
-      throw new Error(`Failed to get user: ${error}`);
+      throw error;
     }
   }
 }

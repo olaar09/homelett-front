@@ -14,26 +14,18 @@ class APIService {
     this.apiBaseUrl = apiBaseUrl;
   }
 
-  private async getIdToken(): Promise<string> {
-    const user = firebase.auth().currentUser;
-    if (!user) return "";
-    return user.getIdToken();
-  }
-
   private async request<T>(
     endpoint: string,
     options: RequestOptions
   ): Promise<T> {
     const url = `${this.apiBaseUrl}${endpoint}`;
     try {
-      const idToken = await this.getIdToken();
-
       const axiosOptions: AxiosRequestConfig = {
         url: url,
         method: options.method,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `${idToken}`,
+          Authorization: localStorage.getItem("token"),
         },
         data: options.data,
       };

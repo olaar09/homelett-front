@@ -16,7 +16,7 @@ class AuthAPIService {
         id_token: idToken,
       });
     } catch (error) {
-      throw new Error(`Failed to sign in with google: ${error}`);
+      throw error;
     }
   }
 
@@ -27,7 +27,7 @@ class AuthAPIService {
         password: data.password,
       });
     } catch (error) {
-      throw new Error(`Failed to register: ${error}`);
+      throw error;
     }
   }
 
@@ -38,7 +38,7 @@ class AuthAPIService {
         password: data.password,
       });
     } catch (error) {
-      throw new Error(`Failed to register: ${error}`);
+      throw error;
     }
   }
 
@@ -46,7 +46,7 @@ class AuthAPIService {
     try {
       await this.apiService.get("/auth/logout");
     } catch (error) {
-      throw new Error(`Failed to logout: ${error}`);
+      throw error;
     }
   }
 }
