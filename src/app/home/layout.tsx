@@ -16,18 +16,14 @@ const NavMenu = ({
   title,
   icon,
   path,
-  onClick,
 }: {
   path: string;
   title: string;
   icon: string;
-  onClick?: (x: any, y: any) => void;
 }) => {
   const browserPath = usePathname();
-  const dummyClick = (xx: any) => {};
   return (
     <div
-      onClick={onClick ?? dummyClick}
       className={`flex items-center h-10 hover:bg-[#E8E7FF] hover:text-primary hover:font-bold rounded-md px-2 w-full  cursor-pointer  gap-x-3  ${
         browserPath.includes(path)
           ? "bg-[#E8E7FF] text-primary font-bold "
@@ -112,12 +108,13 @@ const Nav: React.FC<any> = ({ children }) => {
                 icon={"tabler:api"}
                 title="API Keys"
               />
-              <NavMenu
-                onClick={onLogout}
-                path={"/logout"}
-                icon={"ic:outline-logout"}
-                title="Logout"
-              />
+              <div onClick={onLogout}>
+                <NavMenu
+                  path={"/logout"}
+                  icon={"ic:outline-logout"}
+                  title="Logout"
+                />
+              </div>
             </div>
           </div>
         </div>
