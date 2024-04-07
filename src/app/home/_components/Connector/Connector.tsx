@@ -17,7 +17,7 @@ const ConnectorModal: React.FC<{
 
   const fetchSources = async () => {
     try {
-      const list = await apiUtil.profileService.loadProfile();
+      const list = await apiUtil.datasourceService.listSourceTypes();
     } catch (error) {
       console.log("none");
     }
