@@ -39,11 +39,7 @@ const Chat = () => {
   };
 
   return (
-    <section
-      className={`flex items-center  h-screen flex-col relative ${
-        hasChat ? "justify-start" : "justify-center"
-      }`}
-    >
+    <section>
       <div className="flex items-center gap-x-3 ">
         <div className="w-14 h-14">
           <Icon className="text-foreground text-6xl" icon="simple-icons:poe" />
@@ -52,33 +48,6 @@ const Chat = () => {
       </div>
 
       <div className="fixed bottom-5  left-0 right-0 px-4">
-        <div className="flex flex-row  items-center justify-evenly gap-x-2 mt-4 ">
-          <div className="shrink-0">
-            <Chip
-              title="Write"
-              icon="streamline:ai-edit-spark-solid"
-              isSelected={true}
-              toggleSelect={() => console.log("kmk")}
-            />
-          </div>
-          <div className="shrink-0">
-            <Chip
-              title="Upload"
-              icon="ri:attachment-fill"
-              isSelected={false}
-              toggleSelect={() => console.log("kmk")}
-            />
-          </div>
-          <div className="shrink-0">
-            <Chip
-              title="Voice"
-              icon="icon-park-solid:voice-one"
-              isSelected={false}
-              toggleSelect={() => console.log("kmk")}
-            />
-          </div>
-        </div>
-
         <div className="text-black w-full  pt-7">
           <HomeChatInput
             hasChat={hasChat}

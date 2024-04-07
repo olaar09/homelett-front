@@ -25,7 +25,7 @@ export const AuthContext = createContext<IAuthContext>({
   refreshProfile: async () => {},
 });
 
-export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
+export const AuthProvider: React.FC<any> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<IAuthRequest | null>(null);
   const apiService = new APIUtil();
   const [loading, setLoading] = useState<boolean>(true);
@@ -65,7 +65,7 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
         }
       }
     } catch (error) {
-      if (error instanceof AxiosError) {
+      /* if (error instanceof AxiosError) {
         console.log(error);
 
         message.error(
@@ -73,7 +73,7 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
         );
       } else {
         message.error("Unable to fetch user");
-      }
+      } */
       if (path !== "/") {
         router.push(`/`);
         return;

@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import type { Viewport } from "next";
-import FirebaseProvider from "@/contexts/FirebaseProvider";
-import { FireBaseAuthProvider } from "@/contexts/AuthContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 import { Suspense } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
@@ -12,11 +11,12 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   manifest: "/manifest.json",
   title: "SequelBase",
-  description: "Ask your lecture notes any question after class",
+  description:
+    "AI Co-Pilot for engineering and business teams to get things done faster!",
   applicationName: "SequelBase",
   appleWebApp: true,
   formatDetection: { telephone: false },
-  icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
+  // icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
   openGraph: {
     type: "website",
     title: "SequelBase",
@@ -29,7 +29,8 @@ export const metadata: Metadata = {
     site: "",
     siteId: "", // make unique
     creator: "SequelBase INC",
-    description: "Ask your lecture notes any question, after class",
+    description:
+      "AI Co-Pilot for engineering and business teams to get things done faster!",
     title: "SequelBase",
     images: "",
   },
@@ -62,8 +63,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <GoogleOAuthProvider clientId="801456630743-5rb4c1hh82rvse95fek0bqt623gnclqg.apps.googleusercontent.com">
-          <Suspense fallback={<span>....</span>}>
-            <FireBaseAuthProvider>{children} </FireBaseAuthProvider>{" "}
+          <Suspense fallback={<span></span>}>
+            <AuthProvider>{children} </AuthProvider>{" "}
           </Suspense>
         </GoogleOAuthProvider>
       </body>
