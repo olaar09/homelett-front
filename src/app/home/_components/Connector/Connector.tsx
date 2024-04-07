@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { Modal, List, Avatar, Button } from "antd";
+import React, { useContext, useState } from "react";
+import { Modal, List, Avatar, Button, message } from "antd";
 import { useRequest } from "ahooks";
 import APIUtil from "@/services/APIUtil";
 import { Icon } from "@iconify/react";
 import DynamicComponent from "./DynamicComponent";
+import { AxiosError } from "axios";
+import { AuthContext } from "@/contexts/AuthContext";
 
 // Define TypeScript interface for your item data
 interface ListItem {
@@ -19,7 +21,10 @@ const ConnectorModal: React.FC<{
   onClose: () => void;
 }> = ({ visible, onClose }) => {
   const apiUtil = new APIUtil();
+  const auth = useContext(AuthContext);
+
   const [selected, setSelected] = useState<ListItem | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
   const fetchSources = async () => {
     try {
@@ -46,8 +51,27 @@ const ConnectorModal: React.FC<{
     }
   };
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    try {
+      setSubmitting(true);
+      if (!data.dataSourceName || !data.dataSourceConnection) {
+        message.error("Please complete all fields");
+        return;
+      } else {
+        const response = await apiUtil.datasourceService.addSource(data);
+        await auth.refreshDataSource();
+        onClose();
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return message.error(
+          `${error?.response?.data?.message ?? "Unable to complete request"}`
+        );
+      }
+      message.error("Unable to complete request");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const { data: dataSourceTypes, loading, refresh } = useRequest(fetchSources);
@@ -95,7 +119,11 @@ const ConnectorModal: React.FC<{
       >
         {selected && (
           <div style={{ height: 400, overflow: "auto" }}>
-            <DynamicComponent onSubmit={onSubmit} type={selected.category} />
+            <DynamicComponent
+              loading={submitting}
+              onSubmit={onSubmit}
+              type={selected.category}
+            />
           </div>
         )}
         {!selected && (
