@@ -39,7 +39,7 @@ const Chat = () => {
   };
 
   return (
-    <section className=" w-full bg-[#f9f9f9] min-h-screen">
+    <section className=" w-full bg-background-thin min-h-screen">
       <div className="flex items-center   h-full bg-red-500">
         <span>Hello world</span>
       </div>

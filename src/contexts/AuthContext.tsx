@@ -39,7 +39,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
 
     if (currentUser) {
       if (path === "/") {
-        router.push(`/home${queryParams ? `?${queryParams}` : ""}`);
+        router.push(`/home/chat${queryParams ? `?${queryParams}` : ""}`);
         return;
       }
     } else {
@@ -55,7 +55,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
       if (user) {
         setCurrentUser(user);
         if (path === "/") {
-          router.push(`/home${queryParams ? `?${queryParams}` : ""}`);
+          router.push(`/home/chat${queryParams ? `?${queryParams}` : ""}`);
           return;
         }
       } else {

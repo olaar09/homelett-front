@@ -23,6 +23,7 @@ const config: Config = {
         "foreground-inverted": "rgb(var(--foreground-inverted))",
         "foreground-secondary": "rgb(var(--foreground-secondary-rgb))",
         background: "rgb(var(--background-rgb))",
+        "background-thin": "rgb(var(--background-thin-rgb))",
         link: "rgb(var(--link-rgb))",
         panel: "rgb(var(--panel-rgb))",
       },

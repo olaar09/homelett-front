@@ -9,17 +9,45 @@ import Drawer from "./_components/Drawer";
 
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
+const NavMenu = ({
+  title,
+  icon,
+  path,
+}: {
+  path: string;
+  title: string;
+  icon: string;
+}) => {
+  const browserPath = usePathname();
+
+  return (
+    <Link className="w-full" href={path ?? "/"}>
+      <div
+        className={`flex items-center h-10 hover:bg-[#E8E7FF] hover:text-primary hover:font-bold rounded-md px-2 w-full  cursor-pointer  gap-x-3  ${
+          browserPath.includes(path)
+            ? "bg-[#E8E7FF] text-primary font-bold "
+            : "text-gray-800"
+        }`}
+      >
+        <Icon className="text-lg   font-bold" icon={icon} />
+        <span className="text-md font-thin ">{title}</span>
+      </div>
+    </Link>
+  );
+};
 const HeadIcon = () => {
   return (
-    <div className="flex items-center gap-x-2   pl-4 h-full border-b shadow-sm">
+    <div className="flex items-center gap-x-2   pl-4 h-full border-b shadow-sm w-full">
       <div className="w-6 h-14  flex items-center">
         <Icon
-          className="text-foreground text-2xl opacity-90 mt-1"
+          className="text-gray-700 text-2xl opacity-90 mt-1"
           icon="simple-icons:poe"
         />
       </div>
-      <span className=" text-foreground font-bold text-xl">SequelBase</span>
+      <span className=" text-gray-700 font-bold text-xl">SequelBase</span>
     </div>
   );
 };
@@ -27,8 +55,54 @@ const ChatLayout: React.FC<any> = ({ children }) => {
   return (
     <div className="min-h-screen w-full">
       <div className="flex items-center w-full h-full">
-        <div className=" bg-background w-[260px] min-h-screen border-r border-gray-300 shadow-sm ">
+        <div className=" bg-background w-[260px] min-h-screen border-r border-gray-300 shadow-sm flex flex-col h-full items-start ">
           <HeadIcon />
+          <div className="flex flex-col items-start gap-y-2 py-5 w-full px-2 ">
+            <NavMenu
+              path="/home/chat"
+              icon={"heroicons:chat-bubble-left-ellipsis-20-solid"}
+              title="Chat"
+            />
+            <NavMenu
+              path="/home/workflows"
+              icon={"octicon:workflow-16"}
+              title="Workflows"
+            />
+            <NavMenu
+              path="/home/board"
+              icon={"fluent:pin-48-filled"}
+              title="Pin board"
+            />
+            <NavMenu
+              path="/home/connections"
+              icon={"mdi:connection"}
+              title="Connections"
+            />
+          </div>
+          <div className="flex flex-grow  justify-end flex-col py-3 px-2 w-full ">
+            <div className="flex flex-col border-t w-full py-5">
+              <NavMenu
+                path="/home/profile"
+                icon={"clarity:user-line"}
+                title="Profile"
+              />
+              <NavMenu
+                path="/home/connections"
+                icon={"ant-design:team-outlined"}
+                title="Team"
+              />
+              <NavMenu
+                path="/home/connections"
+                icon={"tabler:api"}
+                title="API Keys"
+              />
+              <NavMenu
+                path="/home/logout"
+                icon={"ic:outline-logout"}
+                title="Logout"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="flex-grow">{children}</div>

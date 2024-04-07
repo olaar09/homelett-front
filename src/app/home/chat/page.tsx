@@ -12,7 +12,7 @@ import APIUtil from "@/services/APIUtil";
 import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
 import { useRequest } from "ahooks";
 import TextAvatar from "@/app/components/TextAvatar";
-import { FireBaseAuthContext } from "@/contexts/AuthContext";
+import { AuthContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
 
@@ -23,13 +23,13 @@ const Chat = () => {
 
   //const currentAuth = useContext(FireBaseAuthContext);
   const [completingPayment, setCompletingPayment] = useState(false);
-  const authContext = useContext(FireBaseAuthContext);
+  const authContext = useContext(AuthContext);
   const apiUtil = new APIUtil();
   const router = useRouter();
 
   const listSubjects = async (): Promise<ISubjectItem[] | undefined> => {
     try {
-      const data = await apiUtil.subjectService.listSubjects();
+      const data = await apiUtil.profileService.loadProfile();
       if (data) {
         return data;
       }
@@ -107,18 +107,6 @@ const Chat = () => {
     <div>
       <LoadingOverlay loading={completingPayment} />
 
-      <StickyHead hasContent={true}>
-        <Link href={"/chat"}>
-          <div className="flex items-center  py-1 rounded-lg gap-x-2">
-            <Icon
-              icon={"material-symbols:arrow-back-ios-rounded"}
-              className="text-md cursor-pointer text-2xl"
-            />
-            <span className="text-lg">Add a new subject</span>
-          </div>
-        </Link>
-      </StickyHead>
-
       {(loading || !data) && (
         <div className="animate-pulse flex flex-col gap-y-6 mt-24">
           <div className="flex items-center flex-wrap gap-y-8">
@@ -137,12 +125,6 @@ const Chat = () => {
               );
             })}
           </div>
-        </div>
-      )}
-
-      {!loading && data && (
-        <div className="flex flex-col gap-y-4 mt-24  ">
-          <SubjectListInfinite onSelect={onSubjectSelected} items={data} />
         </div>
       )}
     </div>

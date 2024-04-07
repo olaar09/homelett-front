@@ -44,7 +44,7 @@ export default function Home() {
 
       localStorage.setItem("token", response.data.token!);
       message.success("Login successful");
-      router.push("/home");
+      router.push("/home/chat");
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error);
@@ -67,7 +67,7 @@ export default function Home() {
       const response = await apiService.authService!.googleSignIn(IdToken);
       localStorage.setItem("token", response.data.token!);
       message.success("Login successful");
-      router.push("/home");
+      router.push("/home/chat");
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error);
