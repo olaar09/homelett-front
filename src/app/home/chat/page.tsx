@@ -89,12 +89,12 @@ const Chat = () => {
     setOpenConnector(true);
   };
 
-  const onCloseConnector = () => {
+  const onCloseConnector = async () => {
     /*  if (!currentAuth.dataSources || currentAuth.dataSources?.length < 1) {
       alert("no dsource");
       return;
     } */
-
+    await currentAuth.refreshDataSource();
     console.log(currentAuth.dataSources);
 
     setOpenConnector(false);
