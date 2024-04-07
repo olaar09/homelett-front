@@ -1,10 +1,7 @@
 import { ISubjectGroup } from "./ISubjectGroup";
 
-export interface ISubjectItem {
+export interface IChat {
   id: string;
-  title: string;
-  description: string;
-  amount: number;
-  subjectGroup: ISubjectGroup;
-  groupId: string;
+  slug: string;
+  session_id: string;
 }

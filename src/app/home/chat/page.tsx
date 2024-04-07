@@ -4,12 +4,9 @@ import { Icon } from "@iconify/react";
 import { useContext, useEffect, useState } from "react";
 
 import Link from "next/link";
-import StickyHead from "@/app/components/Header";
-import SubjectListInfinite from "../_components/SubjectListInfinite";
-import { usePaystackPayment } from "react-paystack";
 import { Spin, message } from "antd";
 import APIUtil from "@/services/APIUtil";
-import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
+import { IChat } from "@/app/interfaces/ISubjectItem";
 import { useRequest } from "ahooks";
 import TextAvatar from "@/app/components/TextAvatar";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -17,17 +14,14 @@ import { useRouter } from "next/navigation";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
 
 const Chat = () => {
-  const [selectedSubject, setSelectedSubject] = useState<ISubjectItem | null>(
-    null
-  );
+  const [chats, setChats] = useState<IChat[]>([]);
 
-  //const currentAuth = useContext(FireBaseAuthContext);
-  const [completingPayment, setCompletingPayment] = useState(false);
+  const currentAuth = useContext(AuthContext);
   const authContext = useContext(AuthContext);
   const apiUtil = new APIUtil();
   const router = useRouter();
 
-  const listSubjects = async (): Promise<ISubjectItem[] | undefined> => {
+  const getChats = async (): Promise<any> => {
     try {
       const data = await apiUtil.profileService.loadProfile();
       if (data) {
@@ -37,97 +31,18 @@ const Chat = () => {
       message.error("unable to load data");
     }
   };
-  const { data, error, loading } = useRequest(() => listSubjects(), {
+
+  const { data, error, loading } = useRequest(() => getChats(), {
     ready:
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
 
-  console.log(data, "RESPONSE");
-
-  const config = {
-    reference: new Date().getTime().toString(),
-    email: "agboolar09@gmail.com",
-    amount: (selectedSubject?.amount ?? 0) * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-    publicKey: "pk_test_0bd51a9b53a2c80ead3d84d11b27e4f51659e5f5",
-  };
-
-  const initializePayment = usePaystackPayment(config);
-  const completeTrx = async (reference: string) => {};
-
-  useEffect(() => {
-    if (selectedSubject && selectedSubject.amount > 0) {
-      onInitPayment();
-    }
-  }, [selectedSubject?.amount]);
-
-  const onSuccess = (reference: string) => {
-    completePayment(reference);
-  };
-
-  const completePayment = async (data: any) => {
-    try {
-      setCompletingPayment(true);
-      await apiUtil.subjectService.addSubject({
-        paymentReference: data.reference,
-        subjectId: selectedSubject!.id,
-      });
-      message.success("Subject added");
-      await authContext.refreshProfile();
-      router.push("/chat");
-      setCompletingPayment(false);
-    } catch (x) {
-      message.error("Unable to complete transaction");
-      setCompletingPayment(false);
-    }
-  };
-
-  // you can call this function anything
-  const onClose = () => {
-    // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log("closed");
-    message.error("Payment cancelled");
-  };
-
-  const onInitPayment = () => {
-    try {
-      initializePayment({ onSuccess, onClose });
-    } catch (x) {
-      message.error("Unable to initialize payment");
-      console.log(x, "Error occured");
-    } finally {
-      setSelectedSubject(null);
-    }
-  };
-
-  const onSubjectSelected = (subject: ISubjectItem) => {
-    setSelectedSubject(subject);
-  };
-
   return (
-    <div>
-      <LoadingOverlay loading={completingPayment} />
-
-      {(loading || !data) && (
-        <div className="animate-pulse flex flex-col gap-y-6 mt-24">
-          <div className="flex items-center flex-wrap gap-y-8">
-            {[1, 2, 3, 4, 8, 8, 8, 3].map((val, index) => {
-              return (
-                <div key={index} className="w-6/12 px-3">
-                  <div
-                    key={index}
-                    className="flex flex-col gap-y-2 shrink-0  bg-[#1D1D1D] rounded-lg  px-2 pt-2 h-36"
-                  >
-                    <TextAvatar character={""} bgColor="#181818" />
-                    <span className="text-sm truncate h-3 "></span>
-                    <span className="text-[0.85rem] h-8 text-foreground-secondary truncate-2-lines max-w-xs"></span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-    </div>
+    <main className="h-full bg-red-300">
+      <section className="h-full">
+        <span className="text-black">Chat name</span>
+      </section>
+    </main>
   );
 };
 

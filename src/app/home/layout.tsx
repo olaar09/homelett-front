@@ -1,14 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import Chip from "@/app/components/Chip";
-import SubjectList from "./_components/SubjectItem";
-import HomeChatInput from "./_components/ChatInput";
-import { useState } from "react";
-import Drawer from "./_components/Drawer";
 
-import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -119,7 +112,7 @@ const Nav: React.FC<any> = ({ children }) => {
           </div>
         </div>
 
-        <div className="flex-grow">{children}</div>
+        <div className="flex-grow h-full min-h-screen">{children}</div>
       </div>
     </div>
   );
