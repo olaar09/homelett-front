@@ -95,6 +95,8 @@ const Chat = () => {
       return;
     } */
 
+    console.log(currentAuth.dataSources);
+
     setOpenConnector(false);
   };
 
