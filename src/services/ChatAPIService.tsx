@@ -19,7 +19,7 @@ class ChatAPIService {
 
   async startChat(data: any): Promise<any> {
     try {
-      const chat = await this.apiService.post("/chats", {});
+      const chat = await this.apiService.post("/chats", data);
       return chat;
     } catch (error) {
       throw error;

@@ -50,16 +50,19 @@ const Chat = () => {
 
   const getChats = async (): Promise<any> => {
     try {
-      const data = await apiUtil.profileService.loadProfile();
-      if (data) {
-        return data;
-      }
+      const data = await apiUtil.chatService.listChats();
+      return data;
     } catch (error) {
       message.error("unable to load data");
     }
   };
 
-  const { data, error, loading } = useRequest(() => getChats(), {
+  const {
+    data: chatList,
+    error,
+    loading: loadingChat,
+    refresh: refreshChats,
+  } = useRequest(() => getChats(), {
     ready:
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
@@ -89,14 +92,14 @@ const Chat = () => {
     setOpenConnector(true);
   };
 
-  const onCloseConnector = async () => {
+  const onCloseConnector = async (needRefresh = false) => {
     /*  if (!currentAuth.dataSources || currentAuth.dataSources?.length < 1) {
       alert("no dsource");
       return;
     } */
-    await currentAuth.refreshDataSource();
-    console.log(currentAuth.dataSources);
-
+    if (needRefresh) {
+      refreshChats();
+    }
     setOpenConnector(false);
   };
 

@@ -19,7 +19,7 @@ interface ListItem {
 
 const ConnectorModal: React.FC<{
   visible: boolean;
-  onClose: () => void;
+  onClose: (needRefresh: boolean) => void;
 }> = ({ visible, onClose }) => {
   const apiUtil = new APIUtil();
   const auth = useContext(AuthContext);
@@ -60,13 +60,14 @@ const ConnectorModal: React.FC<{
         message.error("Please complete all fields");
         return;
       } else {
-        await apiUtil.datasourceService.addSource({
+        const source = await apiUtil.datasourceService.addSource({
           ...data,
           datasource_type_id: selected!.id,
         });
         await auth.refreshDataSource();
+        await apiUtil.chatService.startChat({ datasource_id: source.id });
         message.success("Data source added");
-        onClose();
+        onClose(true);
       }
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -86,8 +87,8 @@ const ConnectorModal: React.FC<{
 
   const { data: dataSourceTypes, loading, refresh } = useRequest(fetchSources);
 
-  const handleOk = () => onClose();
-  const handleCancel = () => onClose();
+  const handleOk = () => onClose(false);
+  const handleCancel = () => onClose(false);
   const title =
     dataSourceTypes && dataSourceTypes.length > 0
       ? "Connect a data source"
