@@ -56,13 +56,13 @@ const ConnectorModal: React.FC<{
   const onSubmit = async (data: any) => {
     try {
       setSubmitting(true);
-      if (!data.connection_url || !data.datasource_name) {
+      if (!data.connection_string || !data.datasource_name) {
         message.error("Please complete all fields");
         return;
       } else {
         await apiUtil.datasourceService.addSource({
           ...data,
-          datasource_type_id: selected?.id,
+          datasource_type_id: selected!.id,
         });
         await auth.refreshDataSource();
         message.success("Data source added");

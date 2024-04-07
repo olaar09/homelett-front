@@ -6,10 +6,10 @@ interface DBConnectorProps {
   loading: boolean;
   onSubmit: ({
     datasource_name,
-    connection_url,
+    connection_string,
   }: {
     datasource_name: string;
-    connection_url: string;
+    connection_string: string;
   }) => void;
 }
 
@@ -38,7 +38,7 @@ const DBConnect: React.FC<DBConnectorProps> = ({ onSubmit, loading }) => {
           }
           type={"text"}
           value={dataSourceConnection}
-          name={"connection_url"}
+          name={"connection_string"}
           onChange={(e) => setdatasourceConnection(e.target.value)}
         />
       </div>
@@ -48,7 +48,7 @@ const DBConnect: React.FC<DBConnectorProps> = ({ onSubmit, loading }) => {
           onClick={() =>
             onSubmit({
               datasource_name: dataSourceName,
-              connection_url: dataSourceConnection,
+              connection_string: dataSourceConnection,
             })
           }
           text={"Continue"}
