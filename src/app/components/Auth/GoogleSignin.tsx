@@ -5,7 +5,7 @@ import { message } from "antd";
 const GoogleLoginButton = ({ onSuccess }: any) => {
   const responseGoogle = async (response: any) => {
     // console.log("HEREEEE", response);
-    return await onSuccess(true, response?.credential);
+    return await onSuccess(response?.credential);
   };
 
   const errorGoogle = () => {
@@ -13,8 +13,13 @@ const GoogleLoginButton = ({ onSuccess }: any) => {
   };
 
   return (
-    <div>
-      <GoogleLogin onSuccess={responseGoogle} onError={errorGoogle} />
+    <div className=" max-auto flex items-center justify-center">
+      <GoogleLogin
+        size="large"
+        width={342}
+        onSuccess={responseGoogle}
+        onError={errorGoogle}
+      />
     </div>
   );
 };

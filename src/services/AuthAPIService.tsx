@@ -12,7 +12,7 @@ class AuthAPIService {
 
   async googleSignIn(idToken: string): Promise<void> {
     try {
-      await this.apiService.post("/api/auth/google", {
+      await this.apiService.post("/auth/google", {
         id_token: idToken,
       });
     } catch (error) {
