@@ -48,10 +48,18 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "appBodyFont"; /* A name to use later */
+  src: url("/fonts/Regular.woff"); /* IE9 Compat Modes */
+  src: url("/fonts/Regular.woff"), url("/fonts/Regular.woff"),
+    url("/fonts/Regular.woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
-  font-family: appFont !important;
 }
 
 html {
@@ -141,4 +149,12 @@ html {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.font-bold {
+  font-family: appFont !important;
+}
+
+.font-body {
+  font-family: appBodyFont !important;
 }

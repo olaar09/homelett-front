@@ -8,9 +8,9 @@ type ChatInputProps = {
   disabled: boolean;
   busy: boolean;
   hasChat: boolean;
-  value: string;
+  value?: string;
   onSend: () => void;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  onChange: ChangeEventHandler<HTMLTextAreaElement>;
 };
 
 const ChatInput: React.FC<ChatInputProps> = ({
@@ -28,7 +28,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
     "Possible exam questions from all lectures",
   ];
 
-  const noSend = busy || value.length < 2;
+  const noSend = busy || !value || (value?.length && value.length < 2);
 
   useEffect(() => {
     let currentMessageIndex = 0;
@@ -83,19 +83,29 @@ const ChatInput: React.FC<ChatInputProps> = ({
 
   return (
     <div className="relative w-full">
-      <input
-        type="text"
+      <textarea
+        id="prompt-textarea"
+        dir="auto"
+        rows={1}
+        onChange={onChange}
+        placeholder={"Message MainDB"}
+        className="m-0 ring-[0.4px]  ring-foreground-secondary rounded-lg w-full resize-none border-0 bg-transparent focus:ring-[0.4px]  focus:ring-black  py-[10px] pr-10 md:py-3.5 md:pr-12 max-h-[25dvh]  placeholder-black/50 dark:placeholder-white/50 pl-10 md:pl-[25px] outline-none"
+        spellCheck={false}
+        style={{ minHeight: "52px", overflowY: "hidden" }}
+      />
+
+      {/*    <textarea
         readOnly={disabled}
         placeholder={placeholder}
         onChange={onChange}
         value={value}
-        className="pl-3 shadow pr-10 bg-transparent py-2 h-12 rounded-full ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none"
-      />
+        className="pl-3 shadow pr-10 flex items-center bg-transparent py-2 min-h-12 rounded-full ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none placeholder:pt-2 "
+      /> */}
       <div
         onClick={() => {
           if (!noSend) onSend();
         }}
-        className="absolute inset-y-0 right-0 pr-0 flex items-center"
+        className="absolute inset-y-0 right-0 pr-0 flex items-center -top-1"
       >
         <Icon
           icon={

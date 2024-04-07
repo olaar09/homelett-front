@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 
 import Link from "next/link";
 import { Spin, message } from "antd";
@@ -12,18 +12,34 @@ import TextAvatar from "@/app/components/TextAvatar";
 import { AuthContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
+import ChatInput from "../_components/ChatInput";
 
-const HeaderItem = ({ title, icon }: { title: string; icon: string }) => {
+const HeaderItem = ({
+  withBg,
+  title,
+  icon,
+}: {
+  withBg: boolean;
+  title: string;
+  icon: string;
+}) => {
   return (
-    <div className=" items-center flex gap-x-1">
+    <div
+      className={` items-center flex gap-x-1 py-2 cursor-pointer hover:opacity-55 transition-all duration-150 ${
+        withBg
+          ? "bg-primary text-foreground-inverted rounded-lg px-3 "
+          : "text-foreground "
+      }`}
+    >
       <Icon icon={icon} className="text-xl" />
-      <span className="text-black font-bold mt-0"> {title}</span>
+      <span className="text-sm font-bold mt-0"> {title}</span>
     </div>
   );
 };
 
 const Chat = () => {
   const [chats, setChats] = useState<IChat[]>([]);
+  const [userInput, setUserInput] = useState("");
 
   const currentAuth = useContext(AuthContext);
   const authContext = useContext(AuthContext);
@@ -46,14 +62,43 @@ const Chat = () => {
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
 
+  const onSendChat = () => {
+    console.log("chat here");
+  };
+
+  const onChange = (ev: any) => {
+    setUserInput(ev.target?.value);
+  };
+
   return (
-    <main className="h-full bg-background-thin min-h-screen">
-      <section className="h-14  flex items-center justify-between px-5">
-        <HeaderItem icon="devicon:mysql-wordmark" title="Main DB" />
+    <main className="h-full bg-background-thin min-h-screen flex flex-col">
+      <section className="h-14  flex items-center justify-between px-6">
+        <HeaderItem
+          icon="devicon:mysql-wordmark"
+          title="Main DB"
+          withBg={false}
+        />
 
         <div className="flex items-center gap-x-7">
-          <HeaderItem icon="fluent:history-32-filled" title="Previous chats" />
-          <HeaderItem icon="ri:chat-new-fill" title="New chat" />
+          <HeaderItem
+            icon="fluent:history-32-filled"
+            title="Previous chats"
+            withBg={false}
+          />
+          <HeaderItem withBg icon="ri:chat-new-fill" title="Start a new chat" />
+        </div>
+      </section>
+
+      <section className="flex flex-grow justify-end flex-col  px-6">
+        <div className="flex w-full lg:w-full xl:w-8/12 mx-auto py-10">
+          <ChatInput
+            disabled={false}
+            busy={false}
+            hasChat={false}
+            value={userInput}
+            onSend={onSendChat}
+            onChange={onChange}
+          />
         </div>
       </section>
     </main>

@@ -17,14 +17,14 @@ const NavMenu = ({
   const browserPath = usePathname();
   return (
     <div
-      className={`flex items-center h-10 hover:bg-[#E8E7FF] hover:text-primary hover:font-bold rounded-md px-2 w-full  cursor-pointer  gap-x-3  ${
+      className={`font-body  flex items-center h-10 hover:bg-[#E8E7FF] hover:text-primary hover:font-bold rounded-md px-2 w-full  cursor-pointer  gap-x-3  ${
         browserPath.includes(path)
-          ? "bg-[#E8E7FF] text-primary font-bold "
-          : "text-gray-800"
+          ? "bg-[#E8E7FF] text-primary font-body "
+          : "text-foreground"
       }`}
     >
-      <Icon className="text-lg   font-bold" icon={icon} />
-      <span className="text-md font-thin ">{title}</span>
+      <Icon className="text-lg   font-body" icon={icon} />
+      <span className="text-md font-thin font-body  ">{title}</span>
     </div>
   );
 };
