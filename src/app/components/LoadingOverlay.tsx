@@ -12,7 +12,10 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ loading }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
-      <Icon icon={"eos-icons:three-dots-loading"} className=" text-7xl"></Icon>
+      <Icon
+        icon={"eos-icons:three-dots-loading"}
+        className=" text-7xl text-foreground-inverted"
+      ></Icon>
     </div>
   );
 };

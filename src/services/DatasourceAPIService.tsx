@@ -8,10 +8,10 @@ class DataSourceAPIService {
     this.apiService = apiService;
   }
 
-  async listSourceTypes(): Promise<{ data: { data: IDatasourceItem[] } }> {
+  async listSourceTypes(): Promise<{ data: IDatasourceItem[] }> {
     try {
       const chats = await this.apiService.get("/datasource/types");
-      return chats as { data: { data: IDatasourceItem[] } };
+      return chats as { data: IDatasourceItem[] };
     } catch (error) {
       throw error;
     }
