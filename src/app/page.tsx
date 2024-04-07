@@ -73,7 +73,15 @@ export default function Home() {
           `${error?.response?.data?.message ?? "Unable to complete request"}`
         );
       } else {
-        message.error("Unable to complete request");
+        if (error instanceof AxiosError) {
+          console.log(error);
+
+          message.error(
+            `${error?.response?.data?.message ?? "Unable to complete request"}`
+          );
+        } else {
+          message.error("Unable to complete request");
+        }
       }
     } finally {
       setLoading(false);
