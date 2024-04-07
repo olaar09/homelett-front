@@ -38,13 +38,7 @@ const Chat = () => {
     message.success("Sending message");
   };
 
-  return (
-    <section className=" w-full bg-background-thin min-h-screen">
-      <div className="flex items-center   h-full bg-red-500">
-        <span>Hello world</span>
-      </div>
-    </section>
-  );
+  return <main className=" w-full bg-background-thin min-h-screen"></main>;
 };
 
 export default Chat;

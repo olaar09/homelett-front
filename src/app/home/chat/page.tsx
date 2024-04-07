@@ -13,6 +13,15 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
 
+const HeaderItem = ({ title, icon }: { title: string; icon: string }) => {
+  return (
+    <div className=" items-center flex gap-x-1">
+      <Icon icon={icon} className="text-xl" />
+      <span className="text-black font-bold mt-0"> {title}</span>
+    </div>
+  );
+};
+
 const Chat = () => {
   const [chats, setChats] = useState<IChat[]>([]);
 
@@ -38,9 +47,14 @@ const Chat = () => {
   });
 
   return (
-    <main className="h-full bg-red-300">
-      <section className="h-full">
-        <span className="text-black">Chat name</span>
+    <main className="h-full bg-background-thin min-h-screen">
+      <section className="h-14  flex items-center justify-between px-5">
+        <HeaderItem icon="devicon:mysql-wordmark" title="Main DB" />
+
+        <div className="flex items-center gap-x-7">
+          <HeaderItem icon="fluent:history-32-filled" title="Previous chats" />
+          <HeaderItem icon="ri:chat-new-fill" title="New chat" />
+        </div>
       </section>
     </main>
   );
