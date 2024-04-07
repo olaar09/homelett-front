@@ -16,26 +16,27 @@ const NavMenu = ({
   title,
   icon,
   path,
+  onClick,
 }: {
   path: string;
   title: string;
   icon: string;
+  onClick?: (x: any, y: any) => void;
 }) => {
   const browserPath = usePathname();
-
+  const dummyClick = (xx: any) => {};
   return (
-    <Link className="w-full" href={path ?? "/"}>
-      <div
-        className={`flex items-center h-10 hover:bg-[#E8E7FF] hover:text-primary hover:font-bold rounded-md px-2 w-full  cursor-pointer  gap-x-3  ${
-          browserPath.includes(path)
-            ? "bg-[#E8E7FF] text-primary font-bold "
-            : "text-gray-800"
-        }`}
-      >
-        <Icon className="text-lg   font-bold" icon={icon} />
-        <span className="text-md font-thin ">{title}</span>
-      </div>
-    </Link>
+    <div
+      onClick={onClick ?? dummyClick}
+      className={`flex items-center h-10 hover:bg-[#E8E7FF] hover:text-primary hover:font-bold rounded-md px-2 w-full  cursor-pointer  gap-x-3  ${
+        browserPath.includes(path)
+          ? "bg-[#E8E7FF] text-primary font-bold "
+          : "text-gray-800"
+      }`}
+    >
+      <Icon className="text-lg   font-bold" icon={icon} />
+      <span className="text-md font-thin ">{title}</span>
+    </div>
   );
 };
 const HeadIcon = () => {
@@ -51,33 +52,48 @@ const HeadIcon = () => {
     </div>
   );
 };
-const ChatLayout: React.FC<any> = ({ children }) => {
+const Nav: React.FC<any> = ({ children }) => {
+  const router = useRouter();
+  const path = usePathname();
+  const onLogout = () => {
+    localStorage.clear();
+    router.push("/");
+  };
   return (
     <div className="min-h-screen w-full">
       <div className="flex items-center w-full h-full">
         <div className=" bg-background w-[260px] min-h-screen border-r border-gray-300 shadow-sm flex flex-col h-full items-start ">
           <HeadIcon />
           <div className="flex flex-col items-start gap-y-2 py-5 w-full px-2 ">
-            <NavMenu
-              path="/home/chat"
-              icon={"heroicons:chat-bubble-left-ellipsis-20-solid"}
-              title="Chat"
-            />
-            <NavMenu
-              path="/home/workflows"
-              icon={"octicon:workflow-16"}
-              title="Workflows"
-            />
-            <NavMenu
-              path="/home/board"
-              icon={"fluent:pin-48-filled"}
-              title="Pin board"
-            />
-            <NavMenu
-              path="/home/connections"
-              icon={"mdi:connection"}
-              title="Connections"
-            />
+            <Link className="w-full" href={"/home/chat"}>
+              <NavMenu
+                path="/home/chat"
+                icon={"heroicons:chat-bubble-left-ellipsis-20-solid"}
+                title="Chat"
+              />
+            </Link>
+            <Link className="w-full" href={"/home/workflows"}>
+              <NavMenu
+                path="/home/workflows"
+                icon={"octicon:workflow-16"}
+                title="Workflows"
+              />
+            </Link>
+            <Link className="w-full" href={"/home/board"}>
+              <NavMenu
+                path="/home/board"
+                icon={"fluent:pin-48-filled"}
+                title="Pin board"
+              />
+            </Link>
+
+            <Link className="w-full" href={"/home/connections"}>
+              <NavMenu
+                path="/home/connections"
+                icon={"mdi:connection"}
+                title="Connections"
+              />
+            </Link>
           </div>
           <div className="flex flex-grow  justify-end flex-col py-3 px-2 w-full ">
             <div className="flex flex-col border-t w-full py-5">
@@ -97,7 +113,8 @@ const ChatLayout: React.FC<any> = ({ children }) => {
                 title="API Keys"
               />
               <NavMenu
-                path="/home/logout"
+                onClick={onLogout}
+                path={"/logout"}
                 icon={"ic:outline-logout"}
                 title="Logout"
               />
@@ -111,4 +128,4 @@ const ChatLayout: React.FC<any> = ({ children }) => {
   );
 };
 
-export default ChatLayout;
+export default Nav;
