@@ -71,7 +71,11 @@ const ConnectorModal: React.FC<{
     } catch (error) {
       if (error instanceof AxiosError) {
         return message.error(
-          `${error?.response?.data?.message ?? "Unable to complete request"}`
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
+          }`
         );
       }
       message.error("Unable to complete request");

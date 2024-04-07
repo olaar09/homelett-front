@@ -90,9 +90,10 @@ const Chat = () => {
   };
 
   const onCloseConnector = () => {
-    if (!currentAuth.dataSources || currentAuth.dataSources?.length < 1) {
+    /*  if (!currentAuth.dataSources || currentAuth.dataSources?.length < 1) {
+      alert("no dsource");
       return;
-    }
+    } */
 
     setOpenConnector(false);
   };
