@@ -18,6 +18,8 @@ class APIService {
     endpoint: string,
     options: RequestOptions
   ): Promise<T> {
+    const token = localStorage.getItem("token");
+    console.log(localStorage.getItem("token"));
     const url = `${this.apiBaseUrl}${endpoint}`;
     try {
       const axiosOptions: AxiosRequestConfig = {
@@ -25,7 +27,7 @@ class APIService {
         method: options.method,
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
+          Authorization: `Bearer ${token}`,
         },
         data: options.data,
       };

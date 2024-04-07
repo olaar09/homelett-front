@@ -29,18 +29,20 @@ export default function Home() {
     e.preventDefault();
     setLoading(true);
     try {
+      let response;
       if (query.get("is_new") === "true") {
-        await apiService.authService!.register({
+        response = await apiService.authService!.register({
           email: form.email,
           password: form.password,
         });
       } else {
-        await apiService.authService!.login({
+        response = await apiService.authService!.login({
           email: form.email,
           password: form.password,
         });
       }
 
+      localStorage.setItem("token", response.data.token!);
       message.success("Login successful");
       router.push("/home");
     } catch (error) {
@@ -62,7 +64,8 @@ export default function Home() {
     setLoading(true);
 
     try {
-      await apiService.authService!.googleSignIn(IdToken);
+      const response = await apiService.authService!.googleSignIn(IdToken);
+      localStorage.setItem("token", response.data.token!);
       message.success("Login successful");
       router.push("/home");
     } catch (error) {

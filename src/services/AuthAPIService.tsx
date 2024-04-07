@@ -10,9 +10,9 @@ class AuthAPIService {
     this.apiService = apiService;
   }
 
-  async googleSignIn(idToken: string): Promise<void> {
+  async googleSignIn(idToken: string): Promise<{ data: IAuth }> {
     try {
-      await this.apiService.post("/auth/google", {
+      return await this.apiService.post("/auth/google", {
         id_token: idToken,
       });
     } catch (error) {
@@ -20,9 +20,9 @@ class AuthAPIService {
     }
   }
 
-  async register(data: IAuthRequest): Promise<void> {
+  async register(data: IAuthRequest): Promise<{ data: IAuth }> {
     try {
-      await this.apiService.post("/auth/register", {
+      return await this.apiService.post("/auth/register", {
         email: data.email,
         password: data.password,
       });
@@ -31,9 +31,9 @@ class AuthAPIService {
     }
   }
 
-  async login(data: IAuthRequest): Promise<void> {
+  async login(data: IAuthRequest): Promise<{ data: IAuth }> {
     try {
-      await this.apiService.post("/auth/login", {
+      return await this.apiService.post("/auth/login", {
         email: data.email,
         password: data.password,
       });
