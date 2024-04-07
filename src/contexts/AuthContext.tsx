@@ -66,6 +66,8 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     try {
       setLoadingSources(true);
       const dataSources = await apiService.datasourceService.listSources();
+      console.log(dataSources.data.data);
+
       setDataSources(dataSources.data.data);
     } catch (error) {
       if (error instanceof AxiosError) {
