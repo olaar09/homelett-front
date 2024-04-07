@@ -9,6 +9,7 @@ import { IProfile } from "@/app/interfaces/IProfile";
 import APIService from "@/services/APIService";
 import APIUtil from "@/services/APIUtil";
 import { IAuthRequest } from "@/app/interfaces/IRegisterRequest";
+import { AxiosError } from "axios";
 
 interface IAuthContext {
   refreshProfile: () => Promise<void>;
@@ -64,11 +65,19 @@ export const FireBaseAuthProvider: React.FC<any> = ({ children }) => {
         }
       }
     } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+
+        message.error(
+          `${error?.response?.data?.message ?? "Unable to complete request"}`
+        );
+      } else {
+        message.error("Unable to fetch user");
+      }
       if (path !== "/") {
         router.push(`/`);
         return;
       }
-      message.error("An error occurred while fetching profile");
     } finally {
       setLoading(false);
     }
