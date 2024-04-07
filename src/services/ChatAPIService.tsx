@@ -8,6 +8,15 @@ class ChatAPIService {
     this.apiService = apiService;
   }
 
+  async getActive(): Promise<any> {
+    try {
+      const chat = await this.apiService.get("/chats/active");
+      return chat;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async listChats(): Promise<any[]> {
     try {
       const chats = await this.apiService.get("/chats");

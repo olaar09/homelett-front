@@ -57,6 +57,15 @@ const Chat = () => {
     }
   };
 
+  const getActiveChat = async (): Promise<any> => {
+    try {
+      const data = await apiUtil.chatService.getActive();
+      return data;
+    } catch (error) {
+      message.error("unable to load data");
+    }
+  };
+
   const {
     data: chatList,
     error,
@@ -67,14 +76,22 @@ const Chat = () => {
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
 
+  const {
+    data: activeChat,
+    error: activeChatError,
+    loading: loadingActiveChat,
+    refresh: refreshActiveChat,
+  } = useRequest(() => getActiveChat(), {
+    ready:
+      authContext.currentUser != null && authContext.currentUser != undefined,
+  });
+
   useEffect(() => {
     if (currentAuth) {
       if (
         (!currentAuth.dataSources || currentAuth.dataSources?.length < 1) &&
         !currentAuth.loadingSources
       ) {
-        console.log("ASDFGH", currentAuth.dataSources, currentAuth, loading);
-
         onOpenConnector();
       }
     }
@@ -98,7 +115,7 @@ const Chat = () => {
       return;
     } */
     if (needRefresh) {
-      refreshChats();
+      refreshActiveChat();
     }
     setOpenConnector(false);
   };
