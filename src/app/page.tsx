@@ -10,11 +10,14 @@ import FirebaseContext from "@/contexts/FirebaseContext";
 import { FirebaseError } from "firebase/app";
 import { useRouter, useSearchParams } from "next/navigation";
 import GoogleLoginButton from "./components/Auth/GoogleSignin";
+import APIService from "@/services/APIService";
+import APIUtil from "@/services/APIUtil";
+import { AxiosError } from "axios";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
-  const firebase = useContext(FirebaseContext);
+  const apiService = new APIUtil();
   const query = useSearchParams();
   const router = useRouter();
 
@@ -27,34 +30,50 @@ export default function Home() {
     setLoading(true);
     try {
       if (query.get("is_new") === "true") {
-        await firebase!.authService.signUpWithPassword(
-          form.email,
-          form.password
-        );
+        await apiService.authService!.register({
+          email: form.email,
+          password: form.password,
+        });
       } else {
-        await firebase!.authService.loginWithPassword(
-          form.email,
-          form.password
-        );
+        await apiService.authService!.login({
+          email: form.email,
+          password: form.password,
+        });
       }
 
       message.success("Login successful");
-      router.push("/chat");
+      router.push("/home");
     } catch (error) {
-      if (error instanceof FirebaseError) {
-        console.log(error.message);
+      if (error instanceof AxiosError) {
+        console.log(error);
 
-        if (error.code === "auth/invalid-credential") {
-          message.error("Invalid login credentials");
-        } else if (error.code === "auth/email-already-in-use") {
-          message.error("Email already exists");
-        } else {
-          // bugsnag
-          message.error("Please check your internet, or contact support");
-        }
+        message.error(
+          `${error?.response?.data?.message ?? "Unable to complete request"}`
+        );
       } else {
-        console.log(typeof error);
-        message.error("An error occurred");
+        message.error("Unable to complete request");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const googleLogin = async (IdToken: string) => {
+    setLoading(true);
+
+    try {
+      await apiService.authService!.googleSignIn(IdToken);
+      message.success("Login successful");
+      router.push("/home");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+
+        message.error(
+          `${error?.response?.data?.message ?? "Unable to complete request"}`
+        );
+      } else {
+        message.error("Unable to complete request");
       }
     } finally {
       setLoading(false);
@@ -93,7 +112,7 @@ export default function Home() {
 
         <div className="mt-12 w-10/12 mx-auto ">
           <Suspense fallback={<span>loading..</span>}>
-            <GoogleLoginButton />
+            <GoogleLoginButton onSuccess={googleLogin} />
           </Suspense>
         </div>
 

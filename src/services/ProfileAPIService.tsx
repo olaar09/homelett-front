@@ -1,6 +1,7 @@
 import { INewSubject } from "@/app/interfaces/INewSubject";
 import ApiService from "./APIService";
 import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
+import { IAuthRequest } from "@/app/interfaces/IRegisterRequest";
 
 class ProfileAPIService {
   private apiService: ApiService;
@@ -9,24 +10,12 @@ class ProfileAPIService {
     this.apiService = apiService;
   }
 
-  async updateActiveChat(subject_id: string): Promise<void> {
+  async loadProfile(): Promise<IAuthRequest> {
     try {
-      await this.apiService.post("/update_active_subject", {
-        subject_id: subject_id,
-      });
+      const user = await this.apiService.get("/user");
+      return user as IAuthRequest;
     } catch (error) {
-      throw new Error(`Failed to list subjects: ${error}`);
-    }
-  }
-
-  async addSubject(newSubject: INewSubject): Promise<ISubjectItem> {
-    try {
-      const addedSubject = await this.apiService.get(
-        `/add_subject?reference=${newSubject.paymentReference}&subject_id=${newSubject.subjectId}`
-      );
-      return addedSubject as ISubjectItem;
-    } catch (error) {
-      throw new Error(`Failed to add a new subject: ${error}`);
+      throw new Error(`Failed to get user: ${error}`);
     }
   }
 }

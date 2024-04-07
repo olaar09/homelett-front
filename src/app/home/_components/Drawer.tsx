@@ -1,7 +1,7 @@
 // components/SlideOut.tsx
 import TextAvatar from "@/app/components/TextAvatar";
 import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
-import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
+import { FireBaseAuthContext } from "@/contexts/AuthContext";
 import FirebaseContext from "@/contexts/FirebaseContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useRouter } from "next/navigation";

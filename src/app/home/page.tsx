@@ -7,7 +7,7 @@ import { useContext, useState } from "react";
 import Drawer from "./_components/Drawer";
 import Link from "next/link";
 import StickyHead from "@/app/components/Header";
-import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
+import { FireBaseAuthContext } from "@/contexts/AuthContext";
 import GroupCodeDrawer from "./_components/GroupCodeDrawer";
 import { message } from "antd";
 import { useRouter } from "next/navigation";

@@ -12,7 +12,7 @@ import APIUtil from "@/services/APIUtil";
 import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
 import { useRequest } from "ahooks";
 import TextAvatar from "@/app/components/TextAvatar";
-import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
+import { FireBaseAuthContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
 

@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import type { Viewport } from "next";
 import FirebaseProvider from "@/contexts/FirebaseProvider";
-import { FireBaseAuthProvider } from "@/contexts/FireBaseAuthContext";
+import { FireBaseAuthProvider } from "@/contexts/AuthContext";
 import { Suspense } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
@@ -62,11 +62,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <GoogleOAuthProvider clientId="801456630743-5rb4c1hh82rvse95fek0bqt623gnclqg.apps.googleusercontent.com">
-          <FirebaseProvider>
-            <Suspense fallback={<span>....</span>}>
-              <FireBaseAuthProvider>{children} </FireBaseAuthProvider>{" "}
-            </Suspense>
-          </FirebaseProvider>
+          <Suspense fallback={<span>....</span>}>
+            <FireBaseAuthProvider>{children} </FireBaseAuthProvider>{" "}
+          </Suspense>
         </GoogleOAuthProvider>
       </body>
     </html>

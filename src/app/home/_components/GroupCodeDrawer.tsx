@@ -2,7 +2,7 @@ import ACButton from "@/app/components/Button";
 import InputField from "@/app/components/InputField";
 import TextAvatar from "@/app/components/TextAvatar";
 import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
-import { FireBaseAuthContext } from "@/contexts/FireBaseAuthContext";
+import { FireBaseAuthContext } from "@/contexts/AuthContext";
 import FirebaseContext from "@/contexts/FirebaseContext";
 import APIUtil from "@/services/APIUtil";
 import { Drawer, Button, message } from "antd";
