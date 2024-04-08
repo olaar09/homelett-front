@@ -51,7 +51,7 @@ const Nav: React.FC<any> = ({ children }) => {
   return (
     <div className="min-h-screen w-full overflow-hidden">
       <div className="flex items-center w-full h-full overflow-hidden">
-        <div className=" bg-background w-[260px] min-h-screen border-r border-gray-300 shadow-sm flex flex-col h-full items-start ">
+        <div className=" bg-background w-[290px] min-h-screen border-r border-gray-300 shadow-sm flex flex-col h-full items-start ">
           <HeadIcon />
           <div className="flex flex-col items-start gap-y-2 py-5 w-full px-2 ">
             <Link className="w-full" href={"/home/chat"}>

@@ -161,12 +161,17 @@ const Chat = () => {
       />
       <ConnectorModal visible={openConnector} onClose={onCloseConnector} />
       {chat && (
-        <section className="h-14  flex items-center justify-between px-6 mt-0">
-          <HeaderItem
-            icon={chat?.datasource.source_type.icon}
-            title={`${chat?.datasource.name}`}
-            withBg={false}
-          />
+        <section className="h-20  flex items-center justify-between px-4 mt-0 mx-auto w-11/12">
+          <div className="flex flex-col">
+            <HeaderItem
+              icon={chat?.datasource.source_type.icon}
+              title={`${chat?.datasource.name}`}
+              withBg={false}
+            />
+            <span className="text-xs text-foreground-secondary">
+              {chat.slug}
+            </span>
+          </div>
 
           <div className="flex items-center gap-x-7">
             {chatList?.length > 1 && (
