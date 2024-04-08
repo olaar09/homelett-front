@@ -10,10 +10,10 @@ import APIService from "@/services/APIService";
 import APIUtil from "@/services/APIUtil";
 import { IAuthRequest } from "@/app/interfaces/IRegisterRequest";
 import { AxiosError } from "axios";
-import { IDatasourceItem } from "@/app/interfaces/IDatasourceItem";
+import { IDataSourceItem } from "@/app/interfaces/IDataSourceItem";
 
 interface IAuthContext {
-  dataSources?: IDatasourceItem[] | null;
+  dataSources?: IDataSourceItem[] | null;
   refreshDataSource: () => Promise<void>;
   refreshProfile: () => Promise<void>;
   currentUser: IAuthRequest | null;
@@ -34,7 +34,7 @@ export const AuthContext = createContext<IAuthContext>({
 
 export const AuthProvider: React.FC<any> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<IAuthRequest | null>(null);
-  const [dataSources, setDataSources] = useState<IDatasourceItem[] | null>(
+  const [dataSources, setDataSources] = useState<IDataSourceItem[] | null>(
     null
   );
   const apiService = new APIUtil();

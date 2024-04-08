@@ -2,12 +2,12 @@
 
 import React, { ChangeEventHandler, useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { IDatasourceItem } from "@/app/interfaces/IDatasourceItem";
+import { IDataSourceItem } from "@/app/interfaces/IDataSourceItem";
 
 // Define the props the component accepts
 type ChatInputProps = {
   disabled: boolean;
-  datasource?: IDatasourceItem;
+  datasource?: IDataSourceItem;
   busy: boolean;
   hasChat: boolean;
   value?: string;

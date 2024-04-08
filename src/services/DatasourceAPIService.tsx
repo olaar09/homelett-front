@@ -1,4 +1,4 @@
-import { IDatasourceItem } from "@/app/interfaces/IDatasourceItem";
+import { IDataSourceItem } from "@/app/interfaces/IDataSourceItem";
 import ApiService from "./APIService";
 
 class DataSourceAPIService {
@@ -8,19 +8,19 @@ class DataSourceAPIService {
     this.apiService = apiService;
   }
 
-  async listSourceTypes(): Promise<{ data: IDatasourceItem[] }> {
+  async listSourceTypes(): Promise<{ data: IDataSourceItem[] }> {
     try {
       const chats = await this.apiService.get("/datasource/types");
-      return chats as { data: IDatasourceItem[] };
+      return chats as { data: IDataSourceItem[] };
     } catch (error) {
       throw error;
     }
   }
 
-  async listSources(): Promise<{ data: { data: IDatasourceItem[] } }> {
+  async listSources(): Promise<{ data: { data: IDataSourceItem[] } }> {
     try {
       const chats = await this.apiService.get("/datasource");
-      return chats as { data: { data: IDatasourceItem[] } };
+      return chats as { data: { data: IDataSourceItem[] } };
     } catch (error) {
       throw error;
     }

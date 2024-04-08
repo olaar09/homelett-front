@@ -1,6 +1,6 @@
 import firebase from "firebase/compat/app";
 import { ISubjectGroup } from "./ISubjectGroup";
-import { ISubjectItem } from "./ISubjectItem";
+import { ISubjectItem } from "./IChatItem";
 
 export interface IProfile {
   id?: string;

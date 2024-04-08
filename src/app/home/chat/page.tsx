@@ -3,17 +3,15 @@
 import { Icon } from "@iconify/react";
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 
-import Link from "next/link";
 import { Spin, message } from "antd";
 import APIUtil from "@/services/APIUtil";
-import { IChat } from "@/app/interfaces/ISubjectItem";
 import { useRequest } from "ahooks";
-import TextAvatar from "@/app/components/TextAvatar";
 import { AuthContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
 import ChatInput from "../_components/ChatInput";
 import ConnectorModal from "../_components/Connector/Connector";
+import { IChat } from "@/app/interfaces/IChatItem";
 
 const HeaderItem = ({
   withBg,
@@ -117,13 +115,13 @@ const Chat = () => {
       {chat && (
         <section className="h-14  flex items-center justify-between px-6">
           <HeaderItem
-            icon={chat?.datasource.icon}
+            icon={chat?.datasource.source_type.icon}
             title={`${chat?.datasource.name}`}
             withBg={false}
           />
 
           <div className="flex items-center gap-x-7">
-            {chatList.length > 1 && (
+            {chatList?.length > 1 && (
               <HeaderItem
                 icon="fluent:history-32-filled"
                 title="Previous chats"

@@ -1,6 +1,6 @@
 import { INewSubject } from "@/app/interfaces/INewSubject";
 import ApiService from "./APIService";
-import { ISubjectItem } from "@/app/interfaces/ISubjectItem";
+import { ISubjectItem } from "@/app/interfaces/IChatItem";
 import { IAuthRequest } from "@/app/interfaces/IRegisterRequest";
 
 class AuthAPIService {

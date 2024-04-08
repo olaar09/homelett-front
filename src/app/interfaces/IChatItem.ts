@@ -1,5 +1,9 @@
-export interface IChatItem {
-  id?: string;
-  datasource_id?: string;
+import { IDataSourceItem } from "./IDataSourceItem";
+import { ISubjectGroup } from "./ISubjectGroup";
+
+export interface IChat {
+  id: string;
+  slug: string;
+  datasource: IDataSourceItem;
   session_id: string;
 }
