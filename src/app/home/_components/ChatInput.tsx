@@ -112,6 +112,9 @@ const ChatInput: React.FC<ChatInputProps> = ({
         className="absolute inset-y-0 right-0 pr-0 flex items-center -top-1"
       >
         <Icon
+          onClick={() => {
+            if (!noSend) onSend();
+          }}
           icon={
             busy
               ? "eos-icons:three-dots-loading"
