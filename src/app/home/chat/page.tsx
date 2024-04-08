@@ -39,7 +39,7 @@ const HeaderItem = ({
 };
 
 const Chat = () => {
-  const [chats, setChats] = useState<IChat[]>([]);
+  const [chat, setChat] = useState<IChat | null>(null);
   const [openConnector, setOpenConnector] = useState<boolean>(false);
   const [userInput, setUserInput] = useState("");
 
@@ -51,16 +51,12 @@ const Chat = () => {
   const getChats = async (): Promise<any> => {
     try {
       const data = await apiUtil.chatService.listChats();
-      return data;
-    } catch (error) {
-      message.error("unable to load data");
-    }
-  };
+      const list = data.data;
 
-  const getActiveChat = async (): Promise<any> => {
-    try {
-      const data = await apiUtil.chatService.getActive();
-      return data;
+      if (list.length > 0) {
+        setChat(list[0]);
+      }
+      return list;
     } catch (error) {
       message.error("unable to load data");
     }
@@ -76,15 +72,7 @@ const Chat = () => {
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
 
-  const {
-    data: activeChat,
-    error: activeChatError,
-    loading: loadingActiveChat,
-    refresh: refreshActiveChat,
-  } = useRequest(() => getActiveChat(), {
-    ready:
-      authContext.currentUser != null && authContext.currentUser != undefined,
-  });
+  console.log("QWERTY", chatList);
 
   useEffect(() => {
     if (currentAuth) {
@@ -115,7 +103,7 @@ const Chat = () => {
       return;
     } */
     if (needRefresh) {
-      refreshActiveChat();
+      refreshChats();
     }
     setOpenConnector(false);
   };
@@ -126,35 +114,46 @@ const Chat = () => {
         loading={currentAuth.loading || currentAuth.loadingSources}
       />
       <ConnectorModal visible={openConnector} onClose={onCloseConnector} />
-      <section className="h-14  flex items-center justify-between px-6">
-        <HeaderItem
-          icon="devicon:mysql-wordmark"
-          title="Main DB"
-          withBg={false}
-        />
-
-        <div className="flex items-center gap-x-7">
+      {chat && (
+        <section className="h-14  flex items-center justify-between px-6">
           <HeaderItem
-            icon="fluent:history-32-filled"
-            title="Previous chats"
+            icon={chat?.datasource.icon}
+            title={`${chat?.datasource.name}`}
             withBg={false}
           />
-          <HeaderItem withBg icon="ri:chat-new-fill" title="Start a new chat" />
-        </div>
-      </section>
 
-      <section className="flex flex-grow justify-end flex-col  px-6">
-        <div className="flex w-full lg:w-full xl:w-8/12 mx-auto py-10">
-          <ChatInput
-            disabled={false}
-            busy={false}
-            hasChat={false}
-            value={userInput}
-            onSend={onSendChat}
-            onChange={onChange}
-          />
-        </div>
-      </section>
+          <div className="flex items-center gap-x-7">
+            {chatList.length > 1 && (
+              <HeaderItem
+                icon="fluent:history-32-filled"
+                title="Previous chats"
+                withBg={false}
+              />
+            )}
+            <HeaderItem
+              withBg
+              icon="ri:chat-new-fill"
+              title="Start a new chat"
+            />
+          </div>
+        </section>
+      )}
+
+      {chatList && chatList?.length > 0 && (
+        <section className="flex flex-grow justify-end flex-col  px-6">
+          <div className="flex w-full lg:w-full xl:w-8/12 mx-auto py-10">
+            <ChatInput
+              datasource={chat?.datasource}
+              disabled={false}
+              busy={false}
+              hasChat={false}
+              value={userInput}
+              onSend={onSendChat}
+              onChange={onChange}
+            />
+          </div>
+        </section>
+      )}
     </main>
   );
 };

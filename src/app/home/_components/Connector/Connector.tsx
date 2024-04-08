@@ -65,7 +65,7 @@ const ConnectorModal: React.FC<{
           datasource_type_id: selected!.id,
         });
         await auth.refreshDataSource();
-        await apiUtil.chatService.startChat({ datasource_id: source.id });
+        await apiUtil.chatService.startChat({ datasource_id: source.data.id });
         message.success("Data source added");
         onClose(true);
       }

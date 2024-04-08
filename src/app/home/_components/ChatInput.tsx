@@ -2,10 +2,12 @@
 
 import React, { ChangeEventHandler, useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
+import { IDatasourceItem } from "@/app/interfaces/IDatasourceItem";
 
 // Define the props the component accepts
 type ChatInputProps = {
   disabled: boolean;
+  datasource?: IDatasourceItem;
   busy: boolean;
   hasChat: boolean;
   value?: string;
@@ -17,6 +19,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
   onChange,
   onSend,
   value,
+  datasource,
   hasChat,
   busy,
   disabled,
@@ -88,7 +91,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
         dir="auto"
         rows={1}
         onChange={onChange}
-        placeholder={"Message MainDB"}
+        placeholder={`Message ${datasource?.name ?? ""}`}
         className="m-0 ring-[0.4px]  ring-foreground-secondary rounded-lg w-full resize-none border-0 bg-transparent focus:ring-[0.4px]  focus:ring-black  py-[10px] pr-10 md:py-3.5 md:pr-12 max-h-[25dvh]  placeholder-black/50 dark:placeholder-white/50 pl-10 md:pl-[25px] outline-none"
         spellCheck={false}
         style={{ minHeight: "52px", overflowY: "hidden" }}

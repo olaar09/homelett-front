@@ -17,10 +17,10 @@ class ChatAPIService {
     }
   }
 
-  async listChats(): Promise<any[]> {
+  async listChats(): Promise<{ data: any[] }> {
     try {
       const chats = await this.apiService.get("/chats");
-      return chats as any[];
+      return chats as { data: any[] };
     } catch (error) {
       throw error;
     }
