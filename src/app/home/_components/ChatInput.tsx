@@ -112,11 +112,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
         className="absolute inset-y-0 right-0 pr-0 flex items-center -top-6 hover:opacity-85 cursor-pointer"
       >
         <Icon
-          icon={
-            busy
-              ? "eos-icons:three-dots-loading"
-              : "solar:round-arrow-right-bold"
-          }
+          icon={busy ? "eos-icons:loading" : "solar:round-arrow-right-bold"}
           className={`text-5xl  ${
             noSend ? "text-foreground-secondary" : "text-primary"
           }`}

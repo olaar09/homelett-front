@@ -70,7 +70,7 @@ const Chat = () => {
     const maxScroll = element.scrollHeight - element.clientHeight;
     if (element.scrollTop < maxScroll) {
       window.requestAnimationFrame(() => scrollToBottom());
-      element.scrollTop += 15; // Adjust the increment to control the speed
+      element.scrollTop += 20; // Adjust the increment to control the speed
     }
   };
 
