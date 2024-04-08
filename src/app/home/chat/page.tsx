@@ -184,6 +184,11 @@ const Chat = () => {
     setOpenPrevChats(false);
   };
 
+  const onSelectChat = (chat: IChat) => {
+    setChat(chat);
+    onClosePreviousChats();
+  };
+
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col">
       <LoadingOverlay
@@ -195,7 +200,7 @@ const Chat = () => {
         open={openPrevChats}
         onClose={onClosePreviousChats}
         items={chatList}
-        onClick={() => {}}
+        onClick={onSelectChat}
       />
       <ConnectorModal visible={openConnector} onClose={onCloseConnector} />
       {chat && (
