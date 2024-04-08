@@ -48,6 +48,16 @@ const Chat = () => {
   const apiUtil = new APIUtil();
   const router = useRouter();
 
+  const getChatHistory = async (): Promise<any> => {
+    try {
+      const data = await apiUtil.chatHistoryService.getChatHistory(chat!.id);
+      console.log(data);
+      return data.data;
+    } catch (error) {
+      message.error("unable to load data");
+    }
+  };
+
   const getChats = async (): Promise<any> => {
     try {
       const data = await apiUtil.chatService.listChats();
@@ -72,7 +82,20 @@ const Chat = () => {
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
 
-  console.log("QWERTY", chatList);
+  const {
+    data: chatHistoryList,
+    error: historyError,
+    loading: loadingChatHistory,
+    refresh: refreshChatHistory,
+  } = useRequest(() => getChatHistory(), {
+    ready: chat != null && chat.id != null,
+  });
+
+  useEffect(() => {
+    if (chat) {
+      refreshChatHistory();
+    }
+  }, [chat]);
 
   useEffect(() => {
     if (currentAuth) {
@@ -85,6 +108,8 @@ const Chat = () => {
     }
   }, [currentAuth, currentAuth.loadingSources]);
 
+  console.log(chatHistoryList);
+
   const onSendChat = async () => {
     try {
       setLoading(true);
@@ -93,6 +118,7 @@ const Chat = () => {
         question: userInput,
         datasource_id: chat!.datasource.id!,
       });
+      refreshChatHistory();
       setUserInput("");
 
       console.log(response);
@@ -160,12 +186,25 @@ const Chat = () => {
       )}
 
       {chatList && chatList?.length > 0 && (
-        <section className="flex flex-grow justify-end flex-col  px-6">
+        <section className="flex flex-grow justify-end flex-col  px-6 ">
+          {chatHistoryList && (
+            <div className="flex w-full lg:w-full xl:w-8/12 mx-auto py-10">
+              <div className="flex flex-col gap-y-5">
+                {chatHistoryList.map((cht: any) => {
+                  return (
+                    <div className={` text-foreground flex `}>
+                      <div className="w-full">{cht.message}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
           <div className="flex w-full lg:w-full xl:w-8/12 mx-auto py-10">
             <ChatInput
               datasource={chat?.datasource}
-              disabled={loading}
-              busy={loading}
+              disabled={loading || loadingChatHistory}
+              busy={loading || loadingChatHistory}
               hasChat={false}
               value={userInput}
               onSend={onSendChat}

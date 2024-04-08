@@ -10,10 +10,10 @@ class ChatHistoryAPIService {
     this.apiService = apiService;
   }
 
-  async getChatHistory(chatId: number): Promise<IChatHistoryItem[]> {
+  async getChatHistory(chatId: string): Promise<{ data: IChatHistoryItem[] }> {
     try {
       const user = await this.apiService.get(`/chats/${chatId}/history`);
-      return user as IChatHistoryItem[];
+      return user as { data: IChatHistoryItem[] };
     } catch (error) {
       throw error;
     }
