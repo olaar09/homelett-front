@@ -10,4 +10,5 @@ export interface DataSourceType {
   name: string;
   icon: string;
   category: string;
+  description?: string;
 }
