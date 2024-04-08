@@ -30,7 +30,7 @@ class ChatAPIService {
     }
   }
 
-  async startChat(data: any): Promise<any> {
+  async startChat(data: { datasource_id: string }): Promise<any> {
     try {
       const chat = await this.apiService.post("/chats", data);
       return chat;

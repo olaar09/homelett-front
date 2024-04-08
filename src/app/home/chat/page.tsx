@@ -13,6 +13,8 @@ import ChatInput from "../_components/ChatInput";
 import ConnectorModal from "../_components/Connector/Connector";
 import { IChat } from "@/app/interfaces/IChatItem";
 import { AxiosError } from "axios";
+import StartChatDropdown from "../_components/StartChatDropdown";
+import ChatListDrawer from "../_components/SelectChatDrawer";
 
 const HeaderItem = ({
   withBg,
@@ -42,6 +44,8 @@ const Chat = () => {
   const [openConnector, setOpenConnector] = useState<boolean>(false);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [openPrevChats, setOpenPrevChats] = useState(false);
+  const [loadingNewChat, setLoadingNewChat] = useState(false);
 
   const currentAuth = useContext(AuthContext);
   const authContext = useContext(AuthContext);
@@ -154,10 +158,44 @@ const Chat = () => {
     setOpenConnector(false);
   };
 
+  const onStartNewChat = async (dataSourceId: any) => {
+    try {
+      setLoadingNewChat(true);
+      await apiUtil.chatService.startChat({ datasource_id: dataSourceId });
+      refreshChats();
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+
+        message.error(
+          `${error?.response?.data?.message ?? "Unable to complete request"}`
+        );
+      }
+    } finally {
+      setLoadingNewChat(false);
+    }
+  };
+
+  const onOpenPreviousChats = () => {
+    setOpenPrevChats(true);
+  };
+
+  const onClosePreviousChats = () => {
+    setOpenPrevChats(false);
+  };
+
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col">
       <LoadingOverlay
-        loading={currentAuth.loading || currentAuth.loadingSources}
+        loading={
+          currentAuth.loading || currentAuth.loadingSources || loadingNewChat
+        }
+      />
+      <ChatListDrawer
+        open={openPrevChats}
+        onClose={onClosePreviousChats}
+        items={chatList}
+        onClick={() => {}}
       />
       <ConnectorModal visible={openConnector} onClose={onCloseConnector} />
       {chat && (
@@ -168,23 +206,24 @@ const Chat = () => {
               title={`${chat?.datasource.name}`}
               withBg={false}
             />
-            <span className="text-xs text-foreground-secondary">
+            <span className="text-xs text-foreground-secondary truncate w-52">
               {chat.slug}
             </span>
           </div>
 
           <div className="flex items-center gap-x-7">
             {chatList?.length > 1 && (
-              <HeaderItem
-                icon="fluent:history-32-filled"
-                title="Previous chats"
-                withBg={false}
-              />
+              <div onClick={onOpenPreviousChats}>
+                <HeaderItem
+                  icon="fluent:history-32-filled"
+                  title="Previous chats"
+                  withBg={false}
+                />
+              </div>
             )}
-            <HeaderItem
-              withBg
-              icon="ri:chat-new-fill"
-              title="Start a new chat"
+            <StartChatDropdown
+              items={currentAuth.dataSources ?? []}
+              onItemSelect={onStartNewChat}
             />
           </div>
         </section>
