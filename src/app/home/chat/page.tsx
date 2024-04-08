@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 
 import { Spin, message } from "antd";
 import APIUtil from "@/services/APIUtil";
@@ -56,6 +56,24 @@ const Chat = () => {
   const apiUtil = new APIUtil();
   const router = useRouter();
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Scroll to the bottom of the div
+    if (chat) scrollToBottom();
+  }, [chat]);
+
+  const scrollToBottom = () => {
+    if (!scrollRef.current) return;
+
+    const element = scrollRef.current;
+    const maxScroll = element.scrollHeight - element.clientHeight;
+    if (element.scrollTop < maxScroll) {
+      window.requestAnimationFrame(() => scrollToBottom());
+      element.scrollTop += 10; // Adjust the increment to control the speed
+    }
+  };
+
   const getChatHistory = async (): Promise<any> => {
     try {
       const data = await apiUtil.chatHistoryService.getChatHistory(chat!.id);
@@ -106,6 +124,10 @@ const Chat = () => {
   }, [chat]);
 
   useEffect(() => {
+    if (chatHistoryList) scrollToBottom();
+  }, [chatHistoryList]);
+
+  useEffect(() => {
     if (currentAuth) {
       if (
         (!currentAuth.dataSources || currentAuth.dataSources?.length < 1) &&
@@ -116,9 +138,8 @@ const Chat = () => {
     }
   }, [currentAuth, currentAuth.loadingSources]);
 
-  console.log(chatHistoryList);
-
   const onSendChat = async () => {
+    if (loading) return;
     try {
       setLoading(true);
       const response = await apiUtil.chatService.askQuestion({
@@ -259,7 +280,10 @@ const Chat = () => {
       )}
 
       {chatHistoryList && (
-        <div className="flex w-full flex-grow lg:w-full xl:w-8/12 mx-auto py-10 h-4/5 overflow-y-scroll">
+        <div
+          ref={scrollRef}
+          className="flex w-full flex-grow lg:w-full xl:w-8/12 mx-auto py-10 h-4/5 overflow-y-scroll"
+        >
           <div className="flex flex-col gap-y-5 px-4">
             {chatHistoryList.map((cht: any) => {
               return (

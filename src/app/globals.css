@@ -60,12 +60,14 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+  scroll-behavior: smooth;
 }
 
 html {
   overflow: scroll;
   overflow-x: hidden;
   font-family: appFont;
+  scroll-behavior: smooth;
 }
 ::-webkit-scrollbar {
   width: 0; /* Remove scrollbar space */
