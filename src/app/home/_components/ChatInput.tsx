@@ -109,7 +109,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
         onClick={() => {
           if (!noSend) onSend();
         }}
-        className="absolute inset-y-0 right-0 pr-0 flex items-center -top-1"
+        className="absolute inset-y-0 right-0 pr-0 flex items-center -top-6"
       >
         <Icon
           onClick={() => {
