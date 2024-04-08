@@ -130,9 +130,7 @@ const Chat = () => {
   });
 
   useEffect(() => {
-    if (!displayedChats || displayedChats.length < 1) {
-      setDisplayedChats(chatHistoryList);
-    }
+    setDisplayedChats(chatHistoryList);
   }, [chatHistoryList]);
 
   useEffect(() => {
