@@ -1,5 +1,6 @@
 import { INewSubject } from "@/app/interfaces/INewSubject";
 import ApiService from "./APIService";
+import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 
 class ChatAPIService {
   private apiService: ApiService;
@@ -12,10 +13,10 @@ class ChatAPIService {
     chat_id: string;
     question: string;
     datasource_id: string;
-  }): Promise<any> {
+  }): Promise<{ data: IChatHistoryItem }> {
     try {
       const chat = await this.apiService.put(`/chats/${data.chat_id}`, data);
-      return chat;
+      return chat as { data: IChatHistoryItem };
     } catch (error) {
       throw error;
     }

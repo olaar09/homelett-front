@@ -17,6 +17,7 @@ import StartChatDropdown from "../_components/StartChatDropdown";
 import ChatListDrawer from "../_components/SelectChatDrawer";
 import StartChatModal from "../_components/StartChatModal";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
+import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 
 const HeaderItem = ({
   withBg,
@@ -43,6 +44,9 @@ const HeaderItem = ({
 
 const Chat = () => {
   const [chat, setChat] = useState<IChat | null>(null);
+  const [displayedChats, setDisplayedChats] = useState<
+    IChatHistoryItem[] | null
+  >(null);
   const [openConnector, setOpenConnector] = useState<boolean>(false);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -54,7 +58,6 @@ const Chat = () => {
   const currentAuth = useContext(AuthContext);
   const authContext = useContext(AuthContext);
   const apiUtil = new APIUtil();
-  const router = useRouter();
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -65,13 +68,16 @@ const Chat = () => {
 
   const scrollToBottom = () => {
     if (!scrollRef.current) return;
-
     const element = scrollRef.current;
+
     const maxScroll = element.scrollHeight - element.clientHeight;
-    if (element.scrollTop < maxScroll) {
-      window.requestAnimationFrame(() => scrollToBottom());
-      element.scrollTop += 20; // Adjust the increment to control the speed
-    }
+    const step = () => {
+      if (element.scrollTop < maxScroll) {
+        element.scrollTop += 50; // Adjust speed as necessary
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
   };
 
   const getChatHistory = async (): Promise<any> => {
@@ -118,14 +124,20 @@ const Chat = () => {
   });
 
   useEffect(() => {
+    if (!displayedChats || displayedChats.length < 1) {
+      setDisplayedChats(chatHistoryList);
+    }
+  }, [chatHistoryList]);
+
+  useEffect(() => {
     if (chat) {
       refreshChatHistory();
     }
   }, [chat]);
 
   useEffect(() => {
-    if (chatHistoryList) scrollToBottom();
-  }, [chatHistoryList]);
+    if (displayedChats) scrollToBottom();
+  }, [displayedChats]);
 
   useEffect(() => {
     if (currentAuth) {
@@ -141,16 +153,23 @@ const Chat = () => {
   const onSendChat = async () => {
     if (loading) return;
     try {
+      const newChats = [...(displayedChats ?? [])];
+      setUserInput("");
+      newChats.push(...(displayedChats ?? []), {
+        message: userInput,
+        type: "question",
+        chat_id: chat!.id!,
+      });
+      setDisplayedChats(newChats);
+
       setLoading(true);
       const response = await apiUtil.chatService.askQuestion({
         chat_id: chat!.id,
         question: userInput,
         datasource_id: chat!.datasource.id!,
       });
-      refreshChatHistory();
-      setUserInput("");
 
-      console.log(response);
+      setDisplayedChats([...newChats, response.data]);
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error);
@@ -279,13 +298,13 @@ const Chat = () => {
         </section>
       )}
 
-      {chatHistoryList && (
+      {displayedChats && (
         <div
           ref={scrollRef}
           className="flex w-full flex-grow lg:w-full xl:w-8/12 mx-auto py-10 h-4/5 overflow-y-scroll"
         >
           <div className="flex flex-col gap-y-5 px-4">
-            {chatHistoryList.map((cht: any) => {
+            {displayedChats.map((cht: any) => {
               return (
                 <div className={` text-foreground flex `}>
                   <div className="w-full">{cht.message}</div>
