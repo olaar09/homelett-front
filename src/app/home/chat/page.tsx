@@ -91,6 +91,7 @@ const Chat = () => {
       const response = await apiUtil.chatService.askQuestion({
         chat_id: chat!.id,
         question: userInput,
+        datasource_id: chat!.datasource.id!,
       });
       setUserInput("");
 
