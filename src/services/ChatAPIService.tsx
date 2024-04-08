@@ -8,9 +8,9 @@ class ChatAPIService {
     this.apiService = apiService;
   }
 
-  async askQuestion(data: { chatId: number; question: string }): Promise<any> {
+  async askQuestion(data: { chat_id: string; question: string }): Promise<any> {
     try {
-      const chat = await this.apiService.post(`/chats/${data.chatId}`, data);
+      const chat = await this.apiService.put(`/chats/${data.chat_id}`, data);
       return chat;
     } catch (error) {
       throw error;

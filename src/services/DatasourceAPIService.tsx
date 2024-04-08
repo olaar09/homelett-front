@@ -1,4 +1,4 @@
-import { IDataSourceItem } from "@/app/interfaces/IDataSourceItem";
+import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import ApiService from "./APIService";
 
 class DataSourceAPIService {

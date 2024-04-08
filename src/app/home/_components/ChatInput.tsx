@@ -2,7 +2,7 @@
 
 import React, { ChangeEventHandler, useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { IDataSourceItem } from "@/app/interfaces/IDataSourceItem";
+import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 
 // Define the props the component accepts
 type ChatInputProps = {

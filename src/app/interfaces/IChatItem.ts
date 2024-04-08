@@ -1,5 +1,4 @@
-import { IDataSourceItem } from "./IDataSourceItem";
-import { ISubjectGroup } from "./ISubjectGroup";
+import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 
 export interface IChat {
   id: string;

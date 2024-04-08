@@ -10,7 +10,7 @@ import APIService from "@/services/APIService";
 import APIUtil from "@/services/APIUtil";
 import { IAuthRequest } from "@/app/interfaces/IRegisterRequest";
 import { AxiosError } from "axios";
-import { IDataSourceItem } from "@/app/interfaces/IDataSourceItem";
+import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 
 interface IAuthContext {
   dataSources?: IDataSourceItem[] | null;

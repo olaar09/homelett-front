@@ -12,6 +12,7 @@ import LoadingOverlay from "@/app/components/LoadingOverlay";
 import ChatInput from "../_components/ChatInput";
 import ConnectorModal from "../_components/Connector/Connector";
 import { IChat } from "@/app/interfaces/IChatItem";
+import { AxiosError } from "axios";
 
 const HeaderItem = ({
   withBg,
@@ -40,6 +41,7 @@ const Chat = () => {
   const [chat, setChat] = useState<IChat | null>(null);
   const [openConnector, setOpenConnector] = useState<boolean>(false);
   const [userInput, setUserInput] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const currentAuth = useContext(AuthContext);
   const authContext = useContext(AuthContext);
@@ -83,8 +85,27 @@ const Chat = () => {
     }
   }, [currentAuth, currentAuth.loadingSources]);
 
-  const onSendChat = () => {
-    console.log("chat here");
+  const onSendChat = async () => {
+    try {
+      setLoading(true);
+      const response = await apiUtil.chatService.askQuestion({
+        chat_id: chat!.id,
+        question: userInput,
+      });
+      setUserInput("");
+
+      console.log(response);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+
+        message.error(
+          `${error?.response?.data?.message ?? "Unable to complete request"}`
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const onChange = (ev: any) => {
@@ -142,8 +163,8 @@ const Chat = () => {
           <div className="flex w-full lg:w-full xl:w-8/12 mx-auto py-10">
             <ChatInput
               datasource={chat?.datasource}
-              disabled={false}
-              busy={false}
+              disabled={loading}
+              busy={loading}
               hasChat={false}
               value={userInput}
               onSend={onSendChat}
