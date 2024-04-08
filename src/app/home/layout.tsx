@@ -49,8 +49,8 @@ const Nav: React.FC<any> = ({ children }) => {
     router.push("/");
   };
   return (
-    <div className="min-h-screen w-full">
-      <div className="flex items-center w-full h-full">
+    <div className="min-h-screen w-full overflow-hidden">
+      <div className="flex items-center w-full h-full overflow-hidden">
         <div className=" bg-background w-[260px] min-h-screen border-r border-gray-300 shadow-sm flex flex-col h-full items-start ">
           <HeadIcon />
           <div className="flex flex-col items-start gap-y-2 py-5 w-full px-2 ">
@@ -112,7 +112,7 @@ const Nav: React.FC<any> = ({ children }) => {
           </div>
         </div>
 
-        <div className="flex-grow h-full min-h-screen">{children}</div>
+        <div className="w-full h-screen overflow-hidden ">{children}</div>
       </div>
     </div>
   );

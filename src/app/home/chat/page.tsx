@@ -161,7 +161,7 @@ const Chat = () => {
       />
       <ConnectorModal visible={openConnector} onClose={onCloseConnector} />
       {chat && (
-        <section className="h-14  flex items-center justify-between px-6">
+        <section className="h-20  flex items-center justify-between px-6 mt-4">
           <HeaderItem
             icon={chat?.datasource.source_type.icon}
             title={`${chat?.datasource.name}`}
@@ -186,9 +186,9 @@ const Chat = () => {
       )}
 
       {chatList && chatList?.length > 0 && (
-        <section className="flex flex-grow justify-end flex-col  px-6 ">
+        <section className="flex flex-grow justify-end flex-col  px-6 h-full ">
           {chatHistoryList && (
-            <div className="flex w-full lg:w-full xl:w-8/12 mx-auto py-10">
+            <div className="flex w-full flex-grow lg:w-full xl:w-8/12 mx-auto py-10 h-2/3 overflow-y-scroll">
               <div className="flex flex-col gap-y-5">
                 {chatHistoryList.map((cht: any) => {
                   return (
@@ -200,7 +200,7 @@ const Chat = () => {
               </div>
             </div>
           )}
-          <div className="flex w-full lg:w-full xl:w-8/12 mx-auto py-10">
+          <div className="flex w-full lg:w-full xl:w-8/12 mx-auto py-10 h-40">
             <ChatInput
               datasource={chat?.datasource}
               disabled={loading || loadingChatHistory}
