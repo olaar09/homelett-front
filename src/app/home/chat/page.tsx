@@ -161,7 +161,7 @@ const Chat = () => {
       />
       <ConnectorModal visible={openConnector} onClose={onCloseConnector} />
       {chat && (
-        <section className="h-20  flex items-center justify-between px-6 mt-4">
+        <section className="h-14  flex items-center justify-between px-6 mt-0">
           <HeaderItem
             icon={chat?.datasource.source_type.icon}
             title={`${chat?.datasource.name}`}
@@ -185,21 +185,22 @@ const Chat = () => {
         </section>
       )}
 
+      {chatHistoryList && (
+        <div className="flex w-full flex-grow lg:w-full xl:w-8/12 mx-auto py-10 h-4/5 overflow-y-scroll">
+          <div className="flex flex-col gap-y-5 px-4">
+            {chatHistoryList.map((cht: any) => {
+              return (
+                <div className={` text-foreground flex `}>
+                  <div className="w-full">{cht.message}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {chatList && chatList?.length > 0 && (
-        <section className="flex flex-grow justify-end flex-col  px-6 h-full ">
-          {chatHistoryList && (
-            <div className="flex w-full flex-grow lg:w-full xl:w-8/12 mx-auto py-10 h-2/3 overflow-y-scroll">
-              <div className="flex flex-col gap-y-5">
-                {chatHistoryList.map((cht: any) => {
-                  return (
-                    <div className={` text-foreground flex `}>
-                      <div className="w-full">{cht.message}</div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
+        <section className="flex flex-grow justify-end flex-col  px-6  ">
           <div className="flex w-full lg:w-full xl:w-8/12 mx-auto py-10 h-40">
             <ChatInput
               datasource={chat?.datasource}
