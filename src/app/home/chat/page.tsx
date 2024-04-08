@@ -15,6 +15,8 @@ import { IChat } from "@/app/interfaces/IChatItem";
 import { AxiosError } from "axios";
 import StartChatDropdown from "../_components/StartChatDropdown";
 import ChatListDrawer from "../_components/SelectChatDrawer";
+import StartChatModal from "../_components/StartChatModal";
+import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 
 const HeaderItem = ({
   withBg,
@@ -45,6 +47,8 @@ const Chat = () => {
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [openPrevChats, setOpenPrevChats] = useState(false);
+  const [openConnectedDatasources, setOpenConnectedDatasources] =
+    useState(false);
   const [loadingNewChat, setLoadingNewChat] = useState(false);
 
   const currentAuth = useContext(AuthContext);
@@ -189,6 +193,15 @@ const Chat = () => {
     onClosePreviousChats();
   };
 
+  const onOpenStartChatModal = () => {
+    setOpenConnectedDatasources(true);
+  };
+
+  const onDatasourceSelected = async (item: IDataSourceItem) => {
+    await onStartNewChat(item.id);
+    setOpenConnectedDatasources(false);
+  };
+
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col">
       <LoadingOverlay
@@ -201,6 +214,13 @@ const Chat = () => {
         onClose={onClosePreviousChats}
         items={chatList}
         onClick={onSelectChat}
+      />
+      <StartChatModal
+        loading={loadingNewChat}
+        datasources={currentAuth.dataSources ?? []}
+        visible={openConnectedDatasources}
+        onClickItem={onDatasourceSelected}
+        onClose={() => setOpenConnectedDatasources(false)}
       />
       <ConnectorModal visible={openConnector} onClose={onCloseConnector} />
       {chat && (
@@ -226,10 +246,14 @@ const Chat = () => {
                 />
               </div>
             )}
-            <StartChatDropdown
-              items={currentAuth.dataSources ?? []}
-              onItemSelect={onStartNewChat}
-            />
+
+            <div onClick={onOpenStartChatModal}>
+              <HeaderItem
+                icon="ri:chat-new-fill"
+                title="Start new chat"
+                withBg={true}
+              />
+            </div>
           </div>
         </section>
       )}

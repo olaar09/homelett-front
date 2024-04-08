@@ -5,12 +5,13 @@ import { Icon } from "@iconify/react";
 
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 
-const StartChartModal: React.FC<{
+const StartChatModal: React.FC<{
+  loading: boolean;
   datasources: IDataSourceItem[];
   visible: boolean;
   onClickItem: (item: IDataSourceItem) => void;
   onClose: (needRefresh: boolean) => void;
-}> = ({ visible, onClose, datasources, onClickItem }) => {
+}> = ({ visible, onClose, datasources, onClickItem, loading }) => {
   const handleOk = () => onClose(false);
   const handleCancel = () => onClose(false);
   const title = "Start a new chat";
@@ -29,8 +30,8 @@ const StartChartModal: React.FC<{
         }
         open={visible}
         onOk={handleOk}
-        closable={false}
-        maskClosable={false}
+        closable={true}
+        maskClosable={true}
         onCancel={handleCancel}
         width={600}
         footer={null}
@@ -55,7 +56,10 @@ const StartChartModal: React.FC<{
                     <span className={`text-foreground`}>{item.name}</span>
 
                     <span className="text-foreground text-xs py-1 px-2 rounded-xl">
-                      <Icon icon={"ep:arrow-right"} className="text-xl w-10" />
+                      <Icon
+                        icon={loading ? "eos-icons:loading" : "ep:arrow-right"}
+                        className="text-xl w-10"
+                      />
                     </span>
                   </div>
                 }
@@ -63,11 +67,11 @@ const StartChartModal: React.FC<{
               />
             </List.Item>
           )}
-          style={{ height: 400, overflow: "auto" }}
+          style={{ height: 300, overflow: "auto" }}
         />
       </Modal>
     </>
   );
 };
 
-export default StartChartModal;
+export default StartChatModal;
