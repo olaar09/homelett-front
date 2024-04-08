@@ -66,6 +66,12 @@ const Chat = () => {
     if (chat) scrollToBottom();
   }, [chat]);
 
+  const jumpToBottom = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  };
+
   const scrollToBottom = () => {
     if (!scrollRef.current) return;
     const element = scrollRef.current;
@@ -73,7 +79,7 @@ const Chat = () => {
     const maxScroll = element.scrollHeight - element.clientHeight;
     const step = () => {
       if (element.scrollTop < maxScroll) {
-        element.scrollTop += 50; // Adjust speed as necessary
+        element.scrollTop += 20; // Adjust speed as necessary
         window.requestAnimationFrame(step);
       }
     };
@@ -136,7 +142,13 @@ const Chat = () => {
   }, [chat]);
 
   useEffect(() => {
-    if (displayedChats) scrollToBottom();
+    if (displayedChats && displayedChats.length > 0) {
+      if (displayedChats[displayedChats.length - 1].type === "answer") {
+        scrollToBottom();
+      } else {
+        jumpToBottom();
+      }
+    }
   }, [displayedChats]);
 
   useEffect(() => {
