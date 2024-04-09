@@ -319,35 +319,12 @@ const Chat = () => {
 
       {chat && chat.datasource && (
         <ChatHistory
+          scrollRef={scrollRef}
           loadingChatHistory={loadingChatHistory}
           datasource={chat!.datasource}
           displayedChats={displayedChats}
         />
       )}
-      {/*  {loadingChatHistory && (
-        <div className="flex w-full flex-grow lg:w-full xl:w-8/12 mx-auto py-10 h-4/5 items-center justify-center">
-          <Icon
-            icon={"eos-icons:three-dots-loading"}
-            className="text-6xl text-foreground"
-          />
-        </div>
-      )}
-      {!loadingChatHistory && displayedChats && (
-        <div
-          ref={scrollRef}
-          className="flex w-full flex-grow lg:w-full xl:w-8/12 mx-auto py-10 h-4/5 overflow-y-scroll"
-        >
-          <div className="flex flex-col gap-y-5 px-4">
-            {displayedChats.map((cht: any) => {
-              return (
-                <div className={` text-foreground flex `}>
-                  <RenderChatItem data={cht} datasource={chat!.datasource!} />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )} */}
 
       {chatList && chatList?.length > 0 && (
         <section className="flex flex-grow justify-end flex-col  px-6  ">

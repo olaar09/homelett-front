@@ -8,15 +8,15 @@ interface ChatHistoryProps {
   loadingChatHistory: boolean;
   datasource: IDataSourceItem;
   displayedChats: IChatHistoryItem[] | null;
+  scrollRef: any;
 }
 
 const ChatHistory: React.FC<ChatHistoryProps> = ({
   loadingChatHistory,
   displayedChats,
   datasource,
+  scrollRef,
 }) => {
-  const scrollRef = useRef<HTMLDivElement>(null); // If scrollRef should come from props, you'll need to adjust this.
-
   return (
     <>
       {loadingChatHistory && (
