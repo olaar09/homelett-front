@@ -3,6 +3,7 @@ import { Button, Card, Table, Tooltip } from "antd";
 import { Icon } from "@iconify/react";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 import AreaChart from "@/app/components/RenderChat/RenderAreaChat";
+import LineChart from "@/app/components/RenderChat/RenderLineChart";
 
 const viewTypes = [
   { icon: "ic:outline-table-view", key: "table", name: "Table view" },
@@ -85,6 +86,7 @@ export const ContentDisplay = ({
   const [viewKey, setViewKey] = useState("table");
 
   const onChangeDisplay = (selected: string) => {
+    //  alert(selected);
     setViewKey(selected);
   };
 
@@ -109,6 +111,9 @@ export const ContentDisplay = ({
         )}
 
         {viewKey === "area" && <AreaChart data={data} title="" />}
+        {viewKey === "pie" && <AreaChart data={data} title="" />}
+        {viewKey === "bar" && <AreaChart data={data} title="" />}
+        {viewKey === "line" && <LineChart data={data} title="" />}
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const { Option } = Select;
   { price: 60, date: "2023-09" },
 ];
  */
-const AreaChart: React.FC<{ title: string; data: any[] }> = ({
+const LineChart: React.FC<{ title: string; data: any[] }> = ({
   title,
   data,
 }) => {
@@ -52,14 +52,14 @@ const AreaChart: React.FC<{ title: string; data: any[] }> = ({
   const state = {
     series: [
       {
-        name: "Series 1",
-        data: yData ?? [],
+        name: "Desktops",
+        data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
       },
     ],
     options: {
       chart: {
-        type: "area",
         height: 350,
+        type: "line",
         zoom: {
           enabled: false,
         },
@@ -68,21 +68,30 @@ const AreaChart: React.FC<{ title: string; data: any[] }> = ({
         enabled: false,
       },
       stroke: {
-        curve: "smooth",
+        curve: "straight",
       },
       title: {
-        text: title ?? "",
+        text: "Product Trends by Month",
         align: "left",
       },
-      labels: xData ?? [],
+      grid: {
+        row: {
+          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+          opacity: 0.5,
+        },
+      },
       xaxis: {
-        type: "category",
-      },
-      yaxis: {
-        opposite: true,
-      },
-      legend: {
-        horizontalAlign: "left",
+        categories: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+        ],
       },
     },
   };
@@ -99,7 +108,7 @@ const AreaChart: React.FC<{ title: string; data: any[] }> = ({
     <>
       {(!x || !y) && (
         <Card
-          title="Area chart"
+          title="Line chart"
           className="w-full  p-4 h-full"
           bordered={false}
         >
@@ -145,11 +154,11 @@ const AreaChart: React.FC<{ title: string; data: any[] }> = ({
       )}
 
       {x && y && (
-        <div id="chart">
+        <div id="line_chart">
           <ReactApexChart
             options={state.options}
             series={state.series}
-            type="area"
+            type="line"
             height={350}
           />
         </div>
@@ -158,4 +167,4 @@ const AreaChart: React.FC<{ title: string; data: any[] }> = ({
   );
 };
 
-export default AreaChart;
+export default LineChart;
