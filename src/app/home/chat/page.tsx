@@ -166,7 +166,7 @@ const Chat = () => {
     try {
       const newChats = [...(displayedChats ?? [])];
       setUserInput("");
-      newChats.push(...(displayedChats ?? []), {
+      newChats.push({
         message: userInput,
         type: "question",
         chat_id: chat!.id!,
