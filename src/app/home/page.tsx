@@ -25,7 +25,8 @@ const Chat = () => {
     setOpenDrawer(true);
   };
 
-  const onSend = async () => {
+  const onSend = async (e: any) => {
+    e.preventDefault();
     if (!textContent) return message.warning("Enter a message to chat");
     if (textContent.length < 2) return message.warning("Enter a valid message");
     await onSubmitMessage();
