@@ -1,35 +1,48 @@
-import React from "react";
-import { Table, message } from "antd";
+import React, { useRef } from "react";
+import { Icon } from "@iconify/react";
+import RenderChatItem from "../ChatItemDisplay";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
-import RenderQuestion from "./RenderQuestion";
-import RenderAnswer from "./RenderAnswer";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 
-interface RenderTableAnswerProps {
-  data: IChatHistoryItem;
+interface ChatHistoryProps {
+  loadingChatHistory: boolean;
   datasource: IDataSourceItem;
+  displayedChats: IChatHistoryItem[] | null;
 }
 
-const RenderChatItem: React.FC<RenderTableAnswerProps> = ({
-  data,
+const ChatHistory: React.FC<ChatHistoryProps> = ({
+  loadingChatHistory,
+  displayedChats,
   datasource,
 }) => {
-  switch (data.type) {
-    case "question":
-      return (
-        <RenderQuestion avatar={""} content={data.message!} senderName={""} />
-      );
-    case "answer":
-      return (
-        <RenderAnswer
-          avatar={datasource.source_type.icon}
-          content={data.message!}
-          senderName={datasource.name!}
-        />
-      );
-    default:
-      return <></>;
-  }
+  const scrollRef = useRef<HTMLDivElement>(null); // If scrollRef should come from props, you'll need to adjust this.
+
+  return (
+    <>
+      {loadingChatHistory && (
+        <div className="flex w-full flex-grow lg:w-full xl:w-8/12 mx-auto py-10 h-4/5 items-center justify-center">
+          <Icon
+            icon="eos-icons:three-dots-loading"
+            className="text-6xl text-foreground"
+          />
+        </div>
+      )}
+      {!loadingChatHistory && displayedChats && (
+        <div
+          ref={scrollRef}
+          className="flex w-full flex-grow lg:w-full xl:w-8/12 mx-auto py-10 h-4/5 overflow-y-scroll"
+        >
+          <div className="flex flex-col gap-y-5 px-4">
+            {displayedChats.map((cht: IChatHistoryItem) => (
+              <div key={cht.id} className="text-foreground flex">
+                <RenderChatItem data={cht} datasource={datasource} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  );
 };
 
-export default RenderChatItem;
+export default ChatHistory;
