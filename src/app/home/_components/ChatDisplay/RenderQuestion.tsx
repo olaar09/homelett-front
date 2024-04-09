@@ -16,10 +16,10 @@ const RenderQuestion: React.FC<RenderQuestionProps> = ({
   senderName,
 }) => {
   return (
-    <div className="flex flex-col gap-y-3">
+    <div className="flex flex-col gap-y-3 w-full hover:bg-gray-100 cursor-pointer px-2 rounded-lg py-2">
       <div className="flex items-center gap-x-2">
         <Icon
-          icon="fa-solid:user-circle"
+          icon="bx:cool"
           className="bg-transparent text-3xl text-gray-600"
         />
         <span className="text-foreground font-bold">You</span>

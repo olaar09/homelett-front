@@ -16,7 +16,7 @@ const RenderAnswer: React.FC<RenderAnswerProps> = ({
   senderName,
 }) => {
   return (
-    <div className="flex flex-col gap-y-3 my-4">
+    <div className="flex flex-col gap-y-3 my-4 hover:bg-gray-100 cursor-pointer px-2 rounded-lg py-2">
       <div className="flex items-center gap-x-2">
         <Icon icon={avatar} className="bg-transparent text-3xl text-gray-600" />
         <span className="text-foreground font-bold">{senderName}</span>
