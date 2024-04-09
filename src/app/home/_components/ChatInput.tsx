@@ -109,7 +109,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
         value={value}
         className="pl-3 shadow pr-10 flex items-center bg-transparent py-2 min-h-12 rounded-full ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none placeholder:pt-2 "
       /> */}
-        <div className="absolute inset-y-0 right-3 pr-0 flex items-center -top-8 hover:opacity-85 cursor-pointer z-40">
+        <div className="absolute inset-y-0 right-3 pr-0 flex items-center -top-6 hover:opacity-85 cursor-pointer z-40">
           <Button
             className="text-1xl bg-primary"
             htmlType="submit"
