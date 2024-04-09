@@ -15,6 +15,7 @@ import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 interface IAuthContext {
   dataSources?: IDataSourceItem[] | null;
   refreshDataSource: () => Promise<void>;
+  clearUser: () => Promise<void>;
   refreshProfile: () => Promise<void>;
   currentUser: IAuthRequest | null;
   authenticated: boolean;
@@ -28,6 +29,7 @@ export const AuthContext = createContext<IAuthContext>({
   authenticated: false,
   loading: true,
   loadingSources: true,
+  clearUser: async () => {},
   refreshProfile: async () => {},
   refreshDataSource: async () => {},
 });
@@ -46,7 +48,12 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const params = useSearchParams();
 
   useEffect(() => {
-    if (currentUser) fetchDataSource();
+    if (currentUser) {
+      fetchDataSource();
+    } else if (!currentUser && !loading) {
+      setCurrentUser(null);
+      setDataSources(null);
+    }
   }, [currentUser]);
 
   useEffect(() => {
@@ -61,6 +68,10 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
       fetchCurrentUserProfile();
     }
   }, [router]);
+
+  const clearUser = async () => {
+    setCurrentUser(null);
+  };
 
   const fetchDataSource = async () => {
     try {
@@ -119,11 +130,11 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   };
 
   const refreshDataSource = async () => {
-    if (currentUser) await fetchDataSource();
+    await fetchDataSource();
   };
 
   const refreshProfile = async () => {
-    if (currentUser) await fetchCurrentUserProfile();
+    await fetchCurrentUserProfile();
   };
 
   return (
@@ -133,6 +144,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         loadingSources,
         dataSources,
         refreshProfile,
+        clearUser,
         refreshDataSource,
         currentUser,
         authenticated,

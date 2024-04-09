@@ -1,9 +1,11 @@
 "use client";
 
+import { AuthContext } from "@/contexts/AuthContext";
 import { Icon } from "@iconify/react";
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useContext } from "react";
 
 const NavMenu = ({
   title,
@@ -44,9 +46,12 @@ const HeadIcon = () => {
 const Nav: React.FC<any> = ({ children }) => {
   const router = useRouter();
   const path = usePathname();
+  const authContext = useContext(AuthContext);
+
   const onLogout = () => {
     localStorage.clear();
     router.push("/");
+    authContext.clearUser();
   };
   return (
     <div className="min-h-screen w-full overflow-hidden">

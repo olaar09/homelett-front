@@ -13,6 +13,7 @@ import GoogleLoginButton from "./components/Auth/GoogleSignin";
 import APIService from "@/services/APIService";
 import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
+import { AuthContext } from "@/contexts/AuthContext";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -20,6 +21,7 @@ export default function Home() {
   const apiService = new APIUtil();
   const query = useSearchParams();
   const router = useRouter();
+  const authContext = useContext(AuthContext);
 
   const onChangeForm = (name: string, value: string) => {
     setForm({ ...form, [name]: value });
@@ -44,6 +46,9 @@ export default function Home() {
 
       localStorage.setItem("token", response.data.token!);
       message.success("Login successful");
+      await authContext.refreshProfile();
+      await authContext.refreshDataSource();
+
       router.push("/home/chat");
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -67,6 +72,9 @@ export default function Home() {
       const response = await apiService.authService!.googleSignIn(IdToken);
       localStorage.setItem("token", response.data.token!);
       message.success("Login successful");
+      await authContext.refreshProfile();
+      await authContext.refreshDataSource();
+
       router.push("/home/chat");
     } catch (error) {
       if (error instanceof AxiosError) {
