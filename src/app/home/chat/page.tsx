@@ -89,8 +89,7 @@ const Chat = () => {
   const getChatHistory = async (): Promise<any> => {
     try {
       const data = await apiUtil.chatHistoryService.getChatHistory(chat!.id);
-      console.log(data);
-      return data.data;
+      return data.data.reverse();
     } catch (error) {
       message.error("unable to load data");
     }
