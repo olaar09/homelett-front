@@ -22,8 +22,8 @@ const RenderChatItem: React.FC<RenderTableAnswerProps> = ({
     case "answer":
       return (
         <RenderAnswer
+          chatHistoryItem={data}
           avatar={datasource.source_type.icon}
-          content={data.message!}
           senderName={datasource.name!}
         />
       );
