@@ -4,6 +4,7 @@ import React, { ChangeEventHandler, useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { Button } from "antd";
+import { ArrowUpOutlined } from "@ant-design/icons";
 
 // Define the props the component accepts
 type ChatInputProps = {
@@ -12,7 +13,7 @@ type ChatInputProps = {
   busy: boolean;
   hasChat: boolean;
   value?: string;
-  onSend: () => void;
+  onSend: (e: any) => void;
   onChange: ChangeEventHandler<HTMLTextAreaElement>;
 };
 
@@ -32,7 +33,8 @@ const ChatInput: React.FC<ChatInputProps> = ({
     "Possible exam questions from all lectures",
   ];
 
-  const noSend = busy || !value || (value?.length && value.length < 2);
+  const noContent = !value || (value?.length && value.length < 2);
+  const noSend = busy || noContent;
 
   useEffect(() => {
     let currentMessageIndex = 0;
@@ -107,16 +109,15 @@ const ChatInput: React.FC<ChatInputProps> = ({
         value={value}
         className="pl-3 shadow pr-10 flex items-center bg-transparent py-2 min-h-12 rounded-full ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none placeholder:pt-2 "
       /> */}
-        <div className="absolute inset-y-0 -right-3 pr-0 flex items-center -top-24 hover:opacity-85 cursor-pointer z-40">
-          <Button htmlType="submit" disabled={noSend as boolean} type="link">
-            {" "}
-            <Icon
-              icon={busy ? "eos-icons:loading" : "solar:round-arrow-right-bold"}
-              className={`text-5xl  ${
-                noSend ? "text-foreground-secondary" : "text-primary"
-              }`}
-            />
-          </Button>
+        <div className="absolute inset-y-0 right-3 pr-0 flex items-center -top-8 hover:opacity-85 cursor-pointer z-40">
+          <Button
+            className="text-1xl bg-primary"
+            htmlType="submit"
+            loading={busy}
+            disabled={noSend as boolean}
+            type="primary"
+            icon={<ArrowUpOutlined />}
+          ></Button>
         </div>
       </form>
     </div>

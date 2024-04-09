@@ -161,9 +161,8 @@ const Chat = () => {
   }, [currentAuth, currentAuth.loadingSources]);
 
   const onSendChat = async (e: any) => {
-    alert("Got here");
-
     e.preventDefault();
+
     try {
       const newChats = [...(displayedChats ?? [])];
       setUserInput("");
