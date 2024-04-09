@@ -79,7 +79,6 @@ const RenderAnswer: React.FC<RenderAnswerProps> = ({
     const headers = Object.keys(parse);
     // single table
     if (Array.isArray(parse) && parse.length > 0) {
-      console.log(Object.keys(parse[0]), parse);
       const columns = Object.keys(parse[0]).map((x) => {
         return {
           title: x,
@@ -98,11 +97,15 @@ const RenderAnswer: React.FC<RenderAnswerProps> = ({
           />
         </div>
       );
+      // multiple tables
     } else if (headers.length > 0 && Array.isArray(parse[headers[0]])) {
       const ui = [];
       for (const index in headers) {
         if (Array.isArray(parse[headers[index]])) {
-          const columns = Object.keys(parse[headers[index]]).map((x) => {
+          const rows = parse[headers[index]];
+          console.log("Keys", parse[headers[index]]);
+
+          const columns = Object.keys(rows[0]).map((x) => {
             return {
               title: x,
               dataIndex: x,
@@ -111,7 +114,7 @@ const RenderAnswer: React.FC<RenderAnswerProps> = ({
           });
           ui.push(
             <TableContentDisplay
-              data={parse[headers[index]]}
+              data={rows}
               columns={columns}
               senderName={senderName}
               avatar={avatar}
