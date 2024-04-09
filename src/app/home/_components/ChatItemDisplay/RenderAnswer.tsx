@@ -1,6 +1,40 @@
 import React from "react";
-import { Avatar, Card, Table } from "antd";
+import { Avatar, Button, Card, Table, Tooltip } from "antd";
 import { Icon } from "@iconify/react";
+import ACButton from "@/app/components/Button";
+
+const viewTypes = [
+  { icon: "ic:outline-table-view", name: "Table view" },
+  { icon: "bi:pie-chart-fill", name: "Pie chart" },
+  { icon: "mingcute:chart-bar-fill", name: "Bar chart" },
+  { icon: "fa6-solid:chart-line", name: "Line chart" },
+  { icon: "teenyicons:area-chart-outline", name: "Area chart" },
+];
+
+const ViewSelector = ({
+  onClick,
+  selectedView,
+}: {
+  onClick: (name: string) => void;
+  selectedView: string | null;
+}) => {
+  return (
+    <div className="absolute  right-1 flex items-center gap-x-3">
+      {viewTypes.map((view) => (
+        <Tooltip title={view.name}>
+          <Button type="link" onClick={() => onClick(view.name)}>
+            <Icon
+              className={`${
+                selectedView === view.name ? " text-primary" : " text-gray-700"
+              }`}
+              icon={view.icon}
+            />
+          </Button>
+        </Tooltip>
+      ))}
+    </div>
+  );
+};
 
 const Header = ({
   avatar,
@@ -45,17 +79,26 @@ const TableContentDisplay = ({
   senderName: string;
   avatar: string;
 }) => {
+  const onChangeDisplay = () => {
+    alert("Change display");
+  };
+
   return (
-    <Table
-      dataSource={data}
-      columns={columns}
-      rowKey="id"
-      pagination={false}
-      bordered
-      size="small"
-      // scroll={{ x: columns.length > 5 ? 3300 : undefined }}
-      rowClassName={() => "text-xs p-0 m-0 "}
-    />
+    <div className=" relative">
+      <div className="absolute -top-7 right-1 flex items-center gap-x-3">
+        <ViewSelector onClick={onChangeDisplay} selectedView={null} />
+      </div>
+      <Table
+        dataSource={data}
+        columns={columns}
+        rowKey="id"
+        pagination={false}
+        bordered
+        size="small"
+        // scroll={{ x: columns.length > 5 ? 3300 : undefined }}
+        rowClassName={() => "text-xs p-0 m-0 "}
+      />
+    </div>
   );
 };
 

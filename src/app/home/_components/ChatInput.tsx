@@ -3,6 +3,7 @@
 import React, { ChangeEventHandler, useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
+import { Button } from "antd";
 
 // Define the props the component accepts
 type ChatInputProps = {
@@ -105,18 +106,25 @@ const ChatInput: React.FC<ChatInputProps> = ({
         value={value}
         className="pl-3 shadow pr-10 flex items-center bg-transparent py-2 min-h-12 rounded-full ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none placeholder:pt-2 "
       /> */}
-      <div
-        onClick={() => {
-          if (!noSend) onSend();
-        }}
-        className="absolute inset-y-0 right-0 pr-0 flex items-center -top-6 hover:opacity-85 cursor-pointer"
-      >
-        <Icon
-          icon={busy ? "eos-icons:loading" : "solar:round-arrow-right-bold"}
-          className={`text-5xl  ${
-            noSend ? "text-foreground-secondary" : "text-primary"
-          }`}
-        />
+      <div className="absolute inset-y-0 -right-3 pr-0 flex items-center -top-24 hover:opacity-85 cursor-pointer">
+        <Button
+          type="link"
+          onClick={() => {
+            if (!noSend) {
+              onSend();
+            } else {
+              alert("no send");
+            }
+          }}
+        >
+          {" "}
+          <Icon
+            icon={busy ? "eos-icons:loading" : "solar:round-arrow-right-bold"}
+            className={`text-5xl  ${
+              noSend ? "text-foreground-secondary" : "text-primary"
+            }`}
+          />
+        </Button>
       </div>
     </div>
   );
