@@ -283,7 +283,7 @@ const Chat = () => {
       />
       <ConnectorModal visible={openConnector} onClose={onCloseConnector} />
       {chat && (
-        <section className="h-20  flex items-center justify-between px-4 mt-0 mx-auto w-11/12">
+        <section className="h-20  flex items-center justify-between px-4 mt-0 mx-auto w-full">
           <div className="flex flex-col">
             <HeaderItem
               icon={chat?.datasource.source_type.icon}
