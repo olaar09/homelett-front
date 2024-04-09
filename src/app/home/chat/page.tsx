@@ -18,6 +18,7 @@ import ChatListDrawer from "../_components/SelectChatDrawer";
 import StartChatModal from "../_components/StartChatModal";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
+import RenderChatItem from "../_components/ChatDisplay";
 
 const HeaderItem = ({
   withBg,
@@ -179,6 +180,15 @@ const Chat = () => {
         datasource_id: chat!.datasource.id!,
       });
 
+      let data;
+      try {
+        data = JSON.parse(response.data.message!);
+      } catch (error) {
+        data = response.data;
+      }
+
+      console.log("PARSED", data);
+
       setDisplayedChats([...newChats, response.data]);
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -317,7 +327,7 @@ const Chat = () => {
             {displayedChats.map((cht: any) => {
               return (
                 <div className={` text-foreground flex `}>
-                  <div className="w-full">{cht.message}</div>
+                  <RenderChatItem data={cht} datasource={chat!.datasource!} />
                 </div>
               );
             })}
