@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Card, Table, Tooltip } from "antd";
 import { Icon } from "@iconify/react";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
+import AreaChart from "@/app/components/RenderChat/RenderAreaChat";
 
 const viewTypes = [
   { icon: "ic:outline-table-view", key: "table", name: "Table view" },
@@ -107,18 +108,7 @@ export const ContentDisplay = ({
           />
         )}
 
-        {viewKey === "pie" && (
-          <Table
-            dataSource={data}
-            columns={columns}
-            rowKey="id"
-            pagination={false}
-            bordered
-            size="small"
-            // scroll={{ x: columns.length > 5 ? 3300 : undefined }}
-            rowClassName={() => "text-xs p-0 m-0 "}
-          />
-        )}
+        {viewKey === "area" && <AreaChart data={data} title="" />}
       </div>
     </div>
   );
