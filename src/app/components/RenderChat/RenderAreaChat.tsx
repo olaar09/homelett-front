@@ -52,7 +52,7 @@ const AreaChart: React.FC<{ title: string; data: any[] }> = ({
   const state = {
     series: [
       {
-        name: "Series 1",
+        name: y,
         data: yData ?? [],
       },
     ],
@@ -71,7 +71,7 @@ const AreaChart: React.FC<{ title: string; data: any[] }> = ({
         curve: "smooth",
       },
       title: {
-        text: title ?? "",
+        text: x,
         align: "left",
       },
       labels: xData ?? [],

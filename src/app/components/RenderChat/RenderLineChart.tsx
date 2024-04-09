@@ -52,8 +52,8 @@ const LineChart: React.FC<{ title: string; data: any[] }> = ({
   const state = {
     series: [
       {
-        name: "Desktops",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+        name: y,
+        data: yData,
       },
     ],
     options: {
@@ -71,7 +71,7 @@ const LineChart: React.FC<{ title: string; data: any[] }> = ({
         curve: "straight",
       },
       title: {
-        text: "Product Trends by Month",
+        text: x,
         align: "left",
       },
       grid: {
@@ -81,17 +81,7 @@ const LineChart: React.FC<{ title: string; data: any[] }> = ({
         },
       },
       xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-        ],
+        categories: xData,
       },
     },
   };
