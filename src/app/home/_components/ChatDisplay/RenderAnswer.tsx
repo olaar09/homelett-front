@@ -2,8 +2,6 @@ import React from "react";
 import { Avatar, Card, Table } from "antd";
 import { Icon } from "@iconify/react";
 
-const { Meta } = Card;
-
 const Header = ({
   avatar,
   senderName,
@@ -72,8 +70,6 @@ const RenderAnswer: React.FC<RenderAnswerProps> = ({
   content,
   senderName,
 }) => {
-  let parsable;
-
   try {
     const parse = JSON.parse(content);
     const headers = Object.keys(parse);
@@ -103,7 +99,7 @@ const RenderAnswer: React.FC<RenderAnswerProps> = ({
       for (const index in headers) {
         if (Array.isArray(parse[headers[index]])) {
           const rows = parse[headers[index]];
-          console.log("Keys", parse[headers[index]]);
+          console.log("Keys Hellllo", headers);
 
           const columns = Object.keys(rows[0]).map((x) => {
             return {
@@ -113,12 +109,17 @@ const RenderAnswer: React.FC<RenderAnswerProps> = ({
             };
           });
           ui.push(
-            <TableContentDisplay
-              data={rows}
-              columns={columns}
-              senderName={senderName}
-              avatar={avatar}
-            />
+            <div key={headers[index]}>
+              <span className=" font-bold text-sm block my-3">
+                {headers[index]}
+              </span>
+              <TableContentDisplay
+                data={rows}
+                columns={columns}
+                senderName={senderName}
+                avatar={avatar}
+              />
+            </div>
           );
         }
       }

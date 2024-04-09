@@ -1,19 +1,17 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import { Spin, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
-import { useRouter } from "next/navigation";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
 import ChatInput from "../_components/ChatInput";
 import ConnectorModal from "../_components/Connector/Connector";
 import { IChat } from "@/app/interfaces/IChatItem";
 import { AxiosError } from "axios";
-import StartChatDropdown from "../_components/StartChatDropdown";
 import ChatListDrawer from "../_components/SelectChatDrawer";
 import StartChatModal from "../_components/StartChatModal";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
