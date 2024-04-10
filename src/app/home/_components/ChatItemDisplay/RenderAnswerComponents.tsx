@@ -98,6 +98,10 @@ export const ContentDisplay = ({
   const onChangeDisplay = (selected: string) => {
     setViewKey(selected);
     chatContext.scrollToBottom!();
+
+    if (selected === "table") {
+      onUpdateDisplay({ key: "table", value: "normal" });
+    }
   };
 
   const onUpdateDisplay = async (config: { key: string; value: string }) => {
