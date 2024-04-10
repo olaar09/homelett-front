@@ -48,8 +48,6 @@ const PieChat: React.FC<{ title: string; data: any[] }> = ({ title, data }) => {
     }
   }, [x]);
 
-  console.log("YrrDATA", yData);
-
   const state = {
     series: yData ?? [], // Example data for Matches, Messages, and Super Likes
     options: {
