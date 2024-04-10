@@ -97,7 +97,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
           value={value}
           onChange={onChange}
           placeholder={`Message ${datasource?.name ?? ""}`}
-          className="m-0 ring-[0.4px]  ring-foreground-secondary rounded-lg w-full resize-none border-0 bg-transparent focus:ring-[0.4px]  focus:ring-black  py-[10px] pr-10 md:py-3.5 md:pr-12 max-h-[25dvh]  placeholder-black/50 dark:placeholder-white/50 pl-10 md:pl-[25px] outline-none"
+          className="m-0 ring-[0.4px]  ring-foreground-secondary rounded-lg w-full resize-none border-0 bg-transparent focus:ring-[0.4px]  focus:ring-black  py-[10px] pr-10 md:py-3.5 md:pr-12 max-h-[25dvh]  placeholder-black/50 dark:placeholder-foreground pl-10 md:pl-[25px] outline-none"
           spellCheck={false}
           style={{ minHeight: "52px", overflowY: "hidden" }}
         />
