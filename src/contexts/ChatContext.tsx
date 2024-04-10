@@ -11,13 +11,16 @@ import APIUtil from "@/services/APIUtil";
 import { IAuthRequest } from "@/app/interfaces/IRegisterRequest";
 import { AxiosError } from "axios";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
+import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 
 interface ChatContext {
   scrollToBottom?: () => void;
+  updateChatHistoryAtIndex: (history: IChatHistoryItem) => void;
 }
 
 export const ChatContext = createContext<ChatContext>({
   scrollToBottom: async () => {},
+  updateChatHistoryAtIndex: (history: IChatHistoryItem) => {},
 });
 
 export const useAuth = () => useContext(ChatContext);

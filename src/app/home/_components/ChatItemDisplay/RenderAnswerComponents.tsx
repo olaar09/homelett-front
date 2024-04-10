@@ -107,6 +107,14 @@ export const ContentDisplay = ({
 
   const onUpdateDisplay = async (config: { key: string; value: string }) => {
     try {
+      const newUpdate = {
+        ...chatHistoryItem,
+        extra: {
+          ...(chatHistoryItem.extra ?? {}),
+          [Object.keys(config)[0]]: Object.values(config)[0],
+        },
+      };
+      chatContext.updateChatHistoryAtIndex(newUpdate);
       await apiUtil.chatHistoryService.updateChatHistory(
         chatHistoryItem.id!,
         config
@@ -117,7 +125,7 @@ export const ContentDisplay = ({
   };
 
   return (
-    <div className=" relative ">
+    <div className=" relative w-full ">
       <div className="absolute -top-7 right-1 flex items-center gap-x-3 z-30">
         <ViewSelector onClick={onChangeDisplay} selectedView={viewKey} />
       </div>

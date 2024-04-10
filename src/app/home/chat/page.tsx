@@ -3,9 +3,9 @@
 import { Icon } from "@iconify/react";
 import { useContext, useEffect, useRef, useState } from "react";
 
-import { Spin, message } from "antd";
+import { message } from "antd";
 import APIUtil from "@/services/APIUtil";
-import { useRequest } from "ahooks";
+import { usePrevious, useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
 import ChatInput from "../_components/ChatInput";
@@ -16,7 +16,6 @@ import ChatListDrawer from "../_components/SelectChatDrawer";
 import StartChatModal from "../_components/StartChatModal";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
-import RenderChatItem from "../_components/ChatItemDisplay";
 import ChatHistory from "../_components/ChatDisplay";
 import { ChatContext } from "@/contexts/ChatContext";
 
@@ -45,9 +44,12 @@ const HeaderItem = ({
 
 const Chat = () => {
   const [chat, setChat] = useState<IChat | null>(null);
+
   const [displayedChats, setDisplayedChats] = useState<
     IChatHistoryItem[] | null
   >(null);
+  const prevDisplayedChats = usePrevious(displayedChats);
+
   const [openConnector, setOpenConnector] = useState<boolean>(false);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -140,7 +142,11 @@ const Chat = () => {
   }, [chat]);
 
   useEffect(() => {
-    if (displayedChats && displayedChats.length > 0) {
+    if (
+      displayedChats &&
+      displayedChats.length > 0 &&
+      (prevDisplayedChats ?? [])!.length !== displayedChats.length
+    ) {
       if (displayedChats[displayedChats.length - 1].type === "answer") {
         scrollToBottom();
       } else {
@@ -207,6 +213,17 @@ const Chat = () => {
 
   const onOpenConnector = () => {
     setOpenConnector(true);
+  };
+
+  const updateChatHistoryAtIndex = (historyItem: IChatHistoryItem) => {
+    const index = displayedChats!.findIndex((ch) => ch.id === historyItem.id);
+
+    console.log("ALLLLL", historyItem, index);
+
+    if (index !== -1) {
+      displayedChats![index] = historyItem;
+      setDisplayedChats([...displayedChats!]);
+    }
   };
 
   const onCloseConnector = async (needRefresh = false) => {
@@ -319,6 +336,7 @@ const Chat = () => {
       {chat && chat.datasource && (
         <ChatContext.Provider
           value={{
+            updateChatHistoryAtIndex,
             scrollToBottom,
           }}
         >
