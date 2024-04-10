@@ -136,13 +136,28 @@ export const ContentDisplay = ({
           />
         )}
         {viewKey === "pie" && (
-          <PieChat onUpdateConfig={onUpdateDisplay} data={data} title="" />
+          <PieChat
+            chatHistoryItem={chatHistoryItem}
+            onUpdateConfig={onUpdateDisplay}
+            data={data}
+            title=""
+          />
         )}
         {viewKey === "bar" && (
-          <BarChart onUpdateConfig={onUpdateDisplay} data={data} title="" />
+          <BarChart
+            chatHistoryItem={chatHistoryItem}
+            onUpdateConfig={onUpdateDisplay}
+            data={data}
+            title=""
+          />
         )}
         {viewKey === "line" && (
-          <LineChart onUpdateConfig={onUpdateDisplay} data={data} title="" />
+          <LineChart
+            chatHistoryItem={chatHistoryItem}
+            onUpdateConfig={onUpdateDisplay}
+            data={data}
+            title=""
+          />
         )}
       </div>
     </div>
