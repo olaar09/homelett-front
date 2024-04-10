@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Card, Table, Tooltip, message } from "antd";
 import { Icon } from "@iconify/react";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
@@ -11,10 +11,10 @@ import APIUtil from "@/services/APIUtil";
 
 const viewTypes = [
   { icon: "ic:outline-table-view", key: "table", name: "Table view" },
-  { icon: "bi:pie-chart-fill", key: "pie", name: "Pie chart" },
-  { icon: "mingcute:chart-bar-fill", key: "bar", name: "Bar chart" },
-  { icon: "fa6-solid:chart-line", key: "line", name: "Line chart" },
-  { icon: "fa6-solid:chart-area", key: "area", name: "Area chart" },
+  { icon: "bi:pie-chart-fill", key: "pie_chart", name: "Pie chart" },
+  { icon: "mingcute:chart-bar-fill", key: "bar_chart", name: "Bar chart" },
+  { icon: "fa6-solid:chart-line", key: "line_chart", name: "Line chart" },
+  { icon: "fa6-solid:chart-area", key: "area_chart", name: "Area chart" },
 ];
 
 export const TextContentDisplay = ({
@@ -91,6 +91,10 @@ export const ContentDisplay = ({
   const chatContext = useContext(ChatContext);
   const apiUtil = new APIUtil();
 
+  useEffect(() => {
+    setViewKey(chatHistoryItem.extra?.current ?? "table");
+  }, []);
+
   const onChangeDisplay = (selected: string) => {
     setViewKey(selected);
     chatContext.scrollToBottom!();
@@ -112,7 +116,6 @@ export const ContentDisplay = ({
       <div className="absolute -top-7 right-1 flex items-center gap-x-3 z-30">
         <ViewSelector onClick={onChangeDisplay} selectedView={viewKey} />
       </div>
-
       <div>
         {viewKey === "table" && (
           <Table
@@ -127,7 +130,7 @@ export const ContentDisplay = ({
           />
         )}
 
-        {viewKey === "area" && (
+        {viewKey === "area_chart" && (
           <AreaChart
             onUpdateConfig={onUpdateDisplay}
             data={data}
@@ -135,7 +138,7 @@ export const ContentDisplay = ({
             chatHistoryItem={chatHistoryItem}
           />
         )}
-        {viewKey === "pie" && (
+        {viewKey === "pie_chart" && (
           <PieChat
             chatHistoryItem={chatHistoryItem}
             onUpdateConfig={onUpdateDisplay}
@@ -143,7 +146,7 @@ export const ContentDisplay = ({
             title=""
           />
         )}
-        {viewKey === "bar" && (
+        {viewKey === "bar_chart" && (
           <BarChart
             chatHistoryItem={chatHistoryItem}
             onUpdateConfig={onUpdateDisplay}
@@ -151,7 +154,7 @@ export const ContentDisplay = ({
             title=""
           />
         )}
-        {viewKey === "line" && (
+        {viewKey === "line_chart" && (
           <LineChart
             chatHistoryItem={chatHistoryItem}
             onUpdateConfig={onUpdateDisplay}

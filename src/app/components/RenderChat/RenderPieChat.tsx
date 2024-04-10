@@ -69,7 +69,7 @@ const PieChat: React.FC<{
       chart: {
         type: "pie",
       },
-      labels: xData,
+      labels: xData ?? [],
       responsive: [
         {
           breakpoint: 480,
