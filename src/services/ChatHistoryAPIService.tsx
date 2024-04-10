@@ -26,7 +26,8 @@ class ChatHistoryAPIService {
     try {
       const response = await this.apiService.put(`/chats/${chatId}/history`, {
         chat_history_id: chatId,
-        ...config,
+        key: Object.keys(config)[0],
+        config: Object.values(config)[0],
       });
       return response as string;
     } catch (error) {
