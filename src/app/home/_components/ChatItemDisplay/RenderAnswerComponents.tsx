@@ -100,7 +100,8 @@ export const ContentDisplay = ({
     chatContext.scrollToBottom!();
 
     if (selected === "table") {
-      onUpdateDisplay({ key: "table", value: "normal" });
+      onUpdateDisplay({ table: "normal" });
+      // onUpdateDisplay({ key: "table", value: "normal" });
     }
   };
 
