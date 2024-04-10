@@ -148,7 +148,7 @@ const Chat = () => {
       (prevDisplayedChats ?? [])!.length !== displayedChats.length
     ) {
       if (displayedChats[displayedChats.length - 1].type === "answer") {
-        scrollToBottom();
+        // scrollToBottom();
       } else {
         jumpToBottom();
       }
@@ -217,8 +217,6 @@ const Chat = () => {
 
   const updateChatHistoryAtIndex = (historyItem: IChatHistoryItem) => {
     const index = displayedChats!.findIndex((ch) => ch.id === historyItem.id);
-
-    console.log("ALLLLL", historyItem, index);
 
     if (index !== -1) {
       displayedChats![index] = historyItem;

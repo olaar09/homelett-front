@@ -43,8 +43,8 @@ export const ViewSelector = ({
 }) => {
   return (
     <div className="absolute  right-1 flex items-center gap-x-3">
-      {viewTypes.map((view) => (
-        <Tooltip title={view.name}>
+      {viewTypes.map((view, i) => (
+        <Tooltip key={i} title={view.name}>
           <Button className="w-2" type="link" onClick={() => onClick(view.key)}>
             <Icon
               className={`${
