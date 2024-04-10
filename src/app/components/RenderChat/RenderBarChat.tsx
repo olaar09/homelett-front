@@ -132,7 +132,7 @@ const BarChart: React.FC<{ title: string; data: any[] }> = ({
                 />
               </Tooltip>
               <Select
-                placeholder="Select Y axis"
+                placeholder="Select Candle labels "
                 className="w-full"
                 onChange={(value) => handleDropdownChange(value, "x")}
               >
@@ -150,7 +150,7 @@ const BarChart: React.FC<{ title: string; data: any[] }> = ({
                 />
               </Tooltip>
               <Select
-                placeholder="Select candle labels"
+                placeholder="Select Y axis"
                 className="w-full"
                 onChange={(value) => handleDropdownChange(value, "y")}
               >

@@ -88,7 +88,7 @@ const PieChat: React.FC<{ title: string; data: any[] }> = ({ title, data }) => {
   return (
     <>
       {(!x || !y) && (
-        <Card title="Bar chart" className="w-full  p-4 h-full" bordered={false}>
+        <Card title="Pie chart" className="w-full  p-4 h-full" bordered={false}>
           <div className="flex flex-col items-center justify-center space-y-4 w-4/12 mx-auto">
             <div className="flex items-center gap-x-2 w-full">
               <Tooltip title="Which value is displayed as label and title">
