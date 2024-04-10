@@ -83,7 +83,7 @@ const BarChart: React.FC<{ title: string; data: any[] }> = ({
       },
       yaxis: {
         title: {
-          text: "Swipes",
+          text: "",
         },
       },
       fill: {
@@ -92,7 +92,7 @@ const BarChart: React.FC<{ title: string; data: any[] }> = ({
       tooltip: {
         y: {
           formatter: function (val: any) {
-            return val + " swipes";
+            return val + "";
           },
         },
       },
@@ -124,7 +124,7 @@ const BarChart: React.FC<{ title: string; data: any[] }> = ({
                 />
               </Tooltip>
               <Select
-                placeholder="Select X axis"
+                placeholder="Select Y axis"
                 className="w-full"
                 onChange={(value) => handleDropdownChange(value, "x")}
               >
@@ -142,7 +142,7 @@ const BarChart: React.FC<{ title: string; data: any[] }> = ({
                 />
               </Tooltip>
               <Select
-                placeholder="Select X axis"
+                placeholder="Select candle labels"
                 className="w-full"
                 onChange={(value) => handleDropdownChange(value, "y")}
               >
