@@ -88,7 +88,7 @@ const PieChat: React.FC<{ title: string; data: any[] }> = ({ title, data }) => {
         <Card title="Bar chart" className="w-full  p-4 h-full" bordered={false}>
           <div className="flex flex-col items-center justify-center space-y-4 w-4/12 mx-auto">
             <div className="flex items-center gap-x-2 w-full">
-              <Tooltip title="Which value is displayed on the left side to show description or timeline">
+              <Tooltip title="Which value is displayed as label and title">
                 {" "}
                 <Icon
                   icon={"ic:outline-info"}
@@ -107,7 +107,7 @@ const PieChat: React.FC<{ title: string; data: any[] }> = ({ title, data }) => {
             </div>
 
             <div className="flex items-center gap-x-2 w-full">
-              <Tooltip title="Which value is displayed on the right side to show growth">
+              <Tooltip title="Which value forms the pie, should be number value">
                 <Icon
                   icon={"ic:outline-info"}
                   className=" text-gray-600 text-xl"
