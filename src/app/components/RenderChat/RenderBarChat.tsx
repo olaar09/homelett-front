@@ -57,7 +57,7 @@ const BarChart: React.FC<{
   useEffect(() => {
     if (y && x) {
       onUpdateConfig({ bar_chart: { x: x, y: y } });
-      chatContext.scrollToBottom!();
+      // chatContext.scrollToBottom!();
     }
   }, [x, y]);
 

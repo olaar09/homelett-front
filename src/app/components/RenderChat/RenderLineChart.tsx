@@ -43,7 +43,7 @@ const LineChart: React.FC<{
   useEffect(() => {
     if (y && x) {
       onUpdateConfig({ line_chart: { x: x, y: y } });
-      chatContext.scrollToBottom!();
+      //chatContext.scrollToBottom!();
     }
   }, [x, y]);
 

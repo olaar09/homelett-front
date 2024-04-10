@@ -33,7 +33,7 @@ const RenderAnswer: React.FC<RenderAnswerProps> = ({
         };
       });
       return (
-        <div className=" flex flex-col gap-y-3  hover:bg-gray-100 cursor-pointer px-2 rounded-lg py-2 w-full">
+        <div className=" flex flex-col gap-y-3  hover:bg-gray-100 cursor-pointer px-2 rounded-lg py-2 w-full min-h-72">
           <Header avatar={avatar} senderName={senderName} />
           <ContentDisplay
             data={parse}
@@ -58,7 +58,7 @@ const RenderAnswer: React.FC<RenderAnswerProps> = ({
             };
           });
           ui.push(
-            <div key={headers[index]}>
+            <div key={headers[index]} className="min-h-72">
               <span className=" font-bold text-sm block my-3">
                 {headers[index]}
               </span>

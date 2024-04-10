@@ -97,7 +97,7 @@ export const ContentDisplay = ({
 
   const onChangeDisplay = (selected: string) => {
     setViewKey(selected);
-    chatContext.scrollToBottom!();
+    //chatContext.scrollToBottom!();
 
     if (selected === "table") {
       onUpdateDisplay({ table: "normal" });

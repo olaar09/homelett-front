@@ -57,7 +57,7 @@ const AreaChart: React.FC<{
   useEffect(() => {
     if (y && x) {
       onUpdateConfig({ area_chart: { x: x, y: y } });
-      chatContext.scrollToBottom!();
+      //chatContext.scrollToBottom!();
     }
   }, [x, y]);
 

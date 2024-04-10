@@ -43,7 +43,7 @@ const PieChat: React.FC<{
   useEffect(() => {
     if (y && x) {
       onUpdateConfig({ pie_chart: { x: x, y: y } });
-      chatContext.scrollToBottom!();
+      //chatContext.scrollToBottom!();
     }
   }, [x, y]);
 
