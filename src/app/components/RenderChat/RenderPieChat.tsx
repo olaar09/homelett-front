@@ -16,10 +16,7 @@ const { Option } = Select;
   { price: 60, date: "2023-09" },
 ];
  */
-const RenderPieChat: React.FC<{ title: string; data: any[] }> = ({
-  title,
-  data,
-}) => {
+const PieChat: React.FC<{ title: string; data: any[] }> = ({ title, data }) => {
   const [x, setX] = useState<any>();
   const [y, setY] = useState<any>(null);
   const [yData, setYData] = useState<any>();
@@ -37,7 +34,9 @@ const RenderPieChat: React.FC<{ title: string; data: any[] }> = ({
 
   useEffect(() => {
     if (y) {
-      const values = data.map((dt: any) => dt[y]);
+      const values = data.map((dt: any) =>
+        isNaN(Number(dt[y])) ? 0 : Number(dt[y])
+      );
       setYData(values);
     }
   }, [y]);
@@ -49,20 +48,15 @@ const RenderPieChat: React.FC<{ title: string; data: any[] }> = ({
     }
   }, [x]);
 
-  console.log("YDATA", y, xData);
+  console.log("YrrDATA", yData);
 
   const state = {
-    series: [
-      {
-        name: y,
-        data: yData ?? [],
-      },
-    ],
+    series: yData ?? [], // Example data for Matches, Messages, and Super Likes
     options: {
       chart: {
         type: "pie",
       },
-      labels: ["Matches", "Messages", "Super Likes"],
+      labels: xData,
       responsive: [
         {
           breakpoint: 480,
@@ -77,7 +71,7 @@ const RenderPieChat: React.FC<{ title: string; data: any[] }> = ({
         },
       ],
       title: {
-        text: "Tinder Interactions Overview",
+        text: "",
         align: "left",
       },
     },
@@ -104,7 +98,7 @@ const RenderPieChat: React.FC<{ title: string; data: any[] }> = ({
                 />
               </Tooltip>
               <Select
-                placeholder="Select X axis"
+                placeholder="Select Labels"
                 className="w-full"
                 onChange={(value) => handleDropdownChange(value, "x")}
               >
@@ -122,7 +116,7 @@ const RenderPieChat: React.FC<{ title: string; data: any[] }> = ({
                 />
               </Tooltip>
               <Select
-                placeholder="Select X axis"
+                placeholder="Select Fill data"
                 className="w-full"
                 onChange={(value) => handleDropdownChange(value, "y")}
               >
@@ -155,4 +149,4 @@ const RenderPieChat: React.FC<{ title: string; data: any[] }> = ({
   );
 };
 
-export default RenderPieChat;
+export default PieChat;
