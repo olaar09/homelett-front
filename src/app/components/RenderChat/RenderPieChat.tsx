@@ -1,6 +1,7 @@
+import { ChatContext } from "@/contexts/ChatContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Card, Select, Button, Tooltip, Checkbox } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 const { Option } = Select;
 
@@ -21,16 +22,18 @@ const PieChat: React.FC<{ title: string; data: any[] }> = ({ title, data }) => {
   const [y, setY] = useState<any>(null);
   const [yData, setYData] = useState<any>();
   const [xData, setXData] = useState<any>();
+  const chatContext = useContext(ChatContext);
 
   let columns: any[] = [];
   if (data.length > 0) {
     columns = Object.keys(data[0]);
   }
 
-  /*   useEffect(() => {
-    setX("created_at");
-    setY("amount");
-  }, []); */
+  useEffect(() => {
+    if (y && x) {
+      chatContext.scrollToBottom!();
+    }
+  }, [x, y]);
 
   useEffect(() => {
     if (y) {

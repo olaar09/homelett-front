@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Card, Table, Tooltip } from "antd";
 import { Icon } from "@iconify/react";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
@@ -6,6 +6,7 @@ import AreaChart from "@/app/components/RenderChat/RenderAreaChat";
 import LineChart from "@/app/components/RenderChat/RenderLineChart";
 import BarChart from "@/app/components/RenderChat/RenderBarChat";
 import PieChat from "@/app/components/RenderChat/RenderPieChat";
+import { ChatContext } from "@/contexts/ChatContext";
 
 const viewTypes = [
   { icon: "ic:outline-table-view", key: "table", name: "Table view" },
@@ -86,10 +87,11 @@ export const ContentDisplay = ({
   avatar: string;
 }) => {
   const [viewKey, setViewKey] = useState("table");
+  const chatContext = useContext(ChatContext);
 
   const onChangeDisplay = (selected: string) => {
-    //  alert(selected);
     setViewKey(selected);
+    chatContext.scrollToBottom!();
   };
 
   return (

@@ -1,6 +1,7 @@
+import { ChatContext } from "@/contexts/ChatContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Card, Select, Button, Tooltip } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 const { Option } = Select;
 
@@ -24,6 +25,7 @@ const AreaChart: React.FC<{ title: string; data: any[] }> = ({
   const [y, setY] = useState<any>();
   const [yData, setYData] = useState<any>();
   const [xData, setXData] = useState<any>();
+  const chatContext = useContext(ChatContext);
 
   let columns: any[] = [];
   if (data.length > 0) {
@@ -48,6 +50,12 @@ const AreaChart: React.FC<{ title: string; data: any[] }> = ({
       setXData(values);
     }
   }, [x]);
+
+  useEffect(() => {
+    if (y && x) {
+      chatContext.scrollToBottom!();
+    }
+  }, [x, y]);
 
   const state = {
     series: [

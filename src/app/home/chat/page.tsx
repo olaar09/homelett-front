@@ -18,6 +18,7 @@ import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 import RenderChatItem from "../_components/ChatItemDisplay";
 import ChatHistory from "../_components/ChatDisplay";
+import { ChatContext } from "@/contexts/ChatContext";
 
 const HeaderItem = ({
   withBg,
@@ -318,12 +319,18 @@ const Chat = () => {
       )}
 
       {chat && chat.datasource && (
-        <ChatHistory
-          scrollRef={scrollRef}
-          loadingChatHistory={loadingChatHistory}
-          datasource={chat!.datasource}
-          displayedChats={displayedChats}
-        />
+        <ChatContext.Provider
+          value={{
+            scrollToBottom,
+          }}
+        >
+          <ChatHistory
+            scrollRef={scrollRef}
+            loadingChatHistory={loadingChatHistory}
+            datasource={chat!.datasource}
+            displayedChats={displayedChats}
+          />
+        </ChatContext.Provider>
       )}
 
       {chatList && chatList?.length > 0 && (
