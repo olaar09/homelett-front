@@ -128,7 +128,12 @@ export const ContentDisplay = ({
         )}
 
         {viewKey === "area" && (
-          <AreaChart onUpdateConfig={onUpdateDisplay} data={data} title="" />
+          <AreaChart
+            onUpdateConfig={onUpdateDisplay}
+            data={data}
+            title=""
+            chatHistoryItem={chatHistoryItem}
+          />
         )}
         {viewKey === "pie" && (
           <PieChat onUpdateConfig={onUpdateDisplay} data={data} title="" />

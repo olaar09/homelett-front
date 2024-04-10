@@ -1,3 +1,4 @@
+import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 import { ChatContext } from "@/contexts/ChatContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Card, Select, Button, Tooltip, Checkbox } from "antd";
@@ -18,10 +19,11 @@ const { Option } = Select;
 ];
  */
 const BarChart: React.FC<{
+  chatHistoryItem: IChatHistoryItem;
   title: string;
   data: any[];
   onUpdateConfig: (data: any) => void;
-}> = ({ title, data, onUpdateConfig }) => {
+}> = ({ title, data, onUpdateConfig, chatHistoryItem }) => {
   const [x, setX] = useState<any>();
   const [y, setY] = useState<any>(null);
   const [yData, setYData] = useState<any>();
@@ -33,10 +35,10 @@ const BarChart: React.FC<{
     columns = Object.keys(data[0]);
   }
 
-  /*   useEffect(() => {
-    setX("created_at");
-    setY("amount");
-  }, []); */
+  useEffect(() => {
+    setX(chatHistoryItem.extra?.bar_chart?.x);
+    setY(chatHistoryItem.extra?.bar_chart?.y);
+  }, []);
 
   useEffect(() => {
     if (y) {

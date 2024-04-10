@@ -1,3 +1,4 @@
+import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 import { ChatContext } from "@/contexts/ChatContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Card, Select, Button, Tooltip } from "antd";
@@ -18,10 +19,11 @@ const { Option } = Select;
 ];
  */
 const LineChart: React.FC<{
+  chatHistoryItem: IChatHistoryItem;
   title: string;
   data: any[];
   onUpdateConfig: (data: any) => void;
-}> = ({ title, data, onUpdateConfig }) => {
+}> = ({ title, data, onUpdateConfig, chatHistoryItem }) => {
   const [x, setX] = useState<any>();
   const [y, setY] = useState<any>();
   const [yData, setYData] = useState<any>();
@@ -32,6 +34,11 @@ const LineChart: React.FC<{
   if (data.length > 0) {
     columns = Object.keys(data[0]);
   }
+
+  useEffect(() => {
+    setX(chatHistoryItem.extra?.line_chart?.x);
+    setY(chatHistoryItem.extra?.line_chart?.y);
+  }, []);
 
   useEffect(() => {
     if (y && x) {
