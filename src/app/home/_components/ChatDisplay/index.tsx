@@ -32,7 +32,7 @@ const ChatHistory: React.FC<ChatHistoryProps> = ({
           ref={scrollRef}
           className="flex w-full flex-grow lg:w-full xl:w-8/12 mx-auto py-10 h-4/5 overflow-y-scroll"
         >
-          <div className="flex flex-col gap-y-5 px-4">
+          <div className="flex flex-col gap-y-5 px-4 w-full ">
             {displayedChats.map((cht: IChatHistoryItem) => (
               <div key={cht.id} className="text-foreground flex">
                 <RenderChatItem data={cht} datasource={datasource} />
