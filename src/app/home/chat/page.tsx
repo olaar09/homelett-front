@@ -187,8 +187,6 @@ const Chat = () => {
         data = response.data;
       }
 
-      console.log("PARSED", data);
-
       setDisplayedChats([...newChats, response.data]);
     } catch (error) {
       if (error instanceof AxiosError) {

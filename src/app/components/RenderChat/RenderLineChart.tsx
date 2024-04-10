@@ -17,10 +17,11 @@ const { Option } = Select;
   { price: 60, date: "2023-09" },
 ];
  */
-const LineChart: React.FC<{ title: string; data: any[] }> = ({
-  title,
-  data,
-}) => {
+const LineChart: React.FC<{
+  title: string;
+  data: any[];
+  onUpdateConfig: (data: any) => void;
+}> = ({ title, data, onUpdateConfig }) => {
   const [x, setX] = useState<any>();
   const [y, setY] = useState<any>();
   const [yData, setYData] = useState<any>();
@@ -34,6 +35,7 @@ const LineChart: React.FC<{ title: string; data: any[] }> = ({
 
   useEffect(() => {
     if (y && x) {
+      onUpdateConfig({ line_chart: { x: x, y: y } });
       chatContext.scrollToBottom!();
     }
   }, [x, y]);

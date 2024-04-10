@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, Card, Table, Tooltip } from "antd";
+import { Button, Card, Table, Tooltip, message } from "antd";
 import { Icon } from "@iconify/react";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 import AreaChart from "@/app/components/RenderChat/RenderAreaChat";
@@ -7,6 +7,7 @@ import LineChart from "@/app/components/RenderChat/RenderLineChart";
 import BarChart from "@/app/components/RenderChat/RenderBarChat";
 import PieChat from "@/app/components/RenderChat/RenderPieChat";
 import { ChatContext } from "@/contexts/ChatContext";
+import APIUtil from "@/services/APIUtil";
 
 const viewTypes = [
   { icon: "ic:outline-table-view", key: "table", name: "Table view" },
@@ -88,10 +89,22 @@ export const ContentDisplay = ({
 }) => {
   const [viewKey, setViewKey] = useState("table");
   const chatContext = useContext(ChatContext);
+  const apiUtil = new APIUtil();
 
   const onChangeDisplay = (selected: string) => {
     setViewKey(selected);
     chatContext.scrollToBottom!();
+  };
+
+  const onUpdateDisplay = async (config: { key: string; value: string }) => {
+    try {
+      await apiUtil.chatHistoryService.updateChatHistory(
+        chatHistoryItem.id!,
+        config
+      );
+    } catch (error) {
+      message.error("unable to update chat config ");
+    }
   };
 
   return (
@@ -114,10 +127,18 @@ export const ContentDisplay = ({
           />
         )}
 
-        {viewKey === "area" && <AreaChart data={data} title="" />}
-        {viewKey === "pie" && <PieChat data={data} title="" />}
-        {viewKey === "bar" && <BarChart data={data} title="" />}
-        {viewKey === "line" && <LineChart data={data} title="" />}
+        {viewKey === "area" && (
+          <AreaChart onUpdateConfig={onUpdateDisplay} data={data} title="" />
+        )}
+        {viewKey === "pie" && (
+          <PieChat onUpdateConfig={onUpdateDisplay} data={data} title="" />
+        )}
+        {viewKey === "bar" && (
+          <BarChart onUpdateConfig={onUpdateDisplay} data={data} title="" />
+        )}
+        {viewKey === "line" && (
+          <LineChart onUpdateConfig={onUpdateDisplay} data={data} title="" />
+        )}
       </div>
     </div>
   );

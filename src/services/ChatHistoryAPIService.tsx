@@ -18,6 +18,21 @@ class ChatHistoryAPIService {
       throw error;
     }
   }
+
+  async updateChatHistory(
+    chatId: string,
+    config: { key: string; value: string }
+  ): Promise<string> {
+    try {
+      const response = await this.apiService.put(
+        `/chats/${chatId}/history`,
+        config
+      );
+      return response as string;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default ChatHistoryAPIService;
