@@ -24,10 +24,10 @@ class ChatHistoryAPIService {
     config: { key: string; value: string }
   ): Promise<string> {
     try {
-      const response = await this.apiService.put(
-        `/chats/${chatId}/history`,
-        config
-      );
+      const response = await this.apiService.put(`/chats/${chatId}/history`, {
+        chat_history_id: chatId,
+        ...config,
+      });
       return response as string;
     } catch (error) {
       throw error;
