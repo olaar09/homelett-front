@@ -255,7 +255,11 @@ const Chat = () => {
         onClickItem={onDatasourceSelected}
         onClose={() => setOpenConnectedDatasources(false)}
       />
-      <ConnectorModal visible={openConnector} onClose={onCloseConnector} />
+      <ConnectorModal
+        visible={openConnector}
+        onClose={onCloseConnector}
+        closable={false}
+      />
       {chat && (
         <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full">
           <div className="flex flex-col">

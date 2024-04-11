@@ -23,7 +23,7 @@ export interface ListItem {
 const ConnectorModal: React.FC<{
   visible: boolean;
   closable: boolean;
-  defaultFormPayload: any;
+  defaultFormPayload?: any;
   onClose: (needRefresh: boolean) => void;
   defaultSelected?: IDataSourceItem;
 }> = ({
