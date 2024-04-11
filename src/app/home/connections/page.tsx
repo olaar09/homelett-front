@@ -111,7 +111,7 @@ const Connections = () => {
       <section className=" flex items-center w-full  px-8 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
         {(currentAuth.dataSources ?? []).map((datasource) => (
           <div className="w-4/12 ">
-            <div className="mr-4 relative">
+            <div className="mr-4 relative cursor-pointer hoverContainer">
               <Card
                 onClick={() =>
                   onSelectConnection({
@@ -125,7 +125,7 @@ const Connections = () => {
                     category: datasource.source_type.category,
                   })
                 }
-                className="rounded-2xl h-40 relative"
+                className="rounded-2xl h-40 relative cursor-pointer"
                 bordered={false}
               >
                 <Meta
@@ -138,6 +138,12 @@ const Connections = () => {
                   description={datasource.source_type.description}
                 />
               </Card>
+              <div className=" absolute top-6 right-10 z-10 hoverItem">
+                <Icon
+                  icon={"mingcute:edit-fill"}
+                  className=" text-xl text-gray-700"
+                />
+              </div>
               <div className="absolute bottom-3 right-2 z-10">
                 <Tag
                   bordered={false}

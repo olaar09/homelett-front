@@ -1,5 +1,6 @@
 import React from "react";
 import DBConnect from "./DBConnector";
+import SlackConnector from "./SlackConnector";
 
 // Sample components for demonstration
 const GitHubComponent = (props: any) => (
@@ -15,6 +16,7 @@ const componentMapping: { [key: string]: React.ElementType } = {
   mysql: DBConnect,
   postgresql: DBConnect,
   mariadb: DBConnect,
+  slack: SlackConnector,
   shopify: URLComponent,
   url: URLComponent,
   // Add other mappings as needed
