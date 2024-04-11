@@ -97,12 +97,12 @@ const Nav: React.FC<any> = ({ children }) => {
                 title="Profile"
               />
               <NavMenu
-                path="/home/connections"
+                path="/home/team"
                 icon={"ant-design:team-outlined"}
                 title="Team"
               />
               <NavMenu
-                path="/home/connections"
+                path="/home/api_keys"
                 icon={"tabler:api"}
                 title="API Keys"
               />

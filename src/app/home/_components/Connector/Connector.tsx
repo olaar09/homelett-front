@@ -19,8 +19,9 @@ interface ListItem {
 
 const ConnectorModal: React.FC<{
   visible: boolean;
+  closable: boolean;
   onClose: (needRefresh: boolean) => void;
-}> = ({ visible, onClose }) => {
+}> = ({ visible, onClose, closable = false }) => {
   const apiUtil = new APIUtil();
   const auth = useContext(AuthContext);
 
@@ -122,8 +123,8 @@ const ConnectorModal: React.FC<{
         }
         open={visible}
         onOk={handleOk}
-        closable={false}
-        maskClosable={false}
+        closable={closable}
+        maskClosable={closable}
         onCancel={handleCancel}
         width={600}
         footer={null}
@@ -133,7 +134,7 @@ const ConnectorModal: React.FC<{
             <DynamicComponent
               loading={submitting}
               onSubmit={onSubmit}
-              type={selected.category}
+              type={selected.title}
             />
           </div>
         )}

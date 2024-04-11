@@ -30,7 +30,7 @@ const HeaderItem = ({
 }) => {
   return (
     <div
-      className={` items-center flex gap-x-1 py-2 cursor-pointer hover:opacity-55 transition-all duration-150 ${
+      className={` items-center flex gap-x-1 py-3 cursor-pointer hover:opacity-55 transition-all duration-150 ${
         withBg
           ? "bg-primary text-foreground-inverted rounded-lg px-3 "
           : "text-foreground "
@@ -257,7 +257,7 @@ const Chat = () => {
       />
       <ConnectorModal visible={openConnector} onClose={onCloseConnector} />
       {chat && (
-        <section className="h-20  flex items-center justify-between px-4 mt-0 mx-auto w-full">
+        <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full">
           <div className="flex flex-col">
             <HeaderItem
               icon={chat?.datasource.source_type.icon}
