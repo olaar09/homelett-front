@@ -39,10 +39,11 @@ const ConnectorModal: React.FC<{
   const [selected, setSelected] = useState<ListItem | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [defaultPayload, setDefaultPayload] = useState(undefined);
-  const [toListItem, setToListItem] = useState<ListItem | undefined>();
-  console.log(defaultFormPayload, defaultSelected, "escefdsCDAWSZ");
+  const [toListItem, setToListItem] = useState<ListItem | null>(null);
 
   useEffect(() => {
+    console.log(defaultSelected, "KWDCWDKSDSKM");
+
     if (defaultSelected) {
       setToListItem({
         datasource_id: Number(defaultSelected.id),
@@ -58,10 +59,9 @@ const ConnectorModal: React.FC<{
   }, [defaultSelected]);
 
   useEffect(() => {
-    if (toListItem) {
-      setSelected(toListItem);
-      setDefaultPayload(defaultFormPayload);
-    }
+    console.log("LIST ITEMMM", toListItem, defaultFormPayload);
+    setSelected(toListItem);
+    setDefaultPayload(defaultFormPayload);
   }, [toListItem]);
 
   const fetchSources = async () => {
@@ -156,6 +156,7 @@ const ConnectorModal: React.FC<{
   const onResetItem = () => {
     setSelected(null);
     setDefaultPayload(undefined);
+    setToListItem(null);
   };
 
   const handleCancel = () => {

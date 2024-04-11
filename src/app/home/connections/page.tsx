@@ -68,10 +68,11 @@ const Connections = () => {
   };
 
   const onSelectConnection = (connection: IDataSourceItem) => {
-    switch (connection.name) {
+    switch (connection.source_type.name) {
       case "mysql":
       case "postgresql":
       case "mariadb":
+      case "slack":
         setSelectedConnectionPayload({
           datasource_id: connection.source_type.id!,
           datasource_name: connection.name,
@@ -85,6 +86,8 @@ const Connections = () => {
     setSelectedConnection(connection);
     onOpenConnector();
   };
+
+  const onDeleteConnection = (connection: IDataSourceItem) => {};
 
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col w-full">
@@ -131,11 +134,13 @@ const Connections = () => {
               <div className=" absolute top-3 right-4 z-10 hoverItem transition-all duration-150">
                 <div className=" flex items-center -gap-x-2 transition-all duration-300">
                   <Button
+                    onClick={() => onDeleteConnection(datasource)}
                     className="text-red-500"
                     icon={<DeleteOutlined />}
                     type="link"
                   />
                   <Button
+                    onClick={() => onSelectConnection(datasource)}
                     icon={<EditOutlined />}
                     className="text-success-500"
                     type="link"
