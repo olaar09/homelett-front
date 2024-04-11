@@ -63,6 +63,10 @@ const Chat = () => {
   const authContext = useContext(AuthContext);
   const apiUtil = new APIUtil();
 
+  const chatSources = (currentAuth.dataSources ?? []).filter((dt) => {
+    return dt.source_type.category === "datasource";
+  });
+
   const getChatHistory = async (): Promise<any> => {
     try {
       const data = await apiUtil.chatHistoryService.getChatHistory(chat!.id);
@@ -250,7 +254,7 @@ const Chat = () => {
       />
       <StartChatModal
         loading={loadingNewChat}
-        datasources={currentAuth.dataSources ?? []}
+        datasources={chatSources ?? []}
         visible={openConnectedDatasources}
         onClickItem={onDatasourceSelected}
         onClose={() => setOpenConnectedDatasources(false)}
