@@ -3,7 +3,7 @@
 import { Icon } from "@iconify/react";
 import { useContext, useEffect, useRef, useState } from "react";
 
-import { Card, message } from "antd";
+import { Card, Tag, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { usePrevious, useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -111,7 +111,7 @@ const Connections = () => {
       <section className=" flex items-center w-full  px-8 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
         {(currentAuth.dataSources ?? []).map((datasource) => (
           <div className="w-4/12 ">
-            <div className="mr-4">
+            <div className="mr-4 relative">
               <Card
                 onClick={() =>
                   onSelectConnection({
@@ -125,7 +125,7 @@ const Connections = () => {
                     category: datasource.source_type.category,
                   })
                 }
-                className="rounded-2xl h-40"
+                className="rounded-2xl h-40 relative"
                 bordered={false}
               >
                 <Meta
@@ -138,6 +138,18 @@ const Connections = () => {
                   description={datasource.source_type.description}
                 />
               </Card>
+              <div className="absolute bottom-3 right-2 z-10">
+                <Tag
+                  bordered={false}
+                  color={
+                    datasource.source_type.category === "datasource"
+                      ? "geekblue"
+                      : "volcano"
+                  }
+                >
+                  {datasource.source_type.category}
+                </Tag>
+              </div>
             </div>
           </div>
         ))}
