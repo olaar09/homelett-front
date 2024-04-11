@@ -127,7 +127,7 @@ const ConnectorModal: React.FC<{
   const existingSourceTitle = `Update ${defaultSelected?.datasource_name} (${defaultSelected?.title})`;
   const newSourceTitle = `Connect  ${selected?.title} `;
   const modalTitle = selected
-    ? `${defaultSelected ? existingSourceTitle : newSourceTitle}`
+    ? `${defaultPayload ? existingSourceTitle : newSourceTitle}`
     : title;
 
   const onClickItem = (item: ListItem) => {
