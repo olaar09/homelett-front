@@ -130,7 +130,9 @@ const AreaChart: React.FC<{
                 onChange={(value) => handleDropdownChange(value, "x")}
               >
                 {columns.map((col) => (
-                  <Option value={col}>{col}</Option>
+                  <Option key={col} value={col}>
+                    {col}
+                  </Option>
                 ))}
               </Select>
             </div>
@@ -148,7 +150,9 @@ const AreaChart: React.FC<{
                 onChange={(value) => handleDropdownChange(value, "y")}
               >
                 {columns.map((col) => (
-                  <Option value={col}>{col}</Option>
+                  <Option key={col} value={col}>
+                    {col}
+                  </Option>
                 ))}
               </Select>
             </div>

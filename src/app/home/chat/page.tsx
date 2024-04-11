@@ -48,6 +48,7 @@ const Chat = () => {
   const [displayedChats, setDisplayedChats] = useState<
     IChatHistoryItem[] | null
   >(null);
+
   const prevDisplayedChats = usePrevious(displayedChats);
 
   const [openConnector, setOpenConnector] = useState<boolean>(false);
@@ -148,6 +149,8 @@ const Chat = () => {
       (prevDisplayedChats ?? [])!.length !== displayedChats.length
     ) {
       if (displayedChats[displayedChats.length - 1].type === "answer") {
+        console.log("i am here");
+
         // scrollToBottom();
       } else {
         jumpToBottom();

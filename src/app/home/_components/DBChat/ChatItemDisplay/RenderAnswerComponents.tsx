@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Card, Table, Tooltip, message } from "antd";
+import { Button, Card, Dropdown, Table, Tooltip, message } from "antd";
 import { Icon } from "@iconify/react";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 import AreaChart from "@/app/components/RenderChat/RenderAreaChat";
@@ -8,13 +8,23 @@ import BarChart from "@/app/components/RenderChat/RenderBarChat";
 import PieChat from "@/app/components/RenderChat/RenderPieChat";
 import { ChatContext } from "@/contexts/ChatContext";
 import APIUtil from "@/services/APIUtil";
+import SendQueryAnswerWorkflow from "../WorkFlowManage/SendQueryAnswerWorkflow";
+
+const actionTypes = [
+  {
+    icon: "octicon:tools-16",
+    key: "workflow",
+    label: "Create workflow",
+  },
+  { icon: "tabler:file-type-sql", key: "view_sql", label: "View SQL" },
+];
 
 const viewTypes = [
-  { icon: "ic:outline-table-view", key: "table", name: "Table view" },
-  { icon: "bi:pie-chart-fill", key: "pie_chart", name: "Pie chart" },
-  { icon: "mingcute:chart-bar-fill", key: "bar_chart", name: "Bar chart" },
-  { icon: "fa6-solid:chart-line", key: "line_chart", name: "Line chart" },
-  { icon: "fa6-solid:chart-area", key: "area_chart", name: "Area chart" },
+  { icon: "mdi:table", key: "table", label: "Table" },
+  { icon: "bi:pie-chart-fill", key: "pie_chart", label: "Pie chart" },
+  { icon: "mingcute:chart-bar-fill", key: "bar_chart", label: "Bar chart" },
+  { icon: "fa6-solid:chart-line", key: "line_chart", label: "Line chart" },
+  { icon: "fa6-solid:chart-area", key: "area_chart", label: "Area chart" },
 ];
 
 export const TextContentDisplay = ({
@@ -29,7 +39,7 @@ export const TextContentDisplay = ({
   return (
     <div className="flex flex-col gap-y-3 my-4 hover:bg-gray-100 cursor-pointer px-2 rounded-lg py-2 w-full">
       <Header avatar={avatar} senderName={senderName} />
-      <span className=" text-[0.85rem]">{content}</span>
+      <span className=" ext-[0.85rem]">{content}</span>
     </div>
   );
 };
@@ -41,21 +51,62 @@ export const ViewSelector = ({
   onClick: (name: string) => void;
   selectedView: string | null;
 }) => {
+  const oClickAction = (action: string) => {
+    switch (action) {
+      case "workflow":
+        message.warning("Not available, coming soon");
+        break;
+      case "view_sql":
+        message.warning("Not available, coming soon");
+        break;
+      default:
+        break;
+    }
+  };
+
+  const mapOptions = viewTypes.map((vw) => {
+    return {
+      key: vw.key,
+      onClick: () => onClick(vw.key),
+      label: (
+        <div className="flex items-center gap-x-2">
+          <Icon icon={vw.icon} />
+          <span>{vw.label}</span>
+        </div>
+      ),
+    };
+  });
+
+  const selectedViewIcon =
+    viewTypes.find((vt) => vt.key === selectedView)?.icon ??
+    "lets-icons:chart-alt";
   return (
-    <div className="absolute  right-1 flex items-center gap-x-3">
-      {viewTypes.map((view, i) => (
-        <Tooltip key={i} title={view.name}>
-          <Button className="w-2" type="link" onClick={() => onClick(view.key)}>
-            <Icon
-              className={`${
-                selectedView === view.key ? " text-primary" : " text-gray-700"
-              }`}
-              icon={view.icon}
-            />
+    <>
+      {/*    <SendQueryAnswerWorkflow /> */}
+      <div className="absolute  right-1 flex items-center gap-x-2">
+        {actionTypes.map((view, i) => (
+          <Tooltip key={i} title={view.label}>
+            <Button
+              className="w-2"
+              type="link"
+              onClick={() => oClickAction(view.key)}
+            >
+              <Icon
+                className={`${
+                  selectedView === view.key ? " text-primary" : " text-gray-700"
+                }`}
+                icon={view.icon}
+              />
+            </Button>
+          </Tooltip>
+        ))}
+        <Dropdown menu={{ items: mapOptions }} placement="bottom">
+          <Button type="link">
+            <Icon className={`text-gray-700`} icon={selectedViewIcon} />
           </Button>
-        </Tooltip>
-      ))}
-    </div>
+        </Dropdown>
+      </div>
+    </>
   );
 };
 

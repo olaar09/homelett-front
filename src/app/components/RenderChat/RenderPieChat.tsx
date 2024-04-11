@@ -64,7 +64,7 @@ const PieChat: React.FC<{
   }, [x]);
 
   const state = {
-    series: yData ?? [], // Example data for Matches, Messages, and Super Likes
+    series: yData ?? [],
     options: {
       chart: {
         type: "pie",
@@ -116,7 +116,9 @@ const PieChat: React.FC<{
                 onChange={(value) => handleDropdownChange(value, "x")}
               >
                 {columns.map((col) => (
-                  <Option value={col}>{col}</Option>
+                  <Option key={col} value={col}>
+                    {col}
+                  </Option>
                 ))}
               </Select>
             </div>
@@ -134,7 +136,9 @@ const PieChat: React.FC<{
                 onChange={(value) => handleDropdownChange(value, "y")}
               >
                 {columns.map((col) => (
-                  <Option value={col}>{col}</Option>
+                  <Option key={col} value={col}>
+                    {col}
+                  </Option>
                 ))}
               </Select>
 

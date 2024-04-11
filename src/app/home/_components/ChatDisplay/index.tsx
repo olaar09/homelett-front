@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Icon } from "@iconify/react";
-import RenderChatItem from "../ChatItemDisplay";
+import RenderChatItem from "../DBChat/ChatItemDisplay";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 
