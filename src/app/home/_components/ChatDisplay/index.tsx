@@ -21,7 +21,6 @@ const ChatHistory: React.FC<ChatHistoryProps> = ({
     if (displayedChats && displayedChats.length > 0) {
       if (displayedChats[displayedChats.length - 1].type === "answer") {
         console.log("i am here");
-
         scrollToBottom();
       } else {
         jumpToBottom();
