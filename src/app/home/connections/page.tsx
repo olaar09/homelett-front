@@ -47,6 +47,7 @@ const HeaderItem = ({
 
 const Connections = () => {
   const [openConnector, setOpenConnector] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [selectedConnectionPayload, setSelectedConnectionPayload] =
     useState<any>(undefined);
@@ -57,6 +58,7 @@ const Connections = () => {
 
   useState(false);
   const currentAuth = useContext(AuthContext);
+  const apiUtil = new APIUtil();
 
   const onOpenConnector = () => {
     setOpenConnector(true);
@@ -87,14 +89,31 @@ const Connections = () => {
     onOpenConnector();
   };
 
-  const onDeleteConnection = (connection: IDataSourceItem) => {
-    alert("kmk,");
+  const handleDeleteConnection = async (connection: IDataSourceItem) => {
+    try {
+      setLoading(true);
+      await apiUtil.datasourceService.deleteSource(connection.id);
+      await currentAuth.refreshDataSource();
+      setLoading(false);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+
+        message.error(
+          `${error?.response?.data?.message ?? "Unable to complete request"}`
+        );
+      } else {
+        message.error("Unable to delete connection");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col w-full">
       <LoadingOverlay
-        loading={currentAuth.loading || currentAuth.loadingSources}
+        loading={currentAuth.loading || currentAuth.loadingSources || loading}
       />
 
       <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full">
@@ -140,7 +159,7 @@ const Connections = () => {
                     description="Are you sure to delete this connection?"
                     okText="Yes"
                     cancelText="No"
-                    onConfirm={() => onDeleteConnection(datasource)}
+                    onConfirm={() => handleDeleteConnection(datasource)}
                   >
                     <Button
                       className="text-red-500"

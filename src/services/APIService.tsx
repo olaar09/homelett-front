@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import "firebase/auth";
 
 type RequestOptions = {
-  method: "GET" | "POST" | "PUT" | "HEAD";
+  method: "GET" | "POST" | "PUT" | "HEAD" | "DELETE";
   data?: any;
 };
 
@@ -53,6 +53,12 @@ class APIService {
     return await this.request<T>(endpoint, {
       method: "POST",
       data: data,
+    });
+  }
+
+  public async delete<T>(endpoint: string): Promise<T> {
+    return await this.request<T>(endpoint, {
+      method: "DELETE",
     });
   }
 

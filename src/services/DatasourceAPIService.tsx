@@ -26,6 +26,15 @@ class DataSourceAPIService {
     }
   }
 
+  async deleteSource(datasourceId: any): Promise<any> {
+    try {
+      const chat = await this.apiService.delete(`/datasource/${datasourceId}`);
+      return chat;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async addSource(data: any): Promise<any> {
     try {
       const chat = await this.apiService.post("/datasource", data);
