@@ -73,7 +73,7 @@ const Connections = () => {
       case "mariadb":
         setSelectedConnectionPayload({
           datasource_id: connection.datasource_id!,
-          datasource_name: connection.title,
+          datasource_name: connection.datasource_name,
           connection_string: "",
         });
         break;
@@ -116,6 +116,7 @@ const Connections = () => {
                 onClick={() =>
                   onSelectConnection({
                     datasource_id: Number(datasource.id),
+                    datasource_name: datasource.name,
                     id: datasource.source_type.id!,
                     title: datasource.source_type.name!,
                     avatar: datasource.source_type.icon,

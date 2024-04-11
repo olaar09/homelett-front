@@ -15,6 +15,7 @@ export interface ListItem {
   category: string;
   id: number;
   datasource_id?: number;
+  datasource_name?: string;
   isActive: boolean;
 }
 
@@ -37,6 +38,8 @@ const ConnectorModal: React.FC<{
   const [selected, setSelected] = useState<ListItem | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [defaultPayload, setDefaultPayload] = useState(undefined);
+
+  console.log(defaultFormPayload, defaultSelected, "escefdsCDAWSZ");
 
   useEffect(() => {
     if (defaultSelected) {
@@ -121,6 +124,12 @@ const ConnectorModal: React.FC<{
       ? "Connect a data source"
       : "";
 
+  const existingSourceTitle = `Update ${defaultSelected?.datasource_name} (${defaultSelected?.title})`;
+  const newSourceTitle = `Connect  ${selected?.title} `;
+  const modalTitle = selected
+    ? `${defaultSelected ? existingSourceTitle : newSourceTitle}`
+    : title;
+
   const onClickItem = (item: ListItem) => {
     if (item.isActive) {
       setSelected(item);
@@ -150,7 +159,7 @@ const ConnectorModal: React.FC<{
                 className="text-lg w-10 text-foreground cursor-pointer"
               />
             )}
-            {selected ? `Connect ${selected?.title}` : title}
+            {modalTitle}
           </div>
         }
         open={visible}
