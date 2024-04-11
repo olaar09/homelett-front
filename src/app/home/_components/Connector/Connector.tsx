@@ -181,7 +181,7 @@ const ConnectorModal: React.FC<{
                 />
               </List.Item>
             )}
-            style={{ height: 400, overflow: "auto" }}
+            style={{ height: 650, overflow: "auto" }}
           />
         )}
       </Modal>

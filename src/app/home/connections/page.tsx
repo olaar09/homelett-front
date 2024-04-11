@@ -57,8 +57,6 @@ const Connections = () => {
     setOpenConnector(false);
   };
 
-  const dummy = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
-
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col w-full">
       <LoadingOverlay
