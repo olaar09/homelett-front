@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Icon } from "@iconify/react";
 import RenderChatItem from "../DBChat/ChatItemDisplay";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
@@ -8,15 +8,52 @@ interface ChatHistoryProps {
   loadingChatHistory: boolean;
   datasource: IDataSourceItem;
   displayedChats: IChatHistoryItem[] | null;
-  scrollRef: any;
 }
 
 const ChatHistory: React.FC<ChatHistoryProps> = ({
   loadingChatHistory,
   displayedChats,
   datasource,
-  scrollRef,
 }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (displayedChats && displayedChats.length > 0) {
+      if (displayedChats[displayedChats.length - 1].type === "answer") {
+        console.log("i am here");
+
+        scrollToBottom();
+      } else {
+        jumpToBottom();
+      }
+    }
+  }, [displayedChats]);
+
+  useEffect(() => {
+    // Scroll to the bottom of the div
+    if (displayedChats) scrollToBottom();
+  }, [displayedChats]);
+
+  const jumpToBottom = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  };
+
+  const scrollToBottom = () => {
+    if (!scrollRef.current) return;
+    const element = scrollRef.current;
+
+    const maxScroll = element.scrollHeight - element.clientHeight;
+    const step = () => {
+      if (element.scrollTop < maxScroll) {
+        element.scrollTop += 20; // Adjust speed as necessary
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  };
+
   return (
     <>
       {loadingChatHistory && (

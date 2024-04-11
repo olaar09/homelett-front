@@ -28,7 +28,6 @@ const LineChart: React.FC<{
   const [y, setY] = useState<any>();
   const [yData, setYData] = useState<any>();
   const [xData, setXData] = useState<any>();
-  const chatContext = useContext(ChatContext);
 
   let columns: any[] = [];
   if (data.length > 0) {
@@ -43,7 +42,6 @@ const LineChart: React.FC<{
   useEffect(() => {
     if (y && x) {
       onUpdateConfig({ line_chart: { x: x, y: y } });
-      //chatContext.scrollToBottom!();
     }
   }, [x, y]);
 

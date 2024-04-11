@@ -63,33 +63,6 @@ const Chat = () => {
   const authContext = useContext(AuthContext);
   const apiUtil = new APIUtil();
 
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Scroll to the bottom of the div
-    if (chat) scrollToBottom();
-  }, [chat]);
-
-  const jumpToBottom = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  };
-
-  const scrollToBottom = () => {
-    if (!scrollRef.current) return;
-    const element = scrollRef.current;
-
-    const maxScroll = element.scrollHeight - element.clientHeight;
-    const step = () => {
-      if (element.scrollTop < maxScroll) {
-        element.scrollTop += 20; // Adjust speed as necessary
-        window.requestAnimationFrame(step);
-      }
-    };
-    window.requestAnimationFrame(step);
-  };
-
   const getChatHistory = async (): Promise<any> => {
     try {
       const data = await apiUtil.chatHistoryService.getChatHistory(chat!.id);
@@ -141,22 +114,6 @@ const Chat = () => {
       refreshChatHistory();
     }
   }, [chat]);
-
-  useEffect(() => {
-    if (
-      displayedChats &&
-      displayedChats.length > 0 &&
-      (prevDisplayedChats ?? [])!.length !== displayedChats.length
-    ) {
-      if (displayedChats[displayedChats.length - 1].type === "answer") {
-        console.log("i am here");
-
-        // scrollToBottom();
-      } else {
-        jumpToBottom();
-      }
-    }
-  }, [displayedChats]);
 
   useEffect(() => {
     if (currentAuth) {
@@ -338,11 +295,9 @@ const Chat = () => {
         <ChatContext.Provider
           value={{
             updateChatHistoryAtIndex,
-            scrollToBottom,
           }}
         >
           <ChatHistory
-            scrollRef={scrollRef}
             loadingChatHistory={loadingChatHistory}
             datasource={chat!.datasource}
             displayedChats={displayedChats}
