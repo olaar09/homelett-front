@@ -7,8 +7,10 @@ export interface IDataSourceItem {
 }
 
 export interface DataSourceType {
+  id: number;
   name: string;
   icon: string;
   category: string;
   description?: string;
+  is_active: number;
 }

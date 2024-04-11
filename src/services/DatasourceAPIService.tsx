@@ -34,6 +34,15 @@ class DataSourceAPIService {
       throw error;
     }
   }
+
+  async updateSource(data: any): Promise<any> {
+    try {
+      const chat = await this.apiService.put("/datasource", data);
+      return chat;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default DataSourceAPIService;

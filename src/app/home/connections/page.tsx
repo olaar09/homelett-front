@@ -9,7 +9,7 @@ import { usePrevious, useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
 import ChatInput from "../_components/ChatInput";
-import ConnectorModal from "../_components/Connector/Connector";
+import ConnectorModal, { ListItem } from "../_components/Connector/Connector";
 import { IChat } from "@/app/interfaces/IChatItem";
 import { AxiosError } from "axios";
 import ChatListDrawer from "../_components/SelectChatDrawer";
@@ -46,6 +46,14 @@ const HeaderItem = ({
 
 const Connections = () => {
   const [openConnector, setOpenConnector] = useState<boolean>(false);
+
+  const [selectedConnectionPayload, setSelectedConnectionPayload] =
+    useState<any>(undefined);
+
+  const [selectedConnection, setSelectedConnection] = useState<
+    ListItem | undefined
+  >(undefined);
+
   useState(false);
   const currentAuth = useContext(AuthContext);
 
@@ -55,6 +63,26 @@ const Connections = () => {
 
   const onCloseConnector = () => {
     setOpenConnector(false);
+    setSelectedConnection(undefined);
+  };
+
+  const onSelectConnection = (connection: ListItem) => {
+    switch (connection.title) {
+      case "mysql":
+      case "postgresql":
+      case "mariadb":
+        setSelectedConnectionPayload({
+          datasource_id: connection.datasource_id!,
+          datasource_name: connection.title,
+          connection_string: "",
+        });
+        break;
+
+      default:
+        break;
+    }
+    setSelectedConnection(connection);
+    onOpenConnector();
   };
 
   return (
@@ -84,7 +112,21 @@ const Connections = () => {
         {(currentAuth.dataSources ?? []).map((datasource) => (
           <div className="w-4/12 ">
             <div className="mr-4">
-              <Card className="rounded-2xl h-40" bordered={false}>
+              <Card
+                onClick={() =>
+                  onSelectConnection({
+                    datasource_id: Number(datasource.id),
+                    id: datasource.source_type.id!,
+                    title: datasource.source_type.name!,
+                    avatar: datasource.source_type.icon,
+                    description: datasource.source_type.description!,
+                    isActive: datasource.source_type.is_active == 1,
+                    category: datasource.source_type.category,
+                  })
+                }
+                className="rounded-2xl h-40"
+                bordered={false}
+              >
                 <Meta
                   title={
                     <div className="flex items-center gap-x-2">
@@ -100,9 +142,11 @@ const Connections = () => {
         ))}
       </section>
       <ConnectorModal
+        defaultFormPayload={selectedConnectionPayload}
         closable={true}
         visible={openConnector}
         onClose={onCloseConnector}
+        defaultSelected={selectedConnection}
       />
     </main>
   );

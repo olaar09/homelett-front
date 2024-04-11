@@ -8,30 +8,40 @@ import { AxiosError } from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
 
 // Define TypeScript interface for your item data
-interface ListItem {
+export interface ListItem {
   title: string;
   avatar: string;
   description: string;
   category: string;
   id: number;
+  datasource_id?: number;
   isActive: boolean;
 }
 
 const ConnectorModal: React.FC<{
   visible: boolean;
   closable: boolean;
+  defaultFormPayload: any;
   onClose: (needRefresh: boolean) => void;
-  defaultSelected: ListItem;
-}> = ({ defaultSelected, visible, onClose, closable = false }) => {
+  defaultSelected?: ListItem;
+}> = ({
+  defaultSelected,
+  visible,
+  onClose,
+  closable = false,
+  defaultFormPayload = undefined,
+}) => {
   const apiUtil = new APIUtil();
   const auth = useContext(AuthContext);
 
   const [selected, setSelected] = useState<ListItem | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [defaultPayload, setDefaultPayload] = useState(undefined);
 
   useEffect(() => {
     if (defaultSelected) {
       setSelected(defaultSelected);
+      setDefaultPayload(defaultFormPayload);
     }
   }, [defaultSelected]);
 
@@ -68,10 +78,20 @@ const ConnectorModal: React.FC<{
         message.error("Please complete all fields");
         return;
       } else {
-        const source = await apiUtil.datasourceService.addSource({
-          ...data,
-          datasource_type_id: selected!.id,
-        });
+        let source;
+        if (defaultPayload && defaultFormPayload) {
+          source = await apiUtil.datasourceService.updateSource({
+            ...data,
+            datasource_id: defaultFormPayload.datasource_id,
+            datasource_type_id: selected!.id,
+          });
+        } else {
+          source = await apiUtil.datasourceService.addSource({
+            ...data,
+            datasource_type_id: selected!.id,
+          });
+        }
+
         await auth.refreshDataSource();
         await apiUtil.chatService.startChat({ datasource_id: source.data.id });
         message.success("Data source added");
@@ -96,7 +116,6 @@ const ConnectorModal: React.FC<{
   const { data: dataSourceTypes, loading, refresh } = useRequest(fetchSources);
 
   const handleOk = () => onClose(false);
-  const handleCancel = () => onClose(false);
   const title =
     dataSourceTypes && dataSourceTypes.length > 0
       ? "Connect a data source"
@@ -111,6 +130,12 @@ const ConnectorModal: React.FC<{
 
   const onResetItem = () => {
     setSelected(null);
+    setDefaultPayload(undefined);
+  };
+
+  const handleCancel = () => {
+    onResetItem();
+    onClose(false);
   };
 
   return (
@@ -139,6 +164,7 @@ const ConnectorModal: React.FC<{
         {selected && (
           <div style={{ height: 400, overflow: "auto" }}>
             <DynamicComponent
+              defaultPayload={defaultPayload}
               loading={submitting}
               onSubmit={onSubmit}
               type={selected.title}

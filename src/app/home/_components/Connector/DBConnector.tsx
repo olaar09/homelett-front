@@ -1,9 +1,13 @@
 import ACButton from "@/app/components/Button";
 import InputField from "@/app/components/InputField";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface DBConnectorProps {
   loading: boolean;
+  defaultPayload: {
+    datasource_name: string;
+    connection_string: string;
+  };
   onSubmit: ({
     datasource_name,
     connection_string,
@@ -13,9 +17,18 @@ interface DBConnectorProps {
   }) => void;
 }
 
-const DBConnect: React.FC<DBConnectorProps> = ({ onSubmit, loading }) => {
+const DBConnect: React.FC<DBConnectorProps> = ({
+  onSubmit,
+  loading,
+  defaultPayload,
+}) => {
   const [dataSourceName, setDataSourceName] = useState<string>("");
-  const [dataSourceConnection, setdatasourceConnection] = useState<string>("");
+  const [dataSourceConnection, setDatasourceConnection] = useState<string>("");
+
+  useEffect(() => {
+    setDataSourceName(defaultPayload?.datasource_name);
+    setDatasourceConnection(defaultPayload?.connection_string);
+  }, [defaultPayload]);
 
   return (
     <div className="flex flex-col gap-y-10 h-full items-center pt-10 w-11/12 mx-auto">
@@ -39,7 +52,7 @@ const DBConnect: React.FC<DBConnectorProps> = ({ onSubmit, loading }) => {
           type={"text"}
           value={dataSourceConnection}
           name={"connection_string"}
-          onChange={(e) => setdatasourceConnection(e.target.value)}
+          onChange={(e) => setDatasourceConnection(e.target.value)}
         />
       </div>
 
