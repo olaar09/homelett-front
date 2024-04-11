@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Modal, List, Avatar, Button, message } from "antd";
 import { useRequest } from "ahooks";
 import APIUtil from "@/services/APIUtil";
@@ -21,12 +21,19 @@ const ConnectorModal: React.FC<{
   visible: boolean;
   closable: boolean;
   onClose: (needRefresh: boolean) => void;
-}> = ({ visible, onClose, closable = false }) => {
+  defaultSelected: ListItem;
+}> = ({ defaultSelected, visible, onClose, closable = false }) => {
   const apiUtil = new APIUtil();
   const auth = useContext(AuthContext);
 
   const [selected, setSelected] = useState<ListItem | null>(null);
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (defaultSelected) {
+      setSelected(defaultSelected);
+    }
+  }, [defaultSelected]);
 
   const fetchSources = async () => {
     try {
