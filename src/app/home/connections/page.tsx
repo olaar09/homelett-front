@@ -2,8 +2,9 @@
 
 import { Icon } from "@iconify/react";
 import { useContext, useEffect, useRef, useState } from "react";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
-import { Card, Tag, message } from "antd";
+import { Button, Card, Tag, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { usePrevious, useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -51,7 +52,7 @@ const Connections = () => {
     useState<any>(undefined);
 
   const [selectedConnection, setSelectedConnection] = useState<
-    ListItem | undefined
+    IDataSourceItem | undefined
   >(undefined);
 
   useState(false);
@@ -66,14 +67,14 @@ const Connections = () => {
     setSelectedConnection(undefined);
   };
 
-  const onSelectConnection = (connection: ListItem) => {
-    switch (connection.title) {
+  const onSelectConnection = (connection: IDataSourceItem) => {
+    switch (connection.name) {
       case "mysql":
       case "postgresql":
       case "mariadb":
         setSelectedConnectionPayload({
-          datasource_id: connection.datasource_id!,
-          datasource_name: connection.datasource_name,
+          datasource_id: connection.source_type.id!,
+          datasource_name: connection.name,
           connection_string: "",
         });
         break;
@@ -111,20 +112,9 @@ const Connections = () => {
       <section className=" flex items-center w-full  px-8 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
         {(currentAuth.dataSources ?? []).map((datasource) => (
           <div className="w-4/12 ">
-            <div className="mr-4 relative cursor-pointer hoverContainer">
+            <div className="mr-4 relative cursor-pointer hoverContainer transition-all">
               <Card
-                onClick={() =>
-                  onSelectConnection({
-                    datasource_id: Number(datasource.id),
-                    datasource_name: datasource.name,
-                    id: datasource.source_type.id!,
-                    title: datasource.source_type.name!,
-                    avatar: datasource.source_type.icon,
-                    description: datasource.source_type.description!,
-                    isActive: datasource.source_type.is_active == 1,
-                    category: datasource.source_type.category,
-                  })
-                }
+                onClick={() => onSelectConnection(datasource)}
                 className="rounded-2xl h-40 relative cursor-pointer"
                 bordered={false}
               >
@@ -138,11 +128,19 @@ const Connections = () => {
                   description={datasource.source_type.description}
                 />
               </Card>
-              <div className=" absolute top-6 right-10 z-10 hoverItem">
-                <Icon
-                  icon={"mingcute:edit-fill"}
-                  className=" text-xl text-gray-700"
-                />
+              <div className=" absolute top-3 right-4 z-10 hoverItem transition-all duration-150">
+                <div className=" flex items-center -gap-x-2 transition-all duration-300">
+                  <Button
+                    className="text-red-500"
+                    icon={<DeleteOutlined />}
+                    type="link"
+                  />
+                  <Button
+                    icon={<EditOutlined />}
+                    className="text-success-500"
+                    type="link"
+                  />
+                </div>
               </div>
               <div className="absolute bottom-3 right-2 z-10">
                 <Tag

@@ -6,6 +6,7 @@ import { Icon } from "@iconify/react";
 import DynamicComponent from "./DynamicComponent";
 import { AxiosError } from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
+import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 
 // Define TypeScript interface for your item data
 export interface ListItem {
@@ -24,7 +25,7 @@ const ConnectorModal: React.FC<{
   closable: boolean;
   defaultFormPayload: any;
   onClose: (needRefresh: boolean) => void;
-  defaultSelected?: ListItem;
+  defaultSelected?: IDataSourceItem;
 }> = ({
   defaultSelected,
   visible,
@@ -38,15 +39,30 @@ const ConnectorModal: React.FC<{
   const [selected, setSelected] = useState<ListItem | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [defaultPayload, setDefaultPayload] = useState(undefined);
-
+  const [toListItem, setToListItem] = useState<ListItem | undefined>();
   console.log(defaultFormPayload, defaultSelected, "escefdsCDAWSZ");
 
   useEffect(() => {
     if (defaultSelected) {
-      setSelected(defaultSelected);
-      setDefaultPayload(defaultFormPayload);
+      setToListItem({
+        datasource_id: Number(defaultSelected.id),
+        datasource_name: defaultSelected.name,
+        id: defaultSelected.source_type.id!,
+        title: defaultSelected.source_type.name!,
+        avatar: defaultSelected.source_type.icon,
+        description: defaultSelected.source_type.description!,
+        isActive: defaultSelected.source_type.is_active == 1,
+        category: defaultSelected.source_type.category,
+      });
     }
   }, [defaultSelected]);
+
+  useEffect(() => {
+    if (toListItem) {
+      setSelected(toListItem);
+      setDefaultPayload(defaultFormPayload);
+    }
+  }, [toListItem]);
 
   const fetchSources = async () => {
     try {
@@ -124,7 +140,7 @@ const ConnectorModal: React.FC<{
       ? "Connect a data source"
       : "";
 
-  const existingSourceTitle = `Update ${defaultSelected?.datasource_name} (${defaultSelected?.title})`;
+  const existingSourceTitle = `Update ${toListItem?.datasource_name} (${toListItem?.title})`;
   const newSourceTitle = `Connect  ${selected?.title} `;
   const modalTitle = selected
     ? `${defaultPayload ? existingSourceTitle : newSourceTitle}`
