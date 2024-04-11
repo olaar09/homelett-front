@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import { useContext, useEffect, useRef, useState } from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
-import { Button, Card, Tag, message } from "antd";
+import { Button, Card, Popconfirm, Tag, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { usePrevious, useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -87,7 +87,9 @@ const Connections = () => {
     onOpenConnector();
   };
 
-  const onDeleteConnection = (connection: IDataSourceItem) => {};
+  const onDeleteConnection = (connection: IDataSourceItem) => {
+    alert("kmk,");
+  };
 
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col w-full">
@@ -133,12 +135,19 @@ const Connections = () => {
               </Card>
               <div className=" absolute top-3 right-4 z-10 hoverItem transition-all duration-150">
                 <div className=" flex items-center -gap-x-2 transition-all duration-300">
-                  <Button
-                    onClick={() => onDeleteConnection(datasource)}
-                    className="text-red-500"
-                    icon={<DeleteOutlined />}
-                    type="link"
-                  />
+                  <Popconfirm
+                    title="Delete the connection"
+                    description="Are you sure to delete this connection?"
+                    okText="Yes"
+                    cancelText="No"
+                    onConfirm={() => onDeleteConnection(datasource)}
+                  >
+                    <Button
+                      className="text-red-500"
+                      icon={<DeleteOutlined />}
+                      type="link"
+                    />
+                  </Popconfirm>
                   <Button
                     onClick={() => onSelectConnection(datasource)}
                     icon={<EditOutlined />}
