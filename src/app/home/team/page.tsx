@@ -59,7 +59,9 @@ const SavedTeamMembers = () => {
   return (
     <>
       <AddTeamModal open={openAddModal} onCancel={handleCloseTeam} />
-      {(loadingTeam || !teamList || teamList?.length < 1) && (
+      {((loadingTeam && (teamList ?? []).length < 1) ||
+        !teamList ||
+        teamList?.length < 1) && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
           <div className="">
