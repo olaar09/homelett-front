@@ -126,7 +126,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     try {
       const user = await apiService.profileService.loadProfile();
       if (user) {
-        setCurrentUser(user);
+        setCurrentUser(user.data);
         if (path === "/") {
           router.push(`/home/chat${queryParams ? `?${queryParams}` : ""}`);
           return;

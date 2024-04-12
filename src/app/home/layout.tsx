@@ -66,6 +66,8 @@ const Nav: React.FC<any> = ({ children }) => {
     setOpenAIKey(false);
   };
 
+  console.log(authContext.currentUser);
+
   return (
     <>
       <AddKeyModal open={openAIKey} onCancel={closeOpenAiKey} />

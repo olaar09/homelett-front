@@ -9,10 +9,10 @@ class ProfileAPIService {
     this.apiService = apiService;
   }
 
-  async loadProfile(): Promise<IAuthRequest> {
+  async loadProfile(): Promise<{ data: IAuthRequest }> {
     try {
       const user = await this.apiService.get("/user");
-      return user as IAuthRequest;
+      return user as { data: IAuthRequest };
     } catch (error) {
       throw error;
     }
