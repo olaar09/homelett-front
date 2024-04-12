@@ -6,11 +6,13 @@ import ProfileAPIService from "./ProfileAPIService";
 import ChatAPIService from "./ChatAPIService";
 import ChatHistoryAPIService from "./ChatHistoryAPIService";
 import DataSourceAPIService from "./DatasourceAPIService";
+import TeamAPIService from "./TeamAPIService";
 
 class APIUtil {
   public chatService: ChatAPIService;
   public groupService: GroupAPIService;
   public profileService: ProfileAPIService;
+  public teamService: TeamAPIService;
   public authService: AuthAPIService;
   public chatHistoryService: ChatHistoryAPIService;
   public datasourceService: DataSourceAPIService;
@@ -24,6 +26,7 @@ class APIUtil {
     this.chatHistoryService = new ChatHistoryAPIService(service);
     this.chatService = new ChatAPIService(service);
     this.datasourceService = new DataSourceAPIService(service);
+    this.teamService = new TeamAPIService(service);
   }
 }
 

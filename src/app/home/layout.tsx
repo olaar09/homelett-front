@@ -96,11 +96,13 @@ const Nav: React.FC<any> = ({ children }) => {
                 icon={"clarity:user-line"}
                 title="Profile"
               />
-              <NavMenu
-                path="/home/team"
-                icon={"ant-design:team-outlined"}
-                title="Team"
-              />
+              <Link className="w-full" href={"/home/team"}>
+                <NavMenu
+                  path="/home/team"
+                  icon={"ant-design:team-outlined"}
+                  title="Team"
+                />
+              </Link>
               <NavMenu
                 path="/home/api_keys"
                 icon={"tabler:api"}
