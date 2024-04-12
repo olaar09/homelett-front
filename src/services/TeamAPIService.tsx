@@ -9,6 +9,15 @@ class TeamAPIService {
     this.apiService = apiService;
   }
 
+  async addTeam(data: any): Promise<any> {
+    try {
+      await this.apiService.post("/teams", data);
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getTeam(): Promise<{ data: { data: any } }> {
     try {
       const team = await this.apiService.get("/teams");

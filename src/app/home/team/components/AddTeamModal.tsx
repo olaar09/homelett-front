@@ -12,29 +12,30 @@ interface DAddTeamModalProps {
 }
 
 const AddTeamModal: React.FC<DAddTeamModalProps> = ({ onCancel, open }) => {
-  const [dataSourceName, setDataSourceName] = useState<string>("");
-  const [dataSourceConnection, setDatasourceConnection] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [fullname, setFullName] = useState<string>("");
   const [submitting, setSubmitting] = useState(false);
   const apiUtil = new APIUtil();
 
   const handleCancel = () => {
-    setDataSourceName("null");
-    setDatasourceConnection("");
+    setEmail("null");
+    setFullName("");
     onCancel();
   };
 
   const handleSubmit = async () => {
     try {
       setSubmitting(true);
-      if (!dataSourceName || !dataSourceConnection) {
+      if (!email || !fullname) {
         message.error("Please complete all fields");
         return;
       } else {
-        await apiUtil.datasourceService.addSource({
-          dataSourceConnection,
-          dataSourceName,
+        await apiUtil.teamService.addTeam({
+          fullname,
+          email,
+          user_role_description: "Account member",
         });
-        message.success("Data source added");
+        message.success("Team member  added");
         onCancel(true);
       }
     } catch (error) {
@@ -71,9 +72,9 @@ const AddTeamModal: React.FC<DAddTeamModalProps> = ({ onCancel, open }) => {
           <InputField
             placeHolder={"Member name"}
             type={"text"}
-            value={dataSourceName}
+            value={fullname}
             name={"member_name"}
-            onChange={(e) => setDataSourceName(e.target.value)}
+            onChange={(e) => setFullName(e.target.value)}
           />
         </div>
 
@@ -82,9 +83,9 @@ const AddTeamModal: React.FC<DAddTeamModalProps> = ({ onCancel, open }) => {
           <InputField
             placeHolder={"email@member.com"}
             type={"text"}
-            value={dataSourceConnection}
+            value={email}
             name={"member_email"}
-            onChange={(e) => setDatasourceConnection(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
