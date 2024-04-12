@@ -8,12 +8,14 @@ import ChatHistoryAPIService from "./ChatHistoryAPIService";
 import DataSourceAPIService from "./DatasourceAPIService";
 import TeamAPIService from "./TeamAPIService";
 import IntegrationAPIService from "./IntegrationAPIService";
+import WorkflowAPIService from "./WorkflowAPIService";
 
 class APIUtil {
   public chatService: ChatAPIService;
   public groupService: GroupAPIService;
   public profileService: ProfileAPIService;
   public teamService: TeamAPIService;
+  public workflowService: WorkflowAPIService;
   public authService: AuthAPIService;
   public integrationsService: IntegrationAPIService;
   public chatHistoryService: ChatHistoryAPIService;
@@ -30,6 +32,7 @@ class APIUtil {
     this.datasourceService = new DataSourceAPIService(service);
     this.teamService = new TeamAPIService(service);
     this.integrationsService = new IntegrationAPIService(service);
+    this.workflowService = new WorkflowAPIService(service);
   }
 }
 

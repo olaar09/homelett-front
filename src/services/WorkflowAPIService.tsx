@@ -24,10 +24,10 @@ class WorkflowAPIService {
     }
   }
 
-  async getWorkflows(): Promise<any[]> {
+  async getWorkflows(): Promise<{ data: any[] }> {
     try {
       const response = await this.apiService.get(`/workflows`);
-      return response as any[];
+      return response as { data: any[] };
     } catch (error) {
       throw error;
     }
