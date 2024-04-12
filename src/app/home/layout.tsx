@@ -109,11 +109,13 @@ const Nav: React.FC<any> = ({ children }) => {
             </div>
             <div className="flex flex-grow  justify-end flex-col py-3 px-2 w-full ">
               <div className="flex flex-col border-t w-full py-5">
-                <NavMenu
-                  path="/home/profile"
-                  icon={"clarity:user-line"}
-                  title="Profile"
-                />
+                <Link className="w-full" href={"/home/profile"}>
+                  <NavMenu
+                    path="/home/profile"
+                    icon={"clarity:user-line"}
+                    title="Profile"
+                  />
+                </Link>
                 <Link className="w-full" href={"/home/team"}>
                   <NavMenu
                     path="/home/team"
