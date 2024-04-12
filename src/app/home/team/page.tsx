@@ -22,7 +22,6 @@ import AddTeamModal from "./components/AddTeamModal";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
-  const [selectedMemberInfo, setSelectedMemberInfo] = useState(undefined);
   const [openAddModal, setOpenAddModal] = useState(false);
   const apiUtils = new APIUtil();
 
@@ -60,12 +59,15 @@ const SavedTeamMembers = () => {
   return (
     <>
       <AddTeamModal open={openAddModal} onCancel={handleCloseTeam} />
-      {(!teamList || teamList?.length < 1) && (
+      {(loadingTeam || !teamList || teamList?.length < 1) && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
           <div className="">
             {" "}
-            <Spin spinning className="text-lg text-center block"></Spin>{" "}
+            <Icon
+              icon={"eos-icons:three-dots-loading"}
+              className=" text-6xl text-foreground"
+            ></Icon>
           </div>
         </div>
       )}
