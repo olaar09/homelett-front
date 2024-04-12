@@ -23,7 +23,6 @@ const AddKeyModal: React.FC<AddKeyModalProps> = ({ onCancel, open }) => {
   };
 
   const handleSubmit = async () => {
-    setSubmitting(true);
     if (!key) {
       message.error("Please complete all fields");
       return;
@@ -48,7 +47,7 @@ const AddKeyModal: React.FC<AddKeyModalProps> = ({ onCancel, open }) => {
       footer={null}
     >
       <div className="flex flex-col gap-y-10 h-full items-center pt-10 w-11/12 mx-auto">
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full gap-y-2">
           <span className=" text-foreground">OpenAI key</span>
           <InputField
             placeHolder={"OpenAI key "}
@@ -64,7 +63,7 @@ const AddKeyModal: React.FC<AddKeyModalProps> = ({ onCancel, open }) => {
             onClick={handleSubmit}
             text={"Continue"}
             type={"button"}
-            loading={submitting}
+            loading={authContext.loadingOpenAIKey}
             children={undefined}
           ></ACButton>
         </div>

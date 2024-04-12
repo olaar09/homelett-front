@@ -22,12 +22,14 @@ interface IAuthContext {
   authenticated: boolean;
   loading: boolean;
   loadingSources: boolean;
+  loadingOpenAIKey: boolean;
 }
 
 export const AuthContext = createContext<IAuthContext>({
   dataSources: null,
   currentUser: null,
   authenticated: false,
+  loadingOpenAIKey: false,
   loading: true,
   loadingSources: true,
   updateKey: async (key: string) => {},
@@ -41,11 +43,10 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const [dataSources, setDataSources] = useState<IDataSourceItem[] | null>(
     null
   );
-  const [openAIKey, setOpenAIKey] = useState<any>(null);
   const apiService = new APIUtil();
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingSources, setLoadingSources] = useState<boolean>(true);
-  const [loadingOpenAIKey, setLoadingOpenAIKey] = useState<boolean>(true);
+  const [loadingOpenAIKey, setLoadingOpenAIKey] = useState<boolean>(false);
   const authenticated = !!currentUser;
   const router = useRouter();
   const path = usePathname();
@@ -168,6 +169,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
       value={{
         loading,
         loadingSources,
+        loadingOpenAIKey,
         dataSources,
         updateKey,
         refreshProfile,
