@@ -7,4 +7,5 @@ export interface IAuthRequest {
   email: string;
   password: string;
   company?: string;
+  is_open_ai?: number;
 }

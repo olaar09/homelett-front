@@ -17,6 +17,7 @@ interface IAuthContext {
   refreshDataSource: () => Promise<void>;
   clearUser: () => Promise<void>;
   refreshProfile: () => Promise<void>;
+  updateKey: (key: string) => Promise<void>;
   currentUser: IAuthRequest | null;
   authenticated: boolean;
   loading: boolean;
@@ -29,6 +30,7 @@ export const AuthContext = createContext<IAuthContext>({
   authenticated: false,
   loading: true,
   loadingSources: true,
+  updateKey: async (key: string) => {},
   clearUser: async () => {},
   refreshProfile: async () => {},
   refreshDataSource: async () => {},
@@ -39,9 +41,11 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const [dataSources, setDataSources] = useState<IDataSourceItem[] | null>(
     null
   );
+  const [openAIKey, setOpenAIKey] = useState<any>(null);
   const apiService = new APIUtil();
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingSources, setLoadingSources] = useState<boolean>(true);
+  const [loadingOpenAIKey, setLoadingOpenAIKey] = useState<boolean>(true);
   const authenticated = !!currentUser;
   const router = useRouter();
   const path = usePathname();
@@ -71,6 +75,23 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
 
   const clearUser = async () => {
     setCurrentUser(null);
+  };
+
+  const updateKey = async (key: string): Promise<any> => {
+    try {
+      setLoadingOpenAIKey(true);
+      await apiService.integrationsService.updateOpenAIKey(key);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+
+        message.error(
+          `${error?.response?.data?.message ?? "Unable to update key"}`
+        );
+      }
+    } finally {
+      setLoadingOpenAIKey(false);
+    }
   };
 
   const fetchDataSource = async () => {
@@ -143,6 +164,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         loading,
         loadingSources,
         dataSources,
+        updateKey,
         refreshProfile,
         clearUser,
         refreshDataSource,
