@@ -120,11 +120,23 @@ const Nav: React.FC<any> = ({ children }) => {
                   />
                 </Link>
 
-                <div onClick={addOpenAiKey}>
+                <div onClick={addOpenAiKey} className="relative">
                   <NavMenu
                     path="/home/api_keys"
                     icon={"ph:open-ai-logo-bold"}
                     title="OpenAI Key"
+                  />
+                  <Icon
+                    className={`absolute right-1 top-[10px] text-xl  ${
+                      authContext.currentUser?.is_open_ai
+                        ? "text-green-500"
+                        : "text-red-300"
+                    }`}
+                    icon={`${
+                      authContext.currentUser?.is_open_ai
+                        ? "ep:success-filled"
+                        : "ic:round-cancel"
+                    }`}
                   />
                 </div>
                 <div onClick={onLogout}>
