@@ -1,10 +1,23 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import { Avatar, Spin, Tag, Typography, message } from "antd";
+import {
+  Avatar,
+  Button,
+  Card,
+  Popconfirm,
+  Spin,
+  Tag,
+  Typography,
+  message,
+} from "antd";
 import APIUtil from "@/services/APIUtil";
 import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
+import { HeaderItem } from "../_components/PageHeaderItem";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import Meta from "antd/es/card/Meta";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -46,89 +59,89 @@ const SavedTeamMembers = () => {
       )}
 
       {teamList && teamList.length > 0 && (
-        <Spin spinning={loadingTeam}>
-          <div className="w-11/12 mx-auto">
-            <div className="my-8 flex justify-between items-center">
-              <h1 className="px-3 py-3 text-[14px] rounded-full bg-gray-100 font-bold">
-                Manage team members
-              </h1>
-              {/*  <Button onClick={() => setOpenInviteModal(true)}>
-                Invite team member
-              </Button> */}
-            </div>
+        <Spin spinning={loadingTeam} className="bg-background-thin">
+          <div className="bg-background-thin min-h-screen">
+            <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full bg-background-thin">
+              <div className="flex flex-col">
+                <HeaderItem
+                  icon={"ant-design:team-outlined"}
+                  title={`Team members`}
+                  withBg={false}
+                />
+                <span className="text-xs text-foreground-secondary truncate w-52">
+                  Manage & add team members
+                </span>
+              </div>
 
-            <div className="flex  flex-wrap	gap-y-4 text-sm">
-              {teamList?.slice(0, 12).map((teamMemberItem: any) => (
-                <div
-                  onClick={() => setSelectedMemberInfo(teamMemberItem)}
-                  key={teamMemberItem.id}
-                  className="w-3/12 cursor-pointer flex-wrap  gap-y-4"
-                >
-                  <div className="mx-2 relative flex  flex-col">
-                    <div className="text-xs flex flex-col gap-x-2 p-0 bg-white shadow-sm p-3 rounded gap-y-2">
-                      <div className="flex gap-x-2 items-center">
-                        <Avatar
-                          style={{
-                            backgroundColor: "#f56a00",
-                            verticalAlign: "middle",
-                          }}
-                          gap={1}
-                        >
-                          {teamMemberItem.fullname?.substring(0, 1)}
-                        </Avatar>
-                        <span className="text-lg">
-                          {" "}
-                          {teamMemberItem.fullname}
-                        </span>
+              <div className="flex items-center gap-x-7">
+                <div onClick={() => {}}>
+                  <HeaderItem
+                    icon="gg:add"
+                    title="Add team member"
+                    withBg={true}
+                  />
+                </div>
+              </div>
+            </section>
+
+            <div className="w-full mx-auto mt-10 bg-background-thin">
+              <section className=" flex items-center w-full  px-8 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
+                {(teamList ?? []).map((teamMemberItem: any) => (
+                  <div className="w-4/12 ">
+                    <div className="mr-4 relative cursor-pointer hoverContainer transition-all">
+                      <Card
+                        className="rounded-2xl h-40 relative cursor-pointer"
+                        bordered={false}
+                      >
+                        <Meta
+                          title={
+                            <div className="flex items-center gap-x-2">
+                              <Icon icon={""} />
+                              <span> {teamMemberItem.fullname}</span>
+                            </div>
+                          }
+                          description={""}
+                        />
+                      </Card>
+                      <div className=" absolute top-3 right-4 z-10 hoverItem transition-all duration-150">
+                        <div className=" flex items-center -gap-x-2 transition-all duration-300">
+                          <Popconfirm
+                            title="Delete the connection"
+                            description="Are you sure to delete this connection?"
+                            okText="Yes"
+                            cancelText="No"
+                          >
+                            <Button
+                              className="text-red-500"
+                              icon={<DeleteOutlined />}
+                              type="link"
+                            />
+                          </Popconfirm>
+                          <Button
+                            icon={<EditOutlined />}
+                            className="text-success-500"
+                            type="link"
+                          />
+                        </div>
                       </div>
-
-                      <div className="ml-10 flex flex-col gap-y-2">
-                        <div>
-                          <span className="text-gray-500">
-                            {" "}
-                            {teamMemberItem.email}
-                          </span>
-                        </div>
-                        <div>
-                          <span className="text-gray-500 h-4">
-                            {teamMemberItem.user_role_description ??
-                              "User role"}
-                          </span>
-                        </div>
-                        <div className="flex gap-x-3">
-                          {teamMemberItem.is_owner === 1 && (
-                            <Tag
-                              className="py-0 px-2"
-                              bordered={false}
-                              color="magenta"
-                            >
-                              Admin
-                            </Tag>
-                          )}
-                          {teamMemberItem.is_activated === 0 && (
-                            <Tag
-                              className="py-0 px-2"
-                              bordered={false}
-                              color="lime"
-                            >
-                              Invite sent
-                            </Tag>
-                          )}
-                          {teamMemberItem.is_activated === 1 && (
-                            <Tag
-                              className="py-0 px-2"
-                              bordered={false}
-                              color="orange"
-                            >
-                              Active
-                            </Tag>
-                          )}
-                        </div>
+                      <div className="absolute bottom-3 right-2 z-10">
+                        <Tag
+                          bordered={false}
+                          color={
+                            teamMemberItem.is_owner === 1
+                              ? "geekblue"
+                              : "volcano"
+                          }
+                        >
+                          {teamMemberItem.is_activated === 1
+                            ? "Active"
+                            : "Not active"}
+                        </Tag>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </section>
             </div>
           </div>
         </Spin>
