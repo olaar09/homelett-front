@@ -135,8 +135,8 @@ const SavedTeamMembers = () => {
                       <div className=" absolute top-3 right-4 z-10 hoverItem transition-all duration-150">
                         <div className=" flex items-center -gap-x-2 transition-all duration-300">
                           <Popconfirm
-                            title="Delete the member?"
-                            description="Are you sure to delete this member?"
+                            title="Delete the connection"
+                            description="Are you sure to delete this connection?"
                             okText="Yes"
                             cancelText="No"
                           >
@@ -146,6 +146,11 @@ const SavedTeamMembers = () => {
                               type="link"
                             />
                           </Popconfirm>
+                          <Button
+                            icon={<EditOutlined />}
+                            className="text-success-500"
+                            type="link"
+                          />
                         </div>
                       </div>
                       <div className="absolute bottom-3 right-2 z-10">

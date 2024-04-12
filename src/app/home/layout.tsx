@@ -103,11 +103,14 @@ const Nav: React.FC<any> = ({ children }) => {
                   title="Team"
                 />
               </Link>
-              <NavMenu
-                path="/home/api_keys"
-                icon={"tabler:api"}
-                title="API Keys"
-              />
+
+              <Link className="w-full" href={"/home/api_keys"}>
+                <NavMenu
+                  path="/home/api_keys"
+                  icon={"tabler:api"}
+                  title="API Keys"
+                />
+              </Link>
               <div onClick={onLogout}>
                 <NavMenu
                   path={"/logout"}
