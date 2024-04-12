@@ -7,53 +7,31 @@ import { Modal, message } from "antd";
 import { AxiosError } from "axios";
 import React, { useContext, useEffect, useState } from "react";
 
-interface DAddKeyModalProps {
+interface AddKeyModalProps {
   open: boolean;
   onCancel: (status?: boolean) => void;
 }
 
-const AddKeyModal: React.FC<DAddKeyModalProps> = ({ onCancel, open }) => {
-  const [email, setEmail] = useState<string>("");
-  const [fullname, setFullName] = useState<string>("");
+const AddKeyModal: React.FC<AddKeyModalProps> = ({ onCancel, open }) => {
+  const [key, setKey] = useState<string>("");
   const [submitting, setSubmitting] = useState(false);
   const authContext = useContext(AuthContext);
-  const apiUtil = new APIUtil();
 
   const handleCancel = () => {
-    setEmail("null");
-    setFullName("");
+    setKey("null");
     onCancel();
   };
 
   const handleSubmit = async () => {
-    try {
-      setSubmitting(true);
-      if (!email || !fullname) {
-        message.error("Please complete all fields");
-        return;
-      } else {
-        await apiUtil.teamService.addTeam({
-          fullname,
-          email,
-          user_role_description: "Account member",
-        });
-        authContext.refreshProfile();
-        message.success("Updated OpenAI key");
+    setSubmitting(true);
+    if (!key) {
+      message.error("Please complete all fields");
+      return;
+    } else {
+      const response = await authContext.updateKey(key);
+      if (response) {
         onCancel(true);
       }
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
-          }`
-        );
-      }
-      message.error("Unable to complete request");
-    } finally {
-      setSubmitting(false);
     }
   };
 
@@ -61,34 +39,23 @@ const AddKeyModal: React.FC<DAddKeyModalProps> = ({ onCancel, open }) => {
     <Modal
       title={
         <div className="flex items-center gap-x-2 text-foreground">
-          Add team member
+          Add OpenAI key
         </div>
       }
       open={open}
       onCancel={handleCancel}
-      width={400}
+      width={600}
       footer={null}
     >
       <div className="flex flex-col gap-y-10 h-full items-center pt-10 w-11/12 mx-auto">
         <div className="flex flex-col w-full">
-          <span className=" text-foreground">Member name</span>
+          <span className=" text-foreground">OpenAI key</span>
           <InputField
-            placeHolder={"Member name"}
-            type={"text"}
-            value={fullname}
-            name={"member_name"}
-            onChange={(e) => setFullName(e.target.value)}
-          />
-        </div>
-
-        <div className="flex flex-col w-full">
-          <span className=" text-foreground">Member email</span>
-          <InputField
-            placeHolder={"email@member.com"}
-            type={"text"}
-            value={email}
-            name={"member_email"}
-            onChange={(e) => setEmail(e.target.value)}
+            placeHolder={"OpenAI key "}
+            type={"password"}
+            value={key}
+            name={"open_ai_key"}
+            onChange={(e) => setKey(e.target.value)}
           />
         </div>
 

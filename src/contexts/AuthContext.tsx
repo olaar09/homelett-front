@@ -17,7 +17,7 @@ interface IAuthContext {
   refreshDataSource: () => Promise<void>;
   clearUser: () => Promise<void>;
   refreshProfile: () => Promise<void>;
-  updateKey: (key: string) => Promise<void>;
+  updateKey: (key: string) => Promise<any>;
   currentUser: IAuthRequest | null;
   authenticated: boolean;
   loading: boolean;
@@ -81,6 +81,10 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     try {
       setLoadingOpenAIKey(true);
       await apiService.integrationsService.updateOpenAIKey(key);
+      await refreshProfile();
+      message.success("Updated OpenAI key");
+
+      return true;
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error);
@@ -91,6 +95,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
       }
     } finally {
       setLoadingOpenAIKey(false);
+      return false;
     }
   };
 
