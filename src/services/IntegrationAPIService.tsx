@@ -10,8 +10,8 @@ class IntegrationAPIService {
 
   async updateOpenAIKey(token: string): Promise<any> {
     try {
-      return await this.apiService.put("/integration/openai", {
-        token: token,
+      return await this.apiService.put("/integrations/openai", {
+        key: token,
       });
     } catch (error) {
       throw error;
