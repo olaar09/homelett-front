@@ -9,6 +9,15 @@ class TeamAPIService {
     this.apiService = apiService;
   }
 
+  async deleteMember(id: any): Promise<any> {
+    try {
+      await this.apiService.delete(`/teams`, { member_id: id });
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async addTeam(data: any): Promise<any> {
     try {
       await this.apiService.post("/teams", data);

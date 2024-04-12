@@ -19,10 +19,13 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import Meta from "antd/es/card/Meta";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import AddTeamModal from "./components/AddTeamModal";
+import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
+import { AxiosError } from "axios";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const apiUtils = new APIUtil();
 
   const {
@@ -53,6 +56,27 @@ const SavedTeamMembers = () => {
       return list;
     } catch (error) {
       message.error("unable to load data");
+    }
+  };
+
+  const handleDeleteConnection = async (teamMember: any) => {
+    try {
+      setLoading(true);
+      await apiUtils.teamService.deleteMember(teamMember.id);
+      refreshTeam();
+      setLoading(false);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+
+        message.error(
+          `${error?.response?.data?.message ?? "Unable to complete request"}`
+        );
+      } else {
+        message.error("Unable to delete member");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -139,6 +163,9 @@ const SavedTeamMembers = () => {
                             description="Are you sure to delete this member?"
                             okText="Yes"
                             cancelText="No"
+                            onConfirm={() =>
+                              handleDeleteConnection(teamMemberItem)
+                            }
                           >
                             <Button
                               className="text-red-500"

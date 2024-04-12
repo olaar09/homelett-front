@@ -56,9 +56,10 @@ class APIService {
     });
   }
 
-  public async delete<T>(endpoint: string): Promise<T> {
+  public async delete<T>(endpoint: string, data: Object): Promise<T> {
     return await this.request<T>(endpoint, {
       method: "DELETE",
+      data: data,
     });
   }
 
