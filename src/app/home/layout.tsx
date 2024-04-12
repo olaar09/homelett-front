@@ -62,7 +62,7 @@ const Nav: React.FC<any> = ({ children }) => {
     setOpenAIKey(true);
   };
 
-  const closeOpenAiKey = (status = false) => {
+  const closeOpenAiKey = () => {
     setOpenAIKey(false);
   };
 

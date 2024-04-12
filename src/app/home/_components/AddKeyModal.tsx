@@ -50,7 +50,7 @@ const AddKeyModal: React.FC<AddKeyModalProps> = ({ onCancel, open }) => {
         <div className="flex flex-col w-full gap-y-2">
           <span className=" text-foreground">OpenAI key</span>
           <InputField
-            placeHolder={"OpenAI key "}
+            placeHolder={"OpenAI key"}
             type={"password"}
             value={key}
             name={"open_ai_key"}

@@ -94,9 +94,9 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
           `${error?.response?.data?.message ?? "Unable to update key"}`
         );
       }
+      return false;
     } finally {
       setLoadingOpenAIKey(false);
-      return false;
     }
   };
 
