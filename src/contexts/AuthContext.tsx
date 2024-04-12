@@ -91,7 +91,11 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         console.log(error);
 
         message.error(
-          `${error?.response?.data?.message ?? "Unable to update key"}`
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to update key"
+          }`
         );
       }
       return false;
