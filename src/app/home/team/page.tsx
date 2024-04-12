@@ -69,13 +69,22 @@ const SavedTeamMembers = () => {
             <Icon
               icon={"eos-icons:three-dots-loading"}
               className=" text-6xl text-foreground"
-            ></Icon>
+            />
           </div>
         </div>
       )}
 
       {teamList && teamList.length > 0 && (
-        <Spin spinning={loadingTeam} className="bg-background-thin">
+        <Spin
+          indicator={
+            <Icon
+              icon={"eos-icons:three-dots-loading"}
+              className=" text-8xl text-foreground"
+            />
+          }
+          spinning={loadingTeam}
+          className="bg-background-thin"
+        >
           <div className="bg-background-thin min-h-screen">
             <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full bg-background-thin">
               <div className="flex flex-col">
