@@ -10,6 +10,7 @@ import { ChatContext } from "@/contexts/ChatContext";
 import APIUtil from "@/services/APIUtil";
 import SendQueryAnswerWorkflow from "../WorkFlowManage/SendQueryAnswerWorkflow";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
+import QueryDisplay from "../QueryDisplay";
 
 const actionTypes = [
   {
@@ -61,7 +62,17 @@ export const ViewSelector = ({
   const closeWorkflowModal = () => {
     setIsModalVisible(false);
   };
+
+  const closeQueryModal = () => {
+    setIsQueryModalVisible(false);
+  };
+
+  const handleOpenQueryModal = () => {
+    setIsQueryModalVisible(true);
+  };
+
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isQueryModalVisible, setIsQueryModalVisible] = useState(false);
 
   const mapOptions = viewTypes.map((vw) => {
     return {
@@ -82,7 +93,7 @@ export const ViewSelector = ({
         handleShowWorkflowModal();
         break;
       case "view_sql":
-        message.warning("Not available, coming soon");
+        handleOpenQueryModal();
         break;
       default:
         break;
@@ -94,6 +105,11 @@ export const ViewSelector = ({
     "lets-icons:chart-alt";
   return (
     <>
+      <QueryDisplay
+        query={chatHistoryItem.datasource_query}
+        open={isQueryModalVisible}
+        onClose={closeQueryModal}
+      />
       <SendQueryAnswerWorkflow
         chatHistoryItem={chatHistoryItem}
         open={isModalVisible}

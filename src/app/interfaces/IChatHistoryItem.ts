@@ -4,6 +4,7 @@ export interface IChatHistoryItem {
   type: string;
   chat_id: string;
   ai_explanation: string;
+  datasource_query: string;
   extra?: {
     current?: string;
     bar_chart?: { x: any; y: any };
