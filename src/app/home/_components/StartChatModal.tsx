@@ -61,7 +61,7 @@ const StartChatModal: React.FC<{
                     <span className="text-foreground text-xs py-1 px-2 rounded-xl">
                       <Icon
                         icon={
-                          loading && selectedItem.id == item.id
+                          loading && selectedItem?.id == item.id
                             ? "eos-icons:loading"
                             : "ep:arrow-right"
                         }
