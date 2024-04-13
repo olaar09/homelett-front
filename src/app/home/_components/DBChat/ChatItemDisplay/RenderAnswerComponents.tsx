@@ -38,9 +38,9 @@ export const TextContentDisplay = ({
   content: string;
 }) => {
   return (
-    <div className="flex flex-col gap-y-3 my-4 hover:bg-gray-100 cursor-pointer px-2 rounded-lg py-2 w-full">
+    <div className="flex flex-col gap-y-3 my-4 cursor-pointer px-2 rounded-lg py-2 w-full">
       <Header avatar={avatar} senderName={senderName} />
-      <span className=" ext-[0.85rem]">{content}</span>
+      <span className=" text-[0.85rem]">{content}</span>
     </div>
   );
 };
@@ -193,7 +193,7 @@ export const ContentDisplay = ({
 
   return (
     <div className=" relative w-full">
-      <div className="absolute -top-7 right-1 flex items-center gap-x-3 z-30">
+      <div className="absolute -top-24 right-1 flex items-center gap-x-3 z-30">
         <ViewSelector
           onClick={onChangeDisplay}
           selectedView={viewKey}
