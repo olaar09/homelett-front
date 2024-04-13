@@ -115,7 +115,7 @@ const SavedTeamMembers = () => {
             <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full bg-background-thin">
               <div className="flex flex-col">
                 <HeaderItem
-                  icon={"ant-design:team-outlined"}
+                  icon={"octicon:workflow-16"}
                   title={`Workflows `}
                   withBg={false}
                 />
@@ -137,63 +137,52 @@ const SavedTeamMembers = () => {
 
             <div className="w-full mx-auto mt-10 bg-background-thin">
               <section className=" flex items-center w-full  px-8 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
-                {(workflowList ?? []).map((teamMemberItem: any) => (
-                  <div className="w-4/12 ">
-                    <div className="mr-4 relative cursor-pointer hoverContainer transition-all">
-                      <Card
-                        className="rounded-2xl h-40 relative cursor-pointer"
-                        bordered={false}
-                      >
-                        <Meta
-                          title={
-                            <div className="flex items-center gap-x-2">
-                              <Icon icon={"mdi:user"} />
-                              <span> {teamMemberItem.fullname}</span>
-                            </div>
-                          }
-                          description={
-                            teamMemberItem.is_owner === 1
-                              ? "Administrator"
-                              : "Team member"
-                          }
-                        />
-                      </Card>
-                      <div className=" absolute top-3 right-4 z-10 hoverItem transition-all duration-150">
-                        <div className=" flex items-center -gap-x-2 transition-all duration-300">
-                          <Popconfirm
-                            title="Delete the member?"
-                            description="Are you sure to delete this member?"
-                            okText="Yes"
-                            cancelText="No"
-                            onConfirm={() =>
-                              handleDeleteConnection(teamMemberItem)
+                {(workflowList ?? []).map((workflow: any) => {
+                  const fromWorkflow = "";
+                  const toDatasource = "";
+                  return (
+                    <div className="w-4/12 ">
+                      <div className="mr-4 relative cursor-pointer hoverContainer transition-all">
+                        <Card
+                          className="rounded-2xl h-40 relative cursor-pointer"
+                          bordered={false}
+                        >
+                          <Meta
+                            title={
+                              <div className="flex items-center gap-x-2">
+                                <Icon icon={"mdi:user"} />
+                                <span> {workflow.title}</span>
+                              </div>
                             }
-                          >
-                            <Button
-                              className="text-red-500"
-                              icon={<DeleteOutlined />}
-                              type="link"
-                            />
-                          </Popconfirm>
+                            description={workflow.description}
+                          />
+                        </Card>
+                        <div className=" absolute top-3 right-4 z-10 hoverItem transition-all duration-150">
+                          <div className=" flex items-center -gap-x-2 transition-all duration-300">
+                            <Popconfirm
+                              title="Delete the member?"
+                              description="Are you sure to delete this member?"
+                              okText="Yes"
+                              cancelText="No"
+                              onConfirm={() => handleDeleteConnection(workflow)}
+                            >
+                              <Button
+                                className="text-red-500"
+                                icon={<DeleteOutlined />}
+                                type="link"
+                              />
+                            </Popconfirm>
+                          </div>
+                        </div>
+                        <div className="absolute bottom-3 right-2 z-10">
+                          <Tag bordered={false} color={"geekblue"}>
+                            Active
+                          </Tag>
                         </div>
                       </div>
-                      <div className="absolute bottom-3 right-2 z-10">
-                        <Tag
-                          bordered={false}
-                          color={
-                            teamMemberItem.is_activated === 1
-                              ? "geekblue"
-                              : "volcano"
-                          }
-                        >
-                          {teamMemberItem.is_activated === 1
-                            ? "Active"
-                            : "Not active"}
-                        </Tag>
-                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </section>
             </div>
           </div>

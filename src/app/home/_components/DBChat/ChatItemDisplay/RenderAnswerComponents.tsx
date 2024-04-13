@@ -13,7 +13,7 @@ import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 
 const actionTypes = [
   {
-    icon: "octicon:tools-16",
+    icon: "octicon:workflow-16",
     key: "workflow",
     label: "Create workflow",
   },
@@ -49,12 +49,10 @@ export const ViewSelector = ({
   onClick,
   selectedView,
   chatHistoryItem,
-  datasource,
 }: {
   onClick: (name: string) => void;
   selectedView: string | null;
   chatHistoryItem: IChatHistoryItem;
-  datasource: IDataSourceItem;
 }) => {
   const handleShowWorkflowModal = () => {
     setIsModalVisible(true);
