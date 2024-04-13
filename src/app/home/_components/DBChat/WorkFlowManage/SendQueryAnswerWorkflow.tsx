@@ -78,6 +78,7 @@ const SendQueryAnswerWorkflow = ({
         chat_history_item_id: chatHistoryItem.id,
       });
 
+      message.success("New workflow created successfully");
       onClose();
     } catch (error) {
       if (error instanceof AxiosError) {

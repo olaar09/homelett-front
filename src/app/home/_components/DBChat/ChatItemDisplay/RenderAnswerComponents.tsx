@@ -98,7 +98,6 @@ export const ViewSelector = ({
     <>
       <SendQueryAnswerWorkflow
         chatHistoryItem={chatHistoryItem}
-        datasource={datasource}
         open={isModalVisible}
         onClose={closeWorkflowModal}
       />
