@@ -12,11 +12,14 @@ const StartChatModal: React.FC<{
   onClickItem: (item: IDataSourceItem) => void;
   onClose: (needRefresh: boolean) => void;
 }> = ({ visible, onClose, datasources, onClickItem, loading }) => {
+  const [selectedItem, setSelectedItem] = useState<any>(null);
+
   const handleOk = () => onClose(false);
   const handleCancel = () => onClose(false);
   const title = "Start a new chat";
 
   const handleOnClickItem = (item: IDataSourceItem) => {
+    setSelectedItem(item);
     onClickItem(item);
   };
 
@@ -57,7 +60,11 @@ const StartChatModal: React.FC<{
 
                     <span className="text-foreground text-xs py-1 px-2 rounded-xl">
                       <Icon
-                        icon={loading ? "eos-icons:loading" : "ep:arrow-right"}
+                        icon={
+                          loading && selectedItem.id == item.id
+                            ? "eos-icons:loading"
+                            : "ep:arrow-right"
+                        }
                         className="text-xl w-10"
                       />
                     </span>
