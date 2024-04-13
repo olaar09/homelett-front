@@ -13,6 +13,9 @@ import {
 import { Icon } from "@iconify/react";
 import ACButton from "@/app/components/Button";
 import { AuthContext } from "@/contexts/AuthContext";
+import APIUtil from "@/services/APIUtil";
+import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
+import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 const { Step } = Steps;
 const { Option } = Select;
 
@@ -25,8 +28,10 @@ const workflowInterval = [
 ];
 const SendQueryAnswerWorkflow = ({
   open,
+  chatHistoryItem,
   onClose,
 }: {
+  chatHistoryItem: IChatHistoryItem;
   open: boolean;
   onClose: () => void;
 }) => {
@@ -34,8 +39,10 @@ const SendQueryAnswerWorkflow = ({
   /*   const [isModalVisible, setIsModalVisible] = useState(false); */
   const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);
-
   const [selectedConnection, setSelectedConnection] = useState<any>(null);
+  const [selectedInterval, setSelectedInterval] = useState<any>(null);
+  const [workflowName, setWorkflowName] = useState<any>(null);
+  const apiUtil = new APIUtil();
 
   const handleOk = () => {
     onClose();
@@ -48,25 +55,33 @@ const SendQueryAnswerWorkflow = ({
     setCurrentStep(0); // Reset step on modal close if needed
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     setLoading(true);
-    // onClose();
-  };
+    try {
+      apiUtil.workflowService.createWorkflow({
+        interval: selectedInterval,
+        title: workflowName,
+        output_connection: selectedConnection.key,
+        chat_history_item_id: chatHistoryItem.id,
+      });
 
-  const prevStep = () => {
-    setCurrentStep(currentStep - 1);
+      onClose();
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   const workflowConnections = (authContext.dataSources ?? [])
     .filter((ds) => ds.source_type.category === "workflow")
     .map((wrk) => ({
-      key: wrk.name,
+      key: wrk.id,
       label: wrk.name,
       icon: <Icon icon={wrk.source_type.icon} />,
     }));
 
   const onConnectionSelected = (e: any) => {
-    const workflow = workflowConnections.find((wrk) => wrk.key === e.key);
+    const workflow = workflowConnections.find((wrk) => wrk.key == e.key);
     setSelectedConnection(workflow);
   };
   return (
@@ -85,6 +100,7 @@ const SendQueryAnswerWorkflow = ({
           className="mt-6"
         >
           <Step
+            active
             title="Name"
             description={
               <div className=" flex my-2 w-full -m-2">
@@ -101,6 +117,7 @@ const SendQueryAnswerWorkflow = ({
             }
           />
           <Step
+            active
             title="Workflow Interval"
             description={
               <div className=" flex my-2 w-full -m-2">
@@ -126,16 +143,17 @@ const SendQueryAnswerWorkflow = ({
             }
           />
           <Step
+            active
             title="Output"
             description={
               <div className=" flex my-2 w-full ">
                 <Dropdown
                   menu={{
-                    items: workflowConnections,
+                    items: workflowConnections as any,
                     onClick: onConnectionSelected,
                   }}
                 >
-                  <div className="flex items-center justify-between w-full pr-4">
+                  <div className="flex items-center justify-between w-full pr-4 cursor-pointer">
                     <div className="flex items-center gap-x-2">
                       {selectedConnection && selectedConnection?.icon}
                       <span>

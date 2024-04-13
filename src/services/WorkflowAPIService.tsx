@@ -11,11 +11,10 @@ class WorkflowAPIService {
   }
 
   async createWorkflow(data: {
-    datasourceId: string;
-    config: any;
+    interval: string;
     title: string;
-    description: string;
-    payload: any;
+    output_connection: any;
+    chat_history_item_id: any;
   }): Promise<any> {
     try {
       await this.apiService.post(`/workflows`, data);

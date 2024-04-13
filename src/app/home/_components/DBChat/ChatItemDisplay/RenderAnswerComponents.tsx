@@ -9,6 +9,7 @@ import PieChat from "@/app/components/RenderChat/RenderPieChat";
 import { ChatContext } from "@/contexts/ChatContext";
 import APIUtil from "@/services/APIUtil";
 import SendQueryAnswerWorkflow from "../WorkFlowManage/SendQueryAnswerWorkflow";
+import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 
 const actionTypes = [
   {
@@ -47,9 +48,13 @@ export const TextContentDisplay = ({
 export const ViewSelector = ({
   onClick,
   selectedView,
+  chatHistoryItem,
+  datasource,
 }: {
   onClick: (name: string) => void;
   selectedView: string | null;
+  chatHistoryItem: IChatHistoryItem;
+  datasource: IDataSourceItem;
 }) => {
   const handleShowWorkflowModal = () => {
     setIsModalVisible(true);
@@ -92,6 +97,8 @@ export const ViewSelector = ({
   return (
     <>
       <SendQueryAnswerWorkflow
+        chatHistoryItem={chatHistoryItem}
+        datasource={datasource}
         open={isModalVisible}
         onClose={closeWorkflowModal}
       />
@@ -190,7 +197,11 @@ export const ContentDisplay = ({
   return (
     <div className=" relative w-full">
       <div className="absolute -top-7 right-1 flex items-center gap-x-3 z-30">
-        <ViewSelector onClick={onChangeDisplay} selectedView={viewKey} />
+        <ViewSelector
+          onClick={onChangeDisplay}
+          selectedView={viewKey}
+          chatHistoryItem={chatHistoryItem}
+        />
       </div>
       <div>
         {viewKey === "table" && (
