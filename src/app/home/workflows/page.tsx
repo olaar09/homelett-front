@@ -138,8 +138,12 @@ const SavedTeamMembers = () => {
             <div className="w-full mx-auto mt-10 bg-background-thin">
               <section className=" flex items-center w-full  px-8 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
                 {(workflowList ?? []).map((workflow: any) => {
-                  const fromWorkflow = "";
-                  const toDatasource = "";
+                  const fromDatasource = authContext.dataSources?.find(
+                    (ds) => ds.id == workflow.datasource_id
+                  );
+                  const toWorkflow = authContext.dataSources?.find(
+                    (ds) => ds.id == workflow.connection_datasource_id
+                  );
                   return (
                     <div className="w-4/12 ">
                       <div className="mr-4 relative cursor-pointer hoverContainer transition-all">
@@ -149,8 +153,14 @@ const SavedTeamMembers = () => {
                         >
                           <Meta
                             title={
-                              <div className="flex items-center gap-x-2">
-                                <Icon icon={"mdi:user"} />
+                              <div className="flex items-center gap-x-4">
+                                <div className="flex items-center -gap-x-5">
+                                  <Icon
+                                    icon={fromDatasource!.source_type.icon}
+                                  />
+                                  <Icon icon={toWorkflow!.source_type.icon} />
+                                </div>
+
                                 <span> {workflow.title}</span>
                               </div>
                             }
