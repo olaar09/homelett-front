@@ -9,8 +9,8 @@ import { HeaderItem } from "../_components/PageHeaderItem";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Meta from "antd/es/card/Meta";
 import { DeleteOutlined } from "@ant-design/icons";
-import AddTeamModal from "./components/AddTeamModal";
 import { AxiosError } from "axios";
+import AddWorkflowModal from "./components/AddWorkflowModal";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -22,20 +22,20 @@ const SavedTeamMembers = () => {
     data: workflowList,
     error,
     loading: loadingWorkflows,
-    refresh: refreshTeam,
+    refresh: refreshWorkflow,
   } = useRequest(() => getWorkFlow(), {
     ready:
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
 
-  const handleAddTeam = () => {
+  const handleAddWorkflow = () => {
     setOpenAddModal(true);
   };
 
   const handleCloseTeam = (status = false) => {
     setOpenAddModal(false);
     if (status) {
-      refreshTeam();
+      refreshWorkflow();
     }
   };
 
@@ -53,7 +53,7 @@ const SavedTeamMembers = () => {
     try {
       setLoading(true);
       await apiUtils.teamService.deleteMember(teamMember.id);
-      refreshTeam();
+      refreshWorkflow();
       setLoading(false);
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -72,7 +72,7 @@ const SavedTeamMembers = () => {
 
   return (
     <>
-      <AddTeamModal open={openAddModal} onCancel={handleCloseTeam} />
+      <AddWorkflowModal open={openAddModal} onCancel={handleCloseTeam} />
       {(loadingWorkflows || !workflowList) && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
@@ -116,19 +116,19 @@ const SavedTeamMembers = () => {
               <div className="flex flex-col">
                 <HeaderItem
                   icon={"ant-design:team-outlined"}
-                  title={`Team members`}
+                  title={`Workflows `}
                   withBg={false}
                 />
                 <span className="text-xs text-foreground-secondary truncate w-52">
-                  Manage & add team members
+                  Manage & view workflows
                 </span>
               </div>
 
               <div className="flex items-center gap-x-7">
-                <div onClick={() => handleAddTeam()}>
+                <div onClick={() => handleAddWorkflow()}>
                   <HeaderItem
                     icon="gg:add"
-                    title="Add team member"
+                    title="Add  new workflow"
                     withBg={true}
                   />
                 </div>
