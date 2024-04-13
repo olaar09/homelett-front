@@ -11,6 +11,7 @@ class WorkflowAPIService {
   }
 
   async createWorkflow(data: {
+    interval_minutes: any;
     interval: string;
     title: string;
     output_connection: any;

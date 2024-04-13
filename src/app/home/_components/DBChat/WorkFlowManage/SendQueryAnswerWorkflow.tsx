@@ -22,11 +22,11 @@ const { Step } = Steps;
 const { Option } = Select;
 
 const workflowInterval = [
-  { key: "onchange", label: "On data change" },
-  { key: "5_min", label: "Every 5 minutes" },
-  { key: "30_min", label: "Every 30 minutes" },
-  { key: "hourly", label: "Every hour" },
-  { key: "daily", label: "Every day" },
+  { key: "onchange", label: "On data change", interval_min: 1 },
+  { key: "5_min", label: "Every 5 minutes", interval_min: 5 },
+  { key: "30_min", label: "Every 30 minutes", interval_min: 30 },
+  { key: "hourly", label: "Every hour", interval_min: 60 },
+  { key: "daily", label: "Every day", interval_min: 1140 },
 ];
 const SendQueryAnswerWorkflow = ({
   open,
@@ -58,9 +58,20 @@ const SendQueryAnswerWorkflow = ({
   };
 
   const onSubmit = async () => {
+    if (
+      !selectedConnection ||
+      !selectedInterval ||
+      !workflowName ||
+      workflowName.length < 1
+    ) {
+      return message.error(" All fields are required");
+    }
     setLoading(true);
     try {
       await apiUtil.workflowService.createWorkflow({
+        interval_minutes: workflowInterval.find(
+          (intr) => intr.key === selectedInterval
+        )!.interval_min,
         interval: selectedInterval,
         title: workflowName,
         output_connection: selectedConnection.key,
@@ -119,6 +130,7 @@ const SendQueryAnswerWorkflow = ({
                   <Form.Item label="">
                     <Input
                       autoFocus
+                      onChange={(e) => setWorkflowName(e.target.value)}
                       placeholder="Enter a name for your workflow"
                       className=" outline-none ring-0 border-0 h-12 shadow-0 focus:outline-none focus:border-0 focus:ring-0"
                     />
@@ -135,6 +147,7 @@ const SendQueryAnswerWorkflow = ({
                 <Form layout="vertical" className="w-full">
                   <Form.Item label="">
                     <Select
+                      onChange={(e) => setSelectedInterval(e)}
                       suffixIcon={
                         <Icon
                           className="text-foreground text-2xl opacity-60"
