@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import AddKeyModal from "./_components/AddKeyModal";
+import { Tag } from "antd";
 
 const NavMenu = ({
   title,
@@ -91,13 +92,19 @@ const Nav: React.FC<any> = ({ children }) => {
                   title="Workflows"
                 />
               </Link>
-              <Link className="w-full" href={"/home/board"}>
+              <div className="relative w-full">
                 <NavMenu
-                  path="/home/board"
+                  path="/home/api_keys"
                   icon={"fluent:pin-48-filled"}
                   title="Pin board"
                 />
-              </Link>
+                <Tag
+                  color="volcano"
+                  className={`absolute right-1 top-[12px] text-xs`}
+                >
+                  coming soon
+                </Tag>
+              </div>
 
               <Link className="w-full" href={"/home/connections"}>
                 <NavMenu
