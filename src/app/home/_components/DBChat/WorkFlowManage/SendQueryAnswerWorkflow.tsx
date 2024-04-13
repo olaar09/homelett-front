@@ -1,5 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Modal, Button, Steps, Form, Input, DatePicker, Select } from "antd";
+import {
+  Modal,
+  Button,
+  Steps,
+  Form,
+  Input,
+  DatePicker,
+  Select,
+  Dropdown,
+  Space,
+} from "antd";
 import { Icon } from "@iconify/react";
 import ACButton from "@/app/components/Button";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -25,8 +35,9 @@ const SendQueryAnswerWorkflow = ({
   const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  const [selectedConnection, setSelectedConnection] = useState<any>(null);
+
   const handleOk = () => {
-    console.log("Handle submission or navigation to next step here");
     onClose();
     setCurrentStep(0); // Reset step on modal close if needed
   };
@@ -46,6 +57,18 @@ const SendQueryAnswerWorkflow = ({
     setCurrentStep(currentStep - 1);
   };
 
+  const workflowConnections = (authContext.dataSources ?? [])
+    .filter((ds) => ds.source_type.category === "workflow")
+    .map((wrk) => ({
+      key: wrk.name,
+      label: wrk.name,
+      icon: <Icon icon={wrk.source_type.icon} />,
+    }));
+
+  const onConnectionSelected = (e: any) => {
+    const workflow = workflowConnections.find((wrk) => wrk.key === e.key);
+    setSelectedConnection(workflow);
+  };
   return (
     <>
       <Modal
@@ -105,8 +128,29 @@ const SendQueryAnswerWorkflow = ({
           <Step
             title="Output"
             description={
-              <div className=" flex my-2 w-full -m-2">
-                <Form layout="vertical" className="w-full">
+              <div className=" flex my-2 w-full ">
+                <Dropdown
+                  menu={{
+                    items: workflowConnections,
+                    onClick: onConnectionSelected,
+                  }}
+                >
+                  <div className="flex items-center justify-between w-full pr-4">
+                    <div className="flex items-center gap-x-2">
+                      {selectedConnection && selectedConnection?.icon}
+                      <span>
+                        {selectedConnection?.label ?? "Select connection"}
+                      </span>
+                    </div>
+
+                    <Icon
+                      className="text-foreground text-2xl opacity-60"
+                      icon="fluent:caret-down-20-filled"
+                    />
+                  </div>
+                </Dropdown>
+
+                {/*         <Form layout="vertical" className="w-full">
                   <Form.Item label="">
                     <Select
                       suffixIcon={
@@ -125,12 +169,12 @@ const SendQueryAnswerWorkflow = ({
                         ))}
                     </Select>
                   </Form.Item>
-                </Form>
+                </Form> */}
               </div>
             }
           />
         </Steps>
-        <div className="steps-content">
+        <div className="steps-content mt-8">
           <ACButton
             onClick={onSubmit}
             text={"Create new workflow"}
