@@ -9,6 +9,7 @@ import {
   Select,
   Dropdown,
   Space,
+  message,
 } from "antd";
 import { Icon } from "@iconify/react";
 import ACButton from "@/app/components/Button";
@@ -16,6 +17,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import APIUtil from "@/services/APIUtil";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
+import { AxiosError } from "axios";
 const { Step } = Steps;
 const { Option } = Select;
 
@@ -58,7 +60,7 @@ const SendQueryAnswerWorkflow = ({
   const onSubmit = async () => {
     setLoading(true);
     try {
-      apiUtil.workflowService.createWorkflow({
+      await apiUtil.workflowService.createWorkflow({
         interval: selectedInterval,
         title: workflowName,
         output_connection: selectedConnection.key,
@@ -67,6 +69,15 @@ const SendQueryAnswerWorkflow = ({
 
       onClose();
     } catch (error) {
+      if (error instanceof AxiosError) {
+        message.error(
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.response ??
+            "Unable to complete request"
+          }`
+        );
+      }
     } finally {
       setLoading(false);
     }
