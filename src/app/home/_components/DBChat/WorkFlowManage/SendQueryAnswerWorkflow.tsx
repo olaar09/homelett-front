@@ -1,29 +1,45 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Button, Steps, Form, Input, DatePicker, Select } from "antd";
+import { Icon } from "@iconify/react";
+import ACButton from "@/app/components/Button";
+import { AuthContext } from "@/contexts/AuthContext";
 const { Step } = Steps;
 const { Option } = Select;
 
-const SendQueryAnswerWorkflow = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+const workflowInterval = [
+  { key: "onchange", label: "On data change" },
+  { key: "5_min", label: "Every 5 minutes" },
+  { key: "30_min", label: "Every 30 minutes" },
+  { key: "hourly", label: "Every hour" },
+  { key: "daily", label: "Every day" },
+];
+const SendQueryAnswerWorkflow = ({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) => {
+  const authContext = useContext(AuthContext);
+  /*   const [isModalVisible, setIsModalVisible] = useState(false); */
   const [currentStep, setCurrentStep] = useState(0);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
+  const [loading, setLoading] = useState(false);
 
   const handleOk = () => {
     console.log("Handle submission or navigation to next step here");
-    setIsModalVisible(false);
+    onClose();
     setCurrentStep(0); // Reset step on modal close if needed
   };
 
   const handleCancel = () => {
-    setIsModalVisible(false);
+    setLoading(false);
+    onClose();
     setCurrentStep(0); // Reset step on modal close if needed
   };
 
-  const nextStep = () => {
-    setCurrentStep(currentStep + 1);
+  const onSubmit = () => {
+    setLoading(true);
+    // onClose();
   };
 
   const prevStep = () => {
@@ -32,64 +48,96 @@ const SendQueryAnswerWorkflow = () => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Open Modal with Steps
-      </Button>
       <Modal
-        title="Step Modal"
-        visible={isModalVisible}
+        title="Setup workflow"
+        open={open}
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
       >
-        <Steps current={currentStep} direction="vertical">
-          <Step title="Title" description="Enter the title." />
-          <Step title="Date & Time" description="Select date and time." />
-          <Step title="Output" description="Select a platform group." />
+        <Steps
+          size="small"
+          current={currentStep}
+          direction="vertical"
+          className="mt-6"
+        >
+          <Step
+            title="Name"
+            description={
+              <div className=" flex my-2 w-full -m-2">
+                <Form layout="vertical" className="w-full">
+                  <Form.Item label="">
+                    <Input
+                      autoFocus
+                      placeholder="Enter a name for your workflow"
+                      className=" outline-none ring-0 border-0 h-12 shadow-0 focus:outline-none focus:border-0 focus:ring-0"
+                    />
+                  </Form.Item>
+                </Form>
+              </div>
+            }
+          />
+          <Step
+            title="Workflow Interval"
+            description={
+              <div className=" flex my-2 w-full -m-2">
+                <Form layout="vertical" className="w-full">
+                  <Form.Item label="">
+                    <Select
+                      suffixIcon={
+                        <Icon
+                          className="text-foreground text-2xl opacity-60"
+                          icon="fluent:caret-down-20-filled"
+                        />
+                      }
+                      placeholder="Select flow interval"
+                      className="focus:outline-none focus:border-0 focus:ring-0  outline-none ring-0 border-0"
+                    >
+                      {workflowInterval.map((wrk) => (
+                        <Option value={wrk.key}>{wrk.label}</Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                </Form>
+              </div>
+            }
+          />
+          <Step
+            title="Output"
+            description={
+              <div className=" flex my-2 w-full -m-2">
+                <Form layout="vertical" className="w-full">
+                  <Form.Item label="">
+                    <Select
+                      suffixIcon={
+                        <Icon
+                          className="text-foreground text-2xl opacity-60"
+                          icon="fluent:caret-down-20-filled"
+                        />
+                      }
+                      placeholder="Select output connection"
+                      className="focus:outline-none focus:border-0 focus:ring-0  outline-none ring-0 border-0"
+                    >
+                      {(authContext.dataSources ?? [])
+                        .filter((ds) => ds.source_type.category === "workflow")
+                        .map((wrk) => (
+                          <Option value={wrk.id}>{wrk.name}</Option>
+                        ))}
+                    </Select>
+                  </Form.Item>
+                </Form>
+              </div>
+            }
+          />
         </Steps>
         <div className="steps-content">
-          {currentStep === 0 && (
-            <Form layout="vertical">
-              <Form.Item label="Title">
-                <Input placeholder="Enter title" />
-              </Form.Item>
-            </Form>
-          )}
-          {currentStep === 1 && (
-            <Form layout="vertical">
-              <Form.Item label="Date & Time">
-                <DatePicker showTime placeholder="Select time" />
-              </Form.Item>
-            </Form>
-          )}
-          {currentStep === 2 && (
-            <Form layout="vertical">
-              <Form.Item label="Output">
-                <Select placeholder="Select a platform group">
-                  <Option value="platform1">Platform 1</Option>
-                  <Option value="platform2">Platform 2</Option>
-                  {/* Add more platforms as needed */}
-                </Select>
-              </Form.Item>
-            </Form>
-          )}
-        </div>
-        <div className="steps-action">
-          {currentStep < 2 && (
-            <Button type="primary" onClick={() => nextStep()}>
-              Next
-            </Button>
-          )}
-          {currentStep === 2 && (
-            <Button type="primary" onClick={handleOk}>
-              Done
-            </Button>
-          )}
-          {currentStep > 0 && (
-            <Button style={{ margin: "0 8px" }} onClick={() => prevStep()}>
-              Previous
-            </Button>
-          )}
+          <ACButton
+            onClick={onSubmit}
+            text={"Create new workflow"}
+            type={"button"}
+            loading={loading}
+            children={undefined}
+          />
         </div>
       </Modal>
     </>

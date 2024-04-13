@@ -51,18 +51,14 @@ export const ViewSelector = ({
   onClick: (name: string) => void;
   selectedView: string | null;
 }) => {
-  const oClickAction = (action: string) => {
-    switch (action) {
-      case "workflow":
-        message.warning("Not available, coming soon");
-        break;
-      case "view_sql":
-        message.warning("Not available, coming soon");
-        break;
-      default:
-        break;
-    }
+  const handleShowWorkflowModal = () => {
+    setIsModalVisible(true);
   };
+
+  const closeWorkflowModal = () => {
+    setIsModalVisible(false);
+  };
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const mapOptions = viewTypes.map((vw) => {
     return {
@@ -77,12 +73,28 @@ export const ViewSelector = ({
     };
   });
 
+  const oClickAction = (action: string) => {
+    switch (action) {
+      case "workflow":
+        handleShowWorkflowModal();
+        break;
+      case "view_sql":
+        message.warning("Not available, coming soon");
+        break;
+      default:
+        break;
+    }
+  };
+
   const selectedViewIcon =
     viewTypes.find((vt) => vt.key === selectedView)?.icon ??
     "lets-icons:chart-alt";
   return (
     <>
-      {/*    <SendQueryAnswerWorkflow /> */}
+      <SendQueryAnswerWorkflow
+        open={isModalVisible}
+        onClose={closeWorkflowModal}
+      />
       <div className="absolute  right-1 flex items-center gap-x-2">
         {actionTypes.map((view, i) => (
           <Tooltip key={i} title={view.label}>

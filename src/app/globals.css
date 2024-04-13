@@ -173,3 +173,15 @@ html {
   background-color: rgb(var(--background-rgb)) !important;
   color: rgb(var(--primary-rgb)) !important;
 }
+
+.ant-select-focused .ant-select-selector,
+.ant-select-selector:focus,
+.ant-select-selector:active,
+.ant-select-open .ant-select-selector {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+.ant-select-selector {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
