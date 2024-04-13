@@ -32,6 +32,15 @@ class WorkflowAPIService {
       throw error;
     }
   }
+
+  async deleteWorkflow(id: any): Promise<{ data: any[] }> {
+    try {
+      const response = await this.apiService.delete(`/workflows/${id}`, {});
+      return response as { data: any[] };
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default WorkflowAPIService;

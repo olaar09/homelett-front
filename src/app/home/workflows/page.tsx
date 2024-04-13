@@ -49,10 +49,10 @@ const SavedTeamMembers = () => {
     }
   };
 
-  const handleDeleteConnection = async (teamMember: any) => {
+  const handleDeleteWorkflow = async (workflow: any) => {
     try {
       setLoading(true);
-      await apiUtils.teamService.deleteMember(teamMember.id);
+      await apiUtils.workflowService.deleteWorkflow(workflow.id);
       refreshWorkflow();
       setLoading(false);
     } catch (error) {
@@ -60,10 +60,14 @@ const SavedTeamMembers = () => {
         console.log(error);
 
         message.error(
-          `${error?.response?.data?.message ?? "Unable to complete request"}`
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
+          }`
         );
       } else {
-        message.error("Unable to delete member");
+        message.error("Unable to delete workflow");
       }
     } finally {
       setLoading(false);
@@ -174,7 +178,7 @@ const SavedTeamMembers = () => {
                               description="Are you sure to delete this member?"
                               okText="Yes"
                               cancelText="No"
-                              onConfirm={() => handleDeleteConnection(workflow)}
+                              onConfirm={() => handleDeleteWorkflow(workflow)}
                             >
                               <Button
                                 className="text-red-500"
