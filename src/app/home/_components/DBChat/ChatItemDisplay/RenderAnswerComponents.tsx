@@ -208,8 +208,8 @@ export const ContentDisplay = ({
   };
 
   return (
-    <div className=" relative w-full">
-      <div className="absolute -top-24 right-1 flex items-center gap-x-3 z-30">
+    <div className="  w-full">
+      <div className="absolute top-10 right-1 flex items-center gap-x-3 z-30">
         <ViewSelector
           onClick={onChangeDisplay}
           selectedView={viewKey}

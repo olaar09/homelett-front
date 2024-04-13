@@ -93,7 +93,7 @@ const RenderAnswer: React.FC<RenderAnswerProps> = ({
     </div>
   );
 
-  return <div className="flex flex-col items-center w-full">{ui}</div>;
+  return <div className="flex flex-col items-center w-full relative">{ui}</div>;
 };
 
 export default RenderAnswer;
