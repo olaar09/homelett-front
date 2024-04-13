@@ -160,9 +160,13 @@ const SavedTeamMembers = () => {
                               <div className="flex items-center gap-x-4">
                                 <div className="flex items-center -gap-x-5">
                                   <Icon
-                                    icon={fromDatasource!.source_type.icon}
+                                    icon={
+                                      fromDatasource?.source_type.icon ?? ""
+                                    }
                                   />
-                                  <Icon icon={toWorkflow!.source_type.icon} />
+                                  <Icon
+                                    icon={toWorkflow?.source_type.icon ?? ""}
+                                  />
                                 </div>
 
                                 <span> {workflow.title}</span>
@@ -174,8 +178,8 @@ const SavedTeamMembers = () => {
                         <div className=" absolute top-3 right-4 z-10 hoverItem transition-all duration-150">
                           <div className=" flex items-center -gap-x-2 transition-all duration-300">
                             <Popconfirm
-                              title="Delete the member?"
-                              description="Are you sure to delete this member?"
+                              title="Delete the workflow?"
+                              description="Are you sure to delete this workflow?"
                               okText="Yes"
                               cancelText="No"
                               onConfirm={() => handleDeleteWorkflow(workflow)}
@@ -188,7 +192,13 @@ const SavedTeamMembers = () => {
                             </Popconfirm>
                           </div>
                         </div>
-                        <div className="absolute bottom-3 right-2 z-10">
+                        <div className="absolute bottom-3 left-0 right-0 z-10 flex items-center justify-between px-4">
+                          <div className="flex items-center gap-x-1">
+                            <Icon className="text-gray-700" icon={"ion:time"} />
+                            <span className="text-sm text-gray-700">
+                              {workflow.interval}
+                            </span>
+                          </div>
                           <Tag bordered={false} color={"geekblue"}>
                             Active
                           </Tag>
