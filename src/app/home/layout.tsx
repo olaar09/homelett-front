@@ -7,7 +7,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import AddKeyModal from "./_components/AddKeyModal";
-import { Tag } from "antd";
+import { Button, Tag } from "antd";
+import ACButton from "../components/Button";
 
 const NavMenu = ({
   title,
@@ -68,7 +69,15 @@ const Nav: React.FC<any> = ({ children }) => {
   };
 
   console.log(authContext.currentUser);
+  const billingMessage = authContext.currentUser?.billingActive
+    ? "You are currently on a SequelBase paid plan "
+    : "You have 7 days left on SequelBase free trial";
 
+  const buttonMessage = authContext.currentUser?.billingActive
+    ? "Billing active "
+    : "Upgrade now";
+
+  const isBillingActive = authContext.currentUser?.billingActive;
   return (
     <>
       <AddKeyModal open={openAIKey} onCancel={closeOpenAiKey} />
@@ -115,6 +124,24 @@ const Nav: React.FC<any> = ({ children }) => {
               </Link>
             </div>
             <div className="flex flex-grow  justify-end flex-col py-3 px-2 w-full ">
+              <div className=" h-32 border my-2 flex flex-col px-3 items-center justify-center gap-y-2">
+                <span className="block text-center text-sm">
+                  {billingMessage}
+                </span>
+
+                <Button type="link">
+                  <div className="flex items-center gap-x-2">
+                    <span>{buttonMessage}</span>
+                    <Icon
+                      icon={
+                        isBillingActive
+                          ? "lets-icons:check-fill"
+                          : "ph:arrow-square-out"
+                      }
+                    />
+                  </div>
+                </Button>
+              </div>
               <div className="flex flex-col border-t w-full py-5">
                 <Link className="w-full" href={"/home/profile"}>
                   <NavMenu

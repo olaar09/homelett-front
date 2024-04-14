@@ -5,4 +5,5 @@ export interface IAuthRequest {
   password: string;
   company?: string;
   is_open_ai?: number;
+  billingActive: boolean;
 }
