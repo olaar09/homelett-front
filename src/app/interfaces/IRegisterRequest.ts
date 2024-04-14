@@ -8,6 +8,7 @@ export interface IAuthRequest {
   freeTrialLeft: any;
   billingActive: boolean;
   billingCurrentPlan: IBilling;
+  paymentLink: string;
 }
 
 interface IBilling {

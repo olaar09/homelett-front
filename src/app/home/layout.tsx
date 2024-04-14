@@ -8,7 +8,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import AddKeyModal from "./_components/AddKeyModal";
 import { Button, Tag } from "antd";
-import ACButton from "../components/Button";
 
 const NavMenu = ({
   title,
@@ -68,8 +67,7 @@ const Nav: React.FC<any> = ({ children }) => {
     setOpenAIKey(false);
   };
 
-  console.log(authContext.currentUser);
-
+  const paymentLink = authContext.currentUser?.paymentLink;
   const isFreeTrial =
     authContext.currentUser?.billingCurrentPlan.name.toLowerCase() === "free";
   const isBillingActive = authContext.currentUser?.billingActive;
@@ -91,6 +89,12 @@ const Nav: React.FC<any> = ({ children }) => {
     : isBillingActive
     ? "lets-icons:check-fill"
     : "ph:arrow-square-out";
+
+  const handlePaymentLink = () => {
+    if (isFreeTrial || !isBillingActive) {
+      window.open(paymentLink, "_blank");
+    }
+  };
 
   return (
     <>
@@ -143,7 +147,7 @@ const Nav: React.FC<any> = ({ children }) => {
                   {billingMessage}
                 </span>
 
-                <Button type="link">
+                <Button onClick={handlePaymentLink} type="link">
                   <div className="flex items-center gap-x-2">
                     <span>{buttonMessage}</span>
                     <Icon icon={buttonIcon} />
