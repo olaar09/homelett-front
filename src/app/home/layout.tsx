@@ -69,15 +69,29 @@ const Nav: React.FC<any> = ({ children }) => {
   };
 
   console.log(authContext.currentUser);
-  const billingMessage = authContext.currentUser?.billingActive
-    ? "You are currently on a SequelBase paid plan "
-    : "You have 7 days left on SequelBase free trial";
 
-  const buttonMessage = authContext.currentUser?.billingActive
-    ? "Billing active "
-    : "Upgrade now";
-
+  const isFreeTrial =
+    authContext.currentUser?.billingCurrentPlan.name.toLowerCase() === "free";
   const isBillingActive = authContext.currentUser?.billingActive;
+
+  const billingMessage = isFreeTrial
+    ? `You have ${authContext.currentUser?.freeTrialLeft} days left on SequelBase free trial `
+    : isBillingActive
+    ? "You are currently on a SequelBase paid plan"
+    : "Your current plan is expired. Click below to renew";
+
+  const buttonMessage = isFreeTrial
+    ? "Upgrade now "
+    : isBillingActive
+    ? "Billing active "
+    : "Renewal required";
+
+  const buttonIcon = isFreeTrial
+    ? "ph:arrow-square-out"
+    : isBillingActive
+    ? "lets-icons:check-fill"
+    : "ph:arrow-square-out";
+
   return (
     <>
       <AddKeyModal open={openAIKey} onCancel={closeOpenAiKey} />
@@ -132,13 +146,7 @@ const Nav: React.FC<any> = ({ children }) => {
                 <Button type="link">
                   <div className="flex items-center gap-x-2">
                     <span>{buttonMessage}</span>
-                    <Icon
-                      icon={
-                        isBillingActive
-                          ? "lets-icons:check-fill"
-                          : "ph:arrow-square-out"
-                      }
-                    />
+                    <Icon icon={buttonIcon} />
                   </div>
                 </Button>
               </div>
