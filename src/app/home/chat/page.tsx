@@ -264,6 +264,7 @@ const Chat = () => {
         onClose={onCloseConnector}
         closable={false}
       />
+
       {currentAuth.currentUser &&
         !loadingChat &&
         !chat &&
@@ -280,6 +281,7 @@ const Chat = () => {
             </div>
           </div>
         )}
+
       {chat && (
         <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full">
           <div className="flex flex-col">
