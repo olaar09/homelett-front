@@ -264,6 +264,22 @@ const Chat = () => {
         onClose={onCloseConnector}
         closable={false}
       />
+      {currentAuth.currentUser &&
+        !loadingChat &&
+        !chat &&
+        !currentAuth.loading &&
+        !currentAuth.loadingSources &&
+        !loadingNewChat && (
+          <div className=" h-screen flex-col flex items-center justify-center">
+            <div onClick={onOpenStartChatModal}>
+              <HeaderItem
+                icon="ri:chat-new-fill"
+                title="Start new chat"
+                withBg={true}
+              />
+            </div>
+          </div>
+        )}
       {chat && (
         <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full">
           <div className="flex flex-col">
