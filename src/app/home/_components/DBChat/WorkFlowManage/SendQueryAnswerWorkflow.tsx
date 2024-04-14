@@ -85,7 +85,7 @@ const SendQueryAnswerWorkflow = ({
         message.error(
           `${
             error?.response?.data?.message ??
-            error?.response?.data?.response ??
+            error?.response?.data?.reason ??
             "Unable to complete request"
           }`
         );

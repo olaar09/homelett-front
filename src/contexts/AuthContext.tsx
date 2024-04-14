@@ -136,7 +136,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
           return;
         }
       } else {
-        if (path !== "/") {
+        if (path !== "/" && !path.includes("complete_invite")) {
           router.push(`/`);
           return;
         }
@@ -151,7 +151,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
       } else {
         message.error("Unable to fetch user");
       } */
-      if (path !== "/") {
+      if (path !== "/" && !path.includes("complete_invite")) {
         router.push(`/`);
         return;
       }

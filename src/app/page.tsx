@@ -55,7 +55,11 @@ export default function Home() {
         console.log(error);
 
         message.error(
-          `${error?.response?.data?.message ?? "Unable to complete request"}`
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
+          }`
         );
       } else {
         message.error("Unable to complete request");
@@ -124,8 +128,8 @@ export default function Home() {
 
         <div className="text-center mt-4  px-4 mx-auto w-11/12">
           <span className="font-bold text-foreground  text-xl lg:text-md xs:text:md">
-            AI Co-Pilot for engineering and business teams to get things done
-            faster!
+            Chat with any datasource for records, insights, and charts. Easily
+            connect to your apps and tools to create workflows.
           </span>
         </div>
 

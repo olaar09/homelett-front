@@ -5,10 +5,10 @@ export interface IAuthRequest {
   password: string;
   company?: string;
   is_open_ai?: number;
-  freeTrialLeft: any;
-  billingActive: boolean;
-  billingCurrentPlan: IBilling;
-  paymentLink: string;
+  freeTrialLeft?: any;
+  billingActive?: boolean;
+  billingCurrentPlan?: IBilling;
+  paymentLink?: string;
 }
 
 interface IBilling {

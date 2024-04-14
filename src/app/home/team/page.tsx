@@ -38,6 +38,16 @@ const SavedTeamMembers = () => {
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
 
+  const getTeamMembers = async (): Promise<any> => {
+    try {
+      const data = await apiUtils.teamService.getTeam();
+      const list = data.data.data;
+      return list;
+    } catch (error) {
+      message.error("unable to load data");
+    }
+  };
+
   const handleAddTeam = () => {
     setOpenAddModal(true);
   };
@@ -46,16 +56,6 @@ const SavedTeamMembers = () => {
     setOpenAddModal(false);
     if (status) {
       refreshTeam();
-    }
-  };
-
-  const getTeamMembers = async (): Promise<any> => {
-    try {
-      const data = await apiUtils.teamService.getTeam();
-      const list = data.data.data;
-      return list;
-    } catch (error) {
-      message.error("unable to load data");
     }
   };
 
@@ -150,9 +150,14 @@ const SavedTeamMembers = () => {
                             </div>
                           }
                           description={
-                            teamMemberItem.is_owner === 1
-                              ? "Administrator"
-                              : "Team member"
+                            <div className="flex flex-col gap-y-2">
+                              <span>{teamMemberItem.email}</span>
+                              <span>
+                                {teamMemberItem.is_owner === 1
+                                  ? "Administrator"
+                                  : "Team member"}{" "}
+                              </span>
+                            </div>
                           }
                         />
                       </Card>
