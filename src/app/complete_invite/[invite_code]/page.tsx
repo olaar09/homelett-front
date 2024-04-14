@@ -269,7 +269,7 @@ export default function CompleteInvite() {
             <div className="px-20 text-center my-6">
               <span className="">
                 Chat with any datasource for records, insights, and charts.
-                Easily connect to your apps and tools to create workflows.
+                Easily connect chats to your apps and tools to create workflows.
                 <span className="font-bold"></span>
               </span>
             </div>
