@@ -74,12 +74,12 @@ export const ViewSelector = ({
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isQueryModalVisible, setIsQueryModalVisible] = useState(false);
 
-  const mapOptions = viewTypes.map((vw) => {
+  const mapOptions = viewTypes.map((vw, i) => {
     return {
       key: vw.key,
       onClick: () => onClick(vw.key),
       label: (
-        <div className="flex items-center gap-x-2">
+        <div key={i} className="flex items-center gap-x-2">
           <Icon icon={vw.icon} />
           <span>{vw.label}</span>
         </div>
@@ -221,7 +221,7 @@ export const ContentDisplay = ({
           <Table
             dataSource={data}
             columns={columns}
-            rowKey="id"
+            rowKey={() => Math.random()}
             pagination={false}
             bordered
             size="small"

@@ -192,12 +192,14 @@ const AreaChart: React.FC<{
 
       {x && y && (
         <div id="chart">
-          <ReactApexChart
-            options={state.options}
-            series={state.series}
-            type="area"
-            height={350}
-          />
+          {typeof window !== "undefined" && (
+            <ReactApexChart
+              options={state.options}
+              series={state.series}
+              type="area"
+              height={350}
+            />
+          )}
         </div>
       )}
     </>

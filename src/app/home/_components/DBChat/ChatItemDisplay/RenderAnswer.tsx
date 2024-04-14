@@ -34,7 +34,10 @@ const RenderAnswer: React.FC<RenderAnswerProps> = ({
         };
       });
       ui.push(
-        <div className=" flex flex-col gap-y-3  hover:bg-gray-100 cursor-pointer px-2 rounded-lg py-2 w-full min-h-28">
+        <div
+          key={chatHistoryItem.id}
+          className=" flex flex-col gap-y-3  hover:bg-gray-100 cursor-pointer px-2 rounded-lg py-2 w-full min-h-28"
+        >
           <ContentDisplay
             data={parse}
             columns={columns}
@@ -84,7 +87,10 @@ const RenderAnswer: React.FC<RenderAnswerProps> = ({
   }
 
   ui.unshift(
-    <div className="flex items-center justify-start w-full mb-3">
+    <div
+      key={chatHistoryItem.ai_explanation}
+      className="flex items-center justify-start w-full mb-3"
+    >
       <TextContentDisplay
         avatar={avatar}
         senderName={senderName}

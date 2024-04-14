@@ -106,7 +106,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col h-screen items-center   overflow-y-clip pb-8">
-      <section className="flex-grow my-4 flex flex-col pt-4 items-center lg:w-5/12 mx-auto w-full mt-10">
+      <section className="flex-grow my-4 flex flex-col pt-4 items-center lg:w-6/12 mx-auto w-full mt-10">
         <div className="flex items-center gap-x-3   px-8">
           <div className="w-9 h-14 flex items-center">
             <Icon
@@ -119,15 +119,11 @@ export default function Home() {
           </span>
         </div>
 
-        <div className="text-center mt-4  px-4 mx-auto w-full">
+        <div className="text-center h-40 px-4 mx-auto w-full ">
           <HomeText />
-          {/*           <span className="font-bold text-foreground  text-5xl lg:text-md xs:text:md">
-            Chat with any datasource for{" "}
-            <span className=" text-primary"> insights </span>
-          </span> */}
         </div>
 
-        <div className="mt-12 w-10/12 mx-auto ">
+        <div className=" w-10/12 mx-auto  ">
           <Suspense fallback={<span>loading..</span>}>
             <GoogleLoginButton onSuccess={googleLogin} />
           </Suspense>
@@ -140,7 +136,7 @@ export default function Home() {
         </div>
 
         <form
-          className="lg:w-9/12 w-full mx-auto"
+          className="lg:w-8/12 w-full mx-auto"
           onSubmit={(e: any) => onSubmitLogin(e)}
           method="post"
         >

@@ -159,7 +159,9 @@ const SendQueryAnswerWorkflow = ({
                       className="focus:outline-none focus:border-0 focus:ring-0  outline-none ring-0 border-0"
                     >
                       {workflowInterval.map((wrk) => (
-                        <Option value={wrk.key}>{wrk.label}</Option>
+                        <Option key={wrk.key} value={wrk.key}>
+                          {wrk.label}
+                        </Option>
                       ))}
                     </Select>
                   </Form.Item>

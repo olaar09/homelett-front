@@ -1,28 +1,39 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const lastWords = ["insights.", "records", "charts.", "workflows."];
+const lastWords = [
+  "Fetch Records.",
+  "View Charts",
+  "Get Insights",
+  "Create Workflows.",
+];
 
-const typingVariants = {
-  hidden: { opacity: 0, x: 20 },
-  visible: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 100 } },
-};
-
-const HomeText = () => {
+const InsightText = () => {
   const [index, setIndex] = useState(0);
+  const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % lastWords.length);
-    }, 3000); // Change the last word every 10 seconds
+    // Clear characters first to avoid old characters showing during transition
+    setCharacters([]);
 
-    return () => clearInterval(interval);
-  }, []);
+    // Delay setting new characters to allow AnimatePresence to fully animate out old characters
+    const timeout = setTimeout(() => {
+      const newChars = [...lastWords[index].split("")]; // Split the current word into an array of characters
+      setCharacters(newChars);
+    }, 1000); // Increased delay to ensure smoother transitions
+
+    const nextWordTimeout = setTimeout(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % lastWords.length);
+    }, 1000 + lastWords[index].length * 150 + 3000); // Adjust time for all characters to animate plus a pause
+
+    return () => {
+      clearTimeout(timeout);
+      clearTimeout(nextWordTimeout);
+    };
+  }, [index]);
 
   return (
     <div
-      className="relative"
       style={{
         fontFamily: "Arial, sans-serif",
         fontSize: "24px",
@@ -30,22 +41,25 @@ const HomeText = () => {
         marginTop: "10px",
       }}
     >
-      <span className="font-bold text-foreground  text-5xl lg:text-md xs:text:md">
-        Chat with any datasource{" "}
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={index}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={typingVariants}
-          >
-            for <span className=" text-primary w-20">{lastWords[index]}</span>
-          </motion.span>
+      <span className=" text-5xl font-black"> Chat with any datasource to</span>
+      <br />
+      <span className="text-5xl font-black text-primary">
+        <AnimatePresence>
+          {characters.map((char, i) => (
+            <motion.span
+              key={`${index}-${i}`} // Use both index and character position to ensure unique keys
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10, transition: { duration: 0 } }} // Slightly longer duration for a smoother exit
+              transition={{ delay: i * 0.15, duration: 0.25 }} // Adjusted duration for a smoother enter
+            >
+              {char}
+            </motion.span>
+          ))}
         </AnimatePresence>
       </span>
     </div>
   );
 };
 
-export default HomeText;
+export default InsightText;
