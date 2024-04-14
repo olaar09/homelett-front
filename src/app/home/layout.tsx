@@ -142,7 +142,7 @@ const Nav: React.FC<any> = ({ children }) => {
               </Link>
             </div>
             <div className="flex flex-grow  justify-end flex-col py-3 px-2 w-full ">
-              <div className=" h-32 border my-2 flex flex-col px-3 items-center justify-center gap-y-2">
+              <div className=" h-32 border rounded-lg my-2 flex flex-col px-3 items-center justify-center gap-y-2">
                 <span className="block text-center text-sm">
                   {billingMessage}
                 </span>
