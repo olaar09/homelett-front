@@ -61,7 +61,31 @@ const BarChart: React.FC<{
     }
   }, [x, y]);
 
-  const state = {
+  type OptionsType = {
+    chart: {
+      type: any;
+      height: number;
+      zoom?: {
+        enabled: boolean;
+      };
+    };
+    dataLabels: {
+      enabled: boolean;
+    };
+    plotOptions: any;
+    stroke: any;
+    title: {
+      text: any;
+      align: any;
+    };
+
+    xaxis: any;
+    fill: any;
+    tooltip: any;
+    yaxis: any;
+  };
+
+  const state: { options: OptionsType; series: any } = {
     series: [
       {
         name: y,

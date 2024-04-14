@@ -140,6 +140,8 @@ const Chat = () => {
         message: userInput,
         type: "question",
         chat_id: chat!.id!,
+        ai_explanation: "",
+        datasource_query: "",
       });
       setDisplayedChats(newChats);
 
@@ -317,7 +319,7 @@ const Chat = () => {
         </section>
       )}
 
-      {chat && chat.datasource && (
+      {typeof window !== "undefined" && chat && chat.datasource && (
         <ChatContext.Provider
           value={{
             updateChatHistoryAtIndex,

@@ -69,7 +69,7 @@ const Nav: React.FC<any> = ({ children }) => {
 
   const paymentLink = authContext.currentUser?.paymentLink;
   const isFreeTrial =
-    authContext.currentUser?.billingCurrentPlan.name.toLowerCase() === "free";
+    authContext.currentUser?.billingCurrentPlan?.name.toLowerCase() === "free";
   const isBillingActive = authContext.currentUser?.billingActive;
 
   const billingMessage = isFreeTrial

@@ -9,6 +9,7 @@ export interface IAuthRequest {
   billingActive?: boolean;
   billingCurrentPlan?: IBilling;
   paymentLink?: string;
+  token?: string;
 }
 
 interface IBilling {

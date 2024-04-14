@@ -6,18 +6,17 @@ import React, { useContext, useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 const { Option } = Select;
 
-/* const data = [
-  { price: 31, date: "2023-01" },
-  { price: 40, date: "2023-02" },
-  { price: 70, date: "2023-03" },
-  { price: 32, date: "2023-04" },
-  { price: 67, date: "2023-05" },
-  { price: 31, date: "2023-06" },
-  { price: 70, date: "2023-07" },
-  { price: 53, date: "2023-08" },
-  { price: 60, date: "2023-09" },
-];
- */
+type OptionsType = {
+  chart: any;
+  labels: any;
+
+  responsive: any;
+  title: {
+    text: any;
+    align: any;
+  };
+};
+
 const PieChat: React.FC<{
   chatHistoryItem: IChatHistoryItem;
   title: string;
@@ -63,7 +62,7 @@ const PieChat: React.FC<{
     }
   }, [x]);
 
-  const state = {
+  const state: { options: OptionsType; series: any } = {
     series: yData ?? [],
     options: {
       chart: {

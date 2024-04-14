@@ -188,7 +188,7 @@ export const ContentDisplay = ({
     }
   };
 
-  const onUpdateDisplay = async (config: { key: string; value: string }) => {
+  const onUpdateDisplay = async (config: any) => {
     try {
       const newUpdate = {
         ...chatHistoryItem,

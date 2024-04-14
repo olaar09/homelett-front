@@ -18,6 +18,28 @@ const { Option } = Select;
   { price: 60, date: "2023-09" },
 ];
  */
+
+type OptionsType = {
+  chart: {
+    type: any;
+    height: number;
+    zoom?: {
+      enabled: boolean;
+    };
+  };
+  dataLabels: {
+    enabled: boolean;
+  };
+  stroke: any;
+  title: {
+    text: any;
+    align: any;
+  };
+
+  xaxis: any;
+  grid: any;
+};
+
 const LineChart: React.FC<{
   chatHistoryItem: IChatHistoryItem;
   title: string;
@@ -59,7 +81,7 @@ const LineChart: React.FC<{
     }
   }, [x]);
 
-  const state = {
+  const state: { options: OptionsType; series: any } = {
     series: [
       {
         name: y,

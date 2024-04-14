@@ -61,7 +61,37 @@ const AreaChart: React.FC<{
     }
   }, [x, y]);
 
-  const state = {
+  type OptionsType = {
+    chart: {
+      type: any;
+      height: number;
+      zoom: {
+        enabled: boolean;
+      };
+    };
+    dataLabels: {
+      enabled: boolean;
+    };
+    stroke: {
+      curve: any;
+    };
+    title: {
+      text: any;
+      align: any;
+    };
+    labels: any;
+    xaxis: {
+      type: "category";
+    };
+    yaxis: {
+      opposite: true;
+    };
+    legend: {
+      horizontalAlign: "left";
+    };
+  };
+
+  const state: { options: OptionsType; series: any } = {
     series: [
       {
         name: y,

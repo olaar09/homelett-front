@@ -10,13 +10,7 @@ const GoogleSignIn = () => {
 
   const firebaseContext = useContext(FirebaseContext);
 
-  const onContinueWithGMail = () => {
-    if (query.get("is_new") === "true") {
-      firebaseContext!.authService.signInWithGoogle();
-    } else {
-      firebaseContext!.authService.signInWithGoogle();
-    }
-  };
+  const onContinueWithGMail = () => {};
   return (
     <button
       className=" flex items-center  justify-center gap-x-3 bg-foreground-inverted text-xl rounded-3xl text-foreground py-3 px-6 w-full ring-1"

@@ -1,14 +1,7 @@
 "use client";
 
-import { Icon } from "@iconify/react";
-import Chip from "@/app/components/Chip";
-import HomeChatInput from "./_components/ChatInput";
 import { useContext, useState } from "react";
-import Drawer from "./_components/Drawer";
-import Link from "next/link";
-import StickyHead from "@/app/components/Header";
 import { AuthContext } from "@/contexts/AuthContext";
-import GroupCodeDrawer from "./_components/GroupCodeDrawer";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
 
