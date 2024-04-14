@@ -130,7 +130,6 @@ const SendQueryAnswerWorkflow = ({
                 <Form layout="vertical" className="w-full">
                   <Form.Item label="">
                     <Input
-                      autoFocus
                       onChange={(e) => setWorkflowName(e.target.value)}
                       placeholder="Enter a name for your workflow"
                       className=" outline-none ring-0 border-0 h-12 shadow-0 focus:outline-none focus:border-0 focus:ring-0"

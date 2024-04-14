@@ -10,7 +10,7 @@ const lastWords = [
 
 const InsightText = () => {
   const [index, setIndex] = useState(0);
-  const [characters, setCharacters] = useState([]);
+  const [characters, setCharacters] = useState<any>([]);
 
   useEffect(() => {
     // Clear characters first to avoid old characters showing during transition
@@ -48,7 +48,7 @@ const InsightText = () => {
       <br />
       <span className="text-5xl font-black text-primary">
         <AnimatePresence>
-          {characters.map((char, i) => (
+          {characters.map((char: any, i: any) => (
             <motion.span
               key={`${index}-${i}`} // Use both index and character position to ensure unique keys
               initial={{ opacity: 0, y: -10 }}
