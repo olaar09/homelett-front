@@ -14,6 +14,7 @@ import APIService from "@/services/APIService";
 import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
+import HomeText from "./components/HomeText";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -105,32 +106,25 @@ export default function Home() {
 
   return (
     <main className="flex flex-col h-screen items-center   overflow-y-clip pb-8">
-      <div className="fade-container h-1/6">
-        {/*  <div className="content  text-transparent">
-          Your content goes here. This div will have fading edges. Your content
-          goes here. This div will have fading edges. Your content goes here.
-          This div will have fading edges. Your content goes here. This div will
-          have fading edges. Your content goes here. This div will have fading
-          edges.
-        </div> */}
-      </div>
-
-      <section className="flex-grow my-4 flex flex-col pt-4 items-center lg:w-4/12 mx-auto w-full">
+      <section className="flex-grow my-4 flex flex-col pt-4 items-center lg:w-5/12 mx-auto w-full mt-10">
         <div className="flex items-center gap-x-3   px-8">
-          <div className="w-14 h-14">
+          <div className="w-9 h-14 flex items-center">
             <Icon
-              className="text-primary text-6xl opacity-60"
+              className="text-gray-60 text-4xl opacity-80"
               icon="simple-icons:poe"
             />
           </div>
-          <span className=" text-primary font-bold text-4xl">SequelBase</span>
+          <span className=" text-gray-600 font-bold text-3xl opacity-90">
+            SequelBase
+          </span>
         </div>
 
-        <div className="text-center mt-4  px-4 mx-auto w-11/12">
-          <span className="font-bold text-foreground  text-xl lg:text-md xs:text:md">
-            Chat with any datasource for records, insights, and charts. Easily
-            connect to your apps and tools to create workflows.
-          </span>
+        <div className="text-center mt-4  px-4 mx-auto w-full">
+          <HomeText />
+          {/*           <span className="font-bold text-foreground  text-5xl lg:text-md xs:text:md">
+            Chat with any datasource for{" "}
+            <span className=" text-primary"> insights </span>
+          </span> */}
         </div>
 
         <div className="mt-12 w-10/12 mx-auto ">
@@ -139,14 +133,14 @@ export default function Home() {
           </Suspense>
         </div>
 
-        <div className="my-4 gap-x-3 mt-9 flex items-center justify-between w-full px-8">
+        <div className="my-4 gap-x-3 mt-9 flex items-center justify-between w-9/12 mx-auto px-8">
           <div className=" border-b-[0.5px] border-foreground-secondary flex-1 "></div>
           <span className=" text-foreground-secondary text-sm">Or</span>
           <div className=" border-b-[0.5px] border-foreground-secondary flex-1"></div>
         </div>
 
         <form
-          className="w-full"
+          className="lg:w-9/12 w-full mx-auto"
           onSubmit={(e: any) => onSubmitLogin(e)}
           method="post"
         >
@@ -177,6 +171,13 @@ export default function Home() {
             />
           </div>
         </form>
+
+        <div className="text-center  px-4 mx-auto w-11/12 mt-14">
+          <span className="font-bold text-gray-500  text-md lg:text-md xs:text:md">
+            Chat with any datasource for records, insights, and charts. Easily
+            connect to your apps and tools to create workflows.
+          </span>
+        </div>
       </section>
 
       <section className="px-6 flex items-center justify-center ">
