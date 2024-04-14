@@ -41,7 +41,10 @@ const InsightText = () => {
         marginTop: "10px",
       }}
     >
-      <span className=" text-5xl font-black"> Chat with any datasource to</span>
+      <span className=" lg:text-5xl text-2xl font-black">
+        {" "}
+        Chat with any datasource to
+      </span>
       <br />
       <span className="text-5xl font-black text-primary">
         <AnimatePresence>
