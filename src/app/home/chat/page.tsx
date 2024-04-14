@@ -52,7 +52,6 @@ const Chat = () => {
   const prevDisplayedChats = usePrevious(displayedChats);
 
   const [openConnector, setOpenConnector] = useState<boolean>(false);
-  const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [openPrevChats, setOpenPrevChats] = useState(false);
   const [openConnectedDatasources, setOpenConnectedDatasources] =
@@ -130,14 +129,13 @@ const Chat = () => {
     }
   }, [currentAuth, currentAuth.loadingSources]);
 
-  const onSendChat = async (e: any) => {
+  const onSendChat = async (e: any, question: string) => {
     e.preventDefault();
 
     try {
       const newChats = [...(displayedChats ?? [])];
-      setUserInput("");
       newChats.push({
-        message: userInput,
+        message: question,
         type: "question",
         chat_id: chat!.id!,
         ai_explanation: "",
@@ -148,7 +146,7 @@ const Chat = () => {
       setLoading(true);
       const response = await apiUtil.chatService.askQuestion({
         chat_id: chat!.id,
-        question: userInput,
+        question: question,
         datasource_id: chat!.datasource.id!,
       });
 
@@ -171,10 +169,6 @@ const Chat = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const onChange = (ev: any) => {
-    setUserInput(ev.target?.value);
   };
 
   const onOpenConnector = () => {
@@ -341,9 +335,7 @@ const Chat = () => {
               disabled={loading || loadingChatHistory}
               busy={loading || loadingChatHistory}
               hasChat={false}
-              value={userInput}
               onSend={onSendChat}
-              onChange={onChange}
             />
           </div>
         </section>

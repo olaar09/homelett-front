@@ -12,103 +12,35 @@ type ChatInputProps = {
   datasource?: IDataSourceItem;
   busy: boolean;
   hasChat: boolean;
-  value?: string;
-  onSend: (e: any) => void;
-  onChange: ChangeEventHandler<HTMLTextAreaElement>;
+  onSend: (e: any, question: string) => void;
 };
 
-const ChatInput: React.FC<ChatInputProps> = ({
-  onChange,
-  onSend,
-  value,
-  datasource,
-  hasChat,
-  busy,
-  disabled,
-}) => {
-  const [placeholder, setPlaceholder] = useState<string>("");
-  const messages = [
-    "Summarize the last class",
-    "What was the topic of the first lecture",
-    "Possible exam questions from all lectures",
-  ];
+const ChatInput: React.FC<ChatInputProps> = ({ onSend, datasource, busy }) => {
+  const [value, setValue] = useState("");
 
   const noContent = !value || (value?.length && value.length < 2);
   const noSend = busy || noContent;
 
-  useEffect(() => {
-    let currentMessageIndex = 0;
-    let charIndex = 0;
-    let isTyping = true;
-    let timerId: ReturnType<typeof setTimeout>;
-    if (busy) {
-      setPlaceholder("");
-      return;
-    }
-
-    const typeMessage = () => {
-      if (isTyping) {
-        charIndex++;
-      } else {
-        charIndex--;
-      }
-
-      const message = messages[currentMessageIndex];
-      setPlaceholder(message.substring(0, charIndex));
-
-      if (isTyping && charIndex === message.length) {
-        // Once the end of the message is reached, pause before starting to delete
-        timerId = setTimeout(() => {
-          isTyping = false;
-        }, 1000);
-      } else if (!isTyping && charIndex === 0) {
-        // Once the message is completely deleted, move to the next message and start typing
-        currentMessageIndex = (currentMessageIndex + 1) % messages.length;
-        isTyping = true;
-      }
-
-      if (
-        (isTyping && charIndex < message.length) ||
-        (!isTyping && charIndex > 0)
-      ) {
-        // Continue typing or deleting
-        const delay = isTyping ? 120 : 60; // Adjust typing and deleting speeds as needed
-        timerId = setTimeout(typeMessage, delay);
-      } else {
-        // Handle end of typing/deleting cycle
-        timerId = setTimeout(typeMessage, isTyping ? 1000 : 1500);
-      }
-    };
-
-    // Start typing the first message
-    timerId = setTimeout(typeMessage, 500);
-
-    // Cleanup function to clear the timeout if the component unmounts
-    return () => clearTimeout(timerId);
-  }, [busy, value]);
+  const handleSend = (e: any) => {
+    setValue("");
+    onSend(e, value);
+  };
 
   return (
     <div className="relative w-full">
-      <form onSubmit={onSend}>
+      <form onSubmit={handleSend}>
         <textarea
           id="prompt-textarea"
           dir="auto"
           rows={1}
           value={value}
-          onChange={onChange}
+          onChange={(x) => setValue(x.target?.value)}
           placeholder={`Message ${datasource?.name ?? ""}`}
           className="m-0 ring-[0.4px]  ring-foreground-secondary rounded-lg w-full resize-none border-0 bg-transparent focus:ring-[0.4px]  focus:ring-black  py-[10px] pr-10 md:py-3.5 md:pr-12 max-h-[25dvh]  placeholder-black/50 dark:placeholder-foreground pl-10 md:pl-[25px] outline-none"
           spellCheck={false}
           style={{ minHeight: "52px", overflowY: "hidden" }}
         />
 
-        {/*    <textarea
-        readOnly={disabled}
-        placeholder={placeholder}
-        onChange={onChange}
-        value={value}
-        className="pl-3 shadow pr-10 flex items-center bg-transparent py-2 min-h-12 rounded-full ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none placeholder:pt-2 "
-      /> */}
         <div className="absolute inset-y-0 right-3 pr-0 flex items-center -top-6 hover:opacity-85 cursor-pointer z-40">
           <Button
             className="text-1xl bg-primary"

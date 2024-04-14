@@ -14,12 +14,10 @@ import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 
 interface ChatContext {
-  scrollToBottom?: () => void;
   updateChatHistoryAtIndex: (history: IChatHistoryItem) => void;
 }
 
 export const ChatContext = createContext<ChatContext>({
-  scrollToBottom: async () => {},
   updateChatHistoryAtIndex: (history: IChatHistoryItem) => {},
 });
 

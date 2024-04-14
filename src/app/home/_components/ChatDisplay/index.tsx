@@ -30,6 +30,8 @@ const ChatHistory: React.FC<ChatHistoryProps> = ({
 
   useEffect(() => {
     // Scroll to the bottom of the div
+    console.log("MEDKSM", "MKREMDSJM");
+
     if (displayedChats) scrollToBottom();
   }, [displayedChats]);
 
@@ -42,6 +44,8 @@ const ChatHistory: React.FC<ChatHistoryProps> = ({
   const scrollToBottom = () => {
     if (!scrollRef.current) return;
     const element = scrollRef.current;
+
+    console.log("SCROLLING BAAACK");
 
     const maxScroll = element.scrollHeight - element.clientHeight;
     const step = () => {
