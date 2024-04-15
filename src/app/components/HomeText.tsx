@@ -46,7 +46,7 @@ const InsightText = () => {
         Chat with any datasource to
       </span>
       <br />
-      <span className="text-5xl font-black text-primary">
+      <span className="text-5xl font-black text-foreground">
         <AnimatePresence>
           {characters.map((char: any, i: any) => (
             <motion.span
