@@ -220,7 +220,7 @@ export default function Home() {
           </div>
         </form>
 
-        <div className="text-center  px-4 mx-auto w-11/12 mt-14">
+        <div className="text-center  px-4 mx-auto w-5/12 mt-14">
           <span className="font-bold text-gray-500  text-md lg:text-md xs:text:md">
             Chat with any datasource for records, insights, and charts. Easily
             connect to your apps and tools to create workflows.
