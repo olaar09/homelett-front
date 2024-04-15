@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 import InputField from "./components/InputField";
 import ACButton from "./components/Button";
 import { message } from "antd";
-import { Suspense, useContext, useState } from "react";
+import { Suspense, useContext, useEffect, useState } from "react";
 import FirebaseContext from "@/contexts/FirebaseContext";
 import { FirebaseError } from "firebase/app";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -15,6 +15,9 @@ import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
 import HomeText from "./components/HomeText";
+import TiltHeroSection from "./components/Landing/Tilt";
+import { useScroll } from "ahooks";
+import React, { useRef } from "react";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -23,6 +26,48 @@ export default function Home() {
   const query = useSearchParams();
   const router = useRouter();
   const authContext = useContext(AuthContext);
+  const [scrollYPosition, setScrollYPosition] = useState(0);
+  const [rotationDegrees, setRotationDegrees] = useState("");
+
+  const divRef = useRef<any>(null);
+
+  // Function to handle scroll event
+  const handleScroll = () => {
+    if (divRef.current) {
+      const scrollTop = divRef.current.scrollTop;
+      const scrollLeft = divRef.current.scrollLeft;
+      console.log(scrollTop);
+
+      /*   if (scrollTop > 450) {
+        setRotationDegrees("rotate-x-45");
+      } else  */ if (scrollTop > 300) {
+        setRotationDegrees("rotate-x-30");
+      } else if (scrollTop > 275) {
+        setRotationDegrees("rotate-x-12");
+      } else if (scrollTop > 100) {
+        setRotationDegrees("rotate-x-6");
+      } else {
+        setRotationDegrees("rotate-x-0");
+      }
+    }
+  };
+
+  useEffect(() => {
+    // just trigger this so that the initial state
+    // is updated as soon as the component is mounted
+    // related: https://stackoverflow.com/a/63408216
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Now the vertical position is available with `scrollYPosition`
+  console.log(scrollYPosition);
 
   const onChangeForm = (name: string, value: string) => {
     setForm({ ...form, [name]: value });
@@ -105,9 +150,13 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col h-screen items-center   overflow-y-clip pb-8">
-      <section className="flex-grow my-4 flex flex-col pt-4 items-center lg:w-6/12 mx-auto w-full mt-10">
-        <div className="flex items-center gap-x-3   px-8">
+    <main
+      ref={divRef}
+      onScroll={handleScroll}
+      className="flex flex-col h-screen overflow-y-scroll items-center   pb-8"
+    >
+      <section className="flex-grow my-4 flex flex-col pt-4 items-center w-full mt-10">
+        <div className="flex items-center gap-x-3   px-8   justify-center  lg:w-6/12 mx-auto">
           <div className="w-9 h-14 flex items-center">
             <Icon
               className="text-gray-60 text-4xl opacity-80"
@@ -119,24 +168,27 @@ export default function Home() {
           </span>
         </div>
 
-        <div className="text-center h-40 px-4 mx-auto w-full ">
+        <div className="text-center h-40 px-4 w-full  lg:w-6/12 mx-auto ">
           <HomeText />
         </div>
+        <div className="w-full  lg:w-10/12 mx-auto">
+          <TiltHeroSection rotationDegrees={rotationDegrees} />
+        </div>
 
-        <div className=" w-10/12 mx-auto  ">
+        <div className=" w-5/12 mx-auto  mt-10 ">
           <Suspense fallback={<span>loading..</span>}>
             <GoogleLoginButton onSuccess={googleLogin} />
           </Suspense>
         </div>
 
-        <div className="my-4 gap-x-3 mt-9 flex items-center justify-between w-9/12 mx-auto px-8">
+        <div className="my-4 gap-x-3 mt-9 flex items-center justify-between w-5/12 mx-auto px-8">
           <div className=" border-b-[0.5px] border-foreground-secondary flex-1 "></div>
           <span className=" text-foreground-secondary text-sm">Or</span>
           <div className=" border-b-[0.5px] border-foreground-secondary flex-1"></div>
         </div>
 
         <form
-          className="lg:w-8/12 w-full mx-auto"
+          className="lg:w-4/12 w-full mx-auto"
           onSubmit={(e: any) => onSubmitLogin(e)}
           method="post"
         >
