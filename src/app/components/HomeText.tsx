@@ -41,12 +41,12 @@ const InsightText = () => {
         marginTop: "10px",
       }}
     >
-      <span className=" lg:text-5xl text-2xl font-black text-foreground-secondary">
+      <span className=" lg:text-5xl text-2xl font-black">
         {" "}
         Chat with any datasource to
       </span>
       <br />
-      <span className="text-5xl font-black text-foreground-secondary">
+      <span className="text-5xl font-black text-foreground">
         <AnimatePresence>
           {characters.map((char: any, i: any) => (
             <motion.span
