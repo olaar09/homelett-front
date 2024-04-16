@@ -283,18 +283,12 @@ const Chat = () => {
                   </Button>
 
                   <div className="flex gap-x-3 px-3">
-                    <Tooltip title="Skip the job (show later)">
-                      <Button type="link" className=" text-foreground px-0">
-                        <Icon
-                          className="mt-2"
-                          icon={"carbon:skip-forward-filled"}
-                        />
-                      </Button>
-                    </Tooltip>
-
                     <Tooltip title="Remove this job (for this profile)">
                       <Button type="link" className=" text-foreground px-0">
-                        <Icon className="mt-2" icon={"ic:round-block"} />
+                        <div className="flex items-center gap-x-2">
+                          <Icon className="mt-0" icon={"ic:round-block"} />
+                          <span className="  block text-xs">Skip this job</span>
+                        </div>
                       </Button>
                     </Tooltip>
                   </div>
