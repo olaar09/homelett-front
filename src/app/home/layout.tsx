@@ -98,9 +98,9 @@ const Nav: React.FC<any> = ({ children }) => {
   const isBillingActive = authContext.currentUser?.billingActive;
 
   const billingMessage = isFreeTrial
-    ? `You have ${authContext.currentUser?.freeTrialLeft} days left on SequelBase free trial `
+    ? `You have ${authContext.currentUser?.freeTrialLeft} days left on PostBird free trial `
     : isBillingActive
-    ? "You are currently on a SequelBase paid plan"
+    ? "You are currently on a PostBird paid plan"
     : "Your current plan is expired. Click below to renew";
 
   const buttonMessage = isFreeTrial
@@ -189,12 +189,20 @@ const Nav: React.FC<any> = ({ children }) => {
             )}
             {openSide && (
               <div className="flex flex-grow  justify-end flex-col py-3 px-2 w-full ">
-                <div className=" h-32 border rounded-lg my-2 flex flex-col px-3 items-center justify-center gap-y-2">
-                  <span className="block text-center text-sm">
+                <div className=" h-40 border rounded-lg my-2 flex flex-col px-3 items-center justify-center gap-y-2 mx-auto w-full">
+                  <span className="block text-center text-sm mx-auto w-8/12 font-bold">
                     {billingMessage}
                   </span>
 
-                  <Button onClick={handlePaymentLink} type="link">
+                  <span className="text-xs text-center">
+                    Apply for over 100 jobs weekly and increase your chance of
+                    getting an interview by 9x
+                  </span>
+                  <Button
+                    className="bg-primary"
+                    onClick={handlePaymentLink}
+                    type="primary"
+                  >
                     <div className="flex items-center gap-x-2">
                       <span>{buttonMessage}</span>
                       <Icon icon={buttonIcon} />
@@ -202,22 +210,28 @@ const Nav: React.FC<any> = ({ children }) => {
                   </Button>
                 </div>
                 <div className="flex flex-col border-t w-full py-5">
+                  <NavMenu
+                    path="/home/name"
+                    icon={"iconamoon:profile-fill"}
+                    title="Agboola Yusuf"
+                  />
+
                   <Link className="w-full" href={"/home/profile"}>
                     <NavMenu
                       path="/home/profile"
-                      icon={"clarity:user-line"}
+                      icon={"mingcute:profile-fill"}
                       title="Profile"
                     />
                   </Link>
-                  <Link className="w-full" href={"/home/team"}>
+                  <Link className="w-full" href={"/home/help"}>
                     <NavMenu
                       path="/home/team"
-                      icon={"ant-design:team-outlined"}
-                      title="Team"
+                      icon={"ic:round-help-center"}
+                      title="Help"
                     />
                   </Link>
 
-                  <div onClick={addOpenAiKey} className="relative">
+                  {/*       <div onClick={addOpenAiKey} className="relative">
                     <NavMenu
                       path="/home/api_keys"
                       icon={"ph:open-ai-logo-bold"}
@@ -235,11 +249,11 @@ const Nav: React.FC<any> = ({ children }) => {
                           : "ic:round-cancel"
                       }`}
                     />
-                  </div>
+                  </div> */}
                   <div onClick={onLogout}>
                     <NavMenu
                       path={"/logout"}
-                      icon={"ic:outline-logout"}
+                      icon={"ri:logout-box-fill"}
                       title="Logout"
                     />
                   </div>
