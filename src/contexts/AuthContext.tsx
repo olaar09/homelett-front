@@ -65,8 +65,8 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     const queryParams = new URLSearchParams(params).toString();
 
     if (currentUser) {
-      if (path === "/") {
-        router.push(`/home/chat${queryParams ? `?${queryParams}` : ""}`);
+      if (path === "/login") {
+        router.push(`/home/apply${queryParams ? `?${queryParams}` : ""}`);
         return;
       }
     } else {
@@ -131,8 +131,8 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
       const user = await apiService.profileService.loadProfile();
       if (user) {
         setCurrentUser(user.data);
-        if (path === "/") {
-          router.push(`/home/chat${queryParams ? `?${queryParams}` : ""}`);
+        if (path === "/login") {
+          router.push(`/home/apply${queryParams ? `?${queryParams}` : ""}`);
           return;
         }
       } else {

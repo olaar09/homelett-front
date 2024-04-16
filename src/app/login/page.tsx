@@ -97,7 +97,7 @@ export default function Home() {
       await authContext.refreshProfile();
       await authContext.refreshDataSource();
 
-      router.push("/home/chat");
+      router.push("/home/apply");
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error);
@@ -127,7 +127,7 @@ export default function Home() {
       await authContext.refreshProfile();
       await authContext.refreshDataSource();
 
-      router.push("/home/chat");
+      router.push("/home/apply");
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error);
