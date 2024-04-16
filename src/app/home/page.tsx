@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
@@ -14,23 +14,9 @@ const Chat = () => {
 
   const [textContent, setTextContent] = useState("");
 
-  const onOpenDrawer = () => {
-    setOpenDrawer(true);
-  };
-
-  const onSend = async (e: any) => {
-    e.preventDefault();
-    if (!textContent) return message.warning("Enter a message to chat");
-    if (textContent.length < 2) return message.warning("Enter a valid message");
-    await onSubmitMessage();
-  };
-
-  const onSubmitMessage = async () => {
-    setHasChat(true);
-    setBusy(true);
-    setTextContent("");
-    message.success("Sending message");
-  };
+  useEffect(() => {
+    router.push("/home/apply");
+  }, []);
 
   return <main className=" w-full bg-background-thin min-h-screen"></main>;
 };
