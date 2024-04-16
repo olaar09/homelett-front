@@ -3,7 +3,7 @@
 import { Icon } from "@iconify/react";
 import { useContext, useEffect, useRef, useState } from "react";
 
-import { message } from "antd";
+import { Card, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { usePrevious, useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -248,8 +248,12 @@ const Chat = () => {
           <span>jobs here</span>
         </div>
 
-        <div className="w-[400px] bg-green-200 h-full">
-          <span>jobs here</span>
+        <div className="w-[400px] bg-green-200 h-full overflow-y-scroll pb-10 ">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((j) => (
+            <Card className=" h-48 mb-2 rounded-none">
+              <Card.Meta></Card.Meta>
+            </Card>
+          ))}
         </div>
       </section>
     </main>
