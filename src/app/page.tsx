@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 //import GoogleSignIn from "./components/Auth/GoogleSignin1";
 import InputField from "./components/InputField";
 import ACButton from "./components/Button";
-import { message } from "antd";
+import { Button, message } from "antd";
 import { Suspense, useContext, useEffect, useState } from "react";
 import FirebaseContext from "@/contexts/FirebaseContext";
 import { FirebaseError } from "firebase/app";
@@ -18,7 +18,16 @@ import HomeText from "./components/HomeText";
 import TiltHeroSection from "./components/Landing/Tilt";
 import { useScroll } from "ahooks";
 import React, { useRef } from "react";
+import Featured from "./components/Landing/Featured";
+import Image from "next/image";
 
+const items = [
+  { name: "AI Powered search to find jobs that fits" },
+  { name: "Automatically tailor your profile to each job" },
+  { name: "Auto send Job application or send applications with 1 click" },
+  { name: "Automatic follow up when you don't hear back" },
+  { name: "Auto send Job application or send manually with 1 click" },
+];
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
@@ -40,9 +49,7 @@ export default function Home() {
 
       /*   if (scrollTop > 450) {
         setRotationDegrees("rotate-x-45");
-      } else  */ if (scrollTop > 300) {
-        setRotationDegrees("rotate-x-30");
-      } else if (scrollTop > 275) {
+      } else  */ if (scrollTop > 275) {
         setRotationDegrees("rotate-x-12");
       } else if (scrollTop > 100) {
         setRotationDegrees("rotate-x-6");
@@ -155,19 +162,32 @@ export default function Home() {
       onScroll={handleScroll}
       className="flex flex-col h-screen overflow-y-scroll items-center   pb-8"
     >
-      <section className="flex-grow my-4 flex flex-col pt-4 items-center w-full mt-10">
-        <div className="flex items-center gap-x-3   px-8   justify-center  lg:w-6/12 mx-auto">
-          <div className="w-9 h-14 flex items-center">
-            <Icon
-              className="text-gray-60 text-4xl opacity-80"
-              icon="simple-icons:poe"
-            />
+      <section className="w-full">
+        <div className=" flex items-center gap-x-3   px-8   justify-between w-full mt-2">
+          <div className="flex items-center gap-x-0 w-6/12">
+            <div className="w-9 h-14 flex items-center">
+              <Icon
+                className="text-foreground text-2xl "
+                icon="streamline:send-email-solid"
+              />
+            </div>
+            <span className=" text-foreground font-bold text-2xl opacity-95">
+              PostBird
+            </span>
           </div>
-          <span className=" text-gray-600 font-bold text-3xl opacity-90">
-            SequelBase
-          </span>
-        </div>
 
+          <div className="flex items-center gap-x-3 w-6/12 justify-end">
+            <Button className="lg:inline hidden " type={"link"} loading={false}>
+              <span className="text-lg text-foreground"> Login </span>
+            </Button>
+
+            <Button type={"link"} loading={false}>
+              <span className="text-lg text-foreground"> Get started </span>
+            </Button>
+          </div>
+        </div>
+      </section>
+      <section className="flex-grow mt-4 flex flex-col pt-4 items-center w-full ">
         <div className="text-center h-40 px-4 w-full  lg:w-6/12 mx-auto ">
           <HomeText />
         </div>
@@ -175,62 +195,40 @@ export default function Home() {
           <TiltHeroSection rotationDegrees={rotationDegrees} />
         </div>
 
-        <div className=" w-5/12 mx-auto  mt-10 ">
-          <Suspense fallback={<span>loading..</span>}>
-            <GoogleLoginButton onSuccess={googleLogin} />
-          </Suspense>
-        </div>
-
-        <div className="my-4 gap-x-3 mt-9 flex items-center justify-between w-5/12 mx-auto px-8">
-          <div className=" border-b-[0.5px] border-foreground-secondary flex-1 "></div>
-          <span className=" text-foreground-secondary text-sm">Or</span>
-          <div className=" border-b-[0.5px] border-foreground-secondary flex-1"></div>
-        </div>
-
-        <form
-          className="lg:w-4/12 w-full mx-auto"
-          onSubmit={(e: any) => onSubmitLogin(e)}
-          method="post"
-        >
-          <div className="w-full px-8 flex flex-col gap-y-6">
-            <InputField
-              name="email"
-              type="email"
-              placeHolder="Email address"
-              onChange={(e) => onChangeForm("email", e.target.value)}
-            />
-            <InputField
-              name="password"
-              type="password"
-              required={true}
-              placeHolder="Password"
-              onChange={(e) => onChangeForm("password", e.target.value)}
-            />
-
-            <ACButton
-              text={
-                query.get("is_new") === "true"
-                  ? "Sign up with email"
-                  : "Login with email"
-              }
-              type={"submit"}
-              loading={loading}
-              children={undefined}
-            />
+        <div className=" w-full  mt-10 px-4 pt-4 pb-10 bg-primary">
+          <div className="h-20 flex items-center justify-center">
+            <span className="text-xl font-bold text-foreground-inverted text-center">
+              400,000+ jobs from only the most exciting companies & startups
+              around the world
+            </span>
           </div>
-        </form>
-
-        <div className="text-center  px-4 mx-auto w-5/12 mt-14">
-          <span className="font-bold text-gray-500  text-md lg:text-md xs:text:md">
-            Chat with any datasource for records, insights, and charts. Easily
-            connect to your apps and tools to create workflows.
-          </span>
+          <Featured />
         </div>
       </section>
 
+      <section className="flex flex-col items-center justify-center my-8 lg:my-20 mx-auto w-full lg:w-9/12 gap-y-6 px-3">
+        <span className=" font-bold lg:text-6xl text-5xl text-center">
+          The better way to job search
+        </span>{" "}
+        <span className="text-center block lg:w-8/12 mx-auto">
+          We're not just another job board. We implement the latest AI
+          technologies to automate job search and application. Giving our users
+          an edge
+        </span>
+        <div className="mx-auto w-full lg:w-7/12">
+          {items.map((item) => (
+            <div className="mt-4 flex items-center justify-between  gap-x-2 w-full">
+              <Icon className="text-2xl" icon={"akar-icons:check-box-fill"} />
+              <div className="w-10/12 flex justify-start">
+                <span>{item.name}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
       <section className="px-6 flex items-center justify-center ">
         <span className=" text-foreground-secondary text-sm text-center">
-          By continuing, you are agreeing to SequelBase's{" "}
+          By continuing, you are agreeing to PostBird's{" "}
           <span className=" text-banner"> terms of services </span> and{" "}
           <span className=" text-banner">Privacy Policy </span>
         </span>

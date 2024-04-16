@@ -5,21 +5,21 @@ import type { Viewport } from "next";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { Suspense } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
-  title: "SequelBase",
-  description:
-    "AI Co-Pilot for engineering and business teams to get things done faster!",
-  applicationName: "SequelBase",
+  title: "PostBird",
+  description: "AI Co-Pilot for your job search",
+  applicationName: "PostBird",
   appleWebApp: true,
   formatDetection: { telephone: false },
   // icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
   openGraph: {
     type: "website",
-    title: "SequelBase",
+    title: "PostBird",
     description: "",
     siteName: "",
     url: "",
@@ -28,10 +28,10 @@ export const metadata: Metadata = {
   twitter: {
     site: "",
     siteId: "", // make unique
-    creator: "SequelBase INC",
+    creator: "PostBird INC",
     description:
       "AI Co-Pilot for engineering and business teams to get things done faster!",
-    title: "SequelBase",
+    title: "PostBird",
     images: "",
   },
 };
@@ -61,6 +61,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js" />
+      </Head>
       <body className={inter.className}>
         <GoogleOAuthProvider clientId="801456630743-5rb4c1hh82rvse95fek0bqt623gnclqg.apps.googleusercontent.com">
           <Suspense fallback={<span></span>}>

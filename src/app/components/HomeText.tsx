@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const lastWords = [
-  "Fetch Records.",
-  "View Charts",
-  "Get Insights",
-  "Create Workflows.",
+  "UI/UX Career",
+  "Software Career",
+  "Analyst Career",
+  "Cyber Sec Career.",
 ];
 
 const InsightText = () => {
@@ -41,12 +41,12 @@ const InsightText = () => {
         marginTop: "10px",
       }}
     >
-      <span className=" lg:text-5xl text-2xl font-black">
+      <span className=" lg:text-5xl text-3xl font-black">
         {" "}
-        Chat with any datasource to
+        AI Co-Pilot For Your
       </span>
       <br />
-      <span className="text-5xl font-black text-foreground">
+      <span className="lg:text-5xl text-3xl font-black text-primary">
         <AnimatePresence>
           {characters.map((char: any, i: any) => (
             <motion.span
