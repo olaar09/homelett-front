@@ -20,6 +20,7 @@ import { useScroll } from "ahooks";
 import React, { useRef } from "react";
 import Featured from "./components/Landing/Featured";
 import Image from "next/image";
+import Link from "next/link";
 
 const items = [
   { name: "AI Powered search to find jobs that fits" },
@@ -177,13 +178,21 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-x-3 w-6/12 justify-end">
-            <Button className="lg:inline hidden " type={"link"} loading={false}>
-              <span className="text-lg text-foreground"> Login </span>
-            </Button>
+            <Link href={"/login"}>
+              <Button
+                className="lg:inline hidden "
+                type={"link"}
+                loading={false}
+              >
+                <span className="text-lg text-foreground"> Login </span>
+              </Button>
+            </Link>
 
-            <Button type={"link"} loading={false}>
-              <span className="text-lg text-foreground"> Get started </span>
-            </Button>
+            <Link href={"/login"}>
+              <Button type={"link"} loading={false}>
+                <span className="text-lg text-foreground"> Get started </span>
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -228,12 +237,14 @@ export default function Home() {
       </section>
 
       <section className="my-8">
-        <ACButton
-          text={"Click here to get started"}
-          type={"reset"}
-          loading={false}
-          children={undefined}
-        />
+        <Link href={"/login"}>
+          <ACButton
+            text={"Click here to get started"}
+            type={"reset"}
+            loading={false}
+            children={undefined}
+          />
+        </Link>
       </section>
       <section className="px-6 flex items-center justify-center ">
         <span className=" text-foreground-secondary text-sm text-center">

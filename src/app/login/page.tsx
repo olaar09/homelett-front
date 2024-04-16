@@ -19,6 +19,7 @@ import GoogleLoginButton from "../components/Auth/GoogleSignin";
 import ACButton from "../components/Button";
 import HomeText from "../components/HomeText";
 import InputField from "../components/InputField";
+import Link from "next/link";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -161,12 +162,14 @@ export default function Home() {
           <div className="w-9 h-14 flex items-center">
             <Icon
               className="text-gray-60 text-4xl opacity-80"
-              icon="simple-icons:poe"
+              icon="streamline:send-email-solid"
             />
           </div>
-          <span className=" text-gray-600 font-bold text-3xl opacity-90">
-            PostBird
-          </span>
+          <Link href={"/"}>
+            <span className=" text-gray-600 font-bold text-3xl opacity-90">
+              PostBird
+            </span>
+          </Link>
         </div>
 
         <div className="text-center mt-10 px-4 w-full  lg:w-6/12 mx-auto ">
@@ -223,8 +226,8 @@ export default function Home() {
 
         <div className="text-center  px-4 mx-auto w-full lg:w-5/12 mt-14">
           <span className="font-bold text-gray-500  text-md lg:text-md xs:text:md">
-            Auto apply to 400,000+ jobs from only the most exciting companies &
-            startups around the world
+            Auto apply to 400,000+ jobs with AI, from only the most exciting
+            companies around the world
           </span>
         </div>
       </section>
