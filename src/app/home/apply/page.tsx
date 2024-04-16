@@ -236,82 +236,22 @@ const Chat = () => {
   };
 
   return (
-    <main className="h-full bg-background-thin min-h-screen flex flex-col">
+    <main className="h-full bg-background-thin min-h-screen flex flex-col 3xl:w-10/12  w-full mx-auto">
       <LoadingOverlay
         loading={
           currentAuth.loading || currentAuth.loadingSources || loadingNewChat
         }
       />
-      {/*   <ChatListDrawer
-        open={openPrevChats}
-        onClose={onClosePreviousChats}
-        items={chatList}
-        onClick={onSelectChat}
-      /> */}
-      {/*   <StartChatModal
-        loading={loadingNewChat}
-        datasources={chatSources ?? []}
-        visible={openConnectedDatasources}
-        onClickItem={onDatasourceSelected}
-        onClose={() => setOpenConnectedDatasources(false)}
-      /> */}
-      {/*    <ConnectorModal
-        visible={openConnector}
-        onClose={onCloseConnector}
-        closable={false}
-      /> */}
 
-      {currentAuth.currentUser &&
-        !loadingChat &&
-        !chat &&
-        !currentAuth.loading &&
-        !currentAuth.loadingSources &&
-        !loadingNewChat && (
-          <div className=" h-screen flex-col flex items-center justify-center">
-            <div onClick={onOpenStartChatModal}>
-              <HeaderItem
-                icon="ri:chat-new-fill"
-                title="Create a profile"
-                withBg={true}
-              />
-            </div>
-          </div>
-        )}
+      <section className=" flex items-center h-screen">
+        <div className="flex w-9/12 bg-red-200 h-full">
+          <span>jobs here</span>
+        </div>
 
-      {chat && (
-        <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full">
-          <div className="flex flex-col">
-            <HeaderItem
-              icon={chat?.datasource.source_type.icon}
-              title={`${chat?.datasource.name}`}
-              withBg={false}
-            />
-            <span className="text-xs text-foreground-secondary truncate w-52">
-              {chat.slug}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-x-7">
-            {chatList?.length > 1 && (
-              <div onClick={onOpenPreviousChats}>
-                <HeaderItem
-                  icon="fluent:history-32-filled"
-                  title="Previous chats"
-                  withBg={false}
-                />
-              </div>
-            )}
-
-            <div onClick={onOpenStartChatModal}>
-              <HeaderItem
-                icon="ri:chat-new-fill"
-                title="Start new chat"
-                withBg={true}
-              />
-            </div>
-          </div>
-        </section>
-      )}
+        <div className="w-[400px] bg-green-200 h-full">
+          <span>jobs here</span>
+        </div>
+      </section>
     </main>
   );
 };
