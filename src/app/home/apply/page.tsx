@@ -242,24 +242,24 @@ const Chat = () => {
           currentAuth.loading || currentAuth.loadingSources || loadingNewChat
         }
       />
-      <ChatListDrawer
+      {/*   <ChatListDrawer
         open={openPrevChats}
         onClose={onClosePreviousChats}
         items={chatList}
         onClick={onSelectChat}
-      />
-      <StartChatModal
+      /> */}
+      {/*   <StartChatModal
         loading={loadingNewChat}
         datasources={chatSources ?? []}
         visible={openConnectedDatasources}
         onClickItem={onDatasourceSelected}
         onClose={() => setOpenConnectedDatasources(false)}
-      />
-      <ConnectorModal
+      /> */}
+      {/*    <ConnectorModal
         visible={openConnector}
         onClose={onCloseConnector}
         closable={false}
-      />
+      /> */}
 
       {currentAuth.currentUser &&
         !loadingChat &&
@@ -271,7 +271,7 @@ const Chat = () => {
             <div onClick={onOpenStartChatModal}>
               <HeaderItem
                 icon="ri:chat-new-fill"
-                title="Start new chat"
+                title="Create a profile"
                 withBg={true}
               />
             </div>
@@ -309,34 +309,6 @@ const Chat = () => {
                 withBg={true}
               />
             </div>
-          </div>
-        </section>
-      )}
-
-      {typeof window !== "undefined" && chat && chat.datasource && (
-        <ChatContext.Provider
-          value={{
-            updateChatHistoryAtIndex,
-          }}
-        >
-          <ChatHistory
-            loadingChatHistory={loadingChatHistory}
-            datasource={chat!.datasource}
-            displayedChats={displayedChats}
-          />
-        </ChatContext.Provider>
-      )}
-
-      {chatList && chatList?.length > 0 && (
-        <section className="flex flex-grow justify-end flex-col  px-6  ">
-          <div className="flex w-full lg:w-full xl:w-8/12 mx-auto py-10 h-40">
-            <ChatInput
-              datasource={chat?.datasource}
-              disabled={loading || loadingChatHistory}
-              busy={loading || loadingChatHistory}
-              hasChat={false}
-              onSend={onSendChat}
-            />
           </div>
         </section>
       )}

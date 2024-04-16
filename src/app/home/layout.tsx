@@ -7,28 +7,54 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import AddKeyModal from "./_components/AddKeyModal";
-import { Button, Tag } from "antd";
+import { Button, Tag, Tooltip } from "antd";
 
 const NavMenu = ({
   title,
   icon,
   path,
+  suffixIcon,
+  onClickSuffix,
+  tooltip,
 }: {
   path: string;
   title: string;
   icon: string;
+  suffixIcon?: string;
+  onClickSuffix?: any;
+  tooltip?: string;
 }) => {
   const browserPath = usePathname();
   return (
     <div
-      className={`font-body  flex items-center h-10 hover:bg-[#E8E7FF] hover:text-primary hover:font-bold rounded-md px-2 w-full  cursor-pointer  gap-x-3  ${
+      className={`font-body  flex items-center h-10 hover:bg-[#E8E7FF] hover:text-primary hover:font-bold rounded-md px-2 w-full  cursor-pointer  gap-x-3 justify-between  ${
         browserPath.includes(path)
           ? "bg-gray-200 text-foreground font-body "
           : "text-foreground"
       }`}
     >
-      <Icon className="text-lg   font-body" icon={icon} />
-      <span className="text-md font-thin font-body  ">{title}</span>
+      <div className="flex items-center gap-x-2">
+        <Icon className="text-lg   font-body" icon={icon} />
+        <span className="text-md font-thin font-body truncate  ">{title}</span>
+      </div>
+
+      {suffixIcon && (
+        <Tooltip title={tooltip ?? ""}>
+          <div className="z-10">
+            <Button
+              onClick={onClickSuffix}
+              htmlType="submit"
+              type="link"
+              className="py-0 bg-gray-100"
+            >
+              <Icon
+                className="text-lg font-body text-gray-900"
+                icon={suffixIcon}
+              />
+            </Button>
+          </div>
+        </Tooltip>
+      )}
     </div>
   );
 };
@@ -80,8 +106,8 @@ const Nav: React.FC<any> = ({ children }) => {
     authContext.clearUser();
   };
 
-  const addOpenAiKey = () => {
-    setOpenAIKey(true);
+  const onSwitch = () => {
+    console.log("open job profiles dropdown");
   };
 
   const closeOpenAiKey = () => {
@@ -212,8 +238,11 @@ const Nav: React.FC<any> = ({ children }) => {
                 <div className="flex flex-col border-t w-full py-5">
                   <NavMenu
                     path="/home/name"
-                    icon={"iconamoon:profile-fill"}
-                    title="Agboola Yusuf"
+                    icon={"mdi:worker"}
+                    title="ReactJS developer"
+                    suffixIcon="ic:round-switch-left"
+                    tooltip="Switch job profile"
+                    onClickSuffix={onSwitch}
                   />
 
                   <Link className="w-full" href={"/home/profile"}>
@@ -254,7 +283,7 @@ const Nav: React.FC<any> = ({ children }) => {
                     <NavMenu
                       path={"/logout"}
                       icon={"ri:logout-box-fill"}
-                      title="Logout"
+                      title={authContext.currentUser?.fullname ?? ""}
                     />
                   </div>
                 </div>

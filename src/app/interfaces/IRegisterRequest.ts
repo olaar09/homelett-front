@@ -1,6 +1,6 @@
 export interface IAuthRequest {
   id?: string;
-  username?: string;
+  fullname?: string;
   email: string;
   password: string;
   company?: string;
