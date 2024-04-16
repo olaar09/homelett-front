@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
-  title: "PostBird",
+  title: "PostBird | AI Co-Pilot for job search",
   description: "AI Co-Pilot for your job search",
   applicationName: "PostBird",
   appleWebApp: true,
