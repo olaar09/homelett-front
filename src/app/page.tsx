@@ -226,6 +226,15 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <section className="my-8">
+        <ACButton
+          text={"Click here to get started"}
+          type={"reset"}
+          loading={false}
+          children={undefined}
+        />
+      </section>
       <section className="px-6 flex items-center justify-center ">
         <span className=" text-foreground-secondary text-sm text-center">
           By continuing, you are agreeing to PostBird's{" "}
