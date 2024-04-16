@@ -262,10 +262,19 @@ const Chat = () => {
                 }
                 description={
                   <div className="flex flex-col items-start h-full">
-                    <span className="text-black text-foreground-secondary">
+                    <span className="text-black text-foreground">
                       Trust Wallet
                     </span>
                     <span>United Kingdom (Remote)</span>
+
+                    <Button type="link" className="-ml-3">
+                      <div className="flex items-center mt-2 gap-x-2">
+                        <Icon className="mt-0 " icon={"lets-icons:out-light"} />
+                        <span className="mt-0 text-foreground-secondary">
+                          View job
+                        </span>
+                      </div>
+                    </Button>
                   </div>
                 }
               />
