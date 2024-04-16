@@ -2,7 +2,7 @@ import { Card, Avatar } from "antd";
 
 const LoadingJobItem = () => {
   return (
-    <div className="flex w-9/12  h-full  px-2 flex-col overflow-y-scroll">
+    <>
       <Card
         className="w-full rounded-none"
         style={{ marginTop: 16, height: 200 }}
@@ -69,7 +69,7 @@ const LoadingJobItem = () => {
           description="This is the description"
         />
       </Card>
-    </div>
+    </>
   );
 };
 

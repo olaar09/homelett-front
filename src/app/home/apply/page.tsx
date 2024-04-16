@@ -246,9 +246,11 @@ const Chat = () => {
       />
 
       <section className=" flex items-center h-screen overflow-scroll">
-        <LoadingJobItem />
+        <div className="lg:flex hidden lg:w-9/12  h-full  px-2 flex-col overflow-y-scroll">
+          <LoadingJobItem />
+        </div>
 
-        <div className="w-[400px]  h-full overflow-y-scroll pb-10 ">
+        <div className="lg:w-[400px] w-full  h-full overflow-y-scroll pb-10 ">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => (
             <JobItem active={i === 1} />
           ))}

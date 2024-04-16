@@ -156,7 +156,7 @@ const Nav: React.FC<any> = ({ children }) => {
           <div
             className={` bg-background ${
               openSide ? "w-[345px]" : "w-[70px]"
-            } min-h-screen border-r border-gray-300 shadow-sm flex flex-col h-full items-start transition-all duration-200 `}
+            } min-h-screen hidden lg:flex border-r border-gray-300 shadow-sm  flex-col h-full items-start transition-all duration-200 `}
           >
             <HeadIcon isOpen={openSide} onToggle={onToggle} />
             {!openSide && (
