@@ -3,7 +3,7 @@
 import { Icon } from "@iconify/react";
 import { useContext, useEffect, useRef, useState } from "react";
 
-import { Card, message } from "antd";
+import { Button, Card, Tooltip, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { usePrevious, useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -248,10 +248,58 @@ const Chat = () => {
           <span>jobs here</span>
         </div>
 
-        <div className="w-[400px] bg-green-200 h-full overflow-y-scroll pb-10 ">
+        <div className="w-[400px]  h-full overflow-y-scroll pb-10 ">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((j) => (
-            <Card className=" h-48 mb-2 rounded-none">
-              <Card.Meta></Card.Meta>
+            <Card
+              hoverable
+              className=" h-48 border-b rounded-none flex flex-col relative"
+            >
+              <Card.Meta
+                title={
+                  <div className="  items-start block text-wrap line-clamp-2">
+                    Frontend Engineer (Senior / Mid)
+                  </div>
+                }
+                description={
+                  <div className="flex flex-col items-start h-full">
+                    <span className="text-black text-foreground-secondary">
+                      Trust Wallet
+                    </span>
+                    <span>United Kingdom (Remote)</span>
+                  </div>
+                }
+              />
+
+              <div className=" absolute bottom-2 left-3 right-0">
+                <div className="flex justify-between items-center w-full ">
+                  <Button type="link" className=" text-foreground">
+                    <div className="flex items-center gap-x-2">
+                      <Icon
+                        className="mt-0 text-primary"
+                        icon={"streamline:send-email-solid"}
+                      />
+                      <span className="  block">Apply for this job</span>
+                    </div>
+                  </Button>
+
+                  <div className="flex gap-x-3 px-3">
+                    <Tooltip title="Skip the job (show later)">
+                      <Button type="link" className=" text-foreground px-0">
+                        <Icon
+                          className="mt-2"
+                          icon={"carbon:skip-forward-filled"}
+                        />
+                      </Button>
+                    </Tooltip>
+
+                    <Tooltip title="Remove this job (for this profile)">
+                      <Button type="link" className=" text-foreground px-0">
+                        <Icon className="mt-2" icon={"ic:round-block"} />
+                      </Button>
+                    </Tooltip>
+                  </div>
+                </div>
+              </div>
             </Card>
           ))}
         </div>
