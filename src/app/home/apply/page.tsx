@@ -51,7 +51,18 @@ const Chat = () => {
 
   useEffect(() => {
     setJobs(Str.dummyJobs);
+    setSelectedJob(Str.dummyJobs[0]);
   }, []);
+
+  useEffect(() => {
+    onLoad();
+  }, [selectedJob]);
+
+  const onLoad = async () => {
+    setLoadingCV(true);
+    await waitforme(5000);
+    setLoadingCV(false);
+  };
 
   const getChatHistory = async (): Promise<any> => {
     try {
@@ -203,44 +214,6 @@ const Chat = () => {
           <div className="px-2 w-full">{loadingCV && <LoadingJobItem />}</div>
 
           <div className="flex flex-col w-full">
-            {/*    <section className="flex items-start h-56 bg-gray-400 p-7 gap-y-3 justify-between">
-              <div className="flex flex-col w-full">
-                <span className="text-3xl font-black">Agboola Yusuf</span>
-                <span className="font-black text-2xl">Frontend engineer</span>
-                <div className="flex flex-col gap-y-2 mt-4">
-                  <div className="flex items-center gap-x-2 text-gray-700">
-                    <Icon icon={"mage:email-fill"} />
-                    <span className="text-sm">agboolar09@gmail.com</span>
-                  </div>
-                  <div className="flex items-center gap-x-2 text-gray-700">
-                    <Icon icon={"mdi:telephone"} />
-                    <span className="text-sm"> +2348104568117</span>
-                  </div>
-
-                  <div className="flex items-center gap-x-3 mt-0">
-                    <div className="flex items-center gap-x-2 text-gray-700">
-                      <Icon icon={"akar-icons:linkedin-v1-fill"} />
-                      <span className="text-sm"> linkedin.com/in/olaar09/</span>
-                    </div>
-                    <div className="flex items-center gap-x-2 text-gray-700">
-                      <Icon icon={"bi:github"} />
-                      <span className="text-sm"> github.com/olaar09</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <Image
-                  width={300}
-                  height={300}
-                  className="h-40 w-48 rounded-md"
-                  src={"/sample.png"}
-                  alt={""}
-                />
-              </div>
-            </section> */}
-
             <div className="flex items-center gap-x-1">
               <div className="flex flex-col w-9/12">
                 <section className="px-6 pt-7">
