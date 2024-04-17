@@ -27,7 +27,6 @@ const items = [
   { name: "Automatically tailor your profile to each job" },
   { name: "Auto send Job application or send applications with 1 click" },
   { name: "Automatic follow up when you don't hear back" },
-  { name: "Auto send Job application or send manually with 1 click" },
 ];
 export default function Home() {
   const [loading, setLoading] = useState(false);
