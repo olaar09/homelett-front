@@ -3,7 +3,6 @@
 import { Icon } from "@iconify/react";
 import { useContext, useEffect, useRef, useState } from "react";
 
-import { Avatar, Button, Card, Tooltip, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { usePrevious, useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -20,29 +19,8 @@ import ChatHistory from "../_components/ChatDisplay";
 import { ChatContext } from "@/contexts/ChatContext";
 import JobItem from "../_components/JobItem";
 import LoadingJobItem from "../_components/LoadingJobItem";
-
-const HeaderItem = ({
-  withBg,
-  title,
-  icon,
-}: {
-  withBg: boolean;
-  title: string;
-  icon: string;
-}) => {
-  return (
-    <div
-      className={` items-center flex gap-x-1 py-3 cursor-pointer hover:opacity-55 transition-all duration-150 ${
-        withBg
-          ? "bg-primary text-foreground-inverted rounded-lg px-3 "
-          : "text-foreground "
-      }`}
-    >
-      <Icon icon={icon} className="text-xl" />
-      <span className="text-sm font-bold mt-0"> {title}</span>
-    </div>
-  );
-};
+import { message } from "antd";
+import { Str } from "@/utils/consts";
 
 const Chat = () => {
   const [chat, setChat] = useState<IChat | null>(null);
@@ -55,18 +33,19 @@ const Chat = () => {
 
   const [openConnector, setOpenConnector] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
-  const [openPrevChats, setOpenPrevChats] = useState(false);
-  const [openConnectedDatasources, setOpenConnectedDatasources] =
-    useState(false);
+  const [selectedJob, setSelectedJob] = useState<any>(null);
+
+  const [jobs, setJobs] = useState<any[]>([]);
+
   const [loadingNewChat, setLoadingNewChat] = useState(false);
 
   const currentAuth = useContext(AuthContext);
   const authContext = useContext(AuthContext);
   const apiUtil = new APIUtil();
 
-  const chatSources = (currentAuth.dataSources ?? []).filter((dt) => {
-    return dt.source_type.category === "datasource";
-  });
+  useEffect(() => {
+    setJobs(Str.dummyJobs);
+  }, []);
 
   const getChatHistory = async (): Promise<any> => {
     try {
@@ -131,48 +110,6 @@ const Chat = () => {
     }
   }, [currentAuth, currentAuth.loadingSources]);
 
-  const onSendChat = async (e: any, question: string) => {
-    e.preventDefault();
-
-    try {
-      const newChats = [...(displayedChats ?? [])];
-      newChats.push({
-        message: question,
-        type: "question",
-        chat_id: chat!.id!,
-        ai_explanation: "",
-        datasource_query: "",
-      });
-      setDisplayedChats(newChats);
-
-      setLoading(true);
-      const response = await apiUtil.chatService.askQuestion({
-        chat_id: chat!.id,
-        question: question,
-        datasource_id: chat!.datasource.id!,
-      });
-
-      let data;
-      try {
-        data = JSON.parse(response.data.message!);
-      } catch (error) {
-        data = response.data;
-      }
-
-      setDisplayedChats([...newChats, response.data]);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error);
-
-        message.error(
-          `${error?.response?.data?.message ?? "Unable to complete request"}`
-        );
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const onOpenConnector = () => {
     setOpenConnector(true);
   };
@@ -215,26 +152,32 @@ const Chat = () => {
     }
   };
 
-  const onOpenPreviousChats = () => {
-    setOpenPrevChats(true);
+  const onSelectJob = (jobItem: any) => {
+    setSelectedJob(jobItem);
   };
+
+  function waitforme(millisec: number) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("");
+      }, millisec);
+    });
+  }
 
   const onClosePreviousChats = () => {
-    setOpenPrevChats(false);
+    // setOpenPrevChats(false);
   };
 
-  const onSelectChat = (chat: IChat) => {
-    setChat(chat);
-    onClosePreviousChats();
-  };
+  const onApplyJob = async (job: any) => {
+    setLoading(true);
 
-  const onOpenStartChatModal = () => {
-    setOpenConnectedDatasources(true);
-  };
+    await waitforme(5000);
+    const clone = [...jobs];
+    const jobIndex = clone.findIndex((i) => i.name === job.name);
+    clone[jobIndex].applied = true;
+    setLoading(false);
 
-  const onDatasourceSelected = async (item: IDataSourceItem) => {
-    await onStartNewChat(item.id);
-    setOpenConnectedDatasources(false);
+    setJobs(clone);
   };
 
   return (
@@ -251,8 +194,14 @@ const Chat = () => {
         </div>
 
         <div className="lg:w-[400px] w-full  h-full overflow-y-scroll pb-10 ">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => (
-            <JobItem active={i === 1} />
+          {Str.dummyJobs.map((job) => (
+            <JobItem
+              job={job}
+              applying={job.name === selectedJob?.name && loading}
+              onApplyJob={() => onApplyJob(job)}
+              onSelectJob={() => onSelectJob(job)}
+              active={job.name === selectedJob?.name}
+            />
           ))}
         </div>
       </section>
