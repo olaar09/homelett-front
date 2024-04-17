@@ -19,8 +19,11 @@ import ChatHistory from "../_components/ChatDisplay";
 import { ChatContext } from "@/contexts/ChatContext";
 import JobItem from "../_components/JobItem";
 import LoadingJobItem from "../_components/LoadingJobItem";
-import { message } from "antd";
+import { Avatar, message } from "antd";
 import { Str } from "@/utils/consts";
+import Image from "next/image";
+import { ExperienceItem } from "./ExperienceItem";
+import { OverviewItem } from "./OverviewItem";
 
 const Chat = () => {
   const [chat, setChat] = useState<IChat | null>(null);
@@ -38,6 +41,7 @@ const Chat = () => {
   const [jobs, setJobs] = useState<any[]>([]);
 
   const [loadingNewChat, setLoadingNewChat] = useState(false);
+  const [loadingCV, setLoadingCV] = useState(false);
 
   const currentAuth = useContext(AuthContext);
   const authContext = useContext(AuthContext);
@@ -193,8 +197,93 @@ const Chat = () => {
       />
 
       <section className=" flex items-center h-screen overflow-scroll">
-        <div className="lg:flex hidden lg:w-9/12  h-full  px-2 flex-col overflow-y-scroll">
-          <LoadingJobItem />
+        <div className="lg:flex hidden lg:w-9/12  h-full   flex-col overflow-y-scroll">
+          <div className="px-2 w-full">{loadingCV && <LoadingJobItem />}</div>
+
+          <div className="flex flex-col w-full">
+            {/*    <section className="flex items-start h-56 bg-gray-400 p-7 gap-y-3 justify-between">
+              <div className="flex flex-col w-full">
+                <span className="text-3xl font-black">Agboola Yusuf</span>
+                <span className="font-black text-2xl">Frontend engineer</span>
+                <div className="flex flex-col gap-y-2 mt-4">
+                  <div className="flex items-center gap-x-2 text-gray-700">
+                    <Icon icon={"mage:email-fill"} />
+                    <span className="text-sm">agboolar09@gmail.com</span>
+                  </div>
+                  <div className="flex items-center gap-x-2 text-gray-700">
+                    <Icon icon={"mdi:telephone"} />
+                    <span className="text-sm"> +2348104568117</span>
+                  </div>
+
+                  <div className="flex items-center gap-x-3 mt-0">
+                    <div className="flex items-center gap-x-2 text-gray-700">
+                      <Icon icon={"akar-icons:linkedin-v1-fill"} />
+                      <span className="text-sm"> linkedin.com/in/olaar09/</span>
+                    </div>
+                    <div className="flex items-center gap-x-2 text-gray-700">
+                      <Icon icon={"bi:github"} />
+                      <span className="text-sm"> github.com/olaar09</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <Image
+                  width={300}
+                  height={300}
+                  className="h-40 w-48 rounded-md"
+                  src={"/sample.png"}
+                  alt={""}
+                />
+              </div>
+            </section> */}
+
+            <div className="flex items-center gap-x-1">
+              <div className="flex flex-col w-9/12">
+                <section className="px-6 pt-7">
+                  <div className="flex items-center gap-x-2">
+                    <Icon className="text-xl" icon={"iconamoon:profile-fill"} />
+                    <span className="font-black text-xl">Career Profile</span>
+                  </div>
+
+                  <OverviewItem title={""} duration={""} content={""} />
+                </section>
+
+                <section className="px-6 pt-7">
+                  <div className="flex items-center gap-x-2">
+                    <Icon
+                      className="text-xl"
+                      icon={"ic:baseline-work-history"}
+                    />
+                    <span className="font-black text-xl">Experiences</span>
+                  </div>
+
+                  <ExperienceItem title={""} duration={""} content={""} />
+                  <ExperienceItem title={""} duration={""} content={""} />
+                  <ExperienceItem title={""} duration={""} content={""} />
+                  <ExperienceItem title={""} duration={""} content={""} />
+                </section>
+              </div>
+
+              <div className="bg-gray-200 h-full w-4/12 ">
+                <div className="w-full flex flex-col items-center h-48  pt-4">
+                  <Avatar
+                    shape="square"
+                    className="w-32 h-32"
+                    size={"large"}
+                    src={"/sample.png"}
+                  />
+                  <div className="flex flex-col items-center mt-2">
+                    <span className="font-black text-2xl">Agboola Yusuf</span>
+                    <span className="text-gray-600 text-xl font-black">
+                      Frontend engineer
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="lg:w-[400px] w-full  h-full overflow-y-scroll pb-10 ">
