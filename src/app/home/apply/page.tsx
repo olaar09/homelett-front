@@ -169,14 +169,18 @@ const Chat = () => {
   };
 
   const onApplyJob = async (job: any) => {
-    setLoading(true);
+    if (selectedJob?.name !== job.name) {
+      setSelectedJob(job);
+      message.warning("Review your cv before applying for this job");
+      return;
+    }
 
+    setLoading(true);
     await waitforme(5000);
     const clone = [...jobs];
     const jobIndex = clone.findIndex((i) => i.name === job.name);
     clone[jobIndex].applied = true;
     setLoading(false);
-
     setJobs(clone);
   };
 
