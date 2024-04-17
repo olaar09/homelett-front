@@ -24,6 +24,8 @@ import { Str } from "@/utils/consts";
 import Image from "next/image";
 import { ExperienceItem } from "./ExperienceItem";
 import { OverviewItem } from "./OverviewItem";
+import HeaderSide from "./CVSide/Header";
+import ASide from "./CVSide";
 
 const Chat = () => {
   const [chat, setChat] = useState<IChat | null>(null);
@@ -266,22 +268,7 @@ const Chat = () => {
                 </section>
               </div>
 
-              <div className="bg-gray-200 h-full w-4/12 ">
-                <div className="w-full flex flex-col items-center h-48  pt-4">
-                  <Avatar
-                    shape="square"
-                    className="w-32 h-32"
-                    size={"large"}
-                    src={"/sample.png"}
-                  />
-                  <div className="flex flex-col items-center mt-2">
-                    <span className="font-black text-2xl">Agboola Yusuf</span>
-                    <span className="text-gray-600 text-xl font-black">
-                      Frontend engineer
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <ASide />
             </div>
           </div>
         </div>
