@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Card, Button, Tooltip } from "antd";
+import { Card, Button, Tooltip, Avatar } from "antd";
 
 const JobItem = ({
   applying,
@@ -23,6 +23,7 @@ const JobItem = ({
       }`}
     >
       <Card.Meta
+        avatar={<Avatar src={job.logo} />}
         title={
           <div className="  items-start block text-wrap line-clamp-2">
             {job.name}
@@ -43,7 +44,7 @@ const JobItem = ({
         }
       />
 
-      <div className=" absolute bottom-2 left-3 right-0">
+      <div className=" absolute bottom-2 left-14 right-0">
         <div className="flex justify-between items-center w-full ">
           <Button
             disabled={applying || job.applied}
