@@ -25,13 +25,13 @@ const ASide = () => {
       <HeaderSide />
 
       <div className="flex flex-col gap-y-6 mt-10  px-10 mx-auto w-11/12">
-        <AsideItem title={"agboolar09@gmail.com"} icon={"mage:email-fill"} />
+        <AsideItem title={"isaac09@gmail.com"} icon={"mage:email-fill"} />
         <AsideItem title={"+234819993993"} icon={"mdi:telephone"} />
         <AsideItem
-          title={"linkedin.com/in/olaar09/"}
+          title={"linkedin.com/in/isaac09/"}
           icon={"akar-icons:linkedin-v1-fill"}
         />
-        <AsideItem title={"github.com/olaar09"} icon={"bi:github"} />
+        <AsideItem title={"github.com/isaac09"} icon={"bi:github"} />
       </div>
 
       <div className="mt-10  mx-auto w-11/12 px-10 ">

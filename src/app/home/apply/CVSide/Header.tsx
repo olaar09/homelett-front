@@ -10,7 +10,7 @@ const HeaderSide = () => {
         src={"/sample.png"}
       />
       <div className="flex flex-col items-center mt-2">
-        <span className="font-black text-2xl">Agboola Yusuf</span>
+        <span className="font-black text-2xl">John Isaac</span>
         <span className="text-gray-600 text-xl font-black">
           Frontend engineer
         </span>
