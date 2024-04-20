@@ -160,11 +160,11 @@ export default function Home() {
     <main
       ref={divRef}
       onScroll={handleScroll}
-      className="flex flex-col min-h-screen overflow-y-scroll items-center gap-y-4   pb-8 mx-auto w-11/12"
+      className="flex flex-col min-h-screen overflow-y-scroll items-center gap-y-4   pb-8 mx-auto w-full lg:w-11/12"
     >
       <section className="w-full">
-        <div className=" flex items-center gap-x-3   px-20   justify-between w-full mt-2">
-          <div className="flex items-center gap-x-0 w-6/12">
+        <div className=" flex items-center gap-x-3  px-4  lg:px-20   justify-between w-full mt-2">
+          <div className="flex items-center gap-x-0 lg:w-6/12">
             <div className="w-5 h-12 flex items-center">
               <Icon
                 className="text-foreground text-xl "
@@ -189,47 +189,47 @@ export default function Home() {
 
             <Link href={"/login"}>
               <Button type={"link"} loading={false}>
-                <span className="text-lg text-foreground"> Get started </span>
+                <span className="text-lg text-foreground"> Login </span>
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      <section className=" mt-4 flex justify-start items-center pt-20  w-full  px-20 ">
+      <section className=" mt-4 flex justify-start items-center pt-20  w-full  lg:px-20 ">
         <div className="text-start  w-full  lg:w-6/12  flex flex-col gap-y-10 ">
-          <span className=" bg-gray-200  rounded-lg py-1 px-2 text-md font-bold w-64">
+          <span className=" bg-gray-200  rounded-lg py-1 px-2 text-md font-bold w-64 mx-auto lg:mx-0">
             Your AI Copilot for job search
           </span>
 
-          <span className="text-5xl font-black w-11/12  leading-tight">
+          <span className="lg:text-5xl text-3xl font-black lg:w-11/12  leading-tight text-center px-4">
             Gain an unparalleled advantage in your job search applygenius.
           </span>
 
-          <span className="text-foreground w-10/12 ">
+          <span className="text-foreground w-full lg:w-10/12  px-4 text-center lg:text-start">
             Find jobs faster and quickly generate persuasive cover letters with
             ApplyGenius. Try it today with a free 7-day trial account.
           </span>
 
-          <div className="flex gap-x-8 mt-0">
-            <div className="w-4/12">
+          <div className="lg:flex flex-col gap-x-8 gap-y-2  mt-0 items-center w-full justify-center">
+            <div className="w-5/12 lg:w-4/12 mx-auto lg:mx-0">
               <ACButton
-                text={"Get access"}
+                text={"Request access"}
                 type={"reset"}
                 loading={false}
                 children={undefined}
               />
             </div>
 
-            <div className="flex items-center text-foreground-secondary">
+            <div className="hidden lg:flex items-center justify-center text-foreground-secondary">
               <Icon icon={"ic:sharp-info"} />
-              <span className=" text-foreground-secondary">
+              <span className=" text-foreground-secondary ">
                 No credit card required
               </span>
             </div>
           </div>
 
-          <div className="flex flex-col gap-y-4">
+          <div className="flex flex-col gap-y-4 items-center">
             <img className="w-60" src="/social.png" />
             <span className=" text-foreground-secondary">
               trusted by 1k+ and counting
@@ -245,16 +245,16 @@ export default function Home() {
         </div>
       </section>
 
-      <div className=" w-full  mt-20 px-4 pt-4 pb-10 ">
+      <div className=" w-full  mt-0 px-4 pt-4 pb-10 ">
         <div className="h-20 flex items-center justify-center">
-          <span className="text-2xl font-bold text-foreground text-center">
+          <span className="lg:text-2xl text-md font-bold text-foreground text-center">
             400,000+ jobs from only the most exciting companies & startups
             around the world
           </span>
         </div>
         <Featured />
       </div>
-
+      {/* 
       <section className="flex flex-col items-center justify-center my-8 lg:my-20 mx-auto w-full lg:w-9/12 gap-y-6 px-3">
         <span className=" font-bold lg:text-6xl text-5xl text-center">
           The better way to job search
@@ -285,7 +285,7 @@ export default function Home() {
             children={undefined}
           />
         </Link>
-      </section>
+      </section> */}
       <section className="px-6 flex items-center justify-center ">
         <span className=" text-foreground-secondary text-sm text-center">
           By continuing, you are agreeing to PostBird's{" "}
