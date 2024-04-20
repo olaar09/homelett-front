@@ -11,15 +11,15 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
-  title: "PostBird | AI Co-Pilot for job search",
+  title: "ApplyGeni.us | AI Co-Pilot for job search",
   description: "AI Co-Pilot for your job search",
-  applicationName: "PostBird",
+  applicationName: "ApplyGeni.us",
   appleWebApp: true,
   formatDetection: { telephone: false },
   // icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
   openGraph: {
     type: "website",
-    title: "PostBird",
+    title: "ApplyGeni.us",
     description: "",
     siteName: "",
     url: "",
@@ -28,10 +28,10 @@ export const metadata: Metadata = {
   twitter: {
     site: "",
     siteId: "", // make unique
-    creator: "PostBird INC",
+    creator: "ApplyGeni.us INC",
     description:
       "AI Co-Pilot for engineering and business teams to get things done faster!",
-    title: "PostBird",
+    title: "ApplyGeni.us",
     images: "",
   },
 };

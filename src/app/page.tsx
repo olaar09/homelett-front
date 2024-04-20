@@ -279,7 +279,7 @@ export default function Home() {
       </section> */}
       <section className="px-6 flex items-center justify-center ">
         <span className=" text-foreground-secondary text-sm text-center">
-          By continuing, you are agreeing to PostBird's{" "}
+          By continuing, you are agreeing to Applygenius'{" "}
           <span className=" text-banner"> terms of services </span> and{" "}
           <span className=" text-banner">Privacy Policy </span>
         </span>

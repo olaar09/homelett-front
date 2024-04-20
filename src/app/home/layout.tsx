@@ -124,9 +124,9 @@ const Nav: React.FC<any> = ({ children }) => {
   const isBillingActive = authContext.currentUser?.billingActive;
 
   const billingMessage = isFreeTrial
-    ? `You have ${authContext.currentUser?.freeTrialLeft} days left on PostBird free trial `
+    ? `You have ${authContext.currentUser?.freeTrialLeft} days left on ApplyGenius free trial `
     : isBillingActive
-    ? "You are currently on a PostBird paid plan"
+    ? "You are currently on a ApplyGenius paid plan"
     : "Your current plan is expired. Click below to renew";
 
   const buttonMessage = isFreeTrial
