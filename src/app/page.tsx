@@ -165,7 +165,7 @@ export default function Home() {
             <div className="w-6 h-12 flex items-center">
               <Icon
                 className="text-foreground text-8xl "
-                icon="mingcute:magic-hat-line"
+                icon="streamline:send-email-solid"
               />
             </div>
             <span className=" text-foreground font-bold text-2xl opacity-95 mb-1">
@@ -173,12 +173,10 @@ export default function Home() {
             </span>
           </div>
 
-          <div className="flex items-center gap-x-3 w-6/12 justify-end">
-            <Link href={"/login"}>
-              <Button type={"link"} loading={false}>
-                <span className="text-lg text-foreground"> Login </span>
-              </Button>
-            </Link>
+          <div className="flex items-center gap-x-3 w-6/12 justify-end cursor-pointer z-30">
+            <Button onClick={() => router.push("/login")} type={"link"}>
+              <span className="text-lg text-foreground"> Login </span>
+            </Button>
           </div>
         </div>
       </section>
@@ -202,8 +200,9 @@ export default function Home() {
           <div className="flex lg:flex-row  flex-col gap-x-3 ">
             <div className="w-5/12 lg:w-4/12 mx-auto lg:mx-0">
               <ACButton
+                onClick={() => router.push("/request-invite")}
                 text={"Request access"}
-                type={"reset"}
+                type={"button"}
                 loading={false}
                 children={undefined}
               />
@@ -228,18 +227,15 @@ export default function Home() {
         <div className="w-full absolute  hidden lg:w-5/12 mx-auto lg:flex lg:flex-row flex-col items-center  right-0  rounded-tl-lg rounded-bl-lg h-full  ">
           <div className="relative">
             <div className="h-full bg-black rounded-xl    opacity-5 absolute left-0 right-0 bottom-0 top-0"></div>
-            <img
-              className="rounded-tl-lg rounded-bl-lg h-[550px] w-[1200px]"
-              src="/two.png"
-            />
+            <img className="rounded-tl-lg rounded-bl-lg " src="/two.png" />
           </div>
         </div>
       </section>
 
-      <div className=" w-full  mt-0 px-4 pt-4 pb-10 ">
+      <div className=" w-full  lg:mt-10 px-4 pt-4 pb-10 ">
         <div className="h-20 flex items-center justify-center">
           <span className="lg:text-2xl text-md font-bold text-foreground text-center">
-            400,000+ jobs from only the most exciting companies & startups
+            400,000+ jobs from the most exciting companies <br />& startups
             around the world
           </span>
         </div>

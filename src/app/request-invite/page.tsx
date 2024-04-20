@@ -23,7 +23,12 @@ import Link from "next/link";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({
+    email: "",
+    fullname: "",
+    phone: "",
+    job_title: "",
+  });
   const apiService = new APIUtil();
   const query = useSearchParams();
   const router = useRouter();
@@ -175,47 +180,53 @@ export default function Home() {
         <div className="text-center mt-10 px-4 w-full  lg:w-6/12 mx-auto ">
           <span className=" lg:text-5xl text-3xl font-black">
             {" "}
-            Login to your account
+            Request invite
           </span>
         </div>
-
+        {/* 
         <div className=" w-5/12 mx-auto  mt-10 ">
           <Suspense fallback={<span>loading..</span>}>
             <GoogleLoginButton onSuccess={googleLogin} />
           </Suspense>
-        </div>
-
-        <div className="my-4 gap-x-3 mt-9 flex items-center justify-between w-5/12 mx-auto px-8">
-          <div className=" border-b-[0.5px] border-foreground-secondary flex-1 "></div>
-          <span className=" text-foreground-secondary text-sm">Or</span>
-          <div className=" border-b-[0.5px] border-foreground-secondary flex-1"></div>
-        </div>
+        </div> */}
 
         <form
-          className="lg:w-4/12 w-full mx-auto"
+          className="lg:w-4/12 w-full mx-auto mt-20"
           onSubmit={(e: any) => onSubmitLogin(e)}
           method="post"
         >
           <div className="w-full px-8 flex flex-col gap-y-6">
+            <InputField
+              name="job_title"
+              type="text"
+              placeHolder="Job title"
+              onChange={(e) => onChangeForm("job_title", e.target.value)}
+            />
+            <InputField
+              name="fullname"
+              type="text"
+              placeHolder="Full name"
+              onChange={(e) => onChangeForm("fullname", e.target.value)}
+            />
             <InputField
               name="email"
               type="email"
               placeHolder="Email address"
               onChange={(e) => onChangeForm("email", e.target.value)}
             />
+
             <InputField
-              name="password"
-              type="password"
-              required={true}
-              placeHolder="Password"
-              onChange={(e) => onChangeForm("password", e.target.value)}
+              name="phone"
+              type="phone"
+              placeHolder="Phone number"
+              onChange={(e) => onChangeForm("phone", e.target.value)}
             />
 
             <ACButton
               text={
                 query.get("is_new") === "true"
                   ? "Sign up with email"
-                  : "Login with email"
+                  : "Request invite"
               }
               type={"submit"}
               loading={loading}
