@@ -202,16 +202,16 @@ export default function Home() {
             Your AI Copilot for job search
           </span>
 
-          <span className="lg:text-5xl text-3xl font-black lg:w-11/12  leading-tight text-center px-4">
+          <span className="lg:text-5xl text-3xl font-black lg:w-11/12  leading-tight  lg:text-start text-center px-4 lg:px-0">
             Gain an unparalleled advantage in your job search applygenius.
           </span>
 
-          <span className="text-foreground w-full lg:w-10/12  px-4 text-center lg:text-start">
+          <span className="text-foreground w-full lg:w-10/12 lg:px-0  px-4 text-center lg:text-start">
             Find jobs faster and quickly generate persuasive cover letters with
             ApplyGenius. Try it today with a free 7-day trial account.
           </span>
 
-          <div className="lg:flex flex-col gap-x-8 gap-y-2  mt-0 items-center w-full justify-center">
+          <div className="flex lg:flex-row  flex-col ">
             <div className="w-5/12 lg:w-4/12 mx-auto lg:mx-0">
               <ACButton
                 text={"Request access"}
@@ -229,7 +229,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-y-4 items-center">
+          <div className="flex flex-col gap-y-4 lg:items-start items-center">
             <img className="w-60" src="/social.png" />
             <span className=" text-foreground-secondary">
               trusted by 1k+ and counting
@@ -237,7 +237,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full  hidden lg:w-5/12 mx-auto lg:flex flex-col items-center  right-0  rounded-tl-lg rounded-bl-lg h-full  ">
+        <div className="w-full  hidden lg:w-5/12 mx-auto lg:flex lg:flex-row flex-col items-center  right-0  rounded-tl-lg rounded-bl-lg h-full  ">
           <div className="relative">
             <div className="h-full bg-black rounded-xl    opacity-5 absolute left-0 right-0 bottom-0 top-0"></div>
             <img className="rounded-tl-lg rounded-bl-lg" src="/home_2.gif" />
