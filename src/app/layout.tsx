@@ -65,7 +65,7 @@ export default function RootLayout({
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js" />
       </Head>
       <body className={inter.className}>
-        <GoogleOAuthProvider clientId="801456630743-5rb4c1hh82rvse95fek0bqt623gnclqg.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId="655083840359-3mq2i1jhtj7ehodfadm4b232pnetm1ka.apps.googleusercontent.com">
           <Suspense fallback={<span></span>}>
             <AuthProvider>{children} </AuthProvider>{" "}
           </Suspense>
