@@ -165,10 +165,10 @@ export default function Home() {
       <section className="w-full">
         <div className=" flex items-center gap-x-3  px-4  lg:px-20   justify-between w-full mt-2">
           <div className="flex items-center gap-x-0 lg:w-6/12">
-            <div className="w-5 h-12 flex items-center">
+            <div className="w-6 h-12 flex items-center">
               <Icon
-                className="text-foreground text-xl "
-                icon="streamline:send-email-solid"
+                className="text-foreground text-8xl "
+                icon="mingcute:magic-hat-line"
               />
             </div>
             <span className=" text-foreground font-bold text-2xl opacity-95 mb-1">
@@ -177,16 +177,6 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-x-3 w-6/12 justify-end">
-            <Link href={"/login"}>
-              <Button
-                className="lg:inline hidden "
-                type={"link"}
-                loading={false}
-              >
-                <span className="text-lg text-foreground"> Login </span>
-              </Button>
-            </Link>
-
             <Link href={"/login"}>
               <Button type={"link"} loading={false}>
                 <span className="text-lg text-foreground"> Login </span>
@@ -203,15 +193,16 @@ export default function Home() {
           </span>
 
           <span className="lg:text-5xl text-3xl font-black lg:w-11/12  leading-tight  lg:text-start text-center px-4 lg:px-0">
-            Gain an unparalleled advantage in your job search applygenius.
+            Gain an unparalleled advantage in your job search.
           </span>
 
           <span className="text-foreground w-full lg:w-10/12 lg:px-0  px-4 text-center lg:text-start">
-            Find jobs faster and quickly generate persuasive cover letters with
-            ApplyGenius. Try it today with a free 7-day trial account.
+            ApplyGenius Boosts Your Interview & Job application Chances 9x:
+            Automatically Applies to Jobs Based on Your Preferences and Tailors
+            Your CV for each application with AI.
           </span>
 
-          <div className="flex lg:flex-row  flex-col ">
+          <div className="flex lg:flex-row  flex-col gap-x-3 ">
             <div className="w-5/12 lg:w-4/12 mx-auto lg:mx-0">
               <ACButton
                 text={"Request access"}
@@ -237,10 +228,13 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full  hidden lg:w-5/12 mx-auto lg:flex lg:flex-row flex-col items-center  right-0  rounded-tl-lg rounded-bl-lg h-full  ">
+        <div className="w-full absolute  hidden lg:w-5/12 mx-auto lg:flex lg:flex-row flex-col items-center  right-0  rounded-tl-lg rounded-bl-lg h-full  ">
           <div className="relative">
             <div className="h-full bg-black rounded-xl    opacity-5 absolute left-0 right-0 bottom-0 top-0"></div>
-            <img className="rounded-tl-lg rounded-bl-lg" src="/home_2.gif" />
+            <img
+              className="rounded-tl-lg rounded-bl-lg h-[550px] w-[1200px]"
+              src="/two.png"
+            />
           </div>
         </div>
       </section>
