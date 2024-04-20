@@ -2,12 +2,9 @@
 
 import { Icon } from "@iconify/react";
 //import GoogleSignIn from "./components/Auth/GoogleSignin1";
-import InputField from "./components/InputField";
 import ACButton from "./components/Button";
 import { Button, message } from "antd";
 import { Suspense, useContext, useEffect, useState } from "react";
-import FirebaseContext from "@/contexts/FirebaseContext";
-import { FirebaseError } from "firebase/app";
 import { useRouter, useSearchParams } from "next/navigation";
 import GoogleLoginButton from "./components/Auth/GoogleSignin";
 import APIService from "@/services/APIService";
@@ -197,9 +194,9 @@ export default function Home() {
           </span>
 
           <span className="text-foreground w-full lg:w-10/12 lg:px-0  px-4 text-center lg:text-start">
-            ApplyGenius Boosts Your Interview & Job application Chances 9x:
-            Automatically Applies to Jobs Based on Your Preferences and Tailors
-            Your CV for each application with AI.
+            ApplyGenius Boosts Your Interview & Job search chances 9x: Apply to
+            100s of Jobs with a single click, based on your preferences & Tailor
+            your CV for each application automatically with AI.
           </span>
 
           <div className="flex lg:flex-row  flex-col gap-x-3 ">
