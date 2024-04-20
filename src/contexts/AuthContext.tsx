@@ -155,7 +155,11 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
       } else {
         message.error("Unable to fetch user");
       } */
-      if (path !== "/" && !path.includes("login")) {
+      if (
+        path !== "/" &&
+        !path.includes("login") &&
+        !path.includes("request-invite")
+      ) {
         router.push(`/`);
         return;
       }
