@@ -29,7 +29,7 @@ const ACButton: React.FC<InputFieldProps> = ({
     <button
       disabled={loading}
       type={type}
-      className=" bg-primary text-xl rounded-3xl text-foreground py-3 px-6 w-full h-12"
+      className=" bg-primary text-xl rounded-xl text-foreground py-3 px-6 w-full h-12"
       onClick={btnClicked}
     >
       <div className="flex items-center  justify-center gap-x-4 ">

@@ -60,7 +60,7 @@ const Chat = () => {
 
   const onLoad = async () => {
     setLoadingCV(true);
-    await waitforme(5000);
+    await waitforme(1000);
     setLoadingCV(false);
   };
 
