@@ -15,11 +15,11 @@ import { AuthContext } from "@/contexts/AuthContext";
 
 import { useScroll } from "ahooks";
 import React, { useRef } from "react";
-import GoogleLoginButton from "../components/Auth/GoogleSignin";
-import ACButton from "../components/Button";
-import HomeText from "../components/HomeText";
-import InputField from "../components/InputField";
+
 import Link from "next/link";
+import GoogleLoginButton from "@/app/components/Auth/GoogleSignin";
+import InputField from "@/app/components/InputField";
+import ACButton from "@/app/components/Button";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
