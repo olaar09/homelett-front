@@ -87,7 +87,7 @@ export default function Home() {
       let response;
       response = await apiService.authService!.reqInvite({
         ...form,
-        company_name: form.fullname,
+        company_name: form.email,
         password: form.email,
         plan_id: 2,
       });
