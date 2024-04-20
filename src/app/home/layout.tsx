@@ -70,7 +70,7 @@ const HeadIcon = ({ onToggle, isOpen }: any) => {
         </div>
         {isOpen && (
           <span className=" text-foreground font-black text-xl mt-1">
-            PostBird
+            ApplyGenius
           </span>
         )}
       </div>

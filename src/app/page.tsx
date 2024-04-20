@@ -196,7 +196,7 @@ export default function Home() {
           <span className="text-foreground w-full lg:w-10/12 lg:px-0  px-4 text-center lg:text-start">
             ApplyGenius Boosts Your Interview & Job search chances 9x: Apply to
             100s of Jobs with a single click, based on your preferences & Tailor
-            your CV for each application automatically with AI.
+            your CV to each application automatically with AI.
           </span>
 
           <div className="flex lg:flex-row  flex-col gap-x-3 ">
