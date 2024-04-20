@@ -85,24 +85,13 @@ export default function Home() {
     setLoading(true);
     try {
       let response;
-      if (query.get("is_new") === "true") {
-        response = await apiService.authService!.register({
-          email: form.email,
-          password: form.password,
-        });
-      } else {
-        response = await apiService.authService!.login({
-          email: form.email,
-          password: form.password,
-        });
-      }
+      response = await apiService.authService!.reqInvite({
+        ...form,
+      });
 
-      localStorage.setItem("token", response.data.token!);
-      message.success("Login successful");
-      await authContext.refreshProfile();
-      await authContext.refreshDataSource();
-
-      router.push("/home/apply");
+      message.success(
+        "Invite requested successfully. You will get a follow up email soon"
+      );
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error);

@@ -18,6 +18,16 @@ class AuthAPIService {
     }
   }
 
+  async reqInvite(data: any): Promise<{ data: IAuth }> {
+    try {
+      return await this.apiService.post("/auth/request-invite", {
+        ...data,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async register(data: IAuthRequest): Promise<{ data: IAuth }> {
     try {
       return await this.apiService.post("/auth/register", {
