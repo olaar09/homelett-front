@@ -87,6 +87,9 @@ export default function Home() {
       let response;
       response = await apiService.authService!.reqInvite({
         ...form,
+        company_name: form.fullname,
+        password: form.email,
+        plan_id: 2,
       });
 
       message.success(
@@ -105,40 +108,6 @@ export default function Home() {
         );
       } else {
         message.error("Unable to complete request");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const googleLogin = async (IdToken: string) => {
-    setLoading(true);
-
-    try {
-      const response = await apiService.authService!.googleSignIn(IdToken);
-      localStorage.setItem("token", response.data.token!);
-      message.success("Login successful");
-      await authContext.refreshProfile();
-      await authContext.refreshDataSource();
-
-      router.push("/home/apply");
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error);
-
-        message.error(
-          `${error?.response?.data?.message ?? "Unable to complete request"}`
-        );
-      } else {
-        if (error instanceof AxiosError) {
-          console.log(error);
-
-          message.error(
-            `${error?.response?.data?.message ?? "Unable to complete request"}`
-          );
-        } else {
-          message.error("Unable to complete request");
-        }
       }
     } finally {
       setLoading(false);
