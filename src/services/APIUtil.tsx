@@ -22,7 +22,7 @@ class APIUtil {
   public datasourceService: DataSourceAPIService;
 
   constructor() {
-    const service = new APIService("https://api.sequelbase.com/api"); // Initialize ApiService
+    const service = new APIService("https://api.applygeni.us/api"); // Initialize ApiService
     this.chatService = new ChatAPIService(service); // Use ApiService instance to initialize chatService
     this.groupService = new GroupAPIService(service);
     this.profileService = new ProfileAPIService(service);
