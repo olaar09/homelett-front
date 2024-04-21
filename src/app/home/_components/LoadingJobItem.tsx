@@ -5,7 +5,7 @@ const LoadingJobItem = () => {
     <>
       <Card
         className="w-full rounded-none"
-        style={{ marginTop: 16, height: 200 }}
+        style={{ marginTop: 16, height: 500 }}
         loading={true}
       >
         <Card.Meta
