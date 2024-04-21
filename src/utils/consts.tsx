@@ -22,7 +22,7 @@ export const Str = {
       logo: "/logos/binance.png",
     },
     {
-      name: "Senior Software Engineer - React, Next.js, GraphQL",
+      name: "Senior Frontend Engineer - MetaMask (Portfolio, Assets, and NFTs)",
       company: "MoniePoint",
       location: "Nigeria, Remote",
       salary: 1900,
