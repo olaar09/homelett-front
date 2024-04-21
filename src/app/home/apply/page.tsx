@@ -103,6 +103,8 @@ const Chat = () => {
     }
   };
 
+  console.log(jProfile, "MKDEM");
+
   const onSelectJob = (jobItem: any) => {
     setSelectedJob(jobItem);
   };
@@ -188,7 +190,7 @@ const Chat = () => {
                   </section>
                 </div>
 
-                <ASide />
+                <ASide profile={jProfile} />
               </div>
             </div>
           )}

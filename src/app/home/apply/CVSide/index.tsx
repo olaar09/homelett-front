@@ -25,8 +25,8 @@ const ASide = ({ profile }: any) => {
       <HeaderSide />
 
       <div className="flex flex-col gap-y-6 mt-10  px-10 mx-auto w-11/12">
-        <AsideItem title={profile?.email} icon={"mage:email-fill"} />
-        <AsideItem title={profile?.phone} icon={"mdi:telephone"} />
+        <AsideItem title={profile?.niche_email} icon={"mage:email-fill"} />
+        <AsideItem title={profile?.niche_phone} icon={"mdi:telephone"} />
         <AsideItem
           title={"linkedin.com/in/isaac09/"}
           icon={"akar-icons:linkedin-v1-fill"}
