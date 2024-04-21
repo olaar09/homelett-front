@@ -19,14 +19,14 @@ const AsideItem2 = ({ title, desc }: any) => {
   );
 };
 
-const ASide = () => {
+const ASide = ({ profile }: any) => {
   return (
     <div className="bg-gray-200 h-full w-4/12  ">
       <HeaderSide />
 
       <div className="flex flex-col gap-y-6 mt-10  px-10 mx-auto w-11/12">
-        <AsideItem title={"isaac09@gmail.com"} icon={"mage:email-fill"} />
-        <AsideItem title={"+234819993993"} icon={"mdi:telephone"} />
+        <AsideItem title={profile?.email} icon={"mage:email-fill"} />
+        <AsideItem title={profile?.phone} icon={"mdi:telephone"} />
         <AsideItem
           title={"linkedin.com/in/isaac09/"}
           icon={"akar-icons:linkedin-v1-fill"}

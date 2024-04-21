@@ -75,9 +75,28 @@ const Chat = () => {
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
 
+  const {
+    data: jProfile,
+    error: profileErr,
+    loading: loadingJProfile,
+    refresh: refreshProfile,
+  } = useRequest(() => getJobProfile(), {
+    ready:
+      authContext.currentUser != null && authContext.currentUser != undefined,
+  });
+
   const getExperiences = async (): Promise<any> => {
     try {
       const data = await apiUtil.cvService.getExperiences("1");
+      return data.data;
+    } catch (error) {
+      message.error("unable to load data");
+    }
+  };
+
+  const getJobProfile = async (): Promise<any> => {
+    try {
+      const data = await apiUtil.cvService.getJobProfile("1");
       return data.data;
     } catch (error) {
       message.error("unable to load data");

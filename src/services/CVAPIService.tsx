@@ -25,6 +25,17 @@ class CVAPIService {
     }
   }
 
+  async getJobProfile(profileId: string): Promise<any> {
+    try {
+      const response = await this.apiService.get(
+        `/action/get_j_profile/${profileId}`
+      );
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getExperiences(profileId: string): Promise<{ data: any[] }> {
     try {
       const response = await this.apiService.get(
