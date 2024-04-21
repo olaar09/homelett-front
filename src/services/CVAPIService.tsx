@@ -3,23 +3,29 @@ import ApiService from "./APIService";
 import { IAuthRequest } from "@/app/interfaces/IRegisterRequest";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 
-class ChatHistoryAPIService {
+class CVAPIService {
   private apiService: ApiService;
 
   constructor(apiService: ApiService) {
     this.apiService = apiService;
   }
 
-  async getChatHistory(chatId: string): Promise<{ data: IChatHistoryItem[] }> {
+  async generateCVCover(profileId: string, jobId: number): Promise<string> {
     try {
-      const user = await this.apiService.get(`/chats/${chatId}/history`);
-      return user as { data: IChatHistoryItem[] };
+      const text = await this.apiService.post<{ data: string }>(
+        `/action/generate_cover`,
+        {
+          job_id: jobId,
+          profile_id: profileId,
+        }
+      );
+      return text.data;
     } catch (error) {
       throw error;
     }
   }
 
-  async updateChatHistory(
+  async generateExperience(
     chatId: string,
     config: { key: string; value: string }
   ): Promise<string> {
@@ -36,4 +42,4 @@ class ChatHistoryAPIService {
   }
 }
 
-export default ChatHistoryAPIService;
+export default CVAPIService;

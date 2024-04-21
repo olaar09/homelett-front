@@ -4,39 +4,21 @@ import { Icon } from "@iconify/react";
 import { useContext, useEffect, useRef, useState } from "react";
 
 import APIUtil from "@/services/APIUtil";
-import { usePrevious, useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
-import ChatInput from "../_components/ChatInput";
-import ConnectorModal from "../_components/Connector/Connector";
 import { IChat } from "@/app/interfaces/IChatItem";
-import { AxiosError } from "axios";
-import ChatListDrawer from "../_components/SelectChatDrawer";
-import StartChatModal from "../_components/StartChatModal";
-import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
-import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
-import ChatHistory from "../_components/ChatDisplay";
-import { ChatContext } from "@/contexts/ChatContext";
 import JobItem from "../_components/JobItem";
 import LoadingJobItem from "../_components/LoadingJobItem";
-import { Avatar, message } from "antd";
+import { message } from "antd";
 import { Str } from "@/utils/consts";
-import Image from "next/image";
 import { ExperienceItem } from "./ExperienceItem";
 import { OverviewItem } from "./OverviewItem";
-import HeaderSide from "./CVSide/Header";
 import ASide from "./CVSide";
+import { AxiosError } from "axios";
 
 const Chat = () => {
-  const [chat, setChat] = useState<IChat | null>(null);
+  const [coverLetter, setCoverLetter] = useState("");
 
-  const [displayedChats, setDisplayedChats] = useState<
-    IChatHistoryItem[] | null
-  >(null);
-
-  const prevDisplayedChats = usePrevious(displayedChats);
-
-  const [openConnector, setOpenConnector] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [selectedJob, setSelectedJob] = useState<any>(null);
 
@@ -46,7 +28,6 @@ const Chat = () => {
   const [loadingCV, setLoadingCV] = useState(false);
 
   const currentAuth = useContext(AuthContext);
-  const authContext = useContext(AuthContext);
   const apiUtil = new APIUtil();
 
   useEffect(() => {
@@ -55,119 +36,43 @@ const Chat = () => {
   }, []);
 
   useEffect(() => {
-    onLoad();
+    if (selectedJob) onLoad(selectedJob);
   }, [selectedJob]);
 
-  const onLoad = async () => {
+  const onLoad = async (jobItem: any) => {
     setLoadingCV(true);
-    await waitforme(1000);
-    setLoadingCV(false);
-  };
-
-  const getChatHistory = async (): Promise<any> => {
     try {
-      const data = await apiUtil.chatHistoryService.getChatHistory(chat!.id);
-      return data.data.reverse();
+      const coverLetter = await apiUtil.cvService.generateCVCover(
+        "1",
+        jobItem.id
+      );
+      setCoverLetter(coverLetter);
     } catch (error) {
-      message.error("unable to load data");
-    }
-  };
-
-  const getChats = async (): Promise<any> => {
-    try {
-      const data = await apiUtil.chatService.listChats();
-      const list = data.data;
-
-      if (list.length > 0) {
-        setChat(list[0]);
+      if (error instanceof AxiosError) {
+        message.error(
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
+          }`
+        );
+      } else {
+        message.error("Unable to complete request");
       }
-      return list;
-    } catch (error) {
-      message.error("unable to load data");
+    } finally {
+      setLoadingCV(false);
     }
   };
 
-  const {
-    data: chatList,
+  /*   const {
+    data: jobList,
     error,
     loading: loadingChat,
-    refresh: refreshChats,
+    refresh: refreshJobList,
   } = useRequest(() => getChats(), {
     ready:
       authContext.currentUser != null && authContext.currentUser != undefined,
-  });
-
-  const {
-    data: chatHistoryList,
-    error: historyError,
-    loading: loadingChatHistory,
-    refresh: refreshChatHistory,
-  } = useRequest(() => getChatHistory(), {
-    ready: chat != null && chat.id != null,
-  });
-
-  useEffect(() => {
-    setDisplayedChats(chatHistoryList);
-  }, [chatHistoryList]);
-
-  useEffect(() => {
-    if (chat) {
-      refreshChatHistory();
-    }
-  }, [chat]);
-
-  useEffect(() => {
-    if (currentAuth) {
-      if (
-        (!currentAuth.dataSources || currentAuth.dataSources?.length < 1) &&
-        !currentAuth.loadingSources
-      ) {
-        onOpenConnector();
-      }
-    }
-  }, [currentAuth, currentAuth.loadingSources]);
-
-  const onOpenConnector = () => {
-    setOpenConnector(true);
-  };
-
-  const updateChatHistoryAtIndex = (historyItem: IChatHistoryItem) => {
-    const index = displayedChats!.findIndex((ch) => ch.id === historyItem.id);
-
-    if (index !== -1) {
-      displayedChats![index] = historyItem;
-      setDisplayedChats([...displayedChats!]);
-    }
-  };
-
-  const onCloseConnector = async (needRefresh = false) => {
-    /*  if (!currentAuth.dataSources || currentAuth.dataSources?.length < 1) {
-      alert("no dsource");
-      return;
-    } */
-    if (needRefresh) {
-      refreshChats();
-    }
-    setOpenConnector(false);
-  };
-
-  const onStartNewChat = async (dataSourceId: any) => {
-    try {
-      setLoadingNewChat(true);
-      await apiUtil.chatService.startChat({ datasource_id: dataSourceId });
-      refreshChats();
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error);
-
-        message.error(
-          `${error?.response?.data?.message ?? "Unable to complete request"}`
-        );
-      }
-    } finally {
-      setLoadingNewChat(false);
-    }
-  };
+  }); */
 
   const onSelectJob = (jobItem: any) => {
     setSelectedJob(jobItem);
@@ -222,7 +127,7 @@ const Chat = () => {
                     <span className="font-black text-xl">Career Profile</span>
                   </div>
 
-                  <OverviewItem title={""} duration={""} content={""} />
+                  <OverviewItem content={coverLetter} />
                 </section>
 
                 <section className="px-6 pt-7">

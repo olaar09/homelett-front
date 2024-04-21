@@ -1,6 +1,7 @@
 export const Str = {
   dummyJobs: [
     {
+      id: 1,
       name: "Principal Mobile Engineer",
       company: "GitLab Inc",
       location: "United kingdom",
@@ -8,6 +9,7 @@ export const Str = {
       logo: "/logos/gitlab.png",
     },
     {
+      id: 2,
       name: "HTML/Email Developer",
       company: "Kraken wallet",
       location: "California",
@@ -15,18 +17,19 @@ export const Str = {
       logo: "/logos/krakenfx_logo.jpeg",
     },
     {
-      name: "Product Designer / Front End engineer",
-      company: "Binance",
-      location: "Remote",
-      salary: 1900,
-      logo: "/logos/binance.png",
-    },
-    {
+      id: 3,
       name: "Senior Frontend Engineer  (Portfolio, Assets, and NFTs)",
       company: "MoniePoint",
       location: "Nigeria, Remote",
       salary: 1900,
       logo: "/logos/monie.jpeg",
+    },
+    {
+      name: "Product Designer / Front End engineer",
+      company: "Binance",
+      location: "Remote",
+      salary: 1900,
+      logo: "/logos/binance.png",
     },
     {
       name: "Lead Frontend Developer ",
