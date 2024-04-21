@@ -25,6 +25,17 @@ class CVAPIService {
     }
   }
 
+  async getExperiences(profileId: string): Promise<{ data: any[] }> {
+    try {
+      const response = await this.apiService.get(
+        `/action/get_experiences/${profileId}`
+      );
+      return response as { data: any[] };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async generateExperience(
     chatId: string,
     config: { key: string; value: string }

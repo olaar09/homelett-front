@@ -18,7 +18,12 @@ export const ExperienceItem = ({
           <span className="text-sm text-gray-400">{duration}</span>
         </div>
 
-        <span className="text-gray-600 text-sm">{content}</span>
+        <span
+          className="text-gray-600 text-sm whitespace-pre-wrap block"
+          dangerouslySetInnerHTML={{
+            __html: content,
+          }}
+        />
       </div>
     </div>
   );
