@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Hero = () => {
   return (
     <section className="relative bg-white py-12 sm:py-16 lg:py-20 xl:py-24">
