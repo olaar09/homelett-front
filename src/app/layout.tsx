@@ -34,6 +34,12 @@ export const metadata: Metadata = {
     title: "ApplyGeni.us",
     images: "",
   },
+  assets: [
+    "css/style-3L7QEW2Y.css",
+    "/css/app-IQIUDFNW.css",
+    "/css/fonts-YCCUU2CX.css",
+    "/css/cooltipz.min-7ME7X4VP.css",
+  ],
 };
 
 export const viewport: Viewport = {
@@ -62,7 +68,38 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js" />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@ApplyGenius" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
+        <title>ApplyGenius - AI Copilot for job search</title>
+        <meta name="robots" content="index,follow" />
+        <meta
+          name="description"
+          content="Automatically apply to 50+ jobs daily from all over the world, with your CV modified to each job requirement"
+        />
+        <meta
+          property="og:title"
+          content="ApplyGenius - AI Copilot for job search"
+        />
+        <meta
+          property="og:description"
+          content="Automatically apply to 50+ jobs daily from all over the world, with your CV modified to each job requirement"
+        />
+        <meta property="og:url" content="https://ApplyGenius.ai/partners" />
+        <meta property="og:image" content="/images/dashboard-mockup.png" />
+        <meta
+          property="og:image:alt"
+          content="ApplyGenius - Your AI Copilot for Job Search"
+        />
+        <meta property="og:site_name" content="ApplyGenius" />
+        <link rel="preconnect" href="https://fonts.bunny.net" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900"
+        />
       </Head>
       <body className={inter.className}>
         <GoogleOAuthProvider clientId="655083840359-3mq2i1jhtj7ehodfadm4b232pnetm1ka.apps.googleusercontent.com">

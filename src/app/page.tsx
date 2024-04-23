@@ -12,12 +12,20 @@ import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
 import HomeText from "./components/HomeText";
-import TiltHeroSection from "./components/Landing/Tilt";
+import TiltHeroSection from "./components/Landing/Hero";
 import { useScroll } from "ahooks";
 import React, { useRef } from "react";
-import Featured from "./components/Landing/Featured";
+import Featured from "./components/Landing/Section2";
 import Image from "next/image";
 import Link from "next/link";
+import Hero from "./components/Landing/Hero";
+import Section2 from "./components/Landing/Section2";
+import Section3 from "./components/Landing/Section3";
+import Section4 from "./components/Landing/Section4";
+import Section5 from "./components/Landing/Section5";
+import Section6 from "./components/Landing/Section6";
+import Section7 from "./components/Landing/Section7";
+import Footer from "./components/Landing/Footer";
 
 const items = [
   { name: "AI Powered search to find jobs that fits" },
@@ -154,132 +162,91 @@ export default function Home() {
   };
 
   return (
-    <main
-      ref={divRef}
-      onScroll={handleScroll}
-      className="flex flex-col min-h-screen overflow-y-scroll items-center gap-y-4   pb-8 mx-auto w-full lg:w-11/12"
-    >
-      <section className="w-full">
-        <div className=" flex items-center gap-x-3  px-4  lg:px-20   justify-between w-full mt-2">
-          <div className="flex items-center gap-x-0 lg:w-6/12">
-            <div className="w-6 h-12 flex items-center">
-              <Icon
-                className="text-foreground text-8xl "
-                icon="streamline:send-email-solid"
-              />
-            </div>
-            <span className=" text-foreground font-bold text-2xl opacity-95 mb-1">
-              applygeni.us
-            </span>
-          </div>
-
-          <div className="flex items-center gap-x-3 w-6/12 justify-end cursor-pointer z-30">
-            <Button onClick={() => router.push("/login")} type={"link"}>
-              <span className="text-lg text-foreground"> Login </span>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <section className=" mt-4 flex justify-start items-center pt-20  w-full  lg:px-20 ">
-        <div className="text-start  w-full  lg:w-6/12  flex flex-col gap-y-10 ">
-          <span className=" bg-gray-200  rounded-lg py-1 px-2 text-md font-bold w-64 mx-auto lg:mx-0">
-            Your AI Copilot for job search
-          </span>
-
-          <span className="lg:text-5xl text-3xl font-black lg:w-11/12  leading-tight  lg:text-start text-center px-4 lg:px-0">
-            Gain an unparalleled advantage in your job search.
-          </span>
-
-          <span className="text-foreground w-full lg:w-10/12 lg:px-0  px-4 text-center lg:text-start">
-            ApplyGenius Boosts Your Interview & Job search chances 9x: Apply to
-            100s of Jobs with a single click, based on your preferences & Tailor
-            your CV to each application automatically with AI.
-          </span>
-
-          <div className="flex lg:flex-row  flex-col gap-x-3 ">
-            <div className="w-5/12 lg:w-4/12 mx-auto lg:mx-0">
-              <ACButton
-                onClick={() => router.push("/request-invite")}
-                text={"Request access"}
-                type={"button"}
-                loading={false}
-                children={undefined}
-              />
-            </div>
-
-            <div className="hidden lg:flex items-center justify-center text-foreground-secondary">
-              <Icon icon={"ic:sharp-info"} />
-              <span className=" text-foreground-secondary ">
-                No credit card required
-              </span>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-y-4 lg:items-start items-center">
-            <img className="w-60" src="/social.png" />
-            <span className=" text-foreground-secondary">
-              trusted by 1k+ and counting
-            </span>
-          </div>
-        </div>
-
-        <div className="w-full absolute  hidden lg:w-5/12 mx-auto lg:flex lg:flex-row flex-col items-center  right-0  rounded-tl-lg rounded-bl-lg h-full  ">
-          <div className="relative">
-            <div className="h-full bg-black rounded-xl    opacity-5 absolute left-0 right-0 bottom-0 top-0"></div>
-            <img className="rounded-tl-lg rounded-bl-lg " src="/two.png" />
-          </div>
-        </div>
-      </section>
-
-      <div className=" w-full  lg:mt-10 px-4 pt-4 pb-10 ">
-        <div className="h-20 flex items-center justify-center">
-          <span className="lg:text-2xl text-md font-bold text-foreground text-center">
-            400,000+ jobs from the most exciting companies <br />& startups
-            around the world
-          </span>
-        </div>
-        <Featured />
-      </div>
-      {/* 
-      <section className="flex flex-col items-center justify-center my-8 lg:my-20 mx-auto w-full lg:w-9/12 gap-y-6 px-3">
-        <span className=" font-bold lg:text-6xl text-5xl text-center">
-          The better way to job search
-        </span>{" "}
-        <span className="text-center block lg:w-8/12 mx-auto">
-          We're not just another job board. We implement the latest AI
-          technologies to automate job search and application. Giving our users
-          an edge
-        </span>
-        <div className="mx-auto w-full lg:w-7/12">
-          {items.map((item) => (
-            <div className="mt-4 flex items-center justify-between  gap-x-2 w-full">
-              <Icon className="text-2xl" icon={"akar-icons:check-box-fill"} />
-              <div className="w-10/12 flex justify-start">
-                <span>{item.name}</span>
+    <body className="h-full bg-white font-sans text-gray-900 antialiased">
+      <div
+        style={{
+          position: "fixed",
+          zIndex: 9999,
+          top: "16px",
+          left: "16px",
+          right: "16px",
+          bottom: "16px",
+          pointerEvents: "none",
+        }}
+      ></div>
+      <div className="isolate flex min-h-screen flex-col">
+        <header className="sticky z-50 bg-white/90 backdrop-blur-lg inset-x-0 top-0 border-b border-gray-100 py-3">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between">
+              <div className="shrink-0">
+                <a
+                  className="isomorphic-link isomorphic-link--internal"
+                  href="/"
+                >
+                  <img
+                    className="h-8 w-auto"
+                    src="images/logo-full.svg"
+                    alt=""
+                  />
+                </a>
+              </div>
+              {/* <div className="hidden items-center justify-center gap-4 lg:flex">
+              <a
+                className="isomorphic-link isomorphic-link--internal text-sm font-semibold leading-5 transition-all duration-150 rounded-lg px-2 py-1.5 text-gray-950 hover:bg-gray-100 hover:text-blue-600"
+                href="/features"
+              >
+                Features
+              </a>
+              <a
+                className="isomorphic-link isomorphic-link--internal text-sm font-semibold leading-5 transition-all duration-150 rounded-lg px-2 py-1.5 text-gray-950 hover:bg-gray-100 hover:text-blue-600"
+                href="/integrations"
+              >
+                Integrations
+              </a>
+              <a
+                className="isomorphic-link isomorphic-link--internal text-sm font-semibold leading-5 transition-all duration-150 rounded-lg px-2 py-1.5 text-gray-950 hover:bg-gray-100 hover:text-blue-600"
+                href="/pricing"
+              >
+                Pricing
+              </a>
+              <a
+                className="isomorphic-link isomorphic-link--internal text-sm font-semibold leading-5 transition-all duration-150 rounded-lg px-2 py-1.5 text-gray-950 hover:bg-gray-100 hover:text-blue-600"
+                href="/demo"
+              >
+                Live Demo
+              </a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="/blog"
+                className="isomorphic-link isomorphic-link--external text-sm font-semibold leading-5 text-gray-950 transition-all duration-150 rounded-lg px-2 py-1.5 hover:bg-gray-100 hover:text-blue-600"
+              >
+                Blog
+              </a>
+            </div> */}
+              <div className="flex items-center justify-end gap-4">
+                <a
+                  href="/book-a-demo"
+                  className="inline-flex items-center justify-center bg-blue-600 text-sm font-semibold leading-5 text-white shadow-sm transition-all duration-150 rounded-lg px-3 py-1.5 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                >
+                  Login to your account
+                </a>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        </header>
 
-      <section className="my-8">
-        <Link href={"/login"}>
-          <ACButton
-            text={"Click here to get started"}
-            type={"reset"}
-            loading={false}
-            children={undefined}
-          />
-        </Link>
-      </section> */}
-      <section className="px-6 flex items-center justify-center ">
-        <span className=" text-foreground-secondary text-sm text-center">
-          By continuing, you are agreeing to Applygenius'{" "}
-          <span className=" text-banner"> terms of services </span> and{" "}
-          <span className=" text-banner">Privacy Policy </span>
-        </span>
-      </section>
-    </main>
+        <main>
+          <Hero />
+          <Section2 />
+          <Section3 />
+          <Section4 />
+          <Section5 />
+          <Section6 />
+          <Section7 />
+          <Footer />
+        </main>
+      </div>
+    </body>
   );
 }
