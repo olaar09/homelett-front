@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
-  title: "ApplyGeni.us | AI Co-Pilot for job search",
+  title: "ApplyGeni.us | AI Agent for job search",
   description: "AI Co-Pilot for your job search",
   applicationName: "ApplyGeni.us",
   appleWebApp: true,
