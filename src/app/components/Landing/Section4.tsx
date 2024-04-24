@@ -4,7 +4,7 @@ export default () => {
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-xl mx-auto text-center lg:max-w-3xl">
           <p className="text-sm font-bold uppercase tracking-widest text-blue-600">
-            This is not Magic, it's just AI.
+            It's not Magic, it's just AI.
           </p>
           <h2 className="font-display text-3xl font-semibold tracking-tight text-gray-900 mt-4 sm:text-4xl lg:text-5xl">
             Built with state of the art AI Technology
