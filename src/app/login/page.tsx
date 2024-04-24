@@ -161,7 +161,7 @@ export default function Home() {
           <div className="w-9 h-14 flex items-center">
             <Icon
               className="text-gray-60 text-4xl opacity-80"
-              icon="streamline:send-email-solid"
+              icon="ph:robot-bold"
             />
           </div>
           <Link href={"/"}>

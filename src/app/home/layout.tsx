@@ -65,7 +65,7 @@ const HeadIcon = ({ onToggle, isOpen }: any) => {
         <div className="w-6 flex items-center justify-center">
           <Icon
             className="text-primary text-md opacity-90 mt-1"
-            icon="streamline:send-email-solid"
+            icon="ph:robot-bold"
           />
         </div>
         {isOpen && (

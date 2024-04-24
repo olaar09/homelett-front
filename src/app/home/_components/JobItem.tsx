@@ -60,7 +60,7 @@ const JobItem = ({
                     ? "eos-icons:loading"
                     : job.applied
                     ? "lets-icons:check-fill"
-                    : "streamline:send-email-solid"
+                    : "ph:robot-bold"
                 }`}
               />
 
