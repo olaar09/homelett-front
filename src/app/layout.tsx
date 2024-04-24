@@ -92,7 +92,7 @@ export default function RootLayout({
         <meta property="og:image" content="/images/dashboard-mockup.png" />
         <meta
           property="og:image:alt"
-          content="ApplyGenius - Your AI Copilot for Job Search"
+          content="ApplyGenius - Your AI Agent for Job Search"
         />
         <meta property="og:site_name" content="ApplyGenius" />
         <link rel="preconnect" href="https://fonts.bunny.net" />
