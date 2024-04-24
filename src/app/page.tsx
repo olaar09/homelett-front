@@ -12,7 +12,7 @@ import Footer from "./components/Landing/Footer";
 
 export default function Home() {
   return (
-    <body className="h-full bg-white font-sans text-gray-900 antialiased">
+    <div className="h-full bg-white font-sans text-gray-900 antialiased">
       <div
         style={{
           position: "fixed",
@@ -30,7 +30,7 @@ export default function Home() {
             <div className="flex items-center justify-between">
               <div className="shrink-0">
                 <a
-                  className="isomorphic-link isomorphic-link--internal"
+                  className="isomorphic-link isomorphic-link--internal flex items-center gap-x-3"
                   href="/"
                 >
                   <img
@@ -38,6 +38,7 @@ export default function Home() {
                     src="images/logo-full.svg"
                     alt=""
                   />
+                  <span className="text-2xl font-black"> ApplyGeni.us</span>
                 </a>
               </div>
               {/* <div className="hidden items-center justify-center gap-4 lg:flex">
@@ -97,6 +98,6 @@ export default function Home() {
           <Footer />
         </main>
       </div>
-    </body>
+    </div>
   );
 }
