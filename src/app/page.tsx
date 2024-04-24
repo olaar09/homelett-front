@@ -81,7 +81,7 @@ export default function Home() {
                   className="inline-flex items-center justify-center bg-blue-600 text-sm font-semibold leading-5 text-white shadow-sm transition-all duration-150 rounded-lg px-3 py-1.5 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 >
                   Login{" "}
-                  <span className="hidden lg:inline-block">
+                  <span className="hidden lg:inline-block pl-2">
                     {" "}
                     to your account{" "}
                   </span>
