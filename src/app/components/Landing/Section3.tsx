@@ -10,7 +10,7 @@ export default () => {
             Your job search assistant
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
-            ApplyGenius AI assistant aims to get you at least 2 job interviews
+            ApplyGenius AI Agent aims to get you at least 2 job interviews
             monthly. Simply setup your account & watch those interview request
             roll in. it's that easy!
           </p>
