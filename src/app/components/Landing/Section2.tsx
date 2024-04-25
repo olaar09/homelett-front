@@ -7,7 +7,7 @@ export default () => {
             <div className="overflow-hidden shadow-md ring-1 ring-gray-200 rounded-2xl">
               <img
                 className="w-full object-cover"
-                src="images/dashboard-mockup.png"
+                src="images/dashboard-mockup.jpg"
                 alt=""
               />
             </div>

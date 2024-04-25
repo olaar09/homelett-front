@@ -89,7 +89,7 @@ export default function RootLayout({
           content="Automatically apply to 50+ jobs daily from all over the world, with your CV modified to each job requirement"
         />
         <meta property="og:url" content="https://ApplyGenius.ai/partners" />
-        <meta property="og:image" content="/images/dashboard-mockup.png" />
+        <meta property="og:image" content="/images/dashboard-mockup.jpg" />
         <meta
           property="og:image:alt"
           content="ApplyGenius - Your AI Agent for Job Search"
