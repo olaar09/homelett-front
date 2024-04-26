@@ -18,30 +18,35 @@ const JobItem = ({
     <Card
       onClick={onSelectJob}
       hoverable
-      className={`" h-48 border-b rounded-none flex flex-col relative ${
+      className={`" h-44 border-b rounded-none flex flex-col relative ${
         active ? "bg-blue-50" : ""
       }`}
     >
       <Card.Meta
         avatar={<Avatar src={job.company_logo} />}
         title={
-          <div className="  items-start block text-wrap line-clamp-2">
-            {job.title}
+          <div className="items-start block text-wrap ">
+            {job.title?.substring(0, 50)}
+            {job.title?.length >= 50 ? "..." : ""}
           </div>
         }
         description={
-          <div className="flex flex-col items-start h-full">
-            <span className="text-black text-foreground">
-              {job.company_name}
-            </span>
-            <span>{job.location}</span>
+          <div className="flex flex-col items-start h-full w-full">
+            <div className="flex justify-between w-full">
+              <span className="text-black text-foreground">
+                {job.company_name}
+              </span>
+              <Button type="link" className="-ml-3">
+                <div className="flex items-center mt-0 gap-x-2">
+                  <Icon className="mt-0 " icon={"lets-icons:out-light"} />
+                  <span className="mt-0 text-foreground-secondary">
+                    View job
+                  </span>
+                </div>
+              </Button>
+            </div>
 
-            <Button type="link" className="-ml-3">
-              <div className="flex items-center mt-0 gap-x-2">
-                <Icon className="mt-0 " icon={"lets-icons:out-light"} />
-                <span className="mt-0 text-foreground-secondary">View job</span>
-              </div>
-            </Button>
+            <span className="-mt-2">{job.location ?? "Remote, World"}</span>
           </div>
         }
       />
@@ -62,7 +67,7 @@ const JobItem = ({
                     ? "eos-icons:loading"
                     : job.applied
                     ? "lets-icons:check-fill"
-                    : "ph:robot-bold"
+                    : "lucide:send"
                 }`}
               />
 
