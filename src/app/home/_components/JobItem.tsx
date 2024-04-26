@@ -23,15 +23,17 @@ const JobItem = ({
       }`}
     >
       <Card.Meta
-        avatar={<Avatar src={job.logo} />}
+        avatar={<Avatar src={job.company_logo} />}
         title={
           <div className="  items-start block text-wrap line-clamp-2">
-            {job.name}
+            {job.title}
           </div>
         }
         description={
           <div className="flex flex-col items-start h-full">
-            <span className="text-black text-foreground">{job.company}</span>
+            <span className="text-black text-foreground">
+              {job.company_name}
+            </span>
             <span>{job.location}</span>
 
             <Button type="link" className="-ml-3">

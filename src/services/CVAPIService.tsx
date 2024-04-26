@@ -25,6 +25,17 @@ class CVAPIService {
     }
   }
 
+  async getMatchedJobs(profileId: string): Promise<any> {
+    try {
+      const response = await this.apiService.get(
+        `/jobs/query_similar/${profileId}`
+      );
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getJobProfile(profileId: string): Promise<any> {
     try {
       const response = await this.apiService.get(

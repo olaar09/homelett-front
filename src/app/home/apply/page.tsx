@@ -23,18 +23,13 @@ const Chat = () => {
   const [loading, setLoading] = useState(false);
   const [selectedJob, setSelectedJob] = useState<any>(null);
 
-  const [jobs, setJobs] = useState<any[]>([]);
+  //const [jobs, setJobs] = useState<any[]>([]);
 
   const [loadingNewChat, setLoadingNewChat] = useState(false);
   const [loadingCV, setLoadingCV] = useState(false);
 
   const authContext = useContext(AuthContext);
   const apiUtil = new APIUtil();
-
-  useEffect(() => {
-    setJobs(Str.dummyJobs);
-    setSelectedJob(Str.dummyJobs[0]);
-  }, []);
 
   useEffect(() => {
     if (selectedJob) onLoad(selectedJob);
@@ -85,6 +80,20 @@ const Chat = () => {
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
 
+  const {
+    data: jobs,
+    error: jobsErr,
+    loading: loadingJobs,
+    refresh: refreshJobs,
+  } = useRequest(() => getSimilarJobs(), {
+    ready:
+      authContext.currentUser != null && authContext.currentUser != undefined,
+  });
+
+  useEffect(() => {
+    setSelectedJob(Str.dummyJobs[0]);
+  }, [jobs]);
+
   const getExperiences = async (): Promise<any> => {
     try {
       const data = await apiUtil.cvService.getExperiences("1");
@@ -100,6 +109,15 @@ const Chat = () => {
       return data.data;
     } catch (error) {
       message.error("unable to load data");
+    }
+  };
+
+  const getSimilarJobs = async (): Promise<any> => {
+    try {
+      const data = await apiUtil.cvService.getMatchedJobs("1");
+      return data.data;
+    } catch (error) {
+      message.error("unable to load jobs");
     }
   };
 
@@ -134,7 +152,7 @@ const Chat = () => {
     const jobIndex = clone.findIndex((i) => i.name === job.name);
     clone[jobIndex].applied = true;
     setLoading(false);
-    setJobs(clone);
+    //setJobs(clone);
   };
 
   return (
@@ -146,6 +164,18 @@ const Chat = () => {
       />
 
       <section className=" flex items-center h-screen overflow-scroll">
+        <div className="lg:w-[400px] w-full  h-full overflow-y-scroll pb-10 ">
+          {(jobs ?? []).map((job: { name: any }) => (
+            <JobItem
+              job={job}
+              applying={job.id === selectedJob?.id && loading}
+              onApplyJob={() => onApplyJob(job)}
+              onSelectJob={() => onSelectJob(job)}
+              active={job.id === selectedJob?.id}
+            />
+          ))}
+        </div>
+
         <div className="lg:flex hidden lg:w-9/12  h-full   flex-col overflow-y-scroll">
           <div className="px-2 w-full">
             {(loadingCV || loadingExperiences) && <LoadingJobItem />}
@@ -194,18 +224,6 @@ const Chat = () => {
               </div>
             </div>
           )}
-        </div>
-
-        <div className="lg:w-[400px] w-full  h-full overflow-y-scroll pb-10 ">
-          {Str.dummyJobs.map((job) => (
-            <JobItem
-              job={job}
-              applying={job.name === selectedJob?.name && loading}
-              onApplyJob={() => onApplyJob(job)}
-              onSelectJob={() => onSelectJob(job)}
-              active={job.name === selectedJob?.name}
-            />
-          ))}
         </div>
       </section>
     </main>
