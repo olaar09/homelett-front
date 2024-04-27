@@ -39,7 +39,7 @@ export const ExperienceItem = ({
 
             return (
               <li className="flex items-start gap-x-2">
-                <span className="rounded-full h-2 w-2 border-2 border-dashed  bg-gray-600 mt-1">
+                <span className="rounded-full h-2 w-2 border-2 border-dashed  bg-gray-600 mt-[5px]">
                   {" "}
                 </span>
                 <span className=" text-sm whitespace-pre-wrap block ">
