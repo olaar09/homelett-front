@@ -165,7 +165,7 @@ const Chat = () => {
 
       <section className=" flex items-center h-screen overflow-scroll">
         <div className="lg:w-[400px] w-full  h-full overflow-y-scroll pb-10 ">
-          {(jobs ?? []).map((job: { name: any }) => (
+          {(jobs ?? []).map((job: { id: any; name: any }) => (
             <JobItem
               job={job}
               applying={job.id === selectedJob?.id && loading}
