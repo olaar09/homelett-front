@@ -234,6 +234,7 @@ const Chat = () => {
                       return (
                         <ExperienceItem
                           title={experience.experience_title}
+                          companyName={experience.company_name}
                           duration={` ${experience.company_name ?? ""} (${
                             experience.duration
                           })`}
