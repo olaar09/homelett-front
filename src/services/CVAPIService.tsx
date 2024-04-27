@@ -47,10 +47,13 @@ class CVAPIService {
     }
   }
 
-  async getExperiences(profileId: string): Promise<{ data: any[] }> {
+  async getExperiences(
+    profileId: string,
+    jobId: string
+  ): Promise<{ data: any[] }> {
     try {
       const response = await this.apiService.get(
-        `/action/get_experiences/${profileId}`
+        `/action/get_experiences/${profileId}/${jobId}`
       );
       return response as { data: any[] };
     } catch (error) {

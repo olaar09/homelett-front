@@ -23,7 +23,8 @@ const Chat = () => {
   const [loading, setLoading] = useState(false);
   const [selectedJob, setSelectedJob] = useState<any>(null);
 
-  //const [jobs, setJobs] = useState<any[]>([]);
+  const [experiences, setExperiences] = useState<any[]>([]);
+  const [loadingExperiences, setLoadingExp] = useState(false);
 
   const [loadingNewChat, setLoadingNewChat] = useState(false);
   const [loadingCV, setLoadingCV] = useState(false);
@@ -61,16 +62,6 @@ const Chat = () => {
   };
 
   const {
-    data: experiences,
-    error,
-    loading: loadingExperiences,
-    refresh: refreshExperiences,
-  } = useRequest(() => getExperiences(), {
-    ready:
-      authContext.currentUser != null && authContext.currentUser != undefined,
-  });
-
-  const {
     data: jProfile,
     error: profileErr,
     loading: loadingJProfile,
@@ -79,6 +70,18 @@ const Chat = () => {
     ready:
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
+
+  /*   const {
+    data: experiences,
+    error,
+    loading: loadingExperiences,
+    refresh: refreshExperiences,
+  } = useRequest(() => getExperiences(), {
+    ready:
+      authContext.currentUser != null &&
+      authContext.currentUser != undefined &&
+      jProfile,
+  }); */
 
   const {
     data: jobs,
@@ -96,12 +99,33 @@ const Chat = () => {
 
   const getExperiences = async (): Promise<any> => {
     try {
-      const data = await apiUtil.cvService.getExperiences("1");
-      return data.data;
+      setLoadingExp(true);
+      console.log(jProfile.id, selectedJob.id);
+
+      const data = await apiUtil.cvService.getExperiences(
+        jProfile.id,
+        selectedJob.id
+      );
+
+      setExperiences(data.data);
+      //return data.data;
     } catch (error) {
       message.error("unable to load data");
+    } finally {
+      setLoadingExp(false);
     }
   };
+
+  useEffect(() => {
+    if (
+      authContext.currentUser != null &&
+      authContext.currentUser != undefined &&
+      jProfile &&
+      selectedJob
+    ) {
+      getExperiences();
+    }
+  }, [authContext.currentUser, jProfile, selectedJob]);
 
   const getJobProfile = async (): Promise<any> => {
     try {
