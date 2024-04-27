@@ -205,7 +205,7 @@ const Chat = () => {
             {(loadingCV || loadingExperiences) && <LoadingJobItem />}
           </div>
 
-          {!loadingCV && (
+          {!loadingCV && !loadingExperiences && (
             <div className="flex flex-col w-full">
               <div className="flex items-center gap-x-1">
                 <div className="flex flex-col w-9/12">
