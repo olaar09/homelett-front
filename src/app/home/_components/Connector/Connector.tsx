@@ -93,7 +93,9 @@ const ConnectorModal: React.FC<{
   const onSubmit = async (data: any) => {
     try {
       setSubmitting(true);
-      if (!data.connection_string || !data.datasource_name) {
+      console.log(data);
+
+      if (!data.password || !data.email || !data.datasource_name) {
         message.error("Please complete all fields");
         return;
       } else {
@@ -189,7 +191,7 @@ const ConnectorModal: React.FC<{
         footer={null}
       >
         {selected && (
-          <div style={{ height: 400, overflow: "auto" }}>
+          <div style={{ height: 450, overflow: "auto" }}>
             <DynamicComponent
               defaultPayload={defaultPayload}
               loading={submitting}

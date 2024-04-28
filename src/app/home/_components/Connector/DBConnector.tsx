@@ -6,14 +6,18 @@ interface DBConnectorProps {
   loading: boolean;
   defaultPayload: {
     datasource_name: string;
-    connection_string: string;
+    email: string;
+    password: string;
   };
+  type: string;
   onSubmit: ({
+    password,
+    email,
     datasource_name,
-    connection_string,
   }: {
     datasource_name: string;
-    connection_string: string;
+    email: string;
+    password: string;
   }) => void;
 }
 
@@ -21,13 +25,16 @@ const DBConnect: React.FC<DBConnectorProps> = ({
   onSubmit,
   loading,
   defaultPayload,
+  type,
 }) => {
   const [dataSourceName, setDataSourceName] = useState<string>("");
-  const [dataSourceConnection, setDatasourceConnection] = useState<string>("");
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   useEffect(() => {
-    setDataSourceName(defaultPayload?.datasource_name);
-    setDatasourceConnection(defaultPayload?.connection_string);
+    setDataSourceName(defaultPayload?.email);
+    setEmail(defaultPayload?.email);
   }, [defaultPayload]);
 
   return (
@@ -44,15 +51,24 @@ const DBConnect: React.FC<DBConnectorProps> = ({
       </div>
 
       <div className="flex flex-col w-full">
-        <span className=" text-foreground">Connection string</span>
+        <span className=" text-foreground">{type} Email</span>
         <InputField
-          placeHolder={
-            "mysql+mysqlconnector://username:password@host:port/dbname"
-          }
+          placeHolder={""}
           type={"text"}
-          value={dataSourceConnection}
-          name={"connection_string"}
-          onChange={(e) => setDatasourceConnection(e.target.value)}
+          value={email}
+          name={"email"}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+
+      <div className="flex flex-col w-full">
+        <span className=" text-foreground">{type} Password</span>
+        <InputField
+          placeHolder={""}
+          type={"password"}
+          value={password}
+          name={"email"}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
 
@@ -61,7 +77,8 @@ const DBConnect: React.FC<DBConnectorProps> = ({
           onClick={() =>
             onSubmit({
               datasource_name: dataSourceName,
-              connection_string: dataSourceConnection,
+              email: email,
+              password: password,
             })
           }
           text={"Continue"}

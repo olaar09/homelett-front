@@ -39,7 +39,7 @@ const DynamicComponent: React.FC<DynamicComponentProps> = ({
   }
 
   // Render the selected component with all passed props
-  return <SelectedComponent {...props} />;
+  return <SelectedComponent {...{ type, ...props }} />;
 };
 
 export default DynamicComponent;
