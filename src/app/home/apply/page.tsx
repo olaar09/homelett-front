@@ -34,6 +34,8 @@ const Chat = () => {
   const authContext = useContext(AuthContext);
   const apiUtil = new APIUtil();
 
+  const isBillingActive = authContext.currentUser?.billingActive;
+
   useEffect(() => {
     if (selectedJob) onLoad(selectedJob);
   }, [selectedJob]);
@@ -205,10 +207,12 @@ const Chat = () => {
             ))}
           </div>
 
-          <Upgrade
-            email={authContext.currentUser?.email}
-            onUpgraded={onUpgraded}
-          />
+          {!isBillingActive && (
+            <Upgrade
+              email={authContext.currentUser?.email}
+              onUpgraded={onUpgraded}
+            />
+          )}
         </div>
 
         <div className="lg:flex hidden lg:w-9/12  h-full   flex-col overflow-y-scroll">
