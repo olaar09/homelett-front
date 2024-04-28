@@ -9,28 +9,28 @@
   }
 }
 :root {
-  --primary-rgb: 51, 51, 255;
-  --banner-rgb: 51, 51, 255;
+  --primary-rgb: 36, 99, 235;
+  --banner-rgb: 36, 99, 235;
   --banner-foreground-rgb: 255, 255, 255;
   --foreground-inverted: 255, 255, 255;
   --foreground-secondary-rgb: 141, 150, 150;
   --foreground-rgb: 29, 29, 35;
   --background-rgb: 255, 255, 255;
   --background-thin-rgb: 251, 251, 252;
-  --link-rgb: 51, 51, 255;
+  --link-rgb: 36, 99, 235;
   --panel-rgb: 36, 36, 36;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary-rgb: 51, 51, 255;
-    --banner-rgb: 51, 51, 255;
+    --primary-rgb: 36, 99, 235;
+    --banner-rgb: 36, 99, 235;
     --banner-foreground-rgb: 255, 255, 255;
     --foreground-inverted: 255, 255, 255;
     --foreground-secondary-rgb: 141, 150, 150;
     --foreground-rgb: 29, 29, 35;
     --background-rgb: 255, 255, 255;
-    --link-rgb: 51, 51, 255;
+    --link-rgb: 36, 99, 235;
     --panel-rgb: 36, 36, 36;
 
     /*     --primary-rgb: 59, 58, 190;
@@ -231,4 +231,9 @@ html {
 
 .slideshowDot.active {
   background-color: #6a0dad;
+}
+
+.blur-at-top {
+  background: white;
+  filter: blur(30px); /* Adjust the blur strength as needed */
 }

@@ -14,8 +14,8 @@ export const ExperienceItem = ({
 }) => {
   console.log(content[0]);
 
-  const summary = content[0].ex_summary;
-  const highlights = content[0].highlights;
+  const summary = content[0]?.ex_summary;
+  const highlights = content[0]?.highlights;
 
   return (
     <div className="">
@@ -34,7 +34,7 @@ export const ExperienceItem = ({
         </span>
 
         <ul className=" flex flex-col gap-y-2 list-disc">
-          {highlights.map((highlight: any) => {
+          {(highlights ?? []).map((highlight: any) => {
             const text = Object.values(highlight)[1];
 
             return (

@@ -19,6 +19,8 @@ const AsideItem2 = ({ title, desc }: any) => {
   );
 };
 
+//"bi:github"
+
 const ASide = ({ profile }: any) => {
   return (
     <div className="bg-gray-200 h-full w-4/12  ">
@@ -31,31 +33,43 @@ const ASide = ({ profile }: any) => {
           title={"linkedin.com/in/isaac09/"}
           icon={"akar-icons:linkedin-v1-fill"}
         />
-        <AsideItem title={"github.com/isaac09"} icon={"bi:github"} />
+        <AsideItem title={profile?.link_1} icon={profile?.link_1_icon} />
       </div>
 
       <div className="mt-10  mx-auto w-11/12 px-10 ">
         <span className="font-black">Education</span>
         <div className="flex flex-col gap-y-4 mt-4 ">
-          <AsideItem2 desc={"2022 - 2024"} title={"MSC Software engineering"} />
-          <AsideItem2 desc={"2017 - 2020"} title={"BSC Comp Sci"} />
+          <AsideItem2
+            desc={profile?.link_1_date}
+            title={profile?.link_1_title}
+          />
+          <AsideItem2
+            desc={profile?.link_2_date}
+            title={profile?.link_2_title}
+          />
         </div>
       </div>
 
       <div className="mt-10  mx-auto w-11/12 px-10 ">
         <span className="font-black">Skills</span>
         <div className="flex flex-col gap-y-4 mt-4 ">
-          <AsideItem2 desc={"React, Nuxt, Next, Vue"} title={"Javascript"} />
-          <AsideItem2 desc={"Flask, Django"} title={"Python"} />
-          <AsideItem2 desc={"Laravel, YII"} title={"PHP"} />
+          {profile?.skills ??
+            [].map((sk) => (
+              <AsideItem2
+                desc={"React, Nuxt, Next, Vue"}
+                title={"Javascript"}
+              />
+            ))}
+          {/*          <AsideItem2 desc={"Flask, Django"} title={"Python"} />
+          <AsideItem2 desc={"Laravel, YII"} title={"PHP"} /> */}
         </div>
       </div>
 
       <div className="mt-10  mx-auto w-11/12 px-10 ">
         <span className="font-black">Languages</span>
         <div className="flex flex-col gap-y-4 mt-4 ">
-          <AsideItem2 desc={"Native"} title={"Yoruba"} />
-          <AsideItem2 desc={"Work, Official"} title={"English"} />
+          {profile?.languages ??
+            [].map((sk) => <AsideItem2 desc={"Native"} title={"Yoruba"} />)}
         </div>
       </div>
     </div>

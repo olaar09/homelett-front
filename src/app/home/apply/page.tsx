@@ -9,13 +9,14 @@ import LoadingOverlay from "@/app/components/LoadingOverlay";
 import { IChat } from "@/app/interfaces/IChatItem";
 import JobItem from "../_components/JobItem";
 import LoadingJobItem from "../_components/LoadingJobItem";
-import { message } from "antd";
+import { Button, message } from "antd";
 import { Str } from "@/utils/consts";
 import { ExperienceItem } from "./ExperienceItem";
 import { OverviewItem } from "./OverviewItem";
 import ASide from "./CVSide";
 import { AxiosError } from "axios";
 import { useRequest } from "ahooks";
+import ACButton from "@/app/components/Button";
 
 const Chat = () => {
   const [coverLetter, setCoverLetter] = useState("");
@@ -188,16 +189,42 @@ const Chat = () => {
       />
 
       <section className=" flex items-center h-screen overflow-scroll">
-        <div className="lg:w-[400px] w-full  h-full overflow-y-scroll pb-10 ">
-          {(jobs ?? []).map((job: { id: any; name: any }) => (
-            <JobItem
-              job={job}
-              applying={job.id === selectedJob?.id && loading}
-              onApplyJob={() => onApplyJob(job)}
-              onSelectJob={() => onSelectJob(job)}
-              active={job.id === selectedJob?.id}
-            />
-          ))}
+        <div className="lg:w-[400px] w-full h-full flex flex-col relative   ">
+          <div className=" overflow-y-scroll w-full h-full  ">
+            {(jobs ?? []).map((job: { id: any; name: any }) => (
+              <JobItem
+                job={job}
+                applying={job.id === selectedJob?.id && loading}
+                onApplyJob={() => onApplyJob(job)}
+                onSelectJob={() => onSelectJob(job)}
+                active={job.id === selectedJob?.id}
+              />
+            ))}
+          </div>
+
+          <div className="blur-at-top  absolute h-40  w-full bottom-80 ">
+            <span className="text-black"></span>
+          </div>
+          <div className="absolute h-40  w-full bottom-64 flex flex-col items-center justify-center ">
+            <div className="mx-auto w-9/12 flex flex-center flex-col items-center gap-y-4">
+              <span className="text-black text-center text-sm">
+                <span className="font-bold">
+                  {" "}
+                  Apply to over 400k jobs when you upgrade.{" "}
+                </span>{" "}
+                <br /> <br /> Start an AI Agent to apply to hundreds of job
+                automatically daily, or manually apply to unlimited jobs each
+                with with a single click
+              </span>
+
+              <Button className="bg-primary" onClick={() => {}} type="primary">
+                <div className="flex items-center gap-x-2">
+                  <span>{"Upgrade To Pro"}</span>
+                  <Icon icon={"buttonIcon"} />
+                </div>
+              </Button>
+            </div>
+          </div>
         </div>
 
         <div className="lg:flex hidden lg:w-9/12  h-full   flex-col overflow-y-scroll">
