@@ -212,7 +212,9 @@ const ConnectorModal: React.FC<{
                 style={{ cursor: item.isActive ? "pointer" : "auto" }}
               >
                 <List.Item.Meta
-                  avatar={<Icon icon={item.avatar} className="text-2xl w-10" />}
+                  avatar={
+                    <Icon icon={item.avatar} className="text-2xl w-10 mt-2" />
+                  }
                   title={
                     <div className=" items-center w-full flex justify-between">
                       <span
@@ -228,7 +230,7 @@ const ConnectorModal: React.FC<{
                         <span className="text-foreground text-xs py-1 px-2 rounded-xl">
                           <Icon
                             icon={"ep:arrow-right"}
-                            className="text-xl w-10"
+                            className="text-xl w-10 mt-2"
                           />
                         </span>
                       )}
