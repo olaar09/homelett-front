@@ -72,7 +72,12 @@ const Upgrade = ({ email }: any) => {
             with a single click
           </span>
 
-          <Button className="bg-primary" onClick={onInitPayment} type="primary">
+          <Button
+            loading={loading}
+            className="bg-primary"
+            onClick={onInitPayment}
+            type="primary"
+          >
             <div className="flex items-center gap-x-2">
               <span>{"Upgrade To Pro"}</span>
               <Icon icon={"buttonIcon"} />
