@@ -98,7 +98,13 @@ const Chat = () => {
   });
 
   useEffect(() => {
-    setSelectedJob(Str.dummyJobs[0]);
+    refreshJobs();
+  }, [authContext.currentUser]);
+
+  useEffect(() => {
+    if (jobs && jobs.length > 0) {
+      setSelectedJob(jobs[0]);
+    }
   }, [jobs]);
 
   const getExperiences = async (): Promise<any> => {

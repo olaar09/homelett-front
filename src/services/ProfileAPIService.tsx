@@ -9,6 +9,15 @@ class ProfileAPIService {
     this.apiService = apiService;
   }
 
+  async loadProfile(): Promise<{ data: IAuthRequest }> {
+    try {
+      const user = await this.apiService.get("/user");
+      return user as { data: IAuthRequest };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async completeUpgradeProfile(reference: string): Promise<any> {
     try {
       return await this.apiService.post("/transactions/completePaystack", {
