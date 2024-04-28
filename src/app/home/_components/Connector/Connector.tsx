@@ -42,8 +42,6 @@ const ConnectorModal: React.FC<{
   const [toListItem, setToListItem] = useState<ListItem | null>(null);
 
   useEffect(() => {
-    console.log(defaultSelected, "KWDCWDKSDSKM");
-
     if (defaultSelected) {
       setToListItem({
         datasource_id: Number(defaultSelected.id),
