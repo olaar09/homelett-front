@@ -13,10 +13,10 @@ const URLComponent = (props: any) => (
 
 // Mapping of type strings to components
 const componentMapping: { [key: string]: React.ElementType } = {
-  mysql: DBConnect,
-  postgresql: DBConnect,
-  mariadb: DBConnect,
-  slack: SlackConnector,
+  linkedIn: DBConnect,
+  indeed: DBConnect,
+  jobberman: DBConnect,
+  email: SlackConnector,
   shopify: URLComponent,
   url: URLComponent,
   // Add other mappings as needed

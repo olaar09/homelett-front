@@ -113,9 +113,6 @@ const ConnectorModal: React.FC<{
 
         await auth.refreshDataSource();
         if (selected?.category === "datasource") {
-          await apiUtil.chatService.startChat({
-            datasource_id: source.data.id,
-          });
         }
         message.success("Data source added");
         onClose(true);
