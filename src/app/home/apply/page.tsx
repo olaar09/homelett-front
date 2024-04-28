@@ -190,88 +190,97 @@ const Chat = () => {
   };
 
   const onUpgraded = () => {};
-
+  const pageLoading =
+    authContext.loading ||
+    authContext.loadingSources ||
+    loadingNewChat ||
+    !jobs;
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col 3xl:w-10/12  w-full mx-auto">
-      <LoadingOverlay
-        loading={
-          authContext.loading || authContext.loadingSources || loadingNewChat
-        }
-      />
+      <LoadingOverlay loading={pageLoading} />
 
-      <section className=" flex items-center h-screen overflow-scroll">
-        <div className="lg:w-[400px] w-full h-full flex flex-col relative   ">
-          <div className=" overflow-y-scroll w-full h-full  ">
-            {(jobs ?? []).map((job: { id: any; name: any }) => (
-              <JobItem
-                job={job}
-                applying={job.id === selectedJob?.id && loading}
-                onApplyJob={() => onApplyJob(job)}
-                onSelectJob={() => onSelectJob(job)}
-                active={job.id === selectedJob?.id}
-              />
-            ))}
-          </div>
-
-          {!isBillingActive && (
-            <Upgrade
-              email={authContext.currentUser?.email}
-              onUpgraded={onUpgraded}
-            />
-          )}
-        </div>
-
-        <div className="lg:flex hidden lg:w-9/12  h-full   flex-col overflow-y-scroll">
-          <div className="px-2 w-full">
-            {(loadingCV || loadingExperiences) && <LoadingJobItem />}
-          </div>
-
-          {!loadingCV && !loadingExperiences && (
-            <div className="flex flex-col w-full">
-              <div className="flex items-center gap-x-1">
-                <div className="flex flex-col w-9/12">
-                  <section className="px-6 pt-7">
-                    <div className="flex items-center gap-x-2">
-                      <Icon
-                        className="text-xl"
-                        icon={"iconamoon:profile-fill"}
-                      />
-                      <span className="font-black text-xl">Career Profile</span>
-                    </div>
-
-                    <OverviewItem content={coverLetter} />
-                  </section>
-
-                  <section className="px-6 pt-7">
-                    <div className="flex items-center gap-x-2">
-                      <Icon
-                        className="text-xl"
-                        icon={"ic:baseline-work-history"}
-                      />
-                      <span className="font-black text-xl">Experiences</span>
-                    </div>
-
-                    {(experiences ?? []).map((experience: any) => {
-                      return (
-                        <ExperienceItem
-                          title={experience.experience_title}
-                          companyName={experience.company_name}
-                          duration={` ${experience.company_name ?? ""} (${
-                            experience.duration
-                          })`}
-                          content={experience.content}
-                        />
-                      );
-                    })}
-                  </section>
-                </div>
-
-                <ASide profile={jProfile} />
-              </div>
+      {!pageLoading && (
+        <section className=" flex items-center h-screen overflow-scroll">
+          <div className="lg:w-[400px] w-full h-full flex flex-col relative   ">
+            <div className=" overflow-y-scroll w-full h-full  ">
+              {(jobs ?? []).map((job: { id: any; name: any }) => (
+                <JobItem
+                  job={job}
+                  applying={job.id === selectedJob?.id && loading}
+                  onApplyJob={() => onApplyJob(job)}
+                  onSelectJob={() => onSelectJob(job)}
+                  active={job.id === selectedJob?.id}
+                />
+              ))}
             </div>
-          )}
-        </div>
-      </section>
+
+            {!isBillingActive && (
+              <Upgrade
+                email={authContext.currentUser?.email}
+                onUpgraded={onUpgraded}
+              />
+            )}
+          </div>
+
+          <div className="lg:flex hidden lg:w-9/12  h-full   flex-col overflow-y-scroll">
+            <div className="px-2 w-full">
+              {(loadingCV || loadingExperiences) && <LoadingJobItem />}
+            </div>
+
+            {!loadingCV &&
+              !loadingExperiences &&
+              coverLetter &&
+              experiences && (
+                <div className="flex flex-col w-full">
+                  <div className="flex items-center gap-x-1">
+                    <div className="flex flex-col w-9/12">
+                      <section className="px-6 pt-7">
+                        <div className="flex items-center gap-x-2">
+                          <Icon
+                            className="text-xl"
+                            icon={"iconamoon:profile-fill"}
+                          />
+                          <span className="font-black text-xl">
+                            Career Profile
+                          </span>
+                        </div>
+
+                        <OverviewItem content={coverLetter} />
+                      </section>
+
+                      <section className="px-6 pt-7">
+                        <div className="flex items-center gap-x-2">
+                          <Icon
+                            className="text-xl"
+                            icon={"ic:baseline-work-history"}
+                          />
+                          <span className="font-black text-xl">
+                            Experiences
+                          </span>
+                        </div>
+
+                        {(experiences ?? []).map((experience: any) => {
+                          return (
+                            <ExperienceItem
+                              title={experience.experience_title}
+                              companyName={experience.company_name}
+                              duration={` ${experience.company_name ?? ""} (${
+                                experience.duration
+                              })`}
+                              content={experience.content}
+                            />
+                          );
+                        })}
+                      </section>
+                    </div>
+
+                    <ASide profile={jProfile} />
+                  </div>
+                </div>
+              )}
+          </div>
+        </section>
+      )}
     </main>
   );
 };
