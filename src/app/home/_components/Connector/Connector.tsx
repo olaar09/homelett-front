@@ -143,7 +143,6 @@ const ConnectorModal: React.FC<{
     if (item.isActive) {
       setSelected(item);
     }
-    console.log(item.description);
   };
 
   const onResetItem = () => {

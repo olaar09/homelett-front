@@ -1,6 +1,5 @@
 import React from "react";
 import DBConnect from "./DBConnector";
-import SlackConnector from "./SlackConnector";
 
 // Sample components for demonstration
 const GitHubComponent = (props: any) => (
