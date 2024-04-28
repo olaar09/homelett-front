@@ -6,17 +6,14 @@ import { useContext, useEffect, useRef, useState } from "react";
 import APIUtil from "@/services/APIUtil";
 import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
-import { IChat } from "@/app/interfaces/IChatItem";
 import JobItem from "../_components/JobItem";
 import LoadingJobItem from "../_components/LoadingJobItem";
-import { Button, message } from "antd";
-import { Str } from "@/utils/consts";
+import { message } from "antd";
 import { ExperienceItem } from "./ExperienceItem";
 import { OverviewItem } from "./OverviewItem";
 import ASide from "./CVSide";
 import { AxiosError } from "axios";
 import { useRequest } from "ahooks";
-import ACButton from "@/app/components/Button";
 import Upgrade from "./Upgrade";
 
 const Chat = () => {
