@@ -70,8 +70,6 @@ const ConnectorModal: React.FC<{
       const data = response.data;
 
       const mapped = data!.map((sourceType: any) => {
-        console.log(sourceType.category);
-
         return {
           id: sourceType.id,
           title: sourceType.name,
@@ -81,9 +79,6 @@ const ConnectorModal: React.FC<{
           category: sourceType.category,
         };
       });
-
-      console.log(mapped);
-
       return mapped;
     } catch (error) {
       console.log("none");
