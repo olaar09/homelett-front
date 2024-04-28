@@ -33,9 +33,9 @@ const Upgrade = ({ email }: any) => {
   };
 
   // you can call this function anything
-  const onSuccess = (reference: string) => {
+  const onSuccess = (response: any) => {
     // implementation for  whatever you want to do when the Paystack dialog closed.
-    completePayment(reference);
+    completePayment(response.reference);
   };
 
   // you can call this function anything
