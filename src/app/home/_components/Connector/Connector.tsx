@@ -93,8 +93,6 @@ const ConnectorModal: React.FC<{
   const onSubmit = async (data: any) => {
     try {
       setSubmitting(true);
-      console.log(data);
-
       if (!data.password || !data.email || !data.datasource_name) {
         message.error("Please complete all fields");
         return;
