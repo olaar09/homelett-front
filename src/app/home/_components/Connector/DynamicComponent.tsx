@@ -16,7 +16,7 @@ const componentMapping: { [key: string]: React.ElementType } = {
   linkedIn: DBConnect,
   indeed: DBConnect,
   jobberman: DBConnect,
-  email: SlackConnector,
+  email: DBConnect,
   shopify: URLComponent,
   url: URLComponent,
   // Add other mappings as needed
