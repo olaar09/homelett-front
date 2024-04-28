@@ -17,6 +17,7 @@ import ASide from "./CVSide";
 import { AxiosError } from "axios";
 import { useRequest } from "ahooks";
 import ACButton from "@/app/components/Button";
+import Upgrade from "./Upgrade";
 
 const Chat = () => {
   const [coverLetter, setCoverLetter] = useState("");
@@ -180,6 +181,8 @@ const Chat = () => {
     //setJobs(clone);
   };
 
+  const onUpgraded = () => {};
+
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col 3xl:w-10/12  w-full mx-auto">
       <LoadingOverlay
@@ -202,29 +205,10 @@ const Chat = () => {
             ))}
           </div>
 
-          <div className="blur-at-top  absolute h-40  w-full bottom-80 ">
-            <span className="text-black"></span>
-          </div>
-          <div className="absolute h-40  w-full bottom-64 flex flex-col items-center justify-center ">
-            <div className="mx-auto w-9/12 flex flex-center flex-col items-center gap-y-4">
-              <span className="text-black text-center text-sm">
-                <span className="font-bold">
-                  {" "}
-                  Apply to over 400k jobs when you upgrade.{" "}
-                </span>{" "}
-                <br /> <br /> Start an AI Agent to apply to hundreds of job
-                automatically daily, or manually apply to unlimited jobs each
-                with with a single click
-              </span>
-
-              <Button className="bg-primary" onClick={() => {}} type="primary">
-                <div className="flex items-center gap-x-2">
-                  <span>{"Upgrade To Pro"}</span>
-                  <Icon icon={"buttonIcon"} />
-                </div>
-              </Button>
-            </div>
-          </div>
+          <Upgrade
+            email={authContext.currentUser?.email}
+            onUpgraded={onUpgraded}
+          />
         </div>
 
         <div className="lg:flex hidden lg:w-9/12  h-full   flex-col overflow-y-scroll">
