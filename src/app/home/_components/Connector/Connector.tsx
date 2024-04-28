@@ -59,7 +59,6 @@ const ConnectorModal: React.FC<{
   }, [defaultSelected]);
 
   useEffect(() => {
-    console.log("LIST ITEMMM", toListItem, defaultFormPayload);
     setSelected(toListItem);
     setDefaultPayload(defaultFormPayload);
   }, [toListItem]);
