@@ -13,7 +13,7 @@ const URLComponent = (props: any) => (
 
 // Mapping of type strings to components
 const componentMapping: { [key: string]: React.ElementType } = {
-  linkedIn: DBConnect,
+  linkedin: DBConnect,
   indeed: DBConnect,
   jobberman: DBConnect,
   email: DBConnect,
