@@ -1,7 +1,6 @@
 "use client";
 
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { Card, Button, Tooltip, Avatar, Slider, Drawer } from "antd";
+import { Drawer } from "antd";
 
 const NicheProfileDrawer = ({
   open,
