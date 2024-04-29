@@ -8,8 +8,34 @@ export interface IAuthRequest {
   freeTrialLeft?: any;
   billingActive?: boolean;
   billingCurrentPlan?: IBilling;
+  active_job_profile: JProfile;
   paymentLink?: string;
   token?: string;
+}
+
+interface JProfile {
+  id: number;
+  name: string;
+  is_active: number;
+  ai_professional_experience: string;
+  ai_experience_summary: string;
+  temperature: string;
+  last_jobs_assignment: string;
+  experiences: IExperience[];
+}
+
+interface IExperience {
+  id: number;
+  niche_profile_id: number;
+  experience_title: string;
+  duration_start: string;
+  duration_end: string;
+  content: string;
+  company_info: string;
+  team_size?: string;
+  main_responsibilities: string;
+  main_tools: string;
+  company_name: string;
 }
 
 interface IBilling {

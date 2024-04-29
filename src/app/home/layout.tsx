@@ -8,6 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import AddKeyModal from "./_components/AddKeyModal";
 import { Button, Tag, Tooltip } from "antd";
+import NicheProfileDrawer from "./niche_profile/NicheProfile";
 
 const NavMenu = ({
   title,
@@ -96,9 +97,10 @@ const Nav: React.FC<any> = ({ children }) => {
   const path = usePathname();
   const [openSide, setOpenSide] = useState(true);
 
-  const [openAIKey, setOpenAIKey] = useState(false);
+  const [openNicheDrawer, setOpenNicheDrawer] = useState(false);
 
   const authContext = useContext(AuthContext);
+  const requiresProfile = authContext.currentUser?.active_job_profile == null;
 
   const onLogout = () => {
     localStorage.clear();
@@ -110,8 +112,8 @@ const Nav: React.FC<any> = ({ children }) => {
     console.log("open job profiles dropdown");
   };
 
-  const closeOpenAiKey = () => {
-    setOpenAIKey(false);
+  const closeNicheDrawer = () => {
+    setOpenNicheDrawer(false);
   };
 
   const onToggle = (status: boolean) => {
@@ -149,7 +151,7 @@ const Nav: React.FC<any> = ({ children }) => {
 
   return (
     <>
-      <AddKeyModal open={openAIKey} onCancel={closeOpenAiKey} />
+      <NicheProfileDrawer open={requiresProfile} onClose={closeNicheDrawer} />
 
       <div className="min-h-screen w-full overflow-hidden">
         <div className="flex items-center w-full h-full overflow-hidden">

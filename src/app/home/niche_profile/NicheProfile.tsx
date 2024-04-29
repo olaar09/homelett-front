@@ -1,3 +1,5 @@
+"use client";
+
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Card, Button, Tooltip, Avatar, Slider, Drawer } from "antd";
 
@@ -9,7 +11,16 @@ const NicheProfileDrawer = ({
   open: boolean;
 }) => {
   return (
-    <Drawer title="Manage profile" onClose={onClose} open={open}>
+    <Drawer
+      width={
+        typeof window !== "undefined"
+          ? window.screen.width - window.screen.width / 4.5
+          : 0
+      }
+      title="Manage profile"
+      onClose={onClose}
+      open={open}
+    >
       <p>Some contents...</p>
       <p>Some contents...</p>
       <p>Some contents...</p>
