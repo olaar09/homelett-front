@@ -9,12 +9,14 @@ import LoadingOverlay from "@/app/components/LoadingOverlay";
 import JobItem from "../_components/JobItem";
 import LoadingJobItem from "../_components/LoadingJobItem";
 import { message } from "antd";
-import { ExperienceItem } from "./ExperienceItem";
-import { OverviewItem } from "./OverviewItem";
-import ASide from "./CVSide";
+import { ExperienceItem } from "./CVSide/ExperienceItem";
+import { OverviewItem } from "./CVSide/OverviewItem";
+import ASide from "./CVSide/CVProfileInfo";
 import { AxiosError } from "axios";
 import { useRequest } from "ahooks";
-import Upgrade from "./Upgrade";
+import Upgrade from "./JobSide/Upgrade";
+import { JobsSide } from "./JobSide/JobsSide";
+import CVSide from "./CVSide/CVSide";
 
 const Chat = () => {
   const [coverLetter, setCoverLetter] = useState("");
@@ -198,84 +200,23 @@ const Chat = () => {
 
       {!pageLoading && (
         <section className=" flex items-center h-screen overflow-scroll">
-          <div className="lg:w-[400px] w-full h-full flex flex-col relative   ">
-            <div className=" overflow-y-scroll w-full h-full  ">
-              {(jobs ?? []).map((job: { id: any; name: any }) => (
-                <JobItem
-                  job={job}
-                  applying={job.id === selectedJob?.id && loading}
-                  onApplyJob={() => onApplyJob(job)}
-                  onSelectJob={() => onSelectJob(job)}
-                  active={job.id === selectedJob?.id}
-                />
-              ))}
-            </div>
+          <JobsSide
+            jobs={jobs}
+            selectedJob={selectedJob}
+            loading={loading}
+            isBillingActive={isBillingActive ?? false}
+            onUpgraded={onUpgraded}
+            onApplyJob={onApplyJob}
+            onSelectJob={onSelectJob}
+          />
 
-            {!isBillingActive && (
-              <Upgrade
-                email={authContext.currentUser?.email}
-                onUpgraded={onUpgraded}
-              />
-            )}
-          </div>
-
-          <div className="lg:flex hidden lg:w-9/12  h-full   flex-col overflow-y-scroll">
-            <div className="px-2 w-full">
-              {(loadingCV || loadingExperiences) && <LoadingJobItem />}
-            </div>
-
-            {!loadingCV &&
-              !loadingExperiences &&
-              coverLetter &&
-              experiences && (
-                <div className="flex flex-col w-full">
-                  <div className="flex items-center gap-x-1">
-                    <div className="flex flex-col w-9/12">
-                      <section className="px-6 pt-7">
-                        <div className="flex items-center gap-x-2">
-                          <Icon
-                            className="text-xl"
-                            icon={"iconamoon:profile-fill"}
-                          />
-                          <span className="font-black text-xl">
-                            Career Profile
-                          </span>
-                        </div>
-
-                        <OverviewItem content={coverLetter} />
-                      </section>
-
-                      <section className="px-6 pt-7">
-                        <div className="flex items-center gap-x-2">
-                          <Icon
-                            className="text-xl"
-                            icon={"ic:baseline-work-history"}
-                          />
-                          <span className="font-black text-xl">
-                            Experiences
-                          </span>
-                        </div>
-
-                        {(experiences ?? []).map((experience: any) => {
-                          return (
-                            <ExperienceItem
-                              title={experience.experience_title}
-                              companyName={experience.company_name}
-                              duration={` ${experience.company_name ?? ""} (${
-                                experience.duration
-                              })`}
-                              content={experience.content}
-                            />
-                          );
-                        })}
-                      </section>
-                    </div>
-
-                    <ASide profile={jProfile} />
-                  </div>
-                </div>
-              )}
-          </div>
+          <CVSide
+            jProfile={jProfile}
+            experiences={experiences}
+            loadingExperiences={loadingExperiences}
+            loadingCV={loadingCV}
+            coverLetter={coverLetter}
+          />
         </section>
       )}
     </main>

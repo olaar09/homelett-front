@@ -43,7 +43,7 @@ export const ExperienceItem = ({
                   {" "}
                 </span>
                 <span className=" text-sm whitespace-pre-wrap block ">
-                  {text}
+                  {`${text}`}
                 </span>
               </li>
             );
