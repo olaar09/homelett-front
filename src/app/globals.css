@@ -237,3 +237,7 @@ html {
   background: white;
   filter: blur(30px); /* Adjust the blur strength as needed */
 }
+
+.ant-drawer-body {
+  padding: 0 !important;
+}
