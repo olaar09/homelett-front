@@ -3,6 +3,7 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Drawer } from "antd";
 import { useState } from "react";
+import BioInfo from "./Components/BioInfo";
 
 const requiredDetails = [
   {
@@ -61,10 +62,46 @@ const NicheProfileDrawer = ({
   onClose: any;
   open: boolean;
 }) => {
-  const [selected, setSelected] = useState<any>(null);
+  const [selected, setSelected] = useState<any>(requiredDetails[0]);
+  const [data, setData] = useState<any>({});
 
   const onSelect = (info: any) => {
     setSelected(info);
+  };
+
+  const onContinue = (key: string, data: Object) => {
+    setData({ ...data, [key]: data });
+    onSelectNext(key);
+  };
+
+  const onSelectNext = (current: string) => {
+    switch (current) {
+      case "basic":
+        setSelected(requiredDetails[1]);
+        break;
+      case "academics":
+        setSelected(requiredDetails[2]);
+        break;
+      case "skills":
+        setSelected(requiredDetails[3]);
+        break;
+      case "work":
+        setSelected(requiredDetails[4]);
+        break;
+      case "socials":
+        setSelected(requiredDetails[5]);
+        break;
+      case "awards":
+        setSelected(requiredDetails[6]);
+        break;
+      case "settings":
+        onSubmitForm();
+        break;
+    }
+  };
+
+  const onSubmitForm = () => {
+    console.log(requiredDetails);
   };
 
   return (
@@ -84,7 +121,6 @@ const NicheProfileDrawer = ({
         <div className="lg:w-[400px] w-full border-r h-full border-gray-200   ">
           {requiredDetails.map((info) => (
             <div
-              onClick={() => onSelect(info)}
               className={`flex flex-col gap-y-2 h-32 hover:bg-gray-50 ${
                 selected?.key === info.key ? "bg-gray-100" : ""
               } cursor-pointer px-4 py-4`}
@@ -102,7 +138,11 @@ const NicheProfileDrawer = ({
           ))}
         </div>
 
-        <div className="lg:w-[400px] lg:flex-grow lg:flex hidden"></div>
+        <div className=" lg:flex-grow lg:flex flex-col h-full   px-4 py-3">
+          {selected?.key === "basic" && (
+            <BioInfo onContinue={(data: any) => onContinue("basic", data)} />
+          )}
+        </div>
       </div>
     </Drawer>
   );
