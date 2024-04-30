@@ -94,9 +94,9 @@ const BioInfo = ({
           <div className="w-6/12 px-2">
             <IInput
               required
-              name="niche"
-              title="Job specialization"
-              label="(e.g) React Frontend engineer"
+              name="location"
+              title="Your location"
+              label="(e.g) Lagos, Remote"
               onChange={undefined}
             />
           </div>
