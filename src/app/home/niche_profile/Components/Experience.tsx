@@ -90,88 +90,99 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
       <div>
         <div className="flex flex-col items-center px-2">
           {academics.map((ac, index) => (
-            <div
-              key={ac.id}
-              className="w-full flex flex-row border rounded-md mt-3 py-1 px-2 relative h-96"
-            >
-              {academics.length > 1 && (
-                <Button
-                  onClick={() => onRemove(ac.id)}
-                  type="link"
-                  className="absolute  -bottom-1 right-1 flex items-center gap-x-2"
-                >
-                  <span className="text-gray-600">Remove</span>
-                  <Icon icon={"zondicons:minus-solid"} />
-                </Button>
-              )}
-              <div className="w-full flex flex-col gap-y-4 items-center">
-                <div className="w-full flex ">
-                  <div className="w-6/12  px-2 flex flex-col gap-y-2">
-                    <UnControlledInput
-                      required
-                      disabled={false}
-                      title={"Role title"}
-                      name={`role_${index}`}
-                      label={"What was your job title"}
-                      value={academics.find((item) => item.id === ac.id)?.role}
-                      onChange={(val: string) => onChange("role", val, ac.id)}
-                    />
-                  </div>
-                  <div className="w-6/12  px-2">
-                    <UnControlledInput
-                      required
-                      disabled={false}
-                      title={"Duration"}
-                      name={`role_${index}`}
-                      label={"Feb 2021 -  June 2022"}
-                      value={
-                        academics.find((item) => item.id === ac.id)?.duration
-                      }
-                      onChange={(val: string) =>
-                        onChange("duration", val, ac.id)
-                      }
-                    />
-                  </div>
-                </div>
+            <div key={ac.id} className="w-full mt-3 py-1 px-2 relative h-96">
+              <div className=" text-xl mb-2 flex items-center justify-between">
+                <span> Experience {index + 1}</span>
+                {academics.length > 1 && (
+                  <Button
+                    onClick={() => onRemove(ac.id)}
+                    type="link"
+                    className="flex items-center gap-x-2"
+                  >
+                    <span className="text-gray-600">Remove</span>
+                    <Icon icon={"zondicons:minus-solid"} />
+                  </Button>
+                )}
+              </div>
 
-                <div className="w-full flex items-center my-2">
-                  <div className="w-6/12  px-2 flex flex-col gap-y-2">
-                    <UnControlledInput
-                      required
-                      disabled={false}
-                      title={"Skills"}
-                      name={`role_${index}`}
-                      label={"Excel, GSuite, ReactJS, etc"}
-                      value={
-                        academics.find((item) => item.id === ac.id)?.skills
-                      }
-                      onChange={(val: string) => onChange("skills", val, ac.id)}
-                    />
+              <div className=" flex flex-row border rounded-md py-2 ">
+                <div className="w-full flex flex-col gap-y-4 items-center">
+                  <div className="w-full flex ">
+                    <div className="w-6/12  px-2 flex flex-col gap-y-2">
+                      <UnControlledInput
+                        required
+                        disabled={false}
+                        title={"Role title"}
+                        name={`role_${index}`}
+                        label={"What was your job title"}
+                        value={
+                          academics.find((item) => item.id === ac.id)?.role
+                        }
+                        onChange={(val: string) => onChange("role", val, ac.id)}
+                      />
+                    </div>
+                    <div className="w-6/12  px-2">
+                      <UnControlledInput
+                        required
+                        disabled={false}
+                        title={"Duration"}
+                        name={`role_${index}`}
+                        label={"Feb 2021 -  June 2022"}
+                        value={
+                          academics.find((item) => item.id === ac.id)?.duration
+                        }
+                        onChange={(val: string) =>
+                          onChange("duration", val, ac.id)
+                        }
+                      />
+                    </div>
                   </div>
-                  <div className="w-6/12  px-2">
-                    <UnControlledInput
-                      required
-                      disabled={false}
-                      title={"Company name"}
-                      name={`role_${index}`}
-                      label={"Company name"}
-                      value={
-                        academics.find((item) => item.id === ac.id)?.company
-                      }
-                      onChange={(val: string) =>
-                        onChange("company", val, ac.id)
-                      }
-                    />
-                  </div>
-                </div>
 
-                <div className="w-full px-2">
-                  <Input.TextArea
-                    placeholder="Describe your role and what  you accomplished in this role. talk a little about the company too"
-                    cols={10}
-                    className="w-full"
-                    rows={5}
-                  />
+                  <div className="w-full flex items-center my-2">
+                    <div className="w-6/12  px-2 flex flex-col gap-y-2">
+                      <UnControlledInput
+                        required
+                        disabled={false}
+                        title={"Skills"}
+                        name={`role_${index}`}
+                        label={"Excel, GSuite, ReactJS, etc"}
+                        value={
+                          academics.find((item) => item.id === ac.id)?.skills
+                        }
+                        onChange={(val: string) =>
+                          onChange("skills", val, ac.id)
+                        }
+                      />
+                    </div>
+                    <div className="w-6/12  px-2">
+                      <UnControlledInput
+                        required
+                        disabled={false}
+                        title={"Company name"}
+                        name={`role_${index}`}
+                        label={"Company name"}
+                        value={
+                          academics.find((item) => item.id === ac.id)?.company
+                        }
+                        onChange={(val: string) =>
+                          onChange("company", val, ac.id)
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div className="w-full px-2">
+                    <Input.TextArea
+                      required
+                      placeholder="Describe your role and what  you accomplished in this role. talk a little about the company too"
+                      cols={10}
+                      className="w-full"
+                      rows={5}
+                      onChange={(val) =>
+                        onChange("description", val.target.value, ac.id)
+                      }
+                    />
+                  </div>
                 </div>
               </div>
             </div>

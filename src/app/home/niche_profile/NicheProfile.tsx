@@ -7,6 +7,7 @@ import BioInfo from "./Components/BioInfo";
 import AcademicInfo from "./Components/Academics";
 import Skills from "./Components/Skills";
 import Experiences from "./Components/Experience";
+import Social from "./Components/Social";
 
 const requiredDetails = [
   {
@@ -157,9 +158,11 @@ const NicheProfileDrawer = ({
           )}
 
           {selected?.key === "work" && (
-            <Experiences
-              onContinue={(data: any) => onContinue("social", data)}
-            />
+            <Experiences onContinue={(data: any) => onContinue("work", data)} />
+          )}
+
+          {selected?.key === "socials" && (
+            <Social onContinue={(data: any) => onContinue("socials", data)} />
           )}
         </div>
       </div>
