@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Button, Drawer, Form, Input, Select } from "antd";
+import { Button, Drawer, Form, Input, Select, message } from "antd";
 import { useState } from "react";
 import ACButton from "@/app/components/Button";
 import { v4 as uuidv4 } from "uuid";
@@ -13,6 +13,13 @@ const Skills = ({ onContinue }: { onContinue: any }) => {
   ]);
 
   const onFinishForm = (data: any) => {
+    for (const item of academics) {
+      if (!item.skill || !item.skill_type) {
+        message.error("Complete all fields or remove unused fields");
+        return;
+      }
+    }
+
     onContinue(data);
   };
 
@@ -43,6 +50,20 @@ const Skills = ({ onContinue }: { onContinue: any }) => {
   const getSkillType = (ac: any) =>
     academics.find((item) => item.id === ac.id)?.skill_type;
 
+  const getValueLabel = (ac: any) => {
+    const type = getSkillType(ac);
+
+    switch (type) {
+      case "language":
+        return "Yoruba, Swedish, German, English";
+      case "skill":
+        return "Yoruba, Swedish, German, English";
+
+      default:
+        return "";
+    }
+  };
+
   return (
     <Form onFinish={onFinishForm} className=" gap-y-12">
       <div>
@@ -50,12 +71,12 @@ const Skills = ({ onContinue }: { onContinue: any }) => {
           {academics.map((ac, index) => (
             <div
               key={ac.id}
-              className="w-full flex flex-row border rounded-md mt-3 py-3 px-2 relative h-32"
+              className="w-full flex flex-row border rounded-md mt-3 py-1 px-2 relative h-32"
             >
               <Button
                 onClick={() => onRemove(ac.id)}
                 type="link"
-                className="absolute bottom-0 right-1 flex items-center gap-x-2"
+                className="absolute -bottom-1 right-1 flex items-center gap-x-2"
               >
                 <span className="text-gray-600">Remove</span>
                 <Icon icon={"zondicons:minus-solid"} />
@@ -84,11 +105,7 @@ const Skills = ({ onContinue }: { onContinue: any }) => {
                     disabled={!getSkillType(ac)}
                     title={getSkillType(ac) ? getSkillType(ac) : "--"}
                     name={`skill_${index}`}
-                    label={
-                      getSkillType(ac) === "language"
-                        ? "Yoruba, Swedish, German, English"
-                        : "React JS, NextJS, Mocha, Jest, NestJS"
-                    }
+                    label={getValueLabel(ac)}
                     value={academics.find((item) => item.id === ac.id)?.skill}
                     onChange={(val: string) => onChange("skill", val, ac.id)}
                   />
