@@ -1,0 +1,122 @@
+"use client";
+
+import { Icon } from "@iconify/react/dist/iconify.js";
+import { Button, Drawer, Form, Input, Select } from "antd";
+import { useState } from "react";
+import ACButton from "@/app/components/Button";
+import { v4 as uuidv4 } from "uuid";
+import { UnControlledInput } from "./Form";
+
+const Skills = ({ onContinue }: { onContinue: any }) => {
+  const [academics, setAcademics] = useState([
+    { skill_type: "", skill: "", id: uuidv4() },
+  ]);
+
+  const onFinishForm = (data: any) => {
+    onContinue(data);
+  };
+
+  const onAddNew = () => {
+    setAcademics([...academics, { skill_type: "", skill: "", id: uuidv4() }]);
+  };
+
+  const onRemove = (id: string) => {
+    console.log("Last", academics[academics.length - 1].id);
+    console.log("Removed", id);
+
+    const removedAcademics = academics.filter((record) => record.id !== id);
+    console.log(removedAcademics);
+
+    setAcademics([...removedAcademics]);
+  };
+
+  const onChange = (key: "skill" | "skill_type", value: string, id: string) => {
+    const cloned = [...academics];
+    const index = academics.findIndex((record) => record.id === id);
+    cloned[index][key] = value;
+
+    console.log(cloned);
+
+    setAcademics(cloned);
+  };
+
+  const getSkillType = (ac: any) =>
+    academics.find((item) => item.id === ac.id)?.skill_type;
+
+  return (
+    <Form onFinish={onFinishForm} className=" gap-y-12">
+      <div>
+        <div className="flex flex-col items-center px-2">
+          {academics.map((ac, index) => (
+            <div
+              key={ac.id}
+              className="w-full flex flex-row border rounded-md mt-3 py-3 px-2 relative h-32"
+            >
+              <Button
+                onClick={() => onRemove(ac.id)}
+                type="link"
+                className="absolute bottom-0 right-1 flex items-center gap-x-2"
+              >
+                <span className="text-gray-600">Remove</span>
+                <Icon icon={"zondicons:minus-solid"} />
+              </Button>
+              <div className="w-full flex items-center">
+                <div className="w-6/12  px-2 flex flex-col gap-y-2">
+                  <span>Type</span>
+                  <Select
+                    className="w-full border h-12 rounded-lg "
+                    placeholder={"Select one"}
+                    value={
+                      academics.find((item) => item.id === ac.id)?.skill_type
+                    }
+                    onChange={(val: string) =>
+                      onChange("skill_type", val, ac.id)
+                    }
+                    options={[
+                      { label: "Language", value: "language" },
+                      { label: "Skill", value: "skill" },
+                    ]}
+                  ></Select>
+                </div>
+                <div className="w-6/12  px-2">
+                  <UnControlledInput
+                    required
+                    disabled={!getSkillType(ac)}
+                    title={getSkillType(ac) ? getSkillType(ac) : "--"}
+                    name={`skill_${index}`}
+                    label={
+                      getSkillType(ac) === "language"
+                        ? "Yoruba, Swedish, German, English"
+                        : "React JS, NextJS, Mocha, Jest, NestJS"
+                    }
+                    value={academics.find((item) => item.id === ac.id)?.skill}
+                    onChange={(val: string) => onChange("skill", val, ac.id)}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div
+        onClick={onAddNew}
+        className="px-3 mt-6 cursor-pointer text-gray-700 hover:text-gray-900 duration-200 transition-all flex items-center gap-x-2"
+      >
+        <Icon icon={"mingcute:add-fill"} />
+        <span className="">Add new skill </span>
+      </div>
+
+      <div className="px-4 mt-12">
+        <ACButton
+          text={"Continue"}
+          type={"submit"}
+          loading={false}
+          children={undefined}
+        />
+      </div>
+    </Form>
+  );
+};
+
+export default Skills;

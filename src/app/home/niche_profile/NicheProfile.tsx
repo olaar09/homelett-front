@@ -5,6 +5,7 @@ import { Drawer } from "antd";
 import { useState } from "react";
 import BioInfo from "./Components/BioInfo";
 import AcademicInfo from "./Components/Academics";
+import Skills from "./Components/Skills";
 
 const requiredDetails = [
   {
@@ -148,6 +149,10 @@ const NicheProfileDrawer = ({
             <AcademicInfo
               onContinue={(data: any) => onContinue("academics", data)}
             />
+          )}
+
+          {selected?.key === "skills" && (
+            <Skills onContinue={(data: any) => onContinue("skills", data)} />
           )}
         </div>
       </div>

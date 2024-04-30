@@ -9,20 +9,24 @@ export const UnControlledInput = ({
   onChange,
   required = true,
   value,
+  disabled = false,
   name,
 }: {
   required?: boolean;
-  title: string;
+  title?: string;
   label: string;
   onChange: any;
   value?: string;
   name: string;
+  disabled: boolean;
 }) => {
   return (
     <div>
       <div className="w-full flex flex-col gap-y-2">
         <span className="font-bold">{title}</span>
         <Input
+          readOnly={disabled}
+          disabled={disabled}
           required={required}
           onChange={(e) => (onChange ? onChange(e.target.value) : () => {})}
           value={value}
