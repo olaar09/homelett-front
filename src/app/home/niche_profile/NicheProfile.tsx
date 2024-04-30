@@ -2,7 +2,7 @@
 
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Drawer, message } from "antd";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import BioInfo from "./Components/BioInfo";
 import AcademicInfo from "./Components/Academics";
 import Skills from "./Components/Skills";
@@ -74,6 +74,7 @@ const NicheProfileDrawer = ({
   const [selected, setSelected] = useState<any>(requiredDetails[0]);
   const [data, setData] = useState<any>({});
   const [loading, setLoading] = useState(false);
+  const [currentKey, setCurrentKey] = useState<any>(null);
   const authContext = useContext(AuthContext);
 
   const onSelect = (info: any) => {
@@ -87,9 +88,15 @@ const NicheProfileDrawer = ({
   const onContinue = (key: string, newData: Object) => {
     console.log(key, newData);
 
+    setCurrentKey(key);
     setData({ ...data, [key]: newData });
-    onSelectNext(key);
   };
+
+  useEffect(() => {
+    if (currentKey && data[currentKey]) {
+      onSelectNext(currentKey);
+    }
+  }, [currentKey, data]);
 
   const onSelectNext = (current: string) => {
     switch (current) {
