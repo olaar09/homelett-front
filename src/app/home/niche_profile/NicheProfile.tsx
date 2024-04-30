@@ -71,11 +71,13 @@ const NicheProfileDrawer = ({
   const [data, setData] = useState<any>({});
 
   const onSelect = (info: any) => {
-    setSelected(info);
+    if (data[info.key]) {
+      setSelected(info);
+    }
   };
 
-  const onContinue = (key: string, data: Object) => {
-    setData({ ...data, [key]: data });
+  const onContinue = (key: string, newData: Object) => {
+    setData({ ...data, [key]: newData });
     onSelectNext(key);
   };
 
@@ -126,6 +128,7 @@ const NicheProfileDrawer = ({
         <div className="lg:w-[400px] w-full border-r h-full border-gray-200  overflow-y-scroll  ">
           {requiredDetails.map((info) => (
             <div
+              onClick={() => onSelect(info)}
               className={`flex flex-col gap-y-2 h-32 hover:bg-gray-50 ${
                 selected?.key === info.key ? "bg-gray-100" : ""
               } cursor-pointer px-4 py-4`}
