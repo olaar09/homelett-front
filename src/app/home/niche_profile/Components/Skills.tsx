@@ -73,14 +73,17 @@ const Skills = ({ onContinue }: { onContinue: any }) => {
               key={ac.id}
               className="w-full flex flex-row border rounded-md mt-3 py-1 px-2 relative h-32"
             >
-              <Button
-                onClick={() => onRemove(ac.id)}
-                type="link"
-                className="absolute -bottom-1 right-1 flex items-center gap-x-2"
-              >
-                <span className="text-gray-600">Remove</span>
-                <Icon icon={"zondicons:minus-solid"} />
-              </Button>
+              {academics.length > 1 && (
+                <Button
+                  onClick={() => onRemove(ac.id)}
+                  type="link"
+                  className="absolute  -bottom-1 right-1 flex items-center gap-x-2"
+                >
+                  <span className="text-gray-600">Remove</span>
+                  <Icon icon={"zondicons:minus-solid"} />
+                </Button>
+              )}
+
               <div className="w-full flex items-center">
                 <div className="w-6/12  px-2 flex flex-col gap-y-2">
                   <span>Type</span>

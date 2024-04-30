@@ -6,6 +6,7 @@ import { useState } from "react";
 import BioInfo from "./Components/BioInfo";
 import AcademicInfo from "./Components/Academics";
 import Skills from "./Components/Skills";
+import Experiences from "./Components/Experience";
 
 const requiredDetails = [
   {
@@ -119,8 +120,8 @@ const NicheProfileDrawer = ({
       style={{ padding: 0 }}
       open={open}
     >
-      <div className="w-full flex items-center h-screen px-0">
-        <div className="lg:w-[400px] w-full border-r h-full border-gray-200   ">
+      <div className="w-full flex items-center h-full  px-0 overflow-hidden">
+        <div className="lg:w-[400px] w-full border-r h-full border-gray-200  overflow-y-scroll  ">
           {requiredDetails.map((info) => (
             <div
               className={`flex flex-col gap-y-2 h-32 hover:bg-gray-50 ${
@@ -140,7 +141,7 @@ const NicheProfileDrawer = ({
           ))}
         </div>
 
-        <div className=" lg:flex-grow lg:flex flex-col h-full   px-4 py-3">
+        <div className=" lg:flex-grow lg:flex flex-col h-full   px-4 py-3 overflow-y-scroll">
           {selected?.key === "basic" && (
             <BioInfo onContinue={(data: any) => onContinue("basic", data)} />
           )}
@@ -153,6 +154,12 @@ const NicheProfileDrawer = ({
 
           {selected?.key === "skills" && (
             <Skills onContinue={(data: any) => onContinue("skills", data)} />
+          )}
+
+          {selected?.key === "work" && (
+            <Experiences
+              onContinue={(data: any) => onContinue("social", data)}
+            />
           )}
         </div>
       </div>

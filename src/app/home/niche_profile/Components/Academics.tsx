@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Button, Drawer, Form, Input } from "antd";
+import { Button, Drawer, Form, Input, message } from "antd";
 import { useState } from "react";
 import ACButton from "@/app/components/Button";
 import { v4 as uuidv4 } from "uuid";
@@ -21,8 +21,9 @@ const AcademicInfo = ({ onContinue }: { onContinue: any }) => {
   };
 
   const onRemove = (id: string) => {
-    console.log("Last", academics[academics.length - 1].id);
-    console.log("Removed", id);
+    if (academics.length < 2) {
+      return;
+    }
 
     const removedAcademics = academics.filter((record) => record.id !== id);
     console.log(removedAcademics);
@@ -53,14 +54,16 @@ const AcademicInfo = ({ onContinue }: { onContinue: any }) => {
               key={ac.id}
               className="w-full flex flex-row border rounded-md mt-3 py-3 px-2 relative h-32"
             >
-              <Button
-                onClick={() => onRemove(ac.id)}
-                type="link"
-                className="absolute bottom-0 right-1 flex items-center gap-x-2"
-              >
-                <span className="text-gray-600">Remove</span>
-                <Icon icon={"zondicons:minus-solid"} />
-              </Button>
+              {academics.length > 1 && (
+                <Button
+                  onClick={() => onRemove(ac.id)}
+                  type="link"
+                  className="absolute bottom-0 right-1 flex items-center gap-x-2"
+                >
+                  <span className="text-gray-600">Remove</span>
+                  <Icon icon={"zondicons:minus-solid"} />
+                </Button>
+              )}
               <div className="w-6/12  px-2">
                 <UnControlledInput
                   required
