@@ -2,17 +2,35 @@
 
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Drawer, Form, Input } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IInput from "./Form";
 import ACButton from "@/app/components/Button";
 
-const BioInfo = ({ onContinue }: { onContinue: any }) => {
+const BioInfo = ({
+  onContinue,
+  existingData = {},
+}: {
+  onContinue: any;
+  existingData: any;
+}) => {
+  const [form] = Form.useForm();
+
+  useEffect(() => {
+    console.log(existingData);
+
+    form.setFieldsValue(existingData);
+  }, []);
+
   const onFinishForm = (data: any) => {
     onContinue(data);
   };
 
   return (
-    <Form onFinish={onFinishForm} className="flex flex-col gap-y-12">
+    <Form
+      form={form}
+      onFinish={onFinishForm}
+      className="flex flex-col gap-y-12"
+    >
       <div>
         <div className="flex items-center px-2">
           <div className="w-6/12  px-2">

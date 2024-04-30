@@ -7,8 +7,9 @@ import ACButton from "@/app/components/Button";
 import { v4 as uuidv4 } from "uuid";
 import { UnControlledInput } from "./Form";
 
-const Experiences = ({ onContinue }: { onContinue: any }) => {
-  const [allData, setAllData] = useState([
+const Experiences = ({
+  onContinue,
+  existingData = [
     {
       role: "",
       duration: "",
@@ -17,7 +18,12 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
       description: "",
       company: "",
     },
-  ]);
+  ],
+}: {
+  onContinue: any;
+  existingData: any[];
+}) => {
+  const [allData, setAllData] = useState(existingData);
 
   const onFinishForm = (_: any) => {
     for (const item of allData) {
@@ -176,6 +182,9 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
                       cols={10}
                       className="w-full"
                       rows={5}
+                      value={
+                        allData.find((item) => item.id === ac.id)?.description
+                      }
                       onChange={(val) =>
                         onChange("description", val.target.value, ac.id)
                       }

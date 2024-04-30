@@ -7,10 +7,14 @@ import ACButton from "@/app/components/Button";
 import { v4 as uuidv4 } from "uuid";
 import { UnControlledInput } from "./Form";
 
-const Accomplishment = ({ onContinue }: { onContinue: any }) => {
-  const [allData, setAllData] = useState([
-    { title: "", details: "", id: uuidv4() },
-  ]);
+const Accomplishment = ({
+  onContinue,
+  existingData = [{ title: "", details: "", id: uuidv4() }],
+}: {
+  onContinue: any;
+  existingData: any[];
+}) => {
+  const [allData, setAllData] = useState(existingData);
 
   const onFinishForm = (_: any) => {
     for (const item of allData) {

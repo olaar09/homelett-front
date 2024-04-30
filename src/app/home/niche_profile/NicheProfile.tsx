@@ -151,7 +151,10 @@ const NicheProfileDrawer = ({
 
         <div className=" lg:flex-grow lg:flex flex-col h-full   px-4 py-3 overflow-y-scroll">
           {selected?.key === "basic" && (
-            <BioInfo onContinue={(data: any) => onContinue("basic", data)} />
+            <BioInfo
+              existingData={data["basic"]}
+              onContinue={(data: any) => onContinue("basic", data)}
+            />
           )}
 
           {selected?.key === "academics" && (
@@ -169,21 +172,29 @@ const NicheProfileDrawer = ({
           )}
 
           {selected?.key === "work" && (
-            <Experiences onContinue={(data: any) => onContinue("work", data)} />
+            <Experiences
+              existingData={data["work"]}
+              onContinue={(data: any) => onContinue("work", data)}
+            />
           )}
 
           {selected?.key === "socials" && (
-            <Social onContinue={(data: any) => onContinue("socials", data)} />
+            <Social
+              existingData={data["socials"]}
+              onContinue={(data: any) => onContinue("socials", data)}
+            />
           )}
 
           {selected?.key === "awards" && (
             <Accomplishment
+              existingData={data["awards"]}
               onContinue={(data: any) => onContinue("awards", data)}
             />
           )}
 
           {selected?.key === "settings" && (
             <Settings
+              existingData={data["settings"]}
               onContinue={(data: any) => onContinue("settings", data)}
             />
           )}

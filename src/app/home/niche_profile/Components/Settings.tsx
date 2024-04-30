@@ -16,11 +16,17 @@ import ACButton from "@/app/components/Button";
 import { v4 as uuidv4 } from "uuid";
 import { UnControlledInput } from "./Form";
 
-const Settings = ({ onContinue }: { onContinue: any }) => {
-  const [data, setData] = useState({
+const Settings = ({
+  onContinue,
+  existingData = {
     cover_letter: "",
     experience: "",
-  });
+  },
+}: {
+  onContinue: any;
+  existingData: any;
+}) => {
+  const [data, setData] = useState(existingData);
 
   const onFinishForm = (_: any) => {
     onContinue(data);
