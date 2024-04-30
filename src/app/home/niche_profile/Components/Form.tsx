@@ -3,17 +3,50 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Drawer, Form, Input } from "antd";
 
-const IInput = ({
+export const UnControlledInput = ({
   label,
   title,
   onChange,
   required = true,
+  value,
   name,
 }: {
   required?: boolean;
   title: string;
   label: string;
   onChange: any;
+  value?: string;
+  name: string;
+}) => {
+  return (
+    <div>
+      <div className="w-full flex flex-col gap-y-2">
+        <span className="font-bold">{title}</span>
+        <Input
+          required={required}
+          onChange={(e) => (onChange ? onChange(e.target.value) : () => {})}
+          value={value}
+          className="h-11"
+          placeholder={label}
+        />
+      </div>
+    </div>
+  );
+};
+
+const IInput = ({
+  label,
+  title,
+  onChange,
+  required = true,
+  value,
+  name,
+}: {
+  required?: boolean;
+  title: string;
+  label: string;
+  onChange: any;
+  value?: string;
   name: string;
 }) => {
   return (
@@ -23,8 +56,9 @@ const IInput = ({
         <Form.Item name={name}>
           <Input
             required={required}
-            onChange={onChange}
+            onChange={(e) => (onChange ? onChange(e.target.value) : () => {})}
             name={label}
+            value={value}
             className="h-11"
             placeholder={label}
           />

@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { Drawer } from "antd";
 import { useState } from "react";
 import BioInfo from "./Components/BioInfo";
+import AcademicInfo from "./Components/Academics";
 
 const requiredDetails = [
   {
@@ -141,6 +142,12 @@ const NicheProfileDrawer = ({
         <div className=" lg:flex-grow lg:flex flex-col h-full   px-4 py-3">
           {selected?.key === "basic" && (
             <BioInfo onContinue={(data: any) => onContinue("basic", data)} />
+          )}
+
+          {selected?.key === "academics" && (
+            <AcademicInfo
+              onContinue={(data: any) => onContinue("academics", data)}
+            />
           )}
         </div>
       </div>
