@@ -12,7 +12,7 @@ const Social = ({ onContinue }: { onContinue: any }) => {
     { type: "", link: "", id: uuidv4() },
   ]);
 
-  const onFinishForm = (data: any) => {
+  const onFinishForm = (_: any) => {
     for (const item of academics) {
       if (!item.link || !item.type) {
         message.error("Complete all fields or remove unused fields");
@@ -20,7 +20,7 @@ const Social = ({ onContinue }: { onContinue: any }) => {
       }
     }
 
-    onContinue(data);
+    onContinue(academics);
   };
 
   const onAddNew = () => {

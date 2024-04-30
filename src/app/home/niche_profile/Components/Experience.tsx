@@ -19,7 +19,7 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
     },
   ]);
 
-  const onFinishForm = (data: any) => {
+  const onFinishForm = (_: any) => {
     for (const item of allData) {
       if (!item.role || !item.description) {
         message.error("Complete all fields or remove unused fields");
@@ -27,7 +27,7 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
       }
     }
 
-    onContinue(data);
+    onContinue(allData);
   };
 
   const onAddNew = () => {
