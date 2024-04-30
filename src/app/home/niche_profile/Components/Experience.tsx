@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { UnControlledInput } from "./Form";
 
 const Experiences = ({ onContinue }: { onContinue: any }) => {
-  const [academics, setAcademics] = useState([
+  const [allData, setAllData] = useState([
     {
       role: "",
       duration: "",
@@ -20,7 +20,7 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
   ]);
 
   const onFinishForm = (data: any) => {
-    for (const item of academics) {
+    for (const item of allData) {
       if (!item.role || !item.description) {
         message.error("Complete all fields or remove unused fields");
         return;
@@ -31,8 +31,8 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
   };
 
   const onAddNew = () => {
-    setAcademics([
-      ...academics,
+    setAllData([
+      ...allData,
       {
         role: "",
         duration: "",
@@ -45,13 +45,13 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
   };
 
   const onRemove = (id: string) => {
-    console.log("Last", academics[academics.length - 1].id);
+    console.log("Last", allData[allData.length - 1].id);
     console.log("Removed", id);
 
-    const removedAcademics = academics.filter((record) => record.id !== id);
-    console.log(removedAcademics);
+    const removedallData = allData.filter((record) => record.id !== id);
+    console.log(removedallData);
 
-    setAcademics([...removedAcademics]);
+    setAllData([...removedallData]);
   };
 
   const onChange = (
@@ -59,17 +59,17 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
     value: string,
     id: string
   ) => {
-    const cloned = [...academics];
-    const index = academics.findIndex((record) => record.id === id);
+    const cloned = [...allData];
+    const index = allData.findIndex((record) => record.id === id);
     cloned[index][key] = value;
 
     console.log(cloned);
 
-    setAcademics(cloned);
+    setAllData(cloned);
   };
 
   /*   const getSkillType = (ac: any) =>
-    academics.find((item) => item.id === ac.id)?.skill_type;
+    allData.find((item) => item.id === ac.id)?.skill_type;
 
   const getValueLabel = (ac: any) => {
     const type = getSkillType(ac);
@@ -89,11 +89,11 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
     <Form onFinish={onFinishForm} className=" gap-y-12">
       <div>
         <div className="flex flex-col items-center px-2">
-          {academics.map((ac, index) => (
+          {allData.map((ac, index) => (
             <div key={ac.id} className="w-full mt-3 py-1 px-2 relative h-96">
               <div className=" text-xl mb-2 flex items-center justify-between">
                 <span> Experience {index + 1}</span>
-                {academics.length > 1 && (
+                {allData.length > 1 && (
                   <Button
                     onClick={() => onRemove(ac.id)}
                     type="link"
@@ -115,9 +115,7 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
                         title={"Role title"}
                         name={`role_${index}`}
                         label={"What was your job title"}
-                        value={
-                          academics.find((item) => item.id === ac.id)?.role
-                        }
+                        value={allData.find((item) => item.id === ac.id)?.role}
                         onChange={(val: string) => onChange("role", val, ac.id)}
                       />
                     </div>
@@ -129,7 +127,7 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
                         name={`role_${index}`}
                         label={"Feb 2021 -  June 2022"}
                         value={
-                          academics.find((item) => item.id === ac.id)?.duration
+                          allData.find((item) => item.id === ac.id)?.duration
                         }
                         onChange={(val: string) =>
                           onChange("duration", val, ac.id)
@@ -147,7 +145,7 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
                         name={`role_${index}`}
                         label={"Excel, GSuite, ReactJS, etc"}
                         value={
-                          academics.find((item) => item.id === ac.id)?.skills
+                          allData.find((item) => item.id === ac.id)?.skills
                         }
                         onChange={(val: string) =>
                           onChange("skills", val, ac.id)
@@ -162,7 +160,7 @@ const Experiences = ({ onContinue }: { onContinue: any }) => {
                         name={`role_${index}`}
                         label={"Company name"}
                         value={
-                          academics.find((item) => item.id === ac.id)?.company
+                          allData.find((item) => item.id === ac.id)?.company
                         }
                         onChange={(val: string) =>
                           onChange("company", val, ac.id)

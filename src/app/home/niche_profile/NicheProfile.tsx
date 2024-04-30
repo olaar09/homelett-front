@@ -9,6 +9,7 @@ import Skills from "./Components/Skills";
 import Experiences from "./Components/Experience";
 import Social from "./Components/Social";
 import Accomplishment from "./Components/Accomplishment";
+import Settings from "./Components/Settings";
 
 const requiredDetails = [
   {
@@ -77,6 +78,8 @@ const NicheProfileDrawer = ({
   };
 
   const onContinue = (key: string, newData: Object) => {
+    console.log(key, newData);
+
     setData({ ...data, [key]: newData });
     onSelectNext(key);
   };
@@ -108,7 +111,7 @@ const NicheProfileDrawer = ({
   };
 
   const onSubmitForm = () => {
-    console.log(requiredDetails);
+    console.log(data);
   };
 
   return (
@@ -172,6 +175,12 @@ const NicheProfileDrawer = ({
           {selected?.key === "awards" && (
             <Accomplishment
               onContinue={(data: any) => onContinue("awards", data)}
+            />
+          )}
+
+          {selected?.key === "settings" && (
+            <Settings
+              onContinue={(data: any) => onContinue("settings", data)}
             />
           )}
         </div>

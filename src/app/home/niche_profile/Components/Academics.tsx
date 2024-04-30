@@ -8,27 +8,27 @@ import { v4 as uuidv4 } from "uuid";
 import { UnControlledInput } from "./Form";
 
 const AcademicInfo = ({ onContinue }: { onContinue: any }) => {
-  const [academics, setAcademics] = useState([
+  const [allData, setAllData] = useState([
     { institution: "", award: "", id: uuidv4() },
   ]);
 
-  const onFinishForm = (data: any) => {
-    onContinue(data);
+  const onFinishForm = (_: any) => {
+    onContinue(allData);
   };
 
   const onAddNew = () => {
-    setAcademics([...academics, { institution: "", award: "", id: uuidv4() }]);
+    setAllData([...allData, { institution: "", award: "", id: uuidv4() }]);
   };
 
   const onRemove = (id: string) => {
-    if (academics.length < 2) {
+    if (allData.length < 2) {
       return;
     }
 
-    const removedAcademics = academics.filter((record) => record.id !== id);
-    console.log(removedAcademics);
+    const removedallData = allData.filter((record) => record.id !== id);
+    console.log(removedallData);
 
-    setAcademics([...removedAcademics]);
+    setAllData([...removedallData]);
   };
 
   const onChange = (
@@ -36,25 +36,25 @@ const AcademicInfo = ({ onContinue }: { onContinue: any }) => {
     value: string,
     id: string
   ) => {
-    const cloned = [...academics];
-    const index = academics.findIndex((record) => record.id === id);
+    const cloned = [...allData];
+    const index = allData.findIndex((record) => record.id === id);
     cloned[index][key] = value;
 
     console.log(cloned);
 
-    setAcademics(cloned);
+    setAllData(cloned);
   };
 
   return (
     <Form onFinish={onFinishForm} className=" gap-y-12">
       <div>
         <div className="flex flex-col items-center px-2">
-          {academics.map((ac, index) => (
+          {allData.map((ac, index) => (
             <div
               key={ac.id}
               className="w-full flex flex-row border rounded-md mt-3 py-3 px-2 relative h-32"
             >
-              {academics.length > 1 && (
+              {allData.length > 1 && (
                 <Button
                   onClick={() => onRemove(ac.id)}
                   type="link"
@@ -70,9 +70,7 @@ const AcademicInfo = ({ onContinue }: { onContinue: any }) => {
                   title="Institution name"
                   name={`institution_${index}`}
                   label="Name of the school or organization"
-                  value={
-                    academics.find((item) => item.id === ac.id)?.institution
-                  }
+                  value={allData.find((item) => item.id === ac.id)?.institution}
                   onChange={(val: string) =>
                     onChange("institution", val, ac.id)
                   }
@@ -84,7 +82,7 @@ const AcademicInfo = ({ onContinue }: { onContinue: any }) => {
                   required
                   title="Award"
                   name={`award_${index}`}
-                  value={academics.find((item) => item.id === ac.id)?.award}
+                  value={allData.find((item) => item.id === ac.id)?.award}
                   label="Award you received, such as MSC or BSC"
                   onChange={(val: string) => onChange("award", val, ac.id)}
                   disabled={false}
