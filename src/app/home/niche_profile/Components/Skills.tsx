@@ -7,10 +7,14 @@ import ACButton from "@/app/components/Button";
 import { v4 as uuidv4 } from "uuid";
 import { UnControlledInput } from "./Form";
 
-const Skills = ({ onContinue }: { onContinue: any }) => {
-  const [academics, setAcademics] = useState([
-    { skill_type: "", skill: "", id: uuidv4() },
-  ]);
+const Skills = ({
+  onContinue,
+  existingData = [{ skill_type: "", skill: "", id: uuidv4() }],
+}: {
+  onContinue: any;
+  existingData: any[];
+}) => {
+  const [academics, setAcademics] = useState(existingData);
 
   const onFinishForm = (_: any) => {
     for (const item of academics) {
