@@ -73,6 +73,7 @@ const AcademicInfo = ({ onContinue }: { onContinue: any }) => {
                   onChange={(val: string) =>
                     onChange("institution", val, ac.id)
                   }
+                  disabled={false}
                 />
               </div>
               <div className="w-6/12 px-2">
@@ -83,6 +84,7 @@ const AcademicInfo = ({ onContinue }: { onContinue: any }) => {
                   value={academics.find((item) => item.id === ac.id)?.award}
                   label="Award you received, such as MSC or BSC"
                   onChange={(val: string) => onChange("award", val, ac.id)}
+                  disabled={false}
                 />
               </div>
             </div>
