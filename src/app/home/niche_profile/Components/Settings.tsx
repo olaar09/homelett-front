@@ -18,6 +18,7 @@ import { UnControlledInput } from "./Form";
 
 const Settings = ({
   onContinue,
+  loading,
   existingData = {
     cover_letter: "",
     experience: "",
@@ -25,6 +26,7 @@ const Settings = ({
 }: {
   onContinue: any;
   existingData: any;
+  loading: boolean;
 }) => {
   const [data, setData] = useState(existingData);
 
@@ -79,7 +81,7 @@ const Settings = ({
           <ACButton
             text={"Continue"}
             type={"submit"}
-            loading={false}
+            loading={loading}
             children={undefined}
           />
         </div>

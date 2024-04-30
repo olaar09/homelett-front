@@ -1,8 +1,8 @@
 "use client";
 
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Drawer } from "antd";
-import { useState } from "react";
+import { Drawer, message } from "antd";
+import { useContext, useState } from "react";
 import BioInfo from "./Components/BioInfo";
 import AcademicInfo from "./Components/Academics";
 import Skills from "./Components/Skills";
@@ -10,6 +10,9 @@ import Experiences from "./Components/Experience";
 import Social from "./Components/Social";
 import Accomplishment from "./Components/Accomplishment";
 import Settings from "./Components/Settings";
+import APIUtil from "@/services/APIUtil";
+import { AxiosError } from "axios";
+import { AuthContext } from "@/contexts/AuthContext";
 
 const requiredDetails = [
   {
@@ -70,12 +73,16 @@ const NicheProfileDrawer = ({
 }) => {
   const [selected, setSelected] = useState<any>(requiredDetails[0]);
   const [data, setData] = useState<any>({});
+  const [loading, setLoading] = useState(false);
+  const authContext = useContext(AuthContext);
 
   const onSelect = (info: any) => {
     if (data[info.key]) {
       setSelected(info);
     }
   };
+
+  const apiUtil = new APIUtil();
 
   const onContinue = (key: string, newData: Object) => {
     console.log(key, newData);
@@ -110,8 +117,24 @@ const NicheProfileDrawer = ({
     }
   };
 
-  const onSubmitForm = () => {
-    console.log(data);
+  const onSubmitForm = async () => {
+    try {
+      setLoading(true);
+      await apiUtil.cvService.createJobProfile(data);
+      authContext.refreshProfile();
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        message.error(
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
+          }`
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -195,6 +218,7 @@ const NicheProfileDrawer = ({
           {selected?.key === "settings" && (
             <Settings
               existingData={data["settings"]}
+              loading={loading || authContext.loading}
               onContinue={(data: any) => onContinue("settings", data)}
             />
           )}

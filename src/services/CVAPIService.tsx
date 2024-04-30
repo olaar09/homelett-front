@@ -36,6 +36,15 @@ class CVAPIService {
     }
   }
 
+  async createJobProfile(data: any): Promise<any> {
+    try {
+      const chat = await this.apiService.post("/action/add_profile", data);
+      return chat;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getJobProfile(profileId: string): Promise<any> {
     try {
       const response = await this.apiService.get(
