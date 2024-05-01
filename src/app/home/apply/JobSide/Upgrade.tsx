@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import { Button, message } from "antd";
 import { useContext, useState } from "react";
 import { usePaystackPayment } from "react-paystack";
+import PricingModal from "./PricingModal";
 
 const Upgrade = ({ email }: any) => {
   const config = {
@@ -14,6 +15,7 @@ const Upgrade = ({ email }: any) => {
   };
 
   const [loading, setLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const initializePayment = usePaystackPayment(config);
   const apiUtil = new APIUtil();
@@ -55,8 +57,17 @@ const Upgrade = ({ email }: any) => {
     }
   };
 
+  const onCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  const onOpenModal = () => {
+    setOpenModal(true);
+  };
+
   return (
     <>
+      <PricingModal open={openModal} closeModal={onCloseModal} />
       <div className="blur-at-top  absolute h-40  w-full bottom-80 ">
         <span className="text-black"></span>
       </div>
@@ -76,7 +87,7 @@ const Upgrade = ({ email }: any) => {
             loading={loading}
             size="large"
             className="bg-primary"
-            onClick={onInitPayment}
+            onClick={onOpenModal}
             type="primary"
           >
             <div className="flex items-center gap-x-2">
