@@ -100,7 +100,9 @@ const Nav: React.FC<any> = ({ children }) => {
   const [openNicheDrawer, setOpenNicheDrawer] = useState(false);
 
   const authContext = useContext(AuthContext);
-  const requiresProfile = authContext.currentUser?.active_job_profile == null;
+  const requiresProfile =
+    authContext.currentUser &&
+    authContext.currentUser?.active_job_profile == null;
 
   const onLogout = () => {
     localStorage.clear();
