@@ -196,7 +196,7 @@ const NicheProfileDrawer = ({
 
           {selected?.key === "skills" && (
             <Skills
-              existingData={data["academics"]}
+              existingData={data["skills"]}
               onContinue={(data: any) => onContinue("skills", data)}
             />
           )}

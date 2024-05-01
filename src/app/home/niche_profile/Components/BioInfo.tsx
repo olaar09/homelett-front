@@ -25,11 +25,7 @@ const BioInfo = ({
   };
 
   return (
-    <Form
-      form={form}
-      onFinish={onFinishForm}
-      className="flex flex-col gap-y-12"
-    >
+    <Form form={form} onFinish={onFinishForm} className="flex flex-col gap-y-4">
       <div>
         <div className="flex items-center px-2">
           <div className="w-6/12  px-2">
