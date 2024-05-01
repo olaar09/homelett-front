@@ -21,7 +21,7 @@ const CVSide = ({
   experiences,
 }: ICVSide) => {
   return (
-    <div className="lg:flex hidden lg:w-9/12  h-full   flex-col overflow-y-scroll">
+    <div className="lg:flex hidden lg:w-9/12  h-full    flex-col overflow-y-scroll">
       <div className="px-2 w-full">
         {(loadingCV || loadingExperiences) && <LoadingJobItem />}
       </div>

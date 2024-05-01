@@ -9,7 +9,7 @@ import LoadingOverlay from "@/app/components/LoadingOverlay";
 import JobItem from "../_components/JobItem";
 import LoadingJobItem from "../_components/LoadingJobItem";
 import { message } from "antd";
-import { ExperienceItem } from "./CVSide/ExperienceItem";
+import { ExperienceItem } from "./CVSide/ExperienceItem_old";
 import { OverviewItem } from "./CVSide/OverviewItem";
 import ASide from "./CVSide/CVProfileInfo";
 import { AxiosError } from "axios";
