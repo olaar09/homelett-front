@@ -1,4 +1,48 @@
+import ACButton from "@/app/components/Button";
+import UtilService from "@/services/UtilService";
+import { Icon } from "@iconify/react";
 import { Modal } from "antd";
+
+const PricingItem = ({
+  items,
+  title,
+  price,
+}: {
+  price: string;
+  items: string[];
+  title: string;
+}) => {
+  const utilService = new UtilService();
+  return (
+    <div className=" w-6/12 rounded-lg shadow-md  border flex flex-col px-6 py-6 gap-y-4 mx-3">
+      <span className={`text-2xl text-gray-500`}> {title} </span>
+      <span className={`text-xl font-black text-gray-500`}>
+        {utilService.formatMoney(price, "NG", "NGN")}{" "}
+      </span>
+
+      <div className=" flex flex-col items-start mt-4 gap-y-4">
+        {items.map((text) => {
+          return (
+            <div className="flex items-center gap-x-1">
+              <Icon icon={"lets-icons:check-fill"} className="text-xl" />
+              <span className={`text-md text-gray-500`}>{text}</span>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="mt-4">
+        <ACButton
+          inverted={title.toLowerCase() === "monthly"}
+          text={"Make payment"}
+          type={"button"}
+          loading={false}
+          children={undefined}
+        />
+      </div>
+    </div>
+  );
+};
 
 const PricingModal = ({
   open,
@@ -7,6 +51,22 @@ const PricingModal = ({
   open: boolean;
   closeModal: () => void;
 }) => {
+  const utilService = new UtilService();
+  const isMonthly = false;
+
+  const monthly = [
+    "Access 400k+ Jobs",
+    "Access to  detailed insights",
+    "Stand out with AI tools",
+    "Use AI Copilot to automatically apply",
+  ];
+
+  const yearly = [
+    "Access 400k+ Jobs",
+    "Access scholarships and grants",
+    "Money back guaranteed (T&C apply) ",
+    "Use AI Copilot to automatically apply",
+  ];
   return (
     <Modal
       title=""
@@ -17,16 +77,23 @@ const PricingModal = ({
       footer={null}
       width={800}
     >
-      <div className="flex flex-col items-center justify-center gap-y-3">
-        <span className="font-black text-xl block text-center">
-          <span className=" text-primary"> 70% </span>of pro users get an
-          interview in the <br /> first month. Join them <br />
-        </span>
-        <span className="block text-center text-gray-500">
-          Access 400k+ fresh jobs with deep insights to make your application
-          stand out
-        </span>
-      </div>
+      <>
+        <div className="flex flex-col items-center justify-center gap-y-3 py-6">
+          <span className="font-black text-2xl block text-center">
+            <span className=" text-primary"> 70% </span>of pro users get an
+            interview in the <br /> first month. Join them <br />
+          </span>
+          <span className="block text-center text-gray-500">
+            Access 400k+ fresh jobs with deep insights to make your application
+            stand out
+          </span>
+        </div>
+
+        <div className="flex items-center w-11/12 mx-auto my-4">
+          <PricingItem price="1000000" title="Monthly" items={monthly} />
+          <PricingItem price="4000000" title="Yearly" items={yearly} />
+        </div>
+      </>
     </Modal>
   );
 };

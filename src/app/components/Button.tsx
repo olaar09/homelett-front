@@ -8,6 +8,7 @@ type InputFieldProps = {
   onClick?: () => void;
   loading: boolean;
   children: any;
+  inverted: boolean;
 };
 
 const ACButton: React.FC<InputFieldProps> = ({
@@ -16,6 +17,7 @@ const ACButton: React.FC<InputFieldProps> = ({
   children,
   loading = false,
   type = "button",
+  inverted = false,
 }) => {
   // Define the props the component accepts
 
@@ -29,7 +31,9 @@ const ACButton: React.FC<InputFieldProps> = ({
     <button
       disabled={loading}
       type={type}
-      className=" bg-primary text-xl rounded-xl text-foreground py-3 px-6 w-full h-12"
+      className={`${
+        inverted ? "bg-gray-500" : "bg-primary"
+      }  text-xl rounded-xl text-foreground py-3 px-6 w-full h-12"`}
       onClick={btnClicked}
     >
       <div className="flex items-center  justify-center gap-x-4 ">
