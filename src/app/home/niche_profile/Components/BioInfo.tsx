@@ -1,6 +1,5 @@
 "use client";
 
-import { Icon } from "@iconify/react/dist/iconify.js";
 import { Drawer, Form, Input } from "antd";
 import { useEffect, useState } from "react";
 import IInput from "./Form";
