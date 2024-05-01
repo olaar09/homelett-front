@@ -27,6 +27,7 @@ const Upgrade = ({ email }: any) => {
     try {
       setLoading(true);
       await apiUtil.profileService.completeUpgradeProfile(data);
+      onCloseModal();
       message.success("Payment completed");
       await authContext.refreshProfile();
       setLoading(false);
@@ -73,7 +74,6 @@ const Upgrade = ({ email }: any) => {
   };
 
   const onSetAmount = (plan: string) => {
-    alert("rf3cefdhksj");
     switch (plan) {
       case "monthly":
         setAmount(10000);
