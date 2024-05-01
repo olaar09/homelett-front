@@ -50,8 +50,9 @@ const CVSide = ({
                     <ExperienceItem
                       title={experience.experience_title}
                       companyName={experience.company_name}
+                      list={experience.content}
                       duration={`${experience.duration_start}`}
-                      content={experience.content}
+                      content={experience.main_responsibilities}
                     />
                   );
                 })}
