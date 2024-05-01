@@ -17,7 +17,7 @@ export interface IJProfile {
   id: string;
   name: string;
   is_active: number;
-  ai_professional_experience: string;
+  profession: string;
   ai_experience_summary: string;
   temperature: string;
   last_jobs_assignment: string;

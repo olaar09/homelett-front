@@ -242,8 +242,8 @@ const Nav: React.FC<any> = ({ children }) => {
                 <div className="flex flex-col border-t w-full py-5">
                   <NavMenu
                     path="/home/name"
-                    icon={"mdi:worker"}
-                    title="ReactJS developer"
+                    icon={"mdi:worker"} // todo, show icon based on profile type
+                    title={`${authContext.activeProfile?.profession}`}
                     suffixIcon="ic:round-switch-left"
                     tooltip="Switch job profile"
                     onClickSuffix={onSwitch}

@@ -61,7 +61,7 @@ const Skills = ({
       case "language":
         return "Yoruba, Swedish, German, English";
       case "skill":
-        return "Yoruba, Swedish, German, English";
+        return "ReactJs, Celery, Dribble, Jira";
 
       default:
         return "";
