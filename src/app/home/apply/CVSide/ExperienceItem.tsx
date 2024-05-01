@@ -19,9 +19,7 @@ export const ExperienceItem = ({
           <span className="font-bold">
             {companyName} - {title}
           </span>
-          <span className="text-sm text-gray-400">
-            {"Feb 2021 - June 2024"}
-          </span>
+          <span className="text-sm text-gray-400">{duration}</span>
         </div>
 
         <span

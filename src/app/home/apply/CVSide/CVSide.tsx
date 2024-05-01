@@ -50,9 +50,7 @@ const CVSide = ({
                     <ExperienceItem
                       title={experience.experience_title}
                       companyName={experience.company_name}
-                      duration={` ${experience.company_name ?? ""} (${
-                        experience.duration
-                      })`}
+                      duration={`${experience.duration_start}`}
                       content={experience.content}
                     />
                   );
