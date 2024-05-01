@@ -93,7 +93,9 @@ const Chat = () => {
     refresh: refreshJobs,
   } = useRequest(() => getSimilarJobs(), {
     ready:
-      authContext.currentUser != null && authContext.currentUser != undefined,
+      authContext.currentUser != null &&
+      authContext.currentUser != undefined &&
+      jProfile?.id != null,
   });
 
   useEffect(() => {
@@ -109,8 +111,6 @@ const Chat = () => {
   const getExperiences = async (): Promise<any> => {
     try {
       setLoadingExp(true);
-      console.log(jProfile.id, selectedJob.id);
-
       const data = await apiUtil.cvService.getExperiences(
         jProfile.id,
         selectedJob.id
@@ -153,8 +153,6 @@ const Chat = () => {
       message.error("unable to load jobs");
     }
   };
-
-  console.log(jProfile, "MKDEM");
 
   const onSelectJob = (jobItem: any) => {
     setSelectedJob(jobItem);

@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 
 import { Avatar } from "antd";
 
-const HeaderSide = () => {
+const HeaderSide = ({ profile }: any) => {
   return (
     <div className="w-full flex flex-col items-center h-48  pt-4">
       <Avatar
@@ -12,9 +12,11 @@ const HeaderSide = () => {
         src={"/sample.png"}
       />
       <div className="flex flex-col items-center mt-2">
-        <span className="font-black text-2xl">John Isaac</span>
+        <span className="font-black text-2xl">
+          {profile.first_name} {profile.last_name}
+        </span>
         <span className="text-gray-600 text-xl font-black">
-          Frontend engineer
+          {profile.profession}
         </span>
       </div>
     </div>
@@ -43,7 +45,7 @@ const AsideItem2 = ({ title, desc }: any) => {
 
 const ASide = ({ profile }: any) => {
   const skills =
-    profile?.attributes?.filter((attr: any) => attr.attribute === "skills") ??
+    profile?.attributes?.filter((attr: any) => attr.attribute === "skill") ??
     [];
 
   const languages =
@@ -51,23 +53,21 @@ const ASide = ({ profile }: any) => {
     [];
 
   const links =
-    profile?.attributes?.filter((attr: any) => attr.attribute === "links") ??
-    [];
+    profile?.attributes?.filter((attr: any) => attr.attribute === "link") ?? [];
 
   const academics =
-    profile?.attributes?.filter(
-      (attr: any) => attr.attribute === "academics"
-    ) ?? [];
+    profile?.attributes?.filter((attr: any) => attr.attribute === "academic") ??
+    [];
 
   console.log(skills, " joeldkms;");
 
   return (
     <div className="bg-gray-200 h-full w-4/12  ">
-      <HeaderSide />
+      <HeaderSide profile={profile} />
 
       <div className="flex flex-col gap-y-6 mt-10  px-10 mx-auto w-11/12">
         {(links ?? []).map((link: any, key: any) => (
-          <AsideItem2 key={key} desc={link.value} title={link.icon} />
+          <AsideItem2 key={key} desc={link.value} title={link.title} />
         ))}
 
         {/*         <AsideItem title={profile?.niche_email} icon={"mage:email-fill"} />
