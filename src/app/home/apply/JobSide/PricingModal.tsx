@@ -7,10 +7,13 @@ const PricingItem = ({
   items,
   title,
   price,
+  loading,
 }: {
   price: string;
   items: { title: string; isSoon?: boolean }[];
   title: string;
+  loading: boolean;
+  onClick: () => void;
 }) => {
   const utilService = new UtilService();
   return (
@@ -42,7 +45,7 @@ const PricingItem = ({
           inverted={title.toLowerCase() === "monthly"}
           text={"Make payment"}
           type={"button"}
-          loading={false}
+          loading={loading}
           children={undefined}
         />
       </div>
@@ -53,9 +56,13 @@ const PricingItem = ({
 const PricingModal = ({
   open,
   closeModal,
+  onInitPayment,
+  loading,
 }: {
   open: boolean;
+  loading: boolean;
   closeModal: () => void;
+  onInitPayment: (plan: string) => void;
 }) => {
   const monthly = [
     { title: "Access 400k+ Jobs" },
@@ -93,8 +100,20 @@ const PricingModal = ({
         </div>
 
         <div className="flex items-center w-11/12 mx-auto my-4">
-          <PricingItem price="1000000" title="Monthly" items={monthly} />
-          <PricingItem price="4000000" title="Yearly" items={yearly} />
+          <PricingItem
+            loading={loading}
+            onClick={() => onInitPayment("monthly")}
+            price="1000000"
+            title="Monthly"
+            items={monthly}
+          />
+          <PricingItem
+            loading={loading}
+            onClick={() => onInitPayment("yearly")}
+            price="4000000"
+            title="Yearly"
+            items={yearly}
+          />
         </div>
       </>
     </Modal>

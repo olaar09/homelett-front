@@ -2,7 +2,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import APIUtil from "@/services/APIUtil";
 import { Icon } from "@iconify/react";
 import { Button, message } from "antd";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { usePaystackPayment } from "react-paystack";
 import PricingModal from "./PricingModal";
 
@@ -16,6 +16,7 @@ const Upgrade = ({ email }: any) => {
 
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [amount, setAmount] = useState(0);
 
   const initializePayment = usePaystackPayment(config);
   const apiUtil = new APIUtil();
@@ -34,6 +35,11 @@ const Upgrade = ({ email }: any) => {
     }
   };
 
+  useEffect(() => {
+    if (amount > 0) {
+      onInitPayment();
+    }
+  }, [amount]);
   // you can call this function anything
   const onSuccess = (response: any) => {
     // implementation for  whatever you want to do when the Paystack dialog closed.
@@ -65,9 +71,28 @@ const Upgrade = ({ email }: any) => {
     setOpenModal(true);
   };
 
+  const onSetAmount = (plan: string) => {
+    switch (plan) {
+      case "monthly":
+        setAmount(10000);
+        break;
+      case "yearly":
+        setAmount(40000);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <>
-      <PricingModal open={openModal} closeModal={onCloseModal} />
+      <PricingModal
+        loading={loading}
+        onInitPayment={onSetAmount}
+        open={openModal}
+        closeModal={onCloseModal}
+      />
       <div className="blur-at-top  absolute h-40  w-full bottom-80 ">
         <span className="text-black"></span>
       </div>
