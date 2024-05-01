@@ -8,6 +8,7 @@ const PricingItem = ({
   title,
   price,
   loading,
+  onClick,
 }: {
   price: string;
   items: { title: string; isSoon?: boolean }[];
@@ -42,6 +43,7 @@ const PricingItem = ({
 
       <div className="mt-4">
         <ACButton
+          onClick={onClick}
           inverted={title.toLowerCase() === "monthly"}
           text={"Make payment"}
           type={"button"}
