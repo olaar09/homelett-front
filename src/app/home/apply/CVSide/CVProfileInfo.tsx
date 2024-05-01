@@ -83,7 +83,11 @@ const ASide = ({ profile }: any) => {
         <span className="font-black">Education</span>
         <div className="flex flex-col gap-y-4 mt-4 ">
           {academics.map((academic: any, key: any) => (
-            <AsideItem2 key={key} desc={academic.value} title={academic.icon} />
+            <AsideItem2
+              key={key}
+              desc={academic.value}
+              title={academic.title}
+            />
           ))}
         </div>
       </div>
