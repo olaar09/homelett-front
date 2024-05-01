@@ -4,13 +4,13 @@ import { Avatar } from "antd";
 
 const HeaderSide = ({ profile }: any) => {
   return (
-    <div className="w-full flex flex-col items-center h-48  pt-4">
-      <Avatar
+    <div className="w-full flex flex-col items-center h-20  pt-4">
+      {/* <Avatar
         shape="square"
         className="w-32 h-32"
         size={"large"}
         src={"/sample.png"}
-      />
+      /> */}
       <div className="flex flex-col items-center mt-2">
         <span className="font-black text-2xl">
           {profile.first_name} {profile.last_name}
