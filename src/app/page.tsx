@@ -38,7 +38,7 @@ export default function Home() {
                     src="images/logo-full.svg"
                     alt=""
                   />
-                  <span className="text-2xl font-black"> ApplyGeni.us</span>
+                  <span className="text-2xl font-black"> ApplyBase</span>
                 </a>
               </div>
               {/* <div className="hidden items-center justify-center gap-4 lg:flex">

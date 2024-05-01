@@ -76,7 +76,7 @@ const HeadIcon = ({ onToggle, isOpen }: any) => {
         </div>
         {isOpen && (
           <span className=" text-foreground font-black text-xl mt-1">
-            ApplyGenius
+            ApplyBase
           </span>
         )}
       </div>
@@ -209,9 +209,9 @@ const Nav: React.FC<any> = ({ children }) => {
   const isBillingActive = authContext.currentUser?.billingActive;
 
   const billingMessage = isFreeTrial
-    ? `You have ${authContext.currentUser?.freeTrialLeft} days left on ApplyGenius free trial `
+    ? `You have ${authContext.currentUser?.freeTrialLeft} days left on ApplyBase free trial `
     : isBillingActive
-    ? "You are currently on a ApplyGenius paid plan"
+    ? "You are currently on a ApplyBase paid plan"
     : "Your current plan is expired. Click below to renew";
 
   const buttonMessage = isFreeTrial

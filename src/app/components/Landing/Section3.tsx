@@ -7,10 +7,10 @@ export default () => {
             How it works?
           </p>
           <h2 className="font-display text-3xl font-semibold tracking-tight text-gray-900 mt-4 sm:text-4xl lg:text-5xl">
-            Your job search assistant
+            AI powered search & application
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
-            ApplyGenius AI Agent aims to get you at least 2 job interviews
+            ApplyBase AI Agent aims to get you at least 2 job interviews
             monthly. Simply setup your account & watch those interview request
             roll in. it's that easy!
           </p>

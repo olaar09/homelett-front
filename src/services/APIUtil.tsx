@@ -22,7 +22,7 @@ class APIUtil {
   public datasourceService: DataSourceAPIService;
 
   constructor() {
-    const service = new APIService("https://api.applygeni.us/api"); // Initialize ApiService
+    const service = new APIService("https://api.ApplyBase/api"); // Initialize ApiService
     this.cvService = new CVAPIService(service); // Use ApiService instance to initialize cvService
     this.groupService = new GroupAPIService(service);
     this.profileService = new ProfileAPIService(service);

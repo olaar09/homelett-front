@@ -167,7 +167,7 @@ export default function Home() {
           </div>
           <Link href={"/"}>
             <span className=" text-gray-600 font-bold text-3xl opacity-90">
-              ApplyGenius
+              ApplyBase
             </span>
           </Link>
         </div>
@@ -234,7 +234,7 @@ export default function Home() {
 
       <section className="px-6 flex items-center justify-center ">
         <span className=" text-foreground-secondary text-sm text-center">
-          By continuing, you are agreeing to ApplyGenius'{" "}
+          By continuing, you are agreeing to ApplyBase'{" "}
           <span className=" text-banner"> terms of services </span> and{" "}
           <span className=" text-banner">Privacy Policy </span>
         </span>

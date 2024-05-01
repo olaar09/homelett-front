@@ -1,6 +1,6 @@
 {
-  "name": "ApplyGenius",
-  "short_name": "ApplyGenius",
+  "name": "ApplyBase",
+  "short_name": "ApplyBase",
   "icons": [
     {
       "src": "/vercel.svg",

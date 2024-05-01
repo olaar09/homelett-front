@@ -9,15 +9,15 @@ import PricingModal from "./PricingModal";
 const Upgrade = ({ email }: any) => {
   const [amount, setAmount] = useState(0);
 
+  const [loading, setLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
   const config = {
     reference: new Date().getTime().toString(),
     email: email,
     amount: amount * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
     publicKey: "pk_test_0bd51a9b53a2c80ead3d84d11b27e4f51659e5f5",
   };
-
-  const [loading, setLoading] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
 
   const initializePayment = usePaystackPayment(config);
   const apiUtil = new APIUtil();

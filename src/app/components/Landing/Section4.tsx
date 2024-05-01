@@ -10,7 +10,7 @@ export default () => {
             Built with state of the art AI Technology
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
-            ApplyGenius is the top job search AI agent, built with state of the
+            ApplyBase is the top job search AI agent, built with state of the
             art AI technology
           </p>
         </div>
@@ -208,8 +208,8 @@ export default () => {
                 Non stop application
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyGenius AI agents doesn't stop. Literarily Land your next
-                job while you sleep!
+                ApplyBase AI agents doesn't stop. Literarily Land your next job
+                while you sleep!
               </p>
             </div>
           </div>
@@ -274,7 +274,7 @@ export default () => {
                 Leading AI solution
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyGenius is the leading AI solution for job search. literally
+                ApplyBase is the leading AI solution for job search. literally
                 find your next job while you sleep.
               </p>
             </div>

@@ -11,15 +11,15 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
-  title: "ApplyGeni.us | AI Agent for job search",
+  title: "ApplyBase | AI Agent for job search",
   description: "AI Co-Pilot for your job search",
-  applicationName: "ApplyGeni.us",
+  applicationName: "ApplyBase",
   appleWebApp: true,
   formatDetection: { telephone: false },
   // icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
   openGraph: {
     type: "website",
-    title: "ApplyGeni.us",
+    title: "ApplyBase",
     description: "",
     siteName: "",
     url: "",
@@ -28,10 +28,10 @@ export const metadata: Metadata = {
   twitter: {
     site: "",
     siteId: "", // make unique
-    creator: "ApplyGeni.us INC",
+    creator: "ApplyBase INC",
     description:
       "AI Co-Pilot for engineering and business teams to get things done faster!",
-    title: "ApplyGeni.us",
+    title: "ApplyBase",
     images: "",
   },
   assets: [
@@ -71,10 +71,10 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@ApplyGenius" />
+        <meta name="twitter:site" content="@ApplyBase" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
-        <title>ApplyGenius - AI Copilot for job search</title>
+        <title>ApplyBase - AI Copilot for job search</title>
         <meta name="robots" content="index,follow" />
         <meta
           name="description"
@@ -82,19 +82,19 @@ export default function RootLayout({
         />
         <meta
           property="og:title"
-          content="ApplyGenius - AI Copilot for job search"
+          content="ApplyBase - AI Copilot for job search"
         />
         <meta
           property="og:description"
           content="Automatically apply to 50+ jobs daily from all over the world, with your CV modified to each job requirement"
         />
-        <meta property="og:url" content="https://ApplyGenius.ai/partners" />
+        <meta property="og:url" content="https://applybase.net/partners" />
         <meta property="og:image" content="/images/dashboard-mockup.jpg" />
         <meta
           property="og:image:alt"
-          content="ApplyGenius - Your AI Agent for Job Search"
+          content="ApplyBase - Your AI Agent for Job Search"
         />
-        <meta property="og:site_name" content="ApplyGenius" />
+        <meta property="og:site_name" content="ApplyBase" />
         <link rel="preconnect" href="https://fonts.bunny.net" />
         <link
           rel="stylesheet"

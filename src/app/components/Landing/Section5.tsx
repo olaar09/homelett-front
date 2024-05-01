@@ -10,7 +10,7 @@ export default () => {
             Who can join?
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
-            ApplyGenius can be used by anyone to apply for jobs, however, our AI
+            ApplyBase can be used by anyone to apply for jobs, however, our AI
             is currently only fine tuned for tech based job applications
           </p>
         </div>

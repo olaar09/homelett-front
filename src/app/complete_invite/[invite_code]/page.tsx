@@ -122,15 +122,15 @@ export default function CompleteInvite() {
     <>
       <Head>
         <meta charSet="utf-8" />
-        <title>ApplyGenius | Complete invite</title>
-        <meta name="description" content="ApplyGenius" />
+        <title>ApplyBase | Complete invite</title>
+        <meta name="description" content="ApplyBase" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
 
         <link rel="icon" href="/database_logo_smaller.png" />
-        <link rel="canonical" href="https://app.ApplyGeni.us/connect" />
+        <link rel="canonical" href="https://app.ApplyBase/connect" />
       </Head>
       <div className="bg-white">
         <main className="h-screen bg-white  mx-auto  w-full flex ">
@@ -174,7 +174,7 @@ export default function CompleteInvite() {
                       className="text-gray-800 text-lg ml-1 font-black"
                     >
                       {" "}
-                      ApplyGenius
+                      ApplyBase
                     </h1>
                   </div>
                   <span className="text-gray-600 text-sm">
@@ -251,7 +251,7 @@ export default function CompleteInvite() {
                     <ACButton
                       onClick={onSubmitLogin}
                       loading={submittingInvite}
-                      text={`Join ${inviteData?.company_name} on ApplyGenius`}
+                      text={`Join ${inviteData?.company_name} on ApplyBase`}
                       type={"button"}
                       children={undefined}
                     />

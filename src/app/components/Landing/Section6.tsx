@@ -12,7 +12,7 @@ export default () => {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="mailto:support@applygeni.us"
+              href="mailto:support@ApplyBase"
               className="isomorphic-link isomorphic-link--external text-blue-600 underline"
             >
               contact us
@@ -136,7 +136,7 @@ export default () => {
           <div className="relative">
             <details className="menu-details peer cursor-pointer bg-white shadow-xs ring-1 ring-gray-300 transition-all duration-150 rounded-xl px-4 py-5 hover:bg-gray-50 sm:p-6">
               <summary className="flex select-none items-center justify-between text-lg font-medium text-gray-900 pr-16">
-                Is ApplyGenius free?
+                Is ApplyBase free?
               </summary>
               <div className="mt-5 space-y-5">
                 <span className="prose-base">
