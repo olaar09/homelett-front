@@ -62,7 +62,7 @@ const ASide = ({ profile }: any) => {
   console.log(skills, " joeldkms;");
 
   return (
-    <div className="bg-gray-200 h-full w-4/12  ">
+    <div className="bg-gray-200 h-full min-h-screen w-4/12  ">
       <HeaderSide profile={profile} />
 
       <div className="flex flex-col gap-y-6 mt-10  px-10 mx-auto w-11/12">
