@@ -7,8 +7,11 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import AddKeyModal from "./_components/AddKeyModal";
-import { Button, Tag, Tooltip } from "antd";
+import { Button, Tag, Tooltip, message } from "antd";
 import NicheProfileDrawer from "./niche_profile/NicheProfile";
+import PricingModal from "./apply/JobSide/PricingModal";
+import APIUtil from "@/services/APIUtil";
+import { usePaystackPayment } from "react-paystack";
 
 const NavMenu = ({
   title,
@@ -26,6 +29,8 @@ const NavMenu = ({
   tooltip?: string;
 }) => {
   const browserPath = usePathname();
+  const [loading, setLoading] = useState(false);
+
   return (
     <div
       className={`font-body  flex items-center h-10 hover:bg-[#E8E7FF] hover:text-primary hover:font-bold rounded-md px-2 w-full  cursor-pointer  gap-x-3 justify-between  ${
@@ -96,8 +101,10 @@ const Nav: React.FC<any> = ({ children }) => {
   const router = useRouter();
   const path = usePathname();
   const [openSide, setOpenSide] = useState(true);
-
+  const [loading, setLoading] = useState(false);
   const [openNicheDrawer, setOpenNicheDrawer] = useState(false);
+  const [amount, setAmount] = useState(0);
+  const [openModal, setOpenModal] = useState(false);
 
   const authContext = useContext(AuthContext);
   const requiresProfile =
@@ -120,6 +127,80 @@ const Nav: React.FC<any> = ({ children }) => {
 
   const onToggle = (status: boolean) => {
     setOpenSide(status);
+  };
+
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: authContext.currentUser?.email,
+    amount: amount * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+    publicKey: "pk_test_0bd51a9b53a2c80ead3d84d11b27e4f51659e5f5",
+  };
+
+  const initializePayment = usePaystackPayment(config);
+  const apiUtil = new APIUtil();
+
+  const completePayment = async (data: any) => {
+    try {
+      setLoading(true);
+      await apiUtil.profileService.completeUpgradeProfile(data);
+      onCloseModal();
+      message.success("Payment completed");
+      await authContext.refreshProfile();
+      setLoading(false);
+    } catch (x) {
+      message.error("Unable to complete transaction");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (amount > 0) {
+      onInitPayment();
+    }
+  }, [amount]);
+  // you can call this function anything
+  const onSuccess = (response: any) => {
+    // implementation for  whatever you want to do when the Paystack dialog closed.
+    completePayment(response.reference);
+  };
+
+  // you can call this function anything
+  const onClose = () => {
+    // implementation for  whatever you want to do when the Paystack dialog closed.
+    console.log("closed");
+    message.error("Payment cancelled");
+  };
+
+  const onInitPayment = () => {
+    try {
+      initializePayment({ onSuccess, onClose });
+    } catch (x) {
+      message.error("Unable to initialize payment");
+      console.log(x, "Error occured");
+    } finally {
+    }
+  };
+
+  const onCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  const onOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const onSetAmount = (plan: string) => {
+    switch (plan) {
+      case "monthly":
+        setAmount(10000);
+        break;
+      case "yearly":
+        setAmount(40000);
+        break;
+
+      default:
+        break;
+    }
   };
 
   const paymentLink = authContext.currentUser?.paymentLink;
@@ -146,14 +227,20 @@ const Nav: React.FC<any> = ({ children }) => {
     : "ph:arrow-square-out";
 
   const handlePaymentLink = () => {
-    if (isFreeTrial || !isBillingActive) {
+    /* if (isFreeTrial || !isBillingActive) {
       window.open(paymentLink, "_blank");
-    }
+    } */
   };
 
   return (
     <>
       <NicheProfileDrawer open={requiresProfile} onClose={closeNicheDrawer} />
+      <PricingModal
+        loading={loading}
+        onInitPayment={onSetAmount}
+        open={openModal}
+        closeModal={onCloseModal}
+      />
 
       <div className="min-h-screen w-full overflow-hidden">
         <div className="flex items-center w-full h-full overflow-hidden">
@@ -230,7 +317,7 @@ const Nav: React.FC<any> = ({ children }) => {
                   </span>
                   <Button
                     className="bg-primary"
-                    onClick={handlePaymentLink}
+                    onClick={onOpenModal}
                     type="primary"
                   >
                     <div className="flex items-center gap-x-2">
