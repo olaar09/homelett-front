@@ -1,7 +1,7 @@
 import ACButton from "@/app/components/Button";
 import UtilService from "@/services/UtilService";
 import { Icon } from "@iconify/react";
-import { Modal } from "antd";
+import { Modal, Tag } from "antd";
 
 const PricingItem = ({
   items,
@@ -9,7 +9,7 @@ const PricingItem = ({
   price,
 }: {
   price: string;
-  items: { title: string; isSoon: boolean }[];
+  items: { title: string; isSoon?: boolean }[];
   title: string;
 }) => {
   const utilService = new UtilService();
@@ -23,9 +23,15 @@ const PricingItem = ({
       <div className=" flex flex-col items-start mt-4 gap-y-4">
         {items.map((text) => {
           return (
-            <div className="flex items-center gap-x-1">
+            <div className="flex items-center gap-x-1 relative">
               <Icon icon={"lets-icons:check-fill"} className="text-xl" />
               <span className={`text-md text-gray-500`}>{text.title}</span>
+
+              {text.isSoon && (
+                <div className="absolute -right-16">
+                  <Tag color="volcano">Soon</Tag>
+                </div>
+              )}
             </div>
           );
         })}
@@ -51,9 +57,6 @@ const PricingModal = ({
   open: boolean;
   closeModal: () => void;
 }) => {
-  const utilService = new UtilService();
-  const isMonthly = false;
-
   const monthly = [
     { title: "Access 400k+ Jobs" },
     { title: "Access to  detailed insights" },
@@ -63,7 +66,7 @@ const PricingModal = ({
 
   const yearly = [
     { title: "Everything in monthly plan" },
-    { title: "Access scholarships and grants" },
+    { title: "Access scholarships and grants", isSoon: true },
     { title: "Money back guaranteed (T&C apply) " },
     { title: "Personal onboarding support" },
   ];
