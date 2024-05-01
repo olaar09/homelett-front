@@ -9,7 +9,7 @@ const PricingItem = ({
   price,
 }: {
   price: string;
-  items: string[];
+  items: { title: string; isSoon: boolean }[];
   title: string;
 }) => {
   const utilService = new UtilService();
@@ -25,7 +25,7 @@ const PricingItem = ({
           return (
             <div className="flex items-center gap-x-1">
               <Icon icon={"lets-icons:check-fill"} className="text-xl" />
-              <span className={`text-md text-gray-500`}>{text}</span>
+              <span className={`text-md text-gray-500`}>{text.title}</span>
             </div>
           );
         })}
@@ -55,17 +55,17 @@ const PricingModal = ({
   const isMonthly = false;
 
   const monthly = [
-    "Access 400k+ Jobs",
-    "Access to  detailed insights",
-    "Stand out with AI tools",
-    "Use AI Copilot to automatically apply",
+    { title: "Access 400k+ Jobs" },
+    { title: "Access to  detailed insights" },
+    { title: "Stand out with AI tools" },
+    { title: "Use AI Copilot to automatically apply" },
   ];
 
   const yearly = [
-    "Access 400k+ Jobs",
-    "Access scholarships and grants",
-    "Money back guaranteed (T&C apply) ",
-    "Use AI Copilot to automatically apply",
+    { title: "Everything in monthly plan" },
+    { title: "Access scholarships and grants" },
+    { title: "Money back guaranteed (T&C apply) " },
+    { title: "Personal onboarding support" },
   ];
   return (
     <Modal
