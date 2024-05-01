@@ -67,13 +67,14 @@ const Upgrade = ({ email }: any) => {
               {" "}
               Apply to over 400k jobs when you upgrade.{" "}
             </span>{" "}
-            <br /> <br /> Start an AI Agent to apply to hundreds of job
-            automatically daily, or manually apply to unlimited jobs each with
-            with a single click
+            <br /> <br /> Get the right information you need to apply for jobs
+            and 10x your chances of getting hired. Apply with a single click or
+            Start an AI Agent to apply to hundreds of job automatically.
           </span>
 
           <Button
             loading={loading}
+            size="large"
             className="bg-primary"
             onClick={onInitPayment}
             type="primary"
