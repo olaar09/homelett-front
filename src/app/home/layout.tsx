@@ -101,7 +101,7 @@ const Nav: React.FC<any> = ({ children }) => {
 
   const authContext = useContext(AuthContext);
   const requiresProfile =
-    authContext.currentUser &&
+    authContext.currentUser != null &&
     authContext.currentUser?.active_job_profile == null;
 
   const onLogout = () => {

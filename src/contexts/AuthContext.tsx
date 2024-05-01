@@ -133,10 +133,17 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     setLoading(true);
     try {
       const user = await apiService.profileService.loadProfile();
-      const activeProfile = await apiService.cvService.getJobProfile(
-        `${user.data.active_job_profile.id}`
-      );
-      setActiveProfile(activeProfile.data);
+
+      try {
+        const activeProfile = await apiService.cvService.getJobProfile(
+          `${user.data.active_job_profile?.id}`
+        );
+
+        setActiveProfile(activeProfile.data);
+      } catch (error) {
+        console.log(error);
+      }
+
       if (user) {
         setCurrentUser(user.data);
         if (path === "/login") {
