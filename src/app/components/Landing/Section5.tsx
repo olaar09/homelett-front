@@ -22,7 +22,7 @@ export default () => {
               alt=""
             />
             <h3 className="text-lg font-semibold text-gray-900 mt-2 sm:text-xl">
-              Software engineers and devOps
+              Tech and IT Job applicants
             </h3>
             <p className="text-base/7 font-normal text-gray-600 mt-2">
               Cover letter and job experience are written to depict deep
@@ -36,7 +36,7 @@ export default () => {
               alt=""
             />
             <h3 className="text-lg font-semibold text-gray-900 mt-2 sm:text-xl">
-              UI / UX and Product
+              Student scholarships
             </h3>
             <p className="text-base/7 font-normal text-gray-600 mt-2">
               Correct industry terminologies are utilized, giving hiring
@@ -50,7 +50,7 @@ export default () => {
               alt=""
             />
             <h3 className="text-lg font-semibold text-gray-900 mt-2 sm:text-xl">
-              Data analysts & Cyber sec
+              Student interns
             </h3>
             <p className="text-base/7 font-normal text-gray-600 mt-2">
               Correct industry terminologies are utilized, giving hiring
