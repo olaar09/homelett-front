@@ -8,7 +8,7 @@ import { message } from "antd";
 import { IProfile } from "@/app/interfaces/IProfile";
 import APIService from "@/services/APIService";
 import APIUtil from "@/services/APIUtil";
-import { IAuthRequest } from "@/app/interfaces/IRegisterRequest";
+import { IAuthRequest, IJProfile } from "@/app/interfaces/IRegisterRequest";
 import { AxiosError } from "axios";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 
@@ -23,6 +23,7 @@ interface IAuthContext {
   loading: boolean;
   loadingSources: boolean;
   loadingOpenAIKey: boolean;
+  activeProfile?: IJProfile | null;
 }
 
 export const AuthContext = createContext<IAuthContext>({
@@ -32,6 +33,7 @@ export const AuthContext = createContext<IAuthContext>({
   loadingOpenAIKey: false,
   loading: true,
   loadingSources: true,
+  activeProfile: null,
   updateKey: async (key: string) => {},
   clearUser: async () => {},
   refreshProfile: async () => {},
@@ -40,6 +42,8 @@ export const AuthContext = createContext<IAuthContext>({
 
 export const AuthProvider: React.FC<any> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<IAuthRequest | null>(null);
+  const [activeProfile, setActiveProfile] = useState<IJProfile | null>(null);
+
   const [dataSources, setDataSources] = useState<IDataSourceItem[] | null>(
     null
   );
@@ -129,6 +133,10 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     setLoading(true);
     try {
       const user = await apiService.profileService.loadProfile();
+      const activeProfile = await apiService.cvService.getJobProfile(
+        `${user.data.active_job_profile.id}`
+      );
+      setActiveProfile(activeProfile.data);
       if (user) {
         setCurrentUser(user.data);
         if (path === "/login") {
@@ -189,6 +197,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         refreshDataSource,
         currentUser,
         authenticated,
+        activeProfile,
       }}
     >
       {children}

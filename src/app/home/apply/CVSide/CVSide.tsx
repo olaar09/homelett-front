@@ -3,9 +3,10 @@ import LoadingJobItem from "../../_components/LoadingJobItem";
 import ASide from "./CVProfileInfo";
 import { ExperienceItem } from "./ExperienceItem";
 import { OverviewItem } from "./OverviewItem";
+import { IJProfile } from "@/app/interfaces/IRegisterRequest";
 
 interface ICVSide {
-  jProfile: [];
+  jProfile: IJProfile;
   experiences: any[];
   loadingExperiences: boolean;
   loadingCV: boolean;

@@ -64,15 +64,15 @@ const Chat = () => {
     }
   };
 
-  const {
-    data: jProfile,
+  /*   const {
+    data: authContext.activeProfile,
     error: profileErr,
-    loading: loadingJProfile,
+    loading: loadingauthContext.activeProfile,
     refresh: refreshProfile,
   } = useRequest(() => getJobProfile(), {
     ready:
       authContext.currentUser != null && authContext.currentUser != undefined,
-  });
+  }); */
 
   /*   const {
     data: experiences,
@@ -83,7 +83,7 @@ const Chat = () => {
     ready:
       authContext.currentUser != null &&
       authContext.currentUser != undefined &&
-      jProfile,
+      authContext.activeProfile,
   }); */
 
   const {
@@ -95,7 +95,7 @@ const Chat = () => {
     ready:
       authContext.currentUser != null &&
       authContext.currentUser != undefined &&
-      jProfile?.id != null,
+      authContext.activeProfile?.id != null,
   });
 
   useEffect(() => {
@@ -112,7 +112,7 @@ const Chat = () => {
     try {
       setLoadingExp(true);
       const data = await apiUtil.cvService.getExperiences(
-        jProfile.id,
+        `${authContext.activeProfile?.id}`,
         selectedJob.id
       );
 
@@ -129,21 +129,21 @@ const Chat = () => {
     if (
       authContext.currentUser != null &&
       authContext.currentUser != undefined &&
-      jProfile &&
+      authContext.activeProfile &&
       selectedJob
     ) {
       getExperiences();
     }
-  }, [authContext.currentUser, jProfile, selectedJob]);
+  }, [authContext.currentUser, authContext.activeProfile, selectedJob]);
 
-  const getJobProfile = async (): Promise<any> => {
+  /*   const getJobProfile = async (): Promise<any> => {
     try {
       const data = await apiUtil.cvService.getJobProfile("1");
       return data.data;
     } catch (error) {
       message.error("unable to load data");
     }
-  };
+  }; */
 
   const getSimilarJobs = async (): Promise<any> => {
     try {
@@ -165,10 +165,6 @@ const Chat = () => {
       }, millisec);
     });
   }
-
-  const onClosePreviousChats = () => {
-    // setOpenPrevChats(false);
-  };
 
   const onApplyJob = async (job: any) => {
     if (selectedJob?.name !== job.name) {
@@ -209,7 +205,7 @@ const Chat = () => {
           />
 
           <CVSide
-            jProfile={jProfile}
+            jProfile={authContext.activeProfile!}
             experiences={experiences}
             loadingExperiences={loadingExperiences}
             loadingCV={loadingCV}
