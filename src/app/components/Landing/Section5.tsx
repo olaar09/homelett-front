@@ -55,7 +55,7 @@ export default () => {
               Student interns
             </h3>
             <p className="text-base/7 font-normal text-gray-600 mt-2">
-              120k+ internship oppurtunities for students from all over the
+              120k+ internship opportunities for students from all over the
               world enables students to get experience before they are ready for
               a full time role.
             </p>
