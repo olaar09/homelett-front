@@ -13,7 +13,7 @@ const Hero = () => {
       <div className="relative max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-xl mx-auto text-center lg:max-w-3xl">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-4xl xl:text-7xl">
-            AI co pilot for job & scholarship search
+            AI powered job & scholarship search
           </h1>
           <p className="max-w-2xl text-base font-normal text-gray-600 mx-auto mt-3 sm:text-xl sm:mt-5 lg:text-xl">
             Apply to intelligently matched jobs, grants and scholarships.
