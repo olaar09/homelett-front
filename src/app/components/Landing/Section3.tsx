@@ -33,11 +33,11 @@ export default () => {
               </h3>
             </div>
             <div className="mt-6">
-              <img
+              {/*    <img
                 className="w-full bg-gray-50 object-cover ring-1 ring-gray-200 rounded-2xl"
                 src="images/complete-flexibility.svg"
                 alt=""
-              />
+              /> */}
             </div>
             <ul className="text-base font-normal text-gray-900 mt-8 space-y-4">
               <li className="flex items-start gap-3">
@@ -52,7 +52,7 @@ export default () => {
                     <path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"></path>
                   </svg>
                 </div>
-                Upload your CV or Complete manually
+                Create multiple Job and scholarship profiles
               </li>
               <li className="flex items-start gap-3">
                 <div className="shrink-0 py-0.5">
@@ -66,23 +66,9 @@ export default () => {
                     <path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"></path>
                   </svg>
                 </div>
-                Add multiple Job profiles (Ex - React developer, Flutter
-                engineer)
+                Select search preferences
               </li>
-              <li className="flex items-start gap-3">
-                <div className="shrink-0 py-0.5">
-                  <svg
-                    aria-hidden="true"
-                    className="size-5 text-success-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 256 256"
-                  >
-                    <path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"></path>
-                  </svg>
-                </div>
-                Select Job search preference
-              </li>
+
               <li className="flex items-start gap-3">
                 <div className="shrink-0 py-0.5">
                   <svg
@@ -109,7 +95,7 @@ export default () => {
                     <path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"></path>
                   </svg>
                 </div>
-                Job application are sent out automatically for each profile
+                Scholarships and jobs that match each profile are displayed
               </li>
             </ul>
           </div>
@@ -133,11 +119,11 @@ export default () => {
               </h3>
             </div>
             <div className="mt-6">
-              <img
+              {/*   <img
                 className="w-full bg-gray-50 object-cover ring-1 ring-gray-200 rounded-2xl"
                 src="images/best-in-class-tech.svg"
                 alt=""
-              />
+              /> */}
             </div>
             <ul className="text-base font-normal text-gray-900 mt-8 space-y-4">
               <li className="flex items-start gap-3">
@@ -180,8 +166,8 @@ export default () => {
                     <path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"></path>
                   </svg>
                 </div>
-                Application that has to be sent through linkedin or indeed
-                directly are also sent with your connected account
+                Application that have to be sent through the listed platform
+                directly are also sent with your connected accounts
               </li>
             </ul>
           </div>
@@ -201,15 +187,15 @@ export default () => {
                 <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm39.1,131.79a47.84,47.84,0,0,0,0-55.58l28.5-28.49a87.83,87.83,0,0,1,0,112.56ZM96,128a32,32,0,1,1,32,32A32,32,0,0,1,96,128Zm88.28-67.6L155.79,88.9a47.84,47.84,0,0,0-55.58,0L71.72,60.4a87.83,87.83,0,0,1,112.56,0ZM60.4,71.72l28.5,28.49a47.84,47.84,0,0,0,0,55.58L60.4,184.28a87.83,87.83,0,0,1,0-112.56ZM71.72,195.6l28.49-28.5a47.84,47.84,0,0,0,55.58,0l28.49,28.5a87.83,87.83,0,0,1-112.56,0Z"></path>
               </svg>
               <h3 className="text-xl font-semibold tracking-tight text-gray-900 sm:text-2xl">
-                Follow up with job search
+                Follow up with your applications
               </h3>
             </div>
             <div className="mt-6">
-              <img
+              {/*  <img
                 className="w-full bg-gray-50 object-cover ring-1 ring-gray-200 rounded-2xl"
                 src="images/complete-support.svg"
                 alt=""
-              />
+              /> */}
             </div>
             <ul className="text-base font-normal text-gray-900 mt-8 space-y-4">
               <li className="flex items-start gap-3">
@@ -224,7 +210,7 @@ export default () => {
                     <path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"></path>
                   </svg>
                 </div>
-                See your job search analytics from the dashboard
+                See your search & application analytics from the dashboard
               </li>
               <li className="flex items-start gap-3">
                 <div className="shrink-0 py-0.5">
@@ -238,8 +224,8 @@ export default () => {
                     <path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"></path>
                   </svg>
                 </div>
-                Responses to your job search from all platforms are captured in
-                one place
+                Responses to your applications from all platforms are captured
+                in one place
               </li>
               <li className="flex items-start gap-3">
                 <div className="shrink-0 py-0.5">
@@ -254,7 +240,7 @@ export default () => {
                   </svg>
                 </div>
                 When you get a positive response, get free insights and
-                preparation notes for the interview. Good luck!
+                preparation notes for the next steps. Good luck!
               </li>
             </ul>
           </div>

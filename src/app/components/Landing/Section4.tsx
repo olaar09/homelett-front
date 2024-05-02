@@ -29,11 +29,34 @@ export default () => {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mt-5 sm:text-xl">
-                AI CV writer
+                Only fresh listings
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                AI rewrites your CV and cover letter to align each job before
-                applying for the job
+                We only match profiles with freshly posted scholarships and jobs
+                still accepting applications
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white shadow-xs ring-1 ring-gray-200 rounded-2xl">
+            <div className="px-4 py-5 sm:p-6">
+              <div className="inline-flex size-10 items-center justify-center bg-blue-100 text-blue-600 rounded-lg">
+                <svg
+                  aria-hidden="true"
+                  className="size-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                >
+                  <path d="M16,176a8,8,0,0,1,8-8h8V152a96.12,96.12,0,0,1,88-95.66V40H104a8,8,0,0,1,0-16h48a8,8,0,0,1,0,16H136V56.34A96.12,96.12,0,0,1,224,152v16h8a8,8,0,0,1,0,16H24A8,8,0,0,1,16,176Zm216,24H24a8,8,0,0,0,0,16H232a8,8,0,0,0,0-16Z"></path>
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mt-5 sm:text-xl">
+                AI CV/Essay writer
+              </h3>
+              <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
+                AI rewrites your Essay, CV and Cover letter to align with each
+                application.
               </p>
             </div>
           </div>
@@ -55,7 +78,7 @@ export default () => {
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
                 Keywords search are obsolete. Our semantics based search ensures
-                high accuracy
+                highly accurate matches
               </p>
             </div>
           </div>
@@ -76,8 +99,8 @@ export default () => {
                 Intelligent matching
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Jobs are matched with your profile intelligently based on your
-                preferences
+                Opportunities are matched with your profile intelligently based
+                on your preferences
               </p>
             </div>
           </div>
@@ -98,8 +121,8 @@ export default () => {
                 Agentic application
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Our propriety AI copilot can navigate different platforms on the
-                web to find and apply for jobs autonomously
+                ApplyBase propriety AI copilot can navigate different platforms
+                on the web to search and apply autonomously
               </p>
             </div>
           </div>
@@ -120,8 +143,8 @@ export default () => {
                 Fine tuned models
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Our CV Writer, has been fine tuned with over 100k CVs from
-                professionals in top companies
+                ApplyBase CV & Essay writer, have been fine tuned with over 100k
+                Top CV & Essays
               </p>
             </div>
           </div>
@@ -142,8 +165,8 @@ export default () => {
                 Easy tracking
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Our tech ensured easy tracking of applications, responses, and
-                auto follow up
+                ApplyBase tech ensures easy tracking of applications, responses,
+                and auto follow up
               </p>
             </div>
           </div>
@@ -164,8 +187,8 @@ export default () => {
                 Human level writing
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Our fine tuned models outputs are indistinguishable from human
-                written. due to the level of model fine tunning
+                ApplyBase fine-tuned models texts are indistinguishable from
+                human written. due to the level of model fine tunning
               </p>
             </div>
           </div>
@@ -186,8 +209,7 @@ export default () => {
                 Domain knowledge
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Our AI knows how to write top CV for specific domains such as
-                software engineering, UI/UX, etc.
+                ApplyBase AI knows how to write top CV for specific domains
               </p>
             </div>
           </div>
@@ -208,8 +230,8 @@ export default () => {
                 Non stop application
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyBase AI copilot doesn't stop. Literarily Land your next job
-                while you sleep!
+                ApplyBase AI copilot doesn't stop. Literarily land your next
+                scholarship or job while you sleep!
               </p>
             </div>
           </div>
@@ -230,8 +252,8 @@ export default () => {
                 Non duplicating
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Safeguards are put in place to ensure job application are not
-                submitted multiple times for same profile
+                Safeguards are put in place to ensure scholarship and job
+                applications are not submitted multiple times for same profile
               </p>
             </div>
           </div>
@@ -257,7 +279,7 @@ export default () => {
               </p>
             </div>
           </div>
-          <div className="bg-white shadow-xs ring-1 ring-gray-200 rounded-2xl">
+          {/*   <div className="bg-white shadow-xs ring-1 ring-gray-200 rounded-2xl">
             <div className="px-4 py-5 sm:p-6">
               <div className="inline-flex size-10 items-center justify-center bg-blue-100 text-blue-600 rounded-lg">
                 <svg
@@ -274,11 +296,12 @@ export default () => {
                 Leading AI solution
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyBase is the leading AI solution for job search. literally
-                find your next job while you sleep.
+                ApplyBase is the leading AI solution for scholarship & job
+                search. literally find your next scholarship & job while you
+                sleep.
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

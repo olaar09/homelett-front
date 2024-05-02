@@ -10,8 +10,9 @@ export default () => {
             Who can join?
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
-            ApplyBase can be used by anyone to apply for jobs, however, our AI
-            is currently only fine tuned for tech based job applications
+            ApplyBase can be used by students and professionals to apply for
+            scholarships, internship and jobs. For job applications, ApplyBase
+            is specifically fine tuned for tech based job applications
           </p>
         </div>
         <div className="grid max-w-md grid-cols-1 gap-y-8 mx-auto mt-12 text-center sm:mt-16 md:max-w-none md:grid-cols-3 md:gap-x-12 md:mx-0 md:text-left">
@@ -39,8 +40,9 @@ export default () => {
               Student scholarships
             </h3>
             <p className="text-base/7 font-normal text-gray-600 mt-2">
-              Correct industry terminologies are utilized, giving hiring
-              managers a energetic sense of professionalism about the applicant
+              We find fresh, relevant scholarships for students and generate
+              essays, motivation letter and other materials needed for a
+              successful application
             </p>
           </div>
           <div>
@@ -53,8 +55,9 @@ export default () => {
               Student interns
             </h3>
             <p className="text-base/7 font-normal text-gray-600 mt-2">
-              Correct industry terminologies are utilized, giving hiring
-              managers a energetic sense of professionalism about the applicant
+              120k+ internship oppurtunities for students from all over the
+              world enables students to get experience before they are ready for
+              a full time role.
             </p>
           </div>
         </div>
