@@ -37,7 +37,7 @@ export default () => {
                 />
                 <img
                   className="w-24 object-contain mix-blend-multiply sm:h-14"
-                  src="/logos/netflix.svg"
+                  src="/logos/british.png"
                   alt=""
                 />
                 <img
