@@ -1,19 +1,13 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import { useContext, useEffect, useRef, useState } from "react";
 
 import APIUtil from "@/services/APIUtil";
 import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
-import JobItem from "../_components/JobItem";
-import LoadingJobItem from "../_components/LoadingJobItem";
 import { message } from "antd";
-import { OverviewItem } from "./CVSide/OverviewItem";
-import ASide from "./CVSide/CVProfileInfo";
 import { AxiosError } from "axios";
 import { useRequest } from "ahooks";
-import Upgrade from "./JobSide/Upgrade";
 import { JobsSide } from "./JobSide/JobsSide";
 import CVSide from "./CVSide/CVSide";
 
