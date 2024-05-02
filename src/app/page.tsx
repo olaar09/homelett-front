@@ -33,11 +33,7 @@ export default function Home() {
                   className="isomorphic-link isomorphic-link--internal flex items-center gap-x-3"
                   href="/"
                 >
-                  <img
-                    className="h-8 w-auto"
-                    src="images/logo-full.svg"
-                    alt=""
-                  />
+                  <img className="h-7 w-auto" src="/logo.png" alt="" />
                   <span className="text-2xl font-black"> ApplyBase</span>
                 </a>
               </div>
