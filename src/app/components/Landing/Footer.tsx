@@ -8,9 +8,9 @@ export default () => {
               <img className="h-8 w-auto" src="images/logo-full.svg" alt="" />
             </a>
             <p className="text-base font-normal text-gray-900 mt-6">
-              Land your next job, while you sleep. Automatically apply to 50+
-              jobs daily from all over the world, with your CV modified to each
-              job requirement
+              Land your next scholarship or job, while you sleep. Automatically
+              apply to 50+ applications daily from all over the world, with your
+              materials modified to each application
             </p>
             <div className="inline-flex items-center justify-center transition-all duration-150 mt-6 hover:-translate-y-1 hover:shadow-md lg:justify-start">
               <img
@@ -30,7 +30,7 @@ export default () => {
                 >
                   <path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-8,144H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"></path>
                 </svg>
-                support@ApplyBase
+                support@applyBase.net
               </div>
             </div>
           </div>
