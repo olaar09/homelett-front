@@ -12,8 +12,8 @@ export default () => {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="mailto:support@ApplyBase"
-              className="isomorphic-link isomorphic-link--external text-blue-600 underline"
+              href="mailto:support@applyBase.net"
+              className="ml-2 isomorphic-link isomorphic-link--external text-blue-600 underline"
             >
               contact us
             </a>
@@ -29,10 +29,10 @@ export default () => {
               <div className="mt-5 space-y-5">
                 <div className="prose-base">
                   <p>
-                    Our fine-tuned AI model is fine-tuned with a CV of over 100k
-                    professionals working in top startups and companies, and it
-                    knows how to modify a CV optimistically to match each job
-                    description.
+                    ApplyBase fine-tuned AI is trained with over 100k CV and
+                    essays, of professionals and students from top institutions,
+                    therefore, it knows how to modify needed materials
+                    optimistically to match each description.
                   </p>
                 </div>
               </div>
@@ -67,8 +67,9 @@ export default () => {
               </summary>
               <div className="mt-5 space-y-5">
                 <span className="prose-base"></span>
-                we basically deploy agents to search the internet for jobs that
-                match a specific profile. and apply for that job on behalf of
+                We basically deploy agents to search the internet for
+                scholarship opportunities and jobs that match a specific
+                profile. & optionally apply for that opportunity on behalf of
                 the applicant.
               </div>
             </details>
@@ -102,11 +103,14 @@ export default () => {
               </summary>
               <div className="mt-5 space-y-5">
                 <span className="prose-base">
-                  You need to connect Indeed and LinkedIn accounts so that we
-                  can apply to jobs directly when it is required. some jobs
-                  require you to apply on that platform directly. not through
-                  email, or a link. so we provide a way to connect your account
-                  so the agent can use your own account to apply.
+                  You need to connect Gmail account so that our AI agent can use
+                  email directly to submit applications, allowing you to
+                  followup with the applications directly from your mail. Indeed
+                  and LinkedIn accounts so that we can apply to jobs directly
+                  when it is required. some jobs require you to apply on that
+                  platform directly. not through email, or a link, therefore, we
+                  provide a way to connect your account so the agent can use
+                  your own account to apply.
                 </span>
               </div>
             </details>
@@ -142,9 +146,8 @@ export default () => {
                 <span className="prose-base">
                   No, it's not. It costs a lot of money to fine tune and call AI
                   models which generates needed content for the applications.
-                  however, because we run our own models locally, we are able to
-                  offer generous discounts and packages that ensure
-                  affordability for everyone
+                  however, we offer generous discounts and packages that ensure
+                  affordability for everyone.
                 </span>
               </div>
             </details>
