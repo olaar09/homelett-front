@@ -10,7 +10,7 @@ export default () => {
             Built with state of the art AI Technology
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
-            ApplyBase is the top job search AI agent, built with state of the
+            ApplyBase is the top job search AI copilot, built with state of the
             art AI technology
           </p>
         </div>
@@ -98,7 +98,7 @@ export default () => {
                 Agentic application
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Our propritery AI agent can navigate different platforms on the
+                Our propriety AI copilot can navigate different platforms on the
                 web to find and apply for jobs autonomously
               </p>
             </div>
@@ -208,7 +208,7 @@ export default () => {
                 Non stop application
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyBase AI agents doesn't stop. Literarily Land your next job
+                ApplyBase AI copilot doesn't stop. Literarily Land your next job
                 while you sleep!
               </p>
             </div>

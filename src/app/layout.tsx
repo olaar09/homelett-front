@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
-  title: "ApplyBase | AI Agent for job search",
+  title: "ApplyBase | AI copilot for scholarship & job search",
   description: "AI Co-Pilot for your job search",
   applicationName: "ApplyBase",
   appleWebApp: true,
@@ -92,7 +92,7 @@ export default function RootLayout({
         <meta property="og:image" content="/images/dashboard-mockup.jpg" />
         <meta
           property="og:image:alt"
-          content="ApplyBase - Your AI Agent for Job Search"
+          content="ApplyBase - Your AI copilot for scholarship & job search"
         />
         <meta property="og:site_name" content="ApplyBase" />
         <link rel="preconnect" href="https://fonts.bunny.net" />
