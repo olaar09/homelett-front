@@ -188,6 +188,10 @@ const Chat = () => {
   const onToggleShowAll = () => setIsShowAll(true);
   const [isShowAll, setIsShowAll] = useState(false);
 
+  const onAddSkill = (skill: string) => {
+    console.log(skill);
+  };
+
   const onUpgraded = () => {};
   const pageLoading =
     authContext.loading ||
@@ -232,7 +236,7 @@ const Chat = () => {
                     description={
                       <div className="flex items-center gap-x-3">
                         <span className="text-sm">
-                          Lagos, Lagos state, Nigeria
+                          {selectedJob?.location ?? "Remote, World"}
                         </span>
                         <span>.</span>
                         <span>2 weeks ago</span>
@@ -272,8 +276,49 @@ const Chat = () => {
                     )}
                   </div>
                 </Card>
-                <Card className="flex flex-col gap-y-1 mt-14 h-72">
-                  <PercentageChart />
+                <Card className="gap-y-1 mt-20 h-72 w-full">
+                  <div className="flex lg:flex-row  justify-between ">
+                    <div className="w-4/12">
+                      <PercentageChart />
+                    </div>
+
+                    <div className="flex flex-col gap-y-3 w-4/12  px-6">
+                      <span>Skills required : </span>
+
+                      <div className="flex items-center flex-wrap justify-start gap-x-4 gap-y-3">
+                        {[
+                          "ReactJS",
+                          "Javascript",
+                          "Laravel",
+                          "Empathy",
+                          "Leadership",
+                          "5 years experience",
+                          "AWS",
+                          "Cloudflare",
+                        ].map((title) => {
+                          return <Chip action={onAddSkill} title={title} />;
+                        })}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col gap-y-3 w-4/12  px-6">
+                      <span>Your skills : </span>
+
+                      <div className="flex items-center flex-wrap justify-start gap-x-4 gap-y-3">
+                        {[
+                          "ReactJS",
+                          "Javascript",
+                          "Laravel",
+                          "Empathy",
+                          "Heroku",
+                          "Tailwind",
+                          "3 years experience",
+                        ].map((title) => {
+                          return <Chip title={title} action={undefined} />;
+                        })}
+                      </div>
+                    </div>
+                  </div>
                 </Card>
               </div>
             )}
@@ -296,3 +341,19 @@ const Chat = () => {
 };
 
 export default Chat;
+
+const Chip = ({ title, action }: { title: string; action: any }) => {
+  return (
+    <div
+      onClick={() => {
+        if (action) {
+          action(title);
+        }
+      }}
+      className="rounded-2xl bg-gray-200 px-2 flex items-center gap-x-2 hover:bg-gray-200 transition-all duration-100 cursor-pointer"
+    >
+      <span>{title}</span>
+      {action && <Icon icon={"lucide:plus"} />}
+    </div>
+  );
+};

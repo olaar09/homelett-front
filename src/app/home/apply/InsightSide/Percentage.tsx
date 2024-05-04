@@ -36,7 +36,7 @@ const PercentageChart: React.FC = () => {
             show: true,
             name: {
               show: true,
-              fontSize: "16px",
+              fontSize: "10px",
               offsetY: -10,
             },
             value: {
