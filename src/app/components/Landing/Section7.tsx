@@ -18,7 +18,7 @@ export default () => {
             <div className="relative">
               <div className="max-w-2xl mx-auto">
                 <h2 className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                  Start your AI powered scholarship & job search now
+                  Start Your AI Powered Job Search Now
                 </h2>
                 <p className="max-w-lg text-base text-blue-100 mx-auto mt-5 sm:text-lg">
                   Spend less time searching and more time applying. 70% of

@@ -7,7 +7,7 @@ export default () => {
             It's not Magic, it's just AI.
           </p>
           <h2 className="font-display text-3xl font-semibold tracking-tight text-gray-900 mt-4 sm:text-4xl lg:text-5xl">
-            Built with state of the art AI Technology
+            Built With State Of The Art AI Technology
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
             ApplyBase is the top job search AI copilot, built with state of the

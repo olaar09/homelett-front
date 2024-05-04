@@ -103,7 +103,7 @@ const Upgrade = ({ email }: any) => {
           <span className="text-black text-center text-sm">
             <span className="font-bold">
               {" "}
-              Apply to 400k+ scholarship & jobs when you upgrade.{" "}
+              Apply to 400k+ jobs when you upgrade.{" "}
             </span>{" "}
             <br /> <br /> Get the right information you need to apply and 10x
             your chances of success. Apply with a single click or Start an AI

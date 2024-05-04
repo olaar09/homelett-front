@@ -10,9 +10,9 @@ export default () => {
             AI Powered Search & Application
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
-            ApplyBase intelligently finds jobs & scholarships that match your
-            profile with pin-point, high accuracy, allowing you focus on
-            applying rather than searching
+            ApplyBase intelligently finds jobs that match your profile with
+            pin-point, high accuracy, allowing you focus on applying rather than
+            searching
           </p>
         </div>
         <div className="grid max-w-md grid-cols-1 gap-12 mx-auto mt-12 sm:mt-16 lg:max-w-none lg:grid-cols-3 lg:mx-0">

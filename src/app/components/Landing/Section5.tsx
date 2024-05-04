@@ -7,7 +7,7 @@ export default () => {
             Built by techies, for techies
           </p>
           <h2 className="font-display text-3xl font-semibold tracking-tight text-gray-900 mt-4 sm:text-4xl lg:text-5xl">
-            Who can join?
+            Who Can Join?
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
             ApplyBase can be used by professionals and students to apply for

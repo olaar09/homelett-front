@@ -21,8 +21,7 @@ export default () => {
             </div>
             <div className="max-w-5xl mx-auto mt-16 text-center lg:mt-20">
               <p className="text-base font-semibold text-gray-900">
-                1.2 million+ Jobs and scholarships from top organizations all
-                over the world
+                1.2 million+ Jobs from top organizations all over the world
               </p>
               <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 mt-4 sm:mt-6 lg:gap-x-8">
                 <img
