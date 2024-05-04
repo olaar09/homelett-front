@@ -18,7 +18,7 @@ const JobItem = ({
     <Card
       onClick={onSelectJob}
       hoverable
-      className={`" h-44 border-b rounded-none flex flex-col relative ${
+      className={`" h-44 border-b border-0 rounded-none flex flex-col relative ${
         active ? "bg-blue-50" : ""
       }`}
     >

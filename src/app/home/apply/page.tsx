@@ -5,11 +5,12 @@ import { useContext, useEffect, useRef, useState } from "react";
 import APIUtil from "@/services/APIUtil";
 import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
-import { message } from "antd";
+import { Button, FloatButton, message } from "antd";
 import { AxiosError } from "axios";
 import { useRequest } from "ahooks";
 import { JobsSide } from "./JobSide/JobsSide";
 import CVSide from "./CVSide/CVSide";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 const Chat = () => {
   const [coverLetter, setCoverLetter] = useState("");
@@ -27,6 +28,7 @@ const Chat = () => {
   const apiUtil = new APIUtil();
 
   const isBillingActive = authContext.currentUser?.billingActive;
+  const [toggleInsight, setToggleInsight] = useState(true);
 
   useEffect(() => {
     if (selectedJob) onLoad(selectedJob);
@@ -175,6 +177,8 @@ const Chat = () => {
     //setJobs(clone);
   };
 
+  const onToggleInsights = () => setToggleInsight(!toggleInsight);
+
   const onUpgraded = () => {};
   const pageLoading =
     authContext.loading ||
@@ -197,13 +201,40 @@ const Chat = () => {
             onSelectJob={onSelectJob}
           />
 
-          <CVSide
-            jProfile={authContext.activeProfile!}
-            experiences={experiences}
-            loadingExperiences={loadingExperiences}
-            loadingCV={loadingCV}
-            coverLetter={coverLetter}
-          />
+          <div className="h-full w-full flex flex-col relative">
+            {!toggleInsight && (
+              <FloatButton
+                onClick={onToggleInsights}
+                style={{ width: 120 }}
+                description={
+                  <div className="flex items-center gap-x-1">
+                    <Icon
+                      className="text-2xl text-primary"
+                      icon={"majesticons:analytics"}
+                    />
+                    <span className=" text-base">Insights</span>
+                  </div>
+                }
+                shape="square"
+              />
+            )}
+
+            {toggleInsight && (
+              <div>
+                <span>Insights</span>
+              </div>
+            )}
+
+            {!toggleInsight && (
+              <CVSide
+                jProfile={authContext.activeProfile!}
+                experiences={experiences}
+                loadingExperiences={loadingExperiences}
+                loadingCV={loadingCV}
+                coverLetter={coverLetter}
+              />
+            )}
+          </div>
         </section>
       )}
     </main>
