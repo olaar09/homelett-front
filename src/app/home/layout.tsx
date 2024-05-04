@@ -66,16 +66,13 @@ const NavMenu = ({
 };
 const HeadIcon = ({ onToggle, isOpen }: any) => {
   return (
-    <div className="flex items-center gap-x-0  h-14   border-b  w-full justify-between px-3">
+    <div className="flex items-center gap-x-0  h-14   border-b  w-full justify-between px-3 relative">
       <div className="flex items-center">
-        <div className="w-6 flex items-center justify-center">
-          <Icon
-            className="text-primary text-md opacity-90 mt-1"
-            icon="ph:robot-bold"
-          />
+        <div className="w-6 flex items-center justify-center gap-x-3">
+          <img src="/logo.png" className="w-4 mr-2" />
         </div>
         {isOpen && (
-          <span className=" text-foreground font-black text-xl mt-1">
+          <span className=" text-foreground font-black text-lg mt-0">
             ApplyBase
           </span>
         )}
@@ -84,7 +81,7 @@ const HeadIcon = ({ onToggle, isOpen }: any) => {
       {isOpen && (
         <Button
           onClick={() => onToggle(false)}
-          className="flex items-center mt-1"
+          className="flex items-center mt-1 absolute -right-2"
           type="link"
         >
           {" "}
@@ -247,14 +244,14 @@ const Nav: React.FC<any> = ({ children }) => {
           <div
             className={` bg-background ${
               openSide ? "w-[345px]" : "w-[70px]"
-            } min-h-screen hidden lg:flex border-r border-gray-100  flex-col h-full items-start transition-all duration-200 `}
+            } min-h-screen hidden lg:flex border-r border-gray-100  flex-col h-full items-start transition-all duration-200 relative `}
           >
             <HeadIcon isOpen={openSide} onToggle={onToggle} />
             {!openSide && (
               <div>
                 <Button
                   onClick={() => onToggle(true)}
-                  className="flex items-center mt-1"
+                  className="  absolute -left-1"
                   type="link"
                 >
                   {" "}
