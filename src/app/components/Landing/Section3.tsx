@@ -7,7 +7,7 @@ export default () => {
             How it works?
           </p>
           <h2 className="font-display text-3xl font-semibold tracking-tight text-gray-900 mt-4 sm:text-4xl lg:text-5xl">
-            AI powered search & application
+            AI Powered Search & Application
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
             ApplyBase intelligently finds jobs & scholarships that match your
@@ -52,7 +52,7 @@ export default () => {
                     <path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"></path>
                   </svg>
                 </div>
-                Create multiple Job and scholarship profiles
+                Create multiple Job profiles
               </li>
               <li className="flex items-start gap-3">
                 <div className="shrink-0 py-0.5">
@@ -95,7 +95,8 @@ export default () => {
                     <path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"></path>
                   </svg>
                 </div>
-                Scholarships and jobs that match each profile are displayed
+                AI matches each profile with jobs based on similarity and
+                success chances.
               </li>
             </ul>
           </div>

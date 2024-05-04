@@ -4,23 +4,19 @@ export default () => {
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-7">
           <div className="col-span-2 shrink-0 md:col-span-3">
-            <a
-              className="isomorphic-link isomorphic-link--internal flex items-center gap-x-2"
-              href="/"
-            >
-              <img className="h-7 w-auto" src="/logo.png" alt="" />
-              <span className="text-2xl font-black"> ApplyBase</span>
+            <a className="isomorphic-link isomorphic-link--internal" href="/">
+              <img className="h-8 w-auto" src="images/logo-full.svg" alt="" />
             </a>
             <p className="text-base font-normal text-gray-900 mt-6">
-              Land your next scholarship or job, while you sleep. Automatically
-              apply to 50+ applications daily from all over the world, with your
-              materials modified to each application
+              Land your next job, while you sleep. Get highly accurate jobs that
+              match with your CV. spend less time searching and more time
+              applying
             </p>
             <div className="inline-flex items-center justify-center transition-all duration-150 mt-6 hover:-translate-y-1 hover:shadow-md lg:justify-start">
               <img
                 className="h-12 w-auto"
                 src="images/top-post-badge.svg"
-                alt="ApplyBase"
+                alt="ApplyGenius"
               />
             </div>
             <div>
