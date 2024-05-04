@@ -93,13 +93,10 @@ const SavedTeamMembers = () => {
       {!loadingWorkflows && workflowList && workflowList.length < 1 && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
-          <div className=" flex flex-col  items-center justify-center gap-y-3">
+          <div className=" flex flex-col  items-center justify-center gap-y-7">
             {" "}
-            <Icon
-              icon={"octicon:workflow-16"}
-              className=" text-6xl text-foreground"
-            />
-            <span className="text-foreground">No workflows found</span>
+            <img className="h-12" src="/fun-arrow.svg" />
+            <span className="text-foreground">No Job applications found</span>
           </div>
         </div>
       )}

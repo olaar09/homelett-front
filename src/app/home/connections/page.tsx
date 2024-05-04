@@ -64,6 +64,26 @@ const Connections = () => {
     setOpenConnector(true);
   };
 
+  const {
+    data: workflowList,
+    error,
+    loading: loadingWorkflows,
+    refresh: refreshWorkflow,
+  } = useRequest(() => getWorkFlow(), {
+    ready:
+      currentAuth.currentUser != null && currentAuth.currentUser != undefined,
+  });
+
+  const getWorkFlow = async (): Promise<any> => {
+    try {
+      const data = await apiUtil.workflowService.getWorkflows();
+      const list = data.data;
+      return list;
+    } catch (error) {
+      message.error("unable to load data");
+    }
+  };
+
   const onCloseConnector = () => {
     setOpenConnector(false);
     setSelectedConnection(undefined);
@@ -118,79 +138,92 @@ const Connections = () => {
 
       <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full">
         <div className="flex flex-col">
-          <HeaderItem icon="" title={`CONNECTIONS`} withBg={false} />
+          <HeaderItem icon="" title={`INTEGRATIONS`} withBg={false} />
           <span className="text-xs text-foreground-secondary truncate w-full">
-            Your datasource and workflow connections
+            Your datasource and workflow integrations
           </span>
         </div>
 
         <div onClick={onOpenConnector}>
           <HeaderItem
             icon="mdi:connection"
-            title="Add new connection"
+            title="Add new integration"
             withBg={true}
           />
         </div>
       </section>
 
-      <section className=" flex items-center w-full  px-8 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
-        {(currentAuth.dataSources ?? []).map((datasource) => (
-          <div className="w-4/12 ">
-            <div className="mr-4 relative cursor-pointer hoverContainer transition-all">
-              <Card
-                onClick={() => onSelectConnection(datasource)}
-                className="rounded-2xl h-40 relative cursor-pointer"
-                bordered={false}
-              >
-                <Meta
-                  title={
-                    <div className="flex items-center gap-x-2">
-                      <Icon icon={datasource.source_type.icon} />
-                      <span>{datasource.name}</span>
-                    </div>
-                  }
-                  description={datasource.source_type.description}
-                />
-              </Card>
-              <div className=" absolute top-3 right-4 z-10 hoverItem transition-all duration-150">
-                <div className=" flex items-center -gap-x-2 transition-all duration-300">
-                  <Popconfirm
-                    title="Delete the connection"
-                    description="Are you sure to delete this connection?"
-                    okText="Yes"
-                    cancelText="No"
-                    onConfirm={() => handleDeleteConnection(datasource)}
-                  >
+      {!loadingWorkflows && workflowList && workflowList.length < 1 && (
+        <div className="h-screen   flex flex-col justify-center items-center">
+          {" "}
+          <div className=" flex flex-col  items-center justify-center gap-y-7">
+            {" "}
+            <img className="h-12" src="/fun-arrow.svg" />
+            <span className="text-foreground">No Integrations found</span>
+          </div>
+        </div>
+      )}
+
+      {workflowList && workflowList.length < 1 && (
+        <section className=" flex items-center w-full  px-8 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
+          {(currentAuth.dataSources ?? []).map((datasource) => (
+            <div className="w-4/12 ">
+              <div className="mr-4 relative cursor-pointer hoverContainer transition-all">
+                <Card
+                  onClick={() => onSelectConnection(datasource)}
+                  className="rounded-2xl h-40 relative cursor-pointer"
+                  bordered={false}
+                >
+                  <Meta
+                    title={
+                      <div className="flex items-center gap-x-2">
+                        <Icon icon={datasource.source_type.icon} />
+                        <span>{datasource.name}</span>
+                      </div>
+                    }
+                    description={datasource.source_type.description}
+                  />
+                </Card>
+                <div className=" absolute top-3 right-4 z-10 hoverItem transition-all duration-150">
+                  <div className=" flex items-center -gap-x-2 transition-all duration-300">
+                    <Popconfirm
+                      title="Delete the connection"
+                      description="Are you sure to delete this connection?"
+                      okText="Yes"
+                      cancelText="No"
+                      onConfirm={() => handleDeleteConnection(datasource)}
+                    >
+                      <Button
+                        className="text-red-500"
+                        icon={<DeleteOutlined />}
+                        type="link"
+                      />
+                    </Popconfirm>
                     <Button
-                      className="text-red-500"
-                      icon={<DeleteOutlined />}
+                      onClick={() => onSelectConnection(datasource)}
+                      icon={<EditOutlined />}
+                      className="text-success-500"
                       type="link"
                     />
-                  </Popconfirm>
-                  <Button
-                    onClick={() => onSelectConnection(datasource)}
-                    icon={<EditOutlined />}
-                    className="text-success-500"
-                    type="link"
-                  />
+                  </div>
+                </div>
+                <div className="absolute bottom-3 right-2 z-10">
+                  <Tag
+                    bordered={false}
+                    color={
+                      datasource.source_type.category === "datasource"
+                        ? "geekblue"
+                        : "volcano"
+                    }
+                  >
+                    {datasource.source_type.category}
+                  </Tag>
                 </div>
               </div>
-              <div className="absolute bottom-3 right-2 z-10">
-                <Tag
-                  bordered={false}
-                  color={
-                    datasource.source_type.category === "datasource"
-                      ? "geekblue"
-                      : "volcano"
-                  }
-                >
-                  {datasource.source_type.category}
-                </Tag>
-              </div>
             </div>
-          </div>
-        ))}
-      </section>
+          ))}
+        </section>
+      )}
       <ConnectorModal
         defaultFormPayload={selectedConnectionPayload}
         closable={true}
