@@ -5,7 +5,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import APIUtil from "@/services/APIUtil";
 import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
-import { Avatar, Button, Card, FloatButton, message } from "antd";
+import { Avatar, Button, Card, FloatButton, Progress, message } from "antd";
 import { AxiosError } from "axios";
 import { useRequest } from "ahooks";
 import { JobsSide } from "./JobSide/JobsSide";
@@ -245,9 +245,27 @@ const Chat = () => {
                   />
 
                   <div className={`mt-6 relative `}>
+                    <Suitability
+                      type="active"
+                      title={"Role suitability"}
+                      description={
+                        "The role is suitable because you have most of the skills it requires. "
+                      }
+                      range={40}
+                    />
+
+                    <Suitability
+                      type="success"
+                      title={"Company suitability"}
+                      description={
+                        "This company is a good fit because they have a track record of offering remote opportunities in Europe, having previously hired Africans to work remotely."
+                      }
+                      range={90}
+                    />
+
                     <span
-                      className={`text-gray-600 text-sm whitespace-pre-wrap block transition-all duration-150  ${
-                        isShowAll ? " h-auto" : "h-96"
+                      className={`text-gray-600 text-sm whitespace-pre-wrap block transition-all duration-150 mt-10  ${
+                        isShowAll ? " h-auto" : " h-60"
                       } overflow-hidden`}
                       dangerouslySetInnerHTML={{
                         __html: selectedJob?.description,
@@ -350,10 +368,34 @@ const Chip = ({ title, action }: { title: string; action: any }) => {
           action(title);
         }
       }}
-      className="rounded-2xl bg-gray-200 px-2 flex items-center gap-x-2 hover:bg-gray-200 transition-all duration-100 cursor-pointer"
+      className="rounded-2xl bg-gray-200 px-2 flex items-center gap-x-2 hover:opacity-60 transition-all duration-100 cursor-pointer"
     >
       <span>{title}</span>
       {action && <Icon icon={"lucide:plus"} />}
+    </div>
+  );
+};
+
+const Suitability = ({
+  title,
+  description,
+  range,
+  type,
+}: {
+  title: string;
+  description: string;
+  range: number;
+  type: "active" | "success";
+}) => {
+  return (
+    <div className="flex flex-col my-4 gap-y-2">
+      <div className="flex gap-x-3 items-start  ">
+        <span className="w-32 text-gray-800">{title}</span>
+        <div className="w-40">
+          <Progress status={type} percent={range} size="small" />
+        </div>
+      </div>
+      <span className="text-gray-800">{description}</span>
     </div>
   );
 };
