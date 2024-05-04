@@ -229,6 +229,7 @@ const Chat = () => {
 
                     <div className="flex items-center gap-x-4">
                       <Button
+                        onClick={onToggleInsights}
                         type="link"
                         className="flex items-center gap-x-3 text-gray-700"
                       >
