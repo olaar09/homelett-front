@@ -67,10 +67,9 @@ export default () => {
               </summary>
               <div className="mt-5 space-y-5">
                 <span className="prose-base"></span>
-                We basically deploy agents to search the internet for
-                scholarship opportunities and jobs that match a specific
-                profile. & optionally apply for that opportunity on behalf of
-                the applicant.
+                We deploy agents to search the internet for jobs that match a
+                specific profiles. & optionally apply for that opportunity on
+                behalf of the applicant.
               </div>
             </details>
             <div className="pointer-events-none invisible absolute right-0 top-0 py-7 pl-7 pr-4 peer-open:visible sm:pr-6">

@@ -21,9 +21,8 @@ export default () => {
                   Start your AI powered scholarship & job search now
                 </h2>
                 <p className="max-w-lg text-base text-blue-100 mx-auto mt-5 sm:text-lg">
-                  Automatically apply to 50+ scholarships and jobs daily from
-                  all over the world, with your Essay and CV modified to each
-                  application.
+                  Spend less time searching and more time applying. 70% of
+                  ApplyBase users get an interview in the first month.
                 </p>
               </div>
               <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-4 text-sm font-medium text-white mt-8">
@@ -57,7 +56,7 @@ export default () => {
                     ></path>
                     <path d="M223.68,66.15,135.68,18h0a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32h0l80.34,44L128,120,47.66,76ZM40,90l80,43.78v85.79L40,175.82Zm96,129.57V133.82L216,90v85.78Z"></path>
                   </svg>
-                  850k+ Scholarships
+                  AI powered matching
                 </li>
                 <li className="inline-flex items-center gap-2">
                   <svg
@@ -89,7 +88,7 @@ export default () => {
                     ></path>
                     <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a28,28,0,0,1-28,28h-4v8a8,8,0,0,1-16,0v-8H104a8,8,0,0,1,0-16h36a12,12,0,0,0,0-24H116a28,28,0,0,1,0-56h4V72a8,8,0,0,1,16,0v8h16a8,8,0,0,1,0,16H116a12,12,0,0,0,0,24h24A28,28,0,0,1,168,148Z"></path>
                   </svg>
-                  10k+ applies daily
+                  70% success in 1st month
                 </li>
               </ul>
               <div className="mt-8">

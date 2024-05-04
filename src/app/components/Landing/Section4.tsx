@@ -55,8 +55,8 @@ export default () => {
                 AI CV/Essay writer
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                AI rewrites your Essay, CV and Cover letter to align with each
-                application.
+                AI identifies necessary skills and qualities for the job, and
+                rewrites your cv with a single click.
               </p>
             </div>
           </div>
@@ -188,7 +188,7 @@ export default () => {
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
                 ApplyBase fine-tuned models texts are indistinguishable from
-                human written. due to the level of model fine tunning
+                human written.
               </p>
             </div>
           </div>
@@ -209,7 +209,7 @@ export default () => {
                 Domain knowledge
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyBase AI knows how to write top CV for specific domains
+                ApplyBase AI knows how to write top CV for specific tech domains
               </p>
             </div>
           </div>
@@ -230,8 +230,8 @@ export default () => {
                 Non stop application
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyBase AI copilot doesn't stop. Literarily land your next
-                scholarship or job while you sleep!
+                ApplyBase AI copilot doesn't stop. Literarily land your next job
+                while you sleep!
               </p>
             </div>
           </div>
@@ -252,8 +252,8 @@ export default () => {
                 Non duplicating
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Safeguards are put in place to ensure scholarship and job
-                applications are not submitted multiple times for same profile
+                Safeguards are put in place to ensure job applications are not
+                submitted multiple times for same profile
               </p>
             </div>
           </div>

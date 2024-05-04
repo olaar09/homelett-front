@@ -10,9 +10,9 @@ export default () => {
             Who can join?
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
-            ApplyBase can be used by students and professionals to apply for
-            scholarships, internship and jobs. For job applications, ApplyBase
-            is specifically fine tuned for tech based job applications
+            ApplyBase can be used by professionals and students to apply for
+            internship and jobs. However ApplyBase is specifically fine tuned
+            and most suitable for tech based job applications
           </p>
         </div>
         <div className="grid max-w-md grid-cols-1 gap-y-8 mx-auto mt-12 text-center sm:mt-16 md:max-w-none md:grid-cols-3 md:gap-x-12 md:mx-0 md:text-left">
@@ -23,7 +23,7 @@ export default () => {
               alt=""
             />
             <h3 className="text-lg font-semibold text-gray-900 mt-2 sm:text-xl">
-              Tech and IT Job applicants
+              Software engineers and devOps
             </h3>
             <p className="text-base/7 font-normal text-gray-600 mt-2">
               Cover letter and job experience are written to depict deep
@@ -37,12 +37,11 @@ export default () => {
               alt=""
             />
             <h3 className="text-lg font-semibold text-gray-900 mt-2 sm:text-xl">
-              Student scholarships
+              Product and UI / UX
             </h3>
             <p className="text-base/7 font-normal text-gray-600 mt-2">
-              We find fresh, relevant scholarships for students and generate
-              essays, motivation letter and other materials needed for a
-              successful application
+              Correct industry terminologies are utilized, giving hiring
+              managers a energetic sense of professionalism about the applicant
             </p>
           </div>
           <div>
@@ -52,12 +51,11 @@ export default () => {
               alt=""
             />
             <h3 className="text-lg font-semibold text-gray-900 mt-2 sm:text-xl">
-              Student interns
+              Data analysts & Cyber sec
             </h3>
             <p className="text-base/7 font-normal text-gray-600 mt-2">
-              120k+ internship opportunities for students from all over the
-              world enables students to get experience before they are ready for
-              a full time role.
+              Correct industry terminologies are utilized, giving hiring
+              managers a energetic sense of professionalism about the applicant
             </p>
           </div>
         </div>
