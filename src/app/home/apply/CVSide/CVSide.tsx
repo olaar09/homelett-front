@@ -4,6 +4,7 @@ import ASide from "./CVProfileInfo";
 import { ExperienceItem } from "./ExperienceItem";
 import { OverviewItem } from "./OverviewItem";
 import { IJProfile } from "@/app/interfaces/IRegisterRequest";
+import { FloatButton } from "antd";
 
 interface ICVSide {
   jProfile: IJProfile;
@@ -11,6 +12,7 @@ interface ICVSide {
   loadingExperiences: boolean;
   loadingCV: boolean;
   coverLetter: string;
+  onToggleInsights: () => void;
 }
 
 const CVSide = ({
@@ -19,9 +21,25 @@ const CVSide = ({
   loadingExperiences,
   coverLetter,
   experiences,
+  onToggleInsights,
 }: ICVSide) => {
   return (
     <div className="lg:flex hidden  h-full    flex-col overflow-y-scroll">
+      <FloatButton
+        onClick={onToggleInsights}
+        style={{ width: 120 }}
+        description={
+          <div className="flex items-center gap-x-1">
+            <Icon
+              className="text-2xl text-primary"
+              icon={"majesticons:analytics"}
+            />
+            <span className=" text-base">Insights</span>
+          </div>
+        }
+        shape="square"
+      />
+
       <div className="px-2 w-full">
         {(loadingCV || loadingExperiences) && <LoadingJobItem />}
       </div>

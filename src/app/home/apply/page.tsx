@@ -5,12 +5,13 @@ import { useContext, useEffect, useRef, useState } from "react";
 import APIUtil from "@/services/APIUtil";
 import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
-import { Button, FloatButton, message } from "antd";
+import { Avatar, Button, Card, FloatButton, message } from "antd";
 import { AxiosError } from "axios";
 import { useRequest } from "ahooks";
 import { JobsSide } from "./JobSide/JobsSide";
 import CVSide from "./CVSide/CVSide";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import PercentageChart from "./InsightSide/Percentage";
 
 const Chat = () => {
   const [coverLetter, setCoverLetter] = useState("");
@@ -92,6 +93,12 @@ const Chat = () => {
       authContext.currentUser != undefined &&
       authContext.activeProfile?.id != null,
   });
+
+  useEffect(() => {
+    if (selectedJob) {
+      setIsShowAll(false);
+    }
+  }, [selectedJob]);
 
   useEffect(() => {
     refreshJobs();
@@ -178,6 +185,8 @@ const Chat = () => {
   };
 
   const onToggleInsights = () => setToggleInsight(!toggleInsight);
+  const onToggleShowAll = () => setIsShowAll(true);
+  const [isShowAll, setIsShowAll] = useState(false);
 
   const onUpgraded = () => {};
   const pageLoading =
@@ -190,7 +199,7 @@ const Chat = () => {
       <LoadingOverlay loading={pageLoading} />
 
       {!pageLoading && (
-        <section className=" flex items-center h-screen overflow-scroll">
+        <section className=" flex items-center h-screen overflow-hidden">
           <JobsSide
             jobs={jobs}
             selectedJob={selectedJob}
@@ -201,32 +210,77 @@ const Chat = () => {
             onSelectJob={onSelectJob}
           />
 
-          <div className="h-full w-full flex flex-col relative">
-            {!toggleInsight && (
-              <FloatButton
-                onClick={onToggleInsights}
-                style={{ width: 120 }}
-                description={
-                  <div className="flex items-center gap-x-1">
-                    <Icon
-                      className="text-2xl text-primary"
-                      icon={"majesticons:analytics"}
-                    />
-                    <span className=" text-base">Insights</span>
-                  </div>
-                }
-                shape="square"
-              />
-            )}
-
+          <div className="h-full w-full flex flex-col relative overflow-scroll">
             {toggleInsight && (
-              <div>
-                <span>Insights</span>
+              <div className="p-4 lg:px-8">
+                <Card
+                  style={{ paddingTop: 0 }}
+                  className=" shadow-none bg-transparent border-0 mt-0 pt-0 "
+                >
+                  <div className=" flex items-center px-0 gap-x-3 mb-4">
+                    <Avatar src={selectedJob?.company_logo} />
+                    <span>{selectedJob?.company_name}</span>
+                  </div>
+                  <Card.Meta
+                    title={
+                      <span className="text-2xl">
+                        {" "}
+                        {selectedJob?.title?.substring(0, 100)}
+                        {selectedJob?.title?.length >= 50 ? "..." : ""}
+                      </span>
+                    }
+                    description={
+                      <div className="flex items-center gap-x-3">
+                        <span className="text-sm">
+                          Lagos, Lagos state, Nigeria
+                        </span>
+                        <span>.</span>
+                        <span>2 weeks ago</span>
+                      </div>
+                    }
+                  />
+
+                  <div className={`mt-6 relative `}>
+                    <span
+                      className={`text-gray-600 text-sm whitespace-pre-wrap block transition-all duration-150  ${
+                        isShowAll ? " h-auto" : "h-96"
+                      } overflow-hidden`}
+                      dangerouslySetInnerHTML={{
+                        __html: selectedJob?.description,
+                      }}
+                    />
+
+                    {!isShowAll && (
+                      <div className="blur-at-top  absolute h-40  bg-transparent  -bottom-20 w-full  "></div>
+                    )}
+                    {!isShowAll && (
+                      <div className="absolute  h-40 z-30 w-full left-0 right-0">
+                        <Button
+                          onClick={onToggleShowAll}
+                          className="w-full"
+                          type="link"
+                        >
+                          <div className="flex items-center justify-center w-full gap-x-3">
+                            <span className="">Show more</span>
+                            <Icon
+                              className="text-xl "
+                              icon={"iconamoon:arrow-down-2-duotone"}
+                            />
+                          </div>
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+                <Card className="flex flex-col gap-y-1 mt-14 h-72">
+                  <PercentageChart />
+                </Card>
               </div>
             )}
 
             {!toggleInsight && (
               <CVSide
+                onToggleInsights={onToggleInsights}
                 jProfile={authContext.activeProfile!}
                 experiences={experiences}
                 loadingExperiences={loadingExperiences}

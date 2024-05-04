@@ -234,8 +234,15 @@ html {
 }
 
 .blur-at-top {
-  background: white;
-  filter: blur(30px); /* Adjust the blur strength as needed */
+  -webkit-mask-image: -webkit-gradient(
+    linear,
+    0 0,
+    0 50%,
+    from(rgba(0, 0, 0, 0)),
+    to(rgba(0, 0, 0, 1))
+  );
+
+  background: #fbfbfc;
 }
 
 .ant-drawer-body {
