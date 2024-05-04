@@ -221,10 +221,31 @@ const Chat = () => {
                   style={{ paddingTop: 0 }}
                   className=" shadow-none bg-transparent border-0 mt-0 pt-0 "
                 >
-                  <div className=" flex items-center px-0 gap-x-3 mb-4">
-                    <Avatar src={selectedJob?.company_logo} />
-                    <span>{selectedJob?.company_name}</span>
+                  <div className="flex justify-between items-center">
+                    <div className=" flex items-center px-0 gap-x-3 mb-4">
+                      <Avatar src={selectedJob?.company_logo} />
+                      <span>{selectedJob?.company_name}</span>
+                    </div>
+
+                    <div className="flex items-center gap-x-4">
+                      <Button
+                        type="link"
+                        className="flex items-center gap-x-3 text-gray-700"
+                      >
+                        <Icon icon={"ph:read-cv-logo-fill"} />
+                        <span>View generated CV</span>
+                      </Button>
+
+                      <Button
+                        className="bg-primary flex items-center gap-x-3"
+                        type="primary"
+                      >
+                        <Icon icon={"mdi:gesture-touch-box"} />
+                        <span>Apply for job</span>
+                      </Button>
+                    </div>
                   </div>
+
                   <Card.Meta
                     title={
                       <span className="text-2xl">
