@@ -16,9 +16,9 @@ const Hero = () => {
             Your AI Copilot For Job Search
           </h1>
           <p className="max-w-2xl text-base font-normal text-gray-600 mx-auto mt-3 sm:text-xl sm:mt-5 lg:text-2xl">
-            Spend less time searching and more time applying. We use AI to match
-            you with high success potential jobs based on your profile and align
-            your CV with each job
+            Spend less time searching and more time applying. <br /> ApplyBase
+            uses AI to match you with high-success potential jobs based on your
+            profile and align your CV with each job
           </p>
           <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-4 text-sm font-medium text-gray-900 mt-6 sm:mt-8">
             <li className="inline-flex items-center gap-2">

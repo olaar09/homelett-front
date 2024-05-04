@@ -32,8 +32,8 @@ export default () => {
                 Only fresh listings
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                We only match profiles with freshly posted scholarships and jobs
-                still accepting applications
+                We only match profiles with strictly freshly posted jobs still
+                accepting applications
               </p>
             </div>
           </div>
