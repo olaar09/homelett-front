@@ -29,8 +29,7 @@ export const metadata: Metadata = {
     site: "",
     siteId: "", // make unique
     creator: "ApplyBase INC",
-    description:
-      "AI Co-Pilot for engineering and business teams to get things done faster!",
+    description: "AI Co-Pilot for job search",
     title: "ApplyBase",
     images: "",
   },
