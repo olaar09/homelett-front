@@ -12,13 +12,13 @@ export default () => {
               match with your CV. spend less time searching and more time
               applying
             </p>
-            <div className="inline-flex items-center justify-center transition-all duration-150 mt-6 hover:-translate-y-1 hover:shadow-md lg:justify-start">
+            {/*     <div className="inline-flex items-center justify-center transition-all duration-150 mt-6 hover:-translate-y-1 hover:shadow-md lg:justify-start">
               <img
                 className="h-12 w-auto"
                 src="images/top-post-badge.svg"
                 alt="ApplyGenius"
               />
-            </div>
+            </div> */}
             <div>
               <div className="inline-flex items-center gap-2 text-base font-medium text-blue-600 mt-6 hover:underline">
                 <svg
