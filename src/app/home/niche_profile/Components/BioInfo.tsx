@@ -1,9 +1,11 @@
 "use client";
 
-import { Drawer, Form, Input } from "antd";
+import { Drawer, Form, Input, Select, message } from "antd";
 import { useEffect, useState } from "react";
 import IInput from "./Form";
 import ACButton from "@/app/components/Button";
+import { Str } from "@/utils/consts";
+import FormItem from "antd/es/form/FormItem";
 
 const BioInfo = ({
   onContinue,
@@ -21,6 +23,9 @@ const BioInfo = ({
   }, []);
 
   const onFinishForm = (data: any) => {
+    if (!data.job_category) {
+      return message.error("Select a job category");
+    }
     onContinue(data);
   };
 
@@ -116,6 +121,31 @@ const BioInfo = ({
               title="Hobbies"
               name="hobbies"
               label="List your hobbies, separated by comma"
+              onChange={undefined}
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center px-2 mt-4">
+          <div className="w-6/12  px-2 flex flex-col gap-y-2 ">
+            <span className="font-bold"> Job category </span>
+            <FormItem name={"job_category"}>
+              <Select
+                className="w-full border h-12 rounded-lg "
+                placeholder={"Select a job category"}
+                options={Str.industryCategories.map((str) => {
+                  return { label: str, value: str };
+                })}
+              />
+            </FormItem>
+          </div>
+
+          <div className="w-6/12  px-2 flex flex-col gap-y-2  ">
+            <IInput
+              required
+              title="Job description"
+              name="job_description"
+              label="E.g software engineer, UI/UX, HR"
               onChange={undefined}
             />
           </div>
