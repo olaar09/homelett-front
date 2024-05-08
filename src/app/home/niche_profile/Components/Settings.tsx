@@ -82,7 +82,7 @@ const Settings = ({
               className="w-full border h-12 rounded-lg "
               placeholder={"Select one"}
               value={data.experience}
-              onChange={(val: string) => onChange("experience", val)}
+              onChange={(val: string) => onChange("location", val)}
               options={[
                 { label: "Work remotely", value: "Fully remote" },
                 {
