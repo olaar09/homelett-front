@@ -143,9 +143,9 @@ const BioInfo = ({
           <div className="w-6/12  px-2 flex flex-col gap-y-2  ">
             <IInput
               required
-              title="Job description"
-              name="job_description"
-              label="E.g software engineer, UI/UX, HR"
+              title="Years of experience in the industry"
+              name="years_of_experience"
+              label="E.g 4"
               onChange={undefined}
             />
           </div>
