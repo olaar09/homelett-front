@@ -75,6 +75,31 @@ const Settings = ({
               ]}
             ></Select>
           </div>
+
+          <div className="w-6/12  px-2 flex flex-col gap-y-2">
+            <span className="font-bold text-xl">Your job type preference</span>
+            <Select
+              className="w-full border h-12 rounded-lg "
+              placeholder={"Select one"}
+              value={data.experience}
+              onChange={(val: string) => onChange("experience", val)}
+              options={[
+                { label: "Work remotely", value: "Fully remote" },
+                {
+                  label: "Partly remote",
+                  value: "Remote but can come in to the office some times",
+                },
+                {
+                  label: "Work from office",
+                  value: "Only work from office is suitable",
+                },
+                {
+                  label: "All work locations",
+                  value: "All types of work are fine",
+                },
+              ]}
+            ></Select>
+          </div>
         </div>
 
         <div className="px-4 mt-12">
