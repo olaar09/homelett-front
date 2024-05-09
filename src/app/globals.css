@@ -239,7 +239,7 @@ html {
     0 0,
     0 50%,
     from(rgba(0, 0, 0, 0)),
-    to(rgba(0, 0, 0, 1))
+    to(rgba(0, 0, 0, 6))
   );
 
   background: #fbfbfc;

@@ -9,9 +9,11 @@ import DataSourceAPIService from "./DatasourceAPIService";
 import TeamAPIService from "./TeamAPIService";
 import IntegrationAPIService from "./IntegrationAPIService";
 import WorkflowAPIService from "./WorkflowAPIService";
+import JobAPIService from "./JobAPIService";
 
 class APIUtil {
   public cvService: CVAPIService;
+  public jobService: JobAPIService;
   public groupService: GroupAPIService;
   public profileService: ProfileAPIService;
   public teamService: TeamAPIService;
@@ -24,6 +26,7 @@ class APIUtil {
   constructor() {
     const service = new APIService("https://api.applybase.net/api"); // Initialize ApiService
     this.cvService = new CVAPIService(service); // Use ApiService instance to initialize cvService
+    this.jobService = new JobAPIService(service);
     this.groupService = new GroupAPIService(service);
     this.profileService = new ProfileAPIService(service);
     this.authService = new AuthAPIService(service);
