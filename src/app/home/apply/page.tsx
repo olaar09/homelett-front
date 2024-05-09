@@ -35,9 +35,17 @@ const Chat = () => {
   const [toggleInsight, setToggleInsight] = useState(true);
 
   const [profileSkills, setProfileSkills] = useState<string[]>([]);
+  const [jobSkills, setJobSkills] = useState<string[]>([]);
 
   useEffect(() => {
     if (selectedJob) onJobFeature(selectedJob);
+  }, [selectedJob]);
+
+  useEffect(() => {
+    if (selectedJob) {
+      const parsed = JSON.parse(selectedJob.ai_description);
+      setJobSkills(parsed?.skills ?? []);
+    }
   }, [selectedJob]);
 
   useEffect(() => {
@@ -377,16 +385,7 @@ const Chat = () => {
                           <span>Skills required : </span>
 
                           <div className="flex items-center flex-wrap justify-start gap-x-4 gap-y-3">
-                            {[
-                              "ReactJS",
-                              "Javascript",
-                              "Laravel",
-                              "Empathy",
-                              "Leadership",
-                              "5 years experience",
-                              "AWS",
-                              "Cloudflare",
-                            ].map((title) => {
+                            {jobSkills.map((title) => {
                               return <Chip action={onAddSkill} title={title} />;
                             })}
                           </div>
