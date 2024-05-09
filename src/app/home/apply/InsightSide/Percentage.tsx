@@ -1,7 +1,7 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-const PercentageChart: React.FC = () => {
+const PercentageChart = ({ similarity }: { similarity: number }) => {
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: "donut",
@@ -61,7 +61,7 @@ const PercentageChart: React.FC = () => {
     },
   };
 
-  const series: any = [90, 10]; // 90% progress, 10% remaining
+  const series: any = [similarity ?? 0, similarity > 0 ? 100 - similarity : 0]; // 90% progress, 10% remaining
 
   return (
     <div id="chart">

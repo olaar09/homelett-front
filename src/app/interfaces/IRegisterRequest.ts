@@ -18,6 +18,12 @@ export interface IJProfile {
   name: string;
   is_active: number;
   profession: string;
+  attributes: {
+    title: string;
+    value: string;
+    icon: null;
+    attribute: "language" | "skill";
+  }[];
   ai_experience_summary: string;
   temperature: string;
   last_jobs_assignment: string;

@@ -10,9 +10,9 @@ class JobAPIService {
   async fetchJobProfileFeatures(
     profileId: string,
     jobId: number
-  ): Promise<string> {
+  ): Promise<IJobProfileFeature | null> {
     try {
-      const text = await this.apiService.get<{ data: string }>(
+      const text = await this.apiService.get<{ data: any }>(
         `/jobs/get_job_features/${profileId}/${jobId}`
       );
       return text.data;

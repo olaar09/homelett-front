@@ -34,9 +34,24 @@ const Chat = () => {
   const isBillingActive = authContext.currentUser?.billingActive;
   const [toggleInsight, setToggleInsight] = useState(true);
 
+  const [profileSkills, setProfileSkills] = useState<string[]>([]);
+
   useEffect(() => {
     if (selectedJob) onJobFeature(selectedJob);
   }, [selectedJob]);
+
+  useEffect(() => {
+    if (authContext.currentUser?.active_job_profile) {
+      const skills =
+        authContext.currentUser?.active_job_profile.attributes.filter(
+          (attr) => attr.attribute === "skill"
+        );
+      const skillsMap = skills.map((skill) => skill.value);
+      setProfileSkills(skillsMap);
+
+      console.log(profileSkills);
+    }
+  }, [authContext.currentUser]);
 
   const onJobFeature = async (jobItem: any) => {
     setLoadingJobFeatures(true);
@@ -353,7 +368,9 @@ const Chat = () => {
                     <Card className="gap-y-1 2xl:h-72 h-auto w-full">
                       <div className="flex 2xl:flex-row flex-col  gap-y-8 items-center justify-between ">
                         <div className="2xl:w-4/12 w-full flex items-center justify-center">
-                          <PercentageChart />
+                          <PercentageChart
+                            similarity={jobProfileFeatures?.role_similarity}
+                          />
                         </div>
 
                         <div className="flex flex-col gap-y-3 2xl:w-4/12 w-full  px-6">
@@ -379,15 +396,7 @@ const Chat = () => {
                           <span>Your skills : </span>
 
                           <div className="flex items-center flex-wrap justify-start gap-x-4 gap-y-3">
-                            {[
-                              "ReactJS",
-                              "Javascript",
-                              "Laravel",
-                              "Empathy",
-                              "Heroku",
-                              "Tailwind",
-                              "3 years experience",
-                            ].map((title) => {
+                            {profileSkills.map((title) => {
                               return <Chip title={title} action={undefined} />;
                             })}
                           </div>
@@ -454,11 +463,11 @@ const Suitability = ({
             status={
               range < 40
                 ? "exception"
-                : range < 50
-                ? "normal"
                 : range < 60
-                ? "active"
+                ? "normal"
                 : range < 80
+                ? "active"
+                : range < 90
                 ? "success"
                 : "success"
             }
