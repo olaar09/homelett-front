@@ -365,7 +365,7 @@ const Chat = () => {
 
                 {!loadingFeatures && jobProfileFeatures && (
                   <div className="gap-y-1 mt-0  w-full flex flex-col flex-end justify-end">
-                    <Card className="gap-y-1 2xl:h-72 h-auto w-full">
+                    <Card className="gap-y-1 2xl:min-h-72 h-auto w-full">
                       <div className="flex 2xl:flex-row flex-col  gap-y-8 items-center justify-between ">
                         <div className="2xl:w-4/12 w-full flex items-center justify-center">
                           <PercentageChart
