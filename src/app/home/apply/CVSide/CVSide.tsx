@@ -24,7 +24,7 @@ const CVSide = ({
   onToggleInsights,
 }: ICVSide) => {
   return (
-    <div className="lg:flex hidden  h-full    flex-col overflow-y-scroll">
+    <div className="lg:flex hidden  h-full  flex-grow   flex-col overflow-y-scroll">
       <FloatButton
         onClick={onToggleInsights}
         style={{ width: 120 }}

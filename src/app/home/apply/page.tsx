@@ -48,6 +48,12 @@ const Chat = () => {
   }, [selectedJob]);
 
   useEffect(() => {
+    if (selectedJob) {
+      onLoadCV(selectedJob);
+    }
+  }, [toggleInsight]);
+
+  useEffect(() => {
     if (authContext.currentUser?.active_job_profile) {
       const skills =
         authContext.currentUser?.active_job_profile.attributes.filter(
@@ -257,27 +263,31 @@ const Chat = () => {
           />
 
           {toggleInsight && (
-            <InsightSide
-              onRefreshInsights={onLoadJobFeatures}
-              onToggleInsights={onToggleInsights}
-              profileSkills={profileSkills}
-              jobSkills={jobSkills}
-              selectedJob={selectedJob}
-              toggleInsight={false}
-              loadingFeatures={loadingFeatures}
-              jobProfileFeatures={jobProfileFeatures}
-            />
+            <div className="lg:w-9/12 h-full ">
+              <InsightSide
+                onRefreshInsights={onLoadJobFeatures}
+                onToggleInsights={onToggleInsights}
+                profileSkills={profileSkills}
+                jobSkills={jobSkills}
+                selectedJob={selectedJob}
+                toggleInsight={false}
+                loadingFeatures={loadingFeatures}
+                jobProfileFeatures={jobProfileFeatures}
+              />
+            </div>
           )}
 
           {!toggleInsight && (
-            <CVSide
-              onToggleInsights={onToggleInsights}
-              jProfile={authContext.activeProfile!}
-              experiences={experiences}
-              loadingExperiences={loadingExperiences}
-              loadingCV={loadingCV}
-              coverLetter={coverLetter}
-            />
+            <div className=" lg:w-9/12  h-full">
+              <CVSide
+                onToggleInsights={onToggleInsights}
+                jProfile={authContext.activeProfile!}
+                experiences={experiences}
+                loadingExperiences={loadingExperiences}
+                loadingCV={loadingCV}
+                coverLetter={coverLetter}
+              />
+            </div>
           )}
         </section>
       )}
