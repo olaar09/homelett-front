@@ -171,12 +171,19 @@ const InsightSide = ({
 
         {!loadingFeatures && jobProfileFeatures && (
           <div className="gap-y-1 mt-0  w-full flex flex-col flex-end justify-end">
-            <Card className="gap-y-1 2xl:min-h-72 h-auto w-full">
+            <Card
+              loading={!jobProfileFeatures?.role_similarity}
+              className="gap-y-1 2xl:min-h-72 h-auto w-full"
+            >
               <div className="flex 2xl:flex-row flex-col  gap-y-8 items-start justify-between ">
                 <div className="2xl:w-4/12 w-full flex items-start justify-center h-full">
-                  <PercentageChart
-                    similarity={jobProfileFeatures?.role_similarity}
-                  />
+                  {jobProfileFeatures?.role_similarity && (
+                    <PercentageChart
+                      similarity={Number(
+                        jobProfileFeatures?.role_similarity ?? 0
+                      )}
+                    />
+                  )}
                 </div>
 
                 <div className="flex flex-col items-start  gap-y-3 2xl:w-4/12 w-full  px-6 h-full">
