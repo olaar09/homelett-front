@@ -5,33 +5,28 @@ import React from "react";
 
 // Define the props interface
 interface ChipProps {
+  action?: (content: string) => void;
   isSelected: boolean;
   icon: string;
   title: string;
-  toggleSelect: () => void;
+  toggleSelect?: () => void;
 }
 
-const Chip: React.FC<ChipProps> = ({
-  title,
-  isSelected,
-  icon,
-  toggleSelect,
-}) => {
+const Chip: React.FC<ChipProps> = ({ action, title, isSelected, icon }) => {
   return (
-    <div
-      className={` px-6 py-[0.5rem] rounded-full cursor-pointer text-sm font-medium  flex items-center gap-x-1 ${
-        isSelected
-          ? "bg-primary  text-foreground"
-          : "foreground-secondary transparent border-secondary border "
-      }`}
-      onClick={toggleSelect}
-    >
-      <div className="w-5">
-        <Icon icon={icon} className="text-lg " />
+    return (
+      <div
+        onClick={() => {
+          if (action) {
+            action(title);
+          }
+        }}
+        className="rounded-2xl bg-gray-200 px-2 flex items-center gap-x-2 hover:opacity-60 transition-all duration-100 cursor-pointer"
+      >
+        <span>{title}</span>
+        {action && <Icon icon={"lucide:plus"} />}
       </div>
-
-      <span className="text-xs"> {title} </span>
-    </div>
+    );>
   );
 };
 
