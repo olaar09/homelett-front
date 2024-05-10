@@ -280,7 +280,7 @@ const Chat = () => {
                       <span>{selectedJob?.company_name}</span>
                     </div>
 
-                    <div className="flex lg:items-center lg:flex-row gap-x-4   justify-start">
+                    <div className="flex lg:items-start lg:flex-row gap-x-4   justify-start">
                       <Button
                         className="bg-primary flex items-center gap-x-3"
                         type="primary"
