@@ -70,6 +70,24 @@ class CVAPIService {
     }
   }
 
+  async createSkill(
+    profileId: string,
+    skills: string[]
+  ): Promise<IJobProfileFeature | null> {
+    try {
+      const text = await this.apiService.post<{ data: any }>(
+        `/action/add_skills`,
+        {
+          skills: skills,
+          profile_id: profileId,
+        }
+      );
+      return text.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async generateExperience(
     chatId: string,
     config: { key: string; value: string }

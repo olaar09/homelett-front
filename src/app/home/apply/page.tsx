@@ -37,7 +37,7 @@ const Chat = () => {
   const [jobSkills, setJobSkills] = useState<string[]>([]);
 
   useEffect(() => {
-    if (selectedJob) onJobFeature(selectedJob);
+    if (selectedJob) onLoadJobFeatures();
   }, [selectedJob]);
 
   useEffect(() => {
@@ -86,6 +86,9 @@ const Chat = () => {
     }
   };
 
+  const onLoadJobFeatures = async () => {
+    await onJobFeature(selectedJob);
+  };
   const onLoadCV = async (jobItem: any) => {
     setLoadingCV(true);
     try {
@@ -255,6 +258,7 @@ const Chat = () => {
 
           {toggleInsight && (
             <InsightSide
+              onRefreshInsights={onLoadJobFeatures}
               onToggleInsights={onToggleInsights}
               profileSkills={profileSkills}
               jobSkills={jobSkills}

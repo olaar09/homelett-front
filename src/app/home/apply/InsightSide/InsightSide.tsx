@@ -1,9 +1,12 @@
 import Chip from "@/app/components/Chip";
 import { Icon } from "@iconify/react";
-import { Card, Avatar, Button, Progress } from "antd";
+import { Card, Avatar, Button, Progress, message } from "antd";
 import CVSide from "../CVSide/CVSide";
 import PercentageChart from "./Percentage";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import APIUtil from "@/services/APIUtil";
+import { AuthContext } from "@/contexts/AuthContext";
+import { AxiosError } from "axios";
 
 const InsightSide = ({
   loadingFeatures,
@@ -12,20 +15,51 @@ const InsightSide = ({
   jobProfileFeatures,
   jobSkills,
   profileSkills,
+  onRefreshInsights,
 }: {
   toggleInsight: boolean;
   loadingFeatures: boolean;
   selectedJob: any;
   onToggleInsights: () => void;
+  onRefreshInsights: () => void;
   jobProfileFeatures: IJobProfileFeature | null;
   jobSkills: string[];
   profileSkills: string[];
 }) => {
   const onToggleShowAll = () => setIsShowAll(true);
   const [isShowAll, setIsShowAll] = useState(false);
+  const apiUtil = new APIUtil();
+  const authContext = useContext(AuthContext);
+  const [addingSkills, setAddSkills] = useState<string[]>([]);
 
-  const onAddSkill = (skill: string) => {
-    console.log(skill);
+  const onAddSkills = async (skills: string[]) => {
+    if (addingSkills.length > 0) return;
+
+    try {
+      setAddSkills([...skills]);
+      await apiUtil.cvService.createSkill(
+        authContext.currentUser!.active_job_profile.id,
+        skills
+      );
+      message.loading("New skill added");
+      setAddSkills([]);
+      onRefreshInsights();
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error?.response?.data?.reason);
+        message.error(
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
+          }`
+        );
+      } else {
+        message.error("Unable to complete request");
+      }
+    } finally {
+      setAddSkills([]);
+    }
   };
 
   useEffect(() => {
@@ -152,8 +186,9 @@ const InsightSide = ({
                     {jobSkills.map((title) => {
                       return (
                         <Chip
-                          action={onAddSkill}
+                          action={() => onAddSkills([title])}
                           title={title}
+                          loading={addingSkills.includes(title)}
                           isSelected={false}
                           icon={""}
                         />
@@ -173,6 +208,7 @@ const InsightSide = ({
                           action={undefined}
                           isSelected={false}
                           icon={""}
+                          loading={false}
                         />
                       );
                     })}
