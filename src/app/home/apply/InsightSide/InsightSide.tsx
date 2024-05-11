@@ -87,7 +87,7 @@ const InsightSide = ({
               <span>{selectedJob?.company_name}</span>
             </div>
 
-            <div className="lg:flex hidden lg:items-start lg:flex-row gap-x-4   justify-start">
+            <div className="flex  lg:items-start lg:flex-row gap-x-4   justify-start">
               <Button
                 className="bg-primary flex items-center gap-x-3"
                 type="primary"
@@ -99,7 +99,7 @@ const InsightSide = ({
               <Button
                 onClick={onToggleInsights}
                 type="link"
-                className="flex items-center gap-x-3 text-gray-700"
+                className="lg:flex items-center gap-x-3 text-gray-700 hidden"
               >
                 <Icon icon={"ph:read-cv-logo-fill"} />
                 <span>View fine tuned CV</span>
