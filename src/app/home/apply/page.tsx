@@ -309,7 +309,7 @@ const Apply = () => {
             </div>
             <span className="block items-center text-center">
               ApplyBase AI agent is currently analyzing Jobs that match your
-              profile. <br /> You will receive an email when your profile is
+              profile. <br /> You will receive an email when your jobs are
               populated
             </span>
           </div>
