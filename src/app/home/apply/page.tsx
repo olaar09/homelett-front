@@ -301,7 +301,7 @@ const Apply = () => {
           )}
 
           {!toggleInsight && (
-            <div className=" lg:w-9/12  h-full">
+            <div className=" lg:w-9/12  h-full hidden lg:block">
               <CVContainer
                 onShuffleCV={handleShuffleCV}
                 selected={selectedCV}
@@ -314,14 +314,6 @@ const Apply = () => {
                   coverLetter,
                 }}
               />
-              {/*  <CVSide
-                onToggleInsights={onToggleInsights}
-                jProfile={authContext.activeProfile!}
-                experiences={experiences}
-                loadingExperiences={loadingExperiences}
-                loadingCV={loadingCV}
-                coverLetter={coverLetter}
-              /> */}
             </div>
           )}
         </section>
