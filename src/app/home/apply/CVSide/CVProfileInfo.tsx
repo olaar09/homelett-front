@@ -66,7 +66,7 @@ const ASide = ({ profile }: any) => {
       <HeaderSide profile={profile} />
 
       <div className="flex flex-col gap-y-6 mt-10  px-10 mx-auto w-11/12">
-        {(links ?? []).map((link: any, key: any) => (
+        {(links ?? []).splice(0, 5).map((link: any, key: any) => (
           <AsideItem2 key={key} desc={link.value} title={link.title} />
         ))}
 
@@ -82,7 +82,7 @@ const ASide = ({ profile }: any) => {
       <div className="mt-10  mx-auto w-11/12 px-10 ">
         <span className="font-black">Education</span>
         <div className="flex flex-col gap-y-4 mt-4 ">
-          {academics.map((academic: any, key: any) => (
+          {academics.splice(0, 5).map((academic: any, key: any) => (
             <AsideItem2
               key={key}
               desc={academic.value}
@@ -95,7 +95,7 @@ const ASide = ({ profile }: any) => {
       <div className="mt-10  mx-auto w-11/12 px-10 ">
         <span className="font-black">Skills</span>
         <div className="flex flex-col gap-y-4 mt-4 ">
-          {skills.map((sk: any, key: any) => (
+          {skills.splice(0, 6).map((sk: any, key: any) => (
             <AsideItem2 key={key} desc={sk.value} title={sk.icon} />
           ))}
           {/*          <AsideItem2 desc={"Flask, Django"} title={"Python"} />
@@ -106,7 +106,7 @@ const ASide = ({ profile }: any) => {
       <div className="mt-10  mx-auto w-11/12 px-10 ">
         <span className="font-black">Languages</span>
         <div className="flex flex-col gap-y-4 mt-4 ">
-          {languages.map((lang: any, key: any) => (
+          {languages.splice(0, 5).map((lang: any, key: any) => (
             <AsideItem2 key={key} desc={lang.value} title={lang.icon} />
           ))}
         </div>
