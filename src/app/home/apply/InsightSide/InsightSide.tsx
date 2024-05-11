@@ -1,6 +1,6 @@
 import Chip from "@/app/components/Chip";
 import { Icon } from "@iconify/react";
-import { Card, Avatar, Button, Progress, message } from "antd";
+import { Card, Avatar, Button, Progress, message, Tooltip } from "antd";
 import CVSide from "../CVSide/CVSide";
 import PercentageChart from "./Percentage";
 import { useContext, useEffect, useState } from "react";
@@ -67,6 +67,8 @@ const InsightSide = ({
 
   useEffect(() => {
     if (selectedJob) {
+      console.log(selectedJob);
+
       setIsShowAll(false);
     }
   }, [selectedJob]);
@@ -115,11 +117,20 @@ const InsightSide = ({
             }
             description={
               <div className="flex items-center gap-x-3">
-                <span className="text-sm">
-                  {selectedJob?.location ?? "Remote, World"}
-                </span>
+                <Tooltip
+                  title={
+                    selectedJob?.location
+                      ? "Only application within this location is considered"
+                      : "Application from all locations are considered"
+                  }
+                >
+                  <span className="text-sm">
+                    {selectedJob?.location ?? "Location agnostic"}
+                  </span>
+                </Tooltip>
+
                 <span>.</span>
-                <span>2 weeks ago</span>
+                <span>{selectedJob?.job_listing_date ?? ""}</span>
               </div>
             }
           />
