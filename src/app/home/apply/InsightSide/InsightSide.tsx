@@ -1,12 +1,41 @@
 import Chip from "@/app/components/Chip";
 import { Icon } from "@iconify/react";
-import { Card, Avatar, Button, Progress, message, Tooltip } from "antd";
-import CVSide from "../CVSide/CV_1/CVSide";
+import {
+  Card,
+  Avatar,
+  Button,
+  Progress,
+  message,
+  Tooltip,
+  Dropdown,
+  MenuProps,
+} from "antd";
 import PercentageChart from "./Percentage";
 import { useContext, useEffect, useState } from "react";
 import APIUtil from "@/services/APIUtil";
 import { AuthContext } from "@/contexts/AuthContext";
 import { AxiosError } from "axios";
+
+const items: MenuProps["items"] = [
+  {
+    key: "source",
+    label: (
+      <div className="flex items-center gap-x-3">
+        <Icon icon={"fluent:open-16-filled"} />
+        <div>Apply from source</div>
+      </div>
+    ),
+  },
+  {
+    key: "applybase",
+    label: (
+      <div className="flex items-center gap-x-3">
+        <Icon icon={"mdi:gesture-touch-box"} />
+        <div>Easily apply directly</div>
+      </div>
+    ),
+  },
+];
 
 const InsightSide = ({
   loadingFeatures,
@@ -73,6 +102,18 @@ const InsightSide = ({
     }
   }, [selectedJob]);
 
+  const onMenuClick: MenuProps["onClick"] = ({ key }) => {
+    if (key === "source") {
+      onApplyFromSource(selectedJob.source_link);
+    } else {
+      message.warning(`Please upgrade to plus plan use this feature`);
+    }
+  };
+
+  const onApplyFromSource = (source: string) => {
+    window.open(source, "_blank");
+  };
+
   return (
     <div className="h-full w-full flex flex-col relative overflow-scroll">
       <div className="p-4 lg:px-8 h-full flex flex-col">
@@ -88,13 +129,18 @@ const InsightSide = ({
             </div>
 
             <div className="flex  lg:items-start lg:flex-row gap-x-4   justify-start">
-              <Button
-                className="bg-primary flex items-center gap-x-3"
-                type="primary"
+              <Dropdown
+                menu={{ items, onClick: onMenuClick }}
+                placement="bottom"
               >
-                <Icon icon={"mdi:gesture-touch-box"} />
-                <span>Apply for job</span>
-              </Button>
+                <Button
+                  className="bg-primary flex items-center gap-x-3"
+                  type="primary"
+                >
+                  <Icon icon={"mdi:gesture-touch-box"} />
+                  <span>Apply for job</span>
+                </Button>
+              </Dropdown>
 
               <Button
                 onClick={onToggleInsights}
