@@ -14,6 +14,7 @@ import InsightSide from "./InsightSide/InsightSide";
 import { Str } from "@/utils/consts";
 import CVContainer from "./CVSide";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import Image from "next/image";
 
 const Apply = () => {
   const [coverLetter, setCoverLetter] = useState("");
@@ -178,7 +179,7 @@ const Apply = () => {
   }, [jobs]);
 
   useEffect(() => {
-    if (allJobs && allJobs.length > 0) {
+    if (allJobs && allJobs?.length > 0) {
       setSelectedJob(allJobs[0]);
     } else {
       setSelectedJob(null);
@@ -223,7 +224,9 @@ const Apply = () => {
   }; */
 
   const onSelectedJobApplied = () => {
-    const removeApplied = allJobs.filter((jb: any) => jb.id !== selectedJob.id);
+    const removeApplied = allJobs?.filter(
+      (jb: any) => jb.id !== selectedJob.id
+    );
     setAllJobs(removeApplied);
   };
 
@@ -285,7 +288,34 @@ const Apply = () => {
     <main className="h-full bg-background-thin min-h-screen flex flex-col 3xl:w-10/12  w-full mx-auto">
       <LoadingOverlay loading={pageLoading} />
 
-      {!pageLoading && (
+      {!pageLoading && allJobs?.length < 1 && (
+        <section className=" flex items-center justify-center h-screen overflow-hidden">
+          <div className="flex flex-col h-20 justify-center items-center gap-y-6">
+            <div className="flex items-center gap-x-3 ">
+              {[
+                "/sources/linkedin.png",
+                "/sources/turing.png",
+                "/sources/glassdoor.png",
+                "/sources/indeed.png",
+              ].map((source) => (
+                <Image
+                  width={200}
+                  height={200}
+                  className="w-8"
+                  src={source}
+                  alt={""}
+                />
+              ))}
+            </div>
+            <span className="block items-center text-center">
+              ApplyBase AI agent is currently analyzing Jobs that match your
+              profile. <br /> Please check back in a few hours
+            </span>
+          </div>
+        </section>
+      )}
+
+      {!pageLoading && allJobs?.length > 0 && (
         <section className=" flex items-center h-screen overflow-hidden">
           <JobsSide
             jobs={allJobs}
