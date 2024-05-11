@@ -1,5 +1,8 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Card, Button, Tooltip, Avatar } from "antd";
+import Image from "next/image";
+
+//      /Users/olaagboola/Downloads/sources/indeed.png /Users/olaagboola/Downloads/sources/linkedin.png /Users/olaagboola/Downloads/sources/turing.png';
 
 const JobItem = ({
   applying,
@@ -14,6 +17,22 @@ const JobItem = ({
   active: boolean;
   job: any;
 }) => {
+  console.log("SOURCE", job.source);
+
+  const getIcon = (source: string) => {
+    switch (source) {
+      case "linkedin":
+        return "/sources/linkedin.png";
+      case "glassdoor":
+        return "/sources/glassdoor.png";
+      case "indeed":
+        return "/sources/indeed.png";
+
+      default:
+        break;
+    }
+  };
+
   return (
     <Card
       onClick={onSelectJob}
@@ -39,6 +58,12 @@ const JobItem = ({
               <Button type="link" className="-ml-3">
                 <div className="flex items-center mt-0 gap-x-2">
                   <Icon className="mt-0 " icon={"lets-icons:out-light"} />
+                  <Image
+                    src={`/sources${job.source}.png`}
+                    width={200}
+                    height={200}
+                    alt={job.source}
+                  />
                   <span className="mt-0 text-foreground-secondary">
                     View job
                   </span>
