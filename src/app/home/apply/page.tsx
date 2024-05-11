@@ -37,7 +37,9 @@ const Chat = () => {
   const [jobSkills, setJobSkills] = useState<string[]>([]);
 
   useEffect(() => {
-    if (selectedJob) onLoadJobFeatures();
+    if (selectedJob) {
+      toggleInsight ? onLoadJobFeatures() : onLoadCV(selectedJob);
+    }
   }, [selectedJob]);
 
   useEffect(() => {
