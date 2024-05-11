@@ -27,14 +27,14 @@ const CVSide = ({
     <div className="lg:flex hidden  h-full  flex-grow   flex-col overflow-y-scroll">
       <FloatButton
         onClick={onToggleInsights}
-        style={{ width: 120 }}
+        style={{ width: 200 }}
         description={
           <div className="flex items-center gap-x-1">
             <Icon
-              className="text-2xl text-primary"
+              className="text-lg text-primary"
               icon={"majesticons:analytics"}
             />
-            <span className=" text-base">Insights</span>
+            <span className="  text-sm">View Job Description</span>
           </div>
         }
         shape="square"
@@ -46,7 +46,7 @@ const CVSide = ({
 
       {!loadingCV && !loadingExperiences && coverLetter && experiences && (
         <div className="flex flex-col w-full">
-          <div className="flex items-center gap-x-1">
+          <div className="flex items-start gap-x-1">
             <div className="flex flex-col w-9/12">
               <section className="px-6 pt-7">
                 <div className="flex items-center gap-x-2">
