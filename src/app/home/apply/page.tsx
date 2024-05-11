@@ -93,7 +93,6 @@ const Chat = () => {
   };
 
   const onNewSkillAdded = (skill: string) => {
-    alert("addking heeeere");
     setProfileSkills([skill, ...profileSkills]);
   };
 
