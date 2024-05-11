@@ -102,7 +102,7 @@ const InsightSide = ({
                 className="flex items-center gap-x-3 text-gray-700"
               >
                 <Icon icon={"ph:read-cv-logo-fill"} />
-                <span>View generated CV</span>
+                <span>View fine tuned CV</span>
               </Button>
             </div>
           </div>
