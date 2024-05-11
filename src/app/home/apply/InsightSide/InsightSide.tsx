@@ -16,10 +16,12 @@ const InsightSide = ({
   jobSkills,
   profileSkills,
   onRefreshInsights,
+  onNewSkillAdded,
 }: {
   toggleInsight: boolean;
   loadingFeatures: boolean;
   selectedJob: any;
+  onNewSkillAdded: (skill: string) => void;
   onToggleInsights: () => void;
   onRefreshInsights: () => void;
   jobProfileFeatures: IJobProfileFeature | null;
@@ -30,19 +32,20 @@ const InsightSide = ({
   const [isShowAll, setIsShowAll] = useState(false);
   const apiUtil = new APIUtil();
   const authContext = useContext(AuthContext);
-  const [addingSkills, setAddSkills] = useState<string[]>([]);
+  const [addingSkills, setAddingSkills] = useState<string[]>([]);
 
   const onAddSkills = async (skills: string[]) => {
     if (addingSkills.length > 0) return;
 
     try {
-      setAddSkills([...skills]);
+      setAddingSkills([...skills]);
       await apiUtil.cvService.createSkill(
         authContext.currentUser!.active_job_profile.id,
         skills
       );
       message.loading("New skill added");
-      setAddSkills([]);
+      setAddingSkills([]);
+      onNewSkillAdded(skills[0]);
       onRefreshInsights();
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -58,7 +61,7 @@ const InsightSide = ({
         message.error("Unable to complete request");
       }
     } finally {
-      setAddSkills([]);
+      setAddingSkills([]);
     }
   };
 

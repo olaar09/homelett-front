@@ -92,6 +92,11 @@ const Chat = () => {
     }
   };
 
+  const onNewSkillAdded = (skill: string) => {
+    alert("addking heeeere");
+    setProfileSkills([skill, ...profileSkills]);
+  };
+
   const onLoadJobFeatures = async () => {
     await onJobFeature(selectedJob);
   };
@@ -267,6 +272,7 @@ const Chat = () => {
               <InsightSide
                 onRefreshInsights={onLoadJobFeatures}
                 onToggleInsights={onToggleInsights}
+                onNewSkillAdded={onNewSkillAdded}
                 profileSkills={profileSkills}
                 jobSkills={jobSkills}
                 selectedJob={selectedJob}
