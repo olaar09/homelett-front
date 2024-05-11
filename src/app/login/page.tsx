@@ -83,11 +83,13 @@ export default function Home() {
         response = await apiService.authService!.register({
           email: form.email,
           password: form.password,
+          active_job_profile: undefined,
         });
       } else {
         response = await apiService.authService!.login({
           email: form.email,
           password: form.password,
+          active_job_profile: undefined,
         });
       }
 

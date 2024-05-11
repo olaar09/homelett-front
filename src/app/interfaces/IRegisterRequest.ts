@@ -8,7 +8,7 @@ export interface IAuthRequest {
   freeTrialLeft?: any;
   billingActive?: boolean;
   billingCurrentPlan?: IBilling;
-  active_job_profile: IJProfile;
+  active_job_profile?: IJProfile;
   paymentLink?: string;
   token?: string;
 }

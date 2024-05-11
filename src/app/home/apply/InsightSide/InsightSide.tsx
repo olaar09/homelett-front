@@ -71,7 +71,7 @@ const InsightSide = ({
     try {
       setAddingSkills([...skills]);
       await apiUtil.cvService.createSkill(
-        authContext.currentUser!.active_job_profile.id,
+        authContext.currentUser!.active_job_profile!.id,
         skills
       );
       message.loading("New skill added");
@@ -116,7 +116,7 @@ const InsightSide = ({
   const onApplyFromSource = async (source: string) => {
     try {
       await apiUtil.jobService.applyToJob(
-        authContext.currentUser!.active_job_profile.id,
+        authContext.currentUser!.active_job_profile!.id,
         selectedJob.id
       );
       onJobApplied();

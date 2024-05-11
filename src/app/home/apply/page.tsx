@@ -82,7 +82,7 @@ const Apply = () => {
     try {
       const jobProfileFeatures =
         await apiUtil.jobService.fetchJobProfileFeatures(
-          authContext.currentUser!.active_job_profile.id,
+          authContext.currentUser!.active_job_profile!.id,
           jobItem.id
         );
       setJobProfileFeatures(jobProfileFeatures);
@@ -114,7 +114,7 @@ const Apply = () => {
     setLoadingCV(true);
     try {
       const coverLetter = await apiUtil.cvService.generateCVCover(
-        authContext.currentUser!.active_job_profile.id,
+        authContext.currentUser!.active_job_profile!.id,
         jobItem.id
       );
       setCoverLetter(coverLetter);
