@@ -5,14 +5,17 @@ import { useContext, useEffect, useRef, useState } from "react";
 import APIUtil from "@/services/APIUtil";
 import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
-import { message } from "antd";
+import { FloatButton, message } from "antd";
 import { AxiosError } from "axios";
 import { useRequest } from "ahooks";
 import { JobsSide } from "./JobSide/JobsSide";
-import CVSide from "./CV_1/CVSide";
+import CVSide from "./CVSide/CV_1/CVSide";
 import InsightSide from "./InsightSide/InsightSide";
+import { Str } from "@/utils/consts";
+import CVContainer from "./CVSide";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
-const Chat = () => {
+const Apply = () => {
   const [coverLetter, setCoverLetter] = useState("");
   const [jobProfileFeatures, setJobProfileFeatures] =
     useState<IJobProfileFeature | null>(null);
@@ -35,6 +38,10 @@ const Chat = () => {
 
   const [profileSkills, setProfileSkills] = useState<string[]>([]);
   const [jobSkills, setJobSkills] = useState<string[]>([]);
+  // State to store the selected CV
+  const [selectedCV, setSelectedCV] = useState<string>(
+    Str.CV_TEMPLATES.CV_1.key
+  );
 
   useEffect(() => {
     if (selectedJob) {
@@ -246,6 +253,15 @@ const Chat = () => {
 
   const onToggleInsights = () => setToggleInsight(!toggleInsight);
 
+  // Function to handle CV selection
+  const handleShuffleCV = () => {
+    const cvs = Object.keys(Str.CV_TEMPLATES);
+    const currentIndex = cvs.indexOf(selectedCV);
+    const nextIndex = (currentIndex + 1) % cvs.length;
+    message.success(`Selected ${cvs[nextIndex]}`);
+    setSelectedCV(cvs[nextIndex]);
+  };
+
   const onUpgraded = () => {};
   const pageLoading =
     authContext.loading ||
@@ -286,14 +302,26 @@ const Chat = () => {
 
           {!toggleInsight && (
             <div className=" lg:w-9/12  h-full">
-              <CVSide
+              <CVContainer
+                onShuffleCV={handleShuffleCV}
+                selected={selectedCV}
+                data={{
+                  onToggleInsights,
+                  jProfile: authContext.activeProfile!,
+                  experiences,
+                  loadingExperiences,
+                  loadingCV,
+                  coverLetter,
+                }}
+              />
+              {/*  <CVSide
                 onToggleInsights={onToggleInsights}
                 jProfile={authContext.activeProfile!}
                 experiences={experiences}
                 loadingExperiences={loadingExperiences}
                 loadingCV={loadingCV}
                 coverLetter={coverLetter}
-              />
+              /> */}
             </div>
           )}
         </section>
@@ -302,4 +330,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default Apply;

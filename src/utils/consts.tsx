@@ -1,4 +1,18 @@
 export const Str = {
+  CV_TEMPLATES: {
+    CV_1: {
+      key: "CV_1",
+    },
+    CV_2: {
+      key: "CV_2",
+    },
+    CV_3: {
+      key: "CV_3",
+    },
+    CV_4: {
+      key: "CV_4",
+    },
+  },
   industryCategories: [
     "Information Technology",
     "Healthcare",

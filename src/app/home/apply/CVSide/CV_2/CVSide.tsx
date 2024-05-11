@@ -1,31 +1,23 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import LoadingJobItem from "../../_components/LoadingJobItem";
+import LoadingJobItem from "../../../_components/LoadingJobItem";
 import ASide from "./CVProfileInfo";
 import { ExperienceItem } from "./ExperienceItem";
 import { OverviewItem } from "./OverviewItem";
 import { IJProfile } from "@/app/interfaces/IRegisterRequest";
 import { FloatButton } from "antd";
+import { ICV } from "@/app/interfaces/ICV";
 
-interface ICVSide {
-  jProfile: IJProfile;
-  experiences: any[];
-  loadingExperiences: boolean;
-  loadingCV: boolean;
-  coverLetter: string;
-  onToggleInsights: () => void;
-}
-
-const CVSide = ({
+const CV_2 = ({
   jProfile,
   loadingCV,
   loadingExperiences,
   coverLetter,
   experiences,
   onToggleInsights,
-}: ICVSide) => {
+}: ICV) => {
   return (
     <div className="lg:flex hidden  h-full  flex-grow   flex-col overflow-y-scroll">
-      <FloatButton
+      {/*  <FloatButton
         onClick={onToggleInsights}
         style={{ width: 200 }}
         description={
@@ -38,7 +30,7 @@ const CVSide = ({
           </div>
         }
         shape="square"
-      />
+      /> */}
 
       <div className="px-2 w-full">
         {(loadingCV || loadingExperiences) && <LoadingJobItem />}
@@ -47,6 +39,7 @@ const CVSide = ({
       {!loadingCV && !loadingExperiences && coverLetter && experiences && (
         <div className="flex flex-col w-full">
           <div className="flex items-start gap-x-1">
+            <ASide profile={jProfile} />
             <div className="flex flex-col w-9/12">
               <section className="px-6 pt-7">
                 <div className="flex items-center gap-x-2">
@@ -76,8 +69,6 @@ const CVSide = ({
                 })}
               </section>
             </div>
-
-            <ASide profile={jProfile} />
           </div>
         </div>
       )}
@@ -85,4 +76,4 @@ const CVSide = ({
   );
 };
 
-export default CVSide;
+export default CV_2;

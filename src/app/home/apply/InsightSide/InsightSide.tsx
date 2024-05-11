@@ -1,7 +1,7 @@
 import Chip from "@/app/components/Chip";
 import { Icon } from "@iconify/react";
 import { Card, Avatar, Button, Progress, message, Tooltip } from "antd";
-import CVSide from "../CV_1/CVSide";
+import CVSide from "../CVSide/CV_1/CVSide";
 import PercentageChart from "./Percentage";
 import { useContext, useEffect, useState } from "react";
 import APIUtil from "@/services/APIUtil";
