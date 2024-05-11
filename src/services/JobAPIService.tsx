@@ -7,6 +7,21 @@ class JobAPIService {
     this.apiService = apiService;
   }
 
+  async applyToJob(profileId: string, jobId: string): Promise<string> {
+    try {
+      const response = await this.apiService.post<{ data: any }>(
+        `/jobs/apply_for_job`,
+        {
+          job_id: jobId,
+          profile_id: profileId,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async fetchJobProfileFeatures(
     profileId: string,
     jobId: number

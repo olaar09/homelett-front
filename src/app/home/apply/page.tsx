@@ -36,6 +36,8 @@ const Apply = () => {
   const isBillingActive = authContext.currentUser?.billingActive;
   const [toggleInsight, setToggleInsight] = useState(true);
 
+  const [allJobs, setAllJobs] = useState<string[]>([]);
+
   const [profileSkills, setProfileSkills] = useState<string[]>([]);
   const [jobSkills, setJobSkills] = useState<string[]>([]);
   // State to store the selected CV
@@ -172,10 +174,16 @@ const Apply = () => {
   }, [authContext.currentUser]);
 
   useEffect(() => {
-    if (jobs && jobs.length > 0) {
-      setSelectedJob(jobs[0]);
-    }
+    setAllJobs(jobs);
   }, [jobs]);
+
+  useEffect(() => {
+    if (allJobs && allJobs.length > 0) {
+      setSelectedJob(allJobs[0]);
+    } else {
+      setSelectedJob(null);
+    }
+  }, [allJobs]);
 
   const getExperiences = async (): Promise<any> => {
     try {
@@ -213,6 +221,11 @@ const Apply = () => {
       message.error("unable to load data");
     }
   }; */
+
+  const onSelectedJobApplied = () => {
+    const removeApplied = allJobs.filter((jb: any) => jb.id !== selectedJob.id);
+    setAllJobs(removeApplied);
+  };
 
   const getSimilarJobs = async (): Promise<any> => {
     try {
@@ -275,7 +288,7 @@ const Apply = () => {
       {!pageLoading && (
         <section className=" flex items-center h-screen overflow-hidden">
           <JobsSide
-            jobs={jobs}
+            jobs={allJobs}
             selectedJob={selectedJob}
             loading={loading}
             isBillingActive={isBillingActive ?? false}
@@ -284,9 +297,10 @@ const Apply = () => {
             onSelectJob={onSelectJob}
           />
 
-          {toggleInsight && (
+          {toggleInsight && selectedJob && (
             <div className="lg:w-9/12 h-full ">
               <InsightSide
+                onJobApplied={onSelectedJobApplied}
                 onRefreshInsights={onLoadJobFeatures}
                 onToggleInsights={onToggleInsights}
                 onNewSkillAdded={onNewSkillAdded}
@@ -300,7 +314,7 @@ const Apply = () => {
             </div>
           )}
 
-          {!toggleInsight && (
+          {!toggleInsight && selectedJob && (
             <div className=" lg:w-9/12  h-full hidden lg:block">
               <CVContainer
                 onShuffleCV={handleShuffleCV}

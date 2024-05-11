@@ -46,10 +46,12 @@ const InsightSide = ({
   profileSkills,
   onRefreshInsights,
   onNewSkillAdded,
+  onJobApplied,
 }: {
   toggleInsight: boolean;
   loadingFeatures: boolean;
   selectedJob: any;
+  onJobApplied: () => void;
   onNewSkillAdded: (skill: string) => void;
   onToggleInsights: () => void;
   onRefreshInsights: () => void;
@@ -104,14 +106,30 @@ const InsightSide = ({
 
   const onMenuClick: MenuProps["onClick"] = ({ key }) => {
     if (key === "source") {
+      message.loading("Please wait...", 3);
       onApplyFromSource(selectedJob.source_link);
     } else {
       message.warning(`Please upgrade to plus plan use this feature`);
     }
   };
 
-  const onApplyFromSource = (source: string) => {
-    window.open(source, "_blank");
+  const onApplyFromSource = async (source: string) => {
+    try {
+      await apiUtil.jobService.applyToJob(
+        authContext.currentUser!.active_job_profile.id,
+        selectedJob.id
+      );
+      onJobApplied();
+      window.open(source, "_blank");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        message.error(
+          `${error?.response?.data?.message ?? "Unable to complete request"}`
+        );
+      } else {
+        message.error("Unable to complete request");
+      }
+    }
   };
 
   return (
