@@ -55,13 +55,13 @@ const JobItem = ({
               <span className="text-black text-foreground">
                 {job.company_name}
               </span>
-              <Button type="link" className="-ml-3">
+              <Button type="link" className="-mr-3">
                 <div className="flex items-center mt-0 gap-x-2">
-                  <Icon className="mt-0 " icon={"lets-icons:out-light"} />
                   <Image
-                    src={`/sources${job.source}.png`}
+                    src={`/sources/${job.source}.png`}
                     width={200}
                     height={200}
+                    className="w-4"
                     alt={job.source}
                   />
                   <span className="mt-0 text-foreground-secondary">
