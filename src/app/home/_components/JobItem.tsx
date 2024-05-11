@@ -55,8 +55,12 @@ const JobItem = ({
               <span className="text-black text-foreground">
                 {job.company_name}
               </span>
-              <Button type="link" className="-mr-3">
-                <div className="flex items-center mt-0 gap-x-2">
+              <Button type="link" className=" px-0">
+                <a
+                  href={job.source_link}
+                  target="_blank"
+                  className="flex items-center mt-0 gap-x-2"
+                >
                   <Image
                     src={`/sources/${job.source}.png`}
                     width={200}
@@ -67,7 +71,7 @@ const JobItem = ({
                   <span className="mt-0 text-foreground-secondary">
                     View job
                   </span>
-                </div>
+                </a>
               </Button>
             </div>
 
@@ -102,7 +106,7 @@ const JobItem = ({
             </div>
           </Button>
 
-          {!job.applied && (
+          {false && !job.applied && (
             <div className="flex gap-x-3 px-3">
               <Tooltip title="Remove this job (for this profile)">
                 <Button type="link" className=" text-foreground px-0">
