@@ -9,7 +9,7 @@ import { message } from "antd";
 import { AxiosError } from "axios";
 import { useRequest } from "ahooks";
 import { JobsSide } from "./JobSide/JobsSide";
-import CVSide from "./CVSide/CVSide";
+import CVSide from "./CV_1/CVSide";
 import InsightSide from "./InsightSide/InsightSide";
 
 const Chat = () => {
