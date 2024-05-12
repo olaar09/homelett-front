@@ -140,7 +140,7 @@ export default function Home() {
           }`
         );
       } else {
-        message.error("Unable to complete request");
+        message.error("Unable to complete sign in");
       }
     } finally {
       setLoading(false);
