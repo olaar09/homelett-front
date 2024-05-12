@@ -161,21 +161,21 @@ const NicheProfileDrawer = ({
         }
         title={
           <div className="flex items-center w-full justify-between px-0">
-            <div className="flex flex-col items-center">
-              <span className="px-0 block ">Create Job Profile</span>
-              <span className="px-0 block text-xs ">Logout</span>
+            <div className="flex gap-x-2 items-center">
+              <Icon icon={"solar:logout-2-bold"} />
+              <span className="px-0 block ">Create Profile</span>
             </div>
 
             <Dropdown menu={{ items }}>
               <a onClick={(e) => e.preventDefault()}>
-                <Space className="bg-gray-200 rounded-md px-3 py-1">
-                  <span className="text-sm text-gray-500">
+                <Space className="bg-gray-200 rounded-md px-2 py-0">
+                  <span className="text-xs text-gray-500">
                     {" "}
                     {selected.title}{" "}
                   </span>
 
                   <Icon
-                    className="text-2xl text-gray-500"
+                    className="text-xl text-gray-500"
                     icon={"gravity-ui:caret-down"}
                   />
                 </Space>
