@@ -226,7 +226,9 @@ export default function Home() {
             <div className="flex items-center justify-center">
               <span>
                 <Link href={"/request-invite"}>
-                  <span className="text-sm">Create an account instead</span>
+                  <span className="text-sm underline">
+                    Create an account instead
+                  </span>
                 </Link>
               </span>
             </div>

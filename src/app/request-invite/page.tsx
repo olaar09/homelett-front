@@ -193,37 +193,50 @@ export default function Home() {
         </div> */}
 
         <form
-          className="lg:w-4/12 w-full mx-auto mt-20"
+          className="lg:w-4/12 w-full mx-auto mt-10"
           onSubmit={(e: any) => onSubmitLogin(e)}
           method="post"
         >
           <div className="w-full px-8 flex flex-col gap-y-6">
-            <InputField
-              name="fullname"
-              type="text"
-              placeHolder="Full name"
-              onChange={(e) => onChangeForm("fullname", e.target.value)}
-            />
-            <InputField
-              name="email"
-              type="email"
-              placeHolder="Email address"
-              onChange={(e) => onChangeForm("email", e.target.value)}
-            />
+            <div className="flex flex-col items-start gap-y-2 text-sm">
+              <span>Full name</span>
+              <InputField
+                name="fullname"
+                type="text"
+                placeHolder="Full name"
+                onChange={(e) => onChangeForm("fullname", e.target.value)}
+              />
+            </div>
 
-            <InputField
-              name="password"
-              type="password"
-              placeHolder="Password"
-              onChange={(e) => onChangeForm("password", e.target.value)}
-            />
+            <div className="flex flex-col items-start gap-y-2 text-sm">
+              <span>Email address</span>
+              <InputField
+                name="email"
+                type="email"
+                placeHolder="Email address"
+                onChange={(e) => onChangeForm("email", e.target.value)}
+              />
+            </div>
 
-            <InputField
-              name="phone"
-              type="phone"
-              placeHolder="Phone number"
-              onChange={(e) => onChangeForm("phone", e.target.value)}
-            />
+            <div className="flex flex-col items-start gap-y-2 text-sm">
+              <span>Password</span>
+              <InputField
+                name="password"
+                type="password"
+                placeHolder="Password"
+                onChange={(e) => onChangeForm("password", e.target.value)}
+              />
+            </div>
+
+            <div className="flex flex-col items-start gap-y-2 text-sm">
+              <span>Phone</span>
+              <InputField
+                name="phone"
+                type="phone"
+                placeHolder="Phone number"
+                onChange={(e) => onChangeForm("phone", e.target.value)}
+              />
+            </div>
 
             <ACButton
               text={
@@ -239,7 +252,7 @@ export default function Home() {
             <div className="flex items-center justify-center">
               <span>
                 <Link href={"/login"}>
-                  <span className="text-sm">Login in instead</span>
+                  <span className="text-sm underline">Login in instead</span>
                 </Link>
               </span>
             </div>
