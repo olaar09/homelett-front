@@ -36,8 +36,8 @@ export const JobsSide = ({
   const authContext = useContext(AuthContext);
 
   return (
-    <div className="lg:w-[500px] w-full h-full flex flex-col relative  border-l-0   pb-12 ">
-      <div className=" overflow-y-scroll w-full h-full  mb-2">
+    <div className="lg:w-[500px] w-full h-full flex flex-col relative  border-l-0   pb-0 ">
+      <div className=" overflow-y-scroll w-full h-full  mb-0">
         {(jobs ?? []).map((job: { id: any; name: any }) => (
           <JobItem
             job={job}
