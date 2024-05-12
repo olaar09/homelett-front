@@ -13,10 +13,9 @@ import CVSide from "./CVSide/CV_1/CVSide";
 import InsightSide from "./InsightSide/InsightSide";
 import { Str } from "@/utils/consts";
 import CVContainer from "./CVSide";
-import { Icon } from "@iconify/react/dist/iconify.js";
-import Image from "next/image";
 import FindingMatch from "./FindingMatch/FindingMatch";
 import { isMobile } from "react-device-detect";
+import MobileInsightDrawer from "./MobileInsightDrawer/MobileInsightDrawer";
 
 const Apply = () => {
   const [coverLetter, setCoverLetter] = useState("");
@@ -271,6 +270,11 @@ const Apply = () => {
 
   const onToggleInsights = () => setToggleInsight(!toggleInsight);
 
+  const onToggleMobileInsights = () => {
+    setSelectedJob(null);
+    setToggleInsight(!toggleInsight);
+  };
+
   // Function to handle CV selection
   const handleShuffleCV = () => {
     const cvs = Object.keys(Str.CV_TEMPLATES);
@@ -303,6 +307,22 @@ const Apply = () => {
             onApplyJob={onApplyJob}
             onSelectJob={onSelectJob}
           />
+
+          {isMobile && (
+            <MobileInsightDrawer
+              open={selectedJob}
+              toggleInsight={toggleInsight}
+              loadingFeatures={loadingFeatures}
+              selectedJob={selectedJob}
+              onJobApplied={onSelectedJobApplied}
+              onRefreshInsights={onLoadJobFeatures}
+              onToggleInsights={onToggleMobileInsights}
+              onNewSkillAdded={onNewSkillAdded}
+              profileSkills={profileSkills}
+              jobSkills={jobSkills}
+              jobProfileFeatures={jobProfileFeatures}
+            />
+          )}
 
           {!isMobile && toggleInsight && selectedJob && (
             <div className="lg:w-9/12 h-full ">
