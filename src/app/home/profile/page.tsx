@@ -1,23 +1,11 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Avatar,
-  Button,
-  Card,
-  Popconfirm,
-  Spin,
-  Tag,
-  Typography,
-  message,
-} from "antd";
+import { Avatar, Button, Card, Spin, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
-import { HeaderItem } from "../_components/PageHeaderItem";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import Meta from "antd/es/card/Meta";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import AddTeamModal from "./components/AddTeamModal";
 import { useRouter } from "next/navigation";
 

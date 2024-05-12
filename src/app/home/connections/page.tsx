@@ -13,12 +13,8 @@ import ChatInput from "../_components/ChatInput";
 import ConnectorModal, { ListItem } from "../_components/Connector/Connector";
 import { IChat } from "@/app/interfaces/IChatItem";
 import { AxiosError } from "axios";
-import ChatListDrawer from "../_components/SelectChatDrawer";
-import StartChatModal from "../_components/StartChatModal";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
-import ChatHistory from "../_components/ChatDisplay";
-import { ChatContext } from "@/contexts/ChatContext";
 import Chip from "@/app/components/Chip";
 const { Meta } = Card;
 
@@ -135,6 +131,19 @@ const Connections = () => {
       <LoadingOverlay
         loading={currentAuth.loading || currentAuth.loadingSources || loading}
       />
+
+      {(loadingWorkflows || !workflowList) && (
+        <div className="h-screen   flex flex-col justify-center items-center">
+          {" "}
+          <div className="">
+            {" "}
+            <Icon
+              icon={"eos-icons:three-dots-loading"}
+              className=" text-6xl text-foreground"
+            />
+          </div>
+        </div>
+      )}
 
       <section className="h-20 flex items-center justify-between px-8 mt-0 mx-auto w-full">
         {
