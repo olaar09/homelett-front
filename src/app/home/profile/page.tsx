@@ -19,11 +19,19 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import Meta from "antd/es/card/Meta";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import AddTeamModal from "./components/AddTeamModal";
+import { useRouter } from "next/navigation";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const apiUtils = new APIUtil();
+  const router = useRouter();
+
+  const onLogout = () => {
+    localStorage.clear();
+    router.push("/");
+    authContext.clearUser();
+  };
 
   const {
     data: teamList,
@@ -85,17 +93,6 @@ const SavedTeamMembers = () => {
         >
           <div className="bg-background-thin min-h-screen">
             <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full bg-background-thin">
-              <div className="flex flex-col">
-                <HeaderItem
-                  icon={"ant-design:team-outlined"}
-                  title={`Profile`}
-                  withBg={false}
-                />
-                <span className="text-xs text-foreground-secondary truncate w-52">
-                  Manage & view your profile
-                </span>
-              </div>
-
               {/*  <div className="flex items-center gap-x-7">
                 <div onClick={() => handleAddTeam()}>
                   <HeaderItem
@@ -109,8 +106,8 @@ const SavedTeamMembers = () => {
 
             <div className="w-full mx-auto mt-10 bg-background-thin">
               <section className=" flex items-center w-full  px-8 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
-                <div className="w-8/12 items-center mx-auto ">
-                  <Card className="">
+                <div className="lg:w-8/12 w-full items-center mx-auto ">
+                  <Card className="w-full">
                     <div className="flex flex-col gap-x-2 gap-y-3 items-center justify-center">
                       <Avatar
                         style={{
@@ -131,6 +128,10 @@ const SavedTeamMembers = () => {
 
                     <div className="flex items-center flex-col justify-start py-2 h-12 border border-gray-200 mt-10 w-6/12 mx-auto">
                       <span className="text-lg"> {"Active"}</span>
+                    </div>
+
+                    <div className="flex items-center mt-10 w-full mx-auto  justify-center">
+                      <Button onClick={onLogout}>Logout</Button>
                     </div>
                   </Card>
                 </div>
