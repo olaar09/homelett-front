@@ -95,7 +95,7 @@ const Upgrade = ({ email }: any) => {
         open={openModal}
         closeModal={onCloseModal}
       />
-      <div className=" h-40  w-full">
+      <div className=" h-40  w-full mt-6">
         <div className="mx-auto w-9/12 flex flex-center flex-col items-center gap-y-4 ">
           <span className="text-black text-center text-sm">
             <span className="font-bold">

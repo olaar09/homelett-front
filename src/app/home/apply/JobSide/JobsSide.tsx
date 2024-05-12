@@ -36,7 +36,7 @@ export const JobsSide = ({
   const authContext = useContext(AuthContext);
 
   return (
-    <div className="lg:w-[500px] w-full h-full flex flex-col relative  border-l-0 overflow-y-scroll  ">
+    <div className="lg:w-[500px] w-full h-full flex flex-col relative  border-l-0 overflow-y-scroll  pb-12 ">
       <div className="  w-full h-full  mb-2">
         {(jobs ?? []).map((job: { id: any; name: any }) => (
           <JobItem
@@ -47,14 +47,13 @@ export const JobsSide = ({
             active={job.id === selectedJob?.id}
           />
         ))}
+        {!isBillingActive && (
+          <Upgrade
+            email={authContext.currentUser?.email}
+            onUpgraded={onUpgraded}
+          />
+        )}
       </div>
-
-      {!isBillingActive && (
-        <Upgrade
-          email={authContext.currentUser?.email}
-          onUpgraded={onUpgraded}
-        />
-      )}
     </div>
   );
 };
