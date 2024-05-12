@@ -131,21 +131,19 @@ export default function Home() {
       router.push("/home/apply");
     } catch (error) {
       if (error instanceof AxiosError) {
-        console.log(error);
+        console.log("IS ERROR", error);
+        console.log("IS ERROR MESSAGE", error.message);
 
         message.error(
-          `${error?.response?.data?.message ?? "Unable to complete request"}`
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
+          }`
         );
       } else {
-        if (error instanceof AxiosError) {
-          console.log(error);
-
-          message.error(
-            `${error?.response?.data?.message ?? "Unable to complete request"}`
-          );
-        } else {
-          message.error("Unable to complete request");
-        }
+        console.log("IS ERROR MESSAGE");
+        message.error("Unable to complete sign in");
       }
     } finally {
       setLoading(false);
