@@ -193,20 +193,25 @@ export default function Home() {
           method="post"
         >
           <div className="w-full px-8 flex flex-col gap-y-6">
-            <InputField
-              name="email"
-              type="email"
-              placeHolder="Email address"
-              onChange={(e) => onChangeForm("email", e.target.value)}
-            />
-            <InputField
-              name="password"
-              type="password"
-              required={true}
-              placeHolder="Password"
-              onChange={(e) => onChangeForm("password", e.target.value)}
-            />
-
+            <div className="flex flex-col items-start gap-y-2 text-sm">
+              <span>Email address</span>
+              <InputField
+                name="email"
+                type="email"
+                placeHolder="Email address"
+                onChange={(e) => onChangeForm("email", e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col items-start gap-y-2 text-sm">
+              <span>Password</span>
+              <InputField
+                name="password"
+                type="password"
+                required={true}
+                placeHolder="Password"
+                onChange={(e) => onChangeForm("password", e.target.value)}
+              />
+            </div>
             <ACButton
               text={
                 query.get("is_new") === "true"
@@ -221,7 +226,7 @@ export default function Home() {
             <div className="flex items-center justify-center">
               <span>
                 <Link href={"/request-invite"}>
-                  <span>Create an account</span>
+                  <span className="text-sm">Create an account instead</span>
                 </Link>
               </span>
             </div>
