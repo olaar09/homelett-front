@@ -130,7 +130,8 @@ export default function Home() {
       router.push("/home/apply");
     } catch (error) {
       if (error instanceof AxiosError) {
-        console.log(error);
+        console.log("IS ERROR", error);
+        console.log("IS ERROR MESSAGE", error.message);
 
         message.error(
           `${
