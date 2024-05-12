@@ -129,7 +129,7 @@ export default function Home() {
 
       router.push("/home/apply");
     } catch (error) {
-      if (error instanceof AxiosError) {
+      /* if (error instanceof AxiosError) {
         console.log("IS ERROR", error);
         console.log("IS ERROR MESSAGE", error.message);
 
@@ -141,8 +141,9 @@ export default function Home() {
           }`
         );
       } else {
+        console.log("IS ERROR MESSAGE");
         message.error("Unable to complete sign in");
-      }
+      } */
     } finally {
       setLoading(false);
     }
