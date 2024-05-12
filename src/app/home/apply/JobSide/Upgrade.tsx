@@ -98,8 +98,8 @@ const Upgrade = ({ email }: any) => {
       <div className="blur-at-top  absolute h-40  w-full bottom-80 ">
         <span className="text-black"></span>
       </div>
-      <div className="absolute h-40  w-full bottom-64 flex flex-col items-center justify-center ">
-        <div className="mx-auto w-9/12 flex flex-center flex-col items-center gap-y-4">
+      <div className="absolute h-40  w-full lg:bottom-64 bottom-48 flex flex-col items-center justify-center ">
+        <div className="mx-auto w-9/12 flex flex-center flex-col items-center gap-y-4 bg-white">
           <span className="text-black text-center text-sm">
             <span className="font-bold">
               {" "}
