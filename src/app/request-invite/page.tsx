@@ -27,7 +27,7 @@ export default function Home() {
     email: "",
     fullname: "",
     phone: "",
-    job_title: "",
+    password: "",
   });
   const apiService = new APIUtil();
   const query = useSearchParams();
@@ -132,7 +132,7 @@ export default function Home() {
       response = await apiService.authService!.reqInvite({
         ...form,
         company_name: form.email,
-        password: form.email,
+        password: form.password,
         plan_id: 2,
       });
 
