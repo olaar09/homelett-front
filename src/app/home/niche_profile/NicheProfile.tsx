@@ -211,7 +211,7 @@ const NicheProfileDrawer = ({
             </div>
           )}
 
-          <div className=" lg:flex-grow lg:flex flex-col h-full   lg:px-4 px-1 py-3 overflow-y-scroll">
+          <div className=" lg:flex-grow lg:flex flex-col h-full w-full  lg:px-4 px-1 py-3 overflow-y-scroll">
             {selected?.key === "basic" && (
               <BioInfo
                 existingData={data["basic"]}

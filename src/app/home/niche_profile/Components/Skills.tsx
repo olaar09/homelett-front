@@ -69,9 +69,9 @@ const Skills = ({
   };
 
   return (
-    <Form onFinish={onFinishForm} className=" gap-y-12">
+    <Form onFinish={onFinishForm} className=" gap-y-12 w-full ">
       <div>
-        <div className="flex flex-col items-center px-2">
+        <div className="flex flex-col items-center px-2 w-full">
           {academics.map((ac, index) => (
             <div
               key={ac.id}

@@ -41,10 +41,10 @@ const Settings = ({
   };
 
   return (
-    <Form onFinish={onFinishForm} className=" gap-y-12">
+    <Form onFinish={onFinishForm} className=" gap-y-12 w-full">
       <div>
-        <div className="flex flex-col items-start px-2 gap-y-7">
-          <div className="w-6/12  px-2 flex flex-col gap-y-2 py-10">
+        <div className="flex flex-col items-start px-2 gap-y-7 w-full">
+          <div className="lg:w-6/12 w-full  px-2 flex flex-col gap-y-2 pt-10">
             <span className="font-bold text-xl">
               How creative it should be when generating cover letter
             </span>
@@ -60,7 +60,7 @@ const Settings = ({
             ></Select>
           </div>
 
-          <div className="w-6/12  px-2 flex flex-col gap-y-2">
+          <div className="lg:w-6/12 w-full  px-2 flex flex-col gap-y-2">
             <span className="font-bold text-xl">
               How creative it should be when rewriting CV for specific job
             </span>
@@ -76,7 +76,7 @@ const Settings = ({
             ></Select>
           </div>
 
-          <div className="w-6/12  px-2 flex flex-col gap-y-2">
+          <div className="lg:w-6/12 w-full  px-2 flex flex-col gap-y-2">
             <span className="font-bold text-xl">Your job type preference</span>
             <Select
               className="w-full border h-12 rounded-lg "
