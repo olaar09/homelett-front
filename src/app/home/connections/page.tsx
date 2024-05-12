@@ -136,21 +136,19 @@ const Connections = () => {
         loading={currentAuth.loading || currentAuth.loadingSources || loading}
       />
 
-      <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full">
-        <div className="flex flex-col">
-          <HeaderItem icon="" title={`INTEGRATIONS`} withBg={false} />
-          <span className="text-xs text-foreground-secondary truncate w-full">
-            Your datasource and workflow integrations
-          </span>
-        </div>
+      <section className="h-20 flex items-center justify-between px-8 mt-0 mx-auto w-full">
+        {
+          <>
+            <div className="flex flex-col"></div>
 
-        <div onClick={onOpenConnector}>
-          <HeaderItem
-            icon="mdi:connection"
-            title="Add new integration"
-            withBg={true}
-          />
-        </div>
+            <div onClick={onOpenConnector}>
+              <Button type="link" className="flex items-center gap-x-2 px-0">
+                <Icon icon={"lucide:plus"} />
+                <span>Add Integration</span>
+              </Button>
+            </div>
+          </>
+        }
       </section>
 
       {!loadingWorkflows && workflowList && workflowList.length < 1 && (
