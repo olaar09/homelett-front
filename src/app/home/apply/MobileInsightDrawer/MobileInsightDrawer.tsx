@@ -12,6 +12,7 @@ const MobileInsightDrawer = ({
   onNewSkillAdded,
   onJobApplied,
   toggleInsight,
+  onClose,
   open,
 }: {
   open: boolean;
@@ -21,6 +22,7 @@ const MobileInsightDrawer = ({
   onJobApplied: () => void;
   onNewSkillAdded: (skill: string) => void;
   onToggleInsights: () => void;
+  onClose: () => void;
   onRefreshInsights: () => void;
   jobProfileFeatures: IJobProfileFeature | null;
   jobSkills: string[];
@@ -31,7 +33,7 @@ const MobileInsightDrawer = ({
       title={null}
       placement={"bottom"}
       closable={true}
-      onClose={onToggleInsights}
+      onClose={onClose}
       open={open}
       height={screen.height}
       key={"bottom"}

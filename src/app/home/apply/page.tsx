@@ -270,9 +270,15 @@ const Apply = () => {
 
   const onToggleInsights = () => setToggleInsight(!toggleInsight);
 
-  const onToggleMobileInsights = () => {
+  const onClose = () => {
     setSelectedJob(null);
     setToggleInsight(!toggleInsight);
+  };
+
+  const onToggleMobileInsights = () => {
+    message.warning("Please switch to a computer to view");
+    // setSelectedJob(null);
+    // setToggleInsight(!toggleInsight);
   };
 
   // Function to handle CV selection
@@ -317,6 +323,7 @@ const Apply = () => {
               onJobApplied={onSelectedJobApplied}
               onRefreshInsights={onLoadJobFeatures}
               onToggleInsights={onToggleMobileInsights}
+              onClose={onClose}
               onNewSkillAdded={onNewSkillAdded}
               profileSkills={profileSkills}
               jobSkills={jobSkills}
