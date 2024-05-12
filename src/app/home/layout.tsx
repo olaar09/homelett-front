@@ -261,7 +261,7 @@ const Nav: React.FC<any> = ({ children }) => {
                   title: "Connections",
                 },
                 {
-                  path: "settings",
+                  path: "/home/profile",
                   icon: "mingcute:profile-fill",
                   title: "Settings",
                 },
