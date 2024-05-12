@@ -18,7 +18,7 @@ const PricingItem = ({
 }) => {
   const utilService = new UtilService();
   return (
-    <div className=" w-6/12 rounded-lg shadow-md  border flex flex-col px-6 py-6 gap-y-4 mx-3">
+    <div className=" lg:w-6/12 w-full rounded-lg shadow-md  border flex flex-col px-6 py-6 gap-y-4 mx-3">
       <span className={`text-2xl text-gray-500`}> {title} </span>
       <span className={`text-xl font-black text-gray-500`}>
         {utilService.formatMoney(price, "NG", "NGN")}{" "}
@@ -101,7 +101,7 @@ const PricingModal = ({
           </span>
         </div>
 
-        <div className="flex items-center w-11/12 mx-auto my-4">
+        <div className="flex lg:flex-row flex-col gap-y-3 items-center w-11/12 mx-auto my-4">
           <PricingItem
             loading={loading}
             onClick={() => onInitPayment("monthly")}
