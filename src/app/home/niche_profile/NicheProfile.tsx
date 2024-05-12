@@ -15,6 +15,7 @@ import { AxiosError } from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
 import { isMobile } from "react-device-detect";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
+import { useRouter } from "next/navigation";
 
 const requiredDetails = [
   {
@@ -73,6 +74,7 @@ const NicheProfileDrawer = ({
   onClose: any;
   open: boolean;
 }) => {
+  const router = useRouter();
   const [selected, setSelected] = useState<any>(requiredDetails[0]);
   const [data, setData] = useState<any>({});
   const [loading, setLoading] = useState(false);
@@ -146,6 +148,12 @@ const NicheProfileDrawer = ({
     }
   };
 
+  const onLogout = () => {
+    localStorage.clear();
+    router.push("/");
+    authContext.clearUser();
+  };
+
   const items: any = requiredDetails.map((info) => {
     return { title: info.title, label: info.title, key: info.key };
   });
@@ -162,7 +170,7 @@ const NicheProfileDrawer = ({
         title={
           <div className="flex items-center w-full justify-between px-0">
             <div className="flex gap-x-2 items-center">
-              <Icon icon={"solar:logout-2-bold"} />
+              <Icon onClick={onLogout} icon={"solar:logout-2-bold"} />
               <span className="px-0 block ">Create Profile</span>
             </div>
 

@@ -140,7 +140,11 @@ export default function Home() {
           console.log(error);
 
           message.error(
-            `${error?.response?.data?.message ?? "Unable to complete request"}`
+            `${
+              error?.response?.data?.message ??
+              error?.response?.data?.reason ??
+              "Unable to complete request"
+            }`
           );
         } else {
           message.error("Unable to complete request");
