@@ -80,6 +80,50 @@ export default function Home() {
     setForm({ ...form, [name]: value });
   };
 
+  /*   const onSubmitLogin = async (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      let response;
+      if (query.get("is_new") === "true") {
+        response = await apiService.authService!.register({
+          email: form.email,
+          password: form.password,
+          active_job_profile: undefined,
+        });
+      } else {
+        response = await apiService.authService!.login({
+          email: form.email,
+          password: form.password,
+          active_job_profile: undefined,
+        });
+      }
+
+      localStorage.setItem("token", response.data.token!);
+      message.success("Login successful");
+      await authContext.refreshProfile();
+      await authContext.refreshDataSource();
+
+      router.push("/home/apply");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+
+        message.error(
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
+          }`
+        );
+      } else {
+        message.error("Unable to complete request");
+      }
+    } finally {
+      setLoading(false);
+    }
+  }; */
+
   const onSubmitLogin = async (e: any) => {
     e.preventDefault();
     setLoading(true);
@@ -92,13 +136,14 @@ export default function Home() {
         plan_id: 2,
       });
 
-      message.success(
-        "Invite requested successfully. You will get a follow up email soon"
-      );
+      localStorage.setItem("token", response.data.token!);
+      message.success("Login successful");
+      await authContext.refreshProfile();
+      await authContext.refreshDataSource();
+
+      router.push("/home/apply");
     } catch (error) {
       if (error instanceof AxiosError) {
-        console.log(error);
-
         message.error(
           `${
             error?.response?.data?.message ??
@@ -154,12 +199,6 @@ export default function Home() {
         >
           <div className="w-full px-8 flex flex-col gap-y-6">
             <InputField
-              name="job_title"
-              type="text"
-              placeHolder="Job title"
-              onChange={(e) => onChangeForm("job_title", e.target.value)}
-            />
-            <InputField
               name="fullname"
               type="text"
               placeHolder="Full name"
@@ -170,6 +209,13 @@ export default function Home() {
               type="email"
               placeHolder="Email address"
               onChange={(e) => onChangeForm("email", e.target.value)}
+            />
+
+            <InputField
+              name="password"
+              type="password"
+              placeHolder="Password"
+              onChange={(e) => onChangeForm("password", e.target.value)}
             />
 
             <InputField
