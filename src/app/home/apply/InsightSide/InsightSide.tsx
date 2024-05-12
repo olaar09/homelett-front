@@ -15,6 +15,7 @@ import { useContext, useEffect, useState } from "react";
 import APIUtil from "@/services/APIUtil";
 import { AuthContext } from "@/contexts/AuthContext";
 import { AxiosError } from "axios";
+import { isMobile } from "react-device-detect";
 
 const items: MenuProps["items"] = [
   {
@@ -146,29 +147,31 @@ const InsightSide = ({
               <span>{selectedJob?.company_name}</span>
             </div>
 
-            <div className="flex  lg:items-start lg:flex-row gap-x-4   justify-start">
-              <Dropdown
-                menu={{ items, onClick: onMenuClick }}
-                placement="bottom"
-              >
-                <Button
-                  className="bg-primary flex items-center gap-x-3"
-                  type="primary"
+            {!isMobile && (
+              <div className="flex  lg:items-start lg:flex-row gap-x-4   justify-start">
+                <Dropdown
+                  menu={{ items, onClick: onMenuClick }}
+                  placement="bottom"
                 >
-                  <Icon icon={"mdi:gesture-touch-box"} />
-                  <span>Apply for job</span>
-                </Button>
-              </Dropdown>
+                  <Button
+                    className="bg-primary flex items-center gap-x-3"
+                    type="primary"
+                  >
+                    <Icon icon={"mdi:gesture-touch-box"} />
+                    <span>Apply for job</span>
+                  </Button>
+                </Dropdown>
 
-              <Button
-                onClick={onToggleInsights}
-                type="link"
-                className="lg:flex items-center gap-x-3 text-gray-700 hidden"
-              >
-                <Icon icon={"ph:read-cv-logo-fill"} />
-                <span>View fine tuned CV</span>
-              </Button>
-            </div>
+                <Button
+                  onClick={onToggleInsights}
+                  type="link"
+                  className="lg:flex items-center gap-x-3 text-gray-700 hidden"
+                >
+                  <Icon icon={"ph:read-cv-logo-fill"} />
+                  <span>View fine tuned CV</span>
+                </Button>
+              </div>
+            )}
           </div>
 
           <Card.Meta
@@ -199,6 +202,31 @@ const InsightSide = ({
             }
           />
 
+          {isMobile && (
+            <div className="flex  lg:items-start lg:flex-row gap-x-4   justify-start mt-10">
+              <Dropdown
+                menu={{ items, onClick: onMenuClick }}
+                placement="bottom"
+              >
+                <Button
+                  className="bg-primary flex items-center gap-x-3"
+                  type="primary"
+                >
+                  <Icon icon={"mdi:gesture-touch-box"} />
+                  <span>Apply for job</span>
+                </Button>
+              </Dropdown>
+
+              <Button
+                onClick={onToggleInsights}
+                type="link"
+                className="flex items-center gap-x-3 text-gray-700"
+              >
+                <Icon icon={"ph:read-cv-logo-fill"} />
+                <span>View fine tuned CV</span>
+              </Button>
+            </div>
+          )}
           <div
             className={`mt-6 relative flex flex-col gap-y-3  ${
               isShowAll ? " h-auto" : " lg:h-72 h-60 overflow-hidden"
