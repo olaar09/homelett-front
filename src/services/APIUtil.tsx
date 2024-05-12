@@ -24,7 +24,7 @@ class APIUtil {
   public datasourceService: DataSourceAPIService;
 
   constructor() {
-    const service = new APIService("https://api.applybase.net/api"); // Initialize ApiService
+    const service = new APIService("https://api.useapplybase.com/api"); // Initialize ApiService
     this.cvService = new CVAPIService(service); // Use ApiService instance to initialize cvService
     this.jobService = new JobAPIService(service);
     this.groupService = new GroupAPIService(service);
