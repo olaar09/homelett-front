@@ -65,10 +65,10 @@ const JobItem = ({
                     src={`/sources/${job.source}.png`}
                     width={200}
                     height={200}
-                    className="w-4"
+                    className="w-3"
                     alt={job.source}
                   />
-                  <span className="mt-0 text-foreground-secondary">
+                  <span className="mt-0 text-xs text-foreground-secondary">
                     View job
                   </span>
                 </a>
