@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Drawer, message } from "antd";
+import { Drawer, Dropdown, Space, message } from "antd";
 import { useContext, useEffect, useState } from "react";
 import BioInfo from "./Components/BioInfo";
 import AcademicInfo from "./Components/Academics";
@@ -13,6 +13,8 @@ import Settings from "./Components/Settings";
 import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
+import { isMobile } from "react-device-detect";
+import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 
 const requiredDetails = [
   {
@@ -144,94 +146,125 @@ const NicheProfileDrawer = ({
     }
   };
 
+  const items: any = requiredDetails.map((info) => {
+    return { title: info.title, label: info.title, key: info.key };
+  });
+
   return (
-    <Drawer
-      width={
-        typeof window !== "undefined"
-          ? window.screen.width - window.screen.width / 4.5
-          : 0
-      }
-      title="Manage profile"
-      onClose={onClose}
-      className="px-0 py-0"
-      style={{ padding: 0 }}
-      open={open}
-    >
-      <div className="w-full flex items-center h-full  px-0 overflow-hidden">
-        <div className="lg:w-[400px] w-full border-r h-full border-gray-200  overflow-y-scroll  ">
-          {requiredDetails.map((info) => (
-            <div
-              onClick={() => onSelect(info)}
-              className={`flex flex-col gap-y-2 h-32 hover:bg-gray-50 ${
-                selected?.key === info.key ? "bg-gray-100" : ""
-              } cursor-pointer px-4 py-4`}
-            >
-              <div className="flex justify-between w-full items-center pr-4">
-                <span className="text-md font-black">{info.title}</span>
-                {/*   <Icon
+    typeof window !== "undefined" && (
+      <Drawer
+        styles={{ header: { paddingLeft: 16, paddingRight: 16 } }}
+        width={
+          isMobile
+            ? window.screen.width
+            : window.screen.width - window.screen.width / 4.5
+        }
+        title={
+          <div className="flex items-center w-full justify-between px-0">
+            <span className="px-0 block ">Create Job Profile</span>
+            <Dropdown menu={{ items }}>
+              <a onClick={(e) => e.preventDefault()}>
+                <Space className="bg-gray-200 rounded-md px-3 py-1">
+                  <span className="text-sm text-gray-500">
+                    {" "}
+                    {selected.title}{" "}
+                  </span>
+
+                  <Icon
+                    className="text-2xl text-gray-500"
+                    icon={"gravity-ui:caret-down"}
+                  />
+                </Space>
+              </a>
+            </Dropdown>
+          </div>
+        }
+        onClose={onClose}
+        closable={false}
+        className="px-0 py-0"
+        style={{ padding: 0 }}
+        open={open}
+      >
+        <div className="w-full flex items-center h-full  px-0 overflow-hidden">
+          {!isMobile && (
+            <div className="lg:w-[400px] w-full border-r h-full border-gray-200  overflow-y-scroll  ">
+              {requiredDetails.map((info) => (
+                <div
+                  onClick={() => onSelect(info)}
+                  className={`flex flex-col gap-y-2 h-32 hover:bg-gray-50 ${
+                    selected?.key === info.key ? "bg-gray-100" : ""
+                  } cursor-pointer px-4 py-4`}
+                >
+                  <div className="flex justify-between w-full items-center pr-4">
+                    <span className="text-md font-black">{info.title}</span>
+                    {/*   <Icon
                   icon={"lets-icons:check-fill"}
                   className="text-xl text-green-700"
                 /> */}
-              </div>
+                  </div>
 
-              <span className="text-sm text-gray-500">{info.description}</span>
+                  <span className="text-sm text-gray-500">
+                    {info.description}
+                  </span>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
+
+          <div className=" lg:flex-grow lg:flex flex-col h-full   lg:px-4 px-1 py-3 overflow-y-scroll">
+            {selected?.key === "basic" && (
+              <BioInfo
+                existingData={data["basic"]}
+                onContinue={(data: any) => onContinue("basic", data)}
+              />
+            )}
+
+            {selected?.key === "academics" && (
+              <AcademicInfo
+                onContinue={(data: any) => onContinue("academics", data)}
+                existingData={data["academics"]}
+              />
+            )}
+
+            {selected?.key === "skills" && (
+              <Skills
+                existingData={data["skills"]}
+                onContinue={(data: any) => onContinue("skills", data)}
+              />
+            )}
+
+            {selected?.key === "work" && (
+              <Experiences
+                existingData={data["work"]}
+                onContinue={(data: any) => onContinue("work", data)}
+              />
+            )}
+
+            {selected?.key === "socials" && (
+              <Social
+                existingData={data["socials"]}
+                onContinue={(data: any) => onContinue("socials", data)}
+              />
+            )}
+
+            {selected?.key === "awards" && (
+              <Accomplishment
+                existingData={data["awards"]}
+                onContinue={(data: any) => onContinue("awards", data)}
+              />
+            )}
+
+            {selected?.key === "settings" && (
+              <Settings
+                existingData={data["settings"]}
+                loading={loading || authContext.loading}
+                onContinue={(data: any) => onContinue("settings", data)}
+              />
+            )}
+          </div>
         </div>
-
-        <div className=" lg:flex-grow lg:flex flex-col h-full   px-4 py-3 overflow-y-scroll">
-          {selected?.key === "basic" && (
-            <BioInfo
-              existingData={data["basic"]}
-              onContinue={(data: any) => onContinue("basic", data)}
-            />
-          )}
-
-          {selected?.key === "academics" && (
-            <AcademicInfo
-              onContinue={(data: any) => onContinue("academics", data)}
-              existingData={data["academics"]}
-            />
-          )}
-
-          {selected?.key === "skills" && (
-            <Skills
-              existingData={data["skills"]}
-              onContinue={(data: any) => onContinue("skills", data)}
-            />
-          )}
-
-          {selected?.key === "work" && (
-            <Experiences
-              existingData={data["work"]}
-              onContinue={(data: any) => onContinue("work", data)}
-            />
-          )}
-
-          {selected?.key === "socials" && (
-            <Social
-              existingData={data["socials"]}
-              onContinue={(data: any) => onContinue("socials", data)}
-            />
-          )}
-
-          {selected?.key === "awards" && (
-            <Accomplishment
-              existingData={data["awards"]}
-              onContinue={(data: any) => onContinue("awards", data)}
-            />
-          )}
-
-          {selected?.key === "settings" && (
-            <Settings
-              existingData={data["settings"]}
-              loading={loading || authContext.loading}
-              onContinue={(data: any) => onContinue("settings", data)}
-            />
-          )}
-        </div>
-      </div>
-    </Drawer>
+      </Drawer>
+    )
   );
 };
 

@@ -143,7 +143,7 @@ const BioInfo = ({
           <div className="w-6/12  px-2 flex flex-col gap-y-2  ">
             <IInput
               required
-              title="Years of experience in the industry"
+              title="Years of experience"
               name="years_of_experience"
               label="E.g 4"
               onChange={undefined}

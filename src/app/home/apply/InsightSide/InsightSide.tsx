@@ -141,8 +141,8 @@ const InsightSide = ({
           style={{ paddingTop: 0 }}
           className=" shadow-none bg-transparent border-0 mt-0 pt-0 relative  "
         >
-          <div className="flex justify-between lg:items-center  lg:flex-row flex-col mb-10">
-            <div className=" flex items-center px-0 gap-x-3 mb-4">
+          <div className="flex justify-between lg:items-center  lg:flex-row flex-col lg:mb-10 mb-6">
+            <div className=" flex items-center px-0 gap-x-3 lg:mb-4 mb-0">
               <Avatar src={selectedJob?.company_logo} />
               <span>{selectedJob?.company_name}</span>
             </div>
@@ -176,9 +176,9 @@ const InsightSide = ({
 
           <Card.Meta
             title={
-              <span className="text-2xl">
+              <span className="text-2xl line-clamp-2 block text-wrap">
                 {" "}
-                {selectedJob?.title?.substring(0, 100)}
+                {selectedJob?.title?.substring(0, 300)}
                 {selectedJob?.title?.length >= 50 ? "..." : ""}
               </span>
             }
