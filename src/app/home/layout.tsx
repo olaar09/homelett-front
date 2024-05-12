@@ -246,17 +246,17 @@ const Nav: React.FC<any> = ({ children }) => {
             <div className=" px-3 flex items-center justify-between absolute bottom-0 left-0 right-0 shadow-lg h-20 z-30 bg-white">
               {[
                 {
-                  path: "apply",
+                  path: "/home/apply",
                   icon: "mdi:gesture-touch-box",
                   title: "Apply",
                 },
                 {
-                  path: "applications",
-                  icon: "pajamas:applications",
+                  path: "/home/applications",
+                  icon: "icon-park-solid:all-application",
                   title: "Applications",
                 },
                 {
-                  path: "connections",
+                  path: "/home/connections",
                   icon: "material-symbols:integration-instructions-rounded",
                   title: "Connections",
                 },
@@ -269,21 +269,23 @@ const Nav: React.FC<any> = ({ children }) => {
                 const browserPath = usePathname();
                 const isActive = browserPath.includes(menu.path);
                 return (
-                  <div className="flex flex-col  items-center justify-center">
-                    <Icon
-                      icon={menu.icon}
-                      className={`${
-                        isActive ? " text-gray-600" : " text-gray-200"
-                      } "text-4xl"`}
-                    />
-                    <span
-                      className={`${
-                        isActive ? " text-gray-600" : " text-gray-200"
-                      } text-sm`}
-                    >
-                      {menu.title}
-                    </span>
-                  </div>
+                  <Link href={menu.path}>
+                    <div className="flex flex-col   hover:bg-gray-50 px-2 py-1 rounded-md  transition-all duration-200  items-center justify-center">
+                      <Icon
+                        icon={menu.icon}
+                        className={`text-xl ${
+                          isActive ? " text-gray-600" : " text-gray-400"
+                        } `}
+                      />
+                      <span
+                        className={`${
+                          isActive ? " text-gray-600" : " text-gray-400"
+                        } text-sm`}
+                      >
+                        {menu.title}
+                      </span>
+                    </div>
+                  </Link>
                 );
               })}
             </div>
@@ -322,7 +324,7 @@ const Nav: React.FC<any> = ({ children }) => {
                   <Link className="w-full" href={"/home/workflows"}>
                     <NavMenu
                       path="/home/applications"
-                      icon={"pajamas:applications"}
+                      icon={"icon-park-solid:all-application"}
                       title="Job applications"
                     />
                   </Link>
@@ -344,7 +346,7 @@ const Nav: React.FC<any> = ({ children }) => {
                     <NavMenu
                       path="/home/connections"
                       icon={"material-symbols:integration-instructions-rounded"}
-                      title="Integrations"
+                      title="Connections"
                     />
                   </Link>
                 </div>
