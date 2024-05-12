@@ -9,7 +9,6 @@ import { FloatButton, message } from "antd";
 import { AxiosError } from "axios";
 import { useRequest } from "ahooks";
 import { JobsSide } from "./JobSide/JobsSide";
-import CVSide from "./CVSide/CV_1/CVSide";
 import InsightSide from "./InsightSide/InsightSide";
 import { Str } from "@/utils/consts";
 import CVContainer from "./CVSide";
