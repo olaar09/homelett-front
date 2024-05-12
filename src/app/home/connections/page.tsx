@@ -152,8 +152,8 @@ const Connections = () => {
 
             <div onClick={onOpenConnector}>
               <Button type="link" className="flex items-center gap-x-2 px-0">
-                <Icon icon={"lucide:plus"} />
-                <span>Add Integration</span>
+                <Icon className="text-black" icon={"lucide:plus"} />
+                <span className="text-black">Add Integration</span>
               </Button>
             </div>
           </>

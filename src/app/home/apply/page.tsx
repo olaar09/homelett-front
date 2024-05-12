@@ -303,7 +303,7 @@ const Apply = () => {
       {!pageLoading && allJobs?.length < 1 && <FindingMatch />}
 
       {!pageLoading && allJobs?.length > 0 && (
-        <section className=" flex items-center h-screen overflow-hidden pb-24">
+        <section className=" flex items-center h-screen overflow-hidden lg:pb-0 pb-24">
           <JobsSide
             jobs={allJobs}
             selectedJob={selectedJob}
