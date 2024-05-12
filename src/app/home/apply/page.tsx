@@ -15,6 +15,7 @@ import { Str } from "@/utils/consts";
 import CVContainer from "./CVSide";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
+import FindingMatch from "./FindingMatch/FindingMatch";
 
 const Apply = () => {
   const [coverLetter, setCoverLetter] = useState("");
@@ -288,33 +289,7 @@ const Apply = () => {
     <main className="h-full bg-background-thin min-h-screen flex flex-col 3xl:w-10/12  w-full mx-auto">
       <LoadingOverlay loading={pageLoading} />
 
-      {!pageLoading && allJobs?.length < 1 && (
-        <section className=" flex items-center justify-center h-screen overflow-hidden">
-          <div className="flex flex-col h-20 justify-center items-center gap-y-6">
-            <div className="flex items-center gap-x-3 ">
-              {[
-                "/sources/linkedin.png",
-                "/sources/turing.png",
-                "/sources/glassdoor.png",
-                "/sources/indeed.png",
-              ].map((source) => (
-                <Image
-                  width={200}
-                  height={200}
-                  className="w-8"
-                  src={source}
-                  alt={""}
-                />
-              ))}
-            </div>
-            <span className="block items-center text-center">
-              ApplyBase AI agent is currently analyzing Jobs that match your
-              profile. <br /> You will receive an email when matching jobs are
-              populated
-            </span>
-          </div>
-        </section>
-      )}
+      {!pageLoading && allJobs?.length < 1 && <FindingMatch />}
 
       {!pageLoading && allJobs?.length > 0 && (
         <section className=" flex items-center h-screen overflow-hidden">
