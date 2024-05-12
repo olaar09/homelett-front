@@ -122,23 +122,22 @@ export default function Home() {
     >
       <section className="flex-grow my-4 flex flex-col pt-4 items-center w-full mt-10">
         <div className="flex items-center gap-x-3   px-8   justify-center  lg:w-6/12 mx-auto">
-          <div className="w-9 h-14 flex items-center">
-            <Icon
-              className="text-gray-60 text-4xl opacity-80"
-              icon="ph:robot-bold"
-            />
-          </div>
           <Link href={"/"}>
-            <span className=" text-gray-600 font-bold text-3xl opacity-90">
-              ApplyBase
-            </span>
+            <div className="flex items-center gap-x-2   px-8   justify-center  lg:w-6/12 mx-auto">
+              <div className="w-6 flex items-center justify-center gap-x-3">
+                <img src="/logo.png" className="w-10 mr-2" />
+              </div>
+              <span className=" text-foreground font-black text-2xl mt-0">
+                ApplyBase
+              </span>
+            </div>
           </Link>
         </div>
 
         <div className="text-center mt-10 px-4 w-full  lg:w-6/12 mx-auto ">
           <span className=" lg:text-5xl text-3xl font-black">
             {" "}
-            Request invite
+            Create an account
           </span>
         </div>
         {/* 
@@ -184,7 +183,7 @@ export default function Home() {
               text={
                 query.get("is_new") === "true"
                   ? "Sign up with email"
-                  : "Request invite"
+                  : "Create account"
               }
               type={"submit"}
               loading={loading}

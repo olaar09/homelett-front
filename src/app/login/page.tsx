@@ -159,18 +159,13 @@ export default function Home() {
       className="flex flex-col h-screen overflow-y-scroll items-center   pb-8"
     >
       <section className="flex-grow my-4 flex flex-col pt-4 items-center w-full mt-10">
-        <div className="flex items-center gap-x-3   px-8   justify-center  lg:w-6/12 mx-auto">
-          <div className="w-9 h-14 flex items-center">
-            <Icon
-              className="text-gray-60 text-4xl opacity-80"
-              icon="ph:robot-bold"
-            />
+        <div className="flex items-center gap-x-2   px-8   justify-center  lg:w-6/12 mx-auto">
+          <div className="w-6 flex items-center justify-center gap-x-3">
+            <img src="/logo.png" className="w-10 mr-2" />
           </div>
-          <Link href={"/"}>
-            <span className=" text-gray-600 font-bold text-3xl opacity-90">
-              ApplyBase
-            </span>
-          </Link>
+          <span className=" text-foreground font-black text-2xl mt-0">
+            ApplyBase
+          </span>
         </div>
 
         <div className="text-center mt-10 px-4 w-full  lg:w-6/12 mx-auto ">
