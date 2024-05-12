@@ -255,7 +255,7 @@ const Apply = () => {
   const onApplyJob = async (job: any) => {
     if (selectedJob?.name !== job.name) {
       setSelectedJob(job);
-      message.warning("Review your cv before applying for this job");
+      //   message.warning("Review your cv before applying for this job");
       return;
     }
 

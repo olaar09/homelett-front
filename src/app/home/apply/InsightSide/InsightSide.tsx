@@ -254,23 +254,16 @@ const InsightSide = ({
             />
           </div>
           {!isShowAll && (
-            <div className=" h-16 bg-green-00  mt-0    lg:bottom-10 bottom-0 blur-at-top left-0 right-0">
-              <div className=" h-10  bg-transparent  w-full  bg-blue-300 text-black "></div>
-              <div className=" z-30 w-full left-0 right-0  ">
-                <Button
-                  onClick={onToggleShowAll}
-                  className="w-full"
-                  type="link"
-                >
-                  <div className="flex items-center justify-center">
-                    <span className="">Show more</span>
-                    <Icon
-                      className="text-xl "
-                      icon={"iconamoon:arrow-down-2-duotone"}
-                    />
-                  </div>
-                </Button>
-              </div>
+            <div className=" h-16 bg-white mt-0  ">
+              <Button onClick={onToggleShowAll} className="w-full" type="link">
+                <div className="flex items-center justify-center bg-white">
+                  <span className="">Show more</span>
+                  <Icon
+                    className="text-xl "
+                    icon={"iconamoon:arrow-down-2-duotone"}
+                  />
+                </div>
+              </Button>
             </div>
           )}
         </Card>
