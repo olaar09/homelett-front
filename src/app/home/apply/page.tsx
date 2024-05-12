@@ -180,7 +180,7 @@ const Apply = () => {
 
   useEffect(() => {
     if (allJobs && allJobs?.length > 0) {
-      setSelectedJob(allJobs[0]);
+      if (!isMobile) setSelectedJob(allJobs[0]);
     } else {
       setSelectedJob(null);
     }
@@ -227,6 +227,7 @@ const Apply = () => {
     const removeApplied = allJobs?.filter(
       (jb: any) => jb.id !== selectedJob.id
     );
+    setSelectedJob(null);
     setAllJobs(removeApplied);
   };
 
