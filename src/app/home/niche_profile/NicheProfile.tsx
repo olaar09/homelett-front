@@ -161,7 +161,11 @@ const NicheProfileDrawer = ({
         }
         title={
           <div className="flex items-center w-full justify-between px-0">
-            <span className="px-0 block ">Create Job Profile</span>
+            <div className="flex flex-col items-center">
+              <span className="px-0 block ">Create Job Profile</span>
+              <span className="px-0 block text-xs ">Logout</span>
+            </div>
+
             <Dropdown menu={{ items }}>
               <a onClick={(e) => e.preventDefault()}>
                 <Space className="bg-gray-200 rounded-md px-3 py-1">
