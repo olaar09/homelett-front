@@ -217,6 +217,14 @@ export default function Home() {
               loading={loading}
               children={undefined}
             />
+
+            <div className="flex items-center justify-center">
+              <span>
+                <Link href={"/request-invite"}>
+                  <span>Create an account</span>
+                </Link>
+              </span>
+            </div>
           </div>
         </form>
 

@@ -235,6 +235,14 @@ export default function Home() {
               loading={loading}
               children={undefined}
             />
+
+            <div className="flex items-center justify-center">
+              <span>
+                <Link href={"/login"}>
+                  <span>Login in instead</span>
+                </Link>
+              </span>
+            </div>
           </div>
         </form>
 
