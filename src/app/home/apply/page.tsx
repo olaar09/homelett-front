@@ -16,6 +16,7 @@ import CVContainer from "./CVSide";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 import FindingMatch from "./FindingMatch/FindingMatch";
+import { isMobile } from "react-device-detect";
 
 const Apply = () => {
   const [coverLetter, setCoverLetter] = useState("");
@@ -303,7 +304,7 @@ const Apply = () => {
             onSelectJob={onSelectJob}
           />
 
-          {toggleInsight && selectedJob && (
+          {!isMobile && toggleInsight && selectedJob && (
             <div className="lg:w-9/12 h-full ">
               <InsightSide
                 onJobApplied={onSelectedJobApplied}
@@ -320,7 +321,7 @@ const Apply = () => {
             </div>
           )}
 
-          {!toggleInsight && selectedJob && (
+          {!isMobile && !toggleInsight && selectedJob && (
             <div className=" lg:w-9/12  h-full hidden lg:block">
               <CVContainer
                 onShuffleCV={handleShuffleCV}

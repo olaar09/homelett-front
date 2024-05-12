@@ -12,6 +12,7 @@ import NicheProfileDrawer from "./niche_profile/NicheProfile";
 import PricingModal from "./apply/JobSide/PricingModal";
 import APIUtil from "@/services/APIUtil";
 import { usePaystackPayment } from "react-paystack";
+import { isMobile } from "react-device-detect";
 
 const NavMenu = ({
   title,
@@ -241,114 +242,115 @@ const Nav: React.FC<any> = ({ children }) => {
 
       <div className="min-h-screen w-full overflow-hidden">
         <div className="flex items-center w-full h-full overflow-hidden">
-          <div
-            className={` bg-background ${
-              openSide ? "w-[345px]" : "w-[70px]"
-            } min-h-screen hidden lg:flex border-r border-gray-100  flex-col h-full items-start transition-all duration-200 relative `}
-          >
-            <HeadIcon isOpen={openSide} onToggle={onToggle} />
-            {!openSide && (
-              <div>
-                <Button
-                  onClick={() => onToggle(true)}
-                  className="  absolute -left-1"
-                  type="link"
-                >
-                  {" "}
-                  <Icon
-                    className="text-gray-600 text-lg opacity-90"
-                    icon="lucide:sidebar-close"
-                  />
-                </Button>
-              </div>
-            )}
-            {openSide && (
-              <div className="flex flex-col items-start gap-y-2 py-5 w-full px-2 ">
-                <Link className="w-full" href={"/home/apply"}>
-                  <NavMenu
-                    path="/home/apply"
-                    icon={"mdi:gesture-touch-box"}
-                    title="Apply"
-                  />
-                </Link>
-                <Link className="w-full" href={"/home/workflows"}>
-                  <NavMenu
-                    path="/home/workflows"
-                    icon={"pajamas:applications"}
-                    title="Job applications"
-                  />
-                </Link>
-                <div className="relative w-full">
-                  <NavMenu
-                    path="/home/api_keys"
-                    icon={"material-symbols:analytics-outline"}
-                    title="Insights"
-                  />
-                  <Tag
-                    color="volcano"
-                    className={`absolute right-1 top-[12px] text-xs`}
-                  >
-                    coming soon
-                  </Tag>
-                </div>
-
-                <Link className="w-full" href={"/home/connections"}>
-                  <NavMenu
-                    path="/home/connections"
-                    icon={"material-symbols:integration-instructions-rounded"}
-                    title="Integrations"
-                  />
-                </Link>
-              </div>
-            )}
-            {openSide && (
-              <div className="flex flex-grow  justify-end flex-col py-3 px-2 w-full ">
-                <div className=" h-40 border rounded-lg my-2 flex flex-col px-3 items-center justify-center gap-y-2 mx-auto w-full">
-                  <span className="block text-center text-sm mx-auto w-8/12 font-bold">
-                    {billingMessage}
-                  </span>
-
-                  <span className="text-xs text-center">
-                    Apply for over 100 jobs weekly and increase your chance of
-                    getting an interview by 9x
-                  </span>
+          {!isMobile && (
+            <div
+              className={` bg-background ${
+                openSide ? "w-[345px]" : "w-[70px]"
+              } min-h-screen hidden lg:flex border-r border-gray-100  flex-col h-full items-start transition-all duration-200 relative `}
+            >
+              <HeadIcon isOpen={openSide} onToggle={onToggle} />
+              {!openSide && (
+                <div>
                   <Button
-                    className="bg-primary"
-                    onClick={onOpenModal}
-                    type="primary"
+                    onClick={() => onToggle(true)}
+                    className="  absolute -left-1"
+                    type="link"
                   >
-                    <div className="flex items-center gap-x-2">
-                      <span>{buttonMessage}</span>
-                      <Icon icon={buttonIcon} />
-                    </div>
+                    {" "}
+                    <Icon
+                      className="text-gray-600 text-lg opacity-90"
+                      icon="lucide:sidebar-close"
+                    />
                   </Button>
                 </div>
-                <div className="flex flex-col border-t w-full py-5">
-                  <NavMenu
-                    path="/home/name"
-                    icon={"mdi:worker"} // todo, show icon based on profile type
-                    title={`${authContext.activeProfile?.profession}`}
-                    suffixIcon="ic:round-switch-left"
-                    tooltip="Switch job profile"
-                    onClickSuffix={onSwitch}
-                  />
-
-                  <Link className="w-full" href={"/home/profile"}>
+              )}
+              {openSide && (
+                <div className="flex flex-col items-start gap-y-2 py-5 w-full px-2 ">
+                  <Link className="w-full" href={"/home/apply"}>
                     <NavMenu
-                      path="/home/profile"
-                      icon={"mingcute:profile-fill"}
-                      title="Profile"
+                      path="/home/apply"
+                      icon={"mdi:gesture-touch-box"}
+                      title="Apply"
                     />
                   </Link>
-                  <Link className="w-full" href={"/home/help"}>
+                  <Link className="w-full" href={"/home/workflows"}>
                     <NavMenu
-                      path="/home/team"
-                      icon={"ic:round-help-center"}
-                      title="Help"
+                      path="/home/workflows"
+                      icon={"pajamas:applications"}
+                      title="Job applications"
                     />
                   </Link>
+                  <div className="relative w-full">
+                    <NavMenu
+                      path="/home/api_keys"
+                      icon={"material-symbols:analytics-outline"}
+                      title="Insights"
+                    />
+                    <Tag
+                      color="volcano"
+                      className={`absolute right-1 top-[12px] text-xs`}
+                    >
+                      coming soon
+                    </Tag>
+                  </div>
 
-                  {/*       <div onClick={addOpenAiKey} className="relative">
+                  <Link className="w-full" href={"/home/connections"}>
+                    <NavMenu
+                      path="/home/connections"
+                      icon={"material-symbols:integration-instructions-rounded"}
+                      title="Integrations"
+                    />
+                  </Link>
+                </div>
+              )}
+              {openSide && (
+                <div className="flex flex-grow  justify-end flex-col py-3 px-2 w-full ">
+                  <div className=" h-40 border rounded-lg my-2 flex flex-col px-3 items-center justify-center gap-y-2 mx-auto w-full">
+                    <span className="block text-center text-sm mx-auto w-8/12 font-bold">
+                      {billingMessage}
+                    </span>
+
+                    <span className="text-xs text-center">
+                      Apply for over 100 jobs weekly and increase your chance of
+                      getting an interview by 9x
+                    </span>
+                    <Button
+                      className="bg-primary"
+                      onClick={onOpenModal}
+                      type="primary"
+                    >
+                      <div className="flex items-center gap-x-2">
+                        <span>{buttonMessage}</span>
+                        <Icon icon={buttonIcon} />
+                      </div>
+                    </Button>
+                  </div>
+                  <div className="flex flex-col border-t w-full py-5">
+                    <NavMenu
+                      path="/home/name"
+                      icon={"mdi:worker"} // todo, show icon based on profile type
+                      title={`${authContext.activeProfile?.profession}`}
+                      suffixIcon="ic:round-switch-left"
+                      tooltip="Switch job profile"
+                      onClickSuffix={onSwitch}
+                    />
+
+                    <Link className="w-full" href={"/home/profile"}>
+                      <NavMenu
+                        path="/home/profile"
+                        icon={"mingcute:profile-fill"}
+                        title="Profile"
+                      />
+                    </Link>
+                    <Link className="w-full" href={"/home/help"}>
+                      <NavMenu
+                        path="/home/team"
+                        icon={"ic:round-help-center"}
+                        title="Help"
+                      />
+                    </Link>
+
+                    {/*       <div onClick={addOpenAiKey} className="relative">
                     <NavMenu
                       path="/home/api_keys"
                       icon={"ph:open-ai-logo-bold"}
@@ -367,17 +369,18 @@ const Nav: React.FC<any> = ({ children }) => {
                       }`}
                     />
                   </div> */}
-                  <div onClick={onLogout}>
-                    <NavMenu
-                      path={"/logout"}
-                      icon={"ri:logout-box-fill"}
-                      title={authContext.currentUser?.fullname ?? ""}
-                    />
+                    <div onClick={onLogout}>
+                      <NavMenu
+                        path={"/logout"}
+                        icon={"ri:logout-box-fill"}
+                        title={authContext.currentUser?.fullname ?? ""}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
 
           <div className="w-full h-screen overflow-hidden ">{children}</div>
         </div>
