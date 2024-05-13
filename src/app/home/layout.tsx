@@ -243,7 +243,7 @@ const Nav: React.FC<any> = ({ children }) => {
       <div className="min-h-screen w-full overflow-hidden">
         <div className="flex items-center w-full h-full overflow-hidden">
           {isMobile && (
-            <div className=" px-3 flex items-center justify-between absolute bottom-0 left-0 right-0 shadow-lg h-20 z-30 bg-white">
+            <div className=" px-3 flex items-center justify-between fixed bottom-0 left-0 right-0 shadow-lg h-20 z-30 bg-white">
               {[
                 {
                   path: "/home/apply",
