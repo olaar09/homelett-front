@@ -1,3 +1,6 @@
+import { Icon } from "@iconify/react/dist/iconify.js";
+import { Tooltip } from "antd";
+
 export default () => {
   return (
     <footer className="bg-blue-50 py-12 sm:py-16 lg:pt-20 xl:pt-24">
@@ -32,6 +35,29 @@ export default () => {
                 </svg>
                 support@useapplybase.com
               </div>
+            </div>
+
+            <div className="mt-4 flex items-center gap-x-3">
+              {[
+                {
+                  icon: "bi:twitter",
+                  title: "Twitter",
+                  link: "https://twitter.com/useapplybase",
+                },
+                {
+                  icon: "teenyicons:instagram-solid",
+                  title: "Instagram",
+                  link: "https://twitter.com/useapplybase",
+                },
+              ].map((social) => (
+                <Tooltip title={social.title}>
+                  <Icon
+                    onClick={() => window.open(social.link, "__blank")}
+                    className="text-xl cursor-pointer"
+                    icon={social.icon}
+                  />
+                </Tooltip>
+              ))}
             </div>
           </div>
         </div>
