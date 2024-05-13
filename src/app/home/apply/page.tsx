@@ -233,7 +233,9 @@ const Apply = () => {
 
   const getSimilarJobs = async (): Promise<any> => {
     try {
-      const data = await apiUtil.cvService.getMatchedJobs("1");
+      const data = await apiUtil.cvService.getMatchedJobs(
+        authContext.currentUser!.active_job_profile!.id
+      );
       return data.data;
     } catch (error) {
       message.error("unable to load jobs");
