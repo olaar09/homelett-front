@@ -41,8 +41,8 @@ const SavedTeamMembers = () => {
 
   const getWorkFlow = async (): Promise<any> => {
     try {
-      const data = await apiUtils.workflowService.getWorkflows();
-      const list = data.data;
+      const data = await apiUtils.jobService.fetchJobApplications();
+      const list = data;
       return list;
     } catch (error) {
       message.error("unable to load data");

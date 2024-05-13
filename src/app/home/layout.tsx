@@ -321,7 +321,7 @@ const Nav: React.FC<any> = ({ children }) => {
                       title="Apply"
                     />
                   </Link>
-                  <Link className="w-full" href={"/home/workflows"}>
+                  <Link className="w-full" href={"/home/applications"}>
                     <NavMenu
                       path="/home/applications"
                       icon={"icon-park-solid:all-application"}
