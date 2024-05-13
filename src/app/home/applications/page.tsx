@@ -11,6 +11,7 @@ import Meta from "antd/es/card/Meta";
 import { DeleteOutlined } from "@ant-design/icons";
 import { AxiosError } from "axios";
 import AddWorkflowModal from "./components/AddWorkflowModal";
+import JobItem from "../_components/JobItem";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -19,7 +20,7 @@ const SavedTeamMembers = () => {
   const apiUtils = new APIUtil();
 
   const {
-    data: workflowList,
+    data: jobList,
     error,
     loading: loadingWorkflows,
     refresh: refreshWorkflow,
@@ -77,7 +78,7 @@ const SavedTeamMembers = () => {
   return (
     <>
       <AddWorkflowModal open={openAddModal} onCancel={handleCloseTeam} />
-      {(loadingWorkflows || !workflowList) && (
+      {(loadingWorkflows || !jobList) && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
           <div className="">
@@ -90,7 +91,7 @@ const SavedTeamMembers = () => {
         </div>
       )}
 
-      {!loadingWorkflows && workflowList && workflowList.length < 1 && (
+      {!loadingWorkflows && jobList && jobList.length < 1 && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
           <div className=" flex flex-col  items-center justify-center gap-y-7">
@@ -101,7 +102,7 @@ const SavedTeamMembers = () => {
         </div>
       )}
 
-      {workflowList && workflowList.length > 0 && (
+      {jobList && jobList.length > 0 && (
         <Spin
           indicator={
             <Icon
@@ -113,7 +114,7 @@ const SavedTeamMembers = () => {
           className="bg-background-thin"
         >
           <div className="bg-background-thin min-h-screen">
-            <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full bg-background-thin">
+            {/*    <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full bg-background-thin">
               <div className="flex flex-col">
                 <HeaderItem
                   icon={"octicon:workflow-16"}
@@ -134,73 +135,20 @@ const SavedTeamMembers = () => {
                   />
                 </div>
               </div>
-            </section>
+            </section> */}
 
             <div className="w-full mx-auto mt-10 bg-background-thin">
               <section className=" flex items-center w-full  px-8 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
-                {(workflowList ?? []).map((workflow: any) => {
-                  const fromDatasource = authContext.dataSources?.find(
-                    (ds) => ds.id == workflow.datasource_id
-                  );
-                  const toWorkflow = authContext.dataSources?.find(
-                    (ds) => ds.id == workflow.connection_datasource_id
-                  );
+                {(jobList ?? []).map((job: any) => {
                   return (
-                    <div className="w-4/12 ">
-                      <div className="mr-4 relative cursor-pointer hoverContainer transition-all">
-                        <Card
-                          className="rounded-2xl h-40 relative cursor-pointer"
-                          bordered={false}
-                        >
-                          <Meta
-                            title={
-                              <div className="flex items-center gap-x-4">
-                                <div className="flex items-center -gap-x-5">
-                                  <Icon
-                                    icon={
-                                      fromDatasource?.source_type.icon ?? ""
-                                    }
-                                  />
-                                  <Icon
-                                    icon={toWorkflow?.source_type.icon ?? ""}
-                                  />
-                                </div>
-
-                                <span> {workflow.title}</span>
-                              </div>
-                            }
-                            description={workflow.description}
-                          />
-                        </Card>
-                        <div className=" absolute top-3 right-4 z-10 hoverItem transition-all duration-150">
-                          <div className=" flex items-center -gap-x-2 transition-all duration-300">
-                            <Popconfirm
-                              title="Delete the workflow?"
-                              description="Are you sure to delete this workflow?"
-                              okText="Yes"
-                              cancelText="No"
-                              onConfirm={() => handleDeleteWorkflow(workflow)}
-                            >
-                              <Button
-                                className="text-red-500"
-                                icon={<DeleteOutlined />}
-                                type="link"
-                              />
-                            </Popconfirm>
-                          </div>
-                        </div>
-                        <div className="absolute bottom-3 left-0 right-0 z-10 flex items-center justify-between px-4">
-                          <div className="flex items-center gap-x-1">
-                            <Icon className="text-gray-700" icon={"ion:time"} />
-                            <span className="text-sm text-gray-700">
-                              {workflow.interval}
-                            </span>
-                          </div>
-                          <Tag bordered={false} color={"geekblue"}>
-                            Active
-                          </Tag>
-                        </div>
-                      </div>
+                    <div className="lg:w-4/12 w-full">
+                      <JobItem
+                        applying={false}
+                        onSelectJob={undefined}
+                        onApplyJob={undefined}
+                        active={false}
+                        job={job}
+                      />
                     </div>
                   );
                 })}
