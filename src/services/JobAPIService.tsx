@@ -35,6 +35,17 @@ class JobAPIService {
       throw error;
     }
   }
+
+  async fetchJobApplications(): Promise<any[] | null> {
+    try {
+      const response = await this.apiService.get<{ data: any }>(
+        `/jobs/get_applications`
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default JobAPIService;

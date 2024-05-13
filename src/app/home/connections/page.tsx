@@ -65,15 +65,15 @@ const Connections = () => {
     error,
     loading: loadingWorkflows,
     refresh: refreshWorkflow,
-  } = useRequest(() => getWorkFlow(), {
+  } = useRequest(() => getJobs(), {
     ready:
       currentAuth.currentUser != null && currentAuth.currentUser != undefined,
   });
 
-  const getWorkFlow = async (): Promise<any> => {
+  const getJobs = async (): Promise<any> => {
     try {
-      const data = await apiUtil.workflowService.getWorkflows();
-      const list = data.data;
+      const data = await apiUtil.jobService.fetchJobApplications();
+      const list = data;
       return list;
     } catch (error) {
       message.error("unable to load data");
