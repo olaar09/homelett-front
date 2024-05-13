@@ -35,7 +35,7 @@ const MobileInsightDrawer = ({
       closable={true}
       onClose={onClose}
       open={open}
-      height={screen.height - (screen.availHeight / 100) * 15}
+      height={screen.availHeight - (screen.availHeight / 100) * 15}
       key={"bottom"}
     >
       <InsightSide
