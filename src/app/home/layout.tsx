@@ -193,7 +193,7 @@ const Nav: React.FC<any> = ({ children }) => {
         setAmount(10000);
         break;
       case "yearly":
-        setAmount(40000);
+        setAmount(50000);
         break;
 
       default:

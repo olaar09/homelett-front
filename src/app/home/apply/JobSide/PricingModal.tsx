@@ -112,7 +112,7 @@ const PricingModal = ({
           <PricingItem
             loading={loading}
             onClick={() => onInitPayment("yearly")}
-            price="4000000"
+            price="5000000"
             title="Yearly"
             items={yearly}
           />
