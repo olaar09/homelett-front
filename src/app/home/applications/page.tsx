@@ -138,8 +138,8 @@ const SavedTeamMembers = () => {
             </section> */}
 
             <div className="w-full mx-auto mt-10 bg-background-thin">
-              <section className=" flex items-center w-full  px-8 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
-                {(jobList ?? []).map((job: any) => {
+              <section className=" flex items-center w-full  lg:px-8 px-2 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
+                {(jobList ?? []).map((application: any) => {
                   return (
                     <div className="lg:w-4/12 w-full">
                       <JobItem
@@ -147,7 +147,7 @@ const SavedTeamMembers = () => {
                         onSelectJob={undefined}
                         onApplyJob={undefined}
                         active={false}
-                        job={job}
+                        job={{ ...application.job, applied: true }}
                       />
                     </div>
                   );
