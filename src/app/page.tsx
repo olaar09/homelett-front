@@ -89,13 +89,6 @@ export default function Home() {
 
         <main>
           <Hero />
-          <Section2 />
-          <Section3 />
-          <Section4 />
-          <Section5 />
-          <Section6 />
-          <Section7 />
-          <Footer />
         </main>
       </div>
     </div>
