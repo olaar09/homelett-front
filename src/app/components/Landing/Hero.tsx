@@ -40,7 +40,7 @@ const Hero = () => {
           </ul>
           <div className="mt-6 sm:mt-8">
             <a
-              href="https://api.whatsapp.com/send?phone=2347018135800&text=I%20want%20like%20to%20start%20a%20subscription"
+              href="https://api.whatsapp.com/send?phone=2347018135800&text=I%20want%20to%20start%20a%20subscription"
               className="inline-flex items-center justify-center bg-blue-600 text-lg font-semibold text-white shadow-sm transition-all duration-150 rounded-xl px-8 py-3 w-full hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             >
               Get started
