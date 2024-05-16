@@ -260,10 +260,7 @@ export default function Home() {
         </form>
 
         <div className="text-center  px-4 mx-auto w-full lg:w-5/12 mt-14">
-          <span className="font-bold text-gray-500  text-md lg:text-md xs:text:md">
-            Auto apply to 400,000+ jobs with AI, from the most exciting
-            companies around the world
-          </span>
+          <span className="font-bold text-gray-500  text-md lg:text-md xs:text:md"></span>
         </div>
       </section>
 
