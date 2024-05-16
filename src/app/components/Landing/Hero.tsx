@@ -17,8 +17,8 @@ const Hero = () => {
           </h1>
           <p className="max-w-2xl text-base font-normal text-gray-600 mx-auto mt-10 sm:text-xl sm:mt-5 lg:text-2xl">
             Get Netflix, Spotify, YouTube premium, showmax, Prime, Hulu, & HBO
-            starting at 250 Naira. Enjoy unbeatable prices for your subscription
-            services
+            starting at <b>250 Naira</b>. Enjoy unbeatable prices for your
+            subscription services
           </p>
           <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-4 text-sm font-medium text-gray-900 mt-16 sm:mt-8">
             <li className="inline-flex items-center gap-2">
