@@ -10,9 +10,9 @@ export default () => {
             Who Can Join?
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
-            ApplyBase can be used by professionals and students to apply for
-            internship and jobs. However ApplyBase is specifically fine tuned
-            and most suitable for tech based job applications
+            Bubble can be used by professionals and students to apply for
+            internship and jobs. However Bubble is specifically fine tuned and
+            most suitable for tech based job applications
           </p>
         </div>
         <div className="grid max-w-md grid-cols-1 gap-y-8 mx-auto mt-12 text-center sm:mt-16 md:max-w-none md:grid-cols-3 md:gap-x-12 md:mx-0 md:text-left">

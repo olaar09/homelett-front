@@ -28,7 +28,7 @@ const items: MenuProps["items"] = [
     ),
   },
   {
-    key: "applybase",
+    key: "Bubble",
     label: (
       <div className="flex items-center gap-x-3">
         <Icon icon={"mdi:gesture-touch-box"} />

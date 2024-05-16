@@ -10,7 +10,7 @@ export default () => {
             AI Powered Search & Application
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
-            ApplyBase intelligently finds jobs that match your profile with
+            Bubble intelligently finds jobs that match your profile with
             pin-point, high accuracy, allowing you focus on applying rather than
             searching
           </p>

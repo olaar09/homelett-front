@@ -74,7 +74,7 @@ const HeadIcon = ({ onToggle, isOpen }: any) => {
         </div>
         {isOpen && (
           <span className=" text-foreground font-black text-lg mt-0">
-            ApplyBase
+            Bubble
           </span>
         )}
       </div>
@@ -207,9 +207,9 @@ const Nav: React.FC<any> = ({ children }) => {
   const isBillingActive = authContext.currentUser?.billingActive;
 
   const billingMessage = isFreeTrial
-    ? `You have ${authContext.currentUser?.freeTrialLeft} days left on ApplyBase free trial `
+    ? `You have ${authContext.currentUser?.freeTrialLeft} days left on Bubble free trial `
     : isBillingActive
-    ? "You are currently on a ApplyBase paid plan"
+    ? "You are currently on a Bubble paid plan"
     : "Your current plan is expired. Click below to renew";
 
   const buttonMessage = isFreeTrial

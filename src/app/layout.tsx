@@ -11,15 +11,15 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
-  title: "ApplyBase | AI copilot for  job search",
+  title: "Bubble | AI copilot for  job search",
   description: "AI Co-Pilot for your job search",
-  applicationName: "ApplyBase",
+  applicationName: "Bubble",
   appleWebApp: true,
   formatDetection: { telephone: false },
   // icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
   openGraph: {
     type: "website",
-    title: "ApplyBase",
+    title: "Bubble",
     description: "",
     siteName: "",
     url: "",
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   twitter: {
     site: "",
     siteId: "", // make unique
-    creator: "ApplyBase INC",
+    creator: "Bubble INC",
     description: "AI Co-Pilot for job search",
-    title: "ApplyBase",
+    title: "Bubble",
     images: "",
   },
   assets: [
@@ -70,10 +70,10 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@ApplyBase" />
+        <meta name="twitter:site" content="@Bubble" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
-        <title>ApplyBase - AI Copilot for job search</title>
+        <title>Bubble - AI Copilot for job search</title>
         <meta name="robots" content="index,follow" />
         <meta
           name="description"
@@ -81,19 +81,19 @@ export default function RootLayout({
         />
         <meta
           property="og:title"
-          content="ApplyBase - AI Copilot for job search"
+          content="Bubble - AI Copilot for job search"
         />
         <meta
           property="og:description"
           content="Automatically apply to 50+ jobs daily from all over the world, with your CV modified to each job requirement"
         />
-        <meta property="og:url" content="https://applybase.net/partners" />
+        <meta property="og:url" content="https://Bubble.net/partners" />
         <meta property="og:image" content="/images/dashboard-mockup.png" />
         <meta
           property="og:image:alt"
-          content="ApplyBase - Your AI copilot for job search"
+          content="Bubble - Your AI copilot for job search"
         />
-        <meta property="og:site_name" content="ApplyBase" />
+        <meta property="og:site_name" content="Bubble" />
         <link rel="preconnect" href="https://fonts.bunny.net" />
         <link
           rel="stylesheet"

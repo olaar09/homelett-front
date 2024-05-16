@@ -10,8 +10,8 @@ export default () => {
             Built With State Of The Art AI Technology
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
-            ApplyBase is the top job search AI copilot, built with state of the
-            art AI technology
+            Bubble is the top job search AI copilot, built with state of the art
+            AI technology
           </p>
         </div>
         <div className="grid grid-cols-1 gap-5 mt-12 sm:grid-cols-2 sm:gap-6 sm:mt-16 md:grid-cols-3 xl:grid-cols-4">
@@ -121,8 +121,8 @@ export default () => {
                 Agentic application
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyBase propriety AI copilot can navigate different platforms
-                on the web to search and apply autonomously
+                Bubble propriety AI copilot can navigate different platforms on
+                the web to search and apply autonomously
               </p>
             </div>
           </div>
@@ -143,7 +143,7 @@ export default () => {
                 Fine tuned models
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyBase CV & Essay writer, have been fine tuned with over 100k
+                Bubble CV & Essay writer, have been fine tuned with over 100k
                 Top CV & Essays
               </p>
             </div>
@@ -165,7 +165,7 @@ export default () => {
                 Easy tracking
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyBase tech ensures easy tracking of applications, responses,
+                Bubble tech ensures easy tracking of applications, responses,
                 and auto follow up
               </p>
             </div>
@@ -187,8 +187,8 @@ export default () => {
                 Human level writing
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyBase fine-tuned models texts are indistinguishable from
-                human written.
+                Bubble fine-tuned models texts are indistinguishable from human
+                written.
               </p>
             </div>
           </div>
@@ -209,7 +209,7 @@ export default () => {
                 Domain knowledge
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyBase AI knows how to write top CV for specific tech domains
+                Bubble AI knows how to write top CV for specific tech domains
               </p>
             </div>
           </div>
@@ -230,7 +230,7 @@ export default () => {
                 Non stop application
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyBase AI copilot doesn't stop. Literarily land your next job
+                Bubble AI copilot doesn't stop. Literarily land your next job
                 while you sleep!
               </p>
             </div>
@@ -296,7 +296,7 @@ export default () => {
                 Leading AI solution
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                ApplyBase is the leading AI solution for scholarship & job
+                Bubble is the leading AI solution for scholarship & job
                 search. literally find your next scholarship & job while you
                 sleep.
               </p>

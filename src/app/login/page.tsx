@@ -162,7 +162,7 @@ export default function Home() {
             <img src="/logo.png" className="w-10 mr-2" />
           </div>
           <span className=" text-foreground font-black text-2xl mt-0">
-            ApplyBase
+            Bubble
           </span>
         </div>
 
@@ -243,7 +243,7 @@ export default function Home() {
 
       <section className="px-6 flex items-center justify-center ">
         <span className=" text-foreground-secondary text-sm text-center">
-          By continuing, you are agreeing to ApplyBase'{" "}
+          By continuing, you are agreeing to Bubble'{" "}
           <span className=" text-banner"> terms of services </span> and{" "}
           <span className=" text-banner">Privacy Policy </span>
         </span>

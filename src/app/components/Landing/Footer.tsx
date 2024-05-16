@@ -33,7 +33,7 @@ export default () => {
                 >
                   <path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-8,144H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"></path>
                 </svg>
-                support@useapplybase.com
+                support@useBubble.com
               </div>
             </div>
 
@@ -42,12 +42,12 @@ export default () => {
                 {
                   icon: "bi:twitter",
                   title: "Twitter",
-                  link: "https://twitter.com/useapplybase",
+                  link: "https://twitter.com/useBubble",
                 },
                 {
                   icon: "teenyicons:instagram-solid",
                   title: "Instagram",
-                  link: "https://twitter.com/useapplybase",
+                  link: "https://twitter.com/useBubble",
                 },
               ].map((social) => (
                 <Tooltip title={social.title}>
@@ -63,7 +63,7 @@ export default () => {
         </div>
         <div className="flex flex-col items-center gap-4 mt-12 sm:mt-16 md:flex-row md:justify-between">
           <p className="text-sm font-medium text-gray-600">
-            © ApplyBase 2024 . All rights reserved
+            © Bubble 2024 . All rights reserved
           </p>
         </div>
       </div>

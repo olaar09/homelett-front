@@ -26,7 +26,7 @@ export default function Home() {
                   href="/"
                 >
                   <img className="h-7 w-auto" src="/logo.png" alt="" />
-                  <span className="text-2xl font-black"> ApplyBase</span>
+                  <span className="text-2xl font-black"> Bubble</span>
                 </a>
               </div>
               {/* <div className="hidden items-center justify-center gap-4 lg:flex">
