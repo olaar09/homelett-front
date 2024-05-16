@@ -11,8 +11,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
-  title: "Bubble | AI copilot for  job search",
-  description: "AI Co-Pilot for your job search",
+  title: "Bubble | Enjoy premium subscription for less",
+  description: "Enjoy premium subscription for less",
   applicationName: "Bubble",
   appleWebApp: true,
   formatDetection: { telephone: false },
