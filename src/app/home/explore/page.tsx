@@ -1,24 +1,17 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Card, Popconfirm, Spin, Tag, message } from "antd";
+import { Button, Card, Popconfirm, Spin, Tabs, Tag, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
 import { HeaderItem } from "../_components/PageHeaderItem";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import Meta from "antd/es/card/Meta";
-import { DeleteOutlined } from "@ant-design/icons";
-import { AxiosError } from "axios";
 import AddWorkflowModal from "./components/AddWorkflowModal";
-import JobItem from "../_components/JobItem";
-import { Str } from "@/utils/consts";
-import UtilService from "@/services/UtilService";
-import ACButton from "@/app/components/Button";
 import ExploreHeader from "./Header";
-import EmptyHighlight from "./components/Highlight/Empty";
-import Brands from "@/app/components/Brands";
-import Chip from "@/app/components/Chip";
+
+import { AndroidOutlined, AppleOutlined } from "@ant-design/icons";
+import Highlight from "./components/Highlight/Available";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -35,10 +28,6 @@ const SavedTeamMembers = () => {
     ready:
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
-
-  const handleAddWorkflow = () => {
-    setOpenAddModal(true);
-  };
 
   const handleCloseTeam = (status = false) => {
     setOpenAddModal(false);
@@ -57,12 +46,14 @@ const SavedTeamMembers = () => {
     }
   };
 
-  const handleContactSupport = async () => {
-    window.open(Str.whatsapp);
-  };
-
   const loadingPage = authContext.loading || loadingProducts;
   const userSubs = authContext.currentUser?.subscriptions;
+
+  const tabs = [
+    { label: "Streaming", icon: "solar:video-library-bold" },
+    { label: "Earn money", icon: "ri:money-dollar-circle-fill" },
+    { label: "Data & Airtime", icon: "teenyicons:mobile-solid" },
+  ];
   return (
     <>
       <AddWorkflowModal open={openAddModal} onCancel={handleCloseTeam} />
@@ -82,61 +73,12 @@ const SavedTeamMembers = () => {
       {!loadingPage && (
         <>
           <ExploreHeader />
-          <div className="flex flex-col items-center w-full px-3 mt-10">
-            {(!userSubs || userSubs.length < 1) && false && <EmptyHighlight />}
-
-            {(true || (userSubs && userSubs!.length > 0)) && (
-              <div className="mt-0 w-full ">
-                <span className=" text-foreground-secondary px-1 text-xs block mb-2 ">
-                  Your Subscriptions
-                </span>
-                <div className=" flex flex-nowrap overflow-x-scroll">
-                  {[
-                    {
-                      plan: {
-                        title: "Premium entertainment",
-                        platforms: [
-                          { logo: Str.brands[0] },
-                          { logo: Str.brands[1] },
-                          { logo: Str.brands[2] },
-                        ],
-                      },
-                    },
-                    2,
-                    3,
-                  ].map((subscription) => {
-                    const selected = [...Str.brands].slice(0, 3);
-                    return (
-                      <div className="px-2 shrink-0 w-7/12 h-20 ">
-                        <div className="  h-full flex flex-col px-1 rounded-md bg-opacity-80 bg-gray-100 shadow">
-                          <div className="px-3 py-2 justify-between flex items-center ">
-                            <Brands size="small" brands={selected} />
-                            <Chip
-                              title="Basic"
-                              loading={false}
-                              isSelected={false}
-                              icon={""}
-                            />
-                          </div>
-                          <div className="flex flex-col mt-1">
-                            <span className="text-xs ">Entertainment</span>
-                            <span className="text-xs text-foreground-secondary">
-                              250 / month{" "}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
+          <Highlight userSubs={userSubs} />
         </>
       )}
 
-      {!loadingPage && productList && productList.length < 1 && (
-        <div className="h-screen   flex flex-col justify-center items-center">
+      {false && !loadingPage && productList && productList.length < 1 && (
+        <div className="h-1/2 mt-10   flex flex-col justify-center items-center">
           {" "}
           <div className=" flex flex-col  items-center justify-center gap-y-7">
             {" "}
@@ -146,37 +88,29 @@ const SavedTeamMembers = () => {
         </div>
       )}
 
-      {productList && productList.length > 0 && (
-        <Spin
-          indicator={
-            <Icon
-              icon={"eos-icons:three-dots-loading"}
-              className=" text-8xl text-foreground"
-            />
-          }
-          spinning={loadingProducts}
-          className="bg-background-thin"
-        >
-          <div className="bg-background-thin min-h-screen">
-            <div className="w-full mx-auto mt-10 bg-background-thin">
-              <section className=" flex items-center w-full  lg:px-8 px-2 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
-                {(productList ?? []).map((application: any) => {
-                  return (
-                    <div className="lg:w-4/12 w-full">
-                      <JobItem
-                        applying={false}
-                        onSelectJob={undefined}
-                        onApplyJob={undefined}
-                        active={false}
-                        job={{ ...application.job, applied: true }}
-                      />
-                    </div>
-                  );
-                })}
-              </section>
-            </div>
-          </div>
-        </Spin>
+      {(true || (productList && productList.length > 0)) && (
+        <div className="px-3 mt-6">
+          <span className="text-xs text-foreground-secondary">
+            Available services
+          </span>
+          <Tabs
+            defaultActiveKey="2"
+            items={tabs.map((tab, i) => {
+              const id = String(i + 1);
+              return {
+                key: id,
+                label: (
+                  <div className="flex items-center gap-x-2">
+                    {" "}
+                    <Icon className="inline" icon={tab.icon} />
+                    <span>{tab.label}</span>
+                  </div>
+                ),
+                children: `Tab ${id}`,
+              };
+            })}
+          />
+        </div>
       )}
     </>
   );
