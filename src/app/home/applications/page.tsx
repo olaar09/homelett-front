@@ -42,7 +42,7 @@ const SavedTeamMembers = () => {
 
   const getWorkFlow = async (): Promise<any> => {
     try {
-      const data = await apiUtils.jobService.fetchJobApplications();
+      const data = await apiUtils.productService.fetchProducts();
       const list = data;
       return list;
     } catch (error) {

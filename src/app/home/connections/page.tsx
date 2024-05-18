@@ -6,16 +6,10 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 import { Button, Card, Popconfirm, Tag, message } from "antd";
 import APIUtil from "@/services/APIUtil";
-import { usePrevious, useRequest } from "ahooks";
+import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
-import ChatInput from "../_components/ChatInput";
-import ConnectorModal, { ListItem } from "../_components/Connector/Connector";
-import { IChat } from "@/app/interfaces/IChatItem";
-import { AxiosError } from "axios";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
-import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
-import Chip from "@/app/components/Chip";
 import { useRouter } from "next/navigation";
 const { Meta } = Card;
 

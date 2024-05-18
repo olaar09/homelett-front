@@ -7,8 +7,8 @@ import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
 import { HeaderItem } from "../_components/PageHeaderItem";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import AddWorkflowModal from "./components/AddWorkflowModal";
-import ExploreHeader from "./Header";
+import AddWorkflowModal from "../_components/AddWorkflowModal";
+import ExploreHeader from "./components/Header";
 
 import { AndroidOutlined, AppleOutlined } from "@ant-design/icons";
 import Highlight from "./components/Highlight/Available";
@@ -16,6 +16,8 @@ import Brands from "@/app/components/Brands";
 import Chip from "@/app/components/Chip";
 import { Str } from "@/utils/consts";
 import ProductItem from "./components/Products/ProductItem";
+import EntertainmentTab from "./components/EntertainmentTab";
+import EarnTab from "./components/EarnTab";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -42,7 +44,7 @@ const SavedTeamMembers = () => {
 
   const getWorkFlow = async (): Promise<any> => {
     try {
-      const data = await apiUtils.jobService.fetchJobApplications();
+      const data = await apiUtils.productService.fetchProducts();
       const list = data;
       return list;
     } catch (error) {
@@ -52,6 +54,7 @@ const SavedTeamMembers = () => {
 
   const loadingPage = authContext.loading || loadingProducts;
   const userSubs = authContext.currentUser?.subscriptions;
+  const waitingProducts = loadingPage || !productList;
 
   const tabs = [
     { label: "Streaming", icon: "solar:video-library-bold" },
@@ -61,7 +64,7 @@ const SavedTeamMembers = () => {
   return (
     <div className=" h-screen ">
       <AddWorkflowModal open={openAddModal} onCancel={handleCloseTeam} />
-      {(loadingPage || !productList) && (
+      {loadingPage && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
           <div className="">
@@ -92,11 +95,11 @@ const SavedTeamMembers = () => {
         </div>
       )}
 
-      {(true || (productList && productList.length > 0)) && (
-        <div className="px-3 mt-16 h-1/2 flex flex-col ">
-          <span className="text-xs text-foreground-secondary">
-            Available services
-          </span>
+      <div className="px-3 mt-16 h-1/2 flex flex-col ">
+        <span className="text-xs text-foreground-secondary">
+          Available services
+        </span>
+        <Spin spinning={false}>
           <Tabs
             defaultActiveKey="1"
             items={tabs.map((tab, i) => {
@@ -118,20 +121,9 @@ const SavedTeamMembers = () => {
                       paddingBottom: 240,
                     }}
                   >
-                    {id === "1" && (
-                      <div className="">
-                        {[1, 2, 3, 4, 5, 6].map((x) => (
-                          <ProductItem />
-                        ))}
-                      </div>
-                    )}
-                    {id === "2" && (
-                      <div>
-                        {[1, 2, 3, 4, 5, 6].map((x) => (
-                          <ProductItem />
-                        ))}
-                      </div>
-                    )}
+                    {id === "1" && <EntertainmentTab />}
+                    {id === "2" && <EarnTab />}
+
                     {id === "3" && (
                       <div className="flex flex-col items-center justify-center h-72 gap-y-10">
                         <img className="h-12" src="/fun-arrow.svg" />
@@ -143,8 +135,8 @@ const SavedTeamMembers = () => {
               };
             })}
           />
-        </div>
-      )}
+        </Spin>
+      </div>
     </div>
   );
 };

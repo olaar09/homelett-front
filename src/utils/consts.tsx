@@ -22,6 +22,15 @@ export const Str = {
     "/logos/nt.png",
     "/logos/sm.png",
   ],
+
+  products: [
+    "/logos/yt.webp",
+    "/logos/sp.png",
+    "/logos/pr.jpeg",
+    "/logos/nt.png",
+    "/logos/sm.png",
+  ],
+
   industryCategories: [
     "Information Technology",
     "Healthcare",

@@ -1,19 +1,49 @@
 import Brands from "@/app/components/Brands";
 import Chip from "@/app/components/Chip";
+import UtilService from "@/services/UtilService";
 import { Str } from "@/utils/consts";
 
-const ProductItem = () => {
+const ProductItem = ({ openProduct, product }: any) => {
+  const capitalize = `${(product.tag ?? "").slice(0, 1).toUpperCase()}${(
+    product.tag ?? ""
+  ).slice(1)}`;
+
+  console.log(
+    product?.total_allowed_count,
+    Str.brands.slice(0, product?.total_allowed_count)
+  );
+
   return (
-    <div className="px-2  w-full h-28   my-2">
-      <div className=" h-full   flex flex-col px-1 rounded-md bg-opacity-80 bg-gray-50 shadow">
+    <div onClick={() => openProduct()} className="px-2  w-full h-28   my-2">
+      <div className=" h-full   flex flex-col px-1 rounded-md bg-opacity-80 bg-gray-50 shadow relative">
         <div className="px-3 py-2 justify-between flex items-center ">
-          <Brands size="small" brands={Str.brands} />
-          <Chip title="Basic" loading={false} isSelected={false} icon={""} />
+          <div className="flex items-center">
+            <Brands
+              size="small"
+              brands={[
+                ...Str.brands.slice(0, product?.total_allowed_count ?? 0),
+              ]}
+            />
+          </div>
+
+          <Chip
+            title={capitalize}
+            loading={false}
+            isSelected={false}
+            icon={""}
+          />
         </div>
         <div className="flex flex-col mt-1">
-          <span className="text-xs ">Entertainment</span>
+          <span className="text-xs ">{product.title}</span>
           <span className="text-xs text-foreground-secondary">
-            250 / month{" "}
+            {new UtilService().formatMoney(product.price, "en-NG", "NGN")} /
+            week{" "}
+          </span>
+        </div>
+
+        <div className="bottom-1 absolute">
+          <span className="text-xs text-foreground-secondary">
+            {product?.total_allowed}
           </span>
         </div>
       </div>
