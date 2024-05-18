@@ -104,15 +104,11 @@ const SavedTeamMembers = () => {
                     },
                     2,
                     3,
-                    4,
-                    5,
-                  ].map(() => {
+                  ].map((subscription) => {
                     const selected = [...Str.brands].slice(0, 3);
-                    console.log(selected);
-
                     return (
-                      <div className="px-1 shrink-0 w-7/12 shadow-lg h-20 ">
-                        <div className=" border h-full flex flex-col px-1 rounded-md border-opacity-25 border-gray-500 shadow-sm">
+                      <div className="px-2 shrink-0 w-7/12 h-20 ">
+                        <div className="  h-full flex flex-col px-1 rounded-md bg-opacity-80 bg-gray-100 shadow">
                           <div className="px-3 py-2 justify-between flex items-center ">
                             <Brands size="small" brands={selected} />
                             <Chip
