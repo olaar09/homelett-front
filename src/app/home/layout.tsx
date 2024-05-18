@@ -253,12 +253,12 @@ const Nav: React.FC<any> = ({ children }) => {
                 {
                   path: "/home/applications",
                   icon: "icon-park-solid:all-application",
-                  title: "Dashboard",
+                  title: "History",
                 },
                 {
                   path: "/home/connections",
                   icon: "material-symbols:integration-instructions-rounded",
-                  title: "History",
+                  title: "Profile",
                 },
                 {
                   path: "/home/profile",
@@ -318,71 +318,22 @@ const Nav: React.FC<any> = ({ children }) => {
                     <NavMenu
                       path="/home/explore"
                       icon={"mdi:gesture-touch-box"}
-                      title="Apply"
+                      title="Explore"
                     />
                   </Link>
-                  <Link className="w-full" href={"/home/applications"}>
-                    <NavMenu
-                      path="/home/applications"
-                      icon={"icon-park-solid:all-application"}
-                      title="Job applications"
-                    />
-                  </Link>
-                  <div className="relative w-full">
-                    <NavMenu
-                      path="/home/api_keys"
-                      icon={"material-symbols:analytics-outline"}
-                      title="Insights"
-                    />
-                    <Tag
-                      color="volcano"
-                      className={`absolute right-1 top-[12px] text-xs`}
-                    >
-                      coming soon
-                    </Tag>
-                  </div>
 
                   <Link className="w-full" href={"/home/connections"}>
                     <NavMenu
-                      path="/home/connections"
+                      path="/home/history"
                       icon={"material-symbols:integration-instructions-rounded"}
-                      title="Connections"
+                      title="History"
                     />
                   </Link>
                 </div>
               )}
               {openSide && (
                 <div className="flex flex-grow  justify-end flex-col py-3 px-2 w-full ">
-                  <div className=" h-40 border rounded-lg my-2 flex flex-col px-3 items-center justify-center gap-y-2 mx-auto w-full">
-                    <span className="block text-center text-sm mx-auto w-8/12 font-bold">
-                      {billingMessage}
-                    </span>
-
-                    <span className="text-xs text-center">
-                      Apply for over 100 jobs weekly and increase your chance of
-                      getting an interview by 9x
-                    </span>
-                    <Button
-                      className="bg-primary"
-                      onClick={onOpenModal}
-                      type="primary"
-                    >
-                      <div className="flex items-center gap-x-2">
-                        <span>{buttonMessage}</span>
-                        <Icon icon={buttonIcon} />
-                      </div>
-                    </Button>
-                  </div>
                   <div className="flex flex-col border-t w-full py-5">
-                    <NavMenu
-                      path="/home/name"
-                      icon={"mdi:worker"} // todo, show icon based on profile type
-                      title={`${authContext.activeProfile?.profession}`}
-                      suffixIcon="ic:round-switch-left"
-                      tooltip="Switch job profile"
-                      onClickSuffix={onSwitch}
-                    />
-
                     <Link className="w-full" href={"/home/profile"}>
                       <NavMenu
                         path="/home/profile"
@@ -398,25 +349,6 @@ const Nav: React.FC<any> = ({ children }) => {
                       />
                     </Link>
 
-                    {/*       <div onClick={addOpenAiKey} className="relative">
-                    <NavMenu
-                      path="/home/api_keys"
-                      icon={"ph:open-ai-logo-bold"}
-                      title="OpenAI Key"
-                    />
-                    <Icon
-                      className={`absolute right-1 top-[10px] text-xl  ${
-                        authContext.currentUser?.is_open_ai
-                          ? "text-green-500"
-                          : "text-red-300"
-                      }`}
-                      icon={`${
-                        authContext.currentUser?.is_open_ai
-                          ? "ep:success-filled"
-                          : "ic:round-cancel"
-                      }`}
-                    />
-                  </div> */}
                     <div onClick={onLogout}>
                       <NavMenu
                         path={"/logout"}
