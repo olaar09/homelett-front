@@ -12,6 +12,10 @@ import ExploreHeader from "./Header";
 
 import { AndroidOutlined, AppleOutlined } from "@ant-design/icons";
 import Highlight from "./components/Highlight/Available";
+import Brands from "@/app/components/Brands";
+import Chip from "@/app/components/Chip";
+import { Str } from "@/utils/consts";
+import ProductItem from "./components/Products/ProductItem";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -55,7 +59,7 @@ const SavedTeamMembers = () => {
     { label: "Data & Airtime", icon: "teenyicons:mobile-solid" },
   ];
   return (
-    <>
+    <div className=" h-screen ">
       <AddWorkflowModal open={openAddModal} onCancel={handleCloseTeam} />
       {(loadingPage || !productList) && (
         <div className="h-screen   flex flex-col justify-center items-center">
@@ -89,12 +93,12 @@ const SavedTeamMembers = () => {
       )}
 
       {(true || (productList && productList.length > 0)) && (
-        <div className="px-3 mt-6">
+        <div className="px-3 mt-16 h-1/2 flex flex-col ">
           <span className="text-xs text-foreground-secondary">
             Available services
           </span>
           <Tabs
-            defaultActiveKey="2"
+            defaultActiveKey="1"
             items={tabs.map((tab, i) => {
               const id = String(i + 1);
               return {
@@ -106,13 +110,42 @@ const SavedTeamMembers = () => {
                     <span>{tab.label}</span>
                   </div>
                 ),
-                children: `Tab ${id}`,
+                children: (
+                  <div
+                    style={{
+                      maxHeight: window.screen.availHeight / 1.4,
+                      overflowY: "scroll",
+                      paddingBottom: 240,
+                    }}
+                  >
+                    {id === "1" && (
+                      <div className="">
+                        {[1, 2, 3, 4, 5, 6].map((x) => (
+                          <ProductItem />
+                        ))}
+                      </div>
+                    )}
+                    {id === "2" && (
+                      <div>
+                        {[1, 2, 3, 4, 5, 6].map((x) => (
+                          <ProductItem />
+                        ))}
+                      </div>
+                    )}
+                    {id === "3" && (
+                      <div className="flex flex-col items-center justify-center h-72 gap-y-10">
+                        <img className="h-12" src="/fun-arrow.svg" />
+                        <span>Coming soon !</span>
+                      </div>
+                    )}
+                  </div>
+                ),
               };
             })}
           />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

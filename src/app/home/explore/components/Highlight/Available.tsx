@@ -6,9 +6,9 @@ import EmptyHighlight from "./Empty";
 const Highlight = ({ userSubs }: { userSubs: any }) => {
   return (
     <div className="flex flex-col items-center w-full px-3 mt-10">
-      {(!userSubs || userSubs.length < 1) && false && <EmptyHighlight />}
+      {(!userSubs || userSubs.length < 1) && true && <EmptyHighlight />}
 
-      {(true || (userSubs && userSubs!.length > 0)) && (
+      {(false || (userSubs && userSubs!.length > 0)) && (
         <div className="mt-0 w-full ">
           <span className=" text-foreground-secondary px-1 text-xs block mb-2 ">
             Your subscriptions
