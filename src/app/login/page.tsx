@@ -19,6 +19,7 @@ import GoogleLoginButton from "../components/Auth/GoogleSignin";
 import InputField from "../components/InputField";
 import Link from "next/link";
 import ACButton from "../components/Button";
+import AuthProblem from "../components/Auth/AuthProblem";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -235,12 +236,10 @@ export default function Home() {
           </div>
         </form>
 
-        <div className="text-center  px-4 mx-auto w-full lg:w-5/12 mt-14">
-          <span className="font-bold text-gray-500  text-md lg:text-md xs:text:md"></span>
-        </div>
+        <AuthProblem />
       </section>
 
-      <section className="px-6 flex items-center justify-center ">
+      <section className="px-6 flex flex-col items-center justify-center gap-y-4 ">
         <span className=" text-foreground-secondary text-sm text-center">
           By continuing, you are agreeing to Bubble'{" "}
           <span className=" text-banner"> terms of services </span> and{" "}

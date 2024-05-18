@@ -20,6 +20,7 @@ import ACButton from "../components/Button";
 import HomeText from "../components/HomeText";
 import InputField from "../components/InputField";
 import Link from "next/link";
+import AuthProblem from "../components/Auth/AuthProblem";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -257,9 +258,7 @@ export default function Home() {
           </div>
         </form>
 
-        <div className="text-center  px-4 mx-auto w-full lg:w-5/12 mt-14">
-          <span className="font-bold text-gray-500  text-md lg:text-md xs:text:md"></span>
-        </div>
+        <AuthProblem />
       </section>
 
       <section className="px-6 flex items-center justify-center ">
