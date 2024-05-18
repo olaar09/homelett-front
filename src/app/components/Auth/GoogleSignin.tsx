@@ -15,6 +15,7 @@ const GoogleLoginButton = ({ onSuccess }: any) => {
   return (
     <div className=" max-auto flex items-center justify-center">
       <GoogleLogin
+        text="continue_with"
         size="large"
         width={342}
         onSuccess={responseGoogle}

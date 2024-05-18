@@ -157,17 +157,19 @@ export default function Home() {
       className="flex flex-col h-screen overflow-y-scroll items-center   pb-8"
     >
       <section className="flex-grow my-4 flex flex-col pt-4 items-center w-full mt-10">
-        <div className="flex items-center gap-x-2   px-8   justify-center  lg:w-6/12 mx-auto">
-          <div className="w-6 flex items-center justify-center gap-x-3">
-            <img src="/logo.png" className="w-10 mr-2" />
-          </div>
-          <span className=" text-foreground font-black text-2xl mt-0">
-            Bubble
-          </span>
+        <div className="flex items-center gap-x-3   px-8   justify-center  lg:w-6/12 mx-auto">
+          <Link href={"/"}>
+            <div className="flex items-center gap-x-0   px-8   justify-center  lg:w-6/12 mx-auto">
+              <img src="/logo.png" className="w-14 mr-2" />
+              <span className=" text-foreground font-black text-2xl mt-0">
+                Bubble
+              </span>
+            </div>
+          </Link>
         </div>
 
-        <div className="text-center mt-10 px-4 w-full  lg:w-6/12 mx-auto ">
-          <span className=" lg:text-5xl text-3xl font-black">
+        <div className="text-center mt-4 px-4 w-full  lg:w-6/12 mx-auto ">
+          <span className=" lg:text-5xl text-2xl font-black">
             {" "}
             Login to your account
           </span>
