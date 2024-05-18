@@ -12,6 +12,7 @@ class AuthAPIService {
     try {
       return await this.apiService.post("/auth/google", {
         id_token: idToken,
+        is_bubble: true,
       });
     } catch (error) {
       throw error;
@@ -22,6 +23,7 @@ class AuthAPIService {
     try {
       return await this.apiService.post("/auth/request-invite", {
         ...data,
+        is_bubble: true,
       });
     } catch (error) {
       throw error;
@@ -33,6 +35,7 @@ class AuthAPIService {
       return await this.apiService.post("/auth/register", {
         email: data.email,
         password: data.password,
+        is_bubble: true,
       });
     } catch (error) {
       throw error;
@@ -44,6 +47,7 @@ class AuthAPIService {
       return await this.apiService.post("/auth/login", {
         email: data.email,
         password: data.password,
+        is_bubble: true,
       });
     } catch (error) {
       throw error;
