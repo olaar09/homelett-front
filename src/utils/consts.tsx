@@ -15,6 +15,13 @@ export const Str = {
       key: "CV_4",
     },
   },
+  brands: [
+    "/logos/yt.webp",
+    "/logos/sp.png",
+    "/logos/pr.jpeg",
+    "/logos/nt.png",
+    "/logos/sm.png",
+  ],
   industryCategories: [
     "Information Technology",
     "Healthcare",

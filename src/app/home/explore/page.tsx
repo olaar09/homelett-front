@@ -16,6 +16,9 @@ import { Str } from "@/utils/consts";
 import UtilService from "@/services/UtilService";
 import ACButton from "@/app/components/Button";
 import ExploreHeader from "./Header";
+import EmptyHighlight from "./components/Highlight/Empty";
+import Brands from "@/app/components/Brands";
+import Chip from "@/app/components/Chip";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -59,7 +62,7 @@ const SavedTeamMembers = () => {
   };
 
   const loadingPage = authContext.loading || loadingProducts;
-
+  const userSubs = authContext.currentUser?.subscriptions;
   return (
     <>
       <AddWorkflowModal open={openAddModal} onCancel={handleCloseTeam} />
@@ -79,31 +82,59 @@ const SavedTeamMembers = () => {
       {!loadingPage && (
         <>
           <ExploreHeader />
-          <div className="flex items-center w-full px-3">
-            <div className="flex flex-col justify-between items-start w-full">
-              <div className="flex flex-col items-center justify-between h-20 w-full mt-10">
-                <div className="flex item h-10  ">
-                  {[
-                    "/logos/yt.webp",
-                    "/logos/sp.png",
-                    "/logos/pr.jpeg",
-                    "/logos/nt.png",
-                    "/logos/sm.png",
-                  ].map((brand, index) => (
-                    <div className={`-ml-4  px-1 bg-transparent `}>
-                      <img
-                        src={brand}
-                        className={`flex  w-auto h-8 bg-[#2A2A2A] rounded-full `}
-                      />
-                    </div>
-                  ))}
-                </div>
+          <div className="flex flex-col items-center w-full px-3 mt-10">
+            {(!userSubs || userSubs.length < 1) && false && <EmptyHighlight />}
 
-                <span className="text-xs w-full text-center block ">
-                  No subscription yet. Select a plan below to get started
+            {(true || (userSubs && userSubs!.length > 0)) && (
+              <div className="mt-0 w-full ">
+                <span className=" text-foreground-secondary px-1 text-xs block mb-2 ">
+                  Your Subscriptions
                 </span>
+                <div className=" flex flex-nowrap overflow-x-scroll">
+                  {[
+                    {
+                      plan: {
+                        title: "Premium entertainment",
+                        platforms: [
+                          { logo: Str.brands[0] },
+                          { logo: Str.brands[1] },
+                          { logo: Str.brands[2] },
+                        ],
+                      },
+                    },
+                    2,
+                    3,
+                    4,
+                    5,
+                  ].map(() => {
+                    const selected = [...Str.brands].slice(0, 3);
+                    console.log(selected);
+
+                    return (
+                      <div className="px-1 shrink-0 w-7/12 shadow-lg h-20 ">
+                        <div className=" border h-full flex flex-col px-1 rounded-md border-opacity-25 border-gray-500 shadow-sm">
+                          <div className="px-3 py-2 justify-between flex items-center ">
+                            <Brands size="small" brands={selected} />
+                            <Chip
+                              title="Basic"
+                              loading={false}
+                              isSelected={false}
+                              icon={""}
+                            />
+                          </div>
+                          <div className="flex flex-col mt-1">
+                            <span className="text-xs ">Entertainment</span>
+                            <span className="text-xs text-foreground-secondary">
+                              250 / month{" "}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </>
       )}

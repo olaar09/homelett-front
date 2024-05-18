@@ -11,6 +11,7 @@ export interface IAuthRequest {
   active_job_profile?: IJProfile;
   paymentLink?: string;
   token?: string;
+  subscriptions: any[];
 }
 
 export interface IJProfile {

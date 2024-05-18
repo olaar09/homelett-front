@@ -23,7 +23,7 @@ const Chip: React.FC<ChipProps> = ({ action, title, loading, icon }) => {
       }}
       className="rounded-2xl bg-gray-200 px-2 flex items-center gap-x-2 hover:opacity-60 transition-all duration-100 cursor-pointer"
     >
-      <span>{title}</span>
+      <span className="text-xs">{title}</span>
       {action && <Icon icon={loading ? "eos-icons:loading" : "lucide:plus"} />}
     </div>
   );
