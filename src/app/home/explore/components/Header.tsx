@@ -23,9 +23,7 @@ const ExploreHeader = ({ handleContactSupport }: any) => {
             >
               <div className="flex items-center gap-x-2">
                 <Icon icon="majesticons:money-plus" />
-                <span className="text-xs text-foreground text-primary">
-                  Add fund
-                </span>
+                <span className="text-xs  text-primary">Add fund</span>
               </div>
             </Button>
           </div>

@@ -21,6 +21,7 @@ export const Str = {
     "/logos/pr.jpeg",
     "/logos/nt.png",
     "/logos/sm.png",
+    "/logos/windscribe_logo.jpg",
   ],
 
   products: [
