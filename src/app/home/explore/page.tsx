@@ -100,7 +100,7 @@ const SavedTeamMembers = () => {
                 </div>
 
                 <span className="text-xs w-full text-center block ">
-                  No subscription yet. Select a service below to get started
+                  No subscription yet. Select a plan below to get started
                 </span>
               </div>
             </div>
