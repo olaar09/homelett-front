@@ -152,8 +152,8 @@ const Connections = () => {
 
             <div onClick={onOpenConnector}>
               <Button type="link" className="flex items-center gap-x-2 px-0">
-                <Icon className="text-black" icon={"lucide:plus"} />
-                <span className="text-black">Add Integration</span>
+                <Icon className="text-black" icon={"ri:logout-box-fill"} />
+                <span className="text-black">Logout</span>
               </Button>
             </div>
           </>
@@ -166,7 +166,7 @@ const Connections = () => {
           <div className=" flex flex-col  items-center justify-center gap-y-7">
             {" "}
             <img className="h-12" src="/fun-arrow.svg" />
-            <span className="text-foreground">No Integrations found</span>
+            <span className="text-foreground">Coming soon !</span>
           </div>
         </div>
       )}

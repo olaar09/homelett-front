@@ -247,17 +247,17 @@ const Nav: React.FC<any> = ({ children }) => {
               {[
                 {
                   path: "/home/explore",
-                  icon: "mdi:gesture-touch-box",
+                  icon: "icon-park-solid:all-application",
                   title: "Explore",
                 },
                 {
                   path: "/home/applications",
-                  icon: "icon-park-solid:all-application",
+                  icon: "uim:history",
                   title: "History",
                 },
                 {
                   path: "/home/connections",
-                  icon: "material-symbols:integration-instructions-rounded",
+                  icon: "iconamoon:profile-fill",
                   title: "Profile",
                 },
                 {
@@ -317,7 +317,7 @@ const Nav: React.FC<any> = ({ children }) => {
                   <Link className="w-full" href={"/home/explore"}>
                     <NavMenu
                       path="/home/explore"
-                      icon={"mdi:gesture-touch-box"}
+                      icon={"icon-park-solid:all-application"}
                       title="Explore"
                     />
                   </Link>
@@ -325,7 +325,7 @@ const Nav: React.FC<any> = ({ children }) => {
                   <Link className="w-full" href={"/home/connections"}>
                     <NavMenu
                       path="/home/history"
-                      icon={"material-symbols:integration-instructions-rounded"}
+                      icon={"uim:history"}
                       title="History"
                     />
                   </Link>
@@ -344,7 +344,7 @@ const Nav: React.FC<any> = ({ children }) => {
                     <Link className="w-full" href={"/home/help"}>
                       <NavMenu
                         path="/home/team"
-                        icon={"ic:round-help-center"}
+                        icon={"logos:whatsapp-icon"}
                         title="Help"
                       />
                     </Link>
