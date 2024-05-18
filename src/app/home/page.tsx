@@ -15,7 +15,7 @@ const Chat = () => {
   const [textContent, setTextContent] = useState("");
 
   useEffect(() => {
-    router.push("/home/apply");
+    router.push("/home/explore");
   }, []);
 
   return <main className=" w-full bg-background-thin min-h-screen"></main>;

@@ -99,7 +99,7 @@ export default function Home() {
       await authContext.refreshProfile();
       await authContext.refreshDataSource();
 
-      router.push("/home/apply");
+      router.push("/home/explore");
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error);
@@ -129,7 +129,7 @@ export default function Home() {
       await authContext.refreshProfile();
       await authContext.refreshDataSource();
 
-      router.push("/home/apply");
+      router.push("/home/explore");
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log("IS ERROR", error);

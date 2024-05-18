@@ -1,4 +1,6 @@
 export const Str = {
+  whatsapp:
+    "https://api.whatsapp.com/send?phone=2347018135800&text=I%20want%20to%20start%20a%20subscription",
   CV_TEMPLATES: {
     CV_1: {
       key: "CV_1",

@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import AddKeyModal from "./_components/AddKeyModal";
 import { Button, Tag, Tooltip, message } from "antd";
 import NicheProfileDrawer from "./niche_profile/NicheProfile";
-import PricingModal from "./apply/JobSide/PricingModal";
+import PricingModal from "./apply_old/JobSide/PricingModal";
 import APIUtil from "@/services/APIUtil";
 import { usePaystackPayment } from "react-paystack";
 import { isMobile } from "react-device-detect";
@@ -232,7 +232,7 @@ const Nav: React.FC<any> = ({ children }) => {
 
   return (
     <>
-      <NicheProfileDrawer open={requiresProfile} onClose={closeNicheDrawer} />
+      {/*  <NicheProfileDrawer open={requiresProfile} onClose={closeNicheDrawer} /> */}
       <PricingModal
         loading={loading}
         onInitPayment={onSetAmount}
@@ -243,44 +243,44 @@ const Nav: React.FC<any> = ({ children }) => {
       <div className="min-h-screen w-full overflow-hidden">
         <div className="flex items-center w-full h-full overflow-hidden">
           {isMobile && (
-            <div className=" px-3 flex items-center justify-between fixed bottom-0 left-0 right-0 shadow-lg h-20 z-30 bg-white">
+            <div className="px-3 border-t flex items-center justify-between fixed bottom-0 left-0 right-0 shadow-2xl h-20 z-30 bg-white">
               {[
                 {
-                  path: "/home/apply",
+                  path: "/home/explore",
                   icon: "mdi:gesture-touch-box",
-                  title: "Apply",
+                  title: "Explore",
                 },
                 {
                   path: "/home/applications",
                   icon: "icon-park-solid:all-application",
-                  title: "Applications",
+                  title: "Dashboard",
                 },
                 {
                   path: "/home/connections",
                   icon: "material-symbols:integration-instructions-rounded",
-                  title: "Connections",
+                  title: "History",
                 },
                 {
                   path: "/home/profile",
-                  icon: "mingcute:profile-fill",
-                  title: "Settings",
+                  icon: "logos:whatsapp-icon",
+                  title: "Support",
                 },
               ].map((menu) => {
                 const browserPath = usePathname();
                 const isActive = browserPath.includes(menu.path);
                 return (
                   <Link href={menu.path}>
-                    <div className="flex flex-col   hover:bg-gray-50 px-2 py-1 rounded-md  transition-all duration-200  items-center justify-center">
+                    <div className="flex flex-col  gap-y-1  hover:bg-gray-50 px-2 py-1 rounded-md  transition-all duration-200  items-center justify-center">
                       <Icon
                         icon={menu.icon}
-                        className={`text-xl ${
+                        className={`text-lg ${
                           isActive ? " text-gray-600" : " text-gray-400"
                         } `}
                       />
                       <span
                         className={`${
                           isActive ? " text-gray-600" : " text-gray-400"
-                        } text-sm`}
+                        } text-xs`}
                       >
                         {menu.title}
                       </span>
@@ -314,9 +314,9 @@ const Nav: React.FC<any> = ({ children }) => {
               )}
               {openSide && (
                 <div className="flex flex-col items-start gap-y-2 py-5 w-full px-2 ">
-                  <Link className="w-full" href={"/home/apply"}>
+                  <Link className="w-full" href={"/home/explore"}>
                     <NavMenu
-                      path="/home/apply"
+                      path="/home/explore"
                       icon={"mdi:gesture-touch-box"}
                       title="Apply"
                     />
