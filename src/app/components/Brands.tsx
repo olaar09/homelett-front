@@ -1,12 +1,14 @@
 const Brands = ({
   brands,
   size = "default",
+  remaining = 0,
 }: {
   size: "small" | "default";
   brands: string[];
+  remaining?: number;
 }) => {
   return (
-    <div className="flex ">
+    <div className="flex items-center justify-between">
       {brands.map((brand, index) => (
         <div key={index} className="-ml-4 px-1 bg-transparent">
           <img
@@ -18,6 +20,10 @@ const Brands = ({
           />
         </div>
       ))}
+
+      {remaining > 0 && (
+        <span className=" text-foreground-secondary text-xs">+{remaining}</span>
+      )}
     </div>
   );
 };
