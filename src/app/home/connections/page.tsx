@@ -16,6 +16,7 @@ import { AxiosError } from "axios";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 import Chip from "@/app/components/Chip";
+import { useRouter } from "next/navigation";
 const { Meta } = Card;
 
 const HeaderItem = ({
@@ -42,12 +43,6 @@ const HeaderItem = ({
 };
 
 const Connections = () => {
-  const [openConnector, setOpenConnector] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const [selectedConnectionPayload, setSelectedConnectionPayload] =
-    useState<any>(undefined);
-
   const [selectedConnection, setSelectedConnection] = useState<
     IDataSourceItem | undefined
   >(undefined);
@@ -56,8 +51,12 @@ const Connections = () => {
   const currentAuth = useContext(AuthContext);
   const apiUtil = new APIUtil();
 
-  const onOpenConnector = () => {
-    setOpenConnector(true);
+  const router = useRouter();
+
+  const onLogout = () => {
+    localStorage.clear();
+    router.push("/");
+    currentAuth.clearUser();
   };
 
   const {
@@ -80,56 +79,10 @@ const Connections = () => {
     }
   };
 
-  const onCloseConnector = () => {
-    setOpenConnector(false);
-    setSelectedConnection(undefined);
-  };
-
-  const onSelectConnection = (connection: IDataSourceItem) => {
-    switch (connection.source_type.name) {
-      case "mysql":
-      case "postgresql":
-      case "mariadb":
-      case "slack":
-        setSelectedConnectionPayload({
-          datasource_id: connection.source_type.id!,
-          datasource_name: connection.name,
-          connection_string: "",
-        });
-        break;
-
-      default:
-        break;
-    }
-    setSelectedConnection(connection);
-    onOpenConnector();
-  };
-
-  const handleDeleteConnection = async (connection: IDataSourceItem) => {
-    try {
-      setLoading(true);
-      await apiUtil.datasourceService.deleteSource(connection.id);
-      await currentAuth.refreshDataSource();
-      setLoading(false);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error);
-
-        message.error(
-          `${error?.response?.data?.message ?? "Unable to complete request"}`
-        );
-      } else {
-        message.error("Unable to delete connection");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col w-full">
       <LoadingOverlay
-        loading={currentAuth.loading || currentAuth.loadingSources || loading}
+        loading={currentAuth.loading || currentAuth.loadingSources}
       />
 
       {(loadingWorkflows || !workflowList) && (
@@ -150,7 +103,7 @@ const Connections = () => {
           <>
             <div className="flex flex-col"></div>
 
-            <div onClick={onOpenConnector}>
+            <div onClick={onLogout}>
               <Button type="link" className="flex items-center gap-x-2 px-0">
                 <Icon className="text-black" icon={"ri:logout-box-fill"} />
                 <span className="text-black">Logout</span>
@@ -177,7 +130,6 @@ const Connections = () => {
             <div className="w-4/12 ">
               <div className="mr-4 relative cursor-pointer hoverContainer transition-all">
                 <Card
-                  onClick={() => onSelectConnection(datasource)}
                   className="rounded-2xl h-40 relative cursor-pointer"
                   bordered={false}
                 >
@@ -198,7 +150,6 @@ const Connections = () => {
                       description="Are you sure to delete this connection?"
                       okText="Yes"
                       cancelText="No"
-                      onConfirm={() => handleDeleteConnection(datasource)}
                     >
                       <Button
                         className="text-red-500"
@@ -207,7 +158,6 @@ const Connections = () => {
                       />
                     </Popconfirm>
                     <Button
-                      onClick={() => onSelectConnection(datasource)}
                       icon={<EditOutlined />}
                       className="text-success-500"
                       type="link"
@@ -231,13 +181,6 @@ const Connections = () => {
           ))}
         </section>
       )}
-      <ConnectorModal
-        defaultFormPayload={selectedConnectionPayload}
-        closable={true}
-        visible={openConnector}
-        onClose={onCloseConnector}
-        defaultSelected={selectedConnection}
-      />
     </main>
   );
 };
