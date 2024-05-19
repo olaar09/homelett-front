@@ -199,6 +199,8 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
     border: "none",
   };
 
+  const hasSubscriptions =
+    subscription?.credentials && subscription?.credentials.length;
   return (
     <>
       <Drawer
@@ -262,20 +264,39 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                 </p>
               </div>
 
-              <div className="flex flex-col items-start mt-4">
-                <span className="text-block text-xs">Selected services</span>
-              </div>
+              {hasSubscriptions && (
+                <div className="flex flex-col items-start mt-4">
+                  <span className="text-block text-xs">Selected services</span>
+                </div>
+              )}
             </div>
 
-            <div className="mt-3 max-h-96 flex flex-col px-3 w-full gap-y-2 overflow-y-scroll">
-              <Collapse
-                bordered={false}
-                defaultActiveKey={["1"]}
-                expandIcon={({ isActive }) => (
-                  <CaretRightOutlined rotate={isActive ? 90 : 0} />
-                )}
-                items={getItems(platforms ?? [])}
-              />
+            {!hasSubscriptions && (
+              <div className="flex flex-col items-center mt-10 px-2 gap-y-4 w-full">
+                <span className="block items-center justify-center text-center">
+                  Please check back within 24 hours for login details
+                </span>
+                <span className=" text-foreground-secondary">
+                  If over 24 hours,{" "}
+                  <a href={Str.whatsappHelp} className="text-primary underline">
+                    {" "}
+                    Contact support{" "}
+                  </a>
+                </span>
+              </div>
+            )}
+
+            <div className="mt-3 flex flex-col px-0 w-full gap-y-2 overflow-y-scroll">
+              {hasSubscriptions && (
+                <Collapse
+                  bordered={false}
+                  defaultActiveKey={["1"]}
+                  expandIcon={({ isActive }) => (
+                    <CaretRightOutlined rotate={isActive ? 90 : 0} />
+                  )}
+                  items={getItems(platforms ?? [])}
+                />
+              )}
             </div>
           </div>
         )}

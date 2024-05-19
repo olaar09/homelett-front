@@ -1,4 +1,6 @@
 export const Str = {
+  whatsappHelp:
+    "https://api.whatsapp.com/send?phone=2347018135800&text=I%20need%20to%20help",
   whatsapp:
     "https://api.whatsapp.com/send?phone=2347018135800&text=I%20want%20to%20start%20a%20subscription",
   CV_TEMPLATES: {
@@ -21,7 +23,7 @@ export const Str = {
     "/logos/pr.jpeg",
     "/logos/nt.png",
     "/logos/sm.png",
-    "/logos/windscribe_logo.jpg",
+    "",
   ],
 
   products: [
