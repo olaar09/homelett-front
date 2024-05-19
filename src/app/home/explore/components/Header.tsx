@@ -28,16 +28,15 @@ const ExploreHeader = () => {
             )}
           </span>
           <div>
-            <Button
-              onClick={handlePaymentLink}
-              type="link"
-              loading={false}
-              className="px-0"
-            >
-              <div className="flex items-center gap-x-2">
+            <Button type="link" loading={false} className="px-0">
+              <a
+                href={paymentLink}
+                className="flex items-center gap-x-2"
+                rel="noreferrer"
+              >
                 <Icon icon="majesticons:money-plus" />
                 <span className="text-xs  text-primary">Add fund</span>
-              </div>
+              </a>
             </Button>
           </div>
         </div>
