@@ -16,7 +16,7 @@ const Upgrade = ({ email }: any) => {
     reference: new Date().getTime().toString(),
     email: email,
     amount: amount * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-    publicKey: "pk_test_0bd51a9b53a2c80ead3d84d11b27e4f51659e5f5",
+    publicKey: "pk_live_9e5eb617e571c17f13bb79edec147f2dbe40bfe7",
   };
 
   const initializePayment = usePaystackPayment(config);
