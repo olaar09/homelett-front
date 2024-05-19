@@ -11,7 +11,7 @@ import AddWorkflowModal from "../_components/AddWorkflowModal";
 import ExploreHeader from "./components/Header";
 
 import { AndroidOutlined, AppleOutlined } from "@ant-design/icons";
-import Highlight from "./components/Highlight/Available";
+import Highlight from "./components/Highlight/Subscriptions";
 import Brands from "@/app/components/Brands";
 import Chip from "@/app/components/Chip";
 import { Str } from "@/utils/consts";
