@@ -4,7 +4,7 @@ import UtilService from "@/services/UtilService";
 import { Str } from "@/utils/consts";
 import { shuffleArray } from "@/utils/helpers";
 
-const ProductItem = ({ openProduct, product }: any) => {
+const ProductItem = ({ brands, openProduct, product }: any) => {
   const capitalize = `${(product.tag ?? "").slice(0, 1).toUpperCase()}${(
     product.tag ?? ""
   ).slice(1)}`;
@@ -14,7 +14,6 @@ const ProductItem = ({ openProduct, product }: any) => {
     Str.brands.slice(0, product?.total_allowed_count)
   );
 
-  const getBrands = [...Str.brands];
   return (
     <div onClick={() => openProduct()} className="px-2  w-full h-28   my-2">
       <div className=" h-full   flex flex-col px-1 rounded-md bg-opacity-80 bg-gray-50 shadow relative">
@@ -24,7 +23,7 @@ const ProductItem = ({ openProduct, product }: any) => {
               size="small"
               remaining={Str.brands.length - product?.total_allowed_count}
               brands={[
-                ...shuffleArray(getBrands).slice(
+                ...shuffleArray(brands).slice(
                   0,
                   product?.total_allowed_count ?? 0
                 ),

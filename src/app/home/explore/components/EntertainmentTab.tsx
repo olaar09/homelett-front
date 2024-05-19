@@ -6,6 +6,7 @@ import ProductItem from "./Products/ProductItem";
 import ProductDrawer from "./Products/ProductDrawer";
 import { AuthContext } from "@/contexts/AuthContext";
 import APIUtil from "@/services/APIUtil";
+import { Str } from "@/utils/consts";
 
 const EntertainmentTab = ({ handleContactSupport }: any) => {
   const [open, setOpen] = useState(false);
@@ -21,6 +22,10 @@ const EntertainmentTab = ({ handleContactSupport }: any) => {
     await authContext.refreshProfile();
   };
 
+  const getBrands = [...Str.brands];
+  const onProductSelected = (product: any) => {
+    setSelectedProduct(product);
+  };
   return (
     <div className="">
       <ProductDrawer
@@ -33,35 +38,37 @@ const EntertainmentTab = ({ handleContactSupport }: any) => {
         {
           title: "Stream surfer",
           price: 350 * 100,
-          tag: "basic",
+          tag: "Surfer",
           total_allowed: "Select up to 2 services",
           total_allowed_count: 2,
         },
         {
           title: "Stream plus",
           price: 600 * 100,
-          tag: "pro",
+          tag: "Plus ",
           total_allowed: "Select up to 3 services",
           total_allowed_count: 3,
         },
         {
           title: "Stream premium",
           price: 800 * 100,
-          tag: "platinum",
+          tag: "Premium",
           total_allowed: "Select up to 4 services",
           total_allowed_count: 4,
         },
         {
           title: "Stream ultimate",
           price: 1000 * 100,
-          tag: "platinum",
+          tag: "Ultimate",
           total_allowed: "Access to  all  services",
           total_allowed_count: 6,
         },
-      ].map((product) => (
+      ].map((product, index) => (
         <ProductItem
+          key={`${product.title} ${index}`}
+          brands={getBrands}
           product={product}
-          openProduct={() => setSelectedProduct(product)}
+          openProduct={() => onProductSelected(product)}
         />
       ))}
     </div>
