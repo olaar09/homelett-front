@@ -1,9 +1,12 @@
+import { AuthContext } from "@/contexts/AuthContext";
 import UtilService from "@/services/UtilService";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Button } from "antd";
-import React from "react";
+import React, { useContext } from "react";
 
 const ExploreHeader = ({ handleContactSupport }: any) => {
+  const authContext = useContext(AuthContext);
+
   return (
     <div className="flex h-12 items-center justify-between w-full px-2 lg:hidden">
       <div className="flex items-center justify-start gap-x-6">
@@ -12,7 +15,11 @@ const ExploreHeader = ({ handleContactSupport }: any) => {
       <div>
         <div className="flex items-center justify-end gap-x-4 w-full">
           <span className="text-sm font-bold">
-            {new UtilService().formatMoney("40000", "en-NG", "NGN")}
+            {new UtilService().formatMoney(
+              `${(authContext.currentUser?.finance?.balance ?? 0) * 100}`,
+              "en-NG",
+              "NGN"
+            )}
           </span>
           <div>
             <Button

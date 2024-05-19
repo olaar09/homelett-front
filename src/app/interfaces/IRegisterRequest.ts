@@ -5,6 +5,9 @@ export interface IAuthRequest {
   password: string;
   company?: string;
   is_open_ai?: number;
+  finance?: {
+    balance: number;
+  };
   freeTrialLeft?: any;
   billingActive?: boolean;
   billingCurrentPlan?: IBilling;
