@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Drawer,
   List,
@@ -18,6 +18,7 @@ import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import UtilService from "@/services/UtilService";
 import { IProduct } from "@/app/interfaces/IProduct";
+import { AuthContext } from "@/contexts/AuthContext";
 
 const payOptions: MenuProps["items"] = [
   {
@@ -71,6 +72,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   const [loading, setLoading] = useState(false);
 
   const platforms = product?.assigned_platforms.map((pl) => pl.platform);
+  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     if (open) setSelectedPlatform([]);
@@ -84,6 +86,8 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
         interval: key,
         selected_platforms: selectedPlatforms,
       });
+      onClose();
+      authContext.refreshProfile();
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error?.response?.data?.reason);
