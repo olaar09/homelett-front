@@ -82,7 +82,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
       await apiUtil.productService.buyProduct({
         product_id: product!.id.toString(),
         interval: key,
-        selectedPlatforms: selectedPlatforms,
+        selected_platforms: selectedPlatforms,
       });
     } catch (error) {
       if (error instanceof AxiosError) {
