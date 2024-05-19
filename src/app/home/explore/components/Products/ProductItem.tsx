@@ -25,11 +25,7 @@ const ProductItem = ({
       <div className=" h-full   flex flex-col px-1 rounded-md bg-opacity-80 bg-gray-50 shadow relative">
         <div className="px-3 py-2 justify-between flex items-center ">
           <div className="flex items-center">
-            <Brands
-              size="small"
-              remaining={brands.length - product?.total_selection_count}
-              brands={[...brands.slice(0, product?.total_selection_count ?? 0)]}
-            />
+            <Brands size="small" brands={[...brands]} />
           </div>
 
           <Chip

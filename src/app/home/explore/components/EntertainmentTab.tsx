@@ -17,34 +17,42 @@ const EntertainmentTab = ({
   products: IProduct[];
 }) => {
   const [open, setOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
   const authContext = useContext(AuthContext);
   const apiUtil = new APIUtil();
 
-  const onSubscribe = async () => {
+  /*   const onSubscribe = async ({
+    interval,
+    selectedPlatforms,
+  }: {
+    interval: string;
+    selectedPlatforms: string[];
+  }) => {
     console.log("call subscribe here");
     console.log("refresh profile here");
 
-    await apiUtil.productService.buyProduct(selectedProduct.id);
+    await apiUtil.productService.buyProduct({
+      product_id: selectedProduct!.id.toString(),
+      interval,
+      selectedPlatforms,
+    });
     await authContext.refreshProfile();
-  };
+  }; */
 
-  const getBrands = [...Str.brands];
   const onProductSelected = (product: any) => {
     setSelectedProduct(product);
   };
+
   return (
     <div className="">
       <ProductDrawer
         product={selectedProduct}
         open={selectedProduct != null}
         onClose={() => setSelectedProduct(null)}
-        onSubscribe={onSubscribe}
       />
       {products.map((product, index) => (
         <ProductItem
           key={`${product.title} ${index}`}
-          brands={getBrands}
           product={product}
           openProduct={() => onProductSelected(product)}
         />

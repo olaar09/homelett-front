@@ -11,6 +11,7 @@ class ProductAPIService {
   async buyProduct(data: {
     product_id: string;
     interval: string;
+    selectedPlatforms: string[];
   }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(

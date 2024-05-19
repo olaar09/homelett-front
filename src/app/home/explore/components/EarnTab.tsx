@@ -9,7 +9,7 @@ const EarnTab = ({ handleContactSupport }: any) => {
   return (
     <div className="">
       <ProductDrawer
-        product={undefined}
+        product={null}
         open={false}
         onClose={function (): void {
           throw new Error("Function not implemented.");

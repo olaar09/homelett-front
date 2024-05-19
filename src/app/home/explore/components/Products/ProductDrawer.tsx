@@ -17,6 +17,7 @@ import { shuffleArray } from "@/utils/helpers";
 import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import UtilService from "@/services/UtilService";
+import { IProduct } from "@/app/interfaces/IProduct";
 
 const payOptions: MenuProps["items"] = [
   {
@@ -41,47 +42,47 @@ const payOptions: MenuProps["items"] = [
 
 // Define types for the component props
 interface DrawerProps {
-  product: any;
+  product: IProduct | null;
   open: boolean;
   onClose: () => void;
-  onSubscribe: () => void;
+  /*   onSubscribe: ({
+    platforms,
+    interval,
+  }: {
+    product_id: number;
+    interval: string;
+    platforms: string[];
+  }) => void; */
 }
 
-const ProductDrawer: React.FC<DrawerProps> = ({
-  product,
-  onSubscribe,
-  onClose,
-  open,
-}) => {
-  const handleItemClick = (item: any) => {
-    onSubscribe();
-  };
+const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
+  /*   const handleItemClick = (item: any) => {
+    onSubscribe({
+      product_id: product!.id,
+      platforms: selectedPlatforms,
+      interval: "",
+    });
+  }; */
 
   const [selectedPlatforms, setSelectedPlatform] = useState<string[]>([]);
 
   const apiUtil = new APIUtil();
-  const isUltimate = product?.total_allowed_count === Str.brands.length;
+  const isUltimate = product?.total_selection_count === Str.brands.length;
   const [loading, setLoading] = useState(false);
+
+  const platforms = product?.assigned_platforms.map((pl) => pl.platform);
 
   useEffect(() => {
     if (open) setSelectedPlatform([]);
   }, [open]);
 
-  const platforms = [
-    { label: "Netflix", value: "1", logo: Str.brands[3] },
-    { label: "Showmax", value: "2", logo: Str.brands[4] },
-    { label: "Spotify", value: "3", logo: Str.brands[1] },
-    { label: "Windscribe VPN", value: "4", logo: Str.brands[5] },
-    { label: "Youtube premium", value: "5", logo: Str.brands[0] },
-    { label: "Prime video", value: "6", logo: Str.brands[2] },
-  ];
-
   const onMenuClick: MenuProps["onClick"] = async ({ key }) => {
     try {
       setLoading(true);
       await apiUtil.productService.buyProduct({
-        product_id: product.id,
+        product_id: product!.id.toString(),
         interval: key,
+        selectedPlatforms: selectedPlatforms,
       });
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -105,8 +106,8 @@ const ProductDrawer: React.FC<DrawerProps> = ({
   const onToggleService = (platform: any) => {
     const index = selectedPlatforms.indexOf(platform);
     if (index === -1) {
-      if (selectedPlatforms.length + 1 > product?.total_allowed_count) {
-        message.warning(product?.total_allowed);
+      if (selectedPlatforms.length + 1 > product!.total_selection_count) {
+        message.warning(product?.total_selection);
       } else {
         setSelectedPlatform([...selectedPlatforms, platform]);
       }
@@ -129,7 +130,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({
           <div className="flex flex-end justify-end items-center">
             <Dropdown
               disabled={
-                selectedPlatforms.length < product?.total_allowed_count ?? 0
+                selectedPlatforms.length < (product?.total_selection_count ?? 0)
               }
               menu={{ items: payOptions, onClick: onMenuClick }}
               placement="bottom"
@@ -159,14 +160,18 @@ const ProductDrawer: React.FC<DrawerProps> = ({
             <div className="mt-4 mb-1 px-3 flex justify-between items-center w-full">
               <span className="text-lg">{product?.title}</span>
               <span className=" text-foreground-secondary">
-                {new UtilService().formatMoney(product?.price, "en-NG", "NGN")}{" "}
+                {new UtilService().formatMoney(
+                  `${product?.price}`,
+                  "en-NG",
+                  "NGN"
+                )}{" "}
                 / weekly
               </span>
             </div>
 
             {/*      <div className="px-3">
               <span className="text-xs text-gray-500">
-                {product?.total_allowed}
+                {product?.total_selection}
               </span>
             </div> */}
 
@@ -176,7 +181,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({
                 {!isUltimate && (
                   <p>
                     {" "}
-                    You may select only {product?.total_allowed_count} of the
+                    You may select only {product?.total_selection_count} of the
                     services presented in the options.
                   </p>
                 )}
@@ -190,26 +195,26 @@ const ProductDrawer: React.FC<DrawerProps> = ({
 
               <div className="flex flex-col items-start mt-4">
                 <span className="text-block text-xs">
-                  {product?.total_allowed}
+                  {product?.total_selection}
                 </span>
               </div>
             </div>
 
             <div className="mt-3 flex flex-col px-3 w-full gap-y-2">
-              {platforms.map((pl) => (
+              {platforms!.map((pl) => (
                 <div
-                  onClick={() => onToggleService(pl.label)}
+                  onClick={() => onToggleService(pl.name)}
                   className="w-full flex justify-between items-center gap-x-3 h-10 cursor-pointer hover:bg-slate-100 transition-all duration-100 rounded-md"
                 >
                   <div className="flex items-center gap-x-3">
-                    <img src={pl.logo} className="w-6 h-6" />
-                    <span className="text-sm">{pl.label}</span>
+                    <img src={pl.icon} className="w-6 h-6" />
+                    <span className="text-sm">{pl.name}</span>
                   </div>
 
                   <div>
                     <Icon
                       icon={
-                        selectedPlatforms.includes(pl.label)
+                        selectedPlatforms.includes(pl.name)
                           ? "icon-park-solid:check-one"
                           : "gg:radio-check"
                       }
