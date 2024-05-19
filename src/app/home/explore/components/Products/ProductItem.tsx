@@ -1,17 +1,23 @@
 import Brands from "@/app/components/Brands";
 import Chip from "@/app/components/Chip";
+import { IProduct } from "@/app/interfaces/IProduct";
 import UtilService from "@/services/UtilService";
 import { Str } from "@/utils/consts";
 import { shuffleArray } from "@/utils/helpers";
 
-const ProductItem = ({ brands, openProduct, product }: any) => {
+const ProductItem = ({
+  openProduct,
+  product,
+}: {
+  product: IProduct;
+  openProduct: () => void;
+}) => {
   const capitalize = `${(product.tag ?? "").slice(0, 1).toUpperCase()}${(
     product.tag ?? ""
   ).slice(1)}`;
 
-  console.log(
-    product?.total_allowed_count,
-    Str.brands.slice(0, product?.total_allowed_count)
+  const brands = product.assigned_platforms.map(
+    (assigned) => assigned.platform.icon
   );
 
   return (
@@ -21,13 +27,8 @@ const ProductItem = ({ brands, openProduct, product }: any) => {
           <div className="flex items-center">
             <Brands
               size="small"
-              remaining={Str.brands.length - product?.total_allowed_count}
-              brands={[
-                ...shuffleArray(brands).slice(
-                  0,
-                  product?.total_allowed_count ?? 0
-                ),
-              ]}
+              remaining={brands.length - product?.total_selection_count}
+              brands={[...brands.slice(0, product?.total_selection_count ?? 0)]}
             />
           </div>
 
@@ -41,14 +42,18 @@ const ProductItem = ({ brands, openProduct, product }: any) => {
         <div className="flex flex-col mt-1">
           <span className="text-xs ">{product.title}</span>
           <span className="text-xs text-foreground-secondary">
-            {new UtilService().formatMoney(product.price, "en-NG", "NGN")} /
-            week{" "}
+            {new UtilService().formatMoney(
+              `${product.price * 100}`,
+              "en-NG",
+              "NGN"
+            )}{" "}
+            / week{" "}
           </span>
         </div>
 
         <div className="bottom-1 absolute">
           <span className="text-xs text-foreground-secondary">
-            {product?.total_allowed}
+            {product?.total_selection}
           </span>
         </div>
       </div>

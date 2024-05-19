@@ -30,7 +30,7 @@ const SavedTeamMembers = () => {
     error,
     loading: loadingProducts,
     refresh: refreshWorkflow,
-  } = useRequest(() => getWorkFlow(), {
+  } = useRequest(() => getProducts(), {
     ready:
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
@@ -42,11 +42,13 @@ const SavedTeamMembers = () => {
     }
   };
 
-  const getWorkFlow = async (): Promise<any> => {
+  const getProducts = async (): Promise<any> => {
     try {
       const data = await apiUtils.productService.fetchProducts();
-      const list = data;
-      return list;
+
+      console.log(data);
+
+      return data;
     } catch (error) {
       message.error("unable to load data");
     }
@@ -84,7 +86,7 @@ const SavedTeamMembers = () => {
         </>
       )}
 
-      {false && !loadingPage && productList && productList.length < 1 && (
+      {!loadingPage && productList && productList.length < 1 && (
         <div className="h-1/2 mt-10   flex flex-col justify-center items-center">
           {" "}
           <div className=" flex flex-col  items-center justify-center gap-y-7">
@@ -99,7 +101,7 @@ const SavedTeamMembers = () => {
         <span className="text-xs text-foreground-secondary">
           Available services
         </span>
-        <Spin spinning={false}>
+        <Spin spinning={loadingProducts}>
           <Tabs
             defaultActiveKey="1"
             items={tabs.map((tab, i) => {
@@ -121,7 +123,7 @@ const SavedTeamMembers = () => {
                       paddingBottom: 240,
                     }}
                   >
-                    {id === "1" && <EntertainmentTab />}
+                    {id === "1" && <EntertainmentTab products={productList} />}
                     {id === "2" && <EarnTab />}
 
                     {id === "3" && (

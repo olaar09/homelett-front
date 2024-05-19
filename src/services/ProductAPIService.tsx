@@ -1,3 +1,4 @@
+import { IProduct } from "@/app/interfaces/IProduct";
 import ApiService from "./APIService";
 
 class ProductAPIService {
@@ -22,7 +23,7 @@ class ProductAPIService {
     }
   }
 
-  async fetchProducts(): Promise<IJobProfileFeature | null> {
+  async fetchProducts(): Promise<IProduct[] | null> {
     try {
       const text = await this.apiService.get<{ data: any }>(`/products`);
       return text.data;
