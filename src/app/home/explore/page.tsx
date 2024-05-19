@@ -60,8 +60,8 @@ const SavedTeamMembers = () => {
 
   const tabs = [
     { label: "Streaming", icon: "solar:video-library-bold" },
-    { label: "Earn money", icon: "ri:money-dollar-circle-fill" },
     { label: "Data & Airtime", icon: "teenyicons:mobile-solid" },
+    { label: "Earn money", icon: "ri:money-dollar-circle-fill" },
   ];
   return (
     <div className=" h-screen ">
@@ -129,7 +129,6 @@ const SavedTeamMembers = () => {
                         loading={false}
                       />
                     )}
-                    {id === "2" && <EarnTab />}
 
                     {id === "3" && (
                       <div className="flex flex-col items-center justify-center h-72 gap-y-10">
@@ -137,6 +136,7 @@ const SavedTeamMembers = () => {
                         <span>Coming soon !</span>
                       </div>
                     )}
+                    {id === "2" && <EarnTab />}
                   </div>
                 ),
               };

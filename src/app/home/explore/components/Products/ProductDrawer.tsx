@@ -152,6 +152,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
         placement="bottom"
         height={computedHeight}
         onClose={onClose}
+        maskClosable={false}
         open={open}
       >
         {product && (
