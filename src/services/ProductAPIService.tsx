@@ -26,7 +26,7 @@ class ProductAPIService {
 
   async fetchProducts(): Promise<IProduct[] | null> {
     try {
-      const text = await this.apiService.get<{ data: any }>(`/product`);
+      const text = await this.apiService.get<{ data: any }>(`/products`);
       return text.data;
     } catch (error) {
       throw error;

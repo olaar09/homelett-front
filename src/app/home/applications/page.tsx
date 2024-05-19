@@ -42,9 +42,9 @@ const SavedTeamMembers = () => {
 
   const getWorkFlow = async (): Promise<any> => {
     try {
-      const data = await apiUtils.productService.fetchProducts();
-      const list = data;
-      return list;
+      // const data = await apiUtils.productService.fetchProducts();
+      // const list = data;
+      return [];
     } catch (error) {
       message.error("unable to load data");
     }
