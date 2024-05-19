@@ -13,6 +13,7 @@ import PricingModal from "./apply_old/JobSide/PricingModal";
 import APIUtil from "@/services/APIUtil";
 import { usePaystackPayment } from "react-paystack";
 import { isMobile } from "react-device-detect";
+import { Str } from "@/utils/consts";
 
 const NavMenu = ({
   title,
@@ -261,7 +262,7 @@ const Nav: React.FC<any> = ({ children }) => {
                   title: "Profile",
                 },
                 {
-                  path: "/home/profile",
+                  path: Str.whatsappHelp,
                   icon: "logos:whatsapp-icon",
                   title: "Support",
                 },
