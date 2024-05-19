@@ -1,8 +1,4 @@
-import UtilService from "@/services/UtilService";
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { Button } from "antd";
 import React from "react";
-import ProductItem from "./Products/ProductItem";
 import ProductDrawer from "./Products/ProductDrawer";
 
 const EarnTab = ({ handleContactSupport }: any) => {
@@ -12,9 +8,6 @@ const EarnTab = ({ handleContactSupport }: any) => {
         product={null}
         open={false}
         onClose={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-        onSubscribe={function (): void {
           throw new Error("Function not implemented.");
         }}
       />

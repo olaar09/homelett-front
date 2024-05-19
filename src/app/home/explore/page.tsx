@@ -123,7 +123,12 @@ const SavedTeamMembers = () => {
                       paddingBottom: 240,
                     }}
                   >
-                    {id === "1" && <EntertainmentTab products={productList} />}
+                    {id === "1" && (
+                      <EntertainmentTab
+                        products={productList}
+                        loading={false}
+                      />
+                    )}
                     {id === "2" && <EarnTab />}
 
                     {id === "3" && (

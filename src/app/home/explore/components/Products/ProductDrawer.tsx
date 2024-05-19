@@ -122,6 +122,9 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
     window.screen.availHeight - (window.screen.availHeight / 100) * 5;
 
   const computedHeight = calcHeight >= 633.65 ? 633.65 : calcHeight;
+  const brands = (product?.assigned_platforms ?? []).map(
+    (assigned) => assigned.platform.icon
+  );
 
   return (
     <>
@@ -154,14 +157,14 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
         {product && (
           <div className="flex flex-col items-start py-6">
             <div className=" px-6">
-              <Brands size="small" brands={[...Str.brands]} />
+              <Brands size="small" brands={brands} />
             </div>
 
             <div className="mt-4 mb-1 px-3 flex justify-between items-center w-full">
               <span className="text-lg">{product?.title}</span>
               <span className=" text-foreground-secondary">
                 {new UtilService().formatMoney(
-                  `${product?.price}`,
+                  `${product?.price * 100}`,
                   "en-NG",
                   "NGN"
                 )}{" "}
