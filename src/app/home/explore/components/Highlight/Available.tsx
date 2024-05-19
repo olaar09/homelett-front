@@ -5,7 +5,7 @@ import EmptyHighlight from "./Empty";
 import { ISubscription } from "@/app/interfaces/IRegisterRequest";
 import UtilService from "@/services/UtilService";
 
-const Highlight = ({ userSubs }: { userSubs: ISubscription[] }) => {
+const Highlight = ({ userSubs }: { userSubs: ISubscription[] | undefined }) => {
   return (
     <div className="flex flex-col items-center w-full px-3 mt-10">
       {(!userSubs || userSubs.length < 1) && <EmptyHighlight />}
@@ -17,12 +17,15 @@ const Highlight = ({ userSubs }: { userSubs: ISubscription[] }) => {
           </span>
           <div className=" flex flex-nowrap overflow-x-scroll">
             {userSubs.map((subscription) => {
-              const selected = [...Str.brands].slice(0, 3);
+              const brands = subscription.product.assigned_platforms.map(
+                (assigned) => assigned.platform.icon
+              );
+
               return (
                 <div className="px-2 shrink-0 w-7/12 h-20 ">
                   <div className="  h-full flex flex-col px-1 rounded-md bg-opacity-80 bg-gray-100 shadow">
                     <div className="px-3 py-2 justify-between flex items-center ">
-                      <Brands size="small" brands={selected} />
+                      <Brands size="small" brands={brands} />
                       <Chip
                         title={subscription.product.tag}
                         loading={false}
@@ -40,7 +43,7 @@ const Highlight = ({ userSubs }: { userSubs: ISubscription[] }) => {
                           "en-NG",
                           "NGN"
                         )}{" "}
-                        / {subscription.plan_end}{" "}
+                        / {subscription.interval}{" "}
                       </span>
                     </div>
                   </div>

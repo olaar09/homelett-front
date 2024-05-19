@@ -24,6 +24,7 @@ export interface ISubscription {
   user_id: number;
   product_id: number;
   plan_end: string;
+  interval: string;
   is_active: number;
   created_at: string;
   updated_at: string;
