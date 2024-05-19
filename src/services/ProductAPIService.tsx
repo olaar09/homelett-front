@@ -15,7 +15,7 @@ class ProductAPIService {
   }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(
-        `/products/buy`,
+        `/products/buy_stream`,
         data
       );
       return response.data;
