@@ -2,32 +2,21 @@ import Brands from "@/app/components/Brands";
 import Chip from "@/app/components/Chip";
 import { Str } from "@/utils/consts";
 import EmptyHighlight from "./Empty";
+import { ISubscription } from "@/app/interfaces/IRegisterRequest";
+import UtilService from "@/services/UtilService";
 
-const Highlight = ({ userSubs }: { userSubs: any }) => {
+const Highlight = ({ userSubs }: { userSubs: ISubscription[] }) => {
   return (
     <div className="flex flex-col items-center w-full px-3 mt-10">
-      {(!userSubs || userSubs.length < 1) && true && <EmptyHighlight />}
+      {(!userSubs || userSubs.length < 1) && <EmptyHighlight />}
 
-      {(false || (userSubs && userSubs!.length > 0)) && (
+      {userSubs && userSubs!.length > 0 && (
         <div className="mt-0 w-full ">
           <span className=" text-foreground-secondary px-1 text-xs block mb-2 ">
             Your subscriptions
           </span>
           <div className=" flex flex-nowrap overflow-x-scroll">
-            {[
-              {
-                plan: {
-                  title: "Premium entertainment",
-                  platforms: [
-                    { logo: Str.brands[0] },
-                    { logo: Str.brands[1] },
-                    { logo: Str.brands[2] },
-                  ],
-                },
-              },
-              2,
-              3,
-            ].map((subscription) => {
+            {userSubs.map((subscription) => {
               const selected = [...Str.brands].slice(0, 3);
               return (
                 <div className="px-2 shrink-0 w-7/12 h-20 ">
@@ -35,16 +24,23 @@ const Highlight = ({ userSubs }: { userSubs: any }) => {
                     <div className="px-3 py-2 justify-between flex items-center ">
                       <Brands size="small" brands={selected} />
                       <Chip
-                        title="Basic"
+                        title={subscription.product.tag}
                         loading={false}
                         isSelected={false}
                         icon={""}
                       />
                     </div>
                     <div className="flex flex-col mt-1">
-                      <span className="text-xs ">Entertainment</span>
+                      <span className="text-xs ">
+                        {subscription.product.title}
+                      </span>
                       <span className="text-xs text-foreground-secondary">
-                        250 / month{" "}
+                        {new UtilService().formatMoney(
+                          `${subscription.product.price * 100}`,
+                          "en-NG",
+                          "NGN"
+                        )}{" "}
+                        / {subscription.plan_end}{" "}
                       </span>
                     </div>
                   </div>

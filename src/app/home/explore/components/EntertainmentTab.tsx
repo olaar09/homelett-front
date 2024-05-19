@@ -21,24 +21,6 @@ const EntertainmentTab = ({
   const authContext = useContext(AuthContext);
   const apiUtil = new APIUtil();
 
-  /*   const onSubscribe = async ({
-    interval,
-    selectedPlatforms,
-  }: {
-    interval: string;
-    selectedPlatforms: string[];
-  }) => {
-    console.log("call subscribe here");
-    console.log("refresh profile here");
-
-    await apiUtil.productService.buyProduct({
-      product_id: selectedProduct!.id.toString(),
-      interval,
-      selectedPlatforms,
-    });
-    await authContext.refreshProfile();
-  }; */
-
   const onProductSelected = (product: any) => {
     setSelectedProduct(product);
   };

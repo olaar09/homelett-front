@@ -55,7 +55,7 @@ const SavedTeamMembers = () => {
   };
 
   const loadingPage = authContext.loading || loadingProducts;
-  const userSubs = authContext.currentUser?.subscriptions;
+  const userSubs = authContext.currentUser?.active_subscriptions;
   const waitingProducts = loadingPage || !productList;
 
   const tabs = [
