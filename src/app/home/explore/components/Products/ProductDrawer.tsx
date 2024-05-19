@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Drawer,
   List,
@@ -14,6 +14,9 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import Brands from "@/app/components/Brands";
 import { Str } from "@/utils/consts";
 import { shuffleArray } from "@/utils/helpers";
+import APIUtil from "@/services/APIUtil";
+import { AxiosError } from "axios";
+import UtilService from "@/services/UtilService";
 
 const payOptions: MenuProps["items"] = [
   {
@@ -56,7 +59,13 @@ const ProductDrawer: React.FC<DrawerProps> = ({
 
   const [selectedPlatforms, setSelectedPlatform] = useState<string[]>([]);
 
+  const apiUtil = new APIUtil();
   const isUltimate = product?.total_allowed_count === Str.brands.length;
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (open) setSelectedPlatform([]);
+  }, [open]);
 
   const platforms = [
     { label: "Netflix", value: "1", logo: Str.brands[3] },
@@ -67,10 +76,29 @@ const ProductDrawer: React.FC<DrawerProps> = ({
     { label: "Prime video", value: "6", logo: Str.brands[2] },
   ];
 
-  const onMenuClick: MenuProps["onClick"] = ({ key }) => {
-    if (key === "source") {
-    } else {
-      message.warning(`Please upgrade to plus plan use this feature`);
+  const onMenuClick: MenuProps["onClick"] = async ({ key }) => {
+    try {
+      setLoading(true);
+      await apiUtil.productService.buyProduct({
+        product_id: product.id,
+        interval: key,
+      });
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error?.response?.data?.reason);
+
+        message.error(
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
+          }`
+        );
+      } else {
+        message.error("Unable to complete request");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -107,10 +135,11 @@ const ProductDrawer: React.FC<DrawerProps> = ({
               placement="bottom"
             >
               <Button
+                loading={loading}
                 className="bg-primary flex items-center gap-x-3"
                 type="primary"
               >
-                <Icon icon={"ic:outline-payment"} />
+                {!loading && <Icon icon={"ic:outline-payment"} />}
                 <span>Make payment</span>
               </Button>
             </Dropdown>
@@ -127,8 +156,12 @@ const ProductDrawer: React.FC<DrawerProps> = ({
               <Brands size="small" brands={[...Str.brands]} />
             </div>
 
-            <div className="mt-4 mb-1 px-3">
+            <div className="mt-4 mb-1 px-3 flex justify-between items-center w-full">
               <span className="text-lg">{product?.title}</span>
+              <span className=" text-foreground-secondary">
+                {new UtilService().formatMoney(product?.price, "en-NG", "NGN")}{" "}
+                / weekly
+              </span>
             </div>
 
             {/*      <div className="px-3">

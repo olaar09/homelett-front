@@ -7,13 +7,14 @@ class ProductAPIService {
     this.apiService = apiService;
   }
 
-  async buyProduct(productId: string): Promise<string> {
+  async buyProduct(data: {
+    product_id: string;
+    interval: string;
+  }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(
         `/products/buy`,
-        {
-          profile_id: productId,
-        }
+        data
       );
       return response.data;
     } catch (error) {
