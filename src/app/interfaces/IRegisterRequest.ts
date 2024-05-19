@@ -1,4 +1,4 @@
-import { IProduct } from "./IProduct";
+import { IPlatform, IProduct } from "./IProduct";
 
 export interface IAuthRequest {
   id?: string;
@@ -34,8 +34,11 @@ export interface ISubscription {
 
 export interface ISubscriptionCredentials {
   id: number;
-  product: IProduct;
-  email: string;
-  password: string;
-  extra?: any;
+  credential: {
+    id: number;
+    platform: IPlatform;
+    email: string;
+    password: string;
+    extra?: any;
+  };
 }
