@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "Bubble | Enjoy premium subscription for less",
   description: "Enjoy premium subscription for less",
   applicationName: "Bubble",
+  referrer: "no-referrer",
   appleWebApp: true,
   formatDetection: { telephone: false },
   // icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
@@ -69,6 +70,7 @@ export default function RootLayout({
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="referrer" content="no-referrer" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@Bubble" />
         <meta property="og:type" content="website" />
