@@ -106,9 +106,6 @@ const Nav: React.FC<any> = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const authContext = useContext(AuthContext);
-  const requiresProfile =
-    authContext.currentUser != null &&
-    authContext.currentUser?.active_job_profile == null;
 
   const onLogout = () => {
     localStorage.clear();
@@ -200,35 +197,6 @@ const Nav: React.FC<any> = ({ children }) => {
       default:
         break;
     }
-  };
-
-  const paymentLink = authContext.currentUser?.paymentLink;
-  const isFreeTrial =
-    authContext.currentUser?.billingCurrentPlan?.name.toLowerCase() === "free";
-  const isBillingActive = authContext.currentUser?.billingActive;
-
-  const billingMessage = isFreeTrial
-    ? `You have ${authContext.currentUser?.freeTrialLeft} days left on Bubble free trial `
-    : isBillingActive
-    ? "You are currently on a Bubble paid plan"
-    : "Your current plan is expired. Click below to renew";
-
-  const buttonMessage = isFreeTrial
-    ? "Upgrade now "
-    : isBillingActive
-    ? "Billing active "
-    : "Renewal required";
-
-  const buttonIcon = isFreeTrial
-    ? "ph:arrow-square-out"
-    : isBillingActive
-    ? "lets-icons:check-fill"
-    : "ph:arrow-square-out";
-
-  const handlePaymentLink = () => {
-    /* if (isFreeTrial || !isBillingActive) {
-      window.open(paymentLink, "_blank");
-    } */
   };
 
   return (

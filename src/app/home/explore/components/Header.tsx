@@ -4,8 +4,14 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { Button } from "antd";
 import React, { useContext } from "react";
 
-const ExploreHeader = ({ handleContactSupport }: any) => {
+const ExploreHeader = () => {
   const authContext = useContext(AuthContext);
+
+  const paymentLink = authContext.currentUser?.paymentLink;
+
+  const handlePaymentLink = () => {
+    window.open(paymentLink, authContext.currentUser?.paymentLink);
+  };
 
   return (
     <div className="flex h-12 items-center justify-between w-full px-2 lg:hidden">
@@ -23,7 +29,7 @@ const ExploreHeader = ({ handleContactSupport }: any) => {
           </span>
           <div>
             <Button
-              onClick={handleContactSupport}
+              onClick={handlePaymentLink}
               type="link"
               loading={false}
               className="px-0"
