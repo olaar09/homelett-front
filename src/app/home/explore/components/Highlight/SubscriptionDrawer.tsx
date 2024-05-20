@@ -76,7 +76,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
   const [loading, setLoading] = useState(false);
 
   const platforms = (subscription?.credentials ?? []).map(
-    (cred) => cred.credential.platform
+    (cred) => cred?.credential?.platform
   );
   const authContext = useContext(AuthContext);
 
@@ -132,16 +132,19 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
     platforms
   ) => {
     const allMapped = (subscription?.credentials ?? []).map((credential) => {
+      const icon = credential?.credential?.platform.icon;
       return {
-        key: credential.credential.id,
+        key: credential?.credential?.id,
         label: (
           <div className="flex items-center gap-x-3">
-            <img
-              src={credential.credential.platform.icon}
-              alt={`brand-${credential.credential.platform.name}}`}
-              className={`flex w-auto  h-5 bg-[#2A2A2A] rounded-full`}
-            />
-            <span>{credential.credential.platform.name}</span>
+            {icon && (
+              <img
+                src={credential?.credential?.platform.icon}
+                alt={`brand-${credential?.credential?.platform.name}}`}
+                className={`flex w-auto  h-5 bg-[#2A2A2A] rounded-full`}
+              />
+            )}
+            <span>{credential?.credential?.platform.name}</span>
           </div>
         ),
         children: (
@@ -153,10 +156,10 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                 </span>
                 <div className="flex items-center">
                   <span className=" text-foreground-secondary text-xs">
-                    {credential.credential.email}{" "}
+                    {credential?.credential?.email}{" "}
                   </span>
                   <Button
-                    onClick={() => onCopyText(credential.credential.email)}
+                    onClick={() => onCopyText(credential?.credential?.email)}
                     type="link"
                   >
                     <Icon icon={"solar:copy-bold"} />
@@ -169,10 +172,10 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                 </span>
                 <div className="flex items-center">
                   <span className=" text-foreground-secondary text-xs">
-                    {credential.credential.password}{" "}
+                    {credential?.credential?.password}{" "}
                   </span>
                   <Button
-                    onClick={() => onCopyText(credential.credential.password)}
+                    onClick={() => onCopyText(credential?.credential?.password)}
                     type="link"
                   >
                     <Icon icon={"solar:copy-bold"} />
@@ -193,9 +196,9 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
     window.screen.availHeight - (window.screen.availHeight / 100) * 5;
 
   const computedHeight = calcHeight >= 633.65 ? 633.65 : calcHeight;
-  const brands = (subscription?.credentials ?? []).map(
-    (cred) => cred.credential.platform.icon
-  );
+  const brands = (subscription?.credentials ?? [])
+    .map((cred) => cred?.credential?.platform.icon)
+    .filter((br) => br != null);
 
   const panelStyle: React.CSSProperties = {
     marginBottom: 24,

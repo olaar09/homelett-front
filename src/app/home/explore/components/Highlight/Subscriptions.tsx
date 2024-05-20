@@ -32,9 +32,9 @@ const Subscriptions = ({
             </span>
             <div className=" flex flex-nowrap overflow-x-scroll">
               {userSubs.map((subscription) => {
-                const brands = (subscription?.credentials ?? []).map(
-                  (credential) => credential.credential.platform.icon
-                );
+                const brands = (subscription?.credentials ?? [])
+                  .map((credential) => credential?.credential?.platform?.icon)
+                  .filter((br) => br != null);
 
                 return (
                   <div
