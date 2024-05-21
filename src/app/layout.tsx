@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   referrer: "no-referrer",
   appleWebApp: true,
   formatDetection: { telephone: false },
+  icons: {
+    icon: "/logo.png", // /public path
+  },
   // icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
   openGraph: {
     type: "website",
