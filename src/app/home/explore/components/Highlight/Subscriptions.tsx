@@ -61,7 +61,7 @@ const Subscriptions = ({
                             "en-NG",
                             "NGN"
                           )}{" "}
-                          / {subscription.interval}{" "}
+                          / week ({subscription.interval} )
                         </span>
                       </div>
                     </div>
