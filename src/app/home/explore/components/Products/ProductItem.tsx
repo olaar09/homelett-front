@@ -46,7 +46,7 @@ const ProductItem = ({
             {product.extra && (
               <Tag
                 color="cyan"
-                className="flex items-center gap-x-2 pr-4 text-xs justify-between rounded-lg"
+                className="flex items-center gap-x-2 pr-4 text-[0.65rem] justify-between rounded-lg"
               >
                 <span> {product.extra} </span>
                 <Icon icon={product.extra_icon} />
