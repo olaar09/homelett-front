@@ -24,6 +24,7 @@ export interface ITransaction {
   description: string;
   amount: number;
   reference: string;
+  created_at: string;
   title: string;
 }
 

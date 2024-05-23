@@ -11,7 +11,7 @@ import Meta from "antd/es/card/Meta";
 import { DeleteOutlined } from "@ant-design/icons";
 import { AxiosError } from "axios";
 import AddWorkflowModal from "./components/AddWorkflowModal";
-import JobItem from "../_components/JobItem";
+import TransactionItem from "../_components/TransactionItem";
 import ACButton from "@/app/components/Button";
 
 const ListTransactions = () => {
@@ -116,17 +116,17 @@ const ListTransactions = () => {
               </div>
             </section> */}
 
-            <div className="w-full mx-auto mt-10 bg-background-thin">
-              <section className=" flex items-center w-full  lg:px-8 px-2 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
-                {(transactionList ?? []).map((application: any) => {
+            <div className="w-full mx-auto  bg-background-thin  ">
+              <section className=" flex items-center w-full max-h-screen pb-40  lg:px-8 px-2 mt-10 flex-wrap gap-y-4 overflow-y-scroll">
+                {(transactionList ?? []).map((transaction: any) => {
                   return (
                     <div className="lg:w-4/12 w-full">
-                      <JobItem
+                      <TransactionItem
                         applying={false}
                         onSelectJob={undefined}
                         onApplyJob={undefined}
                         active={false}
-                        job={{ ...application.job, applied: true }}
+                        transaction={{ ...transaction }}
                       />
                     </div>
                   );

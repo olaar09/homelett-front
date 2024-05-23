@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import APIUtil from "@/services/APIUtil";
 import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
-import JobItem from "../../_components/JobItem";
+import JobItem from "../../_components/TransactionItem";
 import LoadingJobItem from "../../_components/LoadingJobItem";
 import { message } from "antd";
 import { ExperienceItem } from "../CVSide/CV_1/ExperienceItem_old";
