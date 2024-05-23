@@ -8,6 +8,7 @@ import {
   Dropdown,
   MenuProps,
   message,
+  Switch,
 } from "antd";
 import { IChat } from "@/app/interfaces/IChatItem";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -70,6 +71,8 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   const apiUtil = new APIUtil();
   const isUltimate = product?.total_selection_count === Str.brands.length;
   const [loading, setLoading] = useState(false);
+  const [selectedInterval, setSelectedInterval] = useState("Weekly");
+  const [displayedPrice, setDisplayedPrice] = useState(0);
 
   const platforms = product?.assigned_platforms.map((pl) => pl.platform);
   const authContext = useContext(AuthContext);
@@ -77,6 +80,21 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   useEffect(() => {
     if (open) setSelectedPlatform([]);
   }, [open]);
+
+  useEffect(() => {
+    setDisplayedPrice(product?.price ?? 0);
+  }, [product]);
+
+  useEffect(() => {
+    const displayedPrice =
+      selectedInterval.toLocaleLowerCase() === "weekly"
+        ? Number(product?.price) * 1
+        : Number(product?.price) * 4.3;
+
+    console.log("orf3ijwlk", displayedPrice);
+
+    setDisplayedPrice(displayedPrice);
+  }, [selectedInterval]);
 
   const onMenuClick: MenuProps["onClick"] = async ({ key }) => {
     try {
@@ -130,6 +148,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
     (assigned) => assigned.platform.icon
   );
 
+  const utils = new UtilService();
   return (
     <>
       <Drawer
@@ -168,12 +187,15 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
             <div className="mt-4 mb-1 px-3 flex justify-between items-center w-full">
               <span className="text-lg">{product?.title}</span>
               <span className=" text-foreground-secondary">
-                {new UtilService().formatMoney(
-                  `${product?.price * 100}`,
-                  "en-NG",
-                  "NGN"
-                )}{" "}
-                / weekly
+                {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")} /{" "}
+                <Switch
+                  checkedChildren="Weekly"
+                  unCheckedChildren="Monthly"
+                  defaultChecked
+                  onChange={(checked) =>
+                    setSelectedInterval(checked ? "Weekly" : "Monthly")
+                  }
+                />
               </span>
             </div>
 

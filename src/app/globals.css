@@ -248,3 +248,8 @@ html {
 .ant-drawer-body {
   padding: 0 !important;
 }
+
+[aria-checked="false"] {
+  background-color: #ff7a45 !important;
+  color: white;
+}
