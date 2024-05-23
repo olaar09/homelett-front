@@ -61,7 +61,7 @@ const ListTransactions = () => {
               <div className=" flex flex-col  items-center justify-center gap-y-7">
                 {" "}
                 <img className="h-12" src="/fun-arrow.svg" />
-                <span className="text-foreground">Coming soon !</span>
+                <span className="text-foreground">No transactions yet !</span>
               </div>
             )}
             {error && (
