@@ -5,6 +5,7 @@ export interface IAuthRequest {
   fullname?: string;
   email: string;
   password: string;
+  phone: string;
   company?: string;
   is_open_ai?: number;
   finance?: {
