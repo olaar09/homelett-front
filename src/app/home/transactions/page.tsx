@@ -12,73 +12,34 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { AxiosError } from "axios";
 import AddWorkflowModal from "./components/AddWorkflowModal";
 import JobItem from "../_components/JobItem";
+import ACButton from "@/app/components/Button";
 
-const SavedTeamMembers = () => {
+const ListTransactions = () => {
   const authContext = useContext(AuthContext);
-  const [openAddModal, setOpenAddModal] = useState(false);
-  const [loading, setLoading] = useState(false);
   const apiUtils = new APIUtil();
 
   const {
-    data: jobList,
+    data: transactionList,
     error,
-    loading: loadingWorkflows,
-    refresh: refreshWorkflow,
-  } = useRequest(() => getWorkFlow(), {
+    loading: loadingTransactions,
+    refresh: refreshTransactions,
+  } = useRequest(() => getTransactions(), {
     ready:
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
 
-  const handleAddWorkflow = () => {
-    setOpenAddModal(true);
-  };
-
-  const handleCloseTeam = (status = false) => {
-    setOpenAddModal(false);
-    if (status) {
-      refreshWorkflow();
-    }
-  };
-
-  const getWorkFlow = async (): Promise<any> => {
+  const getTransactions = async (): Promise<any> => {
     try {
-      // const data = await apiUtils.productService.fetchProducts();
-      // const list = data;
-      return [];
+      const data = await apiUtils.transactionService.fetchTransaction();
+      return data;
     } catch (error) {
-      message.error("unable to load data");
-    }
-  };
-
-  const handleDeleteWorkflow = async (workflow: any) => {
-    try {
-      setLoading(true);
-      await apiUtils.workflowService.deleteWorkflow(workflow.id);
-      refreshWorkflow();
-      setLoading(false);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error);
-
-        message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
-          }`
-        );
-      } else {
-        message.error("Unable to delete workflow");
-      }
-    } finally {
-      setLoading(false);
+      message.error("unable to load transactions");
     }
   };
 
   return (
     <>
-      <AddWorkflowModal open={openAddModal} onCancel={handleCloseTeam} />
-      {(loadingWorkflows || !jobList) && (
+      {(loadingTransactions || !transactionList) && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
           <div className="">
@@ -91,18 +52,36 @@ const SavedTeamMembers = () => {
         </div>
       )}
 
-      {!loadingWorkflows && jobList && jobList.length < 1 && (
-        <div className="h-screen   flex flex-col justify-center items-center">
-          {" "}
-          <div className=" flex flex-col  items-center justify-center gap-y-7">
+      {!loadingTransactions &&
+        transactionList &&
+        transactionList.length < 1 && (
+          <div className="h-screen   flex flex-col justify-center items-center">
             {" "}
-            <img className="h-12" src="/fun-arrow.svg" />
-            <span className="text-foreground">Coming soon !</span>
+            {!error && (
+              <div className=" flex flex-col  items-center justify-center gap-y-7">
+                {" "}
+                <img className="h-12" src="/fun-arrow.svg" />
+                <span className="text-foreground">Coming soon !</span>
+              </div>
+            )}
+            {error && (
+              <div className=" flex flex-col  items-center justify-center gap-y-7">
+                {" "}
+                <img className="h-12" src="/fun-arrow.svg" />
+                <ACButton
+                  onClick={refreshTransactions}
+                  text={""}
+                  type={"button"}
+                  loading={false}
+                >
+                  <span className="text-foreground">Try again</span>
+                </ACButton>
+              </div>
+            )}
           </div>
-        </div>
-      )}
+        )}
 
-      {jobList && jobList.length > 0 && (
+      {transactionList && transactionList.length > 0 && (
         <Spin
           indicator={
             <Icon
@@ -110,7 +89,7 @@ const SavedTeamMembers = () => {
               className=" text-8xl text-foreground"
             />
           }
-          spinning={loadingWorkflows}
+          spinning={loadingTransactions}
           className="bg-background-thin"
         >
           <div className="bg-background-thin min-h-screen">
@@ -139,7 +118,7 @@ const SavedTeamMembers = () => {
 
             <div className="w-full mx-auto mt-10 bg-background-thin">
               <section className=" flex items-center w-full  lg:px-8 px-2 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
-                {(jobList ?? []).map((application: any) => {
+                {(transactionList ?? []).map((application: any) => {
                   return (
                     <div className="lg:w-4/12 w-full">
                       <JobItem
@@ -161,4 +140,4 @@ const SavedTeamMembers = () => {
   );
 };
 
-export default SavedTeamMembers;
+export default ListTransactions;

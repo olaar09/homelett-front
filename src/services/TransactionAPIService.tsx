@@ -1,4 +1,4 @@
-import { IProduct } from "@/app/interfaces/IProduct";
+import { IProduct, ITransaction } from "@/app/interfaces/IProduct";
 import ApiService from "./APIService";
 
 class TransactionAPIService {
@@ -24,12 +24,12 @@ class TransactionAPIService {
     }
   } */
 
-  async fetchTransaction(): Promise<IProduct[] | null> {
+  async fetchTransaction(): Promise<ITransaction[] | null> {
     try {
-      const text = await this.apiService.get<{ data: any }>(
-        `/transactions/list`
-      );
-      return text.data;
+      const text = await this.apiService.get<{
+        data: { data: ITransaction[] };
+      }>(`/transactions/list`);
+      return text.data.data;
     } catch (error) {
       throw error;
     }

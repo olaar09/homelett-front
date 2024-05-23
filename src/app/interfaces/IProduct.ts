@@ -15,6 +15,18 @@ export interface IProduct {
   assigned_platforms: IAssignedPlatform[];
 }
 
+export interface ITransaction {
+  id: number;
+  type: string;
+  source: string;
+  source_type: string;
+  product_type: string;
+  description: string;
+  amount: number;
+  reference: string;
+  title: string;
+}
+
 export interface IAssignedPlatform {
   id: number;
   product_id: number;
