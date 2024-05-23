@@ -14,7 +14,7 @@ const ExploreHeader = () => {
   };
 
   return (
-    <div className="flex h-12 items-center justify-between w-full px-2 lg:hidden">
+    <div className="flex h-12 items-center justify-between w-full px-2 ">
       <div className="flex items-center justify-start gap-x-6">
         <img className="w-6 h-6" src="/logo.png" alt="Logo" />
       </div>
