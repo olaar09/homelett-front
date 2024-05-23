@@ -220,7 +220,7 @@ const Nav: React.FC<any> = ({ children }) => {
                   title: "Explore",
                 },
                 {
-                  path: "/home/applications",
+                  path: "/home/transactions",
                   icon: "uim:history",
                   title: "History",
                 },
