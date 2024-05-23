@@ -22,6 +22,17 @@ const ProductItem = ({
     (assigned) => assigned.platform.icon
   );
 
+  const weekPrice = new UtilService().formatMoney(
+    `${product.price * 100}`,
+    "en-NG",
+    "NGN"
+  );
+
+  const monthPrice = new UtilService().formatMoney(
+    `${product.price * 100 * 4.3}`,
+    "en-NG",
+    "NGN"
+  );
   return (
     <div
       onClick={() => openProduct()}
@@ -55,12 +66,7 @@ const ProductItem = ({
           </div>
 
           <span className="text-xs text-foreground-secondary">
-            {new UtilService().formatMoney(
-              `${product.price * 100}`,
-              "en-NG",
-              "NGN"
-            )}{" "}
-            / week{" "}
+            {weekPrice} weekly ({monthPrice} Monthly){" "}
           </span>
         </div>
 
