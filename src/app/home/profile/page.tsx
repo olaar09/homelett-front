@@ -21,40 +21,8 @@ const SavedTeamMembers = () => {
     authContext.clearUser();
   };
 
-  const {
-    data: teamList,
-    error,
-    loading: loadingTeam,
-    refresh: refreshTeam,
-  } = useRequest(() => getTeamMembers(), {
-    ready:
-      authContext.currentUser != null && authContext.currentUser != undefined,
-  });
-
-  const handleAddTeam = () => {
-    setOpenAddModal(true);
-  };
-
-  const handleCloseTeam = (status = false) => {
-    setOpenAddModal(false);
-    if (status) {
-      refreshTeam();
-    }
-  };
-
-  const getTeamMembers = async (): Promise<any> => {
-    try {
-      const data = await apiUtils.teamService.getTeam();
-      const list = data.data.data;
-      return list;
-    } catch (error) {
-      message.error("unable to load data");
-    }
-  };
-
   return (
     <>
-      <AddTeamModal open={openAddModal} onCancel={handleCloseTeam} />
       {authContext.loading && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
@@ -104,13 +72,19 @@ const SavedTeamMembers = () => {
                         }}
                         gap={1}
                       >
-                        {authContext.currentUser.username ??
-                          authContext.currentUser.email?.substring(0, 1)}
+                        {authContext.currentUser.fullname?.substring(0, 1)}
                       </Avatar>
                       <span className="text-lg">
                         {" "}
-                        {authContext.currentUser.username ??
-                          authContext.currentUser.email}
+                        {authContext.currentUser.fullname}
+                      </span>
+
+                      <span className="text-gray-400">
+                        {authContext.currentUser.email}
+                      </span>
+
+                      <span className="text-gray-400">
+                        {authContext.currentUser.phone}
                       </span>
                     </div>
 

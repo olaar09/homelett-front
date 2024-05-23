@@ -225,7 +225,7 @@ const Nav: React.FC<any> = ({ children }) => {
                   title: "History",
                 },
                 {
-                  path: "/home/connections",
+                  path: "/home/profile",
                   icon: "iconamoon:profile-fill",
                   title: "Profile",
                 },
