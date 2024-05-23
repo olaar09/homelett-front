@@ -1,6 +1,8 @@
 export interface IProduct {
   id: number;
   title: string;
+  extra: string;
+  extra_icon: string;
   tag: string;
   type: string;
   group_count: number;
