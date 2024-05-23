@@ -41,7 +41,7 @@ const TransactionItem = ({
         }
         title={
           <div className="flex items-center justify-between w-full">
-            <div className="items-start block text-wrap ">
+            <div className="items-start block text-wrap font-light  text-sm">
               {transaction?.title?.substring(0, 50)}
               {transaction?.title?.length >= 50 ? "..." : ""}
             </div>
@@ -59,7 +59,7 @@ const TransactionItem = ({
         description={
           <div className="flex flex-col items-start h-full w-full">
             <div className="flex justify-between w-full">
-              <span className="text-black text-foreground">
+              <span className="text-foreground text-xs text-gray-500">
                 {transaction?.description}
               </span>
             </div>
@@ -67,7 +67,7 @@ const TransactionItem = ({
         }
       />
 
-      <span className=" pl-12 absolute bottom-2">
+      <span className=" pl-12 absolute bottom-2 text-xs text-gray-500">
         {moment(transaction.created_at).format("DD MMM YYYY HH:mm")}
       </span>
     </Card>
