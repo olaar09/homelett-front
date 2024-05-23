@@ -232,7 +232,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
             </Dropdown> */}
           </div>
         }
-        placement="bottom"
+        placement="top"
         height={computedHeight}
         onClose={onClose}
         open={open}
