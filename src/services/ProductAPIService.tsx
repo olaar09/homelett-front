@@ -8,6 +8,23 @@ class ProductAPIService {
     this.apiService = apiService;
   }
 
+  async buyAirtimeProduct(data: {
+    product_id: string;
+    phone: string;
+    amount?: string;
+    data_plan?: string;
+  }): Promise<string> {
+    try {
+      const response = await this.apiService.post<{ data: any }>(
+        `/products/buy_airtime`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async buyProduct(data: {
     product_id: string;
     interval: string;

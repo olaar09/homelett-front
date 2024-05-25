@@ -25,27 +25,6 @@ import ACButton from "@/app/components/Button";
 const buyAirtimeOption = "Buy Airtime";
 const buyDataOption = "Buy Mobile data";
 
-const payOptions: MenuProps["items"] = [
-  {
-    key: "weekly",
-    label: (
-      <div className="flex items-center gap-x-3">
-        <Icon icon={"mdi:calendar-weekend"} />
-        <div>Weekly</div>
-      </div>
-    ),
-  },
-  {
-    key: "monthly",
-    label: (
-      <div className="flex items-center gap-x-3">
-        <Icon icon={"ic:baseline-calendar-month"} />
-        <div> Monthly </div>
-      </div>
-    ),
-  },
-];
-
 // Define types for the component props
 interface DrawerProps {
   product: IProduct | null;
@@ -82,13 +61,20 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
     if (open) setSelectedInterval(buyAirtimeOption);
   }, [open]);
 
-  const onMenuClick: MenuProps["onClick"] = async ({ key }) => {
+  const onMenuClick = async () => {
     try {
       setLoading(true);
-      await apiUtil.productService.buyProduct({
+      if (
+        selectedInterval === buyDataOption &&
+        (!formData.data_plan || formData.data_plan.length < 1)
+      ) {
+        message.error("Select a data plan to continue");
+        return;
+      }
+
+      await apiUtil.productService.buyAirtimeProduct({
         product_id: product!.id.toString(),
-        interval: key,
-        selected_platforms: selectedPlatforms,
+        ...formData,
       });
       onClose();
       authContext.refreshProfile();
@@ -138,8 +124,7 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
 
   const handleSend = (e: any) => {
     e.preventDefault();
-    const data = new FormData(e.target);
-    console.log(data);
+    onMenuClick();
   };
 
   const onSetFormData = (key: string, value: any) => {
@@ -148,26 +133,6 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
   return (
     <>
       <Drawer
-        title={
-          <div className="flex flex-end justify-end items-center">
-            <Dropdown
-              disabled={
-                selectedPlatforms.length < (product?.total_selection_count ?? 0)
-              }
-              menu={{ items: payOptions, onClick: onMenuClick }}
-              placement="bottom"
-            >
-              <Button
-                loading={loading}
-                className="bg-primary flex items-center gap-x-3"
-                type="primary"
-              >
-                {!loading && <Icon icon={"ic:outline-payment"} />}
-                <span>Make payment</span>
-              </Button>
-            </Dropdown>
-          </div>
-        }
         placement="top"
         height={computedHeight}
         onClose={onClose}
@@ -210,6 +175,7 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
                     <Select
                       placeholder="Select data plan"
                       className="w-full h-9"
+                      value={formData.data_plan}
                       onChange={(val) => onSetFormData("data_plan", val)}
                     >
                       {(Str.dataPlans as any)[
@@ -238,8 +204,11 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
                       placeHolder={"Enter amount to recharge"}
                       type={""}
                       name={"amount"}
+                      value={formData.amount}
                       required
-                      onChange={() => {}}
+                      onChange={(val) =>
+                        onSetFormData("amount", val.target.value)
+                      }
                     />
                   </div>
                 </div>
@@ -251,9 +220,10 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
               <InputField
                 placeHolder={"Enter phone number to recharge"}
                 type={""}
-                name={"phone_number"}
+                name={"phone"}
+                value={formData.phone}
                 required
-                onChange={() => {}}
+                onChange={(val) => onSetFormData("phone", val.target.value)}
               />
             </div>
             <div className="mt-4  flex flex-col gap-y-2 w-full px-3">
@@ -268,8 +238,14 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
                   </span>
                 </Checkbox>
               </div>
-              <ACButton text={""} type={"submit"} loading={false}>
-                <span className="text-xs text-white">Buy airtime </span>
+              <ACButton text={""} type={"submit"} loading={loading}>
+                {!loading && (
+                  <Icon className="text-white" icon={"ic:outline-payment"} />
+                )}
+                <span className="text-xs text-white">
+                  Buy{" "}
+                  {selectedInterval === buyAirtimeOption ? "airtime" : "data"}{" "}
+                </span>
               </ACButton>
             </div>
           </form>

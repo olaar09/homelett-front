@@ -29,9 +29,9 @@ export const Str = {
   dataPlans: {
     mtn: [
       { label: "1Gig data @ 100", value: "100 @1gig" },
-      { label: "4Gig data @ 200", value: "100 @1gig" },
-      { label: "1Gig data @ 100", value: "100 @1gig" },
-      { label: "1Gig data @ 100", value: "100 @1gig" },
+      { label: "4Gig data @ 200", value: "200 @1gig" },
+      { label: "1Gig data @ 100", value: "200 @1gig" },
+      { label: "1Gig data @ 100", value: "300 @1gig" },
     ],
     airtel: [
       { label: "1Gig data @ 100", value: "100 @1gig" },
