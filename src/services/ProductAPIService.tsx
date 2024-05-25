@@ -12,7 +12,7 @@ class ProductAPIService {
     product_id: string;
     phone: string;
     amount?: string;
-    data_plan?: string;
+    data_plan?: string | null;
   }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(

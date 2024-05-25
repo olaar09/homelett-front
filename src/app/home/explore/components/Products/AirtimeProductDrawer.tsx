@@ -51,7 +51,7 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
 
   const [formData, setFormData] = useState({
     phone: "",
-    data_plan: "",
+    data_plan: null,
     amount: "",
   });
 
@@ -64,10 +64,7 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
   const onMenuClick = async () => {
     try {
       setLoading(true);
-      if (
-        selectedInterval === buyDataOption &&
-        (!formData.data_plan || formData.data_plan.length < 1)
-      ) {
+      if (selectedInterval === buyDataOption && !formData.data_plan) {
         message.error("Select a data plan to continue");
         return;
       }
@@ -94,21 +91,6 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
       }
     } finally {
       setLoading(false);
-    }
-  };
-
-  const onToggleService = (platform: any) => {
-    const index = selectedPlatforms.indexOf(platform);
-    if (index === -1) {
-      if (selectedPlatforms.length + 1 > product!.total_selection_count) {
-        message.warning(product?.total_selection);
-      } else {
-        setSelectedPlatform([...selectedPlatforms, platform]);
-      }
-    } else {
-      const cloned = [...selectedPlatforms];
-      cloned.splice(index, 1);
-      setSelectedPlatform(cloned);
     }
   };
 
