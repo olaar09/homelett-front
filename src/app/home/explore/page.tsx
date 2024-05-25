@@ -18,6 +18,7 @@ import { Str } from "@/utils/consts";
 import ProductItem from "./components/Products/ProductItem";
 import EntertainmentTab from "./components/EntertainmentTab";
 import EarnTab from "./components/EarnTab";
+import { IProduct } from "@/app/interfaces/IProduct";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -57,6 +58,10 @@ const SavedTeamMembers = () => {
   const loadingPage = authContext.loading || loadingProducts;
   const userSubs = authContext.currentUser?.active_subscriptions;
   const waitingProducts = loadingPage || !productList;
+
+  const streamProducts = (productList ?? []).filter(
+    (product: IProduct) => product.type === "stream"
+  );
 
   const tabs = [
     { label: "Streaming", icon: "solar:video-library-bold" },
@@ -125,7 +130,7 @@ const SavedTeamMembers = () => {
                   >
                     {id === "1" && (
                       <EntertainmentTab
-                        products={productList}
+                        products={streamProducts}
                         loading={false}
                       />
                     )}
