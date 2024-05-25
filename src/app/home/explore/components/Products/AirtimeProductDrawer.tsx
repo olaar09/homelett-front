@@ -45,12 +45,11 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
   const [loading, setLoading] = useState(false);
   const [selectedInterval, setSelectedInterval] = useState(buyAirtimeOption);
 
-  const [enterPromo, setEnterPromo] = useState(false);
-
   const [formData, setFormData] = useState({
     phone: "",
     data_plan: null,
     amount: "",
+    is_promo: false,
   });
 
   const authContext = useContext(AuthContext);
@@ -210,8 +209,10 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
             <div className="mt-4  flex flex-col gap-y-2 w-full px-3">
               <div>
                 <Checkbox
-                  checked={enterPromo}
-                  onChange={(e: any) => setEnterPromo(e.target.checked)}
+                  checked={formData.is_promo}
+                  onChange={(e: any) =>
+                    onSetFormData("is_promo", e.target.checked)
+                  }
                 >
                   <span className="text-xs text-secondary flex items-center gap-x-3">
                     I want a chance to win one month free {promo.label}
