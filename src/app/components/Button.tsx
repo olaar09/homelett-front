@@ -33,7 +33,7 @@ const ACButton: React.FC<InputFieldProps> = ({
       type={type}
       className={`${
         inverted ? "bg-gray-500" : "bg-primary"
-      }  text-xl rounded-md text-foreground py-3 px-6 w-full h-12"`}
+      }  text-xl rounded-md text-foreground py-3 px-6 w-full h-14"`}
       onClick={btnClicked}
     >
       <div className="flex items-center  justify-center gap-x-4 ">
