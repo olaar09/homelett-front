@@ -30,7 +30,7 @@ const AirtimeProductItem = ({
   product,
 }: {
   product: IProduct;
-  openProduct: () => void;
+  openProduct: (promo: any) => void;
 }) => {
   const capitalize = `${(product.tag ?? "").slice(0, 1).toUpperCase()}${(
     product.tag ?? ""
@@ -55,7 +55,7 @@ const AirtimeProductItem = ({
   const platformName = product.assigned_platforms[0].platform.name;
   return (
     <div
-      onClick={() => openProduct()}
+      onClick={() => openProduct((winnings as any)[platformName])}
       className="px-2  w-full h-28   my-2 border-b border-b-gray-100"
     >
       <div className=" h-full   flex flex-col px-1 rounded-md bg-opacity-80  relative">
