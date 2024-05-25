@@ -15,7 +15,7 @@ import { IChat } from "@/app/interfaces/IChatItem";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Brands from "@/app/components/Brands";
 import { Str } from "@/utils/consts";
-import { shuffleArray } from "@/utils/helpers";
+import { hashValue, shuffleArray } from "@/utils/helpers";
 import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import UtilService from "@/services/UtilService";
@@ -214,22 +214,15 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
       <Drawer
         title={
           <div className="flex flex-end justify-end items-center">
-            {/*        <Dropdown
-              disabled={
-                selectedPlatforms.length < (product?.total_selection_count ?? 0)
-              }
-              menu={{ items: payOptions, onClick: onMenuClick }}
-              placement="bottom"
-            >
-              <Button
-                loading={loading}
-                className="bg-primary flex items-center gap-x-3"
-                type="primary"
-              >
-                {!loading && <Icon icon={"ic:outline-payment"} />}
-                <span>Renew subscription</span>
-              </Button>
-            </Dropdown> */}
+            {
+              <div>
+                <span className="text-[0.75em] text-foreground-secondary">
+                  {product?.title.replaceAll(" ", "").toLocaleUpperCase()}-
+                  {subscription?.id}
+                  {hashValue(`${subscription?.id}hash`)}
+                </span>
+              </div>
+            }
           </div>
         }
         placement="top"
