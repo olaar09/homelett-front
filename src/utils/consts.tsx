@@ -26,32 +26,260 @@ export const Str = {
     "/logos/windscribe_logo.jpg",
   ],
 
-  dataPlans: {
-    mtn: [
-      { label: "1Gig data @ 100", value: "100 @1gig" },
-      { label: "4Gig data @ 200", value: "200 @1gig" },
-      { label: "1Gig data @ 100", value: "200 @1gig" },
-      { label: "1Gig data @ 100", value: "300 @1gig" },
-    ],
-    airtel: [
-      { label: "1Gig data @ 100", value: "100 @1gig" },
-      { label: "4Gig data @ 200", value: "100 @1gig" },
-      { label: "1Gig data @ 100", value: "100 @1gig" },
-      { label: "1Gig data @ 100", value: "100 @1gig" },
-    ],
-    glo: [
-      { label: "1Gig data @ 100", value: "100 @1gig" },
-      { label: "4Gig data @ 200", value: "100 @1gig" },
-      { label: "1Gig data @ 100", value: "100 @1gig" },
-      { label: "1Gig data @ 100", value: "100 @1gig" },
-    ],
-    "9mobile": [
-      { label: "1Gig data @ 100", value: "100 @1gig" },
-      { label: "4Gig data @ 200", value: "100 @1gig" },
-      { label: "1Gig data @ 100", value: "100 @1gig" },
-      { label: "1Gig data @ 100", value: "100 @1gig" },
-    ],
-  },
+  dataPlans: [
+    {
+      value: "500",
+      network: "mtn",
+      label: "MTN SME Data 500MB – 30 Days",
+      price: 199,
+    },
+    {
+      value: "M1024",
+      network: "mtn",
+      label: "MTN SME Data 1GB – 30 Days",
+      price: 339,
+    },
+    {
+      value: "M2024",
+      network: "mtn",
+      label: "MTN SME Data 2GB – 30 Days",
+      price: 679,
+    },
+    {
+      value: "3000",
+      network: "mtn",
+      label: "MTN SME Data 3GB – 30 Days",
+      price: 1019,
+    },
+    {
+      value: "5000",
+      network: "mtn",
+      label: "MTN SME Data 5GB – 30 Days",
+      price: 1699,
+    },
+    {
+      value: "10000",
+      network: "mtn",
+      label: "MTN SME Data 10GB – 30 Days",
+      price: 3399,
+    },
+    {
+      value: "mtn-20hrs-1500",
+      network: "mtn",
+      label: "MTN Data 6GB – 7 Days",
+      price: 1499,
+    },
+    {
+      value: "mtn-30gb-8000",
+      network: "mtn",
+      label: "MTN Data 30GB – 30 Days",
+      price: 7959,
+    },
+    {
+      value: "mtn-40gb-10000",
+      network: "mtn",
+      label: "MTN Data 40GB – 30 Days",
+      price: 9899,
+    },
+    {
+      value: "mtn-75gb-15000",
+      network: "mtn",
+      label: "MTN Data 75GB – 30 Days",
+      price: 14979,
+    },
+    {
+      value: "glo100x",
+      network: "glo",
+      label: "Glo Data 1GB – 5 Nights",
+      price: 100, // Assuming price not provided
+    },
+    {
+      value: "glo200x",
+      network: "glo",
+      label: "Glo Data 1.25GB – 1 Day (Sunday)",
+      price: 200, // Assuming price not provided
+    },
+    {
+      value: "G500",
+      network: "glo",
+      label: "Glo Data 1.35GB – 14 Days",
+      price: 500, // Assuming price not provided
+    },
+    {
+      value: "G2000",
+      network: "glo",
+      label: "Glo Data 5.8GB – 30 Days",
+      price: 2000, // Assuming price not provided
+    },
+    {
+      value: "G1000",
+      network: "glo",
+      label: "Glo Data 2.9GB – 30 Days",
+      price: 1000, // Assuming price not provided
+    },
+    {
+      value: "G2500",
+      network: "glo",
+      label: "Glo Data 7.7GB – 30 Days",
+      price: 2500, // Assuming price not provided
+    },
+    {
+      value: "G3000",
+      network: "glo",
+      label: "Glo Data 10GB – 30 Days",
+      price: 3000, // Assuming price not provided
+    },
+    {
+      value: "G4000",
+      network: "glo",
+      label: "Glo Data 13.25GB – 30 Days",
+      price: 4000, // Assuming price not provided
+    },
+    {
+      value: "G5000",
+      network: "glo",
+      label: "Glo Data 18.25GB – 30 Days",
+      price: 5000, // Assuming price not provided
+    },
+    {
+      value: "G8000",
+      network: "glo",
+      label: "Glo Data 29.5GB – 30 Days",
+      price: 8000, // Assuming price not provided
+    },
+    {
+      value: "glo10000",
+      network: "glo",
+      label: "Glo Data 50GB – 30 Days",
+      price: 10000, // Assuming price not provided
+    },
+    {
+      value: "AIRTEL500MB",
+      network: "airtel",
+      label: "Airtel Data 500MB (Gift) – 30 Days",
+      price: 199,
+    },
+    {
+      value: "AIRTEL1GB",
+      network: "airtel",
+      label: "Airtel Data 1GB (Gift) – 30 Days",
+      price: 339,
+    },
+    {
+      value: "AIRTEL2GB",
+      network: "airtel",
+      label: "Airtel Data 2GB (Gift)– 30 Days",
+      price: 679,
+    },
+    {
+      value: "AIRTEL5GB",
+      network: "airtel",
+      label: "Airtel Data 5GB (Gift)– 30 Days",
+      price: 1699,
+    },
+    {
+      value: "AIRTEL10GB",
+      network: "airtel",
+      label: "Airtel Data 10GB (Gift)– 30 Days",
+      price: 3399,
+    },
+    {
+      value: "AIRTEL15GB",
+      network: "airtel",
+      label: "Airtel Data 15GB (Gift)– 30 Days",
+      price: 4999,
+    },
+    {
+      value: "AIRTEL20GB",
+      network: "airtel",
+      label: "Airtel Data 20GB (Gift)– 30 Days",
+      price: 5999,
+    },
+    {
+      value: "airt-1100",
+      network: "airtel",
+      label: "Airtel Data 1.5GB – 30 Days",
+      price: 1079,
+    },
+    {
+      value: "airt-1300",
+      network: "airtel",
+      label: "Airtel Data 2GB – 30 Days",
+      price: 1289,
+    },
+    {
+      value: "airt-1650",
+      network: "airtel",
+      label: "Airtel Data 3GB – 30 Days",
+      price: 1639,
+    },
+    {
+      value: "airt-2200",
+      network: "airtel",
+      label: "Airtel Data 4.5GB – 30 Days",
+      price: 2189,
+    },
+    {
+      value: "airt-3300",
+      network: "airtel",
+      label: "Airtel Data 10GB – 30 Days",
+      price: 3289,
+    },
+    {
+      value: "airt-5500",
+      network: "airtel",
+      label: "Airtel Data 20GB – 30 Days",
+      price: 5489,
+    },
+    {
+      value: "airt-11000",
+      network: "airtel",
+      label: "Airtel Data 40GB – 30 Days",
+      price: 10799,
+    },
+    {
+      value: "airt-330x",
+      network: "airtel",
+      label: "Airtel Data 1GB – 1 Day",
+      price: 329,
+    },
+    {
+      value: "airt-550",
+      network: "airtel",
+      label: "Airtel Data 750MB – 14 Days",
+      price: 545,
+    },
+    {
+      value: "airt-1650-2",
+      network: "airtel",
+      label: "Airtel Data 6GB – 7 Days",
+      price: 1639,
+    },
+    {
+      value: "9MOB1000",
+      network: "9mobile",
+      label: "9mobile Data 1GB – 30 Days",
+      price: 1000, // Assuming price not provided
+    },
+    {
+      value: "9MOB34500",
+      network: "9mobile",
+      label: "9mobile Data 2.5GB – 30 Days",
+      price: 3450, // Assuming price not provided
+    },
+    {
+      value: "9MOB8000",
+      network: "9mobile",
+      label: "9mobile Data 11.5GB – 30 Days",
+      price: 8000, //
+    },
+    {
+      value: "9MOB5000",
+      network: "9mobile",
+      label: "9mobile Data 15.5GB – 30 Days",
+      price: 12000, //
+    },
+  ],
 
   products: [
     "/logos/yt.webp",

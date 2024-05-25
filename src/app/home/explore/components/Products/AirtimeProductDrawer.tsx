@@ -110,6 +110,9 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
   const onSetFormData = (key: string, value: any) => {
     setFormData({ ...formData, [key]: value });
   };
+
+  const networkId =
+    product?.assigned_platforms[0]!.platform.name.toLocaleLowerCase();
   return (
     <>
       <Drawer
@@ -158,13 +161,13 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
                       value={formData.data_plan}
                       onChange={(val) => onSetFormData("data_plan", val)}
                     >
-                      {(Str.dataPlans as any)[
-                        product!.assigned_platforms[0]!.platform.name.toLocaleLowerCase()
-                      ].map((col: any) => (
-                        <Option key={col.label} value={col.value}>
-                          {col.label}
-                        </Option>
-                      ))}
+                      {Str.dataPlans
+                        .filter((dt) => dt.network === networkId)
+                        .map((col) => (
+                          <Option key={col.label} value={col.value}>
+                            {col.label} - ₦{col.price}
+                          </Option>
+                        ))}
                     </Select>
                   </div>
                 </div>
