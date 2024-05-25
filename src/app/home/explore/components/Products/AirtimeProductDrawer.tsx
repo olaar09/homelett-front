@@ -172,8 +172,8 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
               <span className="text-sm">{product?.title}</span>
               <span className=" text-foreground-secondary">
                 <Switch
-                  checkedChildren={buyAirtimeOption}
-                  unCheckedChildren={buyDataOption}
+                  checkedChildren={"Switch to Airtime"}
+                  unCheckedChildren={"Switch to Mobile data"}
                   defaultChecked
                   onChange={(checked) =>
                     setSelectedInterval(
