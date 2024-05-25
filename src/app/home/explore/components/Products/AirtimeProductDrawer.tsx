@@ -41,8 +41,6 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
 }) => {
   const { Option } = Select;
 
-  const [selectedPlatforms, setSelectedPlatform] = useState<string[]>([]);
-
   const apiUtil = new APIUtil();
   const [loading, setLoading] = useState(false);
   const [selectedInterval, setSelectedInterval] = useState(buyAirtimeOption);
