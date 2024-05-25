@@ -19,6 +19,7 @@ import ProductItem from "./components/Products/ProductItem";
 import EntertainmentTab from "./components/EntertainmentTab";
 import EarnTab from "./components/EarnTab";
 import { IProduct } from "@/app/interfaces/IProduct";
+import AirtimeTab from "./components/AirtimeTab/AirtimeTab";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -61,6 +62,10 @@ const SavedTeamMembers = () => {
 
   const streamProducts = (productList ?? []).filter(
     (product: IProduct) => product.type === "stream"
+  );
+
+  const airtimeProducts = (productList ?? []).filter(
+    (product: IProduct) => product.type === "airtime"
   );
 
   const tabs = [
@@ -135,13 +140,11 @@ const SavedTeamMembers = () => {
                       />
                     )}
 
-                    {id === "3" && (
-                      <div className="flex flex-col items-center justify-center h-72 gap-y-10">
-                        <img className="h-12" src="/fun-arrow.svg" />
-                        <span>Coming soon !</span>
-                      </div>
+                    {id === "2" && (
+                      <AirtimeTab products={airtimeProducts} loading={false} />
                     )}
-                    {id === "2" && <EarnTab />}
+
+                    {id === "3" && <EarnTab />}
                   </div>
                 ),
               };

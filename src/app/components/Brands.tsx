@@ -3,7 +3,7 @@ const Brands = ({
   size = "default",
   remaining = 0,
 }: {
-  size: "small" | "default";
+  size: "small" | "default" | "smaller";
   brands: string[];
   remaining?: number;
 }) => {
@@ -15,7 +15,7 @@ const Brands = ({
             src={brand}
             alt={`brand-${index}`}
             className={`flex w-auto ${
-              size == "small" ? "h-5" : "h-8"
+              size == "small" ? "h-5" : "smaller" ? "h-3" : "h-8"
             } bg-[#2A2A2A] rounded-full`}
           />
         </div>
