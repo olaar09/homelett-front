@@ -70,6 +70,7 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
       await apiUtil.productService.buyAirtimeProduct({
         product_id: product!.id.toString(),
         ...formData,
+        type: formData.data_plan ? "data" : "airtime",
       });
       onClose();
       authContext.refreshProfile();

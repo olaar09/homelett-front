@@ -13,6 +13,7 @@ class ProductAPIService {
     phone: string;
     amount?: string;
     data_plan?: string | null;
+    type: string;
   }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(
