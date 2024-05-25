@@ -9,6 +9,7 @@ import {
   MenuProps,
   message,
   Switch,
+  Select,
 } from "antd";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Brands from "@/app/components/Brands";
@@ -59,18 +60,26 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
   onClose,
   open,
 }) => {
+  const { Option } = Select;
+
   const [selectedPlatforms, setSelectedPlatform] = useState<string[]>([]);
 
   const apiUtil = new APIUtil();
   const [loading, setLoading] = useState(false);
-  const [selectedInterval, setSelectedInterval] = useState("Weekly");
+  const [selectedInterval, setSelectedInterval] = useState(buyAirtimeOption);
 
   const [enterPromo, setEnterPromo] = useState(false);
+
+  const [formData, setFormData] = useState({
+    phone: "",
+    data_plan: "",
+    amount: "",
+  });
 
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    if (open) setSelectedPlatform([]);
+    if (open) setSelectedInterval(buyAirtimeOption);
   }, [open]);
 
   const onMenuClick: MenuProps["onClick"] = async ({ key }) => {
@@ -129,10 +138,13 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
 
   const handleSend = (e: any) => {
     e.preventDefault();
-
-    console.log(e);
+    const data = new FormData(e.target);
+    console.log(data);
   };
 
+  const onSetFormData = (key: string, value: any) => {
+    setFormData({ ...formData, [key]: value });
+  };
   return (
     <>
       <Drawer
@@ -163,7 +175,10 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
         open={open}
       >
         {product && (
-          <div className="flex flex-col items-start py-6">
+          <form
+            onSubmit={handleSend}
+            className="flex flex-col items-start py-6"
+          >
             <div className=" px-6">
               <Brands size="small" brands={brands} />
             </div>
@@ -172,8 +187,8 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
               <span className="text-sm">{product?.title}</span>
               <span className=" text-foreground-secondary">
                 <Switch
-                  checkedChildren={"Switch to Airtime"}
-                  unCheckedChildren={"Switch to Mobile data"}
+                  checkedChildren={"Switch to Mobile data"}
+                  unCheckedChildren={"Switch to Airtime"}
                   defaultChecked
                   onChange={(checked) =>
                     setSelectedInterval(
@@ -185,49 +200,37 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
             </div>
 
             <div className="flex items-center px-3  w-full mt-4">
-              {selectedInterval === buyAirtimeOption && (
-                <div className="text-black flex flex-col ">
-                  <InputField
-                    placeHolder={"Phone number"}
-                    type={""}
-                    name={""}
-                    required
-                    onChange={function (
-                      event: React.ChangeEvent<HTMLInputElement>
-                    ): void {
-                      throw new Error("Function not implemented.");
-                    }}
-                  />
+              {selectedInterval === buyDataOption && (
+                <div className="text-black flex flex-col w-full mt-4">
+                  <span className="block pb-4 text-sm font-bold">Buy Data</span>
+                  <div className="flex flex-col gap-y-2 mb-8">
+                    <span className=" text-foreground-secondary">
+                      Data plan
+                    </span>
+                    <Select
+                      placeholder="Select data plan"
+                      className="w-full h-9"
+                      onChange={(val) => onSetFormData("data_plan", val)}
+                    >
+                      {(Str.dataPlans as any)[
+                        product!.assigned_platforms[0]!.platform.name.toLocaleLowerCase()
+                      ].map((col: any) => (
+                        <Option key={col.label} value={col.value}>
+                          {col.label}
+                        </Option>
+                      ))}
+                    </Select>
+                  </div>
                 </div>
               )}
 
-              {selectedInterval === buyDataOption && (
-                <form
-                  onSubmit={handleSend}
-                  className="text-black flex flex-col w-full mt-4 "
-                >
+              {selectedInterval === buyAirtimeOption && (
+                <div className="text-black flex flex-col w-full mt-4 ">
                   <span className="block pb-4 text-sm font-bold">
                     Buy Airtime
                   </span>
 
                   <div className="flex flex-col gap-y-2 mb-8">
-                    <span className=" text-foreground-secondary">
-                      Phone number
-                    </span>
-                    <InputField
-                      placeHolder={"Enter phone number to recharge"}
-                      type={""}
-                      name={"phone_number"}
-                      required
-                      onChange={function (
-                        event: React.ChangeEvent<HTMLInputElement>
-                      ): void {
-                        throw new Error("Function not implemented.");
-                      }}
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-y-2 mb-4">
                     <span className=" text-foreground-secondary">
                       Airtime amount
                     </span>
@@ -236,34 +239,40 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
                       type={""}
                       name={"amount"}
                       required
-                      onChange={function (
-                        event: React.ChangeEvent<HTMLInputElement>
-                      ): void {
-                        throw new Error("Function not implemented.");
-                      }}
+                      onChange={() => {}}
                     />
                   </div>
-
-                  <div className="mt-4  flex flex-col gap-y-2">
-                    <div>
-                      <Checkbox
-                        checked={enterPromo}
-                        onChange={(e: any) => setEnterPromo(e.target.checked)}
-                      >
-                        <span className="text-xs text-secondary flex items-center gap-x-3">
-                          I want a chance to win one month free {promo.label}
-                          <img src={promo.logo} className="w-5 h-5" />
-                        </span>
-                      </Checkbox>
-                    </div>
-                    <ACButton text={""} type={"submit"} loading={false}>
-                      <span className="text-xs text-white">Buy airtime </span>
-                    </ACButton>
-                  </div>
-                </form>
+                </div>
               )}
             </div>
-          </div>
+
+            <div className="flex flex-col gap-y-2 mb-8 w-full px-3">
+              <span className=" text-foreground-secondary">Phone number</span>
+              <InputField
+                placeHolder={"Enter phone number to recharge"}
+                type={""}
+                name={"phone_number"}
+                required
+                onChange={() => {}}
+              />
+            </div>
+            <div className="mt-4  flex flex-col gap-y-2 w-full px-3">
+              <div>
+                <Checkbox
+                  checked={enterPromo}
+                  onChange={(e: any) => setEnterPromo(e.target.checked)}
+                >
+                  <span className="text-xs text-secondary flex items-center gap-x-3">
+                    I want a chance to win one month free {promo.label}
+                    <img src={promo.logo} className="w-5 h-5" />
+                  </span>
+                </Checkbox>
+              </div>
+              <ACButton text={""} type={"submit"} loading={false}>
+                <span className="text-xs text-white">Buy airtime </span>
+              </ACButton>
+            </div>
+          </form>
         )}
       </Drawer>
     </>

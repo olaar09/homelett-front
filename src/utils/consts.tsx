@@ -26,6 +26,33 @@ export const Str = {
     "/logos/windscribe_logo.jpg",
   ],
 
+  dataPlans: {
+    mtn: [
+      { label: "1Gig data @ 100", value: "100 @1gig" },
+      { label: "4Gig data @ 200", value: "100 @1gig" },
+      { label: "1Gig data @ 100", value: "100 @1gig" },
+      { label: "1Gig data @ 100", value: "100 @1gig" },
+    ],
+    airtel: [
+      { label: "1Gig data @ 100", value: "100 @1gig" },
+      { label: "4Gig data @ 200", value: "100 @1gig" },
+      { label: "1Gig data @ 100", value: "100 @1gig" },
+      { label: "1Gig data @ 100", value: "100 @1gig" },
+    ],
+    glo: [
+      { label: "1Gig data @ 100", value: "100 @1gig" },
+      { label: "4Gig data @ 200", value: "100 @1gig" },
+      { label: "1Gig data @ 100", value: "100 @1gig" },
+      { label: "1Gig data @ 100", value: "100 @1gig" },
+    ],
+    "9mobile": [
+      { label: "1Gig data @ 100", value: "100 @1gig" },
+      { label: "4Gig data @ 200", value: "100 @1gig" },
+      { label: "1Gig data @ 100", value: "100 @1gig" },
+      { label: "1Gig data @ 100", value: "100 @1gig" },
+    ],
+  },
+
   products: [
     "/logos/yt.webp",
     "/logos/sp.png",

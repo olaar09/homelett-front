@@ -185,12 +185,12 @@ html {
 .ant-select-selector:focus,
 .ant-select-selector:active,
 .ant-select-open .ant-select-selector {
-  border-color: transparent !important;
-  box-shadow: none !important;
+  /* border-color: transparent !important;
+  box-shadow: none !important;*/
 }
 .ant-select-selector {
-  border-color: transparent !important;
-  box-shadow: none !important;
+  /* border-color: transparent !important;
+  box-shadow: none !important;*/
 }
 
 /* Slideshow */
