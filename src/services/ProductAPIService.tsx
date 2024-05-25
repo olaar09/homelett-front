@@ -17,7 +17,9 @@ class ProductAPIService {
   }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(
-        `/products/${data.type === "data" ? "buy_data" : "buy_airtime_data"}`,
+        `/products/${
+          data.type === "data" ? "buy_airtime_data" : "buy_airtime"
+        }`,
         data
       );
       return response.data;
