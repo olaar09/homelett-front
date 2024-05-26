@@ -136,8 +136,28 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
         open={open}
       >
         {isDone && (
-          <div>
-            <span>hello world</span>
+          <div className="h-screen flex flex-col items-center  pt-40 gap-y-10">
+            <div className="flex flex-col gap-y-2 items-center justify-center">
+              <Icon icon={"icon-park:success"} className="text-6xl" />
+              <span className=" text-foreground">Transaction successful</span>
+            </div>
+
+            <span className="block text-center text-xs">
+              Sorry, you were not selected to win free subscription this time.
+              Your entry amount has been added back to your wallet. Better luck
+              next time !{" "}
+            </span>
+
+            <div className="px-10">
+              <ACButton
+                onClick={onClose}
+                text={""}
+                type={"button"}
+                loading={false}
+              >
+                <span className="text-white"> Continue </span>
+              </ACButton>
+            </div>
           </div>
         )}
         {product && !isDone && (
