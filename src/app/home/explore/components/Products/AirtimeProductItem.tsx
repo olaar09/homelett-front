@@ -2,8 +2,6 @@ import Brands from "@/app/components/Brands";
 import Chip from "@/app/components/Chip";
 import { IProduct } from "@/app/interfaces/IProduct";
 import UtilService from "@/services/UtilService";
-import { Str } from "@/utils/consts";
-import { shuffleArray } from "@/utils/helpers";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Tag } from "antd";
 
@@ -69,6 +67,7 @@ const AirtimeProductItem = ({
             loading={false}
             isSelected={false}
             icon={""}
+            type={"default"}
           />
         </div>
         <div className="flex flex-col mt-1">
