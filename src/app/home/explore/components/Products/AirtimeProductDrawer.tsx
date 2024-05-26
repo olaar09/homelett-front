@@ -45,6 +45,8 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
 
   const apiUtil = new APIUtil();
   const [loading, setLoading] = useState(false);
+  const [isDone, setIsDone] = useState(false);
+
   const [selectedInterval, setSelectedInterval] = useState(buyAirtimeOption);
 
   const [formData, setFormData] = useState({
@@ -60,6 +62,7 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
     if (open) {
       setSelectedInterval(buyAirtimeOption);
       onSetFormData("data_plan", null);
+      setIsDone(false);
     }
   }, [open]);
 
@@ -76,8 +79,9 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
         ...formData,
         type: formData.data_plan ? "data" : "airtime",
       });
-      onClose();
+
       authContext.refreshProfile();
+      setIsDone(true);
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error?.response?.data?.reason);
@@ -116,6 +120,10 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
     setFormData({ ...formData, [key]: value });
   };
 
+  const onUserClose = () => {
+    onClose();
+  };
+
   const networkId =
     product?.assigned_platforms[0]!.platform.name.toLocaleLowerCase();
   return (
@@ -127,7 +135,12 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
         maskClosable={false}
         open={open}
       >
-        {product && (
+        {isDone && (
+          <div>
+            <span>hello world</span>
+          </div>
+        )}
+        {product && !isDone && (
           <form
             onSubmit={handleSend}
             className="flex flex-col items-start py-6"

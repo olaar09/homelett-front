@@ -16,7 +16,7 @@ const winnings = {
     logo: "/logos/sp.png",
     label: "Spotify",
   },
-  "9Mobile": {
+  Etisalat: {
     logo: "/logos/yt.webp",
     label: "Youtube premium",
   },
