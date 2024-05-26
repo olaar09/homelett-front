@@ -129,6 +129,18 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
   return (
     <>
       <Drawer
+        title={
+          <div className="flex flex-end justify-end items-center">
+            <span className="text-xs text-foreground-secondary">
+              Current balance:{" "}
+              {new UtilService().formatMoney(
+                `${(authContext.currentUser?.finance?.balance ?? 0) * 100}`,
+                "en-NG",
+                "NGN"
+              )}
+            </span>
+          </div>
+        }
         placement="top"
         height={computedHeight}
         onClose={onClose}
@@ -143,9 +155,9 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
             </div>
 
             <span className="block text-center text-xs">
-              Sorry, you were not selected to win free subscription this time.
-              Your entry amount has been added back to your wallet. Better luck
-              next time !{" "}
+              Sorry, you were not selected to win free streaming subscription
+              this time. Your entry amount has been added back to your wallet.{" "}
+              <br /> Better luck next time !{" "}
             </span>
 
             <div className="px-10">
