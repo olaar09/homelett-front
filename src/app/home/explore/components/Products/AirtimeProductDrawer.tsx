@@ -57,7 +57,10 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    if (open) setSelectedInterval(buyAirtimeOption);
+    if (open) {
+      setSelectedInterval(buyAirtimeOption);
+      onSetFormData("data_plan", null);
+    }
   }, [open]);
 
   const onMenuClick = async () => {
