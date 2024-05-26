@@ -86,7 +86,7 @@ const SavedTeamMembers = () => {
 
   const tabs = [
     { label: "Streaming", icon: "solar:video-library-bold" },
-    { label: "Data & Airtime", icon: "teenyicons:mobile-solid" },
+    { label: "Data & Airtime", icon: "teenyicons:mobile-solid", isNew: true },
     { label: "Crypto", icon: "ri:money-dollar-circle-fill" },
   ];
   return (
@@ -135,10 +135,21 @@ const SavedTeamMembers = () => {
               return {
                 key: id,
                 label: (
-                  <div className="flex items-center gap-x-2">
+                  <div className="flex items-center gap-x-2 relative">
                     {" "}
                     <Icon className="inline" icon={tab.icon} />
                     <span>{tab.label}</span>
+                    {tab.isNew && (
+                      <div className="absolute animate-bounce -right-3 top-0 ">
+                        <Chip
+                          loading={false}
+                          isSelected={false}
+                          icon={""}
+                          type="badge"
+                          title={""}
+                        />
+                      </div>
+                    )}
                   </div>
                 ),
                 children: (
