@@ -15,6 +15,13 @@ export interface IProduct {
   assigned_platforms: IAssignedPlatform[];
 }
 
+export interface IDataPlan {
+  value: string;
+  network: string;
+  label: string;
+  price: number;
+}
+
 export interface ITransaction {
   id: number;
   type: string;

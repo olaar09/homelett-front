@@ -6,7 +6,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import APIUtil from "@/services/APIUtil";
 import { Str } from "@/utils/consts";
-import { IProduct } from "@/app/interfaces/IProduct";
+import { IDataPlan, IProduct } from "@/app/interfaces/IProduct";
 import ProductDrawer from "../Products/ProductDrawer";
 import ProductItem from "../Products/ProductItem";
 import AirtimeProductItem from "../Products/AirtimeProductItem";
@@ -14,10 +14,12 @@ import AirtimeProductDrawer from "../Products/AirtimeProductDrawer";
 
 const AirtimeTab = ({
   loading,
+  dataPlanList,
   products = [],
 }: {
   loading: boolean;
   products: IProduct[];
+  dataPlanList: IDataPlan[];
 }) => {
   const [open, setOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
@@ -44,6 +46,7 @@ const AirtimeTab = ({
         open={selectedPromo != null && selectedProduct != null}
         promo={selectedPromo!}
         onClose={() => setSelectedProduct(null)}
+        dataPlanList={dataPlanList}
       />
       {products.map((product, index) => (
         <AirtimeProductItem

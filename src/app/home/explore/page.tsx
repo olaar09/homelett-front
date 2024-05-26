@@ -37,10 +37,26 @@ const SavedTeamMembers = () => {
       authContext.currentUser != null && authContext.currentUser != undefined,
   });
 
+  const {
+    data: dataPlanList,
+    error: dataPlanError,
+    loading: loadingDataPlans,
+    refresh: refreshDataPlan,
+  } = useRequest(() => getDataPlanProducts());
+
   const handleCloseTeam = (status = false) => {
     setOpenAddModal(false);
     if (status) {
       refreshWorkflow();
+    }
+  };
+
+  const getDataPlanProducts = async (): Promise<any> => {
+    try {
+      const data = await apiUtils.productService.fetchDataPlanProducts();
+      return data;
+    } catch (error) {
+      message.error("unable to load data");
     }
   };
 
@@ -141,7 +157,11 @@ const SavedTeamMembers = () => {
                     )}
 
                     {id === "2" && (
-                      <AirtimeTab products={airtimeProducts} loading={false} />
+                      <AirtimeTab
+                        dataPlanList={dataPlanList}
+                        products={airtimeProducts}
+                        loading={false}
+                      />
                     )}
 
                     {id === "3" && <EarnTab />}

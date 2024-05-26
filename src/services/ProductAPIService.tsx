@@ -52,6 +52,15 @@ class ProductAPIService {
       throw error;
     }
   }
+
+  async fetchDataPlanProducts(): Promise<IProduct[] | null> {
+    try {
+      const text = await this.apiService.get<{ data: any }>(`/products/data`);
+      return text.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default ProductAPIService;

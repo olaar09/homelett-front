@@ -17,7 +17,7 @@ import { Str } from "@/utils/consts";
 import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import UtilService from "@/services/UtilService";
-import { IProduct } from "@/app/interfaces/IProduct";
+import { IDataPlan, IProduct } from "@/app/interfaces/IProduct";
 import { AuthContext } from "@/contexts/AuthContext";
 import InputField from "@/app/components/InputField";
 import ACButton from "@/app/components/Button";
@@ -30,6 +30,7 @@ interface DrawerProps {
   product: IProduct | null;
   open: boolean;
   promo: { label: string; logo: string };
+  dataPlanList: IDataPlan[];
   onClose: () => void;
 }
 
@@ -38,6 +39,7 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
   promo,
   onClose,
   open,
+  dataPlanList,
 }) => {
   const { Option } = Select;
 
@@ -161,7 +163,7 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
                       value={formData.data_plan}
                       onChange={(val) => onSetFormData("data_plan", val)}
                     >
-                      {Str.dataPlans
+                      {(dataPlanList ?? [])
                         .filter((dt) => dt.network === networkId)
                         .map((col) => (
                           <Option key={col.label} value={col.value}>
