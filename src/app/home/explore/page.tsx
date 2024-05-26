@@ -87,7 +87,7 @@ const SavedTeamMembers = () => {
   const tabs = [
     { label: "Streaming", icon: "solar:video-library-bold" },
     { label: "Data & Airtime", icon: "teenyicons:mobile-solid" },
-    { label: "Others", icon: "ri:money-dollar-circle-fill" },
+    { label: "Crypto", icon: "ri:money-dollar-circle-fill" },
   ];
   return (
     <div className=" h-screen ">
