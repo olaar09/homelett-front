@@ -3,6 +3,7 @@ import { Drawer, MenuProps } from "antd";
 import { IChat } from "@/app/interfaces/IChatItem";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import ACButton from "@/app/components/Button";
+import UtilService from "@/services/UtilService";
 
 // Define types for the component props
 interface DrawerProps {
@@ -19,7 +20,12 @@ interface DrawerProps {
   }) => void; */
 }
 
-const NoticeDrawers: React.FC<DrawerProps> = ({ onClose, open }) => {
+const NoticeDrawers: React.FC<DrawerProps> = ({
+  onClose,
+  balanceRequired,
+  open,
+}) => {
+  const util = new UtilService();
   const calcHeight =
     window.screen.availHeight - (window.screen.availHeight / 100) * 5;
 
@@ -50,7 +56,12 @@ const NoticeDrawers: React.FC<DrawerProps> = ({ onClose, open }) => {
             <br /> <br />
             If your are seeing this message, Your account has been flagged as
             one of those users. you need to add money back to refund us for the
-            excess, then your plans will be restored.
+            excess of <br />
+            <b>
+              {" "}
+              {util.formatMoney(`${balanceRequired * 100}`, "en-NG", "NGN")}
+            </b>
+            , then your plans will be restored.
             <br /> <br />
             If you believe your account is flagged in error, we are sorry.
             kindly send us your email and proof that all the money spent so far
@@ -58,6 +69,7 @@ const NoticeDrawers: React.FC<DrawerProps> = ({ onClose, open }) => {
           </span>
 
           <ACButton
+            onClick={onClose}
             text={"Close notice"}
             type={"button"}
             loading={false}
