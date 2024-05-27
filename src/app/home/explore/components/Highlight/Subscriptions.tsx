@@ -49,6 +49,7 @@ const Subscriptions = ({
                           loading={false}
                           isSelected={false}
                           icon={""}
+                          type={"default"}
                         />
                       </div>
                       <div className="flex flex-col mt-1">

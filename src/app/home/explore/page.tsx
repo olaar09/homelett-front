@@ -1,7 +1,16 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Card, Popconfirm, Spin, Tabs, Tag, message } from "antd";
+import {
+  Button,
+  Card,
+  Drawer,
+  Popconfirm,
+  Spin,
+  Tabs,
+  Tag,
+  message,
+} from "antd";
 import APIUtil from "@/services/APIUtil";
 import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -20,12 +29,23 @@ import EntertainmentTab from "./components/EntertainmentTab";
 import EarnTab from "./components/EarnTab";
 import { IProduct } from "@/app/interfaces/IProduct";
 import AirtimeTab from "./components/AirtimeTab/AirtimeTab";
+import NoticeDrawers from "./components/Notice/NoticeDrawer";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
   const [openAddModal, setOpenAddModal] = useState(false);
+
+  const [openNotice, setOpenNotice] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const apiUtils = new APIUtil();
+
+  useEffect(() => {
+    const finance = authContext.currentUser?.finance?.balance ?? 0;
+    if (finance < 0) {
+      setOpenNotice(true);
+    }
+  }, [authContext.currentUser]);
 
   const {
     data: productList,
@@ -90,100 +110,107 @@ const SavedTeamMembers = () => {
     { label: "Crypto", icon: "ri:money-dollar-circle-fill" },
   ];
   return (
-    <div className=" h-screen ">
-      <AddWorkflowModal open={openAddModal} onCancel={handleCloseTeam} />
-      {loadingPage && (
-        <div className="h-screen   flex flex-col justify-center items-center">
-          {" "}
-          <div className="">
+    <>
+      <NoticeDrawers
+        balanceRequired={authContext.currentUser?.finance?.balance ?? 0}
+        open={openNotice}
+        onClose={() => setOpenNotice(false)}
+      />
+      <div className=" h-screen ">
+        <AddWorkflowModal open={openAddModal} onCancel={handleCloseTeam} />
+        {loadingPage && (
+          <div className="h-screen   flex flex-col justify-center items-center">
             {" "}
-            <Icon
-              icon={"eos-icons:three-dots-loading"}
-              className=" text-6xl text-foreground"
-            />
+            <div className="">
+              {" "}
+              <Icon
+                icon={"eos-icons:three-dots-loading"}
+                className=" text-6xl text-foreground"
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {!loadingPage && (
-        <>
-          <ExploreHeader />
-          <Highlight userSubs={userSubs} />
-        </>
-      )}
+        {!loadingPage && (
+          <>
+            <ExploreHeader />
+            <Highlight userSubs={userSubs} />
+          </>
+        )}
 
-      {!loadingPage && productList && productList.length < 1 && (
-        <div className="h-1/2 mt-10   flex flex-col justify-center items-center">
-          {" "}
-          <div className=" flex flex-col  items-center justify-center gap-y-7">
+        {!loadingPage && productList && productList.length < 1 && (
+          <div className="h-1/2 mt-10   flex flex-col justify-center items-center">
             {" "}
-            <img className="h-12" src="/fun-arrow.svg" />
-            <span className="text-foreground">No products found</span>
+            <div className=" flex flex-col  items-center justify-center gap-y-7">
+              {" "}
+              <img className="h-12" src="/fun-arrow.svg" />
+              <span className="text-foreground">No products found</span>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className="px-3 mt-16 h-1/2 flex flex-col ">
-        <span className="text-xs text-foreground-secondary">
-          Available services
-        </span>
-        <Spin spinning={loadingProducts}>
-          <Tabs
-            defaultActiveKey="1"
-            items={tabs.map((tab, i) => {
-              const id = String(i + 1);
-              return {
-                key: id,
-                label: (
-                  <div className="flex items-center gap-x-2 relative">
-                    {" "}
-                    <Icon className="inline" icon={tab.icon} />
-                    <span>{tab.label}</span>
-                    {tab.isNew && (
-                      <div className="absolute animate-bounce -right-3 top-0 ">
-                        <Chip
+        <div className="px-3 mt-16 h-1/2 flex flex-col ">
+          <span className="text-xs text-foreground-secondary">
+            Available services
+          </span>
+          <Spin spinning={loadingProducts}>
+            <Tabs
+              defaultActiveKey="1"
+              items={tabs.map((tab, i) => {
+                const id = String(i + 1);
+                return {
+                  key: id,
+                  label: (
+                    <div className="flex items-center gap-x-2 relative">
+                      {" "}
+                      <Icon className="inline" icon={tab.icon} />
+                      <span>{tab.label}</span>
+                      {tab.isNew && (
+                        <div className="absolute animate-bounce -right-3 top-0 ">
+                          <Chip
+                            loading={false}
+                            isSelected={false}
+                            icon={""}
+                            type="badge"
+                            title={""}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  ),
+                  children: (
+                    <div
+                      style={{
+                        maxHeight: window.screen.availHeight / 1.4,
+                        overflowY: "scroll",
+                        paddingBottom: 240,
+                      }}
+                    >
+                      {id === "1" && (
+                        <EntertainmentTab
+                          products={streamProducts}
                           loading={false}
-                          isSelected={false}
-                          icon={""}
-                          type="badge"
-                          title={""}
                         />
-                      </div>
-                    )}
-                  </div>
-                ),
-                children: (
-                  <div
-                    style={{
-                      maxHeight: window.screen.availHeight / 1.4,
-                      overflowY: "scroll",
-                      paddingBottom: 240,
-                    }}
-                  >
-                    {id === "1" && (
-                      <EntertainmentTab
-                        products={streamProducts}
-                        loading={false}
-                      />
-                    )}
+                      )}
 
-                    {id === "2" && (
-                      <AirtimeTab
-                        dataPlanList={dataPlanList}
-                        products={airtimeProducts}
-                        loading={false}
-                      />
-                    )}
+                      {id === "2" && (
+                        <AirtimeTab
+                          dataPlanList={dataPlanList}
+                          products={airtimeProducts}
+                          loading={false}
+                        />
+                      )}
 
-                    {id === "3" && <EarnTab />}
-                  </div>
-                ),
-              };
-            })}
-          />
-        </Spin>
+                      {id === "3" && <EarnTab />}
+                    </div>
+                  ),
+                };
+              })}
+            />
+          </Spin>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
