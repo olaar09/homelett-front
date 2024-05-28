@@ -22,9 +22,10 @@ import UtilService from "@/services/UtilService";
 import { IPlatform, IProduct } from "@/app/interfaces/IProduct";
 import { AuthContext } from "@/contexts/AuthContext";
 import { ISubscription } from "@/app/interfaces/IRegisterRequest";
-import { CaretRightOutlined } from "@ant-design/icons";
+import { CaretRightOutlined, RedoOutlined } from "@ant-design/icons";
 import { text } from "stream/consumers";
 import { theme } from "antd";
+import ACButton from "@/app/components/Button";
 
 const payOptions: MenuProps["items"] = [
   {
@@ -134,18 +135,39 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
     const allMapped = (subscription?.credentials ?? []).map((credential) => {
       const icon =
         credential?.platform?.icon ?? credential?.credential?.platform?.icon;
+      const name =
+        credential?.platform?.name ?? credential?.credential?.platform?.name;
+      const assignedCredential = credential?.credential;
+
+      console.log(icon);
+
       return {
         key: credential?.credential?.id,
         label: (
-          <div className="flex items-center gap-x-3">
-            {icon && (
-              <img
-                src={credential?.credential?.platform.icon}
-                alt={`brand-${credential?.credential?.platform.name}}`}
-                className={`flex w-auto  h-5 bg-[#2A2A2A] rounded-full`}
-              />
+          <div className="flex justify-between w-full items-center">
+            <div className="flex items-center gap-x-3">
+              {icon && (
+                <img
+                  src={icon}
+                  alt={`brand-image}`}
+                  className={`flex w-auto  h-5 bg-[#2A2A2A] rounded-full`}
+                />
+              )}
+              <span>{name}</span>
+            </div>
+
+            {!assignedCredential && (
+              <Button
+                type="link"
+                icon={<RedoOutlined />}
+                loading={false}
+                className="p-0 m-0 h-6"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Icon icon={""} />
+                <span> Refresh</span>
+              </Button>
             )}
-            <span>{credential?.credential?.platform.name}</span>
           </div>
         ),
         children: (
@@ -157,7 +179,8 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                 </span>
                 <div className="flex items-center">
                   <span className=" text-foreground-secondary text-xs">
-                    {credential?.credential?.email}{" "}
+                    {credential?.credential?.email ??
+                      "pending, refresh after 24 hours"}{" "}
                   </span>
                   <Button
                     onClick={() => onCopyText(credential?.credential?.email)}
@@ -173,7 +196,8 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                 </span>
                 <div className="flex items-center">
                   <span className=" text-foreground-secondary text-xs">
-                    {credential?.credential?.password}{" "}
+                    {credential?.credential?.password ??
+                      "pending, refresh after 24 hours"}{" "}
                   </span>
                   <Button
                     onClick={() => onCopyText(credential?.credential?.password)}
