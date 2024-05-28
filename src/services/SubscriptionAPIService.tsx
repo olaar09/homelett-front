@@ -16,6 +16,21 @@ class SubscriptionAPIService {
       throw error;
     }
   }
+
+  async requestSubscriptionCredential(data: {
+    subscription_id: string;
+    selected_platform: string;
+  }): Promise<any> {
+    try {
+      const text = await this.apiService.post<{ data: any }>(
+        `/subscriptions/request_credential`,
+        data
+      );
+      return text.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default SubscriptionAPIService;
