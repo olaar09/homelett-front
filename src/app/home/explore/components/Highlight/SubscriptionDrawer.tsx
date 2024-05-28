@@ -92,6 +92,8 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
         subscription_id: subscription!.id.toString(),
         selected_platform: platform,
       });
+
+      await authContext.refreshProfile();
     } catch (error) {
       if (error instanceof AxiosError) {
         message.error(
