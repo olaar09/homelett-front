@@ -33,7 +33,12 @@ const Subscriptions = ({
             <div className=" flex flex-nowrap overflow-x-scroll">
               {userSubs.map((subscription) => {
                 const brands = (subscription?.credentials ?? [])
-                  .map((credential) => credential?.credential?.platform?.icon)
+                  .map((credential) => {
+                    const platform =
+                      credential?.platform?.icon ??
+                      credential?.credential?.platform?.icon;
+                    return platform;
+                  })
                   .filter((br) => br != null);
 
                 return (

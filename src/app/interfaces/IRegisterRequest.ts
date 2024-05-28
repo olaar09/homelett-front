@@ -35,6 +35,7 @@ export interface ISubscription {
 
 export interface ISubscriptionCredentials {
   id: number;
+  platform: IPlatform;
   credential: {
     id: number;
     platform: IPlatform;
