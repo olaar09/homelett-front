@@ -132,7 +132,8 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
     platforms
   ) => {
     const allMapped = (subscription?.credentials ?? []).map((credential) => {
-      const icon = credential?.credential?.platform.icon;
+      const icon =
+        credential?.platform?.icon ?? credential?.credential?.platform?.icon;
       return {
         key: credential?.credential?.id,
         label: (
