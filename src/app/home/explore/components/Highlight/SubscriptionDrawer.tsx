@@ -373,14 +373,17 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                 <span className="block items-center justify-center text-center">
                   Please check back within 24 hours for login details
                 </span>
-                <span className=" text-foreground-secondary">
+                <span className=" text-foreground-secondary text-center">
+                  If it has been over 24 hours, we apologize, reset your
+                  subscription to get a refund and subscribe again. <br />
                   <Button
-                    type="link"
+                    loading={loading}
+                    type="default"
                     onClick={onResetSubscription}
-                    className="text-primary underline"
+                    className="text-white underline mt-4 bg-primary "
                   >
                     {" "}
-                    If over 24 hours, Reset your subscription{" "}
+                    Reset your subscription{" "}
                   </Button>
                 </span>
               </div>
