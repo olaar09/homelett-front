@@ -286,7 +286,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
       <Drawer
         title={
           <div className="flex flex-end justify-end items-center">
-            {(true || isWithinThreeDays(subscription?.plan_end ?? "")) && (
+            {hasSubscriptions && (
               <Button
                 onClick={() => onRenewSubscription()}
                 loading={loading}
