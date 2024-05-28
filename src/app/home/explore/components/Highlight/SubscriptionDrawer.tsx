@@ -10,6 +10,7 @@ import {
   message,
   Collapse,
   CollapseProps,
+  Tag,
 } from "antd";
 import { IChat } from "@/app/interfaces/IChatItem";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -26,6 +27,7 @@ import { CaretRightOutlined, RedoOutlined } from "@ant-design/icons";
 import { text } from "stream/consumers";
 import { theme } from "antd";
 import ACButton from "@/app/components/Button";
+import moment from "moment";
 
 const payOptions: MenuProps["items"] = [
   {
@@ -269,19 +271,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
   return (
     <>
       <Drawer
-        title={
-          <div className="flex flex-end justify-end items-center">
-            {
-              <div>
-                <span className="text-[0.75em] text-foreground-secondary">
-                  {product?.title.replaceAll(" ", "").toLocaleUpperCase()}-
-                  {subscription?.id}
-                  {hashValue(`${subscription?.id}hash`)}
-                </span>
-              </div>
-            }
-          </div>
-        }
+        title={<div className="flex flex-end justify-end items-center">{}</div>}
         placement="top"
         height={computedHeight}
         onClose={onClose}
@@ -295,14 +285,32 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
 
             <div className="mt-4 mb-1 px-3 flex justify-between items-center w-full">
               <span className="text-lg">{product?.title}</span>
-              <span className=" text-foreground-secondary">
-                {new UtilService().formatMoney(
-                  `${product?.price * 100}`,
-                  "en-NG",
-                  "NGN"
-                )}{" "}
-                / weekly
+              <div>
+                <span className=" text-foreground-secondary">
+                  {new UtilService().formatMoney(
+                    `${product?.price * 100}`,
+                    "en-NG",
+                    "NGN"
+                  )}{" "}
+                  / weekly
+                </span>
+              </div>
+            </div>
+
+            <div className="px-3">
+              <span className="text-[0.75em] text-foreground-secondary">
+                {product?.title.replaceAll(" ", "").toLocaleUpperCase()}-
+                {subscription?.id}_{hashValue(`${subscription?.id}hash`)}
               </span>
+            </div>
+
+            <div className="px-3 mt-2 mb-2">
+              <Tag className="text-xs" color="cyan">
+                <span className=" text-foreground-secondary text-xs">
+                  Plan Ends:{" "}
+                  {moment(subscription.plan_end).format("DD MMM YYYY")}
+                </span>
+              </Tag>
             </div>
 
             {/*      <div className="px-3">
