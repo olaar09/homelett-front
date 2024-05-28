@@ -355,7 +355,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                   credentials directly prevents other users from enjoying the
                   services they have paid for.
                 </p>
-                <p>
+                <p className="">
                   If you would like to keep this subscription, ensure you renew
                   at least 1 day before it expires to avoid being terminated
                 </p>
