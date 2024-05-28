@@ -6,6 +6,8 @@ import { ISubscription } from "@/app/interfaces/IRegisterRequest";
 import UtilService from "@/services/UtilService";
 import SubscriptionDrawer from "./SubscriptionDrawer";
 import { useState } from "react";
+import moment from "moment";
+import { Tag } from "antd";
 
 const Subscriptions = ({
   userSubs,
@@ -14,6 +16,13 @@ const Subscriptions = ({
 }) => {
   const [selectedSubscription, setSelectedSubscription] =
     useState<ISubscription | null>(null);
+
+  function isExpired(date: string) {
+    const now = moment().endOf("day");
+    const givenDate = moment(date).startOf("day");
+
+    return givenDate.isBefore(now); // '[]' includes the boundaries
+  }
 
   return (
     <>
@@ -41,6 +50,8 @@ const Subscriptions = ({
                   })
                   .filter((br) => br != null);
 
+                const expired = isExpired(subscription?.plan_end ?? "");
+
                 return (
                   <div
                     onClick={() => setSelectedSubscription(subscription)}
@@ -49,13 +60,22 @@ const Subscriptions = ({
                     <div className="  h-full flex flex-col px-1 rounded-md bg-opacity-80 bg-gray-100 shadow">
                       <div className="px-3 py-2 justify-between flex items-center ">
                         <Brands size="small" brands={brands} />
-                        <Chip
-                          title={subscription.product.tag}
-                          loading={false}
-                          isSelected={false}
-                          icon={""}
-                          type={"default"}
-                        />
+                        {expired && (
+                          <Tag className="text-xs" color={"volcano"}>
+                            <span className=" text-foreground-secondary text-xs">
+                              expired
+                            </span>
+                          </Tag>
+                        )}
+                        {!expired && (
+                          <Chip
+                            title={subscription.product.tag}
+                            loading={false}
+                            isSelected={false}
+                            icon={""}
+                            type={"default"}
+                          />
+                        )}
                       </div>
                       <div className="flex flex-col mt-1">
                         <span className="text-xs ">
