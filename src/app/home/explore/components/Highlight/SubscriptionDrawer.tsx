@@ -29,27 +29,6 @@ import { theme } from "antd";
 import ACButton from "@/app/components/Button";
 import moment from "moment";
 
-const payOptions: MenuProps["items"] = [
-  {
-    key: "weekly",
-    label: (
-      <div className="flex items-center gap-x-3">
-        <Icon icon={"mdi:calendar-weekend"} />
-        <div>Weekly</div>
-      </div>
-    ),
-  },
-  {
-    key: "monthly",
-    label: (
-      <div className="flex items-center gap-x-3">
-        <Icon icon={"ic:baseline-calendar-month"} />
-        <div> Monthly </div>
-      </div>
-    ),
-  },
-];
-
 // Define types for the component props
 interface DrawerProps {
   subscription: ISubscription | null;
@@ -124,35 +103,6 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
       await authContext.refreshProfile();
     } catch (error) {
       if (error instanceof AxiosError) {
-        message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
-          }`
-        );
-      } else {
-        message.error("Unable to complete request");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const onMenuClick: MenuProps["onClick"] = async ({ key }) => {
-    try {
-      setLoading(true);
-      await apiUtil.productService.buyProduct({
-        product_id: product!.id.toString(),
-        interval: key,
-        selected_platforms: selectedPlatforms,
-      });
-      onClose();
-      authContext.refreshProfile();
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error?.response?.data?.reason);
-
         message.error(
           `${
             error?.response?.data?.message ??
@@ -308,7 +258,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
       <Drawer
         title={
           <div className="flex flex-end justify-end items-center">
-            {isWithinThreeDays(subscription?.plan_end ?? "") && (
+            {isWithinThreeDays("2024-05-28") && (
               <Button
                 onClick={() => onRenewSubscription()}
                 loading={loading}
