@@ -161,6 +161,16 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
       message.success("Text copied");
     }
   };
+
+  function isExpired(date: string) {
+    const now = moment().endOf("day");
+    const givenDate = moment(date).startOf("day");
+
+    return givenDate.isBefore(now); // '[]' includes the boundaries
+  }
+
+  const expired = isExpired(subscription?.plan_end ?? "");
+
   const getItems: (platforms: IPlatform[]) => CollapseProps["items"] = (
     platforms
   ) => {
@@ -175,6 +185,14 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
         credential?.platform?.id ?? credential?.credential?.platform?.id;
 
       console.log(icon);
+
+      const email = expired
+        ? "Renew plan to view"
+        : credential?.credential?.email ?? "pending, refresh after 24 hours";
+
+      const password = expired
+        ? "Renew plan to view"
+        : credential?.credential?.password ?? "pending, refresh after 24 hours";
 
       return {
         key: credential?.credential?.id,
@@ -191,7 +209,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
               <span>{name}</span>
             </div>
 
-            {!assignedCredential && (
+            {!expired && !assignedCredential && (
               <Button
                 type="link"
                 icon={<RedoOutlined />}
@@ -217,8 +235,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                 </span>
                 <div className="flex items-center">
                   <span className=" text-foreground-secondary text-xs">
-                    {credential?.credential?.email ??
-                      "pending, refresh after 24 hours"}{" "}
+                    {email}{" "}
                   </span>
                   <Button
                     onClick={() => onCopyText(credential?.credential?.email)}
@@ -234,8 +251,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                 </span>
                 <div className="flex items-center">
                   <span className=" text-foreground-secondary text-xs">
-                    {credential?.credential?.password ??
-                      "pending, refresh after 24 hours"}{" "}
+                    {password}
                   </span>
                   <Button
                     onClick={() => onCopyText(credential?.credential?.password)}
@@ -319,7 +335,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                     "en-NG",
                     "NGN"
                   )}{" "}
-                  / weekly
+                  / weekly ({subscription?.interval})
                 </span>
               </div>
             </div>
@@ -332,9 +348,9 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
             </div>
 
             <div className="px-3 mt-2 mb-2">
-              <Tag className="text-xs" color="cyan">
+              <Tag className="text-xs" color={expired ? "volcano" : "cyan"}>
                 <span className=" text-foreground-secondary text-xs">
-                  Plan Ends:{" "}
+                  {expired ? "Plan Expired: " : `Plan Ends:`}{" "}
                   {moment(subscription.plan_end).format("DD MMM YYYY")}
                 </span>
               </Tag>
