@@ -6,6 +6,7 @@ import ProfileAPIService from "./ProfileAPIService";
 import WorkflowAPIService from "./WorkflowAPIService";
 import ProductAPIService from "./ProductAPIService";
 import TransactionAPIService from "./TransactionAPIService";
+import SubscriptionAPIService from "./SubscriptionAPIService";
 
 class APIUtil {
   public productService: ProductAPIService;
@@ -13,6 +14,7 @@ class APIUtil {
   public profileService: ProfileAPIService;
   public workflowService: WorkflowAPIService;
   public authService: AuthAPIService;
+  public subscriptionService: SubscriptionAPIService;
 
   constructor() {
     const service = new APIService("https://api.useapplybase.com/api"); // Initialize ApiService
@@ -20,6 +22,7 @@ class APIUtil {
     this.profileService = new ProfileAPIService(service);
     this.authService = new AuthAPIService(service);
     this.transactionService = new TransactionAPIService(service);
+    this.subscriptionService = new SubscriptionAPIService(service);
 
     this.workflowService = new WorkflowAPIService(service);
   }

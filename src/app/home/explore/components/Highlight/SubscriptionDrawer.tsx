@@ -85,6 +85,30 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
     if (open) setSelectedPlatform([]);
   }, [open]);
 
+  const onRefreshCredential = async (platform: string) => {
+    try {
+      setLoading(true);
+      await apiUtil.subscriptionService.requestSubscriptionCredential({
+        subscription_id: subscription!.id.toString(),
+        selected_platform: platform,
+      });
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        message.error(
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
+          }`
+        );
+      } else {
+        message.error("Unable to complete request");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const onMenuClick: MenuProps["onClick"] = async ({ key }) => {
     try {
       setLoading(true);
@@ -139,6 +163,9 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
         credential?.platform?.name ?? credential?.credential?.platform?.name;
       const assignedCredential = credential?.credential;
 
+      const platformId =
+        credential?.platform?.id ?? credential?.credential?.platform?.id;
+
       console.log(icon);
 
       return {
@@ -160,9 +187,12 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
               <Button
                 type="link"
                 icon={<RedoOutlined />}
-                loading={false}
+                loading={loading}
                 className="p-0 m-0 h-6"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onRefreshCredential(platformId.toString());
+                }}
               >
                 <Icon icon={""} />
                 <span> Refresh</span>
