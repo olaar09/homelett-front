@@ -94,6 +94,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
         subscription_id: subscription!.id.toString(),
       });
 
+      message.success("Subscription renewal successful");
       await authContext.refreshProfile();
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -119,7 +120,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
         subscription_id: subscription!.id.toString(),
         selected_platform: platform,
       });
-
+      message.success("Credential request successful");
       await authContext.refreshProfile();
     } catch (error) {
       if (error instanceof AxiosError) {
