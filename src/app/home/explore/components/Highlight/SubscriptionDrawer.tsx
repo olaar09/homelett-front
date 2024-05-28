@@ -87,6 +87,31 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
     if (open) setSelectedPlatform([]);
   }, [open]);
 
+  const onRenewSubscription = async () => {
+    try {
+      setLoading(true);
+      await apiUtil.subscriptionService.renewSubscription({
+        subscription_id: subscription!.id.toString(),
+      });
+
+      await authContext.refreshProfile();
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        message.error(
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
+          }`
+        );
+      } else {
+        message.error("Unable to complete request");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const onRefreshCredential = async (platform: string) => {
     try {
       setLoading(true);
@@ -268,10 +293,35 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
 
   const hasSubscriptions =
     subscription?.credentials && subscription?.credentials.length > 0;
+
+  function isWithinThreeDays(date: string) {
+    const now = moment().startOf("day");
+    const threeDaysFromNow = moment().add(3, "days").startOf("day");
+    const givenDate = moment(date).startOf("day");
+
+    return givenDate.isBetween(now, threeDaysFromNow, null, "[]"); // '[]' includes the boundaries
+  }
+
   return (
     <>
       <Drawer
-        title={<div className="flex flex-end justify-end items-center">{}</div>}
+        title={
+          <div className="flex flex-end justify-end items-center">
+            {isWithinThreeDays(
+              /* subscription?.plan_end ?? */ "2024-05-29"
+            ) && (
+              <Button
+                onClick={() => onRenewSubscription()}
+                loading={loading}
+                className="bg-primary flex items-center gap-x-3"
+                type="primary"
+              >
+                {!loading && <Icon icon={"ic:outline-payment"} />}
+                <span>Renew subscription</span>
+              </Button>
+            )}
+          </div>
+        }
         placement="top"
         height={computedHeight}
         onClose={onClose}

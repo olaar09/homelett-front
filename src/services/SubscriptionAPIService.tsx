@@ -17,6 +17,18 @@ class SubscriptionAPIService {
     }
   }
 
+  async renewSubscription(data: { subscription_id: string }): Promise<any> {
+    try {
+      const text = await this.apiService.post<{ data: any }>(
+        `/subscriptions/renew`,
+        data
+      );
+      return text.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async requestSubscriptionCredential(data: {
     subscription_id: string;
     selected_platform: string;
