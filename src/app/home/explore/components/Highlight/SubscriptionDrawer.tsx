@@ -66,6 +66,34 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
     if (open) setSelectedPlatform([]);
   }, [open]);
 
+  const onResetSubscription = async () => {
+    try {
+      setLoading(true);
+      await apiUtil.subscriptionService.resetSubscription({
+        subscription_id: subscription!.id.toString(),
+      });
+
+      message.success(
+        "You have been refunded the subscription amount to purchase a new subscription"
+      );
+      await authContext.refreshProfile();
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        message.error(
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
+          }`
+        );
+      } else {
+        message.error("Unable to complete request");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const onRenewSubscription = async () => {
     try {
       setLoading(true);
@@ -342,11 +370,14 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                   Please check back within 24 hours for login details
                 </span>
                 <span className=" text-foreground-secondary">
-                  If over 24 hours,{" "}
-                  <a href={Str.whatsappHelp} className="text-primary underline">
+                  <Button
+                    type="link"
+                    onClick={onResetSubscription}
+                    className="text-primary underline"
+                  >
                     {" "}
-                    Contact support{" "}
-                  </a>
+                    If over 24 hours, Reset your subscription{" "}
+                  </Button>
                 </span>
               </div>
             )}

@@ -17,6 +17,18 @@ class SubscriptionAPIService {
     }
   }
 
+  async resetSubscription(data: { subscription_id: string }): Promise<any> {
+    try {
+      const text = await this.apiService.post<{ data: any }>(
+        `/subscriptions/reset`,
+        data
+      );
+      return text.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async renewSubscription(data: { subscription_id: string }): Promise<any> {
     try {
       const text = await this.apiService.post<{ data: any }>(
