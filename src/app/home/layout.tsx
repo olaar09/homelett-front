@@ -14,6 +14,7 @@ import APIUtil from "@/services/APIUtil";
 import { usePaystackPayment } from "react-paystack";
 import { isMobile } from "react-device-detect";
 import { Str } from "@/utils/consts";
+import NoticeDrawers from "./explore/components/Notice/NoticeDrawer";
 
 const NavMenu = ({
   title,
@@ -104,6 +105,7 @@ const Nav: React.FC<any> = ({ children }) => {
   const [openNicheDrawer, setOpenNicheDrawer] = useState(false);
   const [amount, setAmount] = useState(0);
   const [openModal, setOpenModal] = useState(false);
+  const [openNotice, setOpenNotice] = useState(false);
 
   const authContext = useContext(AuthContext);
 
@@ -207,6 +209,22 @@ const Nav: React.FC<any> = ({ children }) => {
         onInitPayment={onSetAmount}
         open={openModal}
         closeModal={onCloseModal}
+      />
+
+      <NoticeDrawers
+        open={authContext.currentUser?.is_activated == 0}
+        onClose={() => {}}
+        message={
+          <span className="text-center">
+            Dear user, Your account have beenn banned for violating our terms of
+            use. Specifically for using your logins on more than one device.
+            <br /> <br />
+            You will not be able to use your account anymore and all services
+            assigned to you have been revoked.
+            <br /> <br />
+            Best regards.
+          </span>
+        }
       />
 
       <div className="min-h-screen w-full overflow-hidden">

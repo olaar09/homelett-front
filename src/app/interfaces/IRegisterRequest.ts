@@ -8,6 +8,7 @@ export interface IAuthRequest {
   phone: string;
   company?: string;
   is_open_ai?: number;
+  is_activated?: number;
   finance?: {
     balance: number;
   };

@@ -21,6 +21,7 @@ import EarnTab from "./components/EarnTab";
 import { IProduct } from "@/app/interfaces/IProduct";
 import AirtimeTab from "./components/AirtimeTab/AirtimeTab";
 import NoticeDrawers from "./components/Notice/NoticeDrawer";
+import UtilService from "@/services/UtilService";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -30,6 +31,7 @@ const SavedTeamMembers = () => {
 
   const [loading, setLoading] = useState(false);
   const apiUtils = new APIUtil();
+  const utilsService = new UtilService();
 
   useEffect(() => {
     const finance = authContext.currentUser?.finance?.balance ?? 0;
@@ -101,11 +103,43 @@ const SavedTeamMembers = () => {
     { label: "Utilities", icon: "hugeicons:software" },
     { label: "Online Courses", icon: "ri:video-line" },
   ];
+  const balanceRequired = authContext.currentUser?.finance?.balance ?? 0;
   return (
     <>
       <NoticeDrawers
-        balanceRequired={authContext.currentUser?.finance?.balance ?? 0}
         open={openNotice}
+        message={
+          <span className="text-center">
+            Dear user, earlier today, we discovered users get double the amount
+            when they make a new deposit.
+            <br /> <br />
+            unfortunately, most users decided to keep this money and buy airtime
+            and streaming plans with it causing us great losses.
+            <br /> <br />
+            To capture back our losses, we have began to block all users that
+            benefitted from this and revoke the login credentials for all
+            streaming product.
+            <br /> <br />
+            If your are seeing this message, Your account has been flagged as
+            one of those users. you need to add money back to refund us for the
+            excess of <br />
+            {
+              <b>
+                {" "}
+                {utilsService.formatMoney(
+                  `${balanceRequired * 100}`,
+                  "en-NG",
+                  "NGN"
+                )}
+              </b>
+            }
+            , then your plans will be restored.
+            <br /> <br />
+            If you believe your account is flagged in error, we are sorry.
+            kindly send us your email and proof that all the money spent so far
+            were deposited legitimately
+          </span>
+        }
         onClose={() => setOpenNotice(false)}
       />
       <div className=" h-screen ">

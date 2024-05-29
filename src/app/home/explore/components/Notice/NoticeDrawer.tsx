@@ -7,7 +7,7 @@ import UtilService from "@/services/UtilService";
 
 // Define types for the component props
 interface DrawerProps {
-  balanceRequired: number;
+  message: React.ReactNode | string;
   open: boolean;
   onClose: () => void;
   /*   onSubscribe: ({
@@ -20,11 +20,7 @@ interface DrawerProps {
   }) => void; */
 }
 
-const NoticeDrawers: React.FC<DrawerProps> = ({
-  onClose,
-  balanceRequired,
-  open,
-}) => {
+const NoticeDrawers: React.FC<DrawerProps> = ({ onClose, open, message }) => {
   const util = new UtilService();
   const calcHeight =
     window.screen.availHeight - (window.screen.availHeight / 100) * 5;
@@ -43,30 +39,7 @@ const NoticeDrawers: React.FC<DrawerProps> = ({
         <div className="flex flex-col  py-6 justify-center items-center text-center px-3 gap-y-4">
           <Icon icon={"ic:baseline-warning"} className="text-3xl" />
 
-          <span className="text-center">
-            Dear user, earlier today, we discovered users get double the amount
-            when they make a new deposit.
-            <br /> <br />
-            unfortunately, most users decided to keep this money and buy airtime
-            and streaming plans with it causing us great losses.
-            <br /> <br />
-            To capture back our losses, we have began to block all users that
-            benefitted from this and revoke the login credentials for all
-            streaming product.
-            <br /> <br />
-            If your are seeing this message, Your account has been flagged as
-            one of those users. you need to add money back to refund us for the
-            excess of <br />
-            <b>
-              {" "}
-              {util.formatMoney(`${balanceRequired * 100}`, "en-NG", "NGN")}
-            </b>
-            , then your plans will be restored.
-            <br /> <br />
-            If you believe your account is flagged in error, we are sorry.
-            kindly send us your email and proof that all the money spent so far
-            were deposited legitimately
-          </span>
+          {message}
 
           <ACButton
             onClick={onClose}
