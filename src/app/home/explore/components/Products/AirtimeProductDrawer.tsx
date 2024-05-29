@@ -47,7 +47,7 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
   const [loading, setLoading] = useState(false);
   const [isDone, setIsDone] = useState(false);
 
-  const [selectedInterval, setSelectedInterval] = useState(buyAirtimeOption);
+  const [selectedInterval, setSelectedInterval] = useState(buyDataOption);
 
   const [formData, setFormData] = useState({
     phone: "",
@@ -60,7 +60,7 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
 
   useEffect(() => {
     if (open) {
-      setSelectedInterval(buyAirtimeOption);
+      setSelectedInterval(buyDataOption);
       onSetFormData("data_plan", null);
       setIsDone(false);
     }
@@ -185,12 +185,12 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
               <span className="text-sm">{product?.title}</span>
               <span className=" text-foreground-secondary">
                 <Switch
-                  checkedChildren={"Switch to Mobile data"}
-                  unCheckedChildren={"Switch to Airtime"}
+                  checkedChildren={"Switch to Airtime"}
+                  unCheckedChildren={"Switch to Mobile data"}
                   defaultChecked
                   onChange={(checked) =>
                     setSelectedInterval(
-                      checked ? buyAirtimeOption : buyDataOption
+                      checked ? buyDataOption : buyAirtimeOption
                     )
                   }
                 />
@@ -260,19 +260,21 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
               />
             </div>
             <div className="mt-4  flex flex-col gap-y-2 w-full px-3">
-              <div>
-                <Checkbox
-                  checked={formData.is_promo}
-                  onChange={(e: any) =>
-                    onSetFormData("is_promo", e.target.checked)
-                  }
-                >
-                  <span className="text-xs text-secondary flex items-center gap-x-3">
-                    I want a chance to win one month free {promo.label}
-                    <img src={promo.logo} className="w-5 h-5" />
-                  </span>
-                </Checkbox>
-              </div>
+              {selectedInterval === buyDataOption && (
+                <div>
+                  <Checkbox
+                    checked={formData.is_promo}
+                    onChange={(e: any) =>
+                      onSetFormData("is_promo", e.target.checked)
+                    }
+                  >
+                    <span className="text-xs text-secondary flex items-center gap-x-3">
+                      I want a chance to win one month free {promo.label}
+                      <img src={promo.logo} className="w-5 h-5" />
+                    </span>
+                  </Checkbox>
+                </div>
+              )}
               <ACButton text={""} type={"submit"} loading={loading}>
                 {!loading && (
                   <Icon className="text-white" icon={"ic:outline-payment"} />

@@ -38,18 +38,6 @@ const AirtimeProductItem = ({
     (assigned) => assigned.platform.icon
   );
 
-  const weekPrice = new UtilService().formatMoney(
-    `${product.price * 100}`,
-    "en-NG",
-    "NGN"
-  );
-
-  const monthPrice = new UtilService().formatMoney(
-    `${product.price * 100 * 4.3}`,
-    "en-NG",
-    "NGN"
-  );
-
   const platformName = product.assigned_platforms[0].platform.name;
   return (
     <div
@@ -92,7 +80,7 @@ const AirtimeProductItem = ({
               <span className="flex items-center gap-x-2">
                 <span>
                   {" "}
-                  Buy at least ₦500 to win 1 month free{" "}
+                  Buy at least ₦1500 data to win 1 month free{" "}
                   {(winnings as any)[platformName]?.label}{" "}
                 </span>
                 <img

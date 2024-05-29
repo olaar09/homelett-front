@@ -97,7 +97,7 @@ const SavedTeamMembers = () => {
 
   const tabs = [
     { label: "Streaming", icon: "solar:video-library-bold" },
-    { label: "Data & Airtime", icon: "teenyicons:mobile-solid", isNew: true },
+    { label: "Mobile Data", icon: "teenyicons:mobile-solid", isNew: true },
     { label: "Utilities", icon: "hugeicons:software" },
     { label: "Online Courses", icon: "ri:video-line" },
   ];
@@ -194,6 +194,7 @@ const SavedTeamMembers = () => {
                       )}
 
                       {id === "3" && <EarnTab />}
+                      {id === "4" && <EarnTab />}
                     </div>
                   ),
                 };
