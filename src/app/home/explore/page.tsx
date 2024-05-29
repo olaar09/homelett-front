@@ -98,7 +98,8 @@ const SavedTeamMembers = () => {
   const tabs = [
     { label: "Streaming", icon: "solar:video-library-bold" },
     { label: "Data & Airtime", icon: "teenyicons:mobile-solid", isNew: true },
-    { label: "Crypto", icon: "ri:money-dollar-circle-fill" },
+    { label: "Utilities", icon: "hugeicons:software" },
+    { label: "Online Courses", icon: "ri:video-line" },
   ];
   return (
     <>
