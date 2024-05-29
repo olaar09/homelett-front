@@ -30,6 +30,30 @@ class AuthAPIService {
     }
   }
 
+  async resetPassword(data: {
+    otp: string;
+    password: string;
+  }): Promise<{ data: IAuth }> {
+    try {
+      return await this.apiService.post("/auth/reset-password", {
+        otp: data.otp,
+        password: data.password,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async requestOTP(data: { email: string }): Promise<string> {
+    try {
+      return await this.apiService.post("/auth/request-reset-otp", {
+        email: data.email,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async register(data: IAuthRequest): Promise<{ data: IAuth }> {
     try {
       return await this.apiService.post("/auth/register", {

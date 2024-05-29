@@ -23,13 +23,14 @@ import AuthProblem from "../components/Auth/AuthProblem";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({ email: "", password: "", otp: "" });
   const apiService = new APIUtil();
   const query = useSearchParams();
   const router = useRouter();
   const authContext = useContext(AuthContext);
   const [scrollYPosition, setScrollYPosition] = useState(0);
   const [rotationDegrees, setRotationDegrees] = useState("");
+  const [otpSent, setOTPSent] = useState(false);
 
   const divRef = useRef<any>(null);
 
@@ -75,33 +76,31 @@ export default function Home() {
     setForm({ ...form, [name]: value });
   };
 
-  const onSubmitLogin = async (e: any) => {
+  const onRequestOTP = async (e: any) => {
     e.preventDefault();
     setLoading(true);
     try {
       let response;
-      if (query.get("is_new") === "true") {
-        response = await apiService.authService!.register({
+      if (!otpSent) {
+        response = await apiService.authService!.requestOTP({
           email: form.email,
-          password: form.password,
-          phone: "",
-          subscriptions: [],
         });
+
+        message.success("OTP request sent !");
+        setOTPSent(true);
       } else {
-        response = await apiService.authService!.login({
-          email: form.email,
+        response = await apiService.authService!.resetPassword({
           password: form.password,
-          phone: "",
-          subscriptions: [],
+          otp: form.otp,
         });
+
+        localStorage.setItem("token", response.data.token!);
+        message.success("Password reset successful");
+        await authContext.refreshProfile();
+        await authContext.refreshDataSource();
+
+        router.push("/home/explore");
       }
-
-      localStorage.setItem("token", response.data.token!);
-      message.success("Login successful");
-      await authContext.refreshProfile();
-      await authContext.refreshDataSource();
-
-      router.push("/home/explore");
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error);
@@ -115,38 +114,6 @@ export default function Home() {
         );
       } else {
         message.error("Unable to complete request");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const googleLogin = async (IdToken: string) => {
-    setLoading(true);
-
-    try {
-      const response = await apiService.authService!.googleSignIn(IdToken);
-      localStorage.setItem("token", response.data.token!);
-      message.success("Login successful");
-      await authContext.refreshProfile();
-      await authContext.refreshDataSource();
-
-      router.push("/home/explore");
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log("IS ERROR", error);
-        console.log("IS ERROR MESSAGE", error.message);
-
-        message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
-          }`
-        );
-      } else {
-        console.log("IS ERROR MESSAGE");
-        message.error("Unable to complete sign in");
       }
     } finally {
       setLoading(false);
@@ -174,70 +141,61 @@ export default function Home() {
         <div className="text-center mt-4 px-4 w-full  lg:w-6/12 mx-auto ">
           <span className=" lg:text-5xl text-2xl font-black">
             {" "}
-            Login to your account
+            Reset password
           </span>
         </div>
 
-        <div className=" w-5/12 mx-auto  mt-10 ">
-          <Suspense fallback={<span>loading..</span>}>
-            <GoogleLoginButton onSuccess={googleLogin} />
-          </Suspense>
-        </div>
-
-        <div className="my-4 gap-x-3 mt-9 flex items-center justify-between w-5/12 mx-auto px-8">
-          <div className=" border-b-[0.5px] border-foreground-secondary flex-1 "></div>
-          <span className=" text-foreground-secondary text-sm">Or</span>
-          <div className=" border-b-[0.5px] border-foreground-secondary flex-1"></div>
-        </div>
-
         <form
-          className="lg:w-4/12 w-full mx-auto"
-          onSubmit={(e: any) => onSubmitLogin(e)}
+          className="lg:w-4/12 w-full mx-auto mt-20"
+          onSubmit={(e: any) => onRequestOTP(e)}
           method="post"
         >
           <div className="w-full px-8 flex flex-col gap-y-6">
+            {!otpSent && (
+              <div className="flex flex-col items-start gap-y-2 text-sm">
+                <span>Email address</span>
+                <InputField
+                  name="email"
+                  type="email"
+                  placeHolder="Email address"
+                  onChange={(e) => onChangeForm("email", e.target.value)}
+                />
+              </div>
+            )}
             <div className="flex flex-col items-start gap-y-2 text-sm">
-              <span>Email address</span>
-              <InputField
-                name="email"
-                type="email"
-                placeHolder="Email address"
-                onChange={(e) => onChangeForm("email", e.target.value)}
-              />
+              <span>OTP</span>
+              {otpSent && (
+                <InputField
+                  name="otp"
+                  type="text"
+                  placeHolder="Enter OTP"
+                  onChange={(e) => onChangeForm("otp", e.target.value)}
+                />
+              )}
             </div>
+
             <div className="flex flex-col items-start gap-y-2 text-sm">
               <span>Password</span>
-              <InputField
-                name="password"
-                type="password"
-                required={true}
-                placeHolder="Password"
-                onChange={(e) => onChangeForm("password", e.target.value)}
-              />
+              {otpSent && (
+                <InputField
+                  name="password"
+                  type="password"
+                  placeHolder="Email password"
+                  onChange={(e) => onChangeForm("password", e.target.value)}
+                />
+              )}
             </div>
             <ACButton
-              text={
-                query.get("is_new") === "true"
-                  ? "Sign up with email"
-                  : "Login with email"
-              }
+              text={otpSent ? "Reset Password" : "Request OTP"}
               type={"submit"}
               loading={loading}
               children={undefined}
             />
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center">
               <span>
-                <Link href={"/reset-password"}>
-                  <span className="text-sm underline">Forgot password</span>
-                </Link>
-              </span>
-
-              <span>.</span>
-
-              <span>
-                <Link href={"/request-invite"}>
-                  <span className="text-sm underline">New account</span>
+                <Link href={"/login"}>
+                  <span className="text-sm underline">Go back to login</span>
                 </Link>
               </span>
             </div>
