@@ -216,7 +216,7 @@ const Nav: React.FC<any> = ({ children }) => {
         onClose={() => {}}
         message={
           <span className="text-center">
-            Dear user, Your account have beenn banned for violating our terms of
+            Dear user, Your account have been banned for violating our terms of
             use. Specifically for using your logins on more than one device.
             <br /> <br />
             You will not be able to use your account anymore and all services
