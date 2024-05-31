@@ -15,7 +15,7 @@ const winnings = {
     label: "Spotify",
   },
   Etisalat: {
-    logo: "/logos/yt.webp",
+    logo: "/logos/yt.png",
     label: "Youtube premium",
   },
   Glo: {

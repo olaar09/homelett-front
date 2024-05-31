@@ -22,7 +22,7 @@ const Hero = () => {
           </p>
           <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-4 text-sm font-medium text-gray-900 mt-16 sm:mt-8">
             <li className="inline-flex items-center gap-2">
-              <img className="w-8" src="/logos/yt.webp" />
+              <img className="w-8" src="/logos/yt.png" />
               No ads
             </li>
             <li className="inline-flex items-center gap-2">

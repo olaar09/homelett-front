@@ -18,7 +18,7 @@ export const Str = {
     },
   },
   brands: [
-    "/logos/yt.webp",
+    "/logos/yt.png",
     "/logos/sp.png",
     "/logos/pr.jpeg",
     "/logos/nt.png",
@@ -282,7 +282,7 @@ export const Str = {
   ],
 
   products: [
-    "/logos/yt.webp",
+    "/logos/yt.png",
     "/logos/sp.png",
     "/logos/pr.jpeg",
     "/logos/nt.png",
