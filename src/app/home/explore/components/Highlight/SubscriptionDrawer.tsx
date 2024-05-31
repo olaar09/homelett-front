@@ -229,6 +229,14 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
         children: (
           <div>
             <div className="flex flex-col gap-y-4">
+              {credential.credential?.platform.info && (
+                <Tag
+                  color="magenta"
+                  className="text-wrap break-words text-center"
+                >
+                  {credential?.credential?.platform?.info}
+                </Tag>
+              )}
               <div className="flex items-center justify-between">
                 <span className=" text-foreground-secondary text-xs">
                   Email:{" "}

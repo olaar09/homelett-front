@@ -45,6 +45,7 @@ export interface IAssignedPlatform {
 export interface IPlatform {
   id: number;
   name: string;
+  info?: string;
   description: string;
   categories: string;
   icon: string;

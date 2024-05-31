@@ -40,6 +40,7 @@ export interface ISubscriptionCredentials {
   credential: {
     id: number;
     platform: IPlatform;
+    info?: string;
     email: string;
     password: string;
     extra?: any;
