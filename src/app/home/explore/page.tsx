@@ -22,6 +22,7 @@ import { IProduct } from "@/app/interfaces/IProduct";
 import AirtimeTab from "./components/AirtimeTab/AirtimeTab";
 import NoticeDrawers from "./components/Notice/NoticeDrawer";
 import UtilService from "@/services/UtilService";
+import UtilityTab from "./components/UtilityTab";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -93,14 +94,18 @@ const SavedTeamMembers = () => {
     (product: IProduct) => product.type === "stream"
   );
 
+  const utilityProducts = (productList ?? []).filter(
+    (product: IProduct) => product.type === "utility"
+  );
+
   const airtimeProducts = (productList ?? []).filter(
     (product: IProduct) => product.type === "airtime"
   );
 
   const tabs = [
     { label: "Streaming", icon: "solar:video-library-bold" },
-    { label: "Mobile Data", icon: "teenyicons:mobile-solid", isNew: true },
-    { label: "Utilities", icon: "hugeicons:software" },
+    { label: "Utilities", icon: "hugeicons:software", isNew: true },
+    { label: "Mobile Data", icon: "teenyicons:mobile-solid" },
     { label: "Online Courses", icon: "ri:video-line" },
   ];
   const balanceRequired = authContext.currentUser?.finance?.balance ?? 0;
@@ -220,6 +225,13 @@ const SavedTeamMembers = () => {
                       )}
 
                       {id === "2" && (
+                        <UtilityTab
+                          products={utilityProducts}
+                          loading={false}
+                        />
+                      )}
+
+                      {id === "3" && (
                         <AirtimeTab
                           dataPlanList={dataPlanList}
                           products={airtimeProducts}
@@ -227,7 +239,6 @@ const SavedTeamMembers = () => {
                         />
                       )}
 
-                      {id === "3" && <EarnTab />}
                       {id === "4" && <EarnTab />}
                     </div>
                   ),
