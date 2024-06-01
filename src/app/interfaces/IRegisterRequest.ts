@@ -50,6 +50,7 @@ export interface ICredential {
   email: string;
   password: string;
   extra?: any;
+  next_renewal: string;
 }
 
 export interface ISubscriptionCredentials {

@@ -173,7 +173,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
                       <span className=" text-foreground-secondary">
                         You must purchase the {selectedPricingName} (
                         {utils.formatMoney(
-                          `${selectedPricing * 100 ?? ""}`,
+                          `${selectedPricing! * 100 ?? ""}`,
                           "en-NG",
                           "NGN"
                         )}

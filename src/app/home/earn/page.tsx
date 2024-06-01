@@ -6,7 +6,6 @@ import APIUtil from "@/services/APIUtil";
 import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import AddTeamModal from "./components/AddTeamModal";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Str } from "@/utils/consts";
@@ -107,15 +106,15 @@ const EarnPage = () => {
             />
 
             <section className=" flex items-center w-full max-h-screen pb-40  lg:px-8 px-2 mt-10 flex-wrap gap-y-4 overflow-y-scroll">
-              {credentialList.map((transaction: any) => {
+              {credentialList.map((credential: any) => {
                 return (
                   <div className="lg:w-4/12 w-full">
                     <Credentialtem
                       applying={false}
-                      onSelectJob={undefined}
+                      onSelectCredential={() => {}}
                       onApplyJob={undefined}
                       active={false}
-                      transaction={{ ...transaction }}
+                      credential={{ ...credential }}
                     />
                   </div>
                 );

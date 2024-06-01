@@ -1,28 +1,31 @@
 import { ITransaction } from "@/app/interfaces/IProduct";
+import { ICredential } from "@/app/interfaces/IRegisterRequest";
 import UtilService from "@/services/UtilService";
+import { Str } from "@/utils/consts";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Card, Button, Tooltip, Avatar } from "antd";
+import { Card, Button, Tooltip, Avatar, Tag } from "antd";
 import moment from "moment";
 
 //      /Users/olaagboola/Downloads/sources/indeed.png /Users/olaagboola/Downloads/sources/linkedin.png /Users/olaagboola/Downloads/sources/turing.png';
 
 const Credentialtem = ({
-  applying,
   active,
-  onSelectJob,
-  onApplyJob,
-  transaction,
+  onSelectCredential,
+  credential,
 }: {
   applying: boolean;
-  onSelectJob: any;
+  onSelectCredential: any;
   onApplyJob: any;
   active: boolean;
-  transaction: ITransaction;
+  credential: ICredential;
 }) => {
-  const isDebit = transaction.type == "debit";
+  const planName = Str.platforms.find(
+    (pl) => pl.value === credential?.platform.id.toString()
+  )?.pricingName;
+
   return (
     <Card
-      onClick={onSelectJob}
+      onClick={onSelectCredential}
       hoverable
       className={`" h-32 border-b border-0 rounded-none flex flex-col relative ${
         active ? "bg-blue-50" : ""
@@ -32,27 +35,30 @@ const Credentialtem = ({
         avatar={
           <Avatar
             style={{
-              backgroundColor: isDebit ? "#f56a00" : "#4096ff",
               verticalAlign: "middle",
+              background: "transparent",
             }}
           >
-            {transaction?.type}
+            <img src={credential?.platform.icon} />
           </Avatar>
         }
         title={
           <div className="flex items-center justify-between w-full">
             <div className="items-start block text-wrap font-light  text-sm">
-              {transaction?.title?.substring(0, 50)}
-              {transaction?.title?.length >= 50 ? "..." : ""}
+              {credential?.platform?.name.substring(0, 50)}
+              {credential?.platform?.name.length >= 50 ? "..." : ""}
             </div>
 
             <span className="text-xs  font-light">
-              <span>{transaction.type == "credit" ? "+" : "-"} </span>{" "}
-              {new UtilService().formatMoney(
+              <Tag color="cyan" className="text-xs">
+                {" "}
+                <span>{planName}</span>{" "}
+              </Tag>
+              {/*  {new UtilService().formatMoney(
                 `${transaction.amount * 100}`,
                 "en-NG",
                 "NGN"
-              )}
+              )} */}
             </span>
           </div>
         }
@@ -60,7 +66,7 @@ const Credentialtem = ({
           <div className="flex flex-col items-start h-full w-full">
             <div className="flex justify-between w-full">
               <span className="text-foreground text-xs text-gray-500">
-                {transaction?.description}
+                {credential?.platform?.description}
               </span>
             </div>
           </div>
@@ -68,7 +74,7 @@ const Credentialtem = ({
       />
 
       <span className=" pl-12 absolute bottom-2 text-xs text-gray-500">
-        {moment(transaction.created_at).format("DD MMM YYYY HH:mm")}
+        Renews: {moment(credential.next_renewal).format("DD MMM YYYY HH:mm")}
       </span>
     </Card>
   );

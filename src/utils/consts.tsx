@@ -31,7 +31,7 @@ export const Str = {
     {
       value: "1",
       label: "Youtube premium",
-      pricingAmount: 1600,
+      pricingAmount: 1700,
       pricingName: "Family plan",
       earning: "+ 30%",
       icon: "/logos/yt.png",
