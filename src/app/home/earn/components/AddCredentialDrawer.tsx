@@ -159,7 +159,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
                           <Tag className="text-xs rounded-lg" color="volcano">
                             <span className="text-xs">
                               {" "}
-                              {col.earning} profit{" "}
+                              + {col.earning}% profit{" "}
                             </span>
                           </Tag>
                         </span>
