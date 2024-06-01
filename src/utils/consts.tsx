@@ -27,7 +27,38 @@ export const Str = {
     "/logos/sm.png",
     "/logos/windscribe_logo.jpg",
   ],
-
+  platforms: [
+    {
+      value: "1",
+      label: "Youtube premium",
+      earning: "+ 30%",
+      icon: "/logos/yt.png",
+    },
+    {
+      value: "2",
+      label: "Netflix",
+      earning: "+60%",
+      icon: "/logos/nt.png",
+    },
+    {
+      value: "3",
+      label: "Spotify Premium",
+      earning: "+ 30%",
+      icon: "/logos/sp.png",
+    },
+    {
+      value: "4",
+      label: "ShowMax",
+      earning: "+ 30%",
+      icon: "/logos/sm.png",
+    },
+    {
+      value: "5",
+      label: "Prime video",
+      earning: "+ 30%",
+      icon: "/logos/pr.jpeg",
+    },
+  ],
   dataPlans: [
     {
       value: "500",

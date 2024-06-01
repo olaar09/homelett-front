@@ -8,6 +8,22 @@ class ProductAPIService {
     this.apiService = apiService;
   }
 
+  async shareCredential(data: {
+    platform_id: string;
+    email: string;
+    password?: string;
+  }): Promise<string> {
+    try {
+      const response = await this.apiService.post<{ data: any }>(
+        `/shared_credentials`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async buyAirtimeProduct(data: {
     product_id: string;
     phone: string;

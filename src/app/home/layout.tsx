@@ -257,7 +257,7 @@ const Nav: React.FC<any> = ({ children }) => {
           <div className="text-center w-full flex justify-center flex-col items-center ">
             <span>
               {" "}
-              Dear user, Would you like to earn up to <b> ₦350,000 </b> monthly
+              Dear user, Would you like to earn up to <b> ₦350,000 </b> weekly
               by sharing your netflix, show-max and prime video subscriptions
               with others?
             </span>
