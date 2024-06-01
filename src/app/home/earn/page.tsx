@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import { Avatar, Button, Card, Spin, message } from "antd";
+import { Avatar, Button, Card, FloatButton, Spin, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -16,6 +16,7 @@ import StartEarning from "./components/StartEarning";
 import AddCredentialDrawer from "./components/AddCredentialDrawer";
 import TransactionItem from "../_components/TransactionItem";
 import Credentialtem from "./components/Credentialtem";
+import { PlusCircleOutlined } from "@ant-design/icons";
 import { AxiosError } from "axios";
 
 const EarnPage = () => {
@@ -96,7 +97,15 @@ const EarnPage = () => {
         authContext.currentUser &&
         credentialList &&
         credentialList.length > 0 && (
-          <div className="w-full mx-auto  bg-background-thin  ">
+          <div className="w-full mx-auto h-screen  bg-background-thin  ">
+            <FloatButton
+              onClick={onOpenShareSubscription}
+              icon={<PlusCircleOutlined />}
+              tooltip="Share new login"
+              type="primary"
+              style={{ right: 24, bottom: 100 }}
+            />
+
             <section className=" flex items-center w-full max-h-screen pb-40  lg:px-8 px-2 mt-10 flex-wrap gap-y-4 overflow-y-scroll">
               {credentialList.map((transaction: any) => {
                 return (
