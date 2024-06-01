@@ -216,7 +216,7 @@ const Nav: React.FC<any> = ({ children }) => {
 
   const onClick = () => {
     setOpenNotice(false);
-    window.open(Str.whatsappHelp);
+    window.open(Str.earnChannel);
   };
   return (
     <>
