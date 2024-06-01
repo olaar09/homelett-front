@@ -1,4 +1,6 @@
 export const Str = {
+  earnChannel: "https://whatsapp.com/channel/0029VaTk99h2phHW4XaFwd3m",
+
   whatsappHelp:
     "https://api.whatsapp.com/send?phone=2347018135800&text=I%20need%20to%20help",
   whatsapp:

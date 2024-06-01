@@ -9,6 +9,10 @@ import UtilService from "@/services/UtilService";
 interface DrawerProps {
   message: React.ReactNode | string;
   open: boolean;
+  icon?: string;
+  title?: string;
+  action?: string;
+  onClick?: () => void;
   onClose: () => void;
   /*   onSubscribe: ({
     platforms,
@@ -20,7 +24,15 @@ interface DrawerProps {
   }) => void; */
 }
 
-const NoticeDrawers: React.FC<DrawerProps> = ({ onClose, open, message }) => {
+const NoticeDrawers: React.FC<DrawerProps> = ({
+  onClose = () => {},
+  open,
+  onClick,
+  message,
+  title = "Important notice",
+  action = "Close notice",
+  icon = "ic:baseline-warning",
+}) => {
   const util = new UtilService();
   const calcHeight =
     window.screen.availHeight - (window.screen.availHeight / 100) * 5;
@@ -30,24 +42,30 @@ const NoticeDrawers: React.FC<DrawerProps> = ({ onClose, open, message }) => {
   return (
     <>
       <Drawer
-        title={"Important notice"}
+        title={title}
         placement="top"
         height={computedHeight}
         onClose={onClose}
         open={open}
       >
         <div className="flex flex-col  py-6 justify-center items-center text-center px-3 gap-y-4">
-          <Icon icon={"ic:baseline-warning"} className="text-3xl" />
+          <Icon icon={icon} className="text-6xl" />
 
           {message}
 
-          <ACButton
-            onClick={onClose}
-            text={"Close notice"}
-            type={"button"}
-            loading={false}
-            children={undefined}
-          />
+          <div className="flex w-8/12 mx-auto ">
+            <ACButton
+              text=""
+              onClick={onClick ?? onClose}
+              type={"button"}
+              loading={false}
+            >
+              <div className="flex items-center text-xs gap-x-2">
+                <Icon className="text-white" icon={icon} />
+                <span className="text-white">{action ?? "Close notice"}</span>
+              </div>
+            </ACButton>
+          </div>
         </div>
       </Drawer>
     </>

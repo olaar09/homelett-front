@@ -15,6 +15,7 @@ import { usePaystackPayment } from "react-paystack";
 import { isMobile } from "react-device-detect";
 import { Str } from "@/utils/consts";
 import NoticeDrawers from "./explore/components/Notice/NoticeDrawer";
+import Brands from "../components/Brands";
 
 const NavMenu = ({
   title,
@@ -201,6 +202,22 @@ const Nav: React.FC<any> = ({ children }) => {
     }
   };
 
+  const totalDeposit = authContext.currentUser?.finance?.totalDeposits ?? 0;
+
+  useEffect(() => {
+    if (totalDeposit > 0) {
+      setOpenNotice(true);
+    }
+  }, [totalDeposit]);
+
+  const closeNotice = () => {
+    setOpenNotice(false);
+  };
+
+  const onClick = () => {
+    setOpenNotice(false);
+    window.open(Str.whatsappHelp);
+  };
   return (
     <>
       {/*  <NicheProfileDrawer open={requiresProfile} onClose={closeNicheDrawer} /> */}
@@ -225,6 +242,30 @@ const Nav: React.FC<any> = ({ children }) => {
             <br /> <br />
             Best regards.
           </span>
+        }
+      />
+
+      <NoticeDrawers
+        open={openNotice}
+        onClose={closeNotice}
+        action={"Start earning"}
+        title={"Bubble Earn"}
+        icon={"bi:cash-coin"}
+        onClick={() => onClick()}
+        message={
+          <div className="text-center w-full flex justify-center flex-col items-center ">
+            <span>
+              {" "}
+              Dear user, Would you like to earn up to <b> ₦350,000 </b> monthly
+              by sharing your netflix, show-max and prime video subscriptions
+              with others?
+            </span>
+            <br /> <br />
+            <div className="w-4/12 flex justify-center items-center my-2">
+              <Brands size={"small"} brands={[...Str.brands].splice(2, 3)} />
+            </div>
+            Contact us to get started today !.
+          </div>
         }
       />
 

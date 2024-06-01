@@ -11,6 +11,8 @@ export interface IAuthRequest {
   is_activated?: number;
   finance?: {
     balance: number;
+    totalSpends: number;
+    totalDeposits: number;
   };
   freeTrialLeft?: any;
   billingActive?: boolean;
