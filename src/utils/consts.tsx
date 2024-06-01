@@ -39,7 +39,7 @@ export const Str = {
     {
       value: "2",
       label: "Netflix",
-      pricingName: "Premium",
+      pricingName: "Premium plan",
       pricingAmount: 5000,
       earning: "+60%",
       icon: "/logos/nt.png",
@@ -56,7 +56,7 @@ export const Str = {
       value: "4",
       label: "ShowMax",
       pricingAmount: 2300,
-      pricingName: "All devices",
+      pricingName: "All devices plan",
 
       earning: "+ 30%",
       icon: "/logos/sm.png",
@@ -65,7 +65,7 @@ export const Str = {
       value: "5",
       label: "Prime video",
       pricingAmount: 2300,
-      pricingName: "All devices",
+      pricingName: "All devices plan",
       earning: "+ 30%",
       icon: "/logos/pr.jpeg",
     },
