@@ -264,7 +264,7 @@ const Nav: React.FC<any> = ({ children }) => {
             <div className="w-4/12 flex justify-center items-center my-2">
               <Brands size={"small"} brands={[...Str.brands].splice(2, 3)} />
             </div>
-            Contact us to get started today !.
+            Contact us to started earning today !.
           </div>
         }
       />

@@ -60,7 +60,7 @@ const NoticeDrawers: React.FC<DrawerProps> = ({
               type={"button"}
               loading={false}
             >
-              <div className="flex items-center text-xs gap-x-2">
+              <div className="flex items-center text-sm gap-x-2">
                 <Icon className="text-white" icon={icon} />
                 <span className="text-white">{action ?? "Close notice"}</span>
               </div>
