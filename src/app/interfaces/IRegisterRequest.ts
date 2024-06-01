@@ -7,6 +7,7 @@ export interface IAuthRequest {
   password: string;
   phone: string;
   company?: string;
+  bank_info?: IUserBank;
   is_open_ai?: number;
   is_activated?: number;
   finance?: {
@@ -21,6 +22,12 @@ export interface IAuthRequest {
   paymentLink?: string;
   token?: string;
   subscriptions: any[];
+}
+
+export interface IUserBank {
+  bank_name: string;
+  bank_account_name: string;
+  bank_account_number: string;
 }
 
 export interface ISubscription {

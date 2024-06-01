@@ -24,7 +24,7 @@ const SavedTeamMembers = () => {
     authContext.clearUser();
   };
 
-  const onOpenShareSubscription = () => {
+  const onUpdateBank = () => {
     setOpenBankModal(true);
   };
 
@@ -58,26 +58,14 @@ const SavedTeamMembers = () => {
             />
           }
           spinning={authContext.loading}
-          className="bg-background-thin"
+          className="bg-background-thin w-full"
         >
           <div className="bg-background-thin min-h-screen">
-            <section className="h-20  flex items-center justify-between px-8 mt-0 mx-auto w-full bg-background-thin">
-              {/*  <div className="flex items-center gap-x-7">
-                <div onClick={() => handleAddTeam()}>
-                  <HeaderItem
-                    icon="gg:add"
-                    title="Add team member"
-                    withBg={true}
-                  />
-                </div>
-              </div> */}
-            </section>
-
             <div className="w-full mx-auto mt-10 bg-background-thin">
-              <section className=" flex items-center w-full  px-8 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
-                <div className="lg:w-8/12 w-full items-center mx-auto ">
+              <section className=" flex items-center w-full  px-2 mt-10 flex-wrap gap-y-4 overflow-y-scroll pb-20">
+                <div className="lg:w-full w-full items-center mx-auto ">
                   <Card className="w-full">
-                    <div className="flex flex-col gap-x-2 gap-y-3 items-center justify-center">
+                    <div className="flex flex-col gap-x-2 gap-y-3 items-center justify-center ">
                       <Avatar
                         style={{
                           backgroundColor: "#f56a00",
@@ -101,25 +89,52 @@ const SavedTeamMembers = () => {
                       </span>
                     </div>
 
-                    <div
-                      onClick={onOpenShareSubscription}
-                      className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-10 w-10/12 mx-auto"
-                    >
-                      <Icon icon={"streamline:bank-solid"} />
-                      <span className="text-sm"> {"Add bank details"}</span>
-                    </div>
+                    {!authContext.currentUser.bank_info && (
+                      <div
+                        onClick={onUpdateBank}
+                        className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-10 w-full rounded-lg mx-auto"
+                      >
+                        <Icon icon={"streamline:bank-solid"} />
+                        <span className="text-sm"> {"Add bank details"}</span>
+                      </div>
+                    )}
 
                     <Link href={Str.whatsappHelp}>
-                      <div className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-4 w-10/12 mx-auto">
+                      <div className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-4 w-full rounded-lg mx-auto">
                         <Icon icon={"logos:whatsapp-icon"} />
                         <span className="text-sm"> {"Contact support"}</span>
                       </div>
                     </Link>
 
-                    <div className="flex items-center mt-10 w-full mx-auto  justify-center">
+                    {authContext.currentUser.bank_info && (
+                      <div className="flex flex-col gap-y-2  items-center  gap-x-3 justify-center py-2 border border-gray-200 mt-4 w-full rounded-lg mx-auto">
+                        <InfoItem
+                          icon="ph:bank-bold"
+                          title="Bank name"
+                          content={authContext.currentUser.bank_info.bank_name}
+                        />
+                        <InfoItem
+                          icon="f7:number"
+                          title="Account number"
+                          content={
+                            authContext.currentUser.bank_info
+                              .bank_account_number
+                          }
+                        />
+                        <InfoItem
+                          icon="material-symbols-light:comment-bank-rounded"
+                          title="Account name"
+                          content={
+                            authContext.currentUser.bank_info.bank_account_name
+                          }
+                        />
+                      </div>
+                    )}
+
+                    <div className="flex items-center mt-10 w-8/12 mx-auto  justify-center">
                       <Button
                         type="primary"
-                        className="bg-primary"
+                        className="bg-primary w-full"
                         onClick={onLogout}
                       >
                         Logout
@@ -136,4 +151,16 @@ const SavedTeamMembers = () => {
   );
 };
 
+const InfoItem = ({ content, title, icon }: any) => {
+  return (
+    <div className="flex items-center justify-between w-full px-2 text-xs">
+      <div className="flex items-center gap-x-2">
+        <Icon icon={icon} />
+        <span className="text-xs">{title}</span>
+      </div>
+
+      <span className="text-xs"> {content}</span>
+    </div>
+  );
+};
 export default SavedTeamMembers;
