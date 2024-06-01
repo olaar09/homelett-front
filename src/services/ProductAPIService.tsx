@@ -1,11 +1,23 @@
 import { IProduct } from "@/app/interfaces/IProduct";
 import ApiService from "./APIService";
+import { ICredential } from "@/app/interfaces/IRegisterRequest";
 
 class ProductAPIService {
   private apiService: ApiService;
 
   constructor(apiService: ApiService) {
     this.apiService = apiService;
+  }
+
+  async fetchShareCredentials(): Promise<ICredential[] | null> {
+    try {
+      const text = await this.apiService.get<{ data: any }>(
+        `/shared_credentials`
+      );
+      return text.data;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async shareCredential(data: {

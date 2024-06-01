@@ -36,15 +36,17 @@ export interface ISubscription {
   product: IProduct;
 }
 
+export interface ICredential {
+  id: number;
+  platform: IPlatform;
+  info?: string;
+  email: string;
+  password: string;
+  extra?: any;
+}
+
 export interface ISubscriptionCredentials {
   id: number;
   platform: IPlatform;
-  credential: {
-    id: number;
-    platform: IPlatform;
-    info?: string;
-    email: string;
-    password: string;
-    extra?: any;
-  };
+  credential: ICredential;
 }

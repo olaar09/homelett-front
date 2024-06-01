@@ -15,11 +15,27 @@ import ACButton from "@/app/components/Button";
 import StartEarning from "./components/StartEarning";
 import AddCredentialDrawer from "./components/AddCredentialDrawer";
 
-const SavedTeamMembers = () => {
+const EarnPage = () => {
   const authContext = useContext(AuthContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const apiUtils = new APIUtil();
   const router = useRouter();
+
+  const {
+    data: credentialList,
+    error: credentialListError,
+    loading: loadingCredentialList,
+    refresh: refreshCredentials,
+  } = useRequest(() => getSharedCredentials());
+
+  const getSharedCredentials = async (): Promise<any> => {
+    try {
+      const data = await apiUtils.productService.fetchShareCredentials();
+      return data;
+    } catch (error) {
+      message.error("unable to load data");
+    }
+  };
 
   const onLogout = () => {
     localStorage.clear();
@@ -40,6 +56,7 @@ const SavedTeamMembers = () => {
       <AddCredentialDrawer
         open={openAddModal}
         onClose={onCloseShareSubscription}
+        refreshCredentials={refreshCredentials}
       />
 
       {authContext.loading && (
@@ -55,11 +72,20 @@ const SavedTeamMembers = () => {
         </div>
       )}
 
-      {!authContext.loading && authContext.currentUser && (
-        <StartEarning onClick={onOpenShareSubscription} />
-      )}
+      {!authContext.loading &&
+        authContext.currentUser &&
+        (!credentialList || credentialList.length < 1) && (
+          <StartEarning onClick={onOpenShareSubscription} />
+        )}
+
+      {!authContext.loading &&
+        authContext.currentUser &&
+        credentialList &&
+        credentialList.length > 0 && (
+          <StartEarning onClick={onOpenShareSubscription} />
+        )}
     </>
   );
 };
 
-export default SavedTeamMembers;
+export default EarnPage;
