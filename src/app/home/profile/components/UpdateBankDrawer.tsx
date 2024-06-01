@@ -103,10 +103,8 @@ const UpdateBankDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
       >
         <form onSubmit={handleSend} className="flex flex-col items-start py-4">
           <div className="flex items-center px-3  w-full">
-            <div className="text-black flex flex-col w-full gap-y-3 ">
-              <span className=" text-foreground-secondary">
-                Create bank details
-              </span>
+            <div className="text-black flex flex-col w-full gap-y-3  mb-4">
+              <span className=" text-foreground">Create bank details</span>
             </div>
           </div>
 
@@ -130,7 +128,9 @@ const UpdateBankDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
               name={"bank_account_number"}
               value={formData.bank_account_number}
               required
-              onChange={(val) => onSetFormData("email", val.target.value)}
+              onChange={(val) =>
+                onSetFormData("bank_account_number", val.target.value)
+              }
             />
           </div>
           <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
@@ -141,7 +141,9 @@ const UpdateBankDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
               name={"bank_account_name"}
               value={formData.bank_account_name}
               required
-              onChange={(val) => onSetFormData("password", val.target.value)}
+              onChange={(val) =>
+                onSetFormData("bank_account_name", val.target.value)
+              }
             />
           </div>
 
