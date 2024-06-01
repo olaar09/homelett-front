@@ -9,6 +9,22 @@ class ProfileAPIService {
     this.apiService = apiService;
   }
 
+  async updateBankDetails(data: {
+    bank_name: string;
+    bank_account_name: string;
+    bank_account_number?: string;
+  }): Promise<string> {
+    try {
+      const response = await this.apiService.post<{ data: any }>(
+        `/bank_info`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async loadProfile(): Promise<{ data: IAuthRequest }> {
     try {
       const user = await this.apiService.get("/user");

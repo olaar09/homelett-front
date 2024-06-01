@@ -10,10 +10,11 @@ import AddTeamModal from "./components/AddTeamModal";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Str } from "@/utils/consts";
+import UpdateBankDrawer from "./components/UpdateBankDrawer";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
-  const [openAddModal, setOpenAddModal] = useState(false);
+  const [openBankModal, setOpenBankModal] = useState(false);
   const apiUtils = new APIUtil();
   const router = useRouter();
 
@@ -23,8 +24,18 @@ const SavedTeamMembers = () => {
     authContext.clearUser();
   };
 
+  const onOpenShareSubscription = () => {
+    setOpenBankModal(true);
+  };
+
+  const onCloseBank = () => {
+    setOpenBankModal(false);
+  };
+
   return (
     <>
+      <UpdateBankDrawer open={openBankModal} onClose={onCloseBank} />
+
       {authContext.loading && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
@@ -90,8 +101,16 @@ const SavedTeamMembers = () => {
                       </span>
                     </div>
 
+                    <div
+                      onClick={onOpenShareSubscription}
+                      className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-10 w-10/12 mx-auto"
+                    >
+                      <Icon icon={"streamline:bank-solid"} />
+                      <span className="text-sm"> {"Add bank details"}</span>
+                    </div>
+
                     <Link href={Str.whatsappHelp}>
-                      <div className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-10 w-10/12 mx-auto">
+                      <div className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-4 w-10/12 mx-auto">
                         <Icon icon={"logos:whatsapp-icon"} />
                         <span className="text-sm"> {"Contact support"}</span>
                       </div>
