@@ -83,7 +83,7 @@ const Credentialtem = ({
         }
       />
 
-      <span className=" pl-[2.4em] pr-[2em] left-0 right-0 absolute bottom-2 text-xs text-gray-500 justify-between flex items-center">
+      <span className=" pl-[5.7em] pr-[2em] left-0 right-0 absolute bottom-2 text-xs text-gray-500 justify-between flex items-center">
         <Tag color="green" className="text-xs rounded-md">
           {" "}
           {credential.next_renewal
