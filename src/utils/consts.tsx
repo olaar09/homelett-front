@@ -33,7 +33,7 @@ export const Str = {
       label: "Youtube premium",
       pricingAmount: 1700,
       pricingName: "Family plan",
-      earning: "+ 30%",
+      earning: 30,
       icon: "/logos/yt.png",
     },
     {
@@ -41,7 +41,7 @@ export const Str = {
       label: "Netflix",
       pricingName: "Premium plan",
       pricingAmount: 5000,
-      earning: "+60%",
+      earning: 60,
       icon: "/logos/nt.png",
     },
     {
@@ -49,7 +49,7 @@ export const Str = {
       label: "Spotify Premium",
       pricingAmount: 1400,
       pricingName: "Family plan",
-      earning: "+ 30%",
+      earning: 30,
       icon: "/logos/sp.png",
     },
     {
@@ -58,7 +58,7 @@ export const Str = {
       pricingAmount: 2300,
       pricingName: "All devices plan",
 
-      earning: "+ 30%",
+      earning: 30,
       icon: "/logos/sm.png",
     },
     {
@@ -66,7 +66,7 @@ export const Str = {
       label: "Prime video",
       pricingAmount: 2300,
       pricingName: "All devices plan",
-      earning: "+ 30%",
+      earning: 30,
       icon: "/logos/pr.jpeg",
     },
   ],

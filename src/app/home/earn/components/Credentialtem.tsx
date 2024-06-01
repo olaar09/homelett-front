@@ -19,9 +19,21 @@ const Credentialtem = ({
   active: boolean;
   credential: ICredential;
 }) => {
+  const utilsService = new UtilService();
+
   const planName = Str.platforms.find(
     (pl) => pl.value === credential?.platform.id.toString()
   )?.pricingName;
+
+  const pricingAmount =
+    Str.platforms.find((pl) => pl.value === credential?.platform.id.toString())
+      ?.pricingAmount ?? 0;
+
+  const profit =
+    Str.platforms.find((pl) => pl.value === credential?.platform.id.toString())
+      ?.earning ?? 0;
+
+  const totalROI = pricingAmount + (pricingAmount / 100) * profit;
 
   return (
     <Card
@@ -49,16 +61,11 @@ const Credentialtem = ({
               {credential?.platform?.name.length >= 50 ? "..." : ""}
             </div>
 
-            <span className="text-xs  font-light">
+            <span className="text-xs  font-light flex items-center">
               <Tag color="cyan" className="text-xs">
                 {" "}
                 <span>{planName}</span>{" "}
               </Tag>
-              {/*  {new UtilService().formatMoney(
-                `${transaction.amount * 100}`,
-                "en-NG",
-                "NGN"
-              )} */}
             </span>
           </div>
         }
@@ -66,14 +73,16 @@ const Credentialtem = ({
           <div className="flex flex-col items-start h-full w-full">
             <div className="flex justify-between w-full">
               <span className="text-foreground text-xs text-gray-500">
-                {credential?.platform?.description}
+                ROI:{" "}
+                {utilsService.formatMoney(`${totalROI * 100}`, "en-NG", "NGN")}{" "}
+                (+ {profit}%)
               </span>
             </div>
           </div>
         }
       />
 
-      <span className=" pl-12 absolute bottom-2 text-xs text-gray-500">
+      <span className=" pl-[5.7em] pr-[2em] left-0 right-0 absolute bottom-2 text-xs text-gray-500 justify-between flex items-center">
         <Tag>
           {" "}
           {credential.next_renewal
@@ -82,6 +91,14 @@ const Credentialtem = ({
               )}`
             : "Pending approval"}
         </Tag>
+
+        <span className="flex items-center gap-x-2">
+          <span>Edit</span>
+          <Icon
+            className="text-foreground-secondary"
+            icon={"mingcute:pencil-fill"}
+          />
+        </span>
       </span>
     </Card>
   );
