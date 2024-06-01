@@ -74,7 +74,14 @@ const Credentialtem = ({
       />
 
       <span className=" pl-12 absolute bottom-2 text-xs text-gray-500">
-        Renews: {moment(credential.next_renewal).format("DD MMM YYYY HH:mm")}
+        <Tag>
+          {" "}
+          {credential.next_renewal
+            ? `Renews: ${moment(credential.next_renewal).format(
+                "DD MMM YYYY HH:mm"
+              )}`
+            : "Pending approval"}
+        </Tag>
       </span>
     </Card>
   );
