@@ -8,6 +8,8 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import AddTeamModal from "./components/AddTeamModal";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Str } from "@/utils/consts";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -88,12 +90,21 @@ const SavedTeamMembers = () => {
                       </span>
                     </div>
 
-                    <div className="flex items-center flex-col justify-start py-2 h-12 border border-gray-200 mt-10 w-6/12 mx-auto">
-                      <span className="text-lg"> {"Active"}</span>
-                    </div>
+                    <Link href={Str.whatsappHelp}>
+                      <div className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-10 w-10/12 mx-auto">
+                        <Icon icon={"logos:whatsapp-icon"} />
+                        <span className="text-sm"> {"Contact support"}</span>
+                      </div>
+                    </Link>
 
                     <div className="flex items-center mt-10 w-full mx-auto  justify-center">
-                      <Button onClick={onLogout}>Logout</Button>
+                      <Button
+                        type="primary"
+                        className="bg-primary"
+                        onClick={onLogout}
+                      >
+                        Logout
+                      </Button>
                     </div>
                   </Card>
                 </div>

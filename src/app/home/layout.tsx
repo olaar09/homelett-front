@@ -16,6 +16,7 @@ import { isMobile } from "react-device-detect";
 import { Str } from "@/utils/consts";
 import NoticeDrawers from "./explore/components/Notice/NoticeDrawer";
 import Brands from "../components/Brands";
+import Chip from "../components/Chip";
 
 const NavMenu = ({
   title,
@@ -285,29 +286,42 @@ const Nav: React.FC<any> = ({ children }) => {
                   title: "History",
                 },
                 {
+                  path: "/home/earn",
+                  icon: "majesticons:money-plus-line",
+                  title: "Earn",
+                  isNew: false,
+                },
+                {
                   path: "/home/profile",
                   icon: "iconamoon:profile-fill",
                   title: "Profile",
-                },
-                {
-                  path: Str.whatsappHelp,
-                  icon: "logos:whatsapp-icon",
-                  title: "Support",
                 },
               ].map((menu) => {
                 const browserPath = usePathname();
                 const isActive = browserPath.includes(menu.path);
                 return (
                   <Link href={menu.path}>
-                    <div className="flex flex-col  gap-y-1  hover:bg-gray-50 px-2 py-1 rounded-md  transition-all duration-200  items-center justify-center">
+                    <div className="flex flex-col  gap-y-1  hover:bg-gray-50 px-2 py-1 rounded-md  transition-all duration-200  items-center justify-center relative">
+                      {menu.isNew && (
+                        <div className="absolute animate-bounce -right-1 top-0 ">
+                          <Chip
+                            loading={false}
+                            isSelected={false}
+                            icon={""}
+                            type="badge"
+                            title={""}
+                          />
+                        </div>
+                      )}
+
                       <Icon
                         icon={menu.icon}
                         className={`text-lg ${
-                          isActive ? " text-gray-600" : " text-gray-400"
-                        } `}
+                          menu.isNew ? "text-primary" : ""
+                        } ${isActive ? " text-gray-600" : " text-gray-400"} `}
                       />
                       <span
-                        className={`${
+                        className={` ${menu.isNew ? "text-primary" : ""} ${
                           isActive ? " text-gray-600" : " text-gray-400"
                         } text-xs`}
                       >
