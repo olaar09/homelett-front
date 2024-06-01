@@ -66,6 +66,17 @@ const EarnPage = () => {
 
   return (
     <>
+      {!authContext.currentUser?.bank_info && (
+        <Link href={"/profile"}>
+          <div className="bg-red-400 h-10 gap-x-2 flex items-center justify-center">
+            <Icon icon={"mdi:bank"} className="text-white" />
+            <span className="text-white text-sm">
+              Click here to add your bank details
+            </span>
+          </div>
+        </Link>
+      )}
+
       <AddCredentialDrawer
         open={openAddModal}
         onClose={onCloseShareSubscription}
