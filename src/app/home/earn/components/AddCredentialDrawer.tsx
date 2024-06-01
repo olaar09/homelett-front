@@ -190,8 +190,8 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
             <div className="px-3">
               <Tag className="text-xs my-1  flex flex-col gap-y-3 py-1">
                 <span className="text-xs text-wrap">
-                  Once your login is verified. your bank account will be
-                  credited instantly plus the profit specified{" "}
+                  Once your login is verified. your provided bank account will
+                  be credited instantly plus the profit specified{" "}
                 </span>
               </Tag>
             </div>
