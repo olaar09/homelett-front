@@ -15,9 +15,14 @@ import { Str } from "@/utils/consts";
 interface DrawerProps {
   open: boolean;
   onClose: () => void;
+  refreshCredentials: () => void;
 }
 
-const AddCredentialDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
+const AddCredentialDrawer: React.FC<DrawerProps> = ({
+  refreshCredentials,
+  onClose,
+  open,
+}) => {
   const { Option } = Select;
 
   const apiUtil = new APIUtil();
@@ -54,7 +59,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
       });
 
       authContext.refreshProfile();
-      setIsDone(true);
+      onSuccessClose();
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error?.response?.data?.reason);
@@ -90,8 +95,9 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
     setFormData({ ...formData, [key]: value });
   };
 
-  const onUserClose = () => {
+  const onSuccessClose = () => {
     onClose();
+    refreshCredentials();
   };
 
   return (
@@ -110,100 +116,93 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
         maskClosable={false}
         open={open}
       >
-        {!isDone && (
-          <form
-            onSubmit={handleSend}
-            className="flex flex-col items-start py-4"
-          >
-            <div className="flex items-center px-3  w-full">
-              <div className="text-black flex flex-col w-full ">
-                <div className="flex flex-col gap-y-1 w-full mb-4">
-                  <span>Terms and conditions</span>
-                  <Tag
-                    className="text-xs my-1  flex flex-col gap-y-3 py-1"
-                    color="cyan"
-                  >
-                    <span className="text-xs text-wrap">
-                      The login details you enter must be valid, paid for and
-                      active. Invalid or unpaid login details will lead to
-                      irreversible ban from Bubble earn{" "}
-                    </span>
-                  </Tag>
-                </div>
-
-                <div className="flex flex-col gap-y-2 mb-6">
-                  <span className=" text-foreground-secondary">
-                    Select Service
+        <form onSubmit={handleSend} className="flex flex-col items-start py-4">
+          <div className="flex items-center px-3  w-full">
+            <div className="text-black flex flex-col w-full ">
+              <div className="flex flex-col gap-y-1 w-full mb-4">
+                <span>Terms and conditions</span>
+                <Tag
+                  className="text-xs my-1  flex flex-col gap-y-3 py-1"
+                  color="cyan"
+                >
+                  <span className="text-xs text-wrap">
+                    The login details you enter must be valid, paid for and
+                    active. Invalid or unpaid login details will lead to
+                    irreversible ban from Bubble earn{" "}
                   </span>
-                  <Select
-                    placeholder="Select data plan"
-                    className="w-full h-9"
-                    value={formData.platform_id}
-                    onChange={(val) => onSetFormData("platform_id", val)}
-                  >
-                    {Str.platforms.map((col) => (
-                      <Option key={col.label} value={col.value}>
-                        <div className="flex items-center gap-x-2">
-                          <img src={col.icon} className="w-5" />
-                          <span>
-                            {col.label}{" "}
-                            <Tag className="text-xs rounded-lg" color="volcano">
-                              <span className="text-xs">
-                                {" "}
-                                {col.earning} profit{" "}
-                              </span>
-                            </Tag>
-                          </span>
-                        </div>
-                      </Option>
-                    ))}
-                  </Select>
-                </div>
+                </Tag>
+              </div>
+
+              <div className="flex flex-col gap-y-2 mb-6">
+                <span className=" text-foreground-secondary">
+                  Select Service
+                </span>
+                <Select
+                  placeholder="Select data plan"
+                  className="w-full h-9"
+                  value={formData.platform_id}
+                  onChange={(val) => onSetFormData("platform_id", val)}
+                >
+                  {Str.platforms.map((col) => (
+                    <Option key={col.label} value={col.value}>
+                      <div className="flex items-center gap-x-2">
+                        <img src={col.icon} className="w-5" />
+                        <span>
+                          {col.label}{" "}
+                          <Tag className="text-xs rounded-lg" color="volcano">
+                            <span className="text-xs">
+                              {" "}
+                              {col.earning} profit{" "}
+                            </span>
+                          </Tag>
+                        </span>
+                      </div>
+                    </Option>
+                  ))}
+                </Select>
               </div>
             </div>
+          </div>
 
-            <div className="flex flex-col gap-y-2 mb-6 w-full px-3">
-              <span className=" text-foreground-secondary">Service email</span>
-              <InputField
-                placeHolder={`Enter service email`}
-                type={""}
-                name={"email"}
-                value={formData.email}
-                required
-                onChange={(val) => onSetFormData("email", val.target.value)}
-              />
-            </div>
-            <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
-              <span className=" text-foreground-secondary">
-                Service Password
+          <div className="flex flex-col gap-y-2 mb-6 w-full px-3">
+            <span className=" text-foreground-secondary">Service email</span>
+            <InputField
+              placeHolder={`Enter service email`}
+              type={""}
+              name={"email"}
+              value={formData.email}
+              required
+              onChange={(val) => onSetFormData("email", val.target.value)}
+            />
+          </div>
+          <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
+            <span className=" text-foreground-secondary">Service Password</span>
+            <InputField
+              placeHolder={"Enter service password"}
+              type={""}
+              name={"password"}
+              value={formData.password}
+              required
+              onChange={(val) => onSetFormData("password", val.target.value)}
+            />
+          </div>
+
+          <div className="px-3">
+            <Tag className="text-xs my-1  flex flex-col gap-y-3 py-1">
+              <span className="text-xs text-wrap">
+                Once your login is verified. your provided bank account will be
+                credited instantly plus the profit specified{" "}
               </span>
-              <InputField
-                placeHolder={"Enter service password"}
-                type={""}
-                name={"password"}
-                value={formData.password}
-                required
-                onChange={(val) => onSetFormData("password", val.target.value)}
-              />
-            </div>
+            </Tag>
+          </div>
 
-            <div className="px-3">
-              <Tag className="text-xs my-1  flex flex-col gap-y-3 py-1">
-                <span className="text-xs text-wrap">
-                  Once your login is verified. your provided bank account will
-                  be credited instantly plus the profit specified{" "}
-                </span>
-              </Tag>
-            </div>
-
-            <div className="mt-4  flex flex-col gap-y-2 w-full px-3">
-              <ACButton text={""} type={"submit"} loading={loading}>
-                {!loading && <Icon className="text-white" icon={"ion:share"} />}
-                <span className="text-xs text-white">Share login details </span>
-              </ACButton>
-            </div>
-          </form>
-        )}
+          <div className="mt-4  flex flex-col gap-y-2 w-full px-3">
+            <ACButton text={""} type={"submit"} loading={loading}>
+              {!loading && <Icon className="text-white" icon={"ion:share"} />}
+              <span className="text-xs text-white">Share login details </span>
+            </ACButton>
+          </div>
+        </form>
       </Drawer>
     </>
   );
