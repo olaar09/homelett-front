@@ -198,9 +198,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
 
             <div className="mt-4  flex flex-col gap-y-2 w-full px-3">
               <ACButton text={""} type={"submit"} loading={loading}>
-                {!loading && (
-                  <Icon className="text-white" icon={"ic:outline-payment"} />
-                )}
+                {!loading && <Icon className="text-white" icon={"ion:share"} />}
                 <span className="text-xs text-white">Share login details </span>
               </ACButton>
             </div>
