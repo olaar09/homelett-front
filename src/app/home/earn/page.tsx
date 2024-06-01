@@ -14,6 +14,8 @@ import Brands from "@/app/components/Brands";
 import ACButton from "@/app/components/Button";
 import StartEarning from "./components/StartEarning";
 import AddCredentialDrawer from "./components/AddCredentialDrawer";
+import TransactionItem from "../_components/TransactionItem";
+import Credentialtem from "./components/Credentialtem";
 
 const EarnPage = () => {
   const authContext = useContext(AuthContext);
@@ -82,7 +84,23 @@ const EarnPage = () => {
         authContext.currentUser &&
         credentialList &&
         credentialList.length > 0 && (
-          <StartEarning onClick={onOpenShareSubscription} />
+          <div className="w-full mx-auto  bg-background-thin  ">
+            <section className=" flex items-center w-full max-h-screen pb-40  lg:px-8 px-2 mt-10 flex-wrap gap-y-4 overflow-y-scroll">
+              {credentialList.map((transaction: any) => {
+                return (
+                  <div className="lg:w-4/12 w-full">
+                    <Credentialtem
+                      applying={false}
+                      onSelectJob={undefined}
+                      onApplyJob={undefined}
+                      active={false}
+                      transaction={{ ...transaction }}
+                    />
+                  </div>
+                );
+              })}
+            </section>
+          </div>
         )}
     </>
   );
