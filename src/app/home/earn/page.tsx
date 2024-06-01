@@ -16,6 +16,7 @@ import StartEarning from "./components/StartEarning";
 import AddCredentialDrawer from "./components/AddCredentialDrawer";
 import TransactionItem from "../_components/TransactionItem";
 import Credentialtem from "./components/Credentialtem";
+import { AxiosError } from "axios";
 
 const EarnPage = () => {
   const authContext = useContext(AuthContext);
@@ -35,7 +36,17 @@ const EarnPage = () => {
       const data = await apiUtils.productService.fetchShareCredentials();
       return data;
     } catch (error) {
-      message.error("unable to load data");
+      if (error instanceof AxiosError) {
+        message.error(
+          `${
+            error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
+          }`
+        );
+      } else {
+        message.error("Unable to complete request");
+      }
     }
   };
 
@@ -61,7 +72,7 @@ const EarnPage = () => {
         refreshCredentials={refreshCredentials}
       />
 
-      {authContext.loading && (
+      {(authContext.loading || loadingCredentialList) && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
           <div className="">
@@ -76,6 +87,7 @@ const EarnPage = () => {
 
       {!authContext.loading &&
         authContext.currentUser &&
+        !loadingCredentialList &&
         (!credentialList || credentialList.length < 1) && (
           <StartEarning onClick={onOpenShareSubscription} />
         )}
