@@ -99,6 +99,13 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
     onClose();
     refreshCredentials();
   };
+  const selectedPricingName = Str.platforms.find(
+    (pl) => pl.value === formData.platform_id
+  )?.pricingName;
+
+  const selectedPricing = Str.platforms.find(
+    (pl) => pl.value === formData.platform_id
+  )?.pricingAmount;
 
   return (
     <>
@@ -128,7 +135,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
                   <span className="text-xs text-wrap">
                     The login details you enter must be valid, paid for and
                     active. Invalid or unpaid login details will lead to
-                    irreversible ban from Bubble earn{" "}
+                    irreversible ban from Bubble earn.{" "}
                   </span>
                 </Tag>
               </div>
@@ -160,6 +167,21 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
                     </Option>
                   ))}
                 </Select>
+                {formData.platform_id && (
+                  <div className="inline-block">
+                    <Tag color="magenta">
+                      <span className=" text-foreground-secondary">
+                        You must purchase the {selectedPricingName} (
+                        {utils.formatMoney(
+                          `${selectedPricing * 100 ?? ""}`,
+                          "en-NG",
+                          "NGN"
+                        )}
+                        )
+                      </span>
+                    </Tag>
+                  </div>
+                )}
               </div>
             </div>
           </div>
