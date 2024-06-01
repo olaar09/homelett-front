@@ -104,7 +104,7 @@ const SavedTeamMembers = () => {
 
   const tabs = [
     { label: "Streaming", icon: "solar:video-library-bold" },
-    { label: "Utilities", icon: "hugeicons:software", isNew: true },
+    { label: "Utilities", icon: "hugeicons:software", isNew: false },
     { label: "Mobile Data", icon: "teenyicons:mobile-solid" },
     { label: "Online Courses", icon: "ri:video-line" },
   ];

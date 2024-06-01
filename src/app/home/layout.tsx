@@ -289,7 +289,7 @@ const Nav: React.FC<any> = ({ children }) => {
                   path: "/home/earn",
                   icon: "majesticons:money-plus-line",
                   title: "Earn",
-                  isNew: false,
+                  isNew: true,
                 },
                 {
                   path: "/home/profile",
