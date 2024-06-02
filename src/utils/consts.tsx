@@ -28,12 +28,12 @@ export const Str = {
     "/logos/windscribe_logo.jpg",
   ],
   platforms: [
-    /*     {
+    {
       value: "1",
       label: "Youtube premium",
       pricingAmount: 1700,
       pricingName: "Family plan",
-      earning: 30,
+      earning: 50,
       icon: "/logos/yt.png",
     },
     {
@@ -41,15 +41,15 @@ export const Str = {
       label: "Spotify Premium",
       pricingAmount: 1400,
       pricingName: "Family plan",
-      earning: 30,
+      earning: 50,
       icon: "/logos/sp.png",
-    }, */
+    },
     {
       value: "2",
       label: "Netflix",
       pricingName: "Premium plan",
       pricingAmount: 5000,
-      earning: 60,
+      earning: 50,
       icon: "/logos/nt.png",
     },
     {
@@ -58,7 +58,7 @@ export const Str = {
       pricingAmount: 2300,
       pricingName: "All devices plan",
 
-      earning: 30,
+      earning: 50,
       icon: "/logos/sm.png",
     },
     {
@@ -66,7 +66,7 @@ export const Str = {
       label: "Prime video",
       pricingAmount: 2300,
       pricingName: "All devices plan",
-      earning: 30,
+      earning: 50,
       icon: "/logos/pr.jpeg",
     },
   ],
