@@ -72,7 +72,7 @@ const AirtimeProductItem = ({
             )}
           </div>
 
-          <div className="flex items-center w-96">
+          {/*           <div className="flex items-center w-96">
             <Tag
               color="cyan"
               className="flex items-center gap-x-4 px-1 text-[0.65rem] justify-between rounded-lg"
@@ -89,7 +89,7 @@ const AirtimeProductItem = ({
                 />
               </span>
             </Tag>
-          </div>
+          </div> */}
         </div>
 
         <div className="bottom-1 absolute">
