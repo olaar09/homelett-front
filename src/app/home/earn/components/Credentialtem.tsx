@@ -78,7 +78,7 @@ const Credentialtem = ({
             <div className="flex justify-between w-full">
               {isRejected && (
                 <span className="text-xs">
-                  Ensure you login is valid for at least 1 month and paid for
+                  Ensure your login is valid for at least 1 month and paid for
                   the {planName}
                 </span>
               )}
