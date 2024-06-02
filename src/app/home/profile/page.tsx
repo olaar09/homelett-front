@@ -106,6 +106,16 @@ const SavedTeamMembers = () => {
                       </div>
                     </Link>
 
+                    <Link href={Str.earnChannel}>
+                      <div className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-4 w-full rounded-lg mx-auto">
+                        <Icon icon={"logos:whatsapp-icon"} />
+                        <span className="text-sm">
+                          {" "}
+                          {"Join BubbleEarn channel"}
+                        </span>
+                      </div>
+                    </Link>
+
                     {authContext.currentUser.bank_info && (
                       <div className="flex flex-col gap-y-2  items-center  gap-x-3 justify-center py-2 border border-gray-200 mt-4 w-full rounded-lg mx-auto">
                         <InfoItem
