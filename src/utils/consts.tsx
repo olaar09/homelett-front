@@ -28,7 +28,7 @@ export const Str = {
     "/logos/windscribe_logo.jpg",
   ],
   platforms: [
-    {
+    /*     {
       value: "1",
       label: "Youtube premium",
       pricingAmount: 1700,
@@ -37,20 +37,20 @@ export const Str = {
       icon: "/logos/yt.png",
     },
     {
-      value: "2",
-      label: "Netflix",
-      pricingName: "Premium plan",
-      pricingAmount: 5000,
-      earning: 60,
-      icon: "/logos/nt.png",
-    },
-    {
       value: "3",
       label: "Spotify Premium",
       pricingAmount: 1400,
       pricingName: "Family plan",
       earning: 30,
       icon: "/logos/sp.png",
+    }, */
+    {
+      value: "2",
+      label: "Netflix",
+      pricingName: "Premium plan",
+      pricingAmount: 5000,
+      earning: 60,
+      icon: "/logos/nt.png",
     },
     {
       value: "4",
