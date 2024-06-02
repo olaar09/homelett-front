@@ -68,7 +68,7 @@ const EarnPage = () => {
   const finance = authContext.currentUser?.finance;
   return (
     <>
-      {!authContext.currentUser?.bank_info && (
+      {authContext.currentUser && !authContext.currentUser?.bank_info && (
         <Link href={"/home/profile"}>
           <div className="bg-red-400 h-10 gap-x-2 flex items-center justify-center">
             <Icon icon={"mdi:bank"} className="text-white" />
