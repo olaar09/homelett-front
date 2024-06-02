@@ -35,6 +35,9 @@ const Credentialtem = ({
 
   const totalROI = pricingAmount + (pricingAmount / 100) * profit;
 
+  const isRejected = credential?.sharing_status === "rejected";
+  const isApproved = credential?.sharing_status === "active";
+
   return (
     <Card
       onClick={onSelectCredential}
@@ -73,26 +76,51 @@ const Credentialtem = ({
         description={
           <div className="flex flex-col items-start h-full w-full">
             <div className="flex justify-between w-full">
-              <span className="text-foreground text-xs text-gray-500">
-                ROI:{" "}
-                {utilsService.formatMoney(`${totalROI * 100}`, "en-NG", "NGN")}{" "}
-                (+ {profit}%)
-              </span>
+              {isRejected && (
+                <span className="text-xs">
+                  Ensure you login is valid for at least 1 month and paid for
+                  the {planName}
+                </span>
+              )}
+              {!isRejected && (
+                <span className="text-foreground text-xs text-gray-500">
+                  ROI:{" "}
+                  {utilsService.formatMoney(
+                    `${totalROI * 100}`,
+                    "en-NG",
+                    "NGN"
+                  )}{" "}
+                  (+ {profit}%)
+                </span>
+              )}
             </div>
           </div>
         }
       />
 
       <span className=" pl-[5.7em] pr-[2em] left-0 right-0 absolute bottom-2 text-xs text-gray-500 justify-between flex items-center">
-        <Tag color="green" className="text-xs rounded-md">
-          {" "}
-          {credential.next_renewal
-            ? `Next payment: ${moment(credential.next_renewal).format(
-                "DD MMM YYYY"
-              )}`
-            : "Pending approval"}
-        </Tag>
+        {isRejected && (
+          <Tag color="volcano" className="text-xs rounded-md">
+            Rejected
+          </Tag>
+        )}
 
+        {!isRejected && !isApproved && (
+          <Tag color="green" className="text-xs rounded-md">
+            Pending approval
+          </Tag>
+        )}
+
+        {isApproved && (
+          <Tag color="green" className="text-xs rounded-md">
+            {" "}
+            {credential.next_renewal
+              ? `Next payment: ${moment(credential.next_renewal).format(
+                  "DD MMM YYYY"
+                )}`
+              : "Approved"}
+          </Tag>
+        )}
         <span className="flex items-center gap-x-2">
           <span>Edit</span>
           <Icon
