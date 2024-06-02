@@ -2,6 +2,8 @@ import Brands from "@/app/components/Brands";
 import ACButton from "@/app/components/Button";
 import { Str } from "@/utils/consts";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { Button } from "antd";
+import Link from "next/link";
 
 const StartEarning = ({ onClick }: { onClick: () => void }) => {
   return (
@@ -28,6 +30,22 @@ const StartEarning = ({ onClick }: { onClick: () => void }) => {
           </div>
         </ACButton>
       </div>
+
+      <Link href={Str.earnChannel}>
+        <Button
+          type={"link"}
+          className="w-full text-center px-0 mt-4 "
+          loading={false}
+        >
+          <div className="flex items-center w-full justify-center gap-x-2 ">
+            <Icon icon={"logos:whatsapp-icon"} className="" />
+            <span className="  text-sm">
+              {" "}
+              Join BubbleEarn group to learn more{" "}
+            </span>
+          </div>
+        </Button>
+      </Link>
     </div>
   );
 };
