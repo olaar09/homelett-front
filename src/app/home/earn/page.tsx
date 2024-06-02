@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import { Avatar, Button, Card, FloatButton, Spin, message } from "antd";
+import { Avatar, Button, Card, FloatButton, Spin, Tag, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -17,6 +17,7 @@ import TransactionItem from "../_components/TransactionItem";
 import Credentialtem from "./components/Credentialtem";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { AxiosError } from "axios";
+import UtilService from "@/services/UtilService";
 
 const EarnPage = () => {
   const authContext = useContext(AuthContext);
@@ -63,7 +64,8 @@ const EarnPage = () => {
   const onCloseShareSubscription = () => {
     setOpenAddModal(false);
   };
-
+  const utils = new UtilService();
+  const finance = authContext.currentUser?.finance;
   return (
     <>
       {!authContext.currentUser?.bank_info && (
@@ -75,6 +77,48 @@ const EarnPage = () => {
             </span>
           </div>
         </Link>
+      )}
+
+      {authContext.currentUser?.bank_info && (
+        <div className="flex h-10 gap-x-8 w-full items-center justify-end px-3">
+          <div className="flex items-center text-xs gap-x-1 ">
+            <Tag className="rounded-lg text-xs flex items-center gap-x-1">
+              <Icon
+                icon={"majesticons:money-plus"}
+                className="text-foreground"
+              />
+              <span>Total</span>
+            </Tag>
+
+            <span className="text-foreground">
+              {" "}
+              {utils.formatMoney(
+                `${(finance?.totalPayouts ?? 0) * 100}`,
+                "en-NG",
+                "NGN"
+              )}
+            </span>
+          </div>
+
+          <div className="flex items-center text-xs gap-x-1 ">
+            <Tag
+              color="green"
+              className="rounded-lg text-xs flex items-center gap-x-1"
+            >
+              <Icon icon={"mdi:bank"} className="text-foreground" />
+              <span>Pending</span>
+            </Tag>
+
+            <span className="text-foreground">
+              {" "}
+              {utils.formatMoney(
+                `${(finance?.pendingPayouts ?? 0) * 100}`,
+                "en-NG",
+                "NGN"
+              )}
+            </span>
+          </div>
+        </div>
       )}
 
       <AddCredentialDrawer

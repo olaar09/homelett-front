@@ -14,6 +14,8 @@ export interface IAuthRequest {
     balance: number;
     totalSpends: number;
     totalDeposits: number;
+    totalPayouts: number;
+    pendingPayouts: number;
   };
   freeTrialLeft?: any;
   billingActive?: boolean;
