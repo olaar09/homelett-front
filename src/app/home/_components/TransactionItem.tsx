@@ -1,7 +1,7 @@
 import { ITransaction } from "@/app/interfaces/IProduct";
 import UtilService from "@/services/UtilService";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Card, Button, Tooltip, Avatar } from "antd";
+import { Card, Button, Tooltip, Avatar, Tag } from "antd";
 import moment from "moment";
 
 //      /Users/olaagboola/Downloads/sources/indeed.png /Users/olaagboola/Downloads/sources/linkedin.png /Users/olaagboola/Downloads/sources/turing.png';
@@ -20,6 +20,9 @@ const TransactionItem = ({
   transaction: ITransaction;
 }) => {
   const isDebit = transaction.type == "debit";
+  const isCredit = transaction.type == "credit";
+  const isPayout = transaction.type == "payout";
+  const isPending = transaction.status == "pending";
   return (
     <Card
       onClick={onSelectJob}
@@ -32,7 +35,11 @@ const TransactionItem = ({
         avatar={
           <Avatar
             style={{
-              backgroundColor: isDebit ? "#f56a00" : "#4096ff",
+              backgroundColor: isDebit
+                ? "#f56a00"
+                : isCredit
+                ? "#4096ff"
+                : "orange",
               verticalAlign: "middle",
             }}
           >
@@ -47,7 +54,7 @@ const TransactionItem = ({
             </div>
 
             <span className="text-xs  font-light">
-              <span>{transaction.type == "credit" ? "+" : "-"} </span>{" "}
+              <span>{isCredit ? "+" : isDebit ? "-" : ""} </span>{" "}
               {new UtilService().formatMoney(
                 `${transaction.amount * 100}`,
                 "en-NG",
@@ -63,6 +70,16 @@ const TransactionItem = ({
                 {transaction?.description}
               </span>
             </div>
+            {isPayout && (
+              <div className="mt-1">
+                <Tag
+                  className="rounded-lg text-xs"
+                  color={isPending ? "magenta" : "green"}
+                >
+                  {transaction.status}
+                </Tag>
+              </div>
+            )}
           </div>
         }
       />

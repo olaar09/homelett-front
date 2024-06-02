@@ -25,6 +25,7 @@ export interface IDataPlan {
 export interface ITransaction {
   id: number;
   type: string;
+  status: string;
   source: string;
   source_type: string;
   product_type: string;
