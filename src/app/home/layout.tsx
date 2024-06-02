@@ -205,11 +205,11 @@ const Nav: React.FC<any> = ({ children }) => {
 
   const totalDeposit = authContext.currentUser?.finance?.totalDeposits ?? 0;
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (totalDeposit > 0) {
       setOpenNotice(true);
     }
-  }, [totalDeposit]);
+  }, [totalDeposit]); */
 
   const closeNotice = () => {
     setOpenNotice(false);
