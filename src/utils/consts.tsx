@@ -58,7 +58,7 @@ export const Str = {
       pricingAmount: 2300,
       pricingName: "All devices plan",
 
-      earning: 50,
+      earning: 55,
       icon: "/logos/sm.png",
     },
     {
@@ -66,7 +66,7 @@ export const Str = {
       label: "Prime video",
       pricingAmount: 2300,
       pricingName: "All devices plan",
-      earning: 50,
+      earning: 55,
       icon: "/logos/pr.jpeg",
     },
   ],
