@@ -111,6 +111,16 @@ const SavedTeamMembers = () => {
   const balanceRequired = authContext.currentUser?.finance?.balance ?? 0;
   return (
     <>
+      {/*     {authContext.currentUser && (
+        <div className="bg-red-400 h-auto gap-x-2 flex items-center justify-center text-center px-2 py-2">
+          <span className="text-white text-xs">
+            Due to extremely high demand, netflix, Show-max and prime are not
+            available. please check back later. if you would like to earn 50%
+            instantly sharing your subscription, click earn
+          </span>
+        </div>
+      )}
+ */}
       <NoticeDrawers
         open={openNotice}
         message={
