@@ -237,7 +237,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                   {credential?.credential?.platform?.info}
                 </Tag>
               )}
-              <div className="flex flex-col items-start justify-between gap-y-2">
+              <div className="flex flex-col items-start justify-between gap-y-1">
                 <div className="flex items-center justify-between w-full">
                   <span className=" text-foreground-secondary text-xs w-10">
                     Email:{" "}
@@ -255,7 +255,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                 </span>
               </div>
 
-              <div className="flex flex-col items-start justify-between gap-y-2">
+              <div className="flex flex-col items-start justify-between gap-y-1">
                 <div className="flex items-center justify-between w-full">
                   <span className=" text-foreground-secondary text-xs w-10">
                     Password:{" "}
