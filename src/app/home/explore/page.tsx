@@ -23,6 +23,7 @@ import AirtimeTab from "./components/AirtimeTab/AirtimeTab";
 import NoticeDrawers from "./components/Notice/NoticeDrawer";
 import UtilService from "@/services/UtilService";
 import UtilityTab from "./components/UtilityTab";
+import CourseTab from "./components/CourseTab/CourseTab";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -102,11 +103,15 @@ const SavedTeamMembers = () => {
     (product: IProduct) => product.type === "airtime"
   );
 
+  const coursesProducts = (productList ?? []).filter(
+    (product: IProduct) => product.type === "course"
+  );
+
   const tabs = [
-    { label: "Streaming", icon: "solar:video-library-bold" },
     { label: "Utilities", icon: "hugeicons:software", isNew: false },
-    { label: "Mobile Data", icon: "teenyicons:mobile-solid" },
     { label: "Online Courses", icon: "ri:video-line" },
+    { label: "Streaming", icon: "solar:video-library-bold" },
+    { label: "Mobile Data", icon: "teenyicons:mobile-solid" },
   ];
   const balanceRequired = authContext.currentUser?.finance?.balance ?? 0;
   return (
@@ -227,21 +232,21 @@ const SavedTeamMembers = () => {
                         paddingBottom: 240,
                       }}
                     >
-                      {id === "1" && (
+                      {id === "3" && (
                         <EntertainmentTab
                           products={streamProducts}
                           loading={false}
                         />
                       )}
 
-                      {id === "2" && (
+                      {id === "1" && (
                         <UtilityTab
                           products={utilityProducts}
                           loading={false}
                         />
                       )}
 
-                      {id === "3" && (
+                      {id === "4" && (
                         <AirtimeTab
                           dataPlanList={dataPlanList}
                           products={airtimeProducts}
@@ -249,7 +254,9 @@ const SavedTeamMembers = () => {
                         />
                       )}
 
-                      {id === "4" && <EarnTab />}
+                      {id === "2" && (
+                        <CourseTab products={coursesProducts} loading={false} />
+                      )}
                     </div>
                   ),
                 };
