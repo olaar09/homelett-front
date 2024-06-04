@@ -237,13 +237,10 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                   {credential?.credential?.platform?.info}
                 </Tag>
               )}
-              <div className="flex items-center justify-between">
-                <span className=" text-foreground-secondary text-xs">
-                  Email:{" "}
-                </span>
-                <div className="flex items-center">
-                  <span className=" text-foreground-secondary text-xs">
-                    {email}{" "}
+              <div className="flex flex-col items-start justify-between gap-y-2">
+                <div className="flex items-center justify-between w-full">
+                  <span className=" text-foreground-secondary text-xs w-10">
+                    Email:{" "}
                   </span>
                   <Button
                     onClick={() => onCopyText(credential?.credential?.email)}
@@ -252,14 +249,16 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                     <Icon icon={"solar:copy-bold"} />
                   </Button>
                 </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className=" text-foreground-secondary text-xs">
-                  Password:{" "}
+
+                <span className="  text-foreground-secondary text-xs w-full  text-wrap break-words ">
+                  {email}{" "}
                 </span>
-                <div className="flex items-center">
-                  <span className=" text-foreground-secondary text-xs">
-                    {password}
+              </div>
+
+              <div className="flex flex-col items-start justify-between gap-y-2">
+                <div className="flex items-center justify-between w-full">
+                  <span className=" text-foreground-secondary text-xs w-10">
+                    Password:{" "}
                   </span>
                   <Button
                     onClick={() => onCopyText(credential?.credential?.password)}
@@ -268,6 +267,10 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                     <Icon icon={"solar:copy-bold"} />
                   </Button>
                 </div>
+
+                <span className="  text-foreground-secondary text-xs w-full  text-wrap break-words ">
+                  {password}{" "}
+                </span>
               </div>
             </div>
           </div>
