@@ -2,6 +2,7 @@ export interface IProduct {
   id: number;
   title: string;
   extra: string;
+  extra_link: string;
   extra_icon: string;
   tag: string;
   type: string;
