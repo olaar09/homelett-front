@@ -337,7 +337,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
               <Brands size="small" brands={brands} />
             </div>
 
-            <div className="mt-4 mb-1 px-3 flex justify-between items-center w-full">
+            <div className="mt-4 mb-1 px-3 flex flex-col  items-start w-full">
               <span className="text-lg">{product?.title}</span>
               <div>
                 <span className=" text-foreground-secondary">
@@ -346,17 +346,20 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
                     "en-NG",
                     "NGN"
                   )}{" "}
-                  / weekly ({subscription?.interval})
+                  /{" "}
+                  {subscription?.interval === "single"
+                    ? "monthly"
+                    : subscription?.interval}
                 </span>
               </div>
             </div>
 
-            <div className="px-3">
+            {/*       <div className="px-3">
               <span className="text-[0.75em] text-foreground-secondary">
                 {product?.title.replaceAll(" ", "").toLocaleUpperCase()}-
                 {subscription?.id}_{hashValue(`${subscription?.id}hash`)}
               </span>
-            </div>
+            </div> */}
 
             <div className="px-3 mt-2 mb-2">
               <Tag className="text-xs" color={expired ? "volcano" : "cyan"}>
