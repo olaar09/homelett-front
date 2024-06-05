@@ -47,6 +47,7 @@ const CourseProductItem = ({
       <div className=" h-full   flex flex-col px-1 rounded-md bg-opacity-80  relative">
         <div className="px-3 py-2 justify-between flex items-center ">
           <div className="flex items-center">
+            <img src={product.extra_icon} className="w-12 h-12" />
             <Brands size="small" brands={[...brands]} />
           </div>
 

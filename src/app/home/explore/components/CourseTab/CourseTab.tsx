@@ -40,7 +40,6 @@ const CourseTab = ({
       <CourseProductDrawer
         product={selectedProduct}
         open={selectedProduct != null}
-        promo={selectedPromo!}
         onClose={() => setSelectedProduct(null)}
         dataPlanList={[]}
       />
