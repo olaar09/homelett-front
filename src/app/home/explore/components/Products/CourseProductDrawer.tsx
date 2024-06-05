@@ -107,7 +107,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
       setLoading(true);
       await apiUtil.productService.buyProduct({
         product_id: product!.id.toString(),
-        interval: key === "monthly" ? "single" : "forever",
+        interval: key.toLowerCase() === "monthly" ? "single" : "forever",
         selected_platforms: selectedPlatforms,
       });
       onClose();
