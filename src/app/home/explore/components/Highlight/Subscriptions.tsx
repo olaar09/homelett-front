@@ -87,7 +87,10 @@ const Subscriptions = ({
                             "en-NG",
                             "NGN"
                           )}{" "}
-                          / week ({subscription.interval} )
+                          /{" "}
+                          {subscription?.interval === "single"
+                            ? "monthly"
+                            : subscription?.interval}
                         </span>
                       </div>
                     </div>
