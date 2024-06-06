@@ -357,15 +357,16 @@ const Nav: React.FC<any> = ({ children }) => {
               )}
               {openSide && (
                 <div className="flex flex-col items-start gap-y-2 py-5 w-full px-2 ">
-                  {!authContext.currentUser?.is_admin && (
-                    <Link className="w-full" href={"/home/explore"}>
-                      <NavMenu
-                        path="/home/explore"
-                        icon={"icon-park-solid:all-application"}
-                        title="Explore"
-                      />
-                    </Link>
-                  )}
+                  {authContext.currentUser &&
+                    !authContext.currentUser?.is_admin && (
+                      <Link className="w-full" href={"/home/explore"}>
+                        <NavMenu
+                          path="/home/explore"
+                          icon={"icon-park-solid:all-application"}
+                          title="Explore"
+                        />
+                      </Link>
+                    )}
 
                   {authContext.currentUser &&
                     authContext.currentUser!.is_admin === 1 && (
@@ -381,15 +382,16 @@ const Nav: React.FC<any> = ({ children }) => {
                       </Link>
                     )}
 
-                  {!authContext.currentUser?.is_admin && (
-                    <Link className="w-full" href={"/home/connections"}>
-                      <NavMenu
-                        path="/home/history"
-                        icon={"uim:history"}
-                        title="History"
-                      />
-                    </Link>
-                  )}
+                  {authContext.currentUser &&
+                    !authContext.currentUser?.is_admin && (
+                      <Link className="w-full" href={"/home/connections"}>
+                        <NavMenu
+                          path="/home/history"
+                          icon={"uim:history"}
+                          title="History"
+                        />
+                      </Link>
+                    )}
                 </div>
               )}
               {openSide && (

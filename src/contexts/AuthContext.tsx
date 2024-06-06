@@ -65,18 +65,33 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     }
   }, [currentUser]);
 
-  useEffect(() => {
-    const queryParams = new URLSearchParams(params).toString();
+  const goHome = (currentUser: any) => {
+    console.log(currentUser);
 
+    const queryParams = new URLSearchParams(params).toString();
+    if (currentUser?.is_admin == 1) {
+      router.push(
+        `/home/credentials_request${queryParams ? `?${queryParams}` : ""}`
+      );
+    } else {
+      router.push(`/home/explore${queryParams ? `?${queryParams}` : ""}`);
+    }
+  };
+
+  useEffect(() => {
     if (currentUser) {
       if (path === "/login") {
-        router.push(`/home/explore${queryParams ? `?${queryParams}` : ""}`);
+        goHome(currentUser);
+        return;
+      }
+      if (path === "/home/credentials_request") {
+        goHome(currentUser);
         return;
       }
     } else {
       fetchCurrentUserProfile();
     }
-  }, [router]);
+  }, [router, currentUser]);
 
   const clearUser = async () => {
     setCurrentUser(null);
@@ -147,7 +162,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
       if (user) {
         setCurrentUser(user.data);
         if (path === "/login") {
-          router.push(`/home/explore${queryParams ? `?${queryParams}` : ""}`);
+          goHome(user.data);
           return;
         }
       } else {
