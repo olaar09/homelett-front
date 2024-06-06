@@ -18,6 +18,8 @@ interface DataType {
   gpassword: string;
   gmail: string;
   status: string;
+  sharing: any;
+  admin_status: string;
   next_renewal: string;
 }
 
@@ -196,13 +198,6 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
       ...getColumnSearchProps("password"),
     },
     {
-      title: "Gmail",
-      dataIndex: "name",
-      key: "name",
-
-      ...getColumnSearchProps("gmail"),
-    },
-    {
       title: "GPassword",
       dataIndex: "name",
       key: "name",
@@ -210,13 +205,17 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
       ...getColumnSearchProps("gpassword"),
     },
     {
-      title: "Share Status",
-      dataIndex: "sharing",
-      key: "sharing",
-      render: (sharing) => {
+      title: "Admin Status",
+      dataIndex: "admin_status",
+      key: "admin_status",
+      render: (status) => {
+        const isApproved = status === "active";
+        const isPending = "";
+        const isRejected = status === "rejected";
+
         return (
-          <Tag color={sharing ? "green" : "volcano"}>
-            {sharing ? "Shared" : "Pending"}
+          <Tag color={isApproved ? "green" : isRejected ? "volcano" : ""}>
+            {status ?? "Pending"}
           </Tag>
         );
       },
@@ -226,15 +225,20 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
           value: "pending",
         },
         {
-          text: "Accepted",
-          value: "accepted",
+          text: "Approved",
+          value: "active",
         },
         {
           text: "Rejected",
           value: "rejected",
         },
       ],
-      onFilter: (value, record) => record.status.indexOf(value as string) === 0,
+      onFilter: (value, record) => {
+        if ((value as string) === "pending") {
+          return !record.admin_status || record.admin_status?.length < 1;
+        }
+        return (record.admin_status ?? "").indexOf(value as string) === 0;
+      },
     },
     {
       title: "Share Status",
@@ -242,26 +246,27 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
       key: "sharing",
       render: (sharing) => {
         return (
-          <Tag color={sharing ? "green" : "volcano"}>
-            {sharing ? "Shared" : "Pending"}
+          <Tag color={sharing ? "green" : ""}>
+            {sharing ? "Shared" : "Not shared"}
           </Tag>
         );
       },
       filters: [
         {
-          text: "Pending",
-          value: "pending",
+          text: "Shared",
+          value: "shared",
         },
         {
-          text: "Accepted",
-          value: "accepted",
-        },
-        {
-          text: "Rejected",
-          value: "rejected",
+          text: "Not shared",
+          value: "not_shared",
         },
       ],
-      onFilter: (value, record) => record.status.indexOf(value as string) === 0,
+      onFilter: (value, record) => {
+        if ((value as string) === "shared") {
+          return record.sharing != null;
+        }
+        return !record.sharing;
+      },
     },
     {
       title: "Action",
