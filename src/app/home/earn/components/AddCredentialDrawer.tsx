@@ -33,6 +33,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
     email: "",
     password: "",
     platform_id: "",
+    gpassword: "",
   });
 
   const authContext = useContext(AuthContext);
@@ -42,6 +43,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
       onSetFormData("platform_id", "");
       onSetFormData("email", "");
       onSetFormData("password", "");
+      onSetFormData("gpassword", "");
       setIsDone(false);
     }
   }, [open]);
@@ -51,6 +53,13 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
       setLoading(true);
       if (!formData.platform_id) {
         message.error("Select a platform continue");
+        return;
+      }
+
+      if (formData.gpassword.toLowerCase() == formData.password.toLowerCase()) {
+        message.error(
+          "Service password and email password must not be the same"
+        );
         return;
       }
 
@@ -141,7 +150,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
               </div>
 
               <div className="flex flex-col gap-y-2 mb-6">
-                <span className=" text-foreground-secondary">
+                <span className=" text-foreground-secondary text-xs">
                   Select Service
                 </span>
                 <Select
@@ -187,7 +196,9 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
           </div>
 
           <div className="flex flex-col gap-y-2 mb-6 w-full px-3">
-            <span className=" text-foreground-secondary">Service email</span>
+            <span className=" text-foreground-secondary text-xs">
+              Service email
+            </span>
             <InputField
               placeHolder={`Enter service email`}
               type={""}
@@ -198,7 +209,9 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
             />
           </div>
           <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
-            <span className=" text-foreground-secondary">Service Password</span>
+            <span className=" text-foreground-secondary text-xs">
+              Service Password
+            </span>
             <InputField
               placeHolder={"Enter service password"}
               type={""}
@@ -206,6 +219,23 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
               value={formData.password}
               required
               onChange={(val) => onSetFormData("password", val.target.value)}
+            />
+          </div>
+
+          <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
+            <span className=" text-foreground-secondary text-xs">
+              Email Password
+            </span>
+            <span className=" text-foreground-secondary text-xs">
+              So that we can retrieve OTP at anytime
+            </span>
+            <InputField
+              placeHolder={"Enter password for the email provided"}
+              type={""}
+              name={"gpassword"}
+              value={formData.gpassword}
+              required
+              onChange={(val) => onSetFormData("gpassword", val.target.value)}
             />
           </div>
 

@@ -199,8 +199,8 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
     },
     {
       title: "GPassword",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "gpassword",
+      key: "gpassword",
 
       ...getColumnSearchProps("gpassword"),
     },
