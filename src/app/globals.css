@@ -257,3 +257,8 @@ html {
 .ant-btn-primary {
   background-color: rgb(var(--primary-rgb));
 }
+
+.ant-table-cell {
+  overflow-x: scroll !important;
+  white-space: nowrap;
+}

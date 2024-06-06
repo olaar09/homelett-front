@@ -4,6 +4,8 @@ import type { InputRef, TableColumnsType, TableColumnType } from "antd";
 import { Button, Card, Input, Space, Table, TableProps } from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
 import Highlighter from "react-highlight-words";
+import Brands from "@/app/components/Brands";
+import { Str } from "@/utils/consts";
 
 interface DataType {
   key: string;
@@ -166,7 +168,17 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
       title: "Platform",
       dataIndex: "platform",
       key: "name",
-      render: (platform) => <a>{platform.name}</a>,
+      render: (platform) => {
+        const br = Str.platforms.find((pl) => pl.label == "Spotify Premium");
+
+        console.log(br);
+
+        return (
+          <div>
+            {platform.name} <Brands size="default" brands={[]} />
+          </div>
+        );
+      },
       //  ...getColumnSearchProps("platform"),
     },
     {
@@ -234,8 +246,7 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
         scroll={{ x: 1500 }}
         bordered
         size="small"
-        // scroll={{ x: columns.length > 5 ? 3300 : undefined }}
-        rowClassName={() => "text-xs p-0 m-0 "}
+        rowClassName={() => "text-xs p-0 m-0  overflow-clip text-ellipsis"}
       />
     </Card>
   );
