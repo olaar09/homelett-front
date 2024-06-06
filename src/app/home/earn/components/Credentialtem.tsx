@@ -35,8 +35,8 @@ const Credentialtem = ({
 
   const totalROI = pricingAmount + (pricingAmount / 100) * profit;
 
-  const isRejected = credential?.sharing_status === "rejected";
-  const isApproved = credential?.sharing_status === "active";
+  const isRejected = credential?.admin_status === "rejected";
+  const isApproved = credential?.admin_status === "active";
 
   return (
     <Card

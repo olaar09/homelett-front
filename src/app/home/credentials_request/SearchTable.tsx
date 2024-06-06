@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import type { InputRef, TableColumnsType, TableColumnType } from "antd";
-import { Button, Card, Input, Space, Table, TableProps } from "antd";
+import { Button, Card, Input, Space, Table, TableProps, Tag } from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
 import Highlighter from "react-highlight-words";
 import Brands from "@/app/components/Brands";
@@ -210,8 +210,43 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
       ...getColumnSearchProps("gpassword"),
     },
     {
-      title: "Status",
-      dataIndex: "address",
+      title: "Share Status",
+      dataIndex: "sharing",
+      key: "sharing",
+      render: (sharing) => {
+        return (
+          <Tag color={sharing ? "green" : "volcano"}>
+            {sharing ? "Shared" : "Pending"}
+          </Tag>
+        );
+      },
+      filters: [
+        {
+          text: "Pending",
+          value: "pending",
+        },
+        {
+          text: "Accepted",
+          value: "accepted",
+        },
+        {
+          text: "Rejected",
+          value: "rejected",
+        },
+      ],
+      onFilter: (value, record) => record.status.indexOf(value as string) === 0,
+    },
+    {
+      title: "Share Status",
+      dataIndex: "sharing",
+      key: "sharing",
+      render: (sharing) => {
+        return (
+          <Tag color={sharing ? "green" : "volcano"}>
+            {sharing ? "Shared" : "Pending"}
+          </Tag>
+        );
+      },
       filters: [
         {
           text: "Pending",

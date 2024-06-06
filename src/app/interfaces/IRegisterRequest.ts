@@ -49,7 +49,7 @@ export interface ISubscription {
 export interface ICredential {
   id: number;
   platform: IPlatform;
-  sharing_status?: string;
+  admin_status?: string;
   info?: string;
   email: string;
   password: string;
