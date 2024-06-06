@@ -253,3 +253,7 @@ html {
   background-color: #ff7a45 !important;
   color: white;
 }
+
+.ant-btn-primary {
+  background-color: rgb(var(--primary-rgb));
+}

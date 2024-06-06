@@ -28,6 +28,7 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18",
+    "react-highlight-words": "^0.20.0",
     "react-id-swiper": "^4.0.0",
     "react-parallax-tilt": "^1.7.221",
     "react-paystack": "^5.0.0",

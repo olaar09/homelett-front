@@ -12,7 +12,7 @@ class ProductAPIService {
   async fetchShareCredentials(): Promise<ICredential[] | null> {
     try {
       const text = await this.apiService.get<{ data: any }>(
-        `/shared_credentials`
+        `/credentials_request`
       );
       return text.data;
     } catch (error) {
@@ -27,7 +27,7 @@ class ProductAPIService {
   }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(
-        `/shared_credentials`,
+        `/credentials_request`,
         data
       );
       return response.data;
