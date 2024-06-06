@@ -40,14 +40,6 @@ const ChatDropdown: React.FC<DropdownProps> = ({ items, onItemSelect }) => {
     };
   });
 
-  const menu = (
-    <Menu onClick={handleMenuClick}>
-      {items.map((item) => (
-        <Menu.Item key={item?.id}>{item?.name}</Menu.Item>
-      ))}
-    </Menu>
-  );
-
   return (
     <Dropdown
       menu={{ items: mapped, onClick: handleMenuClick }}

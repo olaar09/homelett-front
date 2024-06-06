@@ -18,24 +18,6 @@ import { DownOutlined } from "@ant-design/icons";
 import Brands from "@/app/components/Brands";
 import { Str } from "@/utils/consts";
 
-const items: any = [
-  {
-    label: <a href="https://www.antgroup.com">Approve credential</a>,
-    key: "0",
-  },
-  {
-    label: <a href="https://www.aliyun.com">Reject credential</a>,
-    key: "1",
-  },
-  {
-    type: "divider",
-  },
-  {
-    label: <a href="https://www.aliyun.com">Revoke credential</a>,
-    key: "3",
-  },
-];
-
 interface DataType {
   key: string;
   email: string;
@@ -66,6 +48,10 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
 
   type GetSingle<T> = T extends (infer U)[] ? U : never;
   type Sorts = GetSingle<Parameters<OnChange>[2]>;
+
+  const handleMenuClick = (e: any) => {
+    console.log(e.key);
+  };
 
   const handleSearch = (
     selectedKeys: string[],
@@ -298,16 +284,27 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
       key: "operation",
       fixed: "right",
       width: 100,
-      render: () => (
-        <Dropdown menu={{ items }} trigger={["click"]}>
-          <a onClick={(e) => e.preventDefault()}>
-            <Space>
-              Actions
-              <DownOutlined />
-            </Space>
-          </a>
-        </Dropdown>
-      ),
+      render: (value, record) => {
+        const items: any = ["Approve", "Reject", "Revoke"].map((it) => {
+          return {
+            label: <span>{it}</span>,
+            key: `${record.id}__${it}`,
+          };
+        });
+        return (
+          <Dropdown
+            menu={{ items, onClick: handleMenuClick }}
+            trigger={["click"]}
+          >
+            <a onClick={(e) => e.preventDefault()}>
+              <Space>
+                Actions
+                <DownOutlined />
+              </Space>
+            </a>
+          </Dropdown>
+        );
+      },
     },
   ];
 
