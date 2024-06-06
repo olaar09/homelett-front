@@ -84,7 +84,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         goHome(currentUser);
         return;
       }
-      if (path === "/home/credentials_request") {
+      if (path === "/home/credentials_request" && currentUser.is_admin != 1) {
         goHome(currentUser);
         return;
       }
