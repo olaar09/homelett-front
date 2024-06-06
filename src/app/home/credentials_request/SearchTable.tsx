@@ -150,24 +150,24 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
     },
     {
       title: "User",
-      dataIndex: "fullname",
-      key: "fullname",
-
-      ...getColumnSearchProps("fullname"),
+      dataIndex: "user",
+      key: "user.fullname",
+      render: (user) => <a>{user.fullname}</a>,
+      //  ...getColumnSearchProps("fullname"),
     },
     {
       title: "Phone",
-      dataIndex: "phone",
+      dataIndex: "user",
       key: "phone",
-
-      ...getColumnSearchProps("phone"),
+      render: (user) => <a>{user.phone}</a>,
+      //  ...getColumnSearchProps("phone"),
     },
     {
       title: "Platform",
       dataIndex: "platform",
-      key: "platform",
-
-      ...getColumnSearchProps("platform"),
+      key: "name",
+      render: (platform) => <a>{platform.name}</a>,
+      //  ...getColumnSearchProps("platform"),
     },
     {
       title: "Email",

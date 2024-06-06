@@ -80,11 +80,9 @@ const CredentialRequests = () => {
 
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col w-full">
-      <LoadingOverlay
-        loading={currentAuth.loading || currentAuth.loadingSources}
-      />
-
-      {(loadingCredentialRequests || !credentialRequests) && (
+      {(currentAuth.loading ||
+        loadingCredentialRequests ||
+        !credentialRequests) && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
           <div className="">
@@ -97,7 +95,7 @@ const CredentialRequests = () => {
         </div>
       )}
 
-      {!loadingCredentialRequests && (
+      {!loadingCredentialRequests && credentialRequests && (
         <div className="h-screen px-7 py-0 flex flex-col gap-y-4">
           <SearchedTable data={credentialRequests} />
         </div>
