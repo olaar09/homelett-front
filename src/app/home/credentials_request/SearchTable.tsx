@@ -7,41 +7,21 @@ import Highlighter from "react-highlight-words";
 
 interface DataType {
   key: string;
-  name: string;
-  age: number;
-  address: string;
+  email: string;
+  id: number;
+  phone: string;
+  platform: string;
+  fullname: string;
+  password: string;
+  gpassword: string;
+  gmail: string;
+  status: string;
+  next_renewal: string;
 }
 
 type DataIndex = keyof DataType;
 
-const data: DataType[] = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-  },
-];
-
-const SearchedTable: React.FC = () => {
+const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
@@ -163,59 +143,59 @@ const SearchedTable: React.FC = () => {
   const columns: TableColumnsType<DataType> = [
     {
       title: "Id",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "id",
+      key: "id",
       fixed: "left",
       width: "5%",
     },
     {
       title: "User",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "fullname",
+      key: "fullname",
 
-      ...getColumnSearchProps("name"),
+      ...getColumnSearchProps("fullname"),
     },
     {
       title: "Phone",
-      dataIndex: "age",
-      key: "age",
+      dataIndex: "phone",
+      key: "phone",
 
-      ...getColumnSearchProps("age"),
+      ...getColumnSearchProps("phone"),
     },
     {
       title: "Platform",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "platform",
+      key: "platform",
 
-      ...getColumnSearchProps("name"),
+      ...getColumnSearchProps("platform"),
     },
     {
       title: "Email",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "email",
+      key: "email",
 
-      ...getColumnSearchProps("name"),
+      ...getColumnSearchProps("email"),
     },
     {
       title: "Password",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "password",
+      key: "password",
 
-      ...getColumnSearchProps("name"),
+      ...getColumnSearchProps("password"),
     },
     {
       title: "Gmail",
       dataIndex: "name",
       key: "name",
 
-      ...getColumnSearchProps("name"),
+      ...getColumnSearchProps("gmail"),
     },
     {
       title: "GPassword",
       dataIndex: "name",
       key: "name",
 
-      ...getColumnSearchProps("name"),
+      ...getColumnSearchProps("gpassword"),
     },
     {
       title: "Status",
@@ -234,8 +214,7 @@ const SearchedTable: React.FC = () => {
           value: "rejected",
         },
       ],
-      onFilter: (value, record) =>
-        record.address.indexOf(value as string) === 0,
+      onFilter: (value, record) => record.status.indexOf(value as string) === 0,
     },
     {
       title: "Action",
@@ -252,7 +231,11 @@ const SearchedTable: React.FC = () => {
         columns={columns}
         dataSource={data}
         className="mt-6"
-        scroll={{ x: 2300 }}
+        scroll={{ x: 1500 }}
+        bordered
+        size="small"
+        // scroll={{ x: columns.length > 5 ? 3300 : undefined }}
+        rowClassName={() => "text-xs p-0 m-0 "}
       />
     </Card>
   );

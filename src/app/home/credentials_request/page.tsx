@@ -55,108 +55,36 @@ const CredentialRequests = () => {
   };
 
   const {
-    data: workflowList,
+    data: credentialRequests,
     error,
-    loading: loadingWorkflows,
+    loading: loadingCredentialRequests,
     refresh: refreshWorkflow,
-  } = useRequest(() => getWorkFlow(), {
+  } = useRequest(() => getCredentialRequests(), {
     ready:
       currentAuth.currentUser != null && currentAuth.currentUser != undefined,
   });
 
-  const getWorkFlow = async (): Promise<any> => {
+  console.log(credentialRequests);
+
+  const getCredentialRequests = async (): Promise<any> => {
     try {
-      const data = await apiUtil.workflowService.getWorkflows();
-      const list = data.data;
+      const data = await apiUtil.productService.fetchAllCredentialRequests();
+      console.log(data);
+
+      const list = data;
       return list;
     } catch (error) {
       message.error("unable to load data");
     }
   };
 
-  const columns = [
-    {
-      title: "Full Name",
-      width: 100,
-      dataIndex: "name",
-      key: "name",
-      fixed: "left",
-    },
-    {
-      title: "Age",
-      width: 100,
-      dataIndex: "age",
-      key: "age",
-      fixed: "left",
-    },
-    {
-      title: "Column 1",
-      dataIndex: "address",
-      key: "1",
-      width: 150,
-    },
-    {
-      title: "Column 2",
-      dataIndex: "address",
-      key: "2",
-      width: 150,
-    },
-    {
-      title: "Column 3",
-      dataIndex: "address",
-      key: "3",
-      width: 150,
-    },
-    {
-      title: "Column 4",
-      dataIndex: "address",
-      key: "4",
-      width: 150,
-    },
-    {
-      title: "Column 5",
-      dataIndex: "address",
-      key: "5",
-      width: 150,
-    },
-    {
-      title: "Column 6",
-      dataIndex: "address",
-      key: "6",
-      width: 150,
-    },
-    {
-      title: "Column 7",
-      dataIndex: "address",
-      key: "7",
-      width: 150,
-    },
-    { title: "Column 8", dataIndex: "address", key: "8" },
-    {
-      title: "Action",
-      key: "operation",
-      fixed: "right",
-      width: 100,
-      render: () => <a>action</a>,
-    },
-  ];
-
-  const data = [];
-  for (let i = 0; i < 100; i++) {
-    data.push({
-      key: i,
-      name: `Edward ${i}`,
-      age: 32,
-      address: `London Park no. ${i}`,
-    });
-  }
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col w-full">
       <LoadingOverlay
         loading={currentAuth.loading || currentAuth.loadingSources}
       />
 
-      {(loadingWorkflows || !workflowList) && (
+      {(loadingCredentialRequests || !credentialRequests) && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
           <div className="">
@@ -169,9 +97,9 @@ const CredentialRequests = () => {
         </div>
       )}
 
-      {!loadingWorkflows && (
+      {!loadingCredentialRequests && (
         <div className="h-screen px-7 py-0 flex flex-col gap-y-4">
-          <SearchedTable />
+          <SearchedTable data={credentialRequests} />
         </div>
       )}
     </main>
