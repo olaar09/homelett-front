@@ -1,11 +1,40 @@
 import React, { useRef, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import type { InputRef, TableColumnsType, TableColumnType } from "antd";
-import { Button, Card, Input, Space, Table, TableProps, Tag } from "antd";
+import {
+  Button,
+  Card,
+  Dropdown,
+  Input,
+  Space,
+  Table,
+  TableProps,
+  Tag,
+} from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
 import Highlighter from "react-highlight-words";
+import { DownOutlined } from "@ant-design/icons";
+
 import Brands from "@/app/components/Brands";
 import { Str } from "@/utils/consts";
+
+const items: any = [
+  {
+    label: <a href="https://www.antgroup.com">Approve credential</a>,
+    key: "0",
+  },
+  {
+    label: <a href="https://www.aliyun.com">Reject credential</a>,
+    key: "1",
+  },
+  {
+    type: "divider",
+  },
+  {
+    label: <a href="https://www.aliyun.com">Revoke credential</a>,
+    key: "3",
+  },
+];
 
 interface DataType {
   key: string;
@@ -265,11 +294,20 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
       },
     },
     {
-      title: "Action",
+      title: "",
       key: "operation",
       fixed: "right",
       width: 100,
-      render: () => <a>action</a>,
+      render: () => (
+        <Dropdown menu={{ items }} trigger={["click"]}>
+          <a onClick={(e) => e.preventDefault()}>
+            <Space>
+              Actions
+              <DownOutlined />
+            </Space>
+          </a>
+        </Dropdown>
+      ),
     },
   ];
 
