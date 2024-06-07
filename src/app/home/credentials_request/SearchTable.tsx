@@ -17,13 +17,14 @@ import { DownOutlined } from "@ant-design/icons";
 
 import Brands from "@/app/components/Brands";
 import { Str } from "@/utils/consts";
+import { IPlatform } from "@/app/interfaces/IProduct";
 
 interface DataType {
   key: string;
   email: string;
   id: number;
   phone: string;
-  platform: string;
+  platform: IPlatform;
   fullname: string;
   password: string;
   gpassword: string;
@@ -36,7 +37,10 @@ interface DataType {
 
 type DataIndex = keyof DataType;
 
-const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
+const SearchedTable: React.FC<{
+  data: any[];
+  onSelect: (key: string) => void;
+}> = ({ data, onSelect }) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
@@ -50,7 +54,7 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
   type Sorts = GetSingle<Parameters<OnChange>[2]>;
 
   const handleMenuClick = (e: any) => {
-    console.log(e.key);
+    onSelect(e.key);
   };
 
   const handleSearch = (
@@ -187,9 +191,6 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
       key: "name",
       render: (platform) => {
         const br = Str.platforms.find((pl) => pl.label == "Spotify Premium");
-
-        console.log(br);
-
         return (
           <div>
             {platform.name} <Brands size="default" brands={[]} />
@@ -288,7 +289,7 @@ const SearchedTable: React.FC<{ data: any[] }> = ({ data }) => {
         const items: any = ["Approve", "Reject", "Revoke"].map((it) => {
           return {
             label: <span>{it}</span>,
-            key: `${record.id}__${it}`,
+            key: `${record.id}__${record.platform.name}__${record.platform.id}__${it}`,
           };
         });
         return (

@@ -7,10 +7,6 @@ import { AuthContext } from "@/contexts/AuthContext";
 import APIUtil from "@/services/APIUtil";
 import { Str } from "@/utils/consts";
 import { IDataPlan, IProduct } from "@/app/interfaces/IProduct";
-import ProductDrawer from "../Products/ProductDrawer";
-import ProductItem from "../Products/ProductItem";
-import AirtimeProductItem from "../Products/AirtimeProductItem";
-import AirtimeProductDrawer from "../Products/AirtimeProductDrawer";
 import CourseProductItem from "../Products/CourseProductItem";
 import CourseProductDrawer from "../Products/CourseProductDrawer";
 
@@ -41,7 +37,6 @@ const CourseTab = ({
         product={selectedProduct}
         open={selectedProduct != null}
         onClose={() => setSelectedProduct(null)}
-        dataPlanList={[]}
       />
       {products.map((product, index) => (
         <CourseProductItem
