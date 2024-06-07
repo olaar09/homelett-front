@@ -12,6 +12,7 @@ import LoadingOverlay from "@/app/components/LoadingOverlay";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { useRouter } from "next/navigation";
 import SearchedTable from "./SearchTable";
+import ApproveCredentialModal from "./ConfirmModal";
 const { Meta } = Card;
 
 const HeaderItem = ({
@@ -41,6 +42,8 @@ const CredentialRequests = () => {
   const [selectedConnection, setSelectedConnection] = useState<
     IDataSourceItem | undefined
   >(undefined);
+
+  const [openApprove, setOpenApprove] = useState(false);
 
   useState(false);
   const currentAuth = useContext(AuthContext);
@@ -78,8 +81,21 @@ const CredentialRequests = () => {
     }
   };
 
+  const onOpenModal = () => {
+    setOpenApprove(true);
+  };
+
+  const onCloseModal = () => {
+    setOpenApprove(false);
+  };
+
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col w-full">
+      <ApproveCredentialModal
+        open={openApprove}
+        handleCancel={onCloseModal}
+        handleOk={onOpenModal}
+      />
       {(currentAuth.loading ||
         loadingCredentialRequests ||
         !credentialRequests) && (
