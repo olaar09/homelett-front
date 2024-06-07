@@ -376,8 +376,21 @@ const Nav: React.FC<any> = ({ children }) => {
                       >
                         <NavMenu
                           path="/home/credentials_request"
-                          icon={"icon-park-solid:all-application"}
+                          icon={"mdi:folder"}
                           title="Credential requests"
+                        />
+                      </Link>
+                    )}
+                  {authContext.currentUser &&
+                    authContext.currentUser!.is_admin === 1 && (
+                      <Link
+                        className="w-full"
+                        href={"/home/credentials_manage"}
+                      >
+                        <NavMenu
+                          path="/home/credentials_manage"
+                          icon={"material-symbols:folder-managed-sharp"}
+                          title="Manage credentials"
                         />
                       </Link>
                     )}

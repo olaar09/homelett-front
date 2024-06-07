@@ -39,8 +39,10 @@ type DataIndex = keyof DataType;
 
 const SearchedTable: React.FC<{
   data: any[];
+  actions: string[];
+  title: string;
   onSelect: (key: string) => void;
-}> = ({ data, onSelect }) => {
+}> = ({ data, onSelect, actions, title }) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
@@ -286,7 +288,7 @@ const SearchedTable: React.FC<{
       fixed: "right",
       width: 100,
       render: (value, record) => {
-        const items: any = ["Approve", "Reject", "Revoke"].map((it) => {
+        const items: any = actions.map((it) => {
           return {
             label: <span>{it}</span>,
             key: `${record.id}__${record.platform.name}__${record.platform.id}__${it}`,
@@ -310,7 +312,7 @@ const SearchedTable: React.FC<{
   ];
 
   return (
-    <Card title="Credential requests">
+    <Card title={title}>
       <Table
         columns={columns}
         dataSource={data}

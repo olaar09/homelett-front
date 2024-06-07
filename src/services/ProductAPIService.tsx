@@ -9,10 +9,12 @@ class ProductAPIService {
     this.apiService = apiService;
   }
 
-  async fetchAllCredentialRequests(): Promise<ICredential[] | null> {
+  async fetchAllCredentialRequests(
+    type: string
+  ): Promise<ICredential[] | null> {
     try {
       const text = await this.apiService.get<{ data: any }>(
-        `/credentials_request/all`
+        `/credentials_request/all?type=${type}`
       );
       return text.data;
     } catch (error) {

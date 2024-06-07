@@ -79,7 +79,7 @@ const CredentialRequests = () => {
   const getCredentialRequests = async (): Promise<any> => {
     try {
       const data = await apiUtil.productService.fetchAllCredentialRequests(
-        "pending"
+        "accepted"
       );
       console.log(data);
 
@@ -133,8 +133,8 @@ const CredentialRequests = () => {
       {!loadingCredentialRequests && credentialRequests && (
         <div className="h-screen px-7 py-0 flex flex-col gap-y-4">
           <SearchedTable
-            title="Credential requests"
-            actions={["Approve", "Reject"]}
+            title="Manage credentials"
+            actions={["Revoke"]}
             onSelect={openModal}
             data={credentialRequests}
           />
