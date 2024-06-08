@@ -186,14 +186,14 @@ const SearchedTable: React.FC<{
       title: "User",
       dataIndex: "user",
       key: "user.fullname",
-      render: (user) => <a>{user.fullname}</a>,
+      render: (user) => <a>{user?.fullname}</a>,
       //  ...getColumnSearchProps("fullname"),
     },
     {
       title: "Phone",
       dataIndex: "user",
       key: "phone",
-      render: (user) => <a>{user.phone}</a>,
+      render: (user) => <a>{user?.phone}</a>,
       //  ...getColumnSearchProps("phone"),
     },
     {
