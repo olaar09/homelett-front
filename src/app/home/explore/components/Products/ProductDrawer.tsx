@@ -30,7 +30,7 @@ const payOptions: MenuProps["items"] = [
         <div>Weekly</div>
       </div>
     ),
-    disabled: true,
+    disabled: false,
   },
   {
     key: "monthly",
