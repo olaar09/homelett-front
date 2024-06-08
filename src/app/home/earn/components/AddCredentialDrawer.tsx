@@ -111,7 +111,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
   };
 
   const calcHeight =
-    window.screen.availHeight - (window.screen.availHeight / 100) * 5;
+    window.screen.availHeight - window.screen.availHeight / 100;
 
   const computedHeight = calcHeight >= 633.65 ? 633.65 : calcHeight;
 
@@ -247,6 +247,40 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
               onChange={(val) => onSetFormData("password", val.target.value)}
             />
           </div>
+
+          {formData.platform_id?.toString() == "3" && (
+            <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
+              <span className=" text-foreground-secondary text-xs">
+                Spotify invite link Password
+              </span>
+              <InputField
+                placeHolder={"Enter invite link for the spotify"}
+                type={""}
+                name={"invite_link"}
+                value={formData.gpassword}
+                required
+                onChange={(val) =>
+                  onSetFormData("invite_link", val.target.value)
+                }
+              />
+            </div>
+          )}
+
+          {formData.platform_id?.toString() == "3" && (
+            <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
+              <span className=" text-foreground-secondary text-xs">
+                Spotify address
+              </span>
+              <InputField
+                placeHolder={"The exact address you signed up with on spotify"}
+                type={""}
+                name={"extra"}
+                value={formData.gpassword}
+                required
+                onChange={(val) => onSetFormData("extra", val.target.value)}
+              />
+            </div>
+          )}
 
           <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
             <span className=" text-foreground-secondary text-xs">
