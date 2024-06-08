@@ -23,6 +23,13 @@ export interface IDataPlan {
   price: number;
 }
 
+export interface IBank {
+  name: string;
+  slug: string;
+  code: string;
+  longcode: string;
+}
+
 export interface ITransaction {
   id: number;
   type: string;

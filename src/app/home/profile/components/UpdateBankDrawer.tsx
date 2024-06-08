@@ -5,11 +5,12 @@ import Brands from "@/app/components/Brands";
 import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import UtilService from "@/services/UtilService";
-import { IDataPlan, IProduct } from "@/app/interfaces/IProduct";
+import { IBank, IDataPlan, IProduct } from "@/app/interfaces/IProduct";
 import { AuthContext } from "@/contexts/AuthContext";
 import InputField from "@/app/components/InputField";
 import ACButton from "@/app/components/Button";
 import { Str } from "@/utils/consts";
+import { useRequest } from "ahooks";
 
 // Define types for the component props
 interface DrawerProps {
@@ -30,6 +31,8 @@ const UpdateBankDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
     bank_account_name: "",
   });
 
+  const apiUtils = new APIUtil();
+
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
@@ -40,6 +43,25 @@ const UpdateBankDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
       setIsDone(false);
     }
   }, [open]);
+
+  const {
+    data: bankList,
+    error,
+    loading: loadingBanks,
+    refresh: refreshBanks,
+  } = useRequest(() => getBanks(), {
+    ready:
+      authContext.currentUser != null && authContext.currentUser != undefined,
+  });
+
+  const getBanks = async (): Promise<any> => {
+    try {
+      const data = await apiUtils.transactionService.fetchBanks();
+      return data;
+    } catch (error) {
+      message.error("unable to load banks");
+    }
+  };
 
   const updateBankDetails = async () => {
     try {
@@ -87,6 +109,15 @@ const UpdateBankDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
     onClose();
   };
 
+  const onChangeBank = (value: string) => {
+    const bank = (bankList ?? []).find((ls: IBank) => ls.name === value);
+    onSetFormData("bank_name", bank.code);
+  };
+
+  const bankName = (bankList ?? []).find(
+    (ls: IBank) => ls.code === formData.bank_name
+  ).name;
+
   return (
     <>
       <Drawer
@@ -110,14 +141,22 @@ const UpdateBankDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
 
           <div className="flex flex-col gap-y-2 mb-6 w-full px-3">
             <span className=" text-foreground-secondary">Bank name</span>
-            <InputField
-              placeHolder={`Enter bank name`}
-              type={""}
-              name={"bank_name"}
-              value={formData.bank_name}
-              required
-              onChange={(val) => onSetFormData("bank_name", val.target.value)}
-            />
+            <Select
+              showSearch
+              placeholder="Select data plan"
+              className="w-full h-9"
+              loading={loadingBanks}
+              value={bankName}
+              onChange={(val) => onChangeBank(val)}
+            >
+              {(bankList ?? []).map((col: IBank) => (
+                <Option key={col.name} value={col.name}>
+                  <div className="flex items-center gap-x-2">
+                    <span>{col.name} </span>
+                  </div>
+                </Option>
+              ))}
+            </Select>
           </div>
 
           <div className="flex flex-col gap-y-2 mb-6 w-full px-3">

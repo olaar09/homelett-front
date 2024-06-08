@@ -1,4 +1,4 @@
-import { IProduct, ITransaction } from "@/app/interfaces/IProduct";
+import { IBank, IProduct, ITransaction } from "@/app/interfaces/IProduct";
 import ApiService from "./APIService";
 
 class TransactionAPIService {
@@ -23,6 +23,17 @@ class TransactionAPIService {
       throw error;
     }
   } */
+
+  async fetchBanks(): Promise<IBank[] | null> {
+    try {
+      const text = await this.apiService.get<{
+        data: IBank[];
+      }>(`/bank_info/list_banks`);
+      return text.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async fetchTransaction(): Promise<ITransaction[] | null> {
     try {
