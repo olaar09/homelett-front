@@ -38,7 +38,7 @@ export const Str = {
     },
     {
       value: "3",
-      label: "Spotify Premium",
+      label: "Spotify Family",
       pricingAmount: 1400,
       pricingName: "Family plan",
       earning: 50,

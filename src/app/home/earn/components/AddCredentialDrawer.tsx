@@ -38,7 +38,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
     platform_id: "",
     gpassword: "",
     invite_link: "",
-    extra: "",
+    extra_data: "",
   });
 
   const authContext = useContext(AuthContext);
@@ -53,7 +53,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
         platform_id: selectedCredential.platform.id?.toString(),
         gpassword: selectedCredential.gpassword,
         invite_link: selectedCredential.invite_link ?? "",
-        extra: selectedCredential.extra ?? "",
+        extra_data: selectedCredential.extra_data ?? "",
       });
       setIsDone(false);
     } else {
@@ -63,7 +63,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
         platform_id: "",
         gpassword: "",
         invite_link: "",
-        extra: "",
+        extra_data: "",
       });
       setIsDone(false);
     }
@@ -169,7 +169,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
           onSubmit={handleSend}
           className="flex flex-col items-start py-4 px-2"
         >
-          <div className="flex items-center px-3  w-full bg-gray-50 rounded-md py-3 border mb-4">
+          <div className="flex items-center px-3  w-full  rounded-md py-3 border mb-4">
             <div className="text-black flex flex-col w-full ">
               <div className="flex flex-col gap-y-1 w-full mb-4">
                 <Tag
@@ -229,7 +229,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
             </div>
           </div>
 
-          <div className="flex flex-col gap-y-2 mb-6 w-full px-3 bg-gray-50 rounded-md py-3 border">
+          <div className="flex flex-col gap-y-2 mb-6 w-full px-3  rounded-md py-3 border">
             <span className=" text-foreground-secondary text-xs">
               {selectedPlatformName} email
             </span>
@@ -242,7 +242,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
               onChange={(val) => onSetFormData("email", val.target.value)}
             />
           </div>
-          <div className="flex flex-col gap-y-2 mb-4 w-full px-3 bg-gray-50 rounded-md py-3 border">
+          <div className="flex flex-col gap-y-2 mb-4 w-full px-3  rounded-md py-3 border">
             <span className=" text-foreground-secondary text-xs">
               {selectedPlatformName} Password
             </span>
@@ -257,15 +257,15 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
           </div>
 
           {formData.platform_id?.toString() == "3" && (
-            <div className="flex flex-col gap-y-2 mb-4 w-full px-3 bg-gray-50 rounded-md py-3 border">
+            <div className="flex flex-col gap-y-2 mb-4 w-full px-3  rounded-md py-3 border">
               <span className=" text-foreground-secondary text-xs">
-                Spotify invite link Password
+                Spotify family invite link
               </span>
               <InputField
                 placeHolder={"Enter invite link for the spotify"}
                 type={""}
                 name={"invite_link"}
-                value={formData.gpassword}
+                value={formData.invite_link}
                 required
                 onChange={(val) =>
                   onSetFormData("invite_link", val.target.value)
@@ -275,22 +275,24 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
           )}
 
           {formData.platform_id?.toString() == "3" && (
-            <div className="flex flex-col gap-y-2 mb-4 w-full px-3 bg-gray-50 rounded-md py-3 border">
+            <div className="flex flex-col gap-y-2 mb-4 w-full px-3  rounded-md py-3 border">
               <span className=" text-foreground-secondary text-xs">
-                Spotify address
+                Spotify family address
               </span>
               <InputField
                 placeHolder={"The exact address as on spotify"}
                 type={""}
-                name={"extra"}
-                value={formData.gpassword}
+                name={"extra_data"}
+                value={formData.extra_data}
                 required
-                onChange={(val) => onSetFormData("extra", val.target.value)}
+                onChange={(val) =>
+                  onSetFormData("extra_data", val.target.value)
+                }
               />
             </div>
           )}
 
-          <div className="flex flex-col gap-y-2 mb-4 w-full px-3 bg-gray-50 rounded-md py-3 border">
+          <div className="flex flex-col gap-y-2 mb-4 w-full px-3  rounded-md py-3 border">
             <span className=" text-foreground-secondary text-xs">
               Gmail Password
             </span>

@@ -55,7 +55,7 @@ export interface ICredential {
   password: string;
   gpassword: string;
   invite_link?: string;
-  extra?: any;
+  extra_data?: any;
   next_renewal: string;
 }
 
