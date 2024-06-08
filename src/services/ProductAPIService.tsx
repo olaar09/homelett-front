@@ -33,6 +33,30 @@ class ProductAPIService {
     }
   }
 
+  async revokeCredential(data: { credential_id: string }): Promise<string> {
+    try {
+      const response = await this.apiService.post<{ data: any }>(
+        `/credentials_request/revoke`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async rejectCredential(data: { credential_id: string }): Promise<string> {
+    try {
+      const response = await this.apiService.post<{ data: any }>(
+        `/credentials_request/reject`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async acceptCredential(data: { credential_id: string }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(

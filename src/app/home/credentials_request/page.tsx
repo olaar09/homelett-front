@@ -13,6 +13,8 @@ import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { useRouter } from "next/navigation";
 import ApproveCredentialModal from "./CredentialApproveModal";
 import SearchedTable from "../_components/SearchTable";
+import { AxiosError } from "axios";
+import RejectCredentialModal from "./CredentialRejectModal";
 const { Meta } = Card;
 
 const HeaderItem = ({
@@ -44,6 +46,8 @@ const CredentialRequests = () => {
   >(undefined);
 
   const [openApprove, setOpenApprove] = useState(false);
+  const [openReject, setOpenReject] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [selectedCredential, setSelectedCredential] = useState<string | null>(
     null
   );
@@ -96,11 +100,20 @@ const CredentialRequests = () => {
     setSelectedPlatform({ id: split[2], name: split[1] });
     if (split[3] === "Approve") {
       setOpenApprove(true);
+    } else if (split[3] === "Reject") {
+      setOpenReject(true);
     }
   };
 
   const onCloseModal = (refresh: boolean = false) => {
     setOpenApprove(false);
+    if (refresh) {
+      refreshCredentialRequests();
+    }
+  };
+
+  const onCloseRejectModal = (refresh: boolean = false) => {
+    setOpenReject(false);
     if (refresh) {
       refreshCredentialRequests();
     }
@@ -115,6 +128,15 @@ const CredentialRequests = () => {
         handleCancel={onCloseModal}
         handleOk={onCloseModal}
       />
+
+      <RejectCredentialModal
+        open={openReject}
+        selectedPlatform={selectedPlatform}
+        selectedCredential={selectedCredential}
+        handleCancel={onCloseRejectModal}
+        handleOk={onCloseRejectModal}
+      />
+
       {(currentAuth.loading ||
         loadingCredentialRequests ||
         !credentialRequests) && (

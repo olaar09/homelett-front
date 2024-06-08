@@ -11,8 +11,8 @@ import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { useRouter } from "next/navigation";
-import ApproveCredentialModal from "./CredentialApproveModal";
 import SearchedTable from "../_components/SearchTable";
+import RejectCredentialModal from "./CredentialRejectModal";
 const { Meta } = Card;
 
 const HeaderItem = ({
@@ -43,7 +43,8 @@ const CredentialRequests = () => {
     IDataSourceItem | undefined
   >(undefined);
 
-  const [openApprove, setOpenApprove] = useState(false);
+  const [openReject, setOpenReject] = useState(false);
+
   const [selectedCredential, setSelectedCredential] = useState<string | null>(
     null
   );
@@ -94,13 +95,13 @@ const CredentialRequests = () => {
     const split = key.split("__");
     setSelectedCredential(split[0]);
     setSelectedPlatform({ id: split[2], name: split[1] });
-    if (split[3] === "Approve") {
-      setOpenApprove(true);
+    if (split[3] === "Revoke") {
+      setOpenReject(true);
     }
   };
 
-  const onCloseModal = (refresh: boolean = false) => {
-    setOpenApprove(false);
+  const onCloseRejectModal = (refresh: boolean = false) => {
+    setOpenReject(false);
     if (refresh) {
       refreshCredentialRequests();
     }
@@ -108,13 +109,14 @@ const CredentialRequests = () => {
 
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col w-full">
-      <ApproveCredentialModal
-        open={openApprove}
+      <RejectCredentialModal
+        open={openReject}
         selectedPlatform={selectedPlatform}
         selectedCredential={selectedCredential}
-        handleCancel={onCloseModal}
-        handleOk={onCloseModal}
+        handleCancel={onCloseRejectModal}
+        handleOk={onCloseRejectModal}
       />
+
       {(currentAuth.loading ||
         loadingCredentialRequests ||
         !credentialRequests) && (
