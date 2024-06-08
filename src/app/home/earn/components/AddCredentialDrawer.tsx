@@ -44,17 +44,21 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
   useEffect(() => {
     console.log(selectedCredential);
 
-    if (selectedCredential) {
-      onSetFormData("platform_id", selectedCredential.platform?.id);
-      onSetFormData("email", selectedCredential.email);
-      onSetFormData("password", selectedCredential.password);
-      onSetFormData("gpassword", selectedCredential.gpassword);
+    if (open && selectedCredential) {
+      setFormData({
+        email: selectedCredential.email,
+        password: selectedCredential.password,
+        platform_id: selectedCredential.platform.id?.toString(),
+        gpassword: selectedCredential.gpassword,
+      });
       setIsDone(false);
     } else {
-      onSetFormData("platform_id", "");
-      onSetFormData("email", "");
-      onSetFormData("password", "");
-      onSetFormData("gpassword", "");
+      setFormData({
+        email: "",
+        password: "",
+        platform_id: "",
+        gpassword: "",
+      });
       setIsDone(false);
     }
   }, [open]);
@@ -74,9 +78,16 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
         return;
       }
 
-      await apiUtil.productService.shareCredential({
-        ...formData,
-      });
+      if (selectedCredential) {
+        await apiUtil.productService.updateCredential({
+          ...formData,
+          credential_id: selectedCredential!.id.toString(),
+        });
+      } else {
+        await apiUtil.productService.shareCredential({
+          ...formData,
+        });
+      }
 
       authContext.refreshProfile();
       onSuccessClose();
@@ -113,12 +124,18 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
 
   const onSetFormData = (key: string, value: any) => {
     setFormData({ ...formData, [key]: value });
+    console.log({ ...formData, [key]: value });
   };
 
   const onSuccessClose = () => {
     onClose();
     refreshCredentials();
   };
+
+  const selectedPlatformName = Str.platforms.find(
+    (pl) => pl.value === formData.platform_id
+  )?.label;
+
   const selectedPricingName = Str.platforms.find(
     (pl) => pl.value === formData.platform_id
   )?.pricingName;
@@ -147,15 +164,13 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
           <div className="flex items-center px-3  w-full">
             <div className="text-black flex flex-col w-full ">
               <div className="flex flex-col gap-y-1 w-full mb-4">
-                <span>Terms and conditions</span>
                 <Tag
                   className="text-xs my-1  flex flex-col gap-y-3 py-1"
                   color="cyan"
                 >
                   <span className="text-xs text-wrap">
-                    The login details you enter must be valid, paid for and
-                    active. Invalid or unpaid login details will lead to
-                    irreversible ban from Bubble earn.{" "}
+                    Ensure you enter the email password so that we can retrieve
+                    OTP at any time
                   </span>
                 </Tag>
               </div>
@@ -208,7 +223,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
 
           <div className="flex flex-col gap-y-2 mb-6 w-full px-3">
             <span className=" text-foreground-secondary text-xs">
-              Service email
+              {selectedPlatformName} email
             </span>
             <InputField
               placeHolder={`Enter service email`}
@@ -221,7 +236,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
           </div>
           <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
             <span className=" text-foreground-secondary text-xs">
-              Service Password
+              {selectedPlatformName} Password
             </span>
             <InputField
               placeHolder={"Enter service password"}

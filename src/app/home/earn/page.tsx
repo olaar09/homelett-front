@@ -67,6 +67,7 @@ const EarnPage = () => {
 
   const onCloseShareSubscription = () => {
     setOpenAddModal(false);
+    setSelectedCredential(null);
   };
   const utils = new UtilService();
   const finance = authContext.currentUser?.finance;

@@ -69,6 +69,23 @@ class ProductAPIService {
     }
   }
 
+  async updateCredential(data: {
+    platform_id: string;
+    email: string;
+    password?: string;
+    credential_id: string;
+  }): Promise<string> {
+    try {
+      const response = await this.apiService.put<{ data: any }>(
+        `/credentials_request`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async shareCredential(data: {
     platform_id: string;
     email: string;
