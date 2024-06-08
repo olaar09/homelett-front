@@ -11,6 +11,7 @@ export interface IAuthRequest {
   is_open_ai?: number;
   is_activated?: number;
   is_admin?: number;
+  is_earner?: number;
   finance?: {
     balance: number;
     totalSpends: number;

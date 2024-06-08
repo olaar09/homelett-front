@@ -150,7 +150,10 @@ const EarnPage = () => {
         authContext.currentUser &&
         !loadingCredentialList &&
         (!credentialList || credentialList.length < 1) && (
-          <StartEarning onClick={onOpenShareSubscription} />
+          <StartEarning
+            isEarner={authContext.currentUser.is_earner == 1}
+            onClick={onOpenShareSubscription}
+          />
         )}
 
       {!authContext.loading &&

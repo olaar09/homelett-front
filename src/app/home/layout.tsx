@@ -247,7 +247,7 @@ const Nav: React.FC<any> = ({ children }) => {
       />
 
       <NoticeDrawers
-        open={openNotice}
+        open={false}
         onClose={closeNotice}
         action={"Start earning"}
         title={"Bubble Earn"}
@@ -289,7 +289,7 @@ const Nav: React.FC<any> = ({ children }) => {
                   path: "/home/earn",
                   icon: "majesticons:money-plus-line",
                   title: "Earn",
-                  isNew: true,
+                  isNew: false,
                 },
                 {
                   path: "/home/profile",
