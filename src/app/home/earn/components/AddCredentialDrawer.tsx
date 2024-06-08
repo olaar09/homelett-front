@@ -169,8 +169,8 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
                   color="cyan"
                 >
                   <span className="text-xs text-wrap">
-                    Ensure you enter the email password so that we can retrieve
-                    OTP at any time
+                    We advise that you create a new gmail for this specific
+                    purpose, because we need the gmail password too.
                   </span>
                 </Tag>
               </div>
