@@ -55,7 +55,7 @@ export const Str = {
     {
       value: "4",
       label: "ShowMax",
-      pricingAmount: 2300,
+      pricingAmount: 2500,
       pricingName: "All devices plan",
 
       earning: 55,

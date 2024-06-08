@@ -12,7 +12,7 @@ const StartEarning = ({ onClick }: { onClick: () => void }) => {
       <div className="text-center w-full flex justify-center flex-col items-center ">
         <span>
           {" "}
-          Earn up to <b> ₦350,000 </b> monthly by sharing your netflix, Show-max
+          Earn over <b> ₦50,000 </b> weekly by sharing your netflix, Show-max
           and Prime video, Spotify premium subscriptions with other users.
         </span>
         <br /> <br />
