@@ -250,7 +250,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
 
           <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
             <span className=" text-foreground-secondary text-xs">
-              Email Password
+              Gmail Password
             </span>
             <span className=" text-foreground-secondary text-xs">
               So that we can retrieve OTP at anytime
