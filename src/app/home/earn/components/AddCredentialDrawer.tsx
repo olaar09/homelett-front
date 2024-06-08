@@ -81,7 +81,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
       if (selectedCredential) {
         await apiUtil.productService.updateCredential({
           ...formData,
-          credential_id: selectedCredential!.id.toString(),
+          credential_request_id: selectedCredential!.id.toString(),
         });
       } else {
         await apiUtil.productService.shareCredential({

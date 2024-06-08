@@ -73,7 +73,7 @@ class ProductAPIService {
     platform_id: string;
     email: string;
     password?: string;
-    credential_id: string;
+    credential_request_id: string;
   }): Promise<string> {
     try {
       const response = await this.apiService.put<{ data: any }>(

@@ -116,7 +116,7 @@ const UpdateBankDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
 
   const bankName = (bankList ?? []).find(
     (ls: IBank) => ls.code === formData.bank_name
-  ).name;
+  )?.name;
 
   return (
     <>
