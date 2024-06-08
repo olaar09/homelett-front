@@ -56,6 +56,7 @@ const SavedTeamMembers = () => {
     (ls: IBank) => ls.code === authContext.currentUser?.bank_info?.bank_name
   )?.name;
 
+  const loading = authContext.loading || loadingBanks;
   return (
     <>
       <UpdateBankDrawer
@@ -64,14 +65,14 @@ const SavedTeamMembers = () => {
         onClose={onCloseBank}
       />
 
-      {authContext.loading && (
+      {loading && (
         <div className="h-screen   flex flex-col justify-center items-center">
           {" "}
-          <div className="">
+          <div className=" ">
             {" "}
             <Icon
               icon={"eos-icons:three-dots-loading"}
-              className=" text-6xl text-foreground"
+              className=" text-6xl  text-foreground"
             />
           </div>
         </div>
@@ -82,10 +83,10 @@ const SavedTeamMembers = () => {
           indicator={
             <Icon
               icon={"eos-icons:three-dots-loading"}
-              className=" text-8xl text-foreground"
+              className=" text-8xl   w-32 text-foreground"
             />
           }
-          spinning={authContext.loading || loadingBanks}
+          spinning={loading}
           className="bg-background-thin w-full"
         >
           <div className="bg-background-thin min-h-screen">
@@ -169,15 +170,17 @@ const SavedTeamMembers = () => {
                       </div>
                     )}
 
-                    <div className="flex items-center mt-10 w-8/12 mx-auto  justify-center">
-                      <Button
-                        type="primary"
-                        className="bg-primary w-full"
-                        onClick={onLogout}
-                      >
-                        Logout
-                      </Button>
-                    </div>
+                    {!loading && (
+                      <div className="flex items-center mt-10 w-8/12 mx-auto  justify-center">
+                        <Button
+                          type="primary"
+                          className="bg-primary w-full"
+                          onClick={onLogout}
+                        >
+                          Logout
+                        </Button>
+                      </div>
+                    )}
                   </Card>
                 </div>
               </section>
