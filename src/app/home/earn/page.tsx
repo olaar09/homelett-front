@@ -18,10 +18,14 @@ import Credentialtem from "./components/Credentialtem";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { AxiosError } from "axios";
 import UtilService from "@/services/UtilService";
+import { ICredential } from "@/app/interfaces/IRegisterRequest";
 
 const EarnPage = () => {
   const authContext = useContext(AuthContext);
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [selectedCredential, setSelectedCredential] = useState<
+    ICredential | null | undefined
+  >(null);
   const apiUtils = new APIUtil();
   const router = useRouter();
 
@@ -122,7 +126,8 @@ const EarnPage = () => {
       )}
 
       <AddCredentialDrawer
-        open={openAddModal}
+        open={openAddModal || selectedCredential != null}
+        selectedCredential={selectedCredential}
         onClose={onCloseShareSubscription}
         refreshCredentials={refreshCredentials}
       />
@@ -166,7 +171,9 @@ const EarnPage = () => {
                   <div className="lg:w-4/12 w-full">
                     <Credentialtem
                       applying={false}
-                      onSelectCredential={() => {}}
+                      onSelectCredential={(credential: ICredential) => {
+                        setSelectedCredential(credential);
+                      }}
                       onApplyJob={undefined}
                       active={false}
                       credential={{ ...credential }}

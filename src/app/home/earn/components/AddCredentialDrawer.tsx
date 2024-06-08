@@ -10,9 +10,11 @@ import { AuthContext } from "@/contexts/AuthContext";
 import InputField from "@/app/components/InputField";
 import ACButton from "@/app/components/Button";
 import { Str } from "@/utils/consts";
+import { ICredential } from "@/app/interfaces/IRegisterRequest";
 
 // Define types for the component props
 interface DrawerProps {
+  selectedCredential?: ICredential | null;
   open: boolean;
   onClose: () => void;
   refreshCredentials: () => void;
@@ -22,6 +24,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
   refreshCredentials,
   onClose,
   open,
+  selectedCredential,
 }) => {
   const { Option } = Select;
 
@@ -39,7 +42,15 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    if (open) {
+    console.log(selectedCredential);
+
+    if (selectedCredential) {
+      onSetFormData("platform_id", selectedCredential.platform?.id);
+      onSetFormData("email", selectedCredential.email);
+      onSetFormData("password", selectedCredential.password);
+      onSetFormData("gpassword", selectedCredential.gpassword);
+      setIsDone(false);
+    } else {
       onSetFormData("platform_id", "");
       onSetFormData("email", "");
       onSetFormData("password", "");

@@ -40,7 +40,7 @@ const Credentialtem = ({
 
   return (
     <Card
-      onClick={onSelectCredential}
+      onClick={() => onSelectCredential(credential)}
       hoverable
       className={`" h-32 border-b border-0 rounded-none flex flex-col relative ${
         active ? "bg-blue-50" : ""
