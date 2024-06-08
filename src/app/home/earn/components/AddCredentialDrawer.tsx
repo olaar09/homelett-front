@@ -37,6 +37,8 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
     password: "",
     platform_id: "",
     gpassword: "",
+    invite_link: "",
+    extra: "",
   });
 
   const authContext = useContext(AuthContext);
@@ -50,6 +52,8 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
         password: selectedCredential.password,
         platform_id: selectedCredential.platform.id?.toString(),
         gpassword: selectedCredential.gpassword,
+        invite_link: selectedCredential.invite_link ?? "",
+        extra: selectedCredential.extra ?? "",
       });
       setIsDone(false);
     } else {
@@ -58,6 +62,8 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
         password: "",
         platform_id: "",
         gpassword: "",
+        invite_link: "",
+        extra: "",
       });
       setIsDone(false);
     }
@@ -110,10 +116,9 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
     }
   };
 
-  const calcHeight =
-    window.screen.availHeight - window.screen.availHeight / 100;
+  const calcHeight = window.screen.height;
 
-  const computedHeight = calcHeight >= 633.65 ? 633.65 : calcHeight;
+  const computedHeight = calcHeight; // >= 633.65 ? 633.65 : calcHeight;
 
   const utils = new UtilService();
 
@@ -160,8 +165,11 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
         maskClosable={false}
         open={open}
       >
-        <form onSubmit={handleSend} className="flex flex-col items-start py-4">
-          <div className="flex items-center px-3  w-full">
+        <form
+          onSubmit={handleSend}
+          className="flex flex-col items-start py-4 px-2"
+        >
+          <div className="flex items-center px-3  w-full bg-gray-50 rounded-md py-3 border mb-4">
             <div className="text-black flex flex-col w-full ">
               <div className="flex flex-col gap-y-1 w-full mb-4">
                 <Tag
@@ -175,7 +183,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
                 </Tag>
               </div>
 
-              <div className="flex flex-col gap-y-2 mb-6">
+              <div className="flex flex-col gap-y-2 mb-6 ">
                 <span className=" text-foreground-secondary text-xs">
                   Select Service
                 </span>
@@ -221,7 +229,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
             </div>
           </div>
 
-          <div className="flex flex-col gap-y-2 mb-6 w-full px-3">
+          <div className="flex flex-col gap-y-2 mb-6 w-full px-3 bg-gray-50 rounded-md py-3 border">
             <span className=" text-foreground-secondary text-xs">
               {selectedPlatformName} email
             </span>
@@ -234,7 +242,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
               onChange={(val) => onSetFormData("email", val.target.value)}
             />
           </div>
-          <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
+          <div className="flex flex-col gap-y-2 mb-4 w-full px-3 bg-gray-50 rounded-md py-3 border">
             <span className=" text-foreground-secondary text-xs">
               {selectedPlatformName} Password
             </span>
@@ -249,7 +257,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
           </div>
 
           {formData.platform_id?.toString() == "3" && (
-            <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
+            <div className="flex flex-col gap-y-2 mb-4 w-full px-3 bg-gray-50 rounded-md py-3 border">
               <span className=" text-foreground-secondary text-xs">
                 Spotify invite link Password
               </span>
@@ -267,12 +275,12 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
           )}
 
           {formData.platform_id?.toString() == "3" && (
-            <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
+            <div className="flex flex-col gap-y-2 mb-4 w-full px-3 bg-gray-50 rounded-md py-3 border">
               <span className=" text-foreground-secondary text-xs">
                 Spotify address
               </span>
               <InputField
-                placeHolder={"The exact address you signed up with on spotify"}
+                placeHolder={"The exact address as on spotify"}
                 type={""}
                 name={"extra"}
                 value={formData.gpassword}
@@ -282,7 +290,7 @@ const AddCredentialDrawer: React.FC<DrawerProps> = ({
             </div>
           )}
 
-          <div className="flex flex-col gap-y-2 mb-4 w-full px-3">
+          <div className="flex flex-col gap-y-2 mb-4 w-full px-3 bg-gray-50 rounded-md py-3 border">
             <span className=" text-foreground-secondary text-xs">
               Gmail Password
             </span>
