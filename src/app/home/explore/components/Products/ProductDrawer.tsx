@@ -30,6 +30,7 @@ const payOptions: MenuProps["items"] = [
         <div>Weekly</div>
       </div>
     ),
+    disabled: true,
   },
   {
     key: "monthly",
@@ -71,7 +72,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   const apiUtil = new APIUtil();
   const isUltimate = product?.total_selection_count === Str.brands.length;
   const [loading, setLoading] = useState(false);
-  const [selectedInterval, setSelectedInterval] = useState("Weekly");
+  const [selectedInterval, setSelectedInterval] = useState("Monthly");
   const [displayedPrice, setDisplayedPrice] = useState(0);
 
   const platforms = product?.assigned_platforms.map((pl) => pl.platform);
@@ -82,12 +83,12 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   }, [open]);
 
   useEffect(() => {
-    setDisplayedPrice(product?.price ?? 0);
+    setDisplayedPrice((product?.price ?? 0) * 4.3);
   }, [product]);
 
   useEffect(() => {
     const displayedPrice =
-      selectedInterval.toLocaleLowerCase() === "weekly"
+      selectedInterval.toLowerCase() === "weekly"
         ? Number(product?.price) * 1
         : Number(product?.price) * 4.3;
 
@@ -189,11 +190,11 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
               <span className=" text-foreground-secondary">
                 {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")} /{" "}
                 <Switch
-                  checkedChildren="Weekly"
-                  unCheckedChildren="Monthly"
+                  checkedChildren="Monthly"
+                  unCheckedChildren="Weekly"
                   defaultChecked
                   onChange={(checked) =>
-                    setSelectedInterval(checked ? "Weekly" : "Monthly")
+                    setSelectedInterval(checked ? "Monthly" : "Weekly")
                   }
                 />
               </span>

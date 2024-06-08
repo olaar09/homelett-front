@@ -108,9 +108,10 @@ const SavedTeamMembers = () => {
   );
 
   const tabs = [
-    { label: "Utilities", icon: "hugeicons:software", isNew: false },
-    { label: "Online Courses", icon: "ri:video-line" },
     { label: "Streaming", icon: "solar:video-library-bold" },
+    { label: "Online Courses", icon: "ri:video-line" },
+    { label: "Utilities", icon: "hugeicons:software", isNew: false },
+
     { label: "Mobile Data", icon: "teenyicons:mobile-solid" },
   ];
   const balanceRequired = authContext.currentUser?.finance?.balance ?? 0;
@@ -232,14 +233,14 @@ const SavedTeamMembers = () => {
                         paddingBottom: 240,
                       }}
                     >
-                      {id === "3" && (
+                      {id === "1" && (
                         <EntertainmentTab
                           products={streamProducts}
                           loading={false}
                         />
                       )}
 
-                      {id === "1" && (
+                      {id === "3" && (
                         <UtilityTab
                           products={utilityProducts}
                           loading={false}
