@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Str } from "@/utils/consts";
 import UpdateBankDrawer from "./components/UpdateBankDrawer";
+import { IBank } from "@/app/interfaces/IProduct";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -24,6 +25,25 @@ const SavedTeamMembers = () => {
     authContext.clearUser();
   };
 
+  const {
+    data: bankList,
+    error,
+    loading: loadingBanks,
+    refresh: refreshBanks,
+  } = useRequest(() => getBanks(), {
+    ready:
+      authContext.currentUser != null && authContext.currentUser != undefined,
+  });
+
+  const getBanks = async (): Promise<any> => {
+    try {
+      const data = await apiUtils.transactionService.fetchBanks();
+      return data;
+    } catch (error) {
+      message.error("unable to load banks");
+    }
+  };
+
   const onUpdateBank = () => {
     setOpenBankModal(true);
   };
@@ -32,9 +52,17 @@ const SavedTeamMembers = () => {
     setOpenBankModal(false);
   };
 
+  const bankName = (bankList ?? []).find(
+    (ls: IBank) => ls.code === authContext.currentUser?.bank_info?.bank_name
+  )?.name;
+
   return (
     <>
-      <UpdateBankDrawer open={openBankModal} onClose={onCloseBank} />
+      <UpdateBankDrawer
+        bankList={bankList}
+        open={openBankModal}
+        onClose={onCloseBank}
+      />
 
       {authContext.loading && (
         <div className="h-screen   flex flex-col justify-center items-center">
@@ -57,7 +85,7 @@ const SavedTeamMembers = () => {
               className=" text-8xl text-foreground"
             />
           }
-          spinning={authContext.loading}
+          spinning={authContext.loading || loadingBanks}
           className="bg-background-thin w-full"
         >
           <div className="bg-background-thin min-h-screen">
@@ -121,7 +149,7 @@ const SavedTeamMembers = () => {
                         <InfoItem
                           icon="ph:bank-bold"
                           title="Bank name"
-                          content={authContext.currentUser.bank_info.bank_name}
+                          content={bankName}
                         />
                         <InfoItem
                           icon="f7:number"

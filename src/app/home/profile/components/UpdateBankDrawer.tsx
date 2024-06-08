@@ -15,10 +15,15 @@ import { useRequest } from "ahooks";
 // Define types for the component props
 interface DrawerProps {
   open: boolean;
+  bankList: any[];
   onClose: () => void;
 }
 
-const UpdateBankDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
+const UpdateBankDrawer: React.FC<DrawerProps> = ({
+  bankList,
+  onClose,
+  open,
+}) => {
   const { Option } = Select;
 
   const apiUtil = new APIUtil();
@@ -43,25 +48,6 @@ const UpdateBankDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
       setIsDone(false);
     }
   }, [open]);
-
-  const {
-    data: bankList,
-    error,
-    loading: loadingBanks,
-    refresh: refreshBanks,
-  } = useRequest(() => getBanks(), {
-    ready:
-      authContext.currentUser != null && authContext.currentUser != undefined,
-  });
-
-  const getBanks = async (): Promise<any> => {
-    try {
-      const data = await apiUtils.transactionService.fetchBanks();
-      return data;
-    } catch (error) {
-      message.error("unable to load banks");
-    }
-  };
 
   const updateBankDetails = async () => {
     try {
@@ -145,7 +131,6 @@ const UpdateBankDrawer: React.FC<DrawerProps> = ({ onClose, open }) => {
               showSearch
               placeholder="Select data plan"
               className="w-full h-9"
-              loading={loadingBanks}
               value={bankName}
               onChange={(val) => onChangeBank(val)}
             >
