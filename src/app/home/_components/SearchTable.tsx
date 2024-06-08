@@ -18,6 +18,7 @@ import { DownOutlined } from "@ant-design/icons";
 import Brands from "@/app/components/Brands";
 import { Str } from "@/utils/consts";
 import { IPlatform } from "@/app/interfaces/IProduct";
+import moment from "moment";
 
 interface DataType {
   key: string;
@@ -174,6 +175,14 @@ const SearchedTable: React.FC<{
       width: "5%",
     },
     {
+      title: "Created",
+      dataIndex: "created_at",
+      key: "created_at",
+      fixed: "left",
+      width: "10%",
+      render: (val) => <span> {moment(val).format("DD MMM YYYY HH:mm")}</span>,
+    },
+    {
       title: "User",
       dataIndex: "user",
       key: "user.fullname",
@@ -289,8 +298,17 @@ const SearchedTable: React.FC<{
       width: 100,
       render: (value, record) => {
         const items: any = actions.map((it) => {
+          let color;
+          if (it === "Approve") {
+            color = "text-green-600";
+          } else if (it === "Reject") {
+            color = "text-red-600";
+          } else if (it === "Revoke") {
+            color = "text-red-600";
+          }
+
           return {
-            label: <span>{it}</span>,
+            label: <span className={`${color}`}>{it}</span>,
             key: `${record.id}__${record.platform.name}__${record.platform.id}__${it}`,
           };
         });
@@ -301,8 +319,8 @@ const SearchedTable: React.FC<{
           >
             <a onClick={(e) => e.preventDefault()}>
               <Space>
-                Actions
-                <DownOutlined />
+                <span className="text-banner"> Actions</span>
+                <DownOutlined className="text-banner" />
               </Space>
             </a>
           </Dropdown>
