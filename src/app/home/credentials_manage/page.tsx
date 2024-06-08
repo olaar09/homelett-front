@@ -44,13 +44,14 @@ const CredentialRequests = () => {
   >(undefined);
 
   const [openReject, setOpenReject] = useState(false);
-
+  const [credentialRequestsList, setCredentialRequestsList] = useState([]);
   const [selectedCredential, setSelectedCredential] = useState<string | null>(
     null
   );
   const [selectedPlatform, setSelectedPlatform] = useState<{
     id: string;
     name: string;
+    email: string;
   } | null>(null);
 
   useState(false);
@@ -75,6 +76,10 @@ const CredentialRequests = () => {
       currentAuth.currentUser != null && currentAuth.currentUser != undefined,
   });
 
+  useEffect(() => {
+    setCredentialRequestsList(credentialRequests);
+  }, [credentialRequests]);
+
   console.log(credentialRequests);
 
   const getCredentialRequests = async (): Promise<any> => {
@@ -94,16 +99,26 @@ const CredentialRequests = () => {
   const openModal = (key: string) => {
     const split = key.split("__");
     setSelectedCredential(split[0]);
-    setSelectedPlatform({ id: split[2], name: split[1] });
+    setSelectedPlatform({ id: split[2], name: split[1], email: split[4] });
     if (split[3] === "Revoke") {
       setOpenReject(true);
     }
   };
 
-  const onCloseRejectModal = (refresh: boolean = false) => {
+  const onCloseRejectModal = (selectedCredential?: string | null) => {
     setOpenReject(false);
-    if (refresh) {
-      refreshCredentialRequests();
+    hideCredential(selectedCredential);
+  };
+
+  const hideCredential = (selectedCredential?: string | null) => {
+    if (selectedCredential) {
+      const index = credentialRequestsList.findIndex(
+        (cr: any) => cr.id == selectedCredential
+      );
+      console.log("oijwndijwqd coiwcoiedsnx ejiondskm", index);
+      const adjusted = [...credentialRequestsList];
+      adjusted.splice(index, 1);
+      setCredentialRequestsList([...adjusted]);
     }
   };
 
@@ -138,7 +153,7 @@ const CredentialRequests = () => {
             title="Manage credentials"
             actions={["Revoke"]}
             onSelect={openModal}
-            data={credentialRequests}
+            data={credentialRequestsList}
           />
         </div>
       )}

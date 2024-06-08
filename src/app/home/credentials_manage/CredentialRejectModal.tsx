@@ -25,8 +25,8 @@ import { AxiosError } from "axios";
 const RejectCredentialModal: React.FC<{
   open: boolean;
   selectedCredential: string | null;
-  selectedPlatform: { name: string; id: string } | null;
-  handleCancel: (refresh: boolean) => void;
+  selectedPlatform: { name: string; id: string; email: string } | null;
+  handleCancel: (removedCredential?: string | null) => void;
   handleOk: () => void;
 }> = ({
   handleOk,
@@ -63,7 +63,7 @@ const RejectCredentialModal: React.FC<{
       await apiUtil.productService.rejectCredential({
         credential_id: selectedCredential!,
       });
-      handleCancel(true);
+      handleCancel(selectedCredential);
     } catch (error) {
       if (error instanceof AxiosError) {
         message.error(
@@ -83,10 +83,10 @@ const RejectCredentialModal: React.FC<{
 
   return (
     <Modal
-      title="Reject  Credential"
+      title={`Reject  Credential (${selectedPlatform?.email})`}
       open={open && selectedCredential != null}
       onOk={handleOk}
-      onCancel={() => handleCancel(false)}
+      onCancel={() => handleCancel(undefined)}
       maskClosable={false}
       footer={null}
     >

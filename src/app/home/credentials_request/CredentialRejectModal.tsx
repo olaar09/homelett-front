@@ -25,7 +25,7 @@ import { AxiosError } from "axios";
 const RejectCredentialModal: React.FC<{
   open: boolean;
   selectedCredential: string | null;
-  selectedPlatform: { name: string; id: string } | null;
+  selectedPlatform: { name: string; id: string; email: string } | null;
   handleCancel: (removedCredential?: string | null) => void;
   handleOk: () => void;
 }> = ({
@@ -83,7 +83,7 @@ const RejectCredentialModal: React.FC<{
 
   return (
     <Modal
-      title="Reject  Credential"
+      title={`Reject  Credential (${selectedPlatform?.email})`}
       open={open && selectedCredential != null}
       onOk={handleOk}
       onCancel={() => handleCancel(undefined)}

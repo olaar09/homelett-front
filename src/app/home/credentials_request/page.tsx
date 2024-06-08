@@ -57,6 +57,7 @@ const CredentialRequests = () => {
   const [selectedPlatform, setSelectedPlatform] = useState<{
     id: string;
     name: string;
+    email: string;
   } | null>(null);
 
   useState(false);
@@ -104,7 +105,7 @@ const CredentialRequests = () => {
   const openModal = (key: string) => {
     const split = key.split("__");
     setSelectedCredential(split[0]);
-    setSelectedPlatform({ id: split[2], name: split[1] });
+    setSelectedPlatform({ id: split[2], name: split[1], email: split[4] });
     if (split[3] === "Approve") {
       setOpenApprove(true);
     } else if (split[3] === "Reject") {

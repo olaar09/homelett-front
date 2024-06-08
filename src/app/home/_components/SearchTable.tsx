@@ -309,7 +309,7 @@ const SearchedTable: React.FC<{
 
           return {
             label: <span className={`${color}`}>{it}</span>,
-            key: `${record.id}__${record.platform.name}__${record.platform.id}__${it}`,
+            key: `${record.id}__${record.platform.name}__${record.platform.id}__${it}__${record.email}`,
           };
         });
         return (
