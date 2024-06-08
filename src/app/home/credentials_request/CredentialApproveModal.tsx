@@ -26,7 +26,7 @@ const ApproveCredentialModal: React.FC<{
   open: boolean;
   selectedCredential: string | null;
   selectedPlatform: { name: string; id: string } | null;
-  handleCancel: (refresh: boolean) => void;
+  handleCancel: (removedCredential?: string | null) => void;
   handleOk: () => void;
 }> = ({
   handleOk,
@@ -96,7 +96,7 @@ const ApproveCredentialModal: React.FC<{
       await apiUtil.productService.acceptCredential({
         credential_id: selectedCredential!,
       });
-      handleCancel(true);
+      handleCancel(selectedCredential);
     } catch (error) {
       if (error instanceof AxiosError) {
         message.error(
@@ -119,7 +119,7 @@ const ApproveCredentialModal: React.FC<{
       title="Approve  Credential"
       open={open && selectedCredential != null}
       onOk={handleOk}
-      onCancel={() => handleCancel(false)}
+      onCancel={() => handleCancel(undefined)}
       maskClosable={false}
       destroyOnClose={true}
       footer={null}

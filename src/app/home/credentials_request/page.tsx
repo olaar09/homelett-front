@@ -48,6 +48,9 @@ const CredentialRequests = () => {
   const [openApprove, setOpenApprove] = useState(false);
   const [openReject, setOpenReject] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [credentialRequestsList, setCredentialRequestsList] = useState([]);
+
   const [selectedCredential, setSelectedCredential] = useState<string | null>(
     null
   );
@@ -78,6 +81,10 @@ const CredentialRequests = () => {
       currentAuth.currentUser != null && currentAuth.currentUser != undefined,
   });
 
+  useEffect(() => {
+    setCredentialRequestsList(credentialRequests);
+  }, [credentialRequests]);
+
   console.log(credentialRequests);
 
   const getCredentialRequests = async (): Promise<any> => {
@@ -105,17 +112,25 @@ const CredentialRequests = () => {
     }
   };
 
-  const onCloseModal = (refresh: boolean = false) => {
+  const onCloseModal = (selectedCredential?: string | null) => {
     setOpenApprove(false);
-    if (refresh) {
-      refreshCredentialRequests();
-    }
+    hideCredential(selectedCredential);
   };
 
-  const onCloseRejectModal = (refresh: boolean = false) => {
+  const onCloseRejectModal = (selectedCredential?: string | null) => {
     setOpenReject(false);
-    if (refresh) {
-      refreshCredentialRequests();
+    hideCredential(selectedCredential);
+  };
+
+  const hideCredential = (selectedCredential?: string | null) => {
+    if (selectedCredential) {
+      const index = credentialRequestsList.findIndex(
+        (cr: any) => cr.id == selectedCredential
+      );
+      console.log(index);
+      const adjusted = [...credentialRequestsList];
+      adjusted.splice(index, 1);
+      setCredentialRequestsList([...adjusted]);
     }
   };
 
@@ -158,7 +173,7 @@ const CredentialRequests = () => {
             title="Credential requests"
             actions={["Approve", "Reject"]}
             onSelect={openModal}
-            data={credentialRequests}
+            data={credentialRequestsList}
           />
         </div>
       )}
