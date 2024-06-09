@@ -33,8 +33,17 @@ export const Str = {
       label: "Youtube premium",
       pricingAmount: 1700,
       pricingName: "Family plan",
-      earning: 50,
+      earning: 55,
       icon: "/logos/yt.png",
+    },
+    {
+      value: "18",
+      label: "Showmax Sport + Movie",
+      pricingAmount: 4500,
+      pricingName: "Sport + Movie Plan",
+
+      earning: 50,
+      icon: "/logos/sm.png",
     },
     {
       value: "3",
@@ -61,6 +70,7 @@ export const Str = {
       earning: 55,
       icon: "/logos/sm.png",
     },
+
     {
       value: "5",
       label: "Prime video",
