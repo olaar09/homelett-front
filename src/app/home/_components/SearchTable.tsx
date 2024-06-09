@@ -34,6 +34,8 @@ interface DataType {
   sharing: any;
   admin_status: string;
   next_renewal: string;
+  invite_link: string;
+  extra_data: string;
 }
 
 type DataIndex = keyof DataType;
@@ -226,6 +228,16 @@ const SearchedTable: React.FC<{
       title: "GPassword",
       dataIndex: "gpassword",
       key: "gpassword",
+    },
+    {
+      title: "Invite link",
+      dataIndex: "invite_link",
+      key: "invite_link",
+    },
+    {
+      title: "Extra data",
+      dataIndex: "extra_data",
+      key: "extra_data",
     },
     {
       title: "Admin Status",
