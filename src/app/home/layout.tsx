@@ -381,6 +381,21 @@ const Nav: React.FC<any> = ({ children }) => {
                         />
                       </Link>
                     )}
+
+                  {authContext.currentUser &&
+                    authContext.currentUser!.is_admin === 1 && (
+                      <Link
+                        className="w-full"
+                        href={"/home/credentials_rejected"}
+                      >
+                        <NavMenu
+                          path="/home/credentials_rejected"
+                          icon={"fluent:text-change-reject-24-filled"}
+                          title="Rejected credentials"
+                        />
+                      </Link>
+                    )}
+
                   {authContext.currentUser &&
                     authContext.currentUser!.is_admin === 1 && (
                       <Link
