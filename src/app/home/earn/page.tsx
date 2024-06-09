@@ -151,18 +151,25 @@ const EarnPage = () => {
         authContext.currentUser &&
         !loadingCredentialList &&
         (!credentialList || credentialList.length < 1) && (
-          <div className="h-screen   flex flex-col justify-center items-center">
-            {" "}
-            <div className=" flex flex-col  items-center justify-center gap-y-7">
-              {" "}
-              <img className="h-12" src="/fun-arrow.svg" />
-              <span className="text-foreground">Coming soon !</span>
-            </div>
-          </div>
-          /*   <StartEarning
-            isEarner={authContext.currentUser.is_earner == 1}
-            onClick={onOpenShareSubscription}
-          /> */
+          <>
+            {authContext.currentUser.is_earner != 1 && (
+              <div className="h-screen   flex flex-col justify-center items-center">
+                {" "}
+                <div className=" flex flex-col  items-center justify-center gap-y-7">
+                  {" "}
+                  <img className="h-12" src="/fun-arrow.svg" />
+                  <span className="text-foreground">Coming soon !</span>
+                </div>
+              </div>
+            )}
+
+            {authContext.currentUser.is_earner == 1 && (
+              <StartEarning
+                isEarner={authContext.currentUser.is_earner == 1}
+                onClick={onOpenShareSubscription}
+              />
+            )}
+          </>
         )}
 
       {!authContext.loading &&
