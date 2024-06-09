@@ -36,6 +36,9 @@ interface DataType {
   next_renewal: string;
   invite_link: string;
   extra_data: string;
+  bank_name: string;
+  account_number: string;
+  account_name: string;
 }
 
 type DataIndex = keyof DataType;
@@ -196,6 +199,29 @@ const SearchedTable: React.FC<{
       dataIndex: "user",
       key: "phone",
       render: (user) => <a>{user?.phone}</a>,
+      //  ...getColumnSearchProps("phone"),
+    },
+    {
+      title: "Bank name",
+      dataIndex: "user",
+      key: "bank",
+      render: (user) => {
+        return <a>{user?.bank?.bank_name}</a>;
+      },
+      //  ...getColumnSearchProps("phone"),
+    },
+    {
+      title: "Bank name",
+      dataIndex: "user",
+      key: "bank",
+      render: (user) => <a>{user?.bank?.account_number}</a>,
+      //  ...getColumnSearchProps("phone"),
+    },
+    {
+      title: "Bank name",
+      dataIndex: "user",
+      key: "bank",
+      render: (user) => <a>{user?.bank?.bank_account_name}</a>,
       //  ...getColumnSearchProps("phone"),
     },
     {
