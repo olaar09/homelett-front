@@ -171,7 +171,7 @@ const CredentialRequests = () => {
       {!loadingCredentialRequests && credentialRequests && (
         <div className="h-screen px-7 py-0 flex flex-col gap-y-4">
           <SearchedTable
-            title="Credential requests"
+            title="Rejected Credential"
             actions={["Approve", "Reject"]}
             onSelect={openModal}
             data={credentialRequestsList}
