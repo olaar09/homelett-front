@@ -39,7 +39,7 @@ export const Str = {
     {
       value: "18",
       label: "Showmax Sport + Movie",
-      pricingAmount: 4500,
+      pricingAmount: 4600,
       pricingName: "Sport + Movie Plan",
 
       earning: 50,
