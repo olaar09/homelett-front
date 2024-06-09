@@ -206,19 +206,19 @@ const SearchedTable: React.FC<{
       dataIndex: "user",
       key: "bank",
       render: (user) => {
-        return <a>{user?.bank?.bank_name}</a>;
+        return <a>{user?.bank?.bank_title}</a>;
       },
       //  ...getColumnSearchProps("phone"),
     },
     {
-      title: "Bank name",
+      title: "Account number",
       dataIndex: "user",
       key: "bank",
-      render: (user) => <a>{user?.bank?.account_number}</a>,
+      render: (user) => <a>{user?.bank?.bank_account_number}</a>,
       //  ...getColumnSearchProps("phone"),
     },
     {
-      title: "Bank name",
+      title: "Account name",
       dataIndex: "user",
       key: "bank",
       render: (user) => <a>{user?.bank?.bank_account_name}</a>,
