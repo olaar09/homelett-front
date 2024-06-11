@@ -72,27 +72,35 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   const apiUtil = new APIUtil();
   const isUltimate = product?.total_selection_count === Str.brands.length;
   const [loading, setLoading] = useState(false);
-  const [selectedInterval, setSelectedInterval] = useState("Monthly");
+  const [selectedInterval, setSelectedInterval] = useState("");
   const [displayedPrice, setDisplayedPrice] = useState(0);
 
   const platforms = product?.assigned_platforms.map((pl) => pl.platform);
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    if (open) setSelectedPlatform([]);
+    if (open) {
+      setSelectedPlatform([]);
+      setSelectedInterval("Weekly");
+    }
   }, [open]);
 
   useEffect(() => {
-    setDisplayedPrice((product?.price ?? 0) * 4.3);
-  }, [product]);
+    if (selectedInterval && product) {
+      const price =
+        selectedInterval.toLowerCase() === "weekly"
+          ? Number(product?.price) * 1
+          : Number(product?.price) * 4.3;
+
+      setDisplayedPrice(price);
+    }
+  }, [product, selectedInterval]);
 
   useEffect(() => {
     const displayedPrice =
       selectedInterval.toLowerCase() === "weekly"
         ? Number(product?.price) * 1
         : Number(product?.price) * 4.3;
-
-    console.log("orf3ijwlk", displayedPrice);
 
     setDisplayedPrice(displayedPrice);
   }, [selectedInterval]);
@@ -190,11 +198,11 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
               <span className=" text-foreground-secondary">
                 {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")} /{" "}
                 <Switch
-                  checkedChildren="Monthly"
-                  unCheckedChildren="Weekly"
+                  checkedChildren="Weekly"
+                  unCheckedChildren="Monthly"
                   defaultChecked
                   onChange={(checked) =>
-                    setSelectedInterval(checked ? "Monthly" : "Weekly")
+                    setSelectedInterval(checked ? "Weekly" : "Monthly")
                   }
                 />
               </span>

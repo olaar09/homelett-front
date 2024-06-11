@@ -41,6 +41,12 @@ const Subscriptions = ({
             </span>
             <div className=" flex flex-nowrap overflow-x-scroll">
               {userSubs.map((subscription) => {
+                const price =
+                  (subscription?.interval === "weekly" ||
+                  subscription?.interval === "single"
+                    ? subscription.product?.price
+                    : (subscription.product?.price ?? 0) * 4.3) ?? 0;
+
                 const brands = (subscription?.credentials ?? [])
                   .map((credential) => {
                     const platform =
@@ -83,7 +89,7 @@ const Subscriptions = ({
                         </span>
                         <span className="text-xs text-foreground-secondary">
                           {new UtilService().formatMoney(
-                            `${subscription.product.price * 100}`,
+                            `${price * 100}`,
                             "en-NG",
                             "NGN"
                           )}{" "}

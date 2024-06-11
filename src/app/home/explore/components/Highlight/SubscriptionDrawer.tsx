@@ -308,6 +308,11 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
     return givenDate.isBetween(now, threeDaysFromNow, null, "[]"); // '[]' includes the boundaries
   }
 
+  const price =
+    (subscription?.interval === "weekly" || subscription?.interval === "single"
+      ? product?.price
+      : (product?.price ?? 0) * 4.3) ?? 0;
+
   return (
     <>
       <Drawer
@@ -342,7 +347,7 @@ const SubscriptionDrawer: React.FC<DrawerProps> = ({
               <div>
                 <span className=" text-foreground-secondary">
                   {new UtilService().formatMoney(
-                    `${product?.price * 100}`,
+                    `${price * 100}`,
                     "en-NG",
                     "NGN"
                   )}{" "}
