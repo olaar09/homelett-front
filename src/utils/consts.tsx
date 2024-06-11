@@ -58,7 +58,7 @@ export const Str = {
       label: "Netflix",
       pricingName: "Premium plan",
       pricingAmount: 5000,
-      earning: 18,
+      earning: 35,
       icon: "/logos/nt.png",
     },
     {
