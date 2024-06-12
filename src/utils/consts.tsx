@@ -1,5 +1,5 @@
 export const Str = {
-  earnChannel: "https://chat.whatsapp.com/J0YYtU74XkUE9eSKeaz2lV",
+  earnChannel: "https://chat.whatsapp.com/Bp3DPBD4V8d1QrQ8j0HvC7",
 
   whatsappHelp:
     "https://api.whatsapp.com/send?phone=2347073106824&text=Hello%2C%20i%20need%20help",
