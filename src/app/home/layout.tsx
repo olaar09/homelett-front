@@ -435,7 +435,7 @@ const Nav: React.FC<any> = ({ children }) => {
                     <Link className="w-full" href={"/home/help"}>
                       <NavMenu
                         path="/home/team"
-                        icon={"logos:whatsapp-icon"}
+                        icon={"ic:baseline-telegram"}
                         title="Help"
                       />
                     </Link>

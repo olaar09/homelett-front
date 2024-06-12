@@ -46,7 +46,7 @@ const StartEarning = ({
           loading={false}
         >
           <div className="flex items-center w-full justify-center gap-x-2 ">
-            <Icon icon={"logos:whatsapp-icon"} className="" />
+            <Icon icon={"ic:baseline-telegram"} className="" />
             <span className="  text-sm">
               {" "}
               Join BubbleEarn group to learn more{" "}

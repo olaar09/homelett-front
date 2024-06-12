@@ -48,7 +48,7 @@ const ExploreHeader = () => {
           size="large"
           type="link"
         >
-          <Icon className="text-2xl" icon="logos:whatsapp-icon" />
+          <Icon className="text-2xl" icon="ic:baseline-telegram" />
         </Button> */}
       </div>
     </div>

@@ -130,14 +130,14 @@ const SavedTeamMembers = () => {
 
                     <Link href={Str.whatsappHelp}>
                       <div className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-4 w-full rounded-lg mx-auto">
-                        <Icon icon={"logos:whatsapp-icon"} />
+                        <Icon icon={"ic:baseline-telegram"} />
                         <span className="text-sm"> {"Contact support"}</span>
                       </div>
                     </Link>
 
                     <Link href={Str.earnChannel}>
                       <div className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-4 w-full rounded-lg mx-auto">
-                        <Icon icon={"logos:whatsapp-icon"} />
+                        <Icon icon={"ic:baseline-telegram"} />
                         <span className="text-sm">
                           {" "}
                           {"Join BubbleEarn channel"}
