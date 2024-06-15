@@ -111,8 +111,8 @@ const SavedTeamMembers = () => {
     { label: "Streaming", icon: "solar:video-library-bold" },
     { label: "Online Courses", icon: "ri:video-line" },
     { label: "Utilities", icon: "hugeicons:software", isNew: false },
-
-    { label: "Mobile Data", icon: "teenyicons:mobile-solid" },
+    /* 
+    { label: "Mobile Data", icon: "teenyicons:mobile-solid" }, */
   ];
   const balanceRequired = authContext.currentUser?.finance?.balance ?? 0;
   return (
@@ -247,13 +247,13 @@ const SavedTeamMembers = () => {
                         />
                       )}
 
-                      {id === "4" && (
+                      {/*   {id === "4" && (
                         <AirtimeTab
                           dataPlanList={dataPlanList}
                           products={airtimeProducts}
                           loading={false}
                         />
-                      )}
+                      )} */}
 
                       {id === "2" && (
                         <CourseTab products={coursesProducts} loading={false} />
