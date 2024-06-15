@@ -17,29 +17,6 @@ import RejectCredentialModal from "./CredentialRejectModal";
 import DashboardTable from "../_components/DashboardTable";
 const { Meta } = Card;
 
-const HeaderItem = ({
-  withBg,
-  title,
-  icon,
-}: {
-  withBg: boolean;
-  title: string;
-  icon: string;
-}) => {
-  return (
-    <div
-      className={` items-center flex gap-x-1 cursor-pointer hover:opacity-55 transition-all duration-150  py-3 ${
-        withBg
-          ? "bg-primary text-foreground-inverted rounded-lg px-3 "
-          : "text-foreground "
-      }`}
-    >
-      <Icon icon={icon} className="text-xl" />
-      <span className="text-sm font-bold mt-0"> {title}</span>
-    </div>
-  );
-};
-
 const CredentialRequests = () => {
   const [selectedConnection, setSelectedConnection] = useState<
     IDataSourceItem | undefined
@@ -47,6 +24,7 @@ const CredentialRequests = () => {
 
   const [openReject, setOpenReject] = useState(false);
   const [credentialRequestsList, setCredentialRequestsList] = useState([]);
+  const [credentialsAggregate, setCredentialsAggregate] = useState([]);
   const [selectedCredential, setSelectedCredential] = useState<string | null>(
     null
   );
@@ -79,7 +57,10 @@ const CredentialRequests = () => {
   });
 
   useEffect(() => {
-    setCredentialRequestsList(credentialRequests);
+    if (credentialRequests && credentialRequests.list) {
+      setCredentialRequestsList(credentialRequests.list);
+      setCredentialsAggregate(credentialRequests.aggregate);
+    }
   }, [credentialRequests]);
 
   console.log(credentialRequests);
@@ -141,21 +122,19 @@ const CredentialRequests = () => {
       )}
 
       {!loadingCredentialRequests && credentialRequests && (
-        <div className="h-screen  px-7 py-0 flex flex-col gap-y-4">
+        <div className="h-screen  px-7 py-0 flex flex-col gap-y-4 overflow-auto">
           <div className="">
             <div className="h-16 px-4 flex items-center ju"></div>
 
             <div className="flex items-center w-full  flex-wrap gap-y-6">
-              {[1, 2].map((x) => (
+              {credentialsAggregate.map((platform: any) => (
                 <div className="px-4 w-1/5">
                   <Card className=" w-full shrink-0 " bordered={false}>
                     <Statistic
-                      title="Netflix"
-                      value={9.3}
+                      title={platform.name}
+                      value={platform.total_slots_left}
                       precision={2}
                       valueStyle={{ color: "#cf1322" }}
-                      prefix={<ArrowDownOutlined />}
-                      suffix="%"
                     />
                   </Card>
                 </div>
