@@ -43,7 +43,7 @@ interface DataType {
 
 type DataIndex = keyof DataType;
 
-const SearchedTable: React.FC<{
+const DashboardTable: React.FC<{
   data: any[];
   actions: string[];
   title: string;
@@ -180,190 +180,23 @@ const SearchedTable: React.FC<{
       width: "5%",
     },
     {
-      title: "Created",
-      dataIndex: "created_at",
-      key: "created_at",
-      fixed: "left",
-      width: "10%",
-      render: (val) => <span> {moment(val).format("DD MMM YYYY HH:mm")}</span>,
-    },
-    {
-      title: "User",
-      dataIndex: "user",
-      key: "user.fullname",
-      render: (user) => <a>{user?.fullname}</a>,
-      //  ...getColumnSearchProps("fullname"),
-    },
-    {
-      title: "Phone",
-      dataIndex: "user",
-      key: "phone",
-      render: (user) => <a>{user?.phone}</a>,
-      //  ...getColumnSearchProps("phone"),
-    },
-    {
-      title: "Bank name",
-      dataIndex: "user",
-      key: "bank",
-      render: (user) => {
-        return <a>{user?.bank?.bank_title}</a>;
-      },
-      //  ...getColumnSearchProps("phone"),
-    },
-    {
-      title: "Account number",
-      dataIndex: "user",
-      key: "bank",
-      render: (user) => <a>{user?.bank?.bank_account_number}</a>,
-      //  ...getColumnSearchProps("phone"),
-    },
-    {
-      title: "Account name",
-      dataIndex: "user",
-      key: "bank",
-      render: (user) => <a>{user?.bank?.bank_account_name}</a>,
-      //  ...getColumnSearchProps("phone"),
-    },
-    {
-      title: "Platform",
-      dataIndex: "platform",
+      title: "Platform name",
+      dataIndex: "name",
       key: "name",
-      render: (platform) => {
-        return (
-          <div>
-            {platform?.name} <Brands size="default" brands={[]} />
-          </div>
-        );
-      },
-      //  ...getColumnSearchProps("platform"),
+      width: "9%",
+      //  ...getColumnSearchProps("fullname"),
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
-
       ...getColumnSearchProps("email"),
     },
     {
-      title: "Password",
-      dataIndex: "password",
-      key: "password",
-    },
-    {
-      title: "GPassword",
-      dataIndex: "gpassword",
-      key: "gpassword",
-    },
-    {
-      title: "Invite link",
-      dataIndex: "invite_link",
-      key: "invite_link",
-      ...getColumnSearchProps("invite_link"),
-    },
-    {
-      title: "Extra data",
-      dataIndex: "extra_data",
-      key: "extra_data",
-    },
-    {
-      title: "Admin Status",
-      dataIndex: "admin_status",
-      key: "admin_status",
-      render: (status) => {
-        const isApproved = status === "active";
-        const isPending = "";
-        const isRejected = status === "rejected";
-
-        return (
-          <Tag color={isApproved ? "green" : isRejected ? "volcano" : ""}>
-            {status ?? "Pending"}
-          </Tag>
-        );
-      },
-      filters: [
-        {
-          text: "Pending",
-          value: "pending",
-        },
-        {
-          text: "Approved",
-          value: "active",
-        },
-        {
-          text: "Rejected",
-          value: "rejected",
-        },
-      ],
-      onFilter: (value, record) => {
-        if ((value as string) === "pending") {
-          return !record.admin_status || record.admin_status?.length < 1;
-        }
-        return (record.admin_status ?? "").indexOf(value as string) === 0;
-      },
-    },
-    {
-      title: "Share Status",
-      dataIndex: "sharing",
-      key: "sharing",
-      render: (sharing) => {
-        return (
-          <Tag color={sharing ? "green" : ""}>
-            {sharing ? "Shared" : "Not shared"}
-          </Tag>
-        );
-      },
-      filters: [
-        {
-          text: "Shared",
-          value: "shared",
-        },
-        {
-          text: "Not shared",
-          value: "not_shared",
-        },
-      ],
-      onFilter: (value, record) => {
-        if ((value as string) === "shared") {
-          return record.sharing != null;
-        }
-        return !record.sharing;
-      },
-    },
-    {
-      title: "",
-      key: "operation",
-      fixed: "right",
-      width: 100,
-      render: (value, record) => {
-        const items: any = actions.map((it) => {
-          let color;
-          if (it === "Approve") {
-            color = "text-green-600";
-          } else if (it === "Reject") {
-            color = "text-red-600";
-          } else if (it === "Revoke") {
-            color = "text-red-600";
-          }
-
-          return {
-            label: <span className={`${color}`}>{it}</span>,
-            key: `${record.id}__${record.platform?.name}__${record.platform?.id}__${it}__${record?.email}`,
-          };
-        });
-        return (
-          <Dropdown
-            menu={{ items, onClick: handleMenuClick }}
-            trigger={["click"]}
-          >
-            <a onClick={(e) => e.preventDefault()}>
-              <Space>
-                <span className="text-banner"> Actions</span>
-                <DownOutlined className="text-banner" />
-              </Space>
-            </a>
-          </Dropdown>
-        );
-      },
+      title: "Slots left",
+      dataIndex: "slots_left",
+      key: "slots_left",
+      //  ...getColumnSearchProps("fullname"),
     },
   ];
 
@@ -382,4 +215,4 @@ const SearchedTable: React.FC<{
   );
 };
 
-export default SearchedTable;
+export default DashboardTable;

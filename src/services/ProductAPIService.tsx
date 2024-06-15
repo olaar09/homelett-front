@@ -9,6 +9,17 @@ class ProductAPIService {
     this.apiService = apiService;
   }
 
+  async fetchAllAvailableCredentialList(): Promise<ICredential[] | null> {
+    try {
+      const text = await this.apiService.get<{ data: any }>(
+        `/credential_demand/available_credentials_list`
+      );
+      return text.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async fetchAllCredentialRequests(
     type: string
   ): Promise<ICredential[] | null> {

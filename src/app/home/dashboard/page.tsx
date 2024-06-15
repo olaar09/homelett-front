@@ -14,6 +14,7 @@ import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { useRouter } from "next/navigation";
 import SearchedTable from "../_components/SearchTable";
 import RejectCredentialModal from "./CredentialRejectModal";
+import DashboardTable from "../_components/DashboardTable";
 const { Meta } = Card;
 
 const HeaderItem = ({
@@ -85,9 +86,8 @@ const CredentialRequests = () => {
 
   const getCredentialRequests = async (): Promise<any> => {
     try {
-      const data = await apiUtil.productService.fetchAllCredentialRequests(
-        "accepted"
-      );
+      const data =
+        await apiUtil.productService.fetchAllAvailableCredentialList();
       console.log(data);
 
       const list = data;
@@ -143,13 +143,11 @@ const CredentialRequests = () => {
       {!loadingCredentialRequests && credentialRequests && (
         <div className="h-screen  px-7 py-0 flex flex-col gap-y-4">
           <div className="">
-            <div className="h-16 px-4 flex items-center ju">
-              <span className="font-bold text-xl">Available Logins</span>
-            </div>
+            <div className="h-16 px-4 flex items-center ju"></div>
 
             <div className="flex items-center w-full  flex-wrap gap-y-6">
-              {[1, 2, 3, 4, 5, 6, 7].map((x) => (
-                <div className="px-4 w-4/12">
+              {[1, 2].map((x) => (
+                <div className="px-4 w-1/5">
                   <Card className=" w-full shrink-0 " bordered={false}>
                     <Statistic
                       title="Netflix"
@@ -163,6 +161,15 @@ const CredentialRequests = () => {
                 </div>
               ))}
             </div>
+          </div>
+
+          <div className="px-4 py-0 flex flex-col gap-y-4">
+            <DashboardTable
+              title="Available logins"
+              actions={["Revoke"]}
+              onSelect={openModal}
+              data={credentialRequestsList}
+            />
           </div>
         </div>
       )}
