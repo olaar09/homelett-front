@@ -374,7 +374,7 @@ const Nav: React.FC<any> = ({ children }) => {
                         <NavMenu
                           path="/home/dashboard"
                           icon={"mage:dashboard-chart-arrow-fill"}
-                          title="Dashboard"
+                          title="Available logins"
                         />
                       </Link>
                     )}
