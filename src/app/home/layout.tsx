@@ -370,6 +370,17 @@ const Nav: React.FC<any> = ({ children }) => {
 
                   {authContext.currentUser &&
                     authContext.currentUser!.is_admin === 1 && (
+                      <Link className="w-full" href={"/home/dashboard"}>
+                        <NavMenu
+                          path="/home/dashboard"
+                          icon={"mage:dashboard-chart-arrow-fill"}
+                          title="Dashboard"
+                        />
+                      </Link>
+                    )}
+
+                  {authContext.currentUser &&
+                    authContext.currentUser!.is_admin === 1 && (
                       <Link
                         className="w-full"
                         href={"/home/credentials_request"}
