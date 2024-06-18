@@ -150,7 +150,7 @@ const DashboardTable: React.FC<{
     ),
     onFilter: (value, record) =>
       record[dataIndex]
-        .toString()
+        ?.toString()
         .toLowerCase()
         .includes((value as string).toLowerCase()),
     onFilterDropdownOpenChange: (visible) => {
