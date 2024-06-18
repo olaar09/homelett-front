@@ -22,6 +22,7 @@ import UtilService from "@/services/UtilService";
 import { IProduct } from "@/app/interfaces/IProduct";
 import { AuthContext } from "@/contexts/AuthContext";
 import WeeklyWarning from "./WeeklyWarning";
+import OrderComplete from "./OrderComplete";
 
 const payOptions: MenuProps["items"] = [
   {
@@ -77,6 +78,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   const [selectedInterval, setSelectedInterval] = useState("");
   const [displayedPrice, setDisplayedPrice] = useState(0);
   const [isNotAvailable, setIsNotAvailable] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
 
   const platforms = product?.assigned_platforms.map((pl) => pl.platform);
   const authContext = useContext(AuthContext);
@@ -85,6 +87,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
     if (open) {
       setSelectedPlatform([]);
       setIsNotAvailable(false);
+      setIsComplete(false);
       setSelectedInterval("Weekly");
     }
   }, [open]);
@@ -116,12 +119,14 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   const onSubmit = async (key: string) => {
     try {
       setLoading(true);
+
       await apiUtil.productService.buyProduct({
         product_id: product!.id.toString(),
         interval: key,
         selected_platforms: selectedPlatforms,
       });
-      onClose();
+      setIsNotAvailable(false);
+      setIsComplete(true);
       authContext.refreshProfile();
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -181,6 +186,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
     <>
       <Drawer
         title={
+          !isComplete &&
           !isNotAvailable && (
             <div className="flex flex-end justify-end items-center">
               <Dropdown
@@ -210,8 +216,9 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
         open={open}
       >
         {isNotAvailable && <WeeklyWarning />}
+        {isComplete && <OrderComplete />}
 
-        {!isNotAvailable && product && (
+        {!isNotAvailable && !isComplete && product && (
           <div className="flex flex-col items-start py-6">
             <div className=" px-6">
               <Brands size="small" brands={brands} />
