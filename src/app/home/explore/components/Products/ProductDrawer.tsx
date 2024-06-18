@@ -83,6 +83,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   useEffect(() => {
     if (open) {
       setSelectedPlatform([]);
+      setIsNotAvailable(false);
       setSelectedInterval("Weekly");
     }
   }, [open]);
