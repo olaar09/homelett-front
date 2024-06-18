@@ -219,7 +219,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
               color="cyan"
               className="text-xs text-foreground-secondary text-center break-words text-wrap"
             >
-              If you're a first-time user, don't worry. 5k+ users trust us for
+              If you're a first-time user don't worry, 5k+ users trust us for
               their streaming subs and our monthly plan offers a much better &
               premium experience than weekly
             </Tag>
