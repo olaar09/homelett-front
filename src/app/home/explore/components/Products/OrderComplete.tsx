@@ -1,32 +1,36 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Tag, Button } from "antd";
 
-const OrderComplete = ({ onForceMonthly, loading }: any) => {
+const OrderComplete = ({ onClose, loading }: any) => {
   return (
-    <div className="h-screen flex flex-col items-center justify-start gap-y-4 px-4 pt-10">
+    <div className="h-screen flex flex-col items-center justify-start gap-y-4 px-4 pt-4">
       <img src="/taken.svg" className=" w-40 h-40" />
-      <p className="text-center">
-        Hi Chief, your order was completed successfully. For any issues with
-        this order, click on your profile and select "Contact Support." The
-        Instagram account manager cannot assist with complaints or support.
-      </p>{" "}
+      <p className="text-center">Your order was completed successfully.</p>{" "}
+      <Tag
+        color="geekblue"
+        className="text-xs text-foreground-secondary text-center break-words text-wrap"
+      >
+        For any issues with this order, click on your profile and select
+        "Contact Support." The Instagram account manager cannot assist with
+        complaints or account support.
+      </Tag>
       <Tag
         color="cyan"
         className="text-xs text-foreground-secondary text-center break-words text-wrap"
       >
         If you have complaints outside working hours, please be patient for
-        support to come online. Do not spam or troll our accounts, or your
+        support to come online. Do not spam or troll our social account, or your
         account will be automatically blocked.
       </Tag>
       <div className="flex items-center flex-col mt-6 justify-center gap-y-4">
         <Button
-          onClick={onForceMonthly}
+          onClick={onClose}
           loading={loading}
           className="bg-primary flex items-center gap-x-3"
           type="primary"
         >
-          {!loading && <Icon icon={"ic:baseline-calendar-month"} />}
-          <span>Select monthly</span>
+          {!loading && <Icon icon={"material-symbols:subscriptions-rounded"} />}
+          <span>Go to my subscription</span>
         </Button>
         {/*               <Button onClick={resetIsNotAvailable} className="" type="link">
         <span className="text-foreground-secondary">

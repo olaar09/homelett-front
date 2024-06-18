@@ -49,7 +49,6 @@ const ProductItem = ({
             loading={false}
             isSelected={false}
             icon={""}
-            type={"badge"}
           />
         </div>
         <div className="flex flex-col mt-1">

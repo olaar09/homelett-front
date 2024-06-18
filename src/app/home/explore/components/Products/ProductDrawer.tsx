@@ -215,8 +215,10 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
         maskClosable={false}
         open={open}
       >
-        {isNotAvailable && <WeeklyWarning />}
-        {isComplete && <OrderComplete />}
+        {isNotAvailable && (
+          <WeeklyWarning loading={loading} onForceMonthly={onForceMonthly} />
+        )}
+        {isComplete && <OrderComplete loading={loading} onClose={onClose} />}
 
         {!isNotAvailable && !isComplete && product && (
           <div className="flex flex-col items-start py-6">
