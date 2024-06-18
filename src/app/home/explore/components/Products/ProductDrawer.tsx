@@ -9,6 +9,7 @@ import {
   MenuProps,
   message,
   Switch,
+  Tag,
 } from "antd";
 import { IChat } from "@/app/interfaces/IChatItem";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -74,6 +75,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   const [loading, setLoading] = useState(false);
   const [selectedInterval, setSelectedInterval] = useState("");
   const [displayedPrice, setDisplayedPrice] = useState(0);
+  const [isNotAvailable, setIsNotAvailable] = useState(false);
 
   const platforms = product?.assigned_platforms.map((pl) => pl.platform);
   const authContext = useContext(AuthContext);
@@ -106,6 +108,10 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   }, [selectedInterval]);
 
   const onMenuClick: MenuProps["onClick"] = async ({ key }) => {
+    await onSubmit(key);
+  };
+
+  const onSubmit = async (key: string) => {
     try {
       setLoading(true);
       await apiUtil.productService.buyProduct({
@@ -118,14 +124,17 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error?.response?.data?.reason);
-
-        message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
-          }`
-        );
+        if (error?.response?.data?.reason == "weekly_not_available") {
+          setIsNotAvailable(true);
+        } else {
+          message.error(
+            `${
+              error?.response?.data?.message ??
+              error?.response?.data?.reason ??
+              "Unable to complete request"
+            }`
+          );
+        }
       } else {
         message.error("Unable to complete request");
       }
@@ -157,29 +166,40 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
     (assigned) => assigned.platform.icon
   );
 
+  const resetIsNotAvailable = () => {
+    setIsNotAvailable(false);
+  };
+
+  const onForceMonthly = async () => {
+    await onSubmit("monthly");
+  };
+
   const utils = new UtilService();
   return (
     <>
       <Drawer
         title={
-          <div className="flex flex-end justify-end items-center">
-            <Dropdown
-              disabled={
-                selectedPlatforms.length < (product?.total_selection_count ?? 0)
-              }
-              menu={{ items: payOptions, onClick: onMenuClick }}
-              placement="bottom"
-            >
-              <Button
-                loading={loading}
-                className="bg-primary flex items-center gap-x-3"
-                type="primary"
+          !isNotAvailable && (
+            <div className="flex flex-end justify-end items-center">
+              <Dropdown
+                disabled={
+                  selectedPlatforms.length <
+                  (product?.total_selection_count ?? 0)
+                }
+                menu={{ items: payOptions, onClick: onMenuClick }}
+                placement="bottom"
               >
-                {!loading && <Icon icon={"ic:outline-payment"} />}
-                <span>Make payment</span>
-              </Button>
-            </Dropdown>
-          </div>
+                <Button
+                  loading={loading}
+                  className="bg-primary flex items-center gap-x-3"
+                  type="primary"
+                >
+                  {!loading && <Icon icon={"ic:outline-payment"} />}
+                  <span>Make payment</span>
+                </Button>
+              </Dropdown>
+            </div>
+          )
         }
         placement="top"
         height={computedHeight}
@@ -187,7 +207,41 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
         maskClosable={false}
         open={open}
       >
-        {product && (
+        {isNotAvailable && (
+          <div className="h-screen flex flex-col items-center justify-start gap-y-4 px-4 pt-10">
+            <img src="/taken.svg" className=" w-40 h-40" />
+            <p className="text-center">
+              Hi chief, all weekly slots for this plan are currently already
+              filled. but monthly slots are available.{" "}
+            </p>{" "}
+            <Tag
+              color="cyan"
+              className="text-xs text-foreground-secondary text-center break-words text-wrap"
+            >
+              If you're a first-time user, don't worry. 5k + users trust us for
+              their streaming subs and our monthly plan offers a much better
+              experience than weekly
+            </Tag>
+            <div className="flex items-center flex-col mt-6 justify-center gap-y-4">
+              <Button
+                onClick={onForceMonthly}
+                loading={loading}
+                className="bg-primary flex items-center gap-x-3"
+                type="primary"
+              >
+                {!loading && <Icon icon={"ic:baseline-calendar-month"} />}
+                <span>Select monthly</span>
+              </Button>
+              {/*               <Button onClick={resetIsNotAvailable} className="" type="link">
+                <span className="text-foreground-secondary">
+                  i'll wait for weekly
+                </span>
+              </Button> */}
+            </div>
+          </div>
+        )}
+
+        {!isNotAvailable && product && (
           <div className="flex flex-col items-start py-6">
             <div className=" px-6">
               <Brands size="small" brands={brands} />
