@@ -293,13 +293,13 @@ const Nav: React.FC<any> = ({ children }) => {
                 },
                 {
                   path: Str.whatsappHelp,
-                  icon: "telegram",
+                  icon: "ic:baseline-telegram",
                   title: "Support",
                   isNew: false,
                 },
                 {
                   path: "/home/profile",
-                  icon: "streamline:telegram",
+                  icon: "iconamoon:profile-fill",
                   title: "Profile",
                 },
               ].map((menu) => {
