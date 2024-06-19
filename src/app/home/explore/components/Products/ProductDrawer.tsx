@@ -23,6 +23,7 @@ import { IProduct } from "@/app/interfaces/IProduct";
 import { AuthContext } from "@/contexts/AuthContext";
 import WeeklyWarning from "./WeeklyWarning";
 import OrderComplete from "./OrderComplete";
+import DropDownLabelItem from "./DropDownLabel";
 
 const payOptions: MenuProps["items"] = [
   {
@@ -181,6 +182,39 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
     await onSubmit("monthly");
   };
 
+  const getOptions = () => {
+    const price = product?.price ?? 0;
+    return [
+      {
+        key: "Weekly",
+        label: (
+          <div className="flex items-center gap-x-3">
+            <Icon icon={"mdi:calendar-weekend"} />
+            <DropDownLabelItem label="Weekly" amount={price} />
+          </div>
+        ),
+      },
+      {
+        key: "Monthly",
+        label: (
+          <div className="flex items-center gap-x-3">
+            <Icon icon={"ic:baseline-calendar-month"} />
+            <DropDownLabelItem label="Monthly" amount={price * 4.3} />
+          </div>
+        ),
+      },
+      {
+        key: "Yearly",
+        label: (
+          <div className="flex items-center gap-x-3">
+            <Icon icon={"ic:baseline-calendar-month"} />
+            <DropDownLabelItem label="Yearly" amount={price * 52.2} />
+          </div>
+        ),
+      },
+    ];
+  };
+
   const utils = new UtilService();
   return (
     <>
@@ -194,7 +228,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
                   selectedPlatforms.length <
                   (product?.total_selection_count ?? 0)
                 }
-                menu={{ items: payOptions, onClick: onMenuClick }}
+                menu={{ items: getOptions(), onClick: onMenuClick }}
                 placement="bottom"
               >
                 <Button
@@ -228,16 +262,10 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
 
             <div className="mt-4 mb-1 px-3 flex justify-between items-center w-full">
               <span className="text-lg">{product?.title}</span>
-              <span className=" text-foreground-secondary">
+              <span className=" text-foreground-secondary text-sm">
+                From{" "}
                 {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")} /{" "}
-                <Switch
-                  checkedChildren="Weekly"
-                  unCheckedChildren="Monthly"
-                  defaultChecked
-                  onChange={(checked) =>
-                    setSelectedInterval(checked ? "Weekly" : "Monthly")
-                  }
-                />
+                {" week "}
               </span>
             </div>
 

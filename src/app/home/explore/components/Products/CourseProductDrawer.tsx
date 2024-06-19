@@ -211,28 +211,22 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
             <div className=" pt-4 px-2 flex justify-between items-center w-full">
               <div className="flex items-center gap-x-0">
                 <Brands size="small" brands={brands} />
+                <a
+                  target="_blank"
+                  href={product.extra_link}
+                  rel="noopener noreferrer"
+                >
+                  <Button className="py-0 px-0" type="link">
+                    Preview on {product.assigned_platforms[0]?.platform.name}
+                  </Button>
+                </a>
               </div>
-              <a
-                target="_blank"
-                href={product.extra_link}
-                rel="noopener noreferrer"
-              >
-                <Button className="py-0 px-0" type="link">
-                  Preview on {product.assigned_platforms[0]?.platform.name}
-                </Button>
-              </a>
-              {/* 
-              <span className=" text-foreground-secondary">
-                {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")} /{" "}
-                <Switch
-                  checkedChildren="Monthly"
-                  unCheckedChildren="Forever"
-                  defaultChecked
-                  onChange={(checked) =>
-                    setSelectedInterval(checked ? "Monthly" : "Forever")
-                  }
-                />
-              </span> */}
+
+              <span className=" text-foreground-secondary text-sm">
+                From{" "}
+                {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")} /
+                {" week "}
+              </span>
             </div>
 
             <div className="mt-4 mb-1 px-2 flex justify-between items-center w-full">
