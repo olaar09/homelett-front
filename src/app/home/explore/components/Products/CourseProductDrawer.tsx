@@ -22,27 +22,6 @@ import { IProduct } from "@/app/interfaces/IProduct";
 import { AuthContext } from "@/contexts/AuthContext";
 import Link from "next/link";
 
-const payOptions: MenuProps["items"] = [
-  {
-    key: "Monthly",
-    label: (
-      <div className="flex items-center gap-x-3">
-        <Icon icon={"mdi:calendar-weekend"} />
-        <div>Monthly</div>
-      </div>
-    ),
-  },
-  {
-    key: "Forever",
-    label: (
-      <div className="flex items-center gap-x-3">
-        <Icon icon={"ic:baseline-calendar-month"} />
-        <div> Forever </div>
-      </div>
-    ),
-  },
-];
-
 // Define types for the component props
 interface DrawerProps {
   product: IProduct | null;
@@ -95,9 +74,11 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
     console.log(selectedInterval);
 
     const displayedPrice =
-      selectedInterval.toLowerCase() === "monthly"
+      selectedInterval.toLowerCase() === "weekly"
         ? Number(product?.price) * 1
-        : Number(product?.price) * 6;
+        : selectedInterval.toLowerCase() === "monthly"
+        ? Number(product?.price) * 4.3
+        : Number(product?.price) * 8;
 
     setDisplayedPrice(displayedPrice);
   }, [selectedInterval]);
@@ -107,7 +88,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
       setLoading(true);
       await apiUtil.productService.buyProduct({
         product_id: product!.id.toString(),
-        interval: key.toLowerCase() === "monthly" ? "single" : "forever",
+        interval: key.toLowerCase(),
         selected_platforms: selectedPlatforms,
       });
       onClose();
@@ -155,6 +136,66 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   );
 
   const utils = new UtilService();
+
+  const getOptions = () => {
+    return [
+      {
+        key: "Weekly",
+        label: (
+          <div className="flex items-center gap-x-3">
+            <Icon icon={"mdi:calendar-weekend"} />
+            <div className="w-full flex items-center justify-between gap-x-4">
+              <span> Weekly</span>
+              <span>
+                {utils.formatMoney(
+                  `${Number(product?.price) * 100}`,
+                  "en-NG",
+                  "NGN"
+                )}
+              </span>
+            </div>
+          </div>
+        ),
+      },
+      {
+        key: "Monthly",
+        label: (
+          <div className="flex items-center gap-x-3">
+            <Icon icon={"ic:baseline-calendar-month"} />
+            <div className="w-full flex items-center justify-between gap-x-4">
+              <span> Monthly</span>
+              <span>
+                {utils.formatMoney(
+                  `${Number(product?.price) * 100 * 4.3}`,
+                  "en-NG",
+                  "NGN"
+                )}
+              </span>
+            </div>
+          </div>
+        ),
+      },
+      {
+        key: "Forever",
+        label: (
+          <div className="flex items-center gap-x-3">
+            <Icon icon={"ic:baseline-calendar-month"} />
+            <div className="w-full flex items-center justify-between gap-x-4">
+              <span> Forever</span>
+              <span>
+                {utils.formatMoney(
+                  `${Number(product?.price) * 100 * 6}`,
+                  "en-NG",
+                  "NGN"
+                )}
+              </span>
+            </div>
+          </div>
+        ),
+      },
+    ];
+  };
+
   return (
     <>
       <Drawer
@@ -164,7 +205,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
               disabled={
                 selectedPlatforms.length < (product?.total_selection_count ?? 0)
               }
-              menu={{ items: payOptions, onClick: onMenuClick }}
+              menu={{ items: getOptions(), onClick: onMenuClick }}
               placement="bottom"
             >
               <Button
@@ -195,17 +236,17 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
             <div className=" pt-4 px-2 flex justify-between items-center w-full">
               <div className="flex items-center gap-x-0">
                 <Brands size="small" brands={brands} />
-                <a
-                  target="_blank"
-                  href={product.extra_link}
-                  rel="noopener noreferrer"
-                >
-                  <Button className="py-0 px-0" type="link">
-                    Preview on {product.assigned_platforms[0]?.platform.name}
-                  </Button>
-                </a>
               </div>
-
+              <a
+                target="_blank"
+                href={product.extra_link}
+                rel="noopener noreferrer"
+              >
+                <Button className="py-0 px-0" type="link">
+                  Preview on {product.assigned_platforms[0]?.platform.name}
+                </Button>
+              </a>
+              {/* 
               <span className=" text-foreground-secondary">
                 {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")} /{" "}
                 <Switch
@@ -216,7 +257,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
                     setSelectedInterval(checked ? "Monthly" : "Forever")
                   }
                 />
-              </span>
+              </span> */}
             </div>
 
             <div className="mt-4 mb-1 px-2 flex justify-between items-center w-full">
