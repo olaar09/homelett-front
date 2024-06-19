@@ -292,6 +292,12 @@ const Nav: React.FC<any> = ({ children }) => {
                   isNew: false,
                 },
                 {
+                  path: Str.whatsappHelp,
+                  icon: "ic:baseline-telegram",
+                  title: "Support",
+                  isNew: false,
+                },
+                {
                   path: "/home/profile",
                   icon: "iconamoon:profile-fill",
                   title: "Profile",
