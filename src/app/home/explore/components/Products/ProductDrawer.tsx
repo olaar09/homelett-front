@@ -25,7 +25,7 @@ import WeeklyWarning from "./WeeklyWarning";
 import OrderComplete from "./OrderComplete";
 import DropDownLabelItem from "./DropDownLabel";
 
-/* const payOptions: MenuProps["items"] = [
+const payOptions: MenuProps["items"] = [
   {
     key: "weekly",
     label: (
@@ -45,7 +45,7 @@ import DropDownLabelItem from "./DropDownLabel";
       </div>
     ),
   },
-]; */
+];
 
 // Define types for the component props
 interface DrawerProps {
@@ -183,7 +183,8 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   };
 
   const getOptions = () => {
-    const price = product?.price ?? 0;
+    return payOptions;
+    /*     const price = product?.price ?? 0;
     return [
       {
         key: "Weekly",
@@ -203,7 +204,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
           </div>
         ),
       },
-      /*       {
+            {
         key: "Yearly",
         label: (
           <div className="flex items-center gap-x-3">
@@ -211,8 +212,8 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
             <DropDownLabelItem label="Yearly" amount={price * 52.2} />
           </div>
         ),
-      }, */
-    ];
+      }, 
+    ]; */
   };
 
   const utils = new UtilService();
@@ -262,11 +263,22 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
 
             <div className="mt-4 mb-1 px-3 flex justify-between items-center w-full">
               <span className="text-lg">{product?.title}</span>
-              <span className=" text-foreground-secondary text-sm">
+              <span className=" text-foreground-secondary">
+                {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")} /{" "}
+                <Switch
+                  checkedChildren="Weekly"
+                  unCheckedChildren="Monthly"
+                  defaultChecked
+                  onChange={(checked) =>
+                    setSelectedInterval(checked ? "Weekly" : "Monthly")
+                  }
+                />
+              </span>
+              {/*  <span className=" text-foreground-secondary text-sm">
                 From{" "}
                 {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")} /{" "}
                 {" week "}
-              </span>
+              </span> */}
             </div>
 
             {/*      <div className="px-3">
