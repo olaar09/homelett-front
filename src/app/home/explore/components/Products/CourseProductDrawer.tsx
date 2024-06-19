@@ -21,6 +21,7 @@ import UtilService from "@/services/UtilService";
 import { IProduct } from "@/app/interfaces/IProduct";
 import { AuthContext } from "@/contexts/AuthContext";
 import Link from "next/link";
+import DropDownLabelItem from "./DropDownLabel";
 
 // Define types for the component props
 interface DrawerProps {
@@ -138,22 +139,14 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   const utils = new UtilService();
 
   const getOptions = () => {
+    const price = product?.price ?? 0;
     return [
       {
         key: "Weekly",
         label: (
           <div className="flex items-center gap-x-3">
             <Icon icon={"mdi:calendar-weekend"} />
-            <div className="w-full flex items-center justify-between gap-x-4">
-              <span> Weekly</span>
-              <span>
-                {utils.formatMoney(
-                  `${Number(product?.price) * 100}`,
-                  "en-NG",
-                  "NGN"
-                )}
-              </span>
-            </div>
+            <DropDownLabelItem label="Weekly" amount={price} />
           </div>
         ),
       },
@@ -162,16 +155,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
         label: (
           <div className="flex items-center gap-x-3">
             <Icon icon={"ic:baseline-calendar-month"} />
-            <div className="w-full flex items-center justify-between gap-x-4">
-              <span> Monthly</span>
-              <span>
-                {utils.formatMoney(
-                  `${Number(product?.price) * 100 * 4.3}`,
-                  "en-NG",
-                  "NGN"
-                )}
-              </span>
-            </div>
+            <DropDownLabelItem label="Monthly" amount={price * 4.3} />
           </div>
         ),
       },
@@ -180,16 +164,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
         label: (
           <div className="flex items-center gap-x-3">
             <Icon icon={"ic:baseline-calendar-month"} />
-            <div className="w-full flex items-center justify-between gap-x-4">
-              <span> Forever</span>
-              <span>
-                {utils.formatMoney(
-                  `${Number(product?.price) * 100 * 6}`,
-                  "en-NG",
-                  "NGN"
-                )}
-              </span>
-            </div>
+            <DropDownLabelItem label="Forever" amount={price * 6} />
           </div>
         ),
       },
