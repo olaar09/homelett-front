@@ -23,7 +23,35 @@ import { AuthContext } from "@/contexts/AuthContext";
 import Link from "next/link";
 import DropDownLabelItem from "./DropDownLabel";
 
-// Define types for the component props
+/* const payOptions: MenuProps["items"] = [
+  {
+    key: "Weekly",
+    label: (
+      <div className="flex items-center gap-x-3">
+        <Icon icon={"mdi:calendar-weekend"} />
+        <div>Weekly</div>
+      </div>
+    ),
+  },
+  {
+    key: "Monthly",
+    label: (
+      <div className="flex items-center gap-x-3">
+        <Icon icon={"ic:baseline-calendar-month"} />
+        <div> Monthly </div>
+      </div>
+    ),
+  },
+  {
+    key: "Forever",
+    label: (
+      <div className="flex items-center gap-x-3">
+        <Icon icon={"ic:baseline-calendar-month"} />
+        <div> Forever </div>
+      </div>
+    ),
+  },
+] */ // Define types for the component props
 interface DrawerProps {
   product: IProduct | null;
   open: boolean;

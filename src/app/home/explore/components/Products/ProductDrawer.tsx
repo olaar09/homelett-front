@@ -25,7 +25,7 @@ import WeeklyWarning from "./WeeklyWarning";
 import OrderComplete from "./OrderComplete";
 import DropDownLabelItem from "./DropDownLabel";
 
-const payOptions: MenuProps["items"] = [
+/* const payOptions: MenuProps["items"] = [
   {
     key: "weekly",
     label: (
@@ -45,7 +45,7 @@ const payOptions: MenuProps["items"] = [
       </div>
     ),
   },
-];
+]; */
 
 // Define types for the component props
 interface DrawerProps {
