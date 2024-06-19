@@ -203,7 +203,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
           </div>
         ),
       },
-      {
+      /*       {
         key: "Yearly",
         label: (
           <div className="flex items-center gap-x-3">
@@ -211,7 +211,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
             <DropDownLabelItem label="Yearly" amount={price * 52.2} />
           </div>
         ),
-      },
+      }, */
     ];
   };
 
