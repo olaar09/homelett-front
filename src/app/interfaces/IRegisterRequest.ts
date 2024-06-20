@@ -10,6 +10,7 @@ export interface IAuthRequest {
   bank_info?: IUserBank;
   is_open_ai?: number;
   is_activated?: number;
+  is_return_user: number;
   is_admin?: number;
   is_earner?: number;
   finance?: {
