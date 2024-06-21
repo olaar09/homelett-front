@@ -53,6 +53,10 @@ const InfoDrawer: React.FC<DrawerProps> = ({
         open={open}
       >
         <div className="flex flex-col  py-4 justify-center items-start text-center px-3 gap-y-4">
+          <Tag className=" text-wrap block text-center">
+            You must have bought any plan at least once to unlock referral
+            benefits
+          </Tag>
           <span className="text-sm text-foreground-secondary">
             Simply share your link with friends and family and instantly earn
             cash when they buy any plan on bubble. <br />{" "}
