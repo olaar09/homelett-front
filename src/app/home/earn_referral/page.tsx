@@ -161,7 +161,7 @@ const EarnReferralPage = () => {
             {
               label: "Total earned",
               value: utils.formatMoney(
-                `${finance?.totalReferralEarning}`,
+                `${(finance?.totalReferralEarning ?? 0) * 100}`,
                 "en-NG",
                 "NGN"
               ),
