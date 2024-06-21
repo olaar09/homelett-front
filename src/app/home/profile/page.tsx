@@ -128,6 +128,13 @@ const SavedTeamMembers = () => {
                       </div>
                     )}
 
+                    <Link href={"/home/earn_referral"}>
+                      <div className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-4 w-full rounded-lg mx-auto">
+                        <Icon icon={"tdesign:money"} />
+                        <span className="text-sm"> {"Refer and earn"}</span>
+                      </div>
+                    </Link>
+
                     <Link href={Str.whatsappHelp}>
                       <div className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-4 w-full rounded-lg mx-auto">
                         <Icon icon={"ic:baseline-telegram"} />

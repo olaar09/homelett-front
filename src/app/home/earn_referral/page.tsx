@@ -188,7 +188,6 @@ const EarnReferralPage = () => {
                     title={info.label}
                     value={`${info.value}`.toUpperCase()}
                     className="h-20 "
-                    precision={2}
                     valueStyle={{ color: info.color, marginTop: 30 }}
                     prefix={info.icon}
                   />
