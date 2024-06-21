@@ -219,6 +219,41 @@ const Nav: React.FC<any> = ({ children }) => {
     setOpenNotice(false);
     window.open(Str.earnChannel);
   };
+
+  const getMobileMenu = () => {
+    return [
+      {
+        path: "/home/explore",
+        icon: "icon-park-solid:all-application",
+        title: "Explore",
+      },
+      {
+        path: "/home/transactions",
+        icon: "uim:history",
+        title: "History",
+      },
+      {
+        path:
+          authContext.currentUser?.is_earner == 1
+            ? "/home/earn"
+            : "/home/earn_referral",
+        icon: "majesticons:money-plus-line",
+        title: "Earn",
+        isNew: true,
+      },
+      {
+        path: Str.whatsappHelp,
+        icon: "ic:baseline-telegram",
+        title: "Support",
+        isNew: false,
+      },
+      {
+        path: "/home/profile",
+        icon: "iconamoon:profile-fill",
+        title: "Profile",
+      },
+    ];
+  };
   return (
     <>
       {/*  <NicheProfileDrawer open={requiresProfile} onClose={closeNicheDrawer} /> */}
@@ -274,35 +309,7 @@ const Nav: React.FC<any> = ({ children }) => {
         <div className="flex items-center w-full h-full overflow-hidden">
           {isMobile && (
             <div className="px-3 border-t flex items-center justify-between fixed bottom-0 left-0 right-0 shadow-2xl h-20 z-30 bg-white">
-              {[
-                {
-                  path: "/home/explore",
-                  icon: "icon-park-solid:all-application",
-                  title: "Explore",
-                },
-                {
-                  path: "/home/transactions",
-                  icon: "uim:history",
-                  title: "History",
-                },
-                {
-                  path: "/home/earn",
-                  icon: "majesticons:money-plus-line",
-                  title: "Earn",
-                  isNew: false,
-                },
-                {
-                  path: Str.whatsappHelp,
-                  icon: "ic:baseline-telegram",
-                  title: "Support",
-                  isNew: false,
-                },
-                {
-                  path: "/home/profile",
-                  icon: "iconamoon:profile-fill",
-                  title: "Profile",
-                },
-              ].map((menu) => {
+              {getMobileMenu().map((menu) => {
                 const browserPath = usePathname();
                 const isActive = browserPath.includes(menu.path);
                 return (

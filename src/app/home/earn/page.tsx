@@ -85,7 +85,7 @@ const EarnPage = () => {
       )}
 
       {authContext.currentUser?.bank_info &&
-        authContext.currentUser?.is_earner && (
+        authContext.currentUser?.is_earner != 0 && (
           <div className="flex h-10 gap-x-8 w-full items-center justify-end px-3">
             <div className="flex items-center text-xs gap-x-1 ">
               <Tag className="rounded-lg text-xs flex items-center gap-x-1">

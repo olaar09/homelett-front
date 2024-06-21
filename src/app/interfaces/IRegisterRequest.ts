@@ -13,12 +13,16 @@ export interface IAuthRequest {
   is_return_user: number;
   is_admin?: number;
   is_earner?: number;
+  total_invites: number;
+  total_active_invites: number;
+  invite_code: string;
   finance?: {
     balance: number;
     totalSpends: number;
     totalDeposits: number;
     totalPayouts: number;
     pendingPayouts: number;
+    totalReferralEarning: number;
   };
   freeTrialLeft?: any;
   billingActive?: boolean;
