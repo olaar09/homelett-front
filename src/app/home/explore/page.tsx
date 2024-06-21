@@ -247,7 +247,7 @@ const SavedTeamMembers = () => {
                         />
                       )}
 
-                      {id === "4" && (
+                      {id === "2" && (
                         <UtilityTab
                           products={utilityProducts}
                           loading={false}
@@ -261,7 +261,7 @@ const SavedTeamMembers = () => {
                         />
                       )}
 
-                      {id === "2" && (
+                      {id === "4" && (
                         <CourseTab products={coursesProducts} loading={false} />
                       )}
                     </div>
