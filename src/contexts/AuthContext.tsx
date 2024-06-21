@@ -100,7 +100,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const updateKey = async (key: string): Promise<any> => {
     try {
       setLoadingOpenAIKey(true);
-      await apiService.integrationsService.updateOpenAIKey(key);
+      //  await apiService.integrationsService.updateOpenAIKey(key);
       await refreshProfile();
       message.success("Updated OpenAI key");
 
@@ -123,42 +123,13 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     }
   };
 
-  const fetchDataSource = async () => {
-    try {
-      setLoadingSources(true);
-      const dataSources = await apiService.datasourceService.listSources();
-      console.log(dataSources.data.data);
-
-      setDataSources(dataSources.data.data);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error);
-
-        message.error(
-          `${error?.response?.data?.message ?? "Unable to complete request"}`
-        );
-      }
-    } finally {
-      setLoadingSources(false);
-    }
-  };
+  const fetchDataSource = async () => {};
 
   const fetchCurrentUserProfile = async () => {
     const queryParams = new URLSearchParams(params).toString();
     setLoading(true);
     try {
       const user = await apiService.profileService.loadProfile();
-
-      try {
-        const activeProfile = await apiService.cvService.getJobProfile(
-          `${user.data.active_job_profile?.id}`
-        );
-
-        setActiveProfile(activeProfile.data);
-      } catch (error) {
-        console.log(error);
-      }
-
       if (user) {
         setCurrentUser(user.data);
         if (path === "/login") {

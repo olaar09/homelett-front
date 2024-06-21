@@ -43,7 +43,7 @@ export default function CompleteInvite() {
   const getInvite = async (): Promise<any> => {
     try {
       const invite = await apiUtil.profileService.getInvite(
-        `${params?.invite_code}`
+        `${params?.invite_token}`
       );
       return invite.data;
     } catch (error) {
@@ -73,7 +73,7 @@ export default function CompleteInvite() {
     try {
       const response = await apiUtil.profileService.submitInvite({
         password: password,
-        invite_code: params?.invite_code,
+        invite_token: params?.invite_token,
       });
 
       setSubmittingInvite(false);

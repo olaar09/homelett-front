@@ -37,7 +37,7 @@ export default function Home() {
   const [scrollYPosition, setScrollYPosition] = useState(0);
   const [rotationDegrees, setRotationDegrees] = useState("");
 
-  const inviteCode = query.get("invite_code");
+  const inviteCode = query.get("invite_token");
   const divRef = useRef<any>(null);
 
   // Function to handle scroll event
@@ -129,14 +129,14 @@ export default function Home() {
   const onSubmitLogin = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    const inviteCode = query.get("invite_code");
+    const inviteCode = query.get("invite_token");
     try {
       let response;
       response = await apiService.authService!.reqInvite({
         ...form,
         company_name: form.email,
         password: form.password,
-        invite_code: inviteCode,
+        invite_token: inviteCode,
         plan_id: 2,
       });
 

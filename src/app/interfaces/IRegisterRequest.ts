@@ -1,5 +1,7 @@
 import { IPlatform, IProduct } from "./IProduct";
 
+export interface IJProfile {}
+
 export interface IAuthRequest {
   id?: string;
   fullname?: string;
@@ -15,7 +17,8 @@ export interface IAuthRequest {
   is_earner?: number;
   total_invites: number;
   total_active_invites: number;
-  invite_code: string;
+  invite_token: string;
+  invite_link: string;
   finance?: {
     balance: number;
     totalSpends: number;

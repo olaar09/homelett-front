@@ -33,7 +33,9 @@ const Chip: React.FC<ChipProps> = ({
       }    flex items-center gap-x-2 hover:opacity-60 transition-all duration-100 cursor-pointer`}
     >
       <span className="text-xs">{title}</span>
-      {action && <Icon icon={loading ? "eos-icons:loading" : "lucide:plus"} />}
+      {action && (
+        <Icon icon={loading ? "eos-icons:loading" : icon ?? "lucide:plus"} />
+      )}
     </div>
   );
 };

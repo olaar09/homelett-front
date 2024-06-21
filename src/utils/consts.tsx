@@ -26,6 +26,13 @@ export const Str = {
     "/logos/sm.png",
     "/logos/windscribe_logo.jpg",
   ],
+  utilityBrands: [
+    "/logos/gramma.png",
+    "/logos/canva.webp",
+    "/logos/chatgpt.png",
+    "/logos/nordvpn.png",
+  ],
+  courseBrands: ["/logos/udemy.png", "/logos/coursera.png"],
   platforms: [
     {
       value: "1",
