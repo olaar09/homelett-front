@@ -24,6 +24,7 @@ import NoticeDrawers from "./components/Notice/NoticeDrawer";
 import UtilService from "@/services/UtilService";
 import UtilityTab from "./components/UtilityTab";
 import CourseTab from "./components/CourseTab/CourseTab";
+import TradingTab from "./components/TradingTab";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -99,6 +100,10 @@ const SavedTeamMembers = () => {
     (product: IProduct) => product.type === "utility"
   );
 
+  const tradingProducts = (productList ?? []).filter(
+    (product: IProduct) => product.type === "trading"
+  );
+
   const airtimeProducts = (productList ?? []).filter(
     (product: IProduct) => product.type === "airtime"
   );
@@ -109,10 +114,12 @@ const SavedTeamMembers = () => {
 
   const tabs = [
     { label: "Streaming", icon: "solar:video-library-bold" },
-    { label: "Online Courses", icon: "ri:video-line" },
     { label: "Utilities", icon: "hugeicons:software", isNew: false },
-    /* 
-    { label: "Mobile Data", icon: "teenyicons:mobile-solid" }, */
+    {
+      label: "Trading Tools",
+      icon: "streamline:money-currency-yuan-exchange-payment-forex-finance-yuan-currency-money-foreign",
+    },
+    { label: "Online Courses", icon: "ri:video-line" },
   ];
   const balanceRequired = authContext.currentUser?.finance?.balance ?? 0;
   return (
@@ -240,20 +247,19 @@ const SavedTeamMembers = () => {
                         />
                       )}
 
-                      {id === "3" && (
+                      {id === "4" && (
                         <UtilityTab
                           products={utilityProducts}
                           loading={false}
                         />
                       )}
 
-                      {/*   {id === "4" && (
-                        <AirtimeTab
-                          dataPlanList={dataPlanList}
-                          products={airtimeProducts}
+                      {id === "3" && (
+                        <TradingTab
+                          products={tradingProducts}
                           loading={false}
                         />
-                      )} */}
+                      )}
 
                       {id === "2" && (
                         <CourseTab products={coursesProducts} loading={false} />
