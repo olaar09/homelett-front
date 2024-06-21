@@ -114,12 +114,12 @@ const SavedTeamMembers = () => {
 
   const tabs = [
     { label: "Streaming", icon: "solar:video-library-bold" },
+    { label: "Online Courses", icon: "ri:video-line" },
     { label: "Utilities", icon: "hugeicons:software", isNew: false },
     {
       label: "Trading Tools",
       icon: "streamline:money-currency-yuan-exchange-payment-forex-finance-yuan-currency-money-foreign",
     },
-    { label: "Online Courses", icon: "ri:video-line" },
   ];
   const balanceRequired = authContext.currentUser?.finance?.balance ?? 0;
   return (
@@ -247,21 +247,21 @@ const SavedTeamMembers = () => {
                         />
                       )}
 
-                      {id === "2" && (
+                      {id === "3" && (
                         <UtilityTab
                           products={utilityProducts}
                           loading={false}
                         />
                       )}
 
-                      {id === "3" && (
+                      {id === "4" && (
                         <TradingTab
                           products={tradingProducts}
                           loading={false}
                         />
                       )}
 
-                      {id === "4" && (
+                      {id === "2" && (
                         <CourseTab products={coursesProducts} loading={false} />
                       )}
                     </div>
