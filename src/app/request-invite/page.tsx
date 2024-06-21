@@ -3,7 +3,7 @@
 import { Icon } from "@iconify/react";
 //import GoogleSignIn from "./components/Auth/GoogleSignin1";
 
-import { message } from "antd";
+import { Tag, message } from "antd";
 import { Suspense, useContext, useEffect, useState } from "react";
 import FirebaseContext from "@/contexts/FirebaseContext";
 import { FirebaseError } from "firebase/app";
@@ -37,6 +37,7 @@ export default function Home() {
   const [scrollYPosition, setScrollYPosition] = useState(0);
   const [rotationDegrees, setRotationDegrees] = useState("");
 
+  const inviteCode = query.get("invite_code");
   const divRef = useRef<any>(null);
 
   // Function to handle scroll event
@@ -128,12 +129,14 @@ export default function Home() {
   const onSubmitLogin = async (e: any) => {
     e.preventDefault();
     setLoading(true);
+    const inviteCode = query.get("invite_code");
     try {
       let response;
       response = await apiService.authService!.reqInvite({
         ...form,
         company_name: form.email,
         password: form.password,
+        invite_code: inviteCode,
         plan_id: 2,
       });
 
@@ -178,7 +181,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="text-center mt-4 px-4 w-full  lg:w-6/12 mx-auto ">
+        <div className="text-center mt-1 px-4 w-full  lg:w-6/12 mx-auto ">
           <span className=" lg:text-5xl text-2xl font-black">
             {" "}
             Create an account
@@ -192,12 +195,21 @@ export default function Home() {
         </div> */}
 
         <form
-          className="lg:w-4/12 w-full mx-auto mt-10"
+          className="lg:w-4/12 w-full mx-auto mt-4"
           onSubmit={(e: any) => onSubmitLogin(e)}
           method="post"
         >
-          <div className="w-full px-8 flex flex-col gap-y-6">
-            <div className="flex flex-col items-start gap-y-2 text-sm">
+          <div className="w-full px-8 flex flex-col gap-y-5 items-center">
+            {inviteCode && (
+              <Tag
+                className="rounded-lg gap-x-3 flex justify-between w-auto mt-2"
+                color="volcano"
+              >
+                <span className="text-md font-bold">Invite code: </span>
+                <span className="font-bold text-md"> {inviteCode}</span>
+              </Tag>
+            )}
+            <div className="flex flex-col items-start gap-y-2 text-sm w-full">
               <span>Full name</span>
               <InputField
                 name="fullname"
@@ -207,7 +219,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="flex flex-col items-start gap-y-2 text-sm">
+            <div className="flex flex-col items-start gap-y-2 text-sm w-full">
               <span>Email address</span>
               <InputField
                 name="email"
@@ -217,7 +229,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="flex flex-col items-start gap-y-2 text-sm">
+            <div className="flex flex-col items-start gap-y-2 text-sm w-full">
               <span>Phone</span>
               <InputField
                 name="phone"
@@ -227,7 +239,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="flex flex-col items-start gap-y-2 text-sm">
+            <div className="flex flex-col items-start gap-y-2 text-sm w-full">
               <span>Password</span>
               <InputField
                 name="password"
