@@ -129,7 +129,7 @@ export default function Home() {
   const onSubmitLogin = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    const inviteCode = query.get("invite_token");
+    const inviteCode = query.get("invite");
     try {
       let response;
       response = await apiService.authService!.reqInvite({
