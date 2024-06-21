@@ -5,19 +5,13 @@ import { Icon } from "@iconify/react";
 
 import { Tag, message } from "antd";
 import { Suspense, useContext, useEffect, useState } from "react";
-import FirebaseContext from "@/contexts/FirebaseContext";
-import { FirebaseError } from "firebase/app";
 import { useRouter, useSearchParams } from "next/navigation";
-import APIService from "@/services/APIService";
 import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
 
-import { useScroll } from "ahooks";
 import React, { useRef } from "react";
-import GoogleLoginButton from "../components/Auth/GoogleSignin";
 import ACButton from "../components/Button";
-import HomeText from "../components/HomeText";
 import InputField from "../components/InputField";
 import Link from "next/link";
 import AuthProblem from "../components/Auth/AuthProblem";
