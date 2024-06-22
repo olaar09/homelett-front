@@ -75,7 +75,7 @@ const Subscriptions = ({
                         )}
                         {!expired && (
                           <Chip
-                            title={subscription.product.tag}
+                            title={subscription.product?.tag}
                             loading={false}
                             isSelected={false}
                             icon={""}
@@ -85,7 +85,7 @@ const Subscriptions = ({
                       </div>
                       <div className="flex flex-col mt-1">
                         <span className="text-xs line-clamp-1 ">
-                          {subscription.product.title}
+                          {subscription.product?.title}
                         </span>
                         <span className="text-xs text-foreground-secondary">
                           {new UtilService().formatMoney(

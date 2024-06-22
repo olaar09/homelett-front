@@ -262,3 +262,22 @@ html {
   overflow-x: scroll !important;
   white-space: nowrap;
 }
+
+.gradient-border-button {
+  padding-right: 10px !important;
+  padding-left: 10px !important;
+  background-color: #fff;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-image: linear-gradient(#fff, #fff),
+    linear-gradient(45deg, #be5bfb, #855cef, #8f4be7);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.gradient-border-button:hover {
+  background-color: #f0f0f0; /* Change background color on hover */
+}

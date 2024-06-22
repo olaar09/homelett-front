@@ -2,6 +2,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import UtilService from "@/services/UtilService";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Button } from "antd";
+import Link from "next/link";
 import React, { useContext } from "react";
 
 const ExploreHeader = () => {
@@ -28,7 +29,7 @@ const ExploreHeader = () => {
             )}
           </span>
           <div>
-            <Button type="link" loading={false} className="px-0">
+            {/* <Link href="/add_fund">
               <a
                 href={paymentLink}
                 className="flex items-center gap-x-2"
@@ -37,7 +38,13 @@ const ExploreHeader = () => {
                 <Icon icon="majesticons:money-plus" />
                 <span className="text-xs  text-primary">Add fund</span>
               </a>
-            </Button>
+            </Link> */}
+            <Link href="/home/add_fund">
+              <div className="flex items-center gap-x-2" rel="noreferrer">
+                <Icon icon="majesticons:money-plus" />
+                <span className="text-xs  text-primary">Add fund</span>
+              </div>
+            </Link>
           </div>
         </div>
 

@@ -9,6 +9,21 @@ class ProfileAPIService {
     this.apiService = apiService;
   }
 
+  async confirmP2P(data: {
+    amount: string;
+    bank_account_number?: string;
+  }): Promise<string> {
+    try {
+      const response = await this.apiService.post<{ data: any }>(
+        `/confirm_p2p`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async updateBankDetails(data: {
     bank_name: string;
     bank_account_name: string;
