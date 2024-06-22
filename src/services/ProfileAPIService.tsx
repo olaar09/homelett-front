@@ -9,10 +9,19 @@ class ProfileAPIService {
     this.apiService = apiService;
   }
 
-  async confirmP2P(data: {
-    amount: number;
-    bank_account_number?: string;
-  }): Promise<string> {
+  async initiateP2P(data: { amount: number }): Promise<string> {
+    try {
+      const response = await this.apiService.post<{ data: any }>(
+        `/transactions/initiateP2P`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async confirmP2P(data: { reference: string }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(
         `/transactions/verifyP2P`,

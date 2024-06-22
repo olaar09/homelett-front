@@ -25,7 +25,7 @@ const SavedTeamMembers = () => {
 
   const [formData, setFormData] = useState({
     account_number: "",
-    amount: 0,
+    amount: null,
   });
 
   const onSetFormData = (key: string, value: any) => {
@@ -69,8 +69,8 @@ const SavedTeamMembers = () => {
       setLoading(true);
 
       await apiUtil.profileService.confirmP2P({
-        amount: "200",
-        bank_account_number: "200000",
+        amount: formData.amount ?? 0,
+        bank_account_number: formData.account_number,
       });
       message.success("Deposit successful");
       router.replace("/home/explore");
@@ -178,12 +178,14 @@ const SavedTeamMembers = () => {
                         </div>
 
                         <div className="w-full">
-                          <span className="text-xs">Sent amount</span>
+                          <span className="text-xs">
+                            Sent amount (Enter exactly the sent amount)
+                          </span>
                           <InputField
                             placeHolder={`Enter amount`}
                             type={""}
                             name={"account_number"}
-                            value={`${formData.amount}`}
+                            value={formData.amount}
                             required
                             onChange={(val) =>
                               onSetFormData("amount", val.target.value)
