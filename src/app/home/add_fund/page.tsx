@@ -14,6 +14,7 @@ import UpdateBankDrawer from "./components/UpdateBankDrawer";
 import { IBank } from "@/app/interfaces/IProduct";
 import { AxiosError } from "axios";
 import ACButton from "@/app/components/Button";
+import InputField from "@/app/components/InputField";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -22,7 +23,15 @@ const SavedTeamMembers = () => {
 
   const [isMoneySent, setIsMoneySent] = useState(false);
 
-  const apiUtils = new APIUtil();
+  const [formData, setFormData] = useState({
+    account_number: "",
+    amount: 0,
+  });
+
+  const onSetFormData = (key: string, value: any) => {
+    setFormData({ ...formData, [key]: value });
+  };
+
   const router = useRouter();
   const apiUtil = new APIUtil();
 
@@ -156,12 +165,30 @@ const SavedTeamMembers = () => {
                       <div className="flex items-center flex-col w-full px-3 gap-y-3">
                         <div className="w-full">
                           <span className="text-xs">Sender account number</span>
-                          <Input />
+                          <InputField
+                            placeHolder={`Enter sender account number`}
+                            type={""}
+                            name={"account_number"}
+                            value={formData.account_number}
+                            required
+                            onChange={(val) =>
+                              onSetFormData("account_number", val.target.value)
+                            }
+                          />
                         </div>
 
                         <div className="w-full">
                           <span className="text-xs">Sent amount</span>
-                          <Input />
+                          <InputField
+                            placeHolder={`Enter amount`}
+                            type={""}
+                            name={"account_number"}
+                            value={`${formData.amount}`}
+                            required
+                            onChange={(val) =>
+                              onSetFormData("amount", val.target.value)
+                            }
+                          />
                         </div>
                       </div>
                     )}

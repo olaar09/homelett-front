@@ -10,7 +10,7 @@ class ProfileAPIService {
   }
 
   async confirmP2P(data: {
-    amount: string;
+    amount: number;
     bank_account_number?: string;
   }): Promise<string> {
     try {
