@@ -94,6 +94,7 @@ const SavedTeamMembers = () => {
   };
 
   const authLoading = authContext.loading || !authContext.currentUser;
+  const bankInfo = authContext.currentUser?.p2p.bank_info;
 
   return (
     <>
@@ -160,7 +161,13 @@ const SavedTeamMembers = () => {
                   </div>
 
                   <div className="flex items-center flex-col justify-center w-full gap-y-4">
-                    {!isMoneySent && <BankInfo />}
+                    {!isMoneySent && (
+                      <BankInfo
+                        bankName={bankInfo?.bank_name ?? ""}
+                        accountNumber={bankInfo?.bank_account_number ?? ""}
+                        accountName={bankInfo?.bank_account_name ?? ""}
+                      />
+                    )}
 
                     {isMoneySent && (
                       <div className="flex items-center flex-col w-full px-3 gap-y-3">
@@ -289,7 +296,15 @@ const OptionItem = ({
   );
 };
 
-const BankInfo = ({}: {}) => {
+const BankInfo = ({
+  bankName,
+  accountNumber,
+  accountName,
+}: {
+  bankName: string;
+  accountNumber: string;
+  accountName: string;
+}) => {
   return (
     <div className="w-full flex flex-col h-28">
       <div className="gradient-border-button px-3 py-2 w-full rounded-lg flex flex-col justify-start gap-y-3">
@@ -297,17 +312,17 @@ const BankInfo = ({}: {}) => {
           {
             icon: "i-mdi:bank-outline",
             title: "Bank name",
-            value: "First bank",
+            value: bankName,
           },
           {
             icon: "i-oui:number",
             title: "Account number",
-            value: "0019929993",
+            value: accountNumber,
           },
           {
             icon: "i-mdi:rename-box",
             title: "Account name",
-            value: "Deepdigital/Yusuf",
+            value: accountName,
           },
         ].map((info) => {
           return (

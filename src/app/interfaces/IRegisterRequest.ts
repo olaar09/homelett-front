@@ -27,6 +27,13 @@ export interface IAuthRequest {
     pendingPayouts: number;
     totalReferralEarning: number;
   };
+  p2p: {
+    bank_info: {
+      bank_name: string;
+      bank_account_number: string;
+      bank_account_name: string;
+    };
+  };
   freeTrialLeft?: any;
   billingActive?: boolean;
   billingCurrentPlan?: IBilling;
