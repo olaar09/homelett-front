@@ -73,6 +73,7 @@ const SavedTeamMembers = () => {
         bank_account_number: formData.account_number,
       });
       message.success("Deposit successful");
+      await authContext.refreshProfile();
       router.replace("/home/explore");
     } catch (error) {
       if (error instanceof AxiosError) {
