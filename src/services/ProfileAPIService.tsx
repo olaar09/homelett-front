@@ -15,7 +15,7 @@ class ProfileAPIService {
   }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(
-        `/confirm_p2p`,
+        `/transactions/verifyP2P`,
         data
       );
       return response.data;
