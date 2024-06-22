@@ -305,6 +305,16 @@ const BankInfo = ({
   accountNumber: string;
   accountName: string;
 }) => {
+  const onCopyText = async (text: string) => {
+    if ("clipboard" in navigator) {
+      await navigator.clipboard.writeText(text);
+      message.success("Text copied");
+    } else {
+      document.execCommand("copy", true, text);
+      message.success("Text copied");
+    }
+  };
+
   return (
     <div className="w-full flex flex-col h-28">
       <div className="gradient-border-button px-3 py-2 w-full rounded-lg flex flex-col justify-start gap-y-3">
@@ -342,7 +352,11 @@ const BankInfo = ({
                   </span>
                 </div>
 
-                <Icon className="text-2xl pl-2" icon={"solar:copy-outline"} />
+                <Icon
+                  onClick={() => onCopyText(info.value)}
+                  className="text-2xl pl-2"
+                  icon={"solar:copy-outline"}
+                />
               </div>
             </div>
           );
