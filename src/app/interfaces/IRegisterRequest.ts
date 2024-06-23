@@ -5,6 +5,7 @@ export interface IJProfile {}
 export interface IAuthRequest {
   id?: string;
   fullname?: string;
+  bannerProduct?: IProduct;
   email: string;
   password: string;
   phone: string;

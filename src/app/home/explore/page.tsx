@@ -25,12 +25,14 @@ import UtilService from "@/services/UtilService";
 import UtilityTab from "./components/UtilityTab";
 import CourseTab from "./components/CourseTab/CourseTab";
 import TradingTab from "./components/TradingTab";
+import ProductDrawer from "./components/Products/ProductDrawer";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
   const [openAddModal, setOpenAddModal] = useState(false);
 
   const [openNotice, setOpenNotice] = useState(false);
+  const [openBannerProduct, setOpenBannerProduct] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const apiUtils = new APIUtil();
@@ -122,8 +124,18 @@ const SavedTeamMembers = () => {
     },
   ];
   const balanceRequired = authContext.currentUser?.finance?.balance ?? 0;
+  const bannerProduct = authContext.currentUser?.bannerProduct;
   return (
     <>
+      {bannerProduct && (
+        <ProductDrawer
+          product={bannerProduct}
+          open={openBannerProduct}
+          onClose={function (): void {
+            setOpenBannerProduct(false);
+          }}
+        />
+      )}
       {/*     {authContext.currentUser && (
         <div className="bg-red-400 h-auto gap-x-2 flex items-center justify-center text-center px-2 py-2">
           <span className="text-white text-xs">
@@ -188,6 +200,11 @@ const SavedTeamMembers = () => {
         {!loadingPage && (
           <>
             <ExploreHeader />
+            <Banner
+              onClick={() => {
+                setOpenBannerProduct(true);
+              }}
+            />
             <Highlight userSubs={userSubs} />
           </>
         )}
@@ -277,3 +294,14 @@ const SavedTeamMembers = () => {
 };
 
 export default SavedTeamMembers;
+
+const Banner = ({ onClick }: { onClick: () => void }) => {
+  return (
+    <div onClick={onClick} className="w-full px-4 rounded-lg h-[4rem]">
+      <img
+        className="w-full h-full object-cover rounded-lg"
+        src="/banners/showmax.png"
+      />
+    </div>
+  );
+};
