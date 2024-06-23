@@ -22,33 +22,19 @@ import moment from "moment";
 
 interface DataType {
   key: string;
-  email: string;
+  credential_email: string;
   id: number;
-  phone: string;
-  platform: IPlatform;
   fullname: string;
-  password: string;
-  gpassword: string;
-  gmail: string;
-  status: string;
-  sharing: any;
-  admin_status: string;
-  next_renewal: string;
+  credential_password: string;
   invite_link: string;
-  extra_data: string;
-  bank_name: string;
-  account_number: string;
-  account_name: string;
 }
 
 type DataIndex = keyof DataType;
 
 const PlatformSubTable: React.FC<{
   data: any[];
-  actions: string[];
   title: string;
-  onSelect: (key: string) => void;
-}> = ({ data, onSelect, actions, title }) => {
+}> = ({ data, title }) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
@@ -60,10 +46,6 @@ const PlatformSubTable: React.FC<{
 
   type GetSingle<T> = T extends (infer U)[] ? U : never;
   type Sorts = GetSingle<Parameters<OnChange>[2]>;
-
-  const handleMenuClick = (e: any) => {
-    onSelect(e.key);
-  };
 
   const handleSearch = (
     selectedKeys: string[],
@@ -180,16 +162,16 @@ const PlatformSubTable: React.FC<{
       width: "5%",
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
+      title: "Credential Email",
+      dataIndex: "credential_email",
+      key: "credential_email",
 
-      ...getColumnSearchProps("email"),
+      ...getColumnSearchProps("credential_email"),
     },
     {
-      title: "Password",
-      dataIndex: "password",
-      key: "password",
+      title: "Credential Password",
+      dataIndex: "credential_email",
+      key: "credential_email",
     },
 
     {
@@ -204,9 +186,9 @@ const PlatformSubTable: React.FC<{
       key: "extra_data",
     },
     {
-      title: "Fullname",
-      dataIndex: "fullname",
-      key: "fullname",
+      title: "User's Fullname",
+      dataIndex: "user_fullname",
+      key: "user_fullname",
     },
     {
       title: "User email",

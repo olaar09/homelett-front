@@ -435,9 +435,9 @@ const Nav: React.FC<any> = ({ children }) => {
                     )}
                   {authContext.currentUser &&
                     authContext.currentUser!.is_admin === 1 && (
-                      <Link className="w-full" href={"/home/spotify_invitees"}>
+                      <Link className="w-full" href={"/home/platform_subs/3"}>
                         <NavMenu
-                          path="/home/spotify_invitees"
+                          path="/home/platform_subs/3"
                           icon={"material-symbols:folder-managed-sharp"}
                           title="Spotify invitees"
                         />
@@ -446,9 +446,9 @@ const Nav: React.FC<any> = ({ children }) => {
 
                   {authContext.currentUser &&
                     authContext.currentUser!.is_admin === 1 && (
-                      <Link className="w-full" href={"/home/youtube_invitees"}>
+                      <Link className="w-full" href={"/home/platform_subs/1"}>
                         <NavMenu
-                          path="/home/youtube_invitees"
+                          path="/home/platform_subs/1"
                           icon={"material-symbols:folder-managed-sharp"}
                           title="Youtube invitees"
                         />

@@ -10,10 +10,9 @@ import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
-import { useRouter } from "next/navigation";
-import ApproveCredentialModal from "./CredentialApproveModal";
-import SearchedTable from "../_components/SearchTable";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { AxiosError } from "axios";
+import PlatformSubTable from "../../_components/PlatformSubTable";
 import RejectCredentialModal from "./CredentialRejectModal";
 const { Meta } = Card;
 
@@ -87,11 +86,12 @@ const CredentialRequests = () => {
   }, [credentialRequests]);
 
   console.log(credentialRequests);
+  const params = useParams();
 
   const getCredentialRequests = async (): Promise<any> => {
     try {
       const data = await apiUtil.productService.fetchAllPlatformSubscriptions(
-        "3"
+        `${params?.id}`
       );
       console.log(data);
 
@@ -137,22 +137,6 @@ const CredentialRequests = () => {
 
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col w-full">
-      <ApproveCredentialModal
-        open={openApprove}
-        selectedPlatform={selectedPlatform}
-        selectedCredential={selectedCredential}
-        handleCancel={onCloseModal}
-        handleOk={onCloseModal}
-      />
-
-      <RejectCredentialModal
-        open={openReject}
-        selectedPlatform={selectedPlatform}
-        selectedCredential={selectedCredential}
-        handleCancel={onCloseRejectModal}
-        handleOk={onCloseRejectModal}
-      />
-
       {(currentAuth.loading ||
         loadingCredentialRequests ||
         !credentialRequests) && (
@@ -170,10 +154,8 @@ const CredentialRequests = () => {
 
       {!loadingCredentialRequests && credentialRequests && (
         <div className="h-screen px-7 py-0 flex flex-col gap-y-4">
-          <SearchedTable
-            title="Credential requests"
-            actions={["Approve", "Reject"]}
-            onSelect={openModal}
+          <PlatformSubTable
+            title="Spotify Platform subs"
             data={credentialRequestsList}
           />
         </div>
