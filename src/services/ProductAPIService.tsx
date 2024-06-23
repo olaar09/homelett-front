@@ -20,6 +20,19 @@ class ProductAPIService {
     }
   }
 
+  async fetchAllPlatformSubscriptions(
+    platformId: string
+  ): Promise<any[] | null> {
+    try {
+      const text = await this.apiService.get<{ data: any }>(
+        `/credentials_request/platform_subs/${platformId}`
+      );
+      return text.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async fetchAllCredentialRequests(
     type: string
   ): Promise<ICredential[] | null> {

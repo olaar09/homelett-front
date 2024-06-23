@@ -433,6 +433,27 @@ const Nav: React.FC<any> = ({ children }) => {
                         />
                       </Link>
                     )}
+                  {authContext.currentUser &&
+                    authContext.currentUser!.is_admin === 1 && (
+                      <Link className="w-full" href={"/home/spotify_invitees"}>
+                        <NavMenu
+                          path="/home/spotify_invitees"
+                          icon={"material-symbols:folder-managed-sharp"}
+                          title="Spotify invitees"
+                        />
+                      </Link>
+                    )}
+
+                  {authContext.currentUser &&
+                    authContext.currentUser!.is_admin === 1 && (
+                      <Link className="w-full" href={"/home/youtube_invitees"}>
+                        <NavMenu
+                          path="/home/youtube_invitees"
+                          icon={"material-symbols:folder-managed-sharp"}
+                          title="Youtube invitees"
+                        />
+                      </Link>
+                    )}
 
                   {authContext.currentUser &&
                     !authContext.currentUser?.is_admin && (
