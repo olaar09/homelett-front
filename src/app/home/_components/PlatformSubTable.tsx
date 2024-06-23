@@ -25,6 +25,7 @@ interface DataType {
   credential_email: string;
   id: number;
   fullname: string;
+  user_email: string;
   credential_password: string;
   invite_link: string;
 }
@@ -170,8 +171,8 @@ const PlatformSubTable: React.FC<{
     },
     {
       title: "Credential Password",
-      dataIndex: "credential_email",
-      key: "credential_email",
+      dataIndex: "credential_password",
+      key: "credential_password",
     },
 
     {
@@ -194,6 +195,7 @@ const PlatformSubTable: React.FC<{
       title: "User email",
       dataIndex: "user_email",
       key: "user_email",
+      ...getColumnSearchProps("user_email"),
     },
   ];
 
