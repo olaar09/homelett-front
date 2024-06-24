@@ -234,12 +234,12 @@ const Nav: React.FC<any> = ({ children }) => {
       },
       {
         path:
-          authContext.currentUser?.is_earner == 1
+          false && authContext.currentUser?.is_earner == 1
             ? "/home/earn"
             : "/home/earn_referral",
         icon: "majesticons:money-plus-line",
         title: "Earn",
-        isNew: true,
+        isNew: false,
       },
       {
         path: Str.whatsappHelp,
