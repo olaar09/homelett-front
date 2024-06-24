@@ -31,7 +31,7 @@ const Subscriptions = ({
         open={selectedSubscription != null}
         onClose={() => setSelectedSubscription(null)}
       />
-      <div className="flex flex-col items-center w-full px-3 mt-10">
+      <div className="flex flex-col items-center w-full px-3 mt-4">
         {(!userSubs || userSubs.length < 1) && <EmptyHighlight />}
 
         {userSubs && userSubs!.length > 0 && (

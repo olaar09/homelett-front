@@ -220,7 +220,7 @@ const SavedTeamMembers = () => {
           </div>
         )}
 
-        <div className="px-3 mt-16 h-1/2 flex flex-col ">
+        <div className="px-3 mt-8 h-1/2 flex flex-col ">
           <span className="text-xs text-foreground-secondary">
             Available services
           </span>
