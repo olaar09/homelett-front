@@ -126,7 +126,7 @@ const EarnReferralPage = () => {
         <Tag className="w-full rounded-lg py-2">{user?.invite_link}</Tag>
       </div>
 
-      <div className="px-2 flex gap-x-2 items-center justify-center mt-4">
+      {/*   <div className="px-2 flex gap-x-2 items-center justify-center mt-4">
         <div
           onClick={onOpenHowItWorks}
           className="bg-gray-100 h-10 gap-x-2 flex items-center justify-center rounded-2xl mt-0 border flex-1 "
@@ -134,7 +134,7 @@ const EarnReferralPage = () => {
           <Icon icon={"ic:twotone-info"} className="text-foreground" />
           <span className=" text-foreground text-sm">{"How it works"}</span>
         </div>
-      </div>
+      </div> */}
 
       {(authContext.loading || loadingCredentialList) && (
         <div className="h-screen   flex flex-col justify-center items-center">

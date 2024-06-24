@@ -234,7 +234,7 @@ const Nav: React.FC<any> = ({ children }) => {
       },
       {
         path:
-          false && authContext.currentUser?.is_earner == 1
+          true || authContext.currentUser?.is_earner == 1
             ? "/home/earn"
             : "/home/earn_referral",
         icon: "majesticons:money-plus-line",
