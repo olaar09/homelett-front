@@ -1,10 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
-import type { InputRef, TableColumnsType, TableColumnType } from "antd";
+import type {
+  DatePickerProps,
+  InputRef,
+  TableColumnsType,
+  TableColumnType,
+} from "antd";
 import {
   Button,
   Card,
   Checkbox,
+  DatePicker,
   Dropdown,
   Input,
   Modal,
@@ -36,6 +42,7 @@ const ApproveCredentialModal: React.FC<{
   selectedPlatform,
 }) => {
   const [loading, setLoading] = useState(false);
+  const [nextBilling, setNextBilling] = useState<any>(null);
 
   const [checkData, setCheckData] = useState({
     gmail: false,
@@ -46,6 +53,11 @@ const ApproveCredentialModal: React.FC<{
 
   const onChange = (key: string, value: boolean) => {
     setCheckData({ ...checkData, [key]: value });
+  };
+
+  const onChangeDate: DatePickerProps<any>["onChange"] = (date, dateString) => {
+    console.log(date, dateString);
+    setNextBilling(dateString);
   };
 
   useEffect(() => {
@@ -61,6 +73,10 @@ const ApproveCredentialModal: React.FC<{
   console.log(selectedCredential, plan);
 
   const onValidate = () => {
+    if (!nextBilling) {
+      message.error("Select next billing date");
+      return;
+    }
     if (!checkData.gmail) {
       message.error("Confirm if the gmail login is valid");
       return;
@@ -95,6 +111,7 @@ const ApproveCredentialModal: React.FC<{
       setLoading(true);
       await apiUtil.productService.acceptCredential({
         credential_id: selectedCredential!,
+        next_billing: nextBilling,
       });
       handleCancel(selectedCredential);
     } catch (error) {
@@ -124,7 +141,7 @@ const ApproveCredentialModal: React.FC<{
       destroyOnClose={true}
       footer={null}
     >
-      <div className=" h-60 mt-10 flex flex-col gap-y-7">
+      <div className=" h-96 mt-10 flex flex-col gap-y-7">
         <Checkbox onChange={(e) => onChange("gmail", e.target.checked)}>
           I confirmed the Gmail password is valid
         </Checkbox>
@@ -140,6 +157,11 @@ const ApproveCredentialModal: React.FC<{
         <Checkbox onChange={(e) => onChange("duration", e.target.checked)}>
           I confirmed that the duration of the plan is at least 1 month
         </Checkbox>
+
+        <div className="w-full flex flex-col gap-y-2">
+          <span className="">Next billing date</span>
+          <DatePicker onChange={onChangeDate} />
+        </div>
 
         <div className="mt-0">
           <ACButton

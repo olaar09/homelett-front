@@ -91,7 +91,10 @@ class ProductAPIService {
     }
   }
 
-  async acceptCredential(data: { credential_id: string }): Promise<string> {
+  async acceptCredential(data: {
+    credential_id: string;
+    next_billing: string;
+  }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(
         `/credentials_request/accept`,
