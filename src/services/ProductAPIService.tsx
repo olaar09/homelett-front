@@ -32,6 +32,16 @@ class ProductAPIService {
       throw error;
     }
   }
+  async fetchExpiredCredential(): Promise<ICredential[] | null> {
+    try {
+      const text = await this.apiService.get<{ data: any }>(
+        `/credentials_request/expired`
+      );
+      return text.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async fetchAllCredentialRequests(
     type: string

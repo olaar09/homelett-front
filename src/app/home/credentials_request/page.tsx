@@ -12,7 +12,7 @@ import LoadingOverlay from "@/app/components/LoadingOverlay";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { useRouter } from "next/navigation";
 import ApproveCredentialModal from "./CredentialApproveModal";
-import SearchedTable from "../_components/SearchTable";
+import CredentialsTable from "../_components/CredentialsTable";
 import { AxiosError } from "axios";
 import RejectCredentialModal from "./CredentialRejectModal";
 const { Meta } = Card;
@@ -170,7 +170,7 @@ const CredentialRequests = () => {
 
       {!loadingCredentialRequests && credentialRequests && (
         <div className="h-screen px-7 py-0 flex flex-col gap-y-4">
-          <SearchedTable
+          <CredentialsTable
             title="Credential requests"
             actions={["Approve", "Reject"]}
             onSelect={openModal}

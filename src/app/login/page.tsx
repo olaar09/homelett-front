@@ -86,6 +86,18 @@ export default function Home() {
           password: form.password,
           phone: "",
           subscriptions: [],
+          is_return_user: 0,
+          total_invites: 0,
+          total_active_invites: 0,
+          invite_token: "",
+          invite_link: "",
+          p2p: {
+            bank_info: {
+              bank_name: "",
+              bank_account_number: "",
+              bank_account_name: "",
+            },
+          },
         });
       } else {
         response = await apiService.authService!.login({
@@ -93,14 +105,24 @@ export default function Home() {
           password: form.password,
           phone: "",
           subscriptions: [],
+          is_return_user: 0,
+          total_invites: 0,
+          total_active_invites: 0,
+          invite_token: "",
+          invite_link: "",
+          p2p: {
+            bank_info: {
+              bank_name: "",
+              bank_account_number: "",
+              bank_account_name: "",
+            },
+          },
         });
       }
 
       localStorage.setItem("token", response.data.token!);
       message.success("Login successful");
       await authContext.refreshProfile();
-      await authContext.refreshDataSource();
-
       router.push("/home/explore");
     } catch (error) {
       if (error instanceof AxiosError) {

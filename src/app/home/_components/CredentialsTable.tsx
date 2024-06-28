@@ -43,7 +43,7 @@ interface DataType {
 
 type DataIndex = keyof DataType;
 
-const SearchedTable: React.FC<{
+const CredentialsTable: React.FC<{
   data: any[];
   actions: string[];
   title: string;
@@ -382,4 +382,4 @@ const SearchedTable: React.FC<{
   );
 };
 
-export default SearchedTable;
+export default CredentialsTable;

@@ -12,7 +12,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { useRouter } from "next/navigation";
-import SearchedTable from "../_components/SearchTable";
+import CredentialsTable from "../_components/CredentialsTable";
 import RejectCredentialModal from "./CredentialRejectModal";
 import DashboardTable from "../_components/DashboardTable";
 const { Meta } = Card;

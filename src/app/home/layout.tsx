@@ -410,6 +410,20 @@ const Nav: React.FC<any> = ({ children }) => {
                     authContext.currentUser!.is_admin === 1 && (
                       <Link
                         className="w-full"
+                        href={"/home/credentials_expired"}
+                      >
+                        <NavMenu
+                          path="/home/credentials_expired"
+                          icon={"i-ri:pass-expired-line"}
+                          title="Credential expired"
+                        />
+                      </Link>
+                    )}
+
+                  {authContext.currentUser &&
+                    authContext.currentUser!.is_admin === 1 && (
+                      <Link
+                        className="w-full"
                         href={"/home/credentials_rejected"}
                       >
                         <NavMenu
@@ -438,7 +452,7 @@ const Nav: React.FC<any> = ({ children }) => {
                       <Link className="w-full" href={"/home/platform_subs/3"}>
                         <NavMenu
                           path="/home/platform_subs/3"
-                          icon={"material-symbols:folder-managed-sharp"}
+                          icon={"i-mingcute:spotify-line"}
                           title="Spotify invitees"
                         />
                       </Link>
@@ -449,7 +463,7 @@ const Nav: React.FC<any> = ({ children }) => {
                       <Link className="w-full" href={"/home/platform_subs/1"}>
                         <NavMenu
                           path="/home/platform_subs/1"
-                          icon={"material-symbols:folder-managed-sharp"}
+                          icon={"i-ant-design:youtube-outlined"}
                           title="Youtube invitees"
                         />
                       </Link>
