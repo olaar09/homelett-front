@@ -410,20 +410,6 @@ const Nav: React.FC<any> = ({ children }) => {
                     authContext.currentUser!.is_admin === 1 && (
                       <Link
                         className="w-full"
-                        href={"/home/credentials_expired"}
-                      >
-                        <NavMenu
-                          path="/home/credentials_expired"
-                          icon={"i-ri:pass-expired-line"}
-                          title="Credential expired"
-                        />
-                      </Link>
-                    )}
-
-                  {authContext.currentUser &&
-                    authContext.currentUser!.is_admin === 1 && (
-                      <Link
-                        className="w-full"
                         href={"/home/credentials_rejected"}
                       >
                         <NavMenu
@@ -444,6 +430,19 @@ const Nav: React.FC<any> = ({ children }) => {
                           path="/home/credentials_manage"
                           icon={"material-symbols:folder-managed-sharp"}
                           title="Manage credentials"
+                        />
+                      </Link>
+                    )}
+                  {authContext.currentUser &&
+                    authContext.currentUser!.is_admin === 1 && (
+                      <Link
+                        className="w-full"
+                        href={"/home/credentials_expired"}
+                      >
+                        <NavMenu
+                          path="/home/credentials_expired"
+                          icon={"i-ri:pass-expired-line"}
+                          title="Credential expired"
                         />
                       </Link>
                     )}
