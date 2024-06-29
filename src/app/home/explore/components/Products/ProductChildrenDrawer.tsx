@@ -302,7 +302,7 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
 
               <div className="flex flex-col items-start mt-4">
                 <span className="text-block text-xs">
-                  Select product and make payment
+                  Select a product and make payment
                 </span>
               </div>
             </div>
