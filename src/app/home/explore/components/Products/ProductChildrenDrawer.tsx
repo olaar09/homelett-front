@@ -25,28 +25,6 @@ import WeeklyWarning from "./WeeklyWarning";
 import OrderComplete from "./OrderComplete";
 import DropDownLabelItem from "./DropDownLabel";
 
-const payOptions: MenuProps["items"] = [
-  {
-    key: "monthly",
-    label: (
-      <div className="flex items-center gap-x-3">
-        <Icon icon={"ic:baseline-calendar-month"} />
-        <div> Monthly </div>
-      </div>
-    ),
-  },
-  {
-    key: "quarterly",
-    label: (
-      <div className="flex items-center gap-x-3">
-        <Icon icon={"mdi:calendar-weekend"} />
-        <div>3 months</div>
-      </div>
-    ),
-    disabled: false,
-  },
-];
-
 // Define types for the component props
 interface DrawerProps {
   product: IProduct | null;
@@ -130,7 +108,7 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
       );
 
       await apiUtil.productService.buyProduct({
-        product_id: product!.id.toString(),
+        product_id: selectedProduct!.id.toString(),
         interval: key.toLowerCase(),
         selected_platforms: platforms,
       });
