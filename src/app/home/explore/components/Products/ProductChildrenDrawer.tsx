@@ -226,7 +226,7 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
         {isComplete && <OrderComplete loading={loading} onClose={onClose} />}
 
         {!isNotAvailable && !isComplete && product && (
-          <div className="flex flex-col items-start py-0">
+          <div className="flex flex-col items-start py-2">
             <div className=" px-6">
               <Brands size="small" brands={brands} />
             </div>
