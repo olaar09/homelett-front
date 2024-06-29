@@ -125,7 +125,7 @@ const ChangeCredentialPasswordModal: React.FC<{
             type={"button"}
             loading={loading}
           >
-            <span className="text-white text-sm"> Update password</span>
+            <span className="text-white text-sm"> Update details</span>
           </ACButton>
         </div>
       </div>

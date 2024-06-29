@@ -106,7 +106,7 @@ const CredentialRequests = () => {
     if (split[3] === "Revoke") {
       setOpenReject(true);
     }
-    if (split[3] === "Update password") {
+    if (split[3] === "Update details") {
       setOpenUpdatePassword(true);
     }
   };
@@ -184,7 +184,7 @@ const CredentialRequests = () => {
         <div className="h-screen px-7 py-0 flex flex-col gap-y-4">
           <CredentialsTable
             title="Manage credentials"
-            actions={["Revoke", "Update password"]}
+            actions={["Revoke", "Update details"]}
             onSelect={openModal}
             data={credentialRequestsList}
           />
