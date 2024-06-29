@@ -8,6 +8,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import APIUtil from "@/services/APIUtil";
 import { Str } from "@/utils/consts";
 import { IProduct } from "@/app/interfaces/IProduct";
+import ProductChildrenDrawer from "./Products/ProductChildrenDrawer";
 
 const EntertainmentTab = ({
   loading,
@@ -25,11 +26,27 @@ const EntertainmentTab = ({
     setSelectedProduct(product);
   };
 
+  const openProductDrawer =
+    selectedProduct != null &&
+    (selectedProduct.children == undefined ||
+      selectedProduct.children.length < 1);
+
+  const openProductWithChildrenDrawer =
+    selectedProduct != null &&
+    selectedProduct.children != undefined &&
+    selectedProduct.children.length > 0;
+
   return (
     <div className="">
+      <ProductChildrenDrawer
+        product={selectedProduct}
+        open={openProductWithChildrenDrawer}
+        onClose={() => setSelectedProduct(null)}
+      />
+
       <ProductDrawer
         product={selectedProduct}
-        open={selectedProduct != null}
+        open={openProductDrawer}
         onClose={() => setSelectedProduct(null)}
       />
       {products.map((product, index) => (

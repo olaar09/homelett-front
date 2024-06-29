@@ -1,6 +1,7 @@
 export interface IProduct {
   id: number;
   title: string;
+  children?: IProduct[];
   extra: string;
   extra_link: string;
   extra_icon: string;
