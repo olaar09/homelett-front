@@ -3,15 +3,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Avatar, Button, Card, Input, Spin, Tag, message } from "antd";
 import APIUtil from "@/services/APIUtil";
-import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import AddTeamModal from "./components/AddTeamModal";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Str } from "@/utils/consts";
-import UpdateBankDrawer from "./components/UpdateBankDrawer";
-import { IBank } from "@/app/interfaces/IProduct";
+
 import { AxiosError } from "axios";
 import ACButton from "@/app/components/Button";
 import InputField from "@/app/components/InputField";
@@ -193,7 +189,7 @@ const SavedTeamMembers = () => {
                             placeHolder={`Enter amount`}
                             type={""}
                             name={"account_number"}
-                            value={formData.amount}
+                            value={`${formData.amount}`}
                             required
                             onChange={(val) =>
                               onSetFormData("amount", val.target.value)

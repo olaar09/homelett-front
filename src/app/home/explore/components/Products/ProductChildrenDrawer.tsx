@@ -27,16 +27,6 @@ import DropDownLabelItem from "./DropDownLabel";
 
 const payOptions: MenuProps["items"] = [
   {
-    key: "weekly",
-    label: (
-      <div className="flex items-center gap-x-3">
-        <Icon icon={"mdi:calendar-weekend"} />
-        <div>Weekly</div>
-      </div>
-    ),
-    disabled: false,
-  },
-  {
     key: "monthly",
     label: (
       <div className="flex items-center gap-x-3">
@@ -44,6 +34,16 @@ const payOptions: MenuProps["items"] = [
         <div> Monthly </div>
       </div>
     ),
+  },
+  {
+    key: "quarterly",
+    label: (
+      <div className="flex items-center gap-x-3">
+        <Icon icon={"mdi:calendar-weekend"} />
+        <div>3 months</div>
+      </div>
+    ),
+    disabled: false,
   },
 ];
 
@@ -70,12 +70,12 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
   /*   const handleItemClick = (item: any) => {
     onSubscribe({
       product_id: product!.id,
-      platforms: selectedPlatforms,
+      platforms: selectedProduct,
       interval: "",
     });
   }; */
 
-  const [selectedPlatforms, setSelectedPlatform] = useState<string[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<IProduct>();
 
   const apiUtil = new APIUtil();
   const isUltimate = product?.total_selection_count === Str.brands.length;
@@ -86,11 +86,12 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
   const [isComplete, setIsComplete] = useState(false);
 
   const platforms = product?.assigned_platforms.map((pl) => pl.platform);
+  const productChildren = product?.children ?? [];
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
     if (open) {
-      setSelectedPlatform([]);
+      setSelectedProduct(undefined);
       setIsNotAvailable(false);
       setIsComplete(false);
       setSelectedInterval("Weekly");
@@ -98,21 +99,21 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
   }, [open]);
 
   useEffect(() => {
-    if (selectedInterval && product) {
+    if (selectedInterval && selectedProduct) {
       const price =
         selectedInterval.toLowerCase() === "weekly"
-          ? Number(product?.price) * 1
-          : Number(product?.price) * 4.3;
+          ? Number(selectedProduct?.price) * 1
+          : Number(selectedProduct?.price) * 4.3;
 
       setDisplayedPrice(price);
     }
-  }, [product, selectedInterval]);
+  }, [selectedProduct, selectedInterval]);
 
   useEffect(() => {
     const displayedPrice =
       selectedInterval.toLowerCase() === "weekly"
-        ? Number(product?.price) * 1
-        : Number(product?.price) * 4.3;
+        ? Number(selectedProduct?.price) * 1
+        : Number(selectedProduct?.price) * 4.3;
 
     setDisplayedPrice(displayedPrice);
   }, [selectedInterval]);
@@ -124,11 +125,14 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
   const onSubmit = async (key: string) => {
     try {
       setLoading(true);
+      const platforms = (selectedProduct?.assigned_platforms ?? []).map(
+        (pl) => pl.platform.name
+      );
 
       await apiUtil.productService.buyProduct({
         product_id: product!.id.toString(),
         interval: key.toLowerCase(),
-        selected_platforms: selectedPlatforms,
+        selected_platforms: platforms,
       });
       setIsNotAvailable(false);
       setIsComplete(true);
@@ -155,71 +159,56 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
     }
   };
 
-  const onToggleService = (platform: any) => {
-    const index = selectedPlatforms.indexOf(platform);
-    if (index === -1) {
-      if (selectedPlatforms.length + 1 > product!.total_selection_count) {
-        message.warning(product?.total_selection);
-      } else {
-        setSelectedPlatform([...selectedPlatforms, platform]);
-      }
-    } else {
-      const cloned = [...selectedPlatforms];
-      cloned.splice(index, 1);
-      setSelectedPlatform(cloned);
-    }
+  const onToggleService = (product: IProduct) => {
+    setSelectedProduct(product);
   };
 
-  const calcHeight =
-    window.screen.availHeight - (window.screen.availHeight / 100) * 5;
+  const calcHeight = window.screen.availHeight;
+  // window.screen.availHeight - (window.screen.availHeight / 100) * 5;
 
-  const computedHeight = calcHeight >= 633.65 ? 633.65 : calcHeight;
+  const computedHeight = calcHeight; //calcHeight >= 633.65 ? 633.65 : calcHeight;
   const brands = (product?.assigned_platforms ?? []).map(
     (assigned) => assigned.platform.icon
   );
-
-  const resetIsNotAvailable = () => {
-    setIsNotAvailable(false);
-  };
 
   const onForceMonthly = async () => {
     await onSubmit("monthly");
   };
 
   const getOptions = () => {
-    const price = product?.price ?? 0;
+    const price = selectedProduct?.price ?? 0;
 
-    return authContext.currentUser?.is_return_user
-      ? [
-          {
-            key: "Weekly",
-            label: (
-              <div className="flex items-center gap-x-3">
-                <Icon icon={"mdi:calendar-weekend"} />
-                <DropDownLabelItem label="Weekly" amount={price} />
-              </div>
-            ),
-          },
-          {
-            key: "Monthly",
-            label: (
-              <div className="flex items-center gap-x-3">
-                <Icon icon={"ic:baseline-calendar-month"} />
-                <DropDownLabelItem label="Monthly" amount={price * 4.3} />
-              </div>
-            ),
-          },
-          {
-            key: "Yearly",
-            label: (
-              <div className="flex items-center gap-x-3">
-                <Icon icon={"ic:baseline-calendar-month"} />
-                <DropDownLabelItem label="Yearly" amount={price * 52.2} />
-              </div>
-            ),
-          },
-        ]
-      : payOptions;
+    return [
+      {
+        disabled: true,
+        key: "Weekly",
+        label: (
+          <div className="flex items-center gap-x-3">
+            {/*     <Icon icon={"mdi:calendar-weekend"} /> */}
+            <Icon icon={"streamline:warning-triangle-solid"} />
+            <DropDownLabelItem label="Weekly" amount={price} />
+          </div>
+        ),
+      },
+      {
+        key: "Monthly",
+        label: (
+          <div className="flex items-center gap-x-3">
+            <Icon icon={"ic:baseline-calendar-month"} />
+            <DropDownLabelItem label="Monthly" amount={price * 4.3} />
+          </div>
+        ),
+      },
+      {
+        key: "Quarterly",
+        label: (
+          <div className="flex items-center gap-x-3">
+            <Icon icon={"ic:baseline-calendar-month"} />
+            <DropDownLabelItem label="3 months" amount={price * 12.9} />
+          </div>
+        ),
+      },
+    ];
   };
 
   const utils = new UtilService();
@@ -231,10 +220,7 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
           !isNotAvailable && (
             <div className="flex flex-end justify-end items-center">
               <Dropdown
-                disabled={
-                  selectedPlatforms.length <
-                  (product?.total_selection_count ?? 0)
-                }
+                disabled={!selectedProduct}
                 menu={{ items: getOptions(), onClick: onMenuClick }}
                 placement="bottom"
               >
@@ -269,17 +255,20 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
 
             <div className="mt-4 mb-1 px-3 flex justify-between items-center w-full">
               <span className="text-lg">{product?.title}</span>
-              <span className=" text-foreground-secondary">
-                {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")} /{" "}
-                <Switch
-                  checkedChildren="Weekly"
-                  unCheckedChildren="Monthly"
-                  defaultChecked
-                  onChange={(checked) =>
-                    setSelectedInterval(checked ? "Weekly" : "Monthly")
-                  }
-                />
-              </span>
+              {selectedProduct && (
+                <span className=" text-foreground-secondary">
+                  {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")}{" "}
+                  /{" "}
+                  <Switch
+                    checkedChildren="Weekly"
+                    unCheckedChildren="Monthly"
+                    defaultChecked
+                    onChange={(checked) =>
+                      setSelectedInterval(checked ? "Weekly" : "Monthly")
+                    }
+                  />
+                </span>
+              )}
               {/*  <span className=" text-foreground-secondary text-sm">
                 From{" "}
                 {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")} /{" "}
@@ -313,33 +302,43 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
 
               <div className="flex flex-col items-start mt-4">
                 <span className="text-block text-xs">
-                  {product?.total_selection}
+                  Select product and make payment
                 </span>
               </div>
             </div>
 
             <div className="mt-3 flex flex-col px-3 w-full gap-y-2">
-              {platforms!.map((pl) => (
-                <div
-                  onClick={() => onToggleService(pl.name)}
-                  className="w-full flex justify-between items-center gap-x-3 h-10 cursor-pointer hover:bg-slate-100 transition-all duration-100 rounded-md"
-                >
-                  <div className="flex items-center gap-x-3">
-                    <img src={pl.icon} className="w-6 h-6" />
-                    <span className="text-sm">{pl.name}</span>
-                  </div>
+              {productChildren!.map((productChild) => {
+                const platforms = (productChild?.assigned_platforms ?? []).map(
+                  (pl) => pl.platform
+                );
 
-                  <div>
-                    <Icon
-                      icon={
-                        selectedPlatforms.includes(pl.name)
-                          ? "icon-park-solid:check-one"
-                          : "gg:radio-check"
-                      }
-                    />
+                const platform = platforms.length > 0 ? platforms[0] : null;
+                const platformName = platform?.name;
+                const platformIcon = platform?.icon;
+
+                return (
+                  <div
+                    onClick={() => onToggleService(productChild)}
+                    className="w-full flex justify-between items-center gap-x-3 h-10 cursor-pointer hover:bg-slate-100 transition-all duration-100 rounded-md"
+                  >
+                    <div className="flex items-center gap-x-3">
+                      <img src={platformIcon} className="w-6 h-6" />
+                      <span className="text-sm">{platformName}</span>
+                    </div>
+
+                    <div>
+                      <Icon
+                        icon={
+                          selectedProduct?.title == productChild.title
+                            ? "icon-park-solid:check-one"
+                            : "gg:radio-check"
+                        }
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

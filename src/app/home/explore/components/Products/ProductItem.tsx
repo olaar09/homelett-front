@@ -33,6 +33,9 @@ const ProductItem = ({
     "en-NG",
     "NGN"
   );
+
+  const productChildren = product.children ?? [];
+
   return (
     <div
       onClick={() => openProduct()}
@@ -49,6 +52,7 @@ const ProductItem = ({
             loading={false}
             isSelected={false}
             icon={""}
+            type={"default"}
           />
         </div>
         <div className="flex flex-col mt-1">
@@ -64,10 +68,11 @@ const ProductItem = ({
               </Tag>
             )}
           </div>
-
           <span className="text-xs text-foreground-secondary">
-            {weekPrice} weekly ({monthPrice} Monthly){" "}
-          </span>
+            {productChildren.length > 0
+              ? `From ${weekPrice} weekly`
+              : ` ${weekPrice} weekly (${monthPrice} Monthly)`}
+          </span>{" "}
         </div>
 
         <div className="bottom-1 absolute">

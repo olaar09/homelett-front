@@ -441,7 +441,7 @@ const Nav: React.FC<any> = ({ children }) => {
                       >
                         <NavMenu
                           path="/home/credentials_expired"
-                          icon={"i-ri:pass-expired-line"}
+                          icon={"ri:pass-expired-line"}
                           title="Credential expired"
                         />
                       </Link>
@@ -451,7 +451,7 @@ const Nav: React.FC<any> = ({ children }) => {
                       <Link className="w-full" href={"/home/platform_subs/3"}>
                         <NavMenu
                           path="/home/platform_subs/3"
-                          icon={"i-mingcute:spotify-line"}
+                          icon={"mingcute:spotify-line"}
                           title="Spotify invitees"
                         />
                       </Link>
@@ -462,7 +462,7 @@ const Nav: React.FC<any> = ({ children }) => {
                       <Link className="w-full" href={"/home/platform_subs/1"}>
                         <NavMenu
                           path="/home/platform_subs/1"
-                          icon={"i-ant-design:youtube-outlined"}
+                          icon={"ant-design:youtube-outlined"}
                           title="Youtube invitees"
                         />
                       </Link>
