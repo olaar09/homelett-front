@@ -226,7 +226,7 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
         {isComplete && <OrderComplete loading={loading} onClose={onClose} />}
 
         {!isNotAvailable && !isComplete && product && (
-          <div className="flex flex-col items-start py-6">
+          <div className="flex flex-col items-start py-0">
             <div className=" px-6">
               <Brands size="small" brands={brands} />
             </div>
@@ -262,14 +262,7 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
 
             <div className="px-3  max-h-80 overflow-y-scroll mt-2">
               <span className="block">Terms of use</span>
-              <div className="text-xs gap-y-2 text-gray-500 flex flex-col pt-1">
-                {!isUltimate && (
-                  <p>
-                    {" "}
-                    You may select only {product?.total_selection_count} of the
-                    services presented in the options.
-                  </p>
-                )}
+              <div className="text-xs gap-y-2 text-gray-500 flex flex-col pt-0">
                 <p>
                   You must not share the credentials with anyone, if sharing is
                   detected, you will be banned immediately forever. Sharing
