@@ -343,6 +343,8 @@ const CredentialsTable: React.FC<{
             color = "text-red-600";
           } else if (it === "Revoke") {
             color = "text-red-600";
+          } else if (it === "Update password") {
+            color = "text-violet-600";
           }
 
           return {

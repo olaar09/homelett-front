@@ -13,6 +13,8 @@ import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { useRouter } from "next/navigation";
 import CredentialsTable from "../_components/CredentialsTable";
 import RejectCredentialModal from "./CredentialRejectModal";
+import ChangeCredentialPasswordModal from "./CredentialPasswordModal";
+import { ICredential } from "@/app/interfaces/IRegisterRequest";
 const { Meta } = Card;
 
 const HeaderItem = ({
@@ -44,6 +46,7 @@ const CredentialRequests = () => {
   >(undefined);
 
   const [openReject, setOpenReject] = useState(false);
+  const [openUpdatePassword, setOpenUpdatePassword] = useState(false);
   const [credentialRequestsList, setCredentialRequestsList] = useState([]);
   const [selectedCredential, setSelectedCredential] = useState<string | null>(
     null
@@ -103,11 +106,30 @@ const CredentialRequests = () => {
     if (split[3] === "Revoke") {
       setOpenReject(true);
     }
+    if (split[3] === "Update password") {
+      setOpenUpdatePassword(true);
+    }
   };
 
   const onCloseRejectModal = (selectedCredential?: string | null) => {
     setOpenReject(false);
     hideCredential(selectedCredential);
+  };
+
+  const onCloseUpdatePasswordModal = (
+    password?: string,
+    selectedCredential?: string | null
+  ) => {
+    setOpenUpdatePassword(false);
+    if (selectedCredential) {
+      const index = credentialRequestsList.findIndex(
+        (cr: any) => cr.id == selectedCredential
+      );
+      console.log("oijwndijwqd coiwcoiedsnx ejiondskm", index);
+      (credentialRequestsList[index] as any).password = password;
+      setCredentialRequestsList([...credentialRequestsList]);
+    }
+    // hideCredential(selectedCredential);
   };
 
   const hideCredential = (selectedCredential?: string | null) => {
@@ -132,6 +154,17 @@ const CredentialRequests = () => {
         handleOk={onCloseRejectModal}
       />
 
+      <ChangeCredentialPasswordModal
+        open={openUpdatePassword}
+        selectedCredential={
+          (credentialRequestsList ?? []).find(
+            (cr: ICredential) => `${cr.id}` == selectedCredential
+          )!
+        }
+        handleCancel={onCloseUpdatePasswordModal}
+        handleOk={onCloseUpdatePasswordModal}
+      />
+
       {(currentAuth.loading ||
         loadingCredentialRequests ||
         !credentialRequests) && (
@@ -151,7 +184,7 @@ const CredentialRequests = () => {
         <div className="h-screen px-7 py-0 flex flex-col gap-y-4">
           <CredentialsTable
             title="Manage credentials"
-            actions={["Revoke"]}
+            actions={["Revoke", "Update password"]}
             onSelect={openModal}
             data={credentialRequestsList}
           />

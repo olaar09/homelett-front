@@ -91,6 +91,23 @@ class ProductAPIService {
     }
   }
 
+  async updateCredentialPassword(data: {
+    credential_request_id: string;
+    password: string;
+    invite_link: string;
+    email: string;
+  }): Promise<string> {
+    try {
+      const response = await this.apiService.put<{ data: any }>(
+        `/credentials_request/update_credential_password`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async acceptCredential(data: {
     credential_id: string;
     next_billing: string;

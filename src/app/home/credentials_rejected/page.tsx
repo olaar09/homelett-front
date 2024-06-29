@@ -11,7 +11,6 @@ import { AuthContext } from "@/contexts/AuthContext";
 import LoadingOverlay from "@/app/components/LoadingOverlay";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { useRouter } from "next/navigation";
-import ApproveCredentialModal from "./CredentialApproveModal";
 import CredentialsTable from "../_components/CredentialsTable";
 import { AxiosError } from "axios";
 import RejectCredentialModal from "./CredentialRejectModal";
@@ -137,14 +136,6 @@ const CredentialRequests = () => {
 
   return (
     <main className="h-full bg-background-thin min-h-screen flex flex-col w-full">
-      <ApproveCredentialModal
-        open={openApprove}
-        selectedPlatform={selectedPlatform}
-        selectedCredential={selectedCredential}
-        handleCancel={onCloseModal}
-        handleOk={onCloseModal}
-      />
-
       <RejectCredentialModal
         open={openReject}
         selectedPlatform={selectedPlatform}
