@@ -9,6 +9,7 @@ export interface IProduct {
   type: string;
   group_count: number;
   total_selection: string;
+  minimum_duration_month?: number;
   total_selection_count: number;
   price: number;
   platform_ids: number;

@@ -155,33 +155,53 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
 
   const getOptions = () => {
     const price = selectedProduct?.price ?? 0;
-
+    const minimumDuration = selectedProduct?.minimum_duration_month ?? 0;
     return [
       {
-        disabled: true,
+        disabled: minimumDuration > 0,
         key: "Weekly",
         label: (
           <div className="flex items-center gap-x-3">
             {/*     <Icon icon={"mdi:calendar-weekend"} /> */}
-            <Icon icon={"streamline:warning-triangle-solid"} />
+            <Icon
+              icon={
+                minimumDuration > 0
+                  ? "streamline:warning-triangle-solid"
+                  : "mdi:calendar-weekend"
+              }
+            />
             <DropDownLabelItem label="Weekly" amount={price} />
           </div>
         ),
       },
       {
+        disabled: minimumDuration > 1,
         key: "Monthly",
         label: (
           <div className="flex items-center gap-x-3">
-            <Icon icon={"ic:baseline-calendar-month"} />
+            <Icon
+              icon={
+                minimumDuration > 1
+                  ? "streamline:warning-triangle-solid"
+                  : "ic:baseline-calendar-month"
+              }
+            />
             <DropDownLabelItem label="Monthly" amount={price * 4.3} />
           </div>
         ),
       },
       {
+        disabled: minimumDuration > 3,
         key: "Quarterly",
         label: (
           <div className="flex items-center gap-x-3">
-            <Icon icon={"ic:baseline-calendar-month"} />
+            <Icon
+              icon={
+                minimumDuration > 3
+                  ? "streamline:warning-triangle-solid"
+                  : "ic:baseline-calendar-month"
+              }
+            />
             <DropDownLabelItem label="3 months" amount={price * 12.9} />
           </div>
         ),
