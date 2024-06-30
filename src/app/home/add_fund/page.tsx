@@ -189,7 +189,7 @@ const SavedTeamMembers = () => {
                             placeHolder={`Enter amount`}
                             type={""}
                             name={"account_number"}
-                            value={`${formData.amount}`}
+                            value={formData.amount}
                             required
                             onChange={(val) =>
                               onSetFormData("amount", val.target.value)
