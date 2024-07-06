@@ -22,7 +22,7 @@ const OrderComplete = ({ onClose, loading }: any) => {
       >
         You too can own a website like this and <br /> make millions monthly 💸💸💸
       </p>
-      <p className="text-center"> Simply join our reseller program and we will setup and host your website for you. (T&C applies)</p>
+      <p className="text-center"> Simply join our reseller program and we will setup and host a copy of this website for you. <br /> (T&C applies)</p>
 
       <div className="flex items-center flex-row mt-2 justify-center gap-y-4 gap-x-2 px-5">
         <Button
