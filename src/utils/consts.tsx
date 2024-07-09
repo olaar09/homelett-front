@@ -48,7 +48,7 @@ export const Str = {
       pricingAmount: 4600,
       pricingName: "Sport + Movie Plan",
 
-      earning: 35,
+      earning: 25,
       icon: "/logos/sm.png",
     },
     {
@@ -64,7 +64,7 @@ export const Str = {
       label: "Netflix",
       pricingName: "Premium plan",
       pricingAmount: 5000,
-      earning: 35,
+      earning: 25,
       icon: "/logos/nt.png",
     },
     {
