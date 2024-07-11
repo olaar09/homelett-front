@@ -469,6 +469,28 @@ const Nav: React.FC<any> = ({ children }) => {
                     )}
 
                   {authContext.currentUser &&
+                    authContext.currentUser!.is_admin === 1 && (
+                      <Link className="w-full" href={"/home/platform_subs/2"}>
+                        <NavMenu
+                          path="/home/platform_subs/2"
+                          icon={"ant-design:youtube-outlined"}
+                          title="Netflix"
+                        />
+                      </Link>
+                    )}
+
+                {authContext.currentUser &&
+                    authContext.currentUser!.is_admin === 1 && (
+                      <Link className="w-full" href={"/home/platform_subs/5"}>
+                        <NavMenu
+                          path="/home/platform_subs/5"
+                          icon={"ant-design:youtube-outlined"}
+                          title="Prime video"
+                        />
+                      </Link>
+                    )}
+
+                  {authContext.currentUser &&
                     !authContext.currentUser?.is_admin && (
                       <Link className="w-full" href={"/home/connections"}>
                         <NavMenu
