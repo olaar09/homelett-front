@@ -1,9 +1,6 @@
 export const Str = {
   earnChannel: "https://t.me/+QvfqIlQfQPEzZDM0",
-
   whatsappHelp: "https://t.me/BubbleAfrica",
-  whatsapp:
-    "https://api.whatsapp.com/send?phone=2347018135800&text=I%20want%20to%20start%20a%20subscription",
   CV_TEMPLATES: {
     CV_1: {
       key: "CV_1",
