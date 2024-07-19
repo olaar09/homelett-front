@@ -14,9 +14,8 @@ const Brands = ({
           <img
             src={brand}
             alt={`brand-${index}`}
-            className={`flex w-auto ${
-              size == "small" ? "h-5" : "smaller" ? "h-3" : "h-8"
-            } bg-[#2A2A2A] rounded-full`}
+            className={`flex w-auto ${size == "small" ? "h-5" : "smaller" ? "h-4" : "h-8"
+              } bg-[#2A2A2A] rounded-full`}
           />
         </div>
       ))}

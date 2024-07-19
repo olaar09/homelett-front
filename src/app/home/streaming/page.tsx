@@ -26,8 +26,6 @@ import UtilityTab from "./components/UtilityTab";
 import CourseTab from "./components/CourseTab/CourseTab";
 import TradingTab from "./components/TradingTab";
 import ProductDrawer from "./components/Products/ProductDrawer";
-import LoadingCard from "../_components/LoadingCard";
-import HomeMenu from "../_components/HomeMenu";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -184,7 +182,7 @@ const SavedTeamMembers = () => {
         }
         onClose={() => setOpenNotice(false)}
       />
-      <div className=" h-screen overflow-y-auto overflow-hidden">
+      <div className=" h-screen ">
         <AddWorkflowModal open={openAddModal} onCancel={handleCloseTeam} />
         {loadingPage && (
           <div className="h-screen   flex flex-col justify-center items-center">
@@ -202,7 +200,13 @@ const SavedTeamMembers = () => {
         {!loadingPage && (
           <>
             <ExploreHeader />
+
             <Highlight userSubs={userSubs} />
+            {/* <Banner
+              onClick={() => {
+                setOpenBannerProduct(true);
+              }}
+            /> */}
           </>
         )}
 
@@ -217,19 +221,14 @@ const SavedTeamMembers = () => {
           </div>
         )}
 
-        <div className="px-3 mt-8 h-3/4  flex flex-col  flex-grow overflow-y-auto pb-20">
+        <div className="px-3 mt-8 h-1/2 flex flex-col ">
           <span className="text-xs text-foreground-secondary">
             Available services
           </span>
 
-          {(loadingProducts || loadingPage) &&
-            <LoadingCard />
-          }
+          <div>
 
-          {!loadingProducts && !loadingPage &&
-            <HomeMenu />
-          }
-
+          </div>
           {/*    <Spin spinning={loadingProducts}>
             <Tabs
               defaultActiveKey="1"
