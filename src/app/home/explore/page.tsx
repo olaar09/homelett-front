@@ -29,15 +29,21 @@ import ProductDrawer from "./components/Products/ProductDrawer";
 import LoadingCard from "../_components/LoadingCard";
 import HomeMenu from "../_components/HomeMenu";
 import { useRouter } from "next/navigation";
+import SingleProductDrawer from "./components/SingleProductDrawer";
 
 const ExplorePage = () => {
   const authContext = useContext(AuthContext);
   const [openBannerProduct, setOpenBannerProduct] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
+
+  const apiUtils = new APIUtil();
+  const utilsService = new UtilService();
   const router = useRouter()
 
-  const loadingPage = authContext.loading
+
+  const loadingPage = authContext.loading;
   const userSubs = authContext.currentUser?.active_subscriptions;
-  const bannerProduct = authContext.currentUser?.bannerProduct;
+  const homeProducts = authContext.currentUser?.home_products ?? [];
 
   const onTapMenu = (item: any) => {
     switch (item.key) {
@@ -45,8 +51,10 @@ const ExplorePage = () => {
         router.push('/home/streaming')
         break;
       case '/yt_automation':
+        setSelectedProduct({ tag: '', extra: '', extra_icon: '', price: 500, title: 'Youtube automation' })
         break;
       case '/forex':
+        setSelectedProduct({ tag: '', extra: '', extra_icon: '', price: 500, title: 'Forex profit' })
         break;
       case '/smm':
         break;
@@ -62,15 +70,12 @@ const ExplorePage = () => {
 
   return (
     <>
-      {bannerProduct && (
-        <ProductDrawer
-          product={bannerProduct}
-          open={openBannerProduct}
-          onClose={function (): void {
-            setOpenBannerProduct(false);
-          }}
-        />
-      )}
+      <SingleProductDrawer
+        product={selectedProduct}
+        open={selectedProduct != null}
+        onClose={() => setSelectedProduct(null)}
+      />
+
       <div className=" h-screen overflow-y-auto overflow-hidden">
         {loadingPage && (
           <div className="h-screen   flex flex-col justify-center items-center">
@@ -102,7 +107,7 @@ const ExplorePage = () => {
           }
 
           {!loadingPage &&
-            <HomeMenu onClick={(item: any) => onTapMenu(item)}
+            <HomeMenu products={homeProducts} onClick={(item: any) => onTapMenu(item)}
             />
           }
         </div>
@@ -112,3 +117,14 @@ const ExplorePage = () => {
 };
 
 export default ExplorePage;
+
+const Banner = ({ onClick }: { onClick: () => void }) => {
+  return (
+    <div onClick={onClick} className="w-full px-4 rounded-lg h-[4rem] mt-4">
+      <img
+        className="w-full h-full object-cover rounded-lg"
+        src="/banners/showmax.png"
+      />
+    </div>
+  );
+};

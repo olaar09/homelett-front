@@ -39,6 +39,7 @@ export interface IAuthRequest {
   billingActive?: boolean;
   billingCurrentPlan?: IBilling;
   active_subscriptions?: ISubscription[];
+  home_products: IProduct[]
   paymentLink?: string;
   token?: string;
   subscriptions: any[];
