@@ -22,6 +22,7 @@ import { IProduct } from "@/app/interfaces/IProduct";
 import { AuthContext } from "@/contexts/AuthContext";
 import Link from "next/link";
 import DropDownLabelItem from "./DropDownLabel";
+import { useRouter } from "next/navigation";
 
 /* const payOptions: MenuProps["items"] = [
   {
@@ -66,6 +67,7 @@ interface DrawerProps {
   }) => void; */
 }
 
+
 const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   /*   const handleItemClick = (item: any) => {
     onSubscribe({
@@ -75,6 +77,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
     });
   }; */
 
+  const router = useRouter();
   const [selectedPlatforms, setSelectedPlatform] = useState<string[]>([]);
 
   const apiUtil = new APIUtil();
@@ -106,8 +109,8 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
       selectedInterval.toLowerCase() === "weekly"
         ? Number(product?.price) * 1
         : selectedInterval.toLowerCase() === "monthly"
-        ? Number(product?.price) * 4.3
-        : Number(product?.price) * 8;
+          ? Number(product?.price) * 4.3
+          : Number(product?.price) * 8;
 
     setDisplayedPrice(displayedPrice);
   }, [selectedInterval]);
@@ -122,15 +125,16 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
       });
       onClose();
       authContext.refreshProfile();
+      message.success('Purchase successful')
+      router.push('/home/explore')
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error?.response?.data?.reason);
 
         message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
+          `${error?.response?.data?.message ??
+          error?.response?.data?.reason ??
+          "Unable to complete request"
           }`
         );
       } else {

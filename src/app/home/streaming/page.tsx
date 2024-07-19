@@ -26,6 +26,7 @@ import UtilityTab from "./components/UtilityTab";
 import CourseTab from "./components/CourseTab/CourseTab";
 import TradingTab from "./components/TradingTab";
 import ProductDrawer from "./components/Products/ProductDrawer";
+import Link from "next/link";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -146,42 +147,6 @@ const SavedTeamMembers = () => {
         </div>
       )}
  */}
-      <NoticeDrawers
-        open={openNotice}
-        message={
-          <span className="text-center">
-            Dear user, earlier today, we discovered users get double the amount
-            when they make a new deposit.
-            <br /> <br />
-            unfortunately, most users decided to keep this money and buy airtime
-            and streaming plans with it causing us great losses.
-            <br /> <br />
-            To capture back our losses, we have began to block all users that
-            benefitted from this and revoke the login credentials for all
-            streaming product.
-            <br /> <br />
-            If your are seeing this message, Your account has been flagged as
-            one of those users. you need to add money back to refund us for the
-            excess of <br />
-            {
-              <b>
-                {" "}
-                {utilsService.formatMoney(
-                  `${balanceRequired * 100}`,
-                  "en-NG",
-                  "NGN"
-                )}
-              </b>
-            }
-            , then your plans will be restored.
-            <br /> <br />
-            If you believe your account is flagged in error, we are sorry.
-            kindly send us your email and proof that all the money spent so far
-            were deposited legitimately
-          </span>
-        }
-        onClose={() => setOpenNotice(false)}
-      />
       <div className=" h-screen ">
         <AddWorkflowModal open={openAddModal} onCancel={handleCloseTeam} />
         {loadingPage && (
@@ -197,19 +162,6 @@ const SavedTeamMembers = () => {
           </div>
         )}
 
-        {!loadingPage && (
-          <>
-            <ExploreHeader />
-
-            <Highlight userSubs={userSubs} />
-            {/* <Banner
-              onClick={() => {
-                setOpenBannerProduct(true);
-              }}
-            /> */}
-          </>
-        )}
-
         {!loadingPage && productList && productList.length < 1 && (
           <div className="h-1/2 mt-10   flex flex-col justify-center items-center">
             {" "}
@@ -221,15 +173,18 @@ const SavedTeamMembers = () => {
           </div>
         )}
 
-        <div className="px-3 mt-8 h-1/2 flex flex-col ">
-          <span className="text-xs text-foreground-secondary">
-            Available services
+        <div className="px-3 mt-2  flex flex-col ">
+          <Link href={'/home/explore'}>
+            <div className="flex items-center gap-x-2 hover:bg-gray-50  rounded ">
+              <Icon icon={'ion:arrow-back-outline'} />
+              <span className="font-bold">  Available streaming services</span>
+            </div>
+          </Link>
+
+          <span className="text-xs block mt-4 text-foreground-secondary">
+
           </span>
-
-          <div>
-
-          </div>
-          {/*    <Spin spinning={loadingProducts}>
+          <Spin spinning={loadingProducts}>
             <Tabs
               defaultActiveKey="1"
               items={tabs.map((tab, i) => {
@@ -291,7 +246,7 @@ const SavedTeamMembers = () => {
                 };
               })}
             />
-          </Spin> */}
+          </Spin>
         </div>
       </div>
     </>

@@ -60,11 +60,11 @@ const homeMenuItems = [
         </div>
     }
 ]
-const HomeMenu = () => {
+const HomeMenu = ({ onClick }: { onClick: (item: any) => void }) => {
     return (
         <div className=" py-4    grid grid-cols-2">
             {homeMenuItems.map((item) => {
-                return <div className="h-40 0 py-3  px-2 flex flex-col ring-[0.2px]">
+                return <div onClick={() => onClick(item)} className="h-40 0 py-3  px-2 flex flex-col border-[0.2px]">
                     <div>
                         {item.avatar}
                     </div>

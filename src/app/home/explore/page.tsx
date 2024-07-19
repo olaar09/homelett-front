@@ -28,6 +28,7 @@ import TradingTab from "./components/TradingTab";
 import ProductDrawer from "./components/Products/ProductDrawer";
 import LoadingCard from "../_components/LoadingCard";
 import HomeMenu from "../_components/HomeMenu";
+import { useRouter } from "next/navigation";
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
@@ -39,6 +40,7 @@ const SavedTeamMembers = () => {
   const [loading, setLoading] = useState(false);
   const apiUtils = new APIUtil();
   const utilsService = new UtilService();
+  const router = useRouter()
 
   useEffect(() => {
     const finance = authContext.currentUser?.finance?.balance ?? 0;
@@ -127,6 +129,33 @@ const SavedTeamMembers = () => {
   ];
   const balanceRequired = authContext.currentUser?.finance?.balance ?? 0;
   const bannerProduct = authContext.currentUser?.bannerProduct;
+
+  const onTapMenu = (item: any) => {
+    switch (item.key) {
+      case '/home/streaming':
+        router.push('/home/streaming')
+        break;
+      case '/yt_automation':
+        alert('open ooo')
+        break;
+      case '/forex':
+        alert('open ooo')
+        break;
+      case '/smm':
+        alert('open ooo')
+        break;
+      case '/phone':
+        alert('open ooo')
+        break;
+      case '/skill':
+        alert('open ooo')
+        break;
+      default:
+        break;
+    }
+  }
+
+
   return (
     <>
       {bannerProduct && (
@@ -227,7 +256,8 @@ const SavedTeamMembers = () => {
           }
 
           {!loadingProducts && !loadingPage &&
-            <HomeMenu />
+            <HomeMenu onClick={(item: any) => onTapMenu(item)}
+            />
           }
 
           {/*    <Spin spinning={loadingProducts}>

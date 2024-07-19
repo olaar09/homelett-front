@@ -1,12 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
   Drawer,
-  List,
-  Button,
   Checkbox,
-  GetProp,
-  Dropdown,
-  MenuProps,
   message,
   Switch,
   Select,
@@ -21,9 +16,11 @@ import { IDataPlan, IProduct } from "@/app/interfaces/IProduct";
 import { AuthContext } from "@/contexts/AuthContext";
 import InputField from "@/app/components/InputField";
 import ACButton from "@/app/components/Button";
+import { useRouter } from "next/navigation";
 
 const buyAirtimeOption = "Buy Airtime";
 const buyDataOption = "Buy Mobile data";
+const router = useRouter();
 
 // Define types for the component props
 interface DrawerProps {
@@ -87,10 +84,9 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
         console.log(error?.response?.data?.reason);
 
         message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
+          `${error?.response?.data?.message ??
+          error?.response?.data?.reason ??
+          "Unable to complete request"
           }`
         );
       } else {
@@ -188,7 +184,7 @@ const AirtimeProductDrawer: React.FC<DrawerProps> = ({
                   checkedChildren={"Switch to Airtime"}
                   unCheckedChildren={"Switch to Mobile data"}
                   defaultChecked
-                  onChange={(checked) => {}}
+                  onChange={(checked) => { }}
                 />
               </span>
             </div>

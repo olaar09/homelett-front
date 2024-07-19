@@ -24,6 +24,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import WeeklyWarning from "./WeeklyWarning";
 import OrderComplete from "./OrderComplete";
 import DropDownLabelItem from "./DropDownLabel";
+import { useRouter } from "next/navigation";
 
 const payOptions: MenuProps["items"] = [
   {
@@ -83,6 +84,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
 
   const platforms = product?.assigned_platforms.map((pl) => pl.platform);
   const authContext = useContext(AuthContext);
+  const router = useRouter();
 
   useEffect(() => {
     if (open) {
@@ -127,8 +129,10 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
         selected_platforms: selectedPlatforms,
       });
       setIsNotAvailable(false);
-      setIsComplete(true);
+      // setIsComplete(true);
       authContext.refreshProfile();
+      message.success('Purchase successful')
+      router.push('/home/explore')
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error?.response?.data?.reason);
@@ -136,10 +140,9 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
           setIsNotAvailable(true);
         } else {
           message.error(
-            `${
-              error?.response?.data?.message ??
-              error?.response?.data?.reason ??
-              "Unable to complete request"
+            `${error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
             }`
           );
         }
@@ -187,34 +190,34 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
 
     return authContext.currentUser?.is_return_user
       ? [
-          {
-            key: "Weekly",
-            label: (
-              <div className="flex items-center gap-x-3">
-                <Icon icon={"mdi:calendar-weekend"} />
-                <DropDownLabelItem label="Weekly" amount={price} />
-              </div>
-            ),
-          },
-          {
-            key: "Monthly",
-            label: (
-              <div className="flex items-center gap-x-3">
-                <Icon icon={"ic:baseline-calendar-month"} />
-                <DropDownLabelItem label="Monthly" amount={price * 4.3} />
-              </div>
-            ),
-          },
-          {
-            key: "Yearly",
-            label: (
-              <div className="flex items-center gap-x-3">
-                <Icon icon={"ic:baseline-calendar-month"} />
-                <DropDownLabelItem label="Yearly" amount={price * 52.2} />
-              </div>
-            ),
-          },
-        ]
+        {
+          key: "Weekly",
+          label: (
+            <div className="flex items-center gap-x-3">
+              <Icon icon={"mdi:calendar-weekend"} />
+              <DropDownLabelItem label="Weekly" amount={price} />
+            </div>
+          ),
+        },
+        {
+          key: "Monthly",
+          label: (
+            <div className="flex items-center gap-x-3">
+              <Icon icon={"ic:baseline-calendar-month"} />
+              <DropDownLabelItem label="Monthly" amount={price * 4.3} />
+            </div>
+          ),
+        },
+        {
+          key: "Yearly",
+          label: (
+            <div className="flex items-center gap-x-3">
+              <Icon icon={"ic:baseline-calendar-month"} />
+              <DropDownLabelItem label="Yearly" amount={price * 52.2} />
+            </div>
+          ),
+        },
+      ]
       : payOptions;
   };
 
