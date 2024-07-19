@@ -46,21 +46,24 @@ const ExplorePage = () => {
   const homeProducts = authContext.currentUser?.home_products ?? [];
 
   const onTapMenu = (item: any) => {
-    switch (item.key) {
-      case '/home/streaming':
+    switch (item.tag) {
+      case 'streaming':
         router.push('/home/streaming')
         break;
-      case '/yt_automation':
-        setSelectedProduct({ tag: '', extra: '', extra_icon: '', price: 500, title: 'Youtube automation' })
+      case 'yt_automation':
+      case 'forex':
+        setSelectedProduct(item)
         break;
-      case '/forex':
-        setSelectedProduct({ tag: '', extra: '', extra_icon: '', price: 500, title: 'Forex profit' })
+      case 'skills':
+      case 'utilities':
+        router.push('/home/streaming')
+        router.push('/home/streaming')
         break;
-      case '/smm':
+      case 'smm':
+        message.info('coming soon..')
         break;
       case '/phone':
-        break;
-      case '/skill':
+        message.info('coming soon..')
         break;
       default:
         break;
