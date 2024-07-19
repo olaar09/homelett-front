@@ -5,35 +5,21 @@ import { Spin, Tabs, Tag, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
-import { HeaderItem } from "../_components/PageHeaderItem";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import AddWorkflowModal from "../_components/AddWorkflowModal";
-import ExploreHeader from "./components/Header";
-
-import { AndroidOutlined, AppleOutlined } from "@ant-design/icons";
-import Brands from "@/app/components/Brands";
 import Chip from "@/app/components/Chip";
-import { Str } from "@/utils/consts";
-import ProductItem from "./components/Products/ProductItem";
-import EntertainmentTab from "./components/EntertainmentTab";
-import EarnTab from "./components/EarnTab";
-import { IProduct } from "@/app/interfaces/IProduct";
 
+import { IProduct } from "@/app/interfaces/IProduct";
 import UtilService from "@/services/UtilService";
 import UtilityTab from "./components/UtilityTab";
-import TradingTab from "./components/TradingTab";
+import CourseTab from "./components/CourseTab/CourseTab";
 import ProductDrawer from "./components/Products/ProductDrawer";
 import Link from "next/link";
-import CourseTab from "../streaming/components/CourseTab/CourseTab";
 
-const SavedTeamMembers = () => {
+const DigitalPage = () => {
   const authContext = useContext(AuthContext);
   const [openAddModal, setOpenAddModal] = useState(false);
-
-  const utilsService = new UtilService();
-  const [loading, setLoading] = useState(false);
   const [openNotice, setOpenNotice] = useState(false);
-  const [openBannerProduct, setOpenBannerProduct] = useState(false);
 
   const apiUtils = new APIUtil();
 
@@ -94,10 +80,6 @@ const SavedTeamMembers = () => {
   const userSubs = authContext.currentUser?.active_subscriptions;
   const waitingProducts = loadingPage || !productList;
 
-  const streamProducts = (productList ?? []).filter(
-    (product: IProduct) => product.type === "stream"
-  );
-
   const utilityProducts = (productList ?? []).filter(
     (product: IProduct) => product.type === "utility"
   );
@@ -107,33 +89,12 @@ const SavedTeamMembers = () => {
   );
 
   const tabs = [
-    { label: "Streaming", icon: "solar:video-library-bold" },
+    { label: "Utilities", icon: "hugeicons:software", isNew: false },
     { label: "Online Courses", icon: "ri:video-line" },
   ];
-  const bannerProduct = authContext.currentUser?.bannerProduct;
   return (
     <>
-      {bannerProduct && (
-        <ProductDrawer
-          product={bannerProduct}
-          open={openBannerProduct}
-          onClose={function (): void {
-            setOpenBannerProduct(false);
-          }}
-        />
-      )}
-      {/*     {authContext.currentUser && (
-        <div className="bg-red-400 h-auto gap-x-2 flex items-center justify-center text-center px-2 py-2">
-          <span className="text-white text-xs">
-            Due to extremely high demand, netflix, Show-max and prime are not
-            available. please check back later. if you would like to earn 50%
-            instantly sharing your subscription, click earn
-          </span>
-        </div>
-      )}
- */}
       <div className=" h-screen ">
-        <AddWorkflowModal open={openAddModal} onCancel={handleCloseTeam} />
         {loadingPage && (
           <div className="h-screen   flex flex-col justify-center items-center">
             {" "}
@@ -162,7 +123,7 @@ const SavedTeamMembers = () => {
           <Link href={'/home/explore'}>
             <div className="flex items-center gap-x-2 hover:bg-gray-50  rounded ">
               <Icon icon={'ion:arrow-back-outline'} />
-              <span className="font-bold">  Available streaming services</span>
+              <span className="font-bold">  Available digital services</span>
             </div>
           </Link>
 
@@ -181,6 +142,17 @@ const SavedTeamMembers = () => {
                       {" "}
                       <Icon className="inline" icon={tab.icon} />
                       <span>{tab.label}</span>
+                      {tab.isNew && (
+                        <div className="absolute animate-bounce -right-3 top-0 ">
+                          <Chip
+                            loading={false}
+                            isSelected={false}
+                            icon={""}
+                            type="badge"
+                            title={""}
+                          />
+                        </div>
+                      )}
                     </div>
                   ),
                   children: (
@@ -191,15 +163,13 @@ const SavedTeamMembers = () => {
                         paddingBottom: 240,
                       }}
                     >
+
                       {id === "1" && (
-                        <EntertainmentTab
-                          products={streamProducts}
+                        <UtilityTab
+                          products={utilityProducts}
                           loading={false}
                         />
                       )}
-
-
-
 
                       {id === "2" && (
                         <CourseTab products={coursesProducts} loading={false} />
@@ -216,15 +186,4 @@ const SavedTeamMembers = () => {
   );
 };
 
-export default SavedTeamMembers;
-
-const Banner = ({ onClick }: { onClick: () => void }) => {
-  return (
-    <div onClick={onClick} className="w-full px-4 rounded-lg h-[4rem] mt-4">
-      <img
-        className="w-full h-full object-cover rounded-lg"
-        src="/banners/showmax.png"
-      />
-    </div>
-  );
-};
+export default DigitalPage;

@@ -50,14 +50,14 @@ const ExplorePage = () => {
       case 'streaming':
         router.push('/home/streaming')
         break;
+      case 'skills':
+      case 'utilities':
+        router.push('/home/digital')
+        router.push('/home/digital')
+        break;
       case 'yt_automation':
       case 'forex':
         setSelectedProduct(item)
-        break;
-      case 'skills':
-      case 'utilities':
-        router.push('/home/streaming')
-        router.push('/home/streaming')
         break;
       case 'smm':
         message.info('coming soon..')
