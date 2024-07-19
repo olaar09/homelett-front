@@ -32,12 +32,13 @@ const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
   const [openAddModal, setOpenAddModal] = useState(false);
 
+  const utilsService = new UtilService();
+  const [loading, setLoading] = useState(false);
   const [openNotice, setOpenNotice] = useState(false);
   const [openBannerProduct, setOpenBannerProduct] = useState(false);
 
-  const [loading, setLoading] = useState(false);
   const apiUtils = new APIUtil();
-  const utilsService = new UtilService();
+
 
   useEffect(() => {
     const finance = authContext.currentUser?.finance?.balance ?? 0;
