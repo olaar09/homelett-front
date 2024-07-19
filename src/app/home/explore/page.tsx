@@ -136,19 +136,14 @@ const SavedTeamMembers = () => {
         router.push('/home/streaming')
         break;
       case '/yt_automation':
-        alert('open ooo')
         break;
       case '/forex':
-        alert('open ooo')
         break;
       case '/smm':
-        alert('open ooo')
         break;
       case '/phone':
-        alert('open ooo')
         break;
       case '/skill':
-        alert('open ooo')
         break;
       default:
         break;
