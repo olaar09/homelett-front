@@ -60,10 +60,10 @@ const ExplorePage = () => {
         setSelectedProduct(item)
         break;
       case 'smm':
-        message.info('coming soon..')
+        message.success('coming soon..')
         break;
-      case '/phone':
-        message.info('coming soon..')
+      case 'phone':
+        message.success('coming soon..')
         break;
       default:
         break;
