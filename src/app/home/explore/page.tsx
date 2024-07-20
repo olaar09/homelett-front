@@ -120,14 +120,3 @@ const ExplorePage = () => {
 };
 
 export default ExplorePage;
-
-const Banner = ({ onClick }: { onClick: () => void }) => {
-  return (
-    <div onClick={onClick} className="w-full px-4 rounded-lg h-[4rem] mt-4">
-      <img
-        className="w-full h-full object-cover rounded-lg"
-        src="/banners/showmax.png"
-      />
-    </div>
-  );
-};

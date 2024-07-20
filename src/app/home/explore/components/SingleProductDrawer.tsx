@@ -14,7 +14,7 @@ import { IChat } from "@/app/interfaces/IChatItem";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Brands from "@/app/components/Brands";
 import { Str } from "@/utils/consts";
-import { shuffleArray } from "@/utils/helpers";
+import { getAvatar, shuffleArray } from "@/utils/helpers";
 import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import UtilService from "@/services/UtilService";
@@ -155,10 +155,9 @@ const SingleProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) 
     }
   };
 
-  const calcHeight =
-    window.screen.availHeight - (window.screen.availHeight / 100) * 2;
+  const calcHeight = window.screen.availHeight;
 
-  const computedHeight = calcHeight >= 633.65 ? 633.65 : calcHeight;
+  const computedHeight = calcHeight
   /*  const brands = (product?.assigned_platforms ?? []).map(
      (assigned) => assigned.platform.icon
    );
@@ -231,7 +230,7 @@ const SingleProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) 
             </div>
             <div className=" pt-4 px-2 flex justify-between items-center w-full">
               <div className="flex items-center gap-x-0">
-                <Brands size="small" brands={[]} />
+                {getAvatar(product.tag)}
                 <a
                   target="_blank"
                   href={product.extra_link}
@@ -243,10 +242,8 @@ const SingleProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) 
                 </a>
               </div>
 
-              <span className=" text-foreground-secondary text-sm">
-                From{" "}
-                {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")} /
-                {" week "}
+              <span className=" text-foreground text-sm font-bold">
+                {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")}
               </span>
             </div>
 
@@ -265,40 +262,19 @@ const SingleProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) 
               </span>
             </div> */}
 
-            <div className="px-2  max-h-80 overflow-y-scroll mt-2">
+            <div className="px-2  overflow-y-scroll mt-2">
               <span className="block">Terms of use</span>
               <div className="text-xs gap-y-2 text-gray-500 flex flex-col pt-1">
                 <p>
                   {" "}
-                  Once you make payment, you will get the{" "}
-                  login details.
-                  You must not share login details. If you pay for monthly, you
-                  will have access for 1 month and can renew again, if you
-                  select forever, you will have access forever.
+                  Once you make payment, you will get the{" "}required details to access this course. You must not share the access with others.
                 </p>
               </div>
 
               <div className="flex flex-col items-start mt-4">
                 <div className="flex items-center justify-between w-full">
                   <span className="block">About this course</span>
-                  <a
-                    target="_blank"
-                    href={product.extra_link}
-                    rel="noopener noreferrer"
-                  >
-                    <Button className="py-0 px-0 " type="link">
-                      <div className="flex items-center">
-                        <span>
-                          Learn more on{" "}
-                          {/*  {product.assigned_platforms[0]?.platform.name}{" "} */}
-                        </span>
-                        <Icon
-                          icon={"iconamoon:arrow-right-2-light"}
-                          className="text-sm"
-                        />
-                      </div>
-                    </Button>
-                  </a>
+
                 </div>
 
                 <div className="text-xs gap-y-2 text-gray-500 flex flex-col pt-1">
