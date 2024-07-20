@@ -115,10 +115,8 @@ const SingleProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) 
   const onMenuClick = async () => {
     try {
       setLoading(true);
-      await apiUtil.productService.buyProduct({
+      await apiUtil.productService.buySingleProduct({
         product_id: product!.id.toString(),
-        interval: 'forever',
-        selected_platforms: selectedPlatforms,
       });
       onClose();
       authContext.refreshProfile();
@@ -140,62 +138,11 @@ const SingleProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) 
     }
   };
 
-  const onToggleService = (platform: any) => {
-    const index = selectedPlatforms.indexOf(platform);
-    if (index === -1) {
-      if (selectedPlatforms.length + 1 > product!.total_selection_count) {
-        message.warning(product?.total_selection);
-      } else {
-        setSelectedPlatform([...selectedPlatforms, platform]);
-      }
-    } else {
-      const cloned = [...selectedPlatforms];
-      cloned.splice(index, 1);
-      setSelectedPlatform(cloned);
-    }
-  };
-
   const calcHeight = window.screen.availHeight;
 
   const computedHeight = calcHeight
-  /*  const brands = (product?.assigned_platforms ?? []).map(
-     (assigned) => assigned.platform.icon
-   );
-  */
-  const utils = new UtilService();
 
-  /*   const getOptions = () => {
-      const price = product?.price ?? 0;
-      return [
-        {
-          key: "Weekly",
-          label: (
-            <div className="flex items-center gap-x-3">
-              <Icon icon={"mdi:calendar-weekend"} />
-              <DropDownLabelItem label="Weekly" amount={price} />
-            </div>
-          ),
-        },
-        {
-          key: "Monthly",
-          label: (
-            <div className="flex items-center gap-x-3">
-              <Icon icon={"ic:baseline-calendar-month"} />
-              <DropDownLabelItem label="Monthly" amount={price * 4.3} />
-            </div>
-          ),
-        },
-        {
-          key: "Forever",
-          label: (
-            <div className="flex items-center gap-x-3">
-              <Icon icon={"ic:baseline-calendar-month"} />
-              <DropDownLabelItem label="Forever" amount={price * 6} />
-            </div>
-          ),
-        },
-      ];
-    }; */
+  const utils = new UtilService();
 
   return (
     <>
