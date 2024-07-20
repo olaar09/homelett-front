@@ -78,7 +78,7 @@ export default function RootLayout({
         <meta name="twitter:site" content="@Bubble" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
-        <title>Bubble - AI Copilot for job search</title>
+        <title>Bubble - Enjoy unbreatable prices for your subscriptions</title>
         <meta name="robots" content="index,follow" />
         <meta
           name="description"
@@ -86,7 +86,7 @@ export default function RootLayout({
         />
         <meta
           property="og:title"
-          content="Bubble - AI Copilot for job search"
+          content="Bubble - Enjoy unbreatable prices for your subscriptions"
         />
         <meta
           property="og:description"
@@ -96,7 +96,7 @@ export default function RootLayout({
         <meta property="og:image" content="/images/dashboard-mockup.png" />
         <meta
           property="og:image:alt"
-          content="Bubble - Your AI copilot for job search"
+          content="Bubble - Your Enjoy unbreatable prices for your subscriptions"
         />
         <meta property="og:site_name" content="Bubble" />
         <link rel="preconnect" href="https://fonts.bunny.net" />
