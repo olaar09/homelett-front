@@ -20,7 +20,7 @@ export const AppConfigProvider: React.FC<any> = ({ children }) => {
 
   useEffect(() => {
     // move this to context
-    setLogo(`${window.location.hostname}.png`);
+    setLogo(`/${window.location.hostname}.png`);
     setAppName(window.location.hostname.split('.')[0]);
   }, []);
 

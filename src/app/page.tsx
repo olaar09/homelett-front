@@ -38,7 +38,7 @@ export default function Home() {
                   href="/"
                 >
                   <img className="h-7 w-auto"
-                    src={`/${appConfig.logo}.png`}
+                    src={`${appConfig.logo}`}
                     alt=""
                   />
                   <span className="text-2xl font-black"> {appConfig.appName}</span>
