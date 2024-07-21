@@ -42,7 +42,7 @@ export default function Home() {
                   href="/"
                 >
                   <img className="h-7 w-auto"
-                    src={isJuvostreams ? "/logo-juvostreams.png" : "/logo.png"}
+                    src={isJuvostreams ? "/logo-juvostreams.jpeg" : "/logo.png"}
                     alt=""
                   />
                   <span className="text-2xl font-black"> {isJuvostreams ? 'JuvoStreams' : 'Bubbble'}</span>
