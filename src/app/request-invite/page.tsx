@@ -129,6 +129,7 @@ export default function Home() {
         ...form,
         company_name: form.email,
         password: form.password,
+        domain: window.location.hostname,
         invite_token: inviteCode,
         plan_id: 2,
       });
@@ -142,10 +143,9 @@ export default function Home() {
     } catch (error) {
       if (error instanceof AxiosError) {
         message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
+          `${error?.response?.data?.message ??
+          error?.response?.data?.reason ??
+          "Unable to complete request"
           }`
         );
       } else {
