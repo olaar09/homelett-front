@@ -3,7 +3,6 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/auth";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import FirebaseContext from "./FirebaseContext";
 import { message } from "antd";
 import { IProfile } from "@/app/interfaces/IProfile";
 import APIService from "@/services/APIService";
@@ -34,10 +33,10 @@ export const AuthContext = createContext<IAuthContext>({
   loading: true,
   loadingSources: true,
   activeProfile: null,
-  updateKey: async (key: string) => {},
-  clearUser: async () => {},
-  refreshProfile: async () => {},
-  refreshDataSource: async () => {},
+  updateKey: async (key: string) => { },
+  clearUser: async () => { },
+  refreshProfile: async () => { },
+  refreshDataSource: async () => { },
 });
 
 export const AuthProvider: React.FC<any> = ({ children }) => {
@@ -110,10 +109,9 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         console.log(error);
 
         message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to update key"
+          `${error?.response?.data?.message ??
+          error?.response?.data?.reason ??
+          "Unable to update key"
           }`
         );
       }
@@ -123,7 +121,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     }
   };
 
-  const fetchDataSource = async () => {};
+  const fetchDataSource = async () => { };
 
   const fetchCurrentUserProfile = async () => {
     const queryParams = new URLSearchParams(params).toString();

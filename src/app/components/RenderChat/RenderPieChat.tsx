@@ -1,5 +1,4 @@
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
-import { ChatContext } from "@/contexts/ChatContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Card, Select, Button, Tooltip, Checkbox } from "antd";
 import React, { useContext, useEffect, useState } from "react";
@@ -27,7 +26,6 @@ const PieChat: React.FC<{
   const [y, setY] = useState<any>(null);
   const [yData, setYData] = useState<any>();
   const [xData, setXData] = useState<any>();
-  const chatContext = useContext(ChatContext);
 
   let columns: any[] = [];
   if (data.length > 0) {
@@ -42,7 +40,6 @@ const PieChat: React.FC<{
   useEffect(() => {
     if (y && x) {
       onUpdateConfig({ pie_chart: { x: x, y: y } });
-      //chatContext.scrollToBottom!();
     }
   }, [x, y]);
 

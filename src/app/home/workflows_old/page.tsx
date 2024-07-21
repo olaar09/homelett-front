@@ -18,7 +18,6 @@ import StartChatModal from "../_components/StartChatModal";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
 import ChatHistory from "../_components/ChatDisplay";
-import { ChatContext } from "@/contexts/ChatContext";
 import Chip from "@/app/components/Chip";
 const { Meta } = Card;
 
@@ -33,11 +32,10 @@ const HeaderItem = ({
 }) => {
   return (
     <div
-      className={` items-center flex gap-x-1 cursor-pointer hover:opacity-55 transition-all duration-150  py-3 ${
-        withBg
+      className={` items-center flex gap-x-1 cursor-pointer hover:opacity-55 transition-all duration-150  py-3 ${withBg
           ? "bg-primary text-foreground-inverted rounded-lg px-3 "
           : "text-foreground "
-      }`}
+        }`}
     >
       <Icon icon={icon} className="text-xl" />
       <span className="text-sm font-bold mt-0"> {title}</span>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Hero from "./components/Landing/Hero";
 import Section2 from "./components/Landing/Section2";
 import Section3 from "./components/Landing/Section3";
@@ -9,15 +9,11 @@ import Section5 from "./components/Landing/Section5";
 import Section6 from "./components/Landing/Section6";
 import Section7 from "./components/Landing/Section7";
 import Footer from "./components/Landing/Footer";
+import { useAppConfig } from "@/contexts/AppConfigContext";
+
 
 export default function Home() {
-  const [isJuvostreams, setIsJuvoStreams] = useState(false);
-
-  useEffect(() => {
-    if (window.location.hostname === 'juvostreams.com.ng') {
-      setIsJuvoStreams(true);
-    }
-  }, []);
+  const appConfig = useAppConfig()
 
   return (
     <div className="h-full bg-white font-sans text-gray-900 antialiased">
@@ -42,10 +38,10 @@ export default function Home() {
                   href="/"
                 >
                   <img className="h-7 w-auto"
-                    src={isJuvostreams ? "/logo-juvostreams.jpeg" : "/logo.png"}
+                    src={`${appConfig.logo}.png`}
                     alt=""
                   />
-                  <span className="text-2xl font-black"> {isJuvostreams ? 'JuvoStreams' : 'Bubbble'}</span>
+                  <span className="text-2xl font-black"> {appConfig.appName}</span>
                 </a>
               </div>
               {/* <div className="hidden items-center justify-center gap-4 lg:flex">

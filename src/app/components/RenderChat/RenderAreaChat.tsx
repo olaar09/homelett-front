@@ -1,5 +1,4 @@
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
-import { ChatContext } from "@/contexts/ChatContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Card, Select, Button, Tooltip } from "antd";
 import React, { useContext, useEffect, useState } from "react";
@@ -28,7 +27,6 @@ const AreaChart: React.FC<{
   const [y, setY] = useState<any>();
   const [yData, setYData] = useState<any>();
   const [xData, setXData] = useState<any>();
-  const chatContext = useContext(ChatContext);
 
   let columns: any[] = [];
   if (data.length > 0) {
@@ -57,7 +55,6 @@ const AreaChart: React.FC<{
   useEffect(() => {
     if (y && x) {
       onUpdateConfig({ area_chart: { x: x, y: y } });
-      //chatContext.scrollToBottom!();
     }
   }, [x, y]);
 

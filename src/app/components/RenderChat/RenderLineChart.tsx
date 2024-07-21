@@ -1,5 +1,4 @@
 import { IChatHistoryItem } from "@/app/interfaces/IChatHistoryItem";
-import { ChatContext } from "@/contexts/ChatContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Card, Select, Button, Tooltip } from "antd";
 import React, { useContext, useEffect, useState } from "react";

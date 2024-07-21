@@ -6,6 +6,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { Suspense } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Head from "next/head";
+import { AppConfigProvider } from "@/contexts/AppConfigContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -108,7 +109,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <GoogleOAuthProvider clientId="655083840359-3mq2i1jhtj7ehodfadm4b232pnetm1ka.apps.googleusercontent.com">
           <Suspense fallback={<span></span>}>
-            <AuthProvider>{children} </AuthProvider>{" "}
+            <AppConfigProvider>
+              <AuthProvider>{children} </AuthProvider>{" "}
+            </AppConfigProvider>
           </Suspense>
         </GoogleOAuthProvider>
       </body>

@@ -6,7 +6,6 @@ import AreaChart from "@/app/components/RenderChat/RenderAreaChat";
 import LineChart from "@/app/components/RenderChat/RenderLineChart";
 import BarChart from "@/app/components/RenderChat/RenderBarChat";
 import PieChat from "@/app/components/RenderChat/RenderPieChat";
-import { ChatContext } from "@/contexts/ChatContext";
 import APIUtil from "@/services/APIUtil";
 import SendQueryAnswerWorkflow from "../WorkFlowManage/SendQueryAnswerWorkflow";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
@@ -124,9 +123,8 @@ export const ViewSelector = ({
               onClick={() => oClickAction(view.key)}
             >
               <Icon
-                className={`${
-                  selectedView === view.key ? " text-primary" : " text-gray-700"
-                }`}
+                className={`${selectedView === view.key ? " text-primary" : " text-gray-700"
+                  }`}
                 icon={view.icon}
               />
             </Button>
@@ -171,7 +169,6 @@ export const ContentDisplay = ({
   avatar: string;
 }) => {
   const [viewKey, setViewKey] = useState("table");
-  const chatContext = useContext(ChatContext);
   const apiUtil = new APIUtil();
 
   useEffect(() => {
@@ -180,7 +177,6 @@ export const ContentDisplay = ({
 
   const onChangeDisplay = (selected: string) => {
     setViewKey(selected);
-    //chatContext.scrollToBottom!();
 
     if (selected === "table") {
       onUpdateDisplay({ table: "normal" });
@@ -189,22 +185,7 @@ export const ContentDisplay = ({
   };
 
   const onUpdateDisplay = async (config: any) => {
-    try {
-      const newUpdate = {
-        ...chatHistoryItem,
-        extra: {
-          ...(chatHistoryItem.extra ?? {}),
-          [Object.keys(config)[0]]: Object.values(config)[0],
-        },
-      };
-      chatContext.updateChatHistoryAtIndex(newUpdate);
-      await apiUtil.chatHistoryService.updateChatHistory(
-        chatHistoryItem.id!,
-        config
-      );
-    } catch (error) {
-      message.error("unable to update chat config ");
-    }
+
   };
 
   return (
