@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Hero from "./components/Landing/Hero";
 import Section2 from "./components/Landing/Section2";
 import Section3 from "./components/Landing/Section3";
@@ -11,6 +11,14 @@ import Section7 from "./components/Landing/Section7";
 import Footer from "./components/Landing/Footer";
 
 export default function Home() {
+  const [isJuvostreams, setIsJuvoStreams] = useState(false);
+
+  useEffect(() => {
+    if (window.location.hostname === 'juvostreams.com.ng') {
+      setIsJuvoStreams(true);
+    }
+  }, []);
+
   return (
     <div className="h-full bg-white font-sans text-gray-900 antialiased">
       <div
@@ -33,8 +41,11 @@ export default function Home() {
                   className="isomorphic-link isomorphic-link--internal flex items-center gap-x-3"
                   href="/"
                 >
-                  <img className="h-7 w-auto" src="/logo.png" alt="" />
-                  <span className="text-2xl font-black"> Bubble</span>
+                  <img className="h-7 w-auto"
+                    src={isJuvostreams ? "/logo-juvostreams.png" : "/logo.png"}
+                    alt=""
+                  />
+                  <span className="text-2xl font-black"> {isJuvostreams ? 'JuvoStreams' : 'Bubbble'}</span>
                 </a>
               </div>
               {/* <div className="hidden items-center justify-center gap-4 lg:flex">

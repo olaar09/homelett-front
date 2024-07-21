@@ -72,10 +72,10 @@ export const Str = {
     {
       value: "4",
       label: "ShowMax",
-      pricingAmount: 2500,
+      pricingAmount: 3500,
       pricingName: "All devices plan",
 
-      earning: 35,
+      earning: 30,
       icon: "/logos/sm.png",
     },
 

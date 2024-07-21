@@ -78,7 +78,7 @@ export default function RootLayout({
         <meta name="twitter:site" content="@Bubble" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
-        <title>Bubble - Enjoy unbreatable prices for your subscriptions</title>
+        <title>Bubble - Enjoy unbeatable prices for your subscriptions</title>
         <meta name="robots" content="index,follow" />
         <meta
           name="description"
