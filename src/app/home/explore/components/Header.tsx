@@ -1,3 +1,6 @@
+"use client"
+
+import { useAppConfig } from "@/contexts/AppConfigContext";
 import { AuthContext } from "@/contexts/AuthContext";
 import UtilService from "@/services/UtilService";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -7,6 +10,7 @@ import React, { useContext } from "react";
 
 const ExploreHeader = () => {
   const authContext = useContext(AuthContext);
+  const appConfig = useAppConfig();
 
   const paymentLink = authContext.currentUser?.paymentLink;
 
@@ -17,7 +21,7 @@ const ExploreHeader = () => {
   return (
     <div className="flex h-12 items-center justify-between w-full px-2 ">
       <div className="flex items-center justify-start gap-x-6">
-        <img className="w-6 h-6" src="/logo.png" alt="Logo" />
+        <img className="w-6 h-6" src={`/${appConfig.logo}.png`} alt="Logo" />
       </div>
       <div>
         <div className="flex items-center justify-end gap-x-4 w-full">

@@ -5,7 +5,6 @@ import { Icon } from "@iconify/react";
 
 import { message } from "antd";
 import { Suspense, useContext, useEffect, useState } from "react";
-import FirebaseContext from "@/contexts/FirebaseContext";
 import { FirebaseError } from "firebase/app";
 import { useRouter, useSearchParams } from "next/navigation";
 import APIService from "@/services/APIService";
@@ -20,6 +19,7 @@ import InputField from "../components/InputField";
 import Link from "next/link";
 import ACButton from "../components/Button";
 import AuthProblem from "../components/Auth/AuthProblem";
+import { useAppConfig } from "@/contexts/AppConfigContext";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -28,6 +28,7 @@ export default function Home() {
   const query = useSearchParams();
   const router = useRouter();
   const authContext = useContext(AuthContext);
+  const appConfig = useAppConfig()
   const [scrollYPosition, setScrollYPosition] = useState(0);
   const [rotationDegrees, setRotationDegrees] = useState("");
 
@@ -98,6 +99,7 @@ export default function Home() {
               bank_account_name: "",
             },
           },
+          home_products: []
         });
       } else {
         response = await apiService.authService!.login({
@@ -117,6 +119,7 @@ export default function Home() {
               bank_account_name: "",
             },
           },
+          home_products: []
         });
       }
 
@@ -129,10 +132,9 @@ export default function Home() {
         console.log(error);
 
         message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
+          `${error?.response?.data?.message ??
+          error?.response?.data?.reason ??
+          "Unable to complete request"
           }`
         );
       } else {
@@ -160,10 +162,9 @@ export default function Home() {
         console.log("IS ERROR MESSAGE", error.message);
 
         message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
+          `${error?.response?.data?.message ??
+          error?.response?.data?.reason ??
+          "Unable to complete request"
           }`
         );
       } else {
@@ -185,9 +186,9 @@ export default function Home() {
         <div className="flex items-center gap-x-3   px-8   justify-center  lg:w-6/12 mx-auto">
           <Link href={"/"}>
             <div className="flex items-center gap-x-0   px-8   justify-center  lg:w-6/12 mx-auto">
-              <img src="/logo.png" className="w-14 mr-2" />
+              <img src={`/${appConfig.logo}.png`} className="w-14 mr-2" />
               <span className=" text-foreground font-black text-2xl mt-0">
-                Bubble
+                {appConfig.appName}
               </span>
             </div>
           </Link>
@@ -271,7 +272,7 @@ export default function Home() {
 
       <section className="px-6 flex flex-col items-center justify-center gap-y-4 ">
         <span className=" text-foreground-secondary text-sm text-center">
-          By continuing, you are agreeing to Bubble'{" "}
+          By continuing, you are agreeing to {appConfig.appName}'{" "}
           <span className=" text-banner"> terms of services </span> and{" "}
           <span className=" text-banner">Privacy Policy </span>
         </span>

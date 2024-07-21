@@ -15,6 +15,7 @@ import ACButton from "../components/Button";
 import InputField from "../components/InputField";
 import Link from "next/link";
 import AuthProblem from "../components/Auth/AuthProblem";
+import { useAppConfig } from "@/contexts/AppConfigContext";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -30,6 +31,7 @@ export default function Home() {
   const authContext = useContext(AuthContext);
   const [scrollYPosition, setScrollYPosition] = useState(0);
   const [rotationDegrees, setRotationDegrees] = useState("");
+  const appConfig = useAppConfig()
 
   const inviteCode = query.get("invite");
   const divRef = useRef<any>(null);
@@ -166,9 +168,9 @@ export default function Home() {
         <div className="flex items-center gap-x-3   px-8   justify-center  lg:w-6/12 mx-auto">
           <Link href={"/"}>
             <div className="flex items-center gap-x-0   px-8   justify-center  lg:w-6/12 mx-auto">
-              <img src="/logo.png" className="w-14 mr-2" />
+              <img src={`/${appConfig.logo}.png`} className="w-14 mr-2" />
               <span className=" text-foreground font-black text-2xl mt-0">
-                Bubble
+                {appConfig.appName}
               </span>
             </div>
           </Link>
@@ -268,7 +270,7 @@ export default function Home() {
 
       <section className="px-6 flex items-center justify-center ">
         <span className=" text-foreground-secondary text-sm text-center">
-          By continuing, you are agreeing to Bubble'{" "}
+          By continuing, you are agreeing to {appConfig.appName}'{" "}
           <span className=" text-banner"> terms of services </span> and{" "}
           <span className=" text-banner">Privacy Policy </span>
         </span>
