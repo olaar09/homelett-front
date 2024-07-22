@@ -25,33 +25,13 @@ export function hashValue(val) {
 
 export const getAvatar = (type) => {
   switch (type) {
-    case 'streaming':
+    case 'import':
       return <div className='w-14 px-3'>
-        <Brands brands={[...Str.brands].splice(0, 4)} size='smaller' />
+        <Brands brands={[...Str.storeBrands].splice(0, 1)} size='smaller' />
       </div>
-    case 'yt_automation':
+    case 'canada':
       return <div className='w-20 px-3'>
-        <Brands brands={[...Str.brands].splice(7, 1)} size='small' />
-      </div>
-    case 'forex':
-      return <div className='w-20 px-3'>
-        <Brands brands={[...Str.brands].splice(8, 1)} size='small' />
-      </div>
-    case 'phone':
-      return <div className='w-20 px-3'>
-        <Brands brands={[...Str.brands].splice(10, 1)} size='small' />
-      </div>
-    case 'skills':
-      return <div className='w-20 px-3'>
-        <Brands brands={[...Str.courseBrands].splice(0, 1)} size='small' />
-      </div>
-    case 'utilities':
-      return <div className='w-14 px-3'>
-        <Brands brands={[...Str.utilityBrands].splice(0, 4)} size='smaller' />
-      </div>
-    case 'smm':
-      return <div className='w-20 px-3'>
-        <Brands brands={[...Str.brands].splice(9, 1)} size='small' />
+        <Brands brands={[...Str.storeBrands].splice(1, 1)} size='small' />
       </div>
 
     default:

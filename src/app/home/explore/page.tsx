@@ -43,31 +43,10 @@ const ExplorePage = () => {
 
   const loadingPage = authContext.loading;
   const userSubs = authContext.currentUser?.active_subscriptions;
-  const homeProducts = authContext.currentUser?.home_products ?? [];
+  const homeProducts = authContext.currentUser?.store_products ?? [];
 
   const onTapMenu = (item: any) => {
-    switch (item.tag) {
-      case 'streaming':
-        router.push('/home/streaming')
-        break;
-      case 'skills':
-      case 'utilities':
-        router.push('/home/digital')
-        router.push('/home/digital')
-        break;
-      case 'yt_automation':
-      case 'forex':
-        setSelectedProduct(item)
-        break;
-      case 'smm':
-        message.success('coming soon..')
-        break;
-      case 'phone':
-        message.success('coming soon..')
-        break;
-      default:
-        break;
-    }
+    setSelectedProduct(item)
   }
 
 
@@ -102,7 +81,7 @@ const ExplorePage = () => {
 
         <div className="px-3 mt-8 h-3/4  flex flex-col  flex-grow overflow-y-auto pb-20">
           <span className="text-xs text-foreground-secondary">
-            Available services
+            Available tracks
           </span>
 
           {(loadingPage) &&
