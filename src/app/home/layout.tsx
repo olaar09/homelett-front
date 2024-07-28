@@ -482,7 +482,7 @@ const Nav: React.FC<any> = ({ children }) => {
                       <div onClick={() => setOpenRefund(true)} className="w-full">
                         <NavMenu
                           path="/home/refund"
-                          icon={"ant-design:youtube-outlined"}
+                          icon={"heroicons:receipt-refund-16-solid"}
                           title="Refund money"
                         />
                       </div>
@@ -493,7 +493,7 @@ const Nav: React.FC<any> = ({ children }) => {
                       <div onClick={() => setOpenDeduct(true)} className="w-full">
                         <NavMenu
                           path="/home/deduct-money"
-                          icon={"ant-design:youtube-outlined"}
+                          icon={"ic:outline-money-off"}
                           title="Deduct money"
                         />
                       </div>
