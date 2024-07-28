@@ -65,7 +65,7 @@ const DeductUserModal: React.FC<DeductUserModalProps> = ({ visible, onClose }) =
                     className='w-full'
                     rules={[{ required: true, message: 'Please enter the deduct reason' }]}
                 >
-                    <InputNumber className='w-full' min={1} />
+                    <Input className='w-full' min={1} />
                 </Form.Item>
             </Form>
         </Modal>
