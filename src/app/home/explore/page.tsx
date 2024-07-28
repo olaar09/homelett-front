@@ -58,13 +58,13 @@ const ExplorePage = () => {
         {!loadingPage && (
           <>
             <ExploreHeader />
-            <Highlight userSubs={userSubs} />
+            {authContext.currentUser?.is_reseller != 1 && <Highlight userSubs={userSubs} />}
           </>
         )}
 
         <div className="px-3 mt-8 h-3/4  flex flex-col  flex-grow overflow-y-auto pb-20">
           <span className="text-xs text-foreground-secondary">
-            Available tracks
+            Available services
           </span>
 
           {(loadingPage) &&
