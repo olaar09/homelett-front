@@ -10,6 +10,7 @@ import SingleProductDrawer from '../explore/components/SingleProductDrawer';
 import { useRouter } from 'next/navigation';
 import APIUtil from '@/services/APIUtil';
 import UtilService from '@/services/UtilService';
+import ResellerProductDrawer from './ResellerProductDrawer';
 
 
 const HomeMenu = ({ homeProducts }: { homeProducts: IProduct[] }) => {
@@ -19,6 +20,7 @@ const HomeMenu = ({ homeProducts }: { homeProducts: IProduct[] }) => {
     const utilsService = new UtilService();
     const router = useRouter()
 
+    const isReseller = authContext.currentUser?.is_reseller == 1;
 
     const onTapMenu = (item: IProduct) => {
         switch (item.tag) {
@@ -48,11 +50,20 @@ const HomeMenu = ({ homeProducts }: { homeProducts: IProduct[] }) => {
 
     return (
         <>
-            <SingleProductDrawer
+            {!isReseller && <SingleProductDrawer
                 product={selectedProduct}
                 open={selectedProduct != null}
                 onClose={() => setSelectedProduct(null)}
             />
+            }
+
+            {isReseller && <ResellerProductDrawer
+                product={selectedProduct}
+                open={selectedProduct != null}
+                onClose={() => setSelectedProduct(null)}
+            />
+            }
+
             <div className=" py-4    grid grid-cols-2">
                 {(homeProducts ?? []).map((item) => {
                     return <div onClick={() => onTapMenu(item)} className="h-40 0 py-3  px-2 flex flex-col border-[0.2px]">
