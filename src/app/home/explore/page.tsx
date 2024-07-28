@@ -64,7 +64,7 @@ const ExplorePage = () => {
 
         <div className="px-3 mt-8 h-3/4  flex flex-col  flex-grow overflow-y-auto pb-20">
           <span className="text-xs text-foreground-secondary">
-            Available services
+            Available tracks
           </span>
 
           {(loadingPage) &&

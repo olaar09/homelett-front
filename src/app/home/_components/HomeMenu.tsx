@@ -20,7 +20,7 @@ const HomeMenu = ({ homeProducts }: { homeProducts: IProduct[] }) => {
     const router = useRouter()
 
 
-    const onTapMenu = (item: any) => {
+    const onTapMenu = (item: IProduct) => {
         switch (item.tag) {
             case 'streaming':
                 router.push('/home/streaming')
@@ -41,6 +41,7 @@ const HomeMenu = ({ homeProducts }: { homeProducts: IProduct[] }) => {
                 message.success('coming soon..')
                 break;
             default:
+                setSelectedProduct(item)
                 break;
         }
     }
@@ -57,6 +58,7 @@ const HomeMenu = ({ homeProducts }: { homeProducts: IProduct[] }) => {
                     return <div onClick={() => onTapMenu(item)} className="h-40 0 py-3  px-2 flex flex-col border-[0.2px]">
                         <div>
                             {getAvatar(item.tag)}
+                            {item.type === 'reseller' && <img className='h-5 w-5 rounded-full' src={item.extra_icon} />}
                         </div>
                         <div className='mt-1'>
                             <span className='font-bold text-xs'>{item.title}</span>

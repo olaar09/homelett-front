@@ -12,8 +12,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
-  title: "Bubble | Enjoy premium subscription for less",
-  description: "Enjoy premium subscription for less",
+  title: "Bubble | Learn digital skills and upgrade your earning potentials with our digital skills program",
+  description: "Learn digital skills and upgrade your earning potentials with our digital skills program",
   applicationName: "Bubble",
   referrer: "no-referrer",
   appleWebApp: true,
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     site: "",
     siteId: "", // make unique
     creator: "Bubble INC",
-    description: "AI Co-Pilot for job search",
+    description: "",
     title: "Bubble",
     images: "",
   },
@@ -83,7 +83,7 @@ export default function RootLayout({
         <meta name="robots" content="index,follow" />
         <meta
           name="description"
-          content="Automatically apply to 50+ jobs daily from all over the world, with your CV modified to each job requirement"
+          content=""
         />
         <meta
           property="og:title"
@@ -91,13 +91,13 @@ export default function RootLayout({
         />
         <meta
           property="og:description"
-          content="Automatically apply to 50+ jobs daily from all over the world, with your CV modified to each job requirement"
+          content=""
         />
         <meta property="og:url" content="https://Bubble.net/partners" />
         <meta property="og:image" content="/images/dashboard-mockup.png" />
         <meta
           property="og:image:alt"
-          content="Bubble - Your Enjoy unbreatable prices for your subscriptions"
+          content="Bubble - Learn digital skills and upgrade your earning potentials with our digital skills program"
         />
         <meta property="og:site_name" content="Bubble" />
         <link rel="preconnect" href="https://fonts.bunny.net" />

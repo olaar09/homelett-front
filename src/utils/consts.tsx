@@ -15,6 +15,10 @@ export const Str = {
       key: "CV_4",
     },
   },
+  storeBrands: [
+    "/logos/aliexpress.jpeg",
+    "/logos/canada_icon.webp",
+  ],
   brands: [
     "/logos/yt.png",
     "/logos/sp.png",

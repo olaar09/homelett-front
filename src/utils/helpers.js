@@ -23,35 +23,19 @@ export function hashValue(val) {
   return hash;
 }
 
-export const getAvatar = (type) => {
+export const getAvatar = (type, logo) => {
   switch (type) {
-    case 'streaming':
+    case 'reseller':
       return <div className='w-14 px-3'>
-        <Brands brands={[...Str.brands].splice(0, 4)} size='smaller' />
+        <Brands brands={[...Str.brands.find((dt) => dt === logo)].splice(0, 1)} size='smaller' />
       </div>
-    case 'yt_automation':
-      return <div className='w-20 px-3'>
-        <Brands brands={[...Str.brands].splice(7, 1)} size='small' />
-      </div>
-    case 'forex':
-      return <div className='w-20 px-3'>
-        <Brands brands={[...Str.brands].splice(8, 1)} size='small' />
-      </div>
-    case 'phone':
-      return <div className='w-20 px-3'>
-        <Brands brands={[...Str.brands].splice(10, 1)} size='small' />
-      </div>
-    case 'skills':
-      return <div className='w-20 px-3'>
-        <Brands brands={[...Str.courseBrands].splice(0, 1)} size='small' />
-      </div>
-    case 'utilities':
+    case 'import':
       return <div className='w-14 px-3'>
-        <Brands brands={[...Str.utilityBrands].splice(0, 4)} size='smaller' />
+        <Brands brands={[...Str.storeBrands].splice(0, 1)} size='smaller' />
       </div>
-    case 'smm':
+    case 'canada':
       return <div className='w-20 px-3'>
-        <Brands brands={[...Str.brands].splice(9, 1)} size='small' />
+        <Brands brands={[...Str.storeBrands].splice(1, 1)} size='small' />
       </div>
 
     default:
