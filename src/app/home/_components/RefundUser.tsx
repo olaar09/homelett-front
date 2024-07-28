@@ -52,7 +52,7 @@ const RefundModal: React.FC<RefundModalProps> = ({ visible, onClose }) => {
                 </Form.Item>
                 <Form.Item
                     name="amount"
-                    label="Amount"
+                    label="Amount to add for user"
                     className='w-full'
                     rules={[{ required: true, message: 'Please enter the refund amount' }]}
                 >

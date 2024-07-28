@@ -52,7 +52,7 @@ const DeductUserModal: React.FC<DeductUserModalProps> = ({ visible, onClose }) =
                 </Form.Item>
                 <Form.Item
                     name="amount"
-                    label="Amount"
+                    label="Amount to remove from user"
                     className='w-full'
                     rules={[{ required: true, message: 'Please enter the DeductUser amount' }]}
                 >
