@@ -17,6 +17,8 @@ import { Str } from "@/utils/consts";
 import NoticeDrawers from "./explore/components/Notice/NoticeDrawer";
 import Brands from "../components/Brands";
 import Chip from "../components/Chip";
+import RefundModal from "./_components/RefundUser";
+import DeductUserModal from "./_components/DeductUser";
 
 const NavMenu = ({
   title,
@@ -38,11 +40,10 @@ const NavMenu = ({
 
   return (
     <div
-      className={`font-body  flex items-center h-10 hover:bg-[#E8E7FF] hover:text-primary hover:font-bold rounded-md px-2 w-full  cursor-pointer  gap-x-3 justify-between  ${
-        browserPath.includes(path)
-          ? "bg-gray-200 text-foreground font-body "
-          : "text-foreground"
-      }`}
+      className={`font-body  flex items-center h-10 hover:bg-[#E8E7FF] hover:text-primary hover:font-bold rounded-md px-2 w-full  cursor-pointer  gap-x-3 justify-between  ${browserPath.includes(path)
+        ? "bg-gray-200 text-foreground font-body "
+        : "text-foreground"
+        }`}
     >
       <div className="flex items-center gap-x-2">
         <Icon className="text-lg   font-body" icon={icon} />
@@ -108,6 +109,8 @@ const Nav: React.FC<any> = ({ children }) => {
   const [amount, setAmount] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [openNotice, setOpenNotice] = useState(false);
+  const [openRefund, setOpenRefund] = useState(false);
+  const [openDeduct, setOpenDeduct] = useState(false);
 
   const authContext = useContext(AuthContext);
 
@@ -266,7 +269,7 @@ const Nav: React.FC<any> = ({ children }) => {
 
       <NoticeDrawers
         open={authContext.currentUser?.is_activated == 0}
-        onClose={() => {}}
+        onClose={() => { }}
         message={
           <span className="text-center">
             Dear user, Your account has been banned for violating our terms of
@@ -281,29 +284,16 @@ const Nav: React.FC<any> = ({ children }) => {
         }
       />
 
-      <NoticeDrawers
-        open={false}
-        onClose={closeNotice}
-        action={"Start earning"}
-        title={"Bubble Earn"}
-        icon={"bi:cash-coin"}
-        onClick={() => onClick()}
-        message={
-          <div className="text-center w-full flex justify-center flex-col items-center ">
-            <span>
-              {" "}
-              Dear user, Would you like to earn up to <b> ₦350,000 </b> weekly
-              by sharing your netflix, show-max and prime video subscriptions
-              with others?
-            </span>
-            <br /> <br />
-            <div className="w-4/12 flex justify-center items-center my-2">
-              <Brands size={"small"} brands={[...Str.brands].splice(2, 3)} />
-            </div>
-            Contact us to started earning today !.
-          </div>
-        }
-      />
+
+      <RefundModal visible={openRefund}
+        onClose={function (): void {
+          setOpenRefund(false)
+        }} />
+
+      <DeductUserModal visible={openDeduct}
+        onClose={function (): void {
+          setOpenDeduct(false)
+        }} />
 
       <div className="min-h-screen w-full overflow-hidden">
         <div className="flex items-center w-full h-full overflow-hidden">
@@ -329,14 +319,12 @@ const Nav: React.FC<any> = ({ children }) => {
 
                       <Icon
                         icon={menu.icon}
-                        className={`text-lg ${
-                          menu.isNew ? "text-primary" : ""
-                        } ${isActive ? " text-gray-600" : " text-gray-400"} `}
+                        className={`text-lg ${menu.isNew ? "text-primary" : ""
+                          } ${isActive ? " text-gray-600" : " text-gray-400"} `}
                       />
                       <span
-                        className={` ${menu.isNew ? "text-primary" : ""} ${
-                          isActive ? " text-gray-600" : " text-gray-400"
-                        } text-xs`}
+                        className={` ${menu.isNew ? "text-primary" : ""} ${isActive ? " text-gray-600" : " text-gray-400"
+                          } text-xs`}
                       >
                         {menu.title}
                       </span>
@@ -348,9 +336,8 @@ const Nav: React.FC<any> = ({ children }) => {
           )}
           {!isMobile && (
             <div
-              className={` bg-background ${
-                openSide ? "w-[345px]" : "w-[70px]"
-              } min-h-screen hidden lg:flex border-r border-gray-100  flex-col h-full items-start transition-all duration-200 relative `}
+              className={` bg-background ${openSide ? "w-[345px]" : "w-[70px]"
+                } min-h-screen hidden lg:flex border-r border-gray-100  flex-col h-full items-start transition-all duration-200 relative `}
             >
               <HeadIcon isOpen={openSide} onToggle={onToggle} />
               {!openSide && (
@@ -479,7 +466,7 @@ const Nav: React.FC<any> = ({ children }) => {
                       </Link>
                     )}
 
-                {authContext.currentUser &&
+                  {authContext.currentUser &&
                     authContext.currentUser!.is_admin === 1 && (
                       <Link className="w-full" href={"/home/platform_subs/5"}>
                         <NavMenu
@@ -488,6 +475,28 @@ const Nav: React.FC<any> = ({ children }) => {
                           title="Prime video"
                         />
                       </Link>
+                    )}
+
+                  {authContext.currentUser &&
+                    authContext.currentUser!.is_admin === 1 && (
+                      <div onClick={() => setOpenRefund(true)} className="w-full">
+                        <NavMenu
+                          path="/home/refund"
+                          icon={"ant-design:youtube-outlined"}
+                          title="Refund money"
+                        />
+                      </div>
+                    )}
+
+                  {authContext.currentUser &&
+                    authContext.currentUser!.is_admin === 1 && (
+                      <div onClick={() => setOpenDeduct(true)} className="w-full">
+                        <NavMenu
+                          path="/home/deduct-money"
+                          icon={"ant-design:youtube-outlined"}
+                          title="Deduct money"
+                        />
+                      </div>
                     )}
 
                   {authContext.currentUser &&

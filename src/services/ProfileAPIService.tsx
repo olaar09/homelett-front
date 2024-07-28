@@ -9,6 +9,30 @@ class ProfileAPIService {
     this.apiService = apiService;
   }
 
+  async addMoney(data: { refunds: { amount: number, email: string }[] }): Promise<string> {
+    try {
+      const response = await this.apiService.post<{ data: any }>(
+        `/admin_4599299934_credentials/refundUsers`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deductMoney(data: { refunds: { amount: number, email: string }[] }): Promise<string> {
+    try {
+      const response = await this.apiService.post<{ data: any }>(
+        `/admin_4599299934_credentials/deductUsers`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async initiateP2P(data: { amount: number }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(
