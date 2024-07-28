@@ -9,6 +9,8 @@ import {
   MenuProps,
   message,
   Switch,
+  Input,
+  Divider,
 } from "antd";
 import { IChat } from "@/app/interfaces/IChatItem";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -81,6 +83,7 @@ const ResellerProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }
   const [loading, setLoading] = useState(false);
   const [selectedInterval, setSelectedInterval] = useState("Monthly");
   const [displayedPrice, setDisplayedPrice] = useState(0);
+  const [email, setEmail] = useState('');
 
   //const platforms = product?.assigned_platforms.map((pl) => pl.platform);
   const authContext = useContext(AuthContext);
@@ -115,8 +118,9 @@ const ResellerProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }
   const onMenuClick = async () => {
     try {
       setLoading(true);
-      await apiUtil.productService.buySingleProduct({
+      await apiUtil.productService.buyResellerProduct({
         product_id: product!.id.toString(),
+        customer_email: email
       });
       onClose();
       authContext.refreshProfile();
@@ -144,21 +148,15 @@ const ResellerProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }
 
   const utils = new UtilService();
 
+  const normalPrice = (displayedPrice * 100) * 4.3
+  const resellerPrice = normalPrice / 100 * 5;
+
   return (
     <>
       <Drawer
         title={
-          <div className="flex flex-end justify-end items-center">
-            <Button
-              onClick={() => onMenuClick()}
-              loading={loading}
-              className="bg-primary flex items-center gap-x-3"
-              type="primary"
-            >
-              {!loading && <Icon icon={"ic:outline-payment"} />}
-              <span>Make payment</span>
-            </Button>
-
+          <div className="flex flex-end justify-start items-center">
+            <span className="text-xs">Buy product</span>
           </div>
         }
         placement="top"
@@ -168,16 +166,13 @@ const ResellerProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }
         open={open}
       >
         {product && (
-          <div className="flex flex-col items-start pb-6">
-            <div className="w-full flex justify-center items-center ">
-              <img
-                className="object-cover h-24 w-full"
-                src={`/logos/${product.extra_icon}`}
-              />
-            </div>
-            <div className=" pt-4 px-2 flex justify-between items-center w-full">
+          <div className="flex flex-col items-start pb-6 mt-3">
+            <div className=" pt-4 px-2 flex justify-between items-end w-full">
               <div className="flex items-center gap-x-0">
-                {product.type === 'reseller' && <img className='h-5 w-5 rounded-full' src={product.extra_icon} />}
+                <div className="flex items-start gap-x-2 flex-col">
+                  {product.type === 'reseller' && <img className='h-5 w-5 rounded-full' src={product.extra_icon} />}
+                  <span className="text-lg">{product?.title}</span>
+                </div>
 
                 <a
                   target="_blank"
@@ -190,46 +185,40 @@ const ResellerProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }
                 </a>
               </div>
 
-              <span className=" text-foreground text-sm font-bold">
-                {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")}
-              </span>
-            </div>
-
-            <div className="mt-4 mb-1 px-2 flex justify-between items-center w-full">
-              <div className="flex flex-col">
-                <span className="text-lg">{product?.title}</span>
-                <span className="text-block text-xs text-foreground-secondary">
-                  {product?.total_selection}
+              <div className="flex items-center gap-x-2">
+                <span className=" text-foreground text-md font-bold mb-1 line-through ">
+                  {utils.formatMoney(`${normalPrice}`, "en-NG", "NGN")}
+                </span>
+                <span className=" text-foreground-secondary text-md font-bold mb-1 ">
+                  {utils.formatMoney(`${normalPrice - resellerPrice}`, "en-NG", "NGN")}
                 </span>
               </div>
+
             </div>
+            <Divider />
+            <div className=" w-full px-3 my-6">
+              <span className="text-xs">Customer email</span>
+              <Input
+                name={"email"}
+                readOnly={false}
+                disabled={false}
+                value={email}
+                onChange={(val) => setEmail(val.target.value ?? '')}
+                placeholder="email@example.com"
+                className={`h-10 text-gray-800 font-bold bg-white border-gray-200 border my-3`}
+              />
+            </div>
+            <div className="flex flex-end justify-end items-center w-full px-3">
+              <Button
+                onClick={() => onMenuClick()}
+                loading={loading}
+                className="bg-primary flex justify-center items-center gap-x-3 w-full"
+                type="primary"
+              >
+                {!loading && <Icon icon={"ic:outline-payment"} />}
+                <span>Make payment</span>
+              </Button>
 
-            {/*      <div className="px-3">
-              <span className="text-xs text-gray-500">
-                {product?.total_selection}
-              </span>
-            </div> */}
-
-            <div className="px-2  overflow-y-scroll mt-2">
-              <span className="block">Terms of use</span>
-              <div className="text-xs gap-y-2 text-gray-500 flex flex-col pt-1">
-                <p>
-                  {" "}
-                  Once you make payment, you will get the{" "}required details to access this product will be sent to the user's email address.
-                  Please ask the user to check their email
-                </p>
-              </div>
-
-              <div className="flex flex-col items-start mt-4">
-                <div className="flex items-center justify-between w-full">
-                  <span className="block">About this product</span>
-
-                </div>
-
-                <div className="text-xs gap-y-2 text-gray-500 flex flex-col pt-1">
-                  <p dangerouslySetInnerHTML={{ __html: product.extra }} />
-                </div>
-              </div>
             </div>
           </div>
         )}

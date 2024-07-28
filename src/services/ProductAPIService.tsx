@@ -175,6 +175,21 @@ class ProductAPIService {
     }
   }
 
+  async buyResellerProduct(data: {
+    product_id: string;
+    customer_email: string
+  }): Promise<string> {
+    try {
+      const response = await this.apiService.post<{ data: any }>(
+        `/products/buy_reseller`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async buySingleProduct(data: {
     product_id: string;
   }): Promise<string> {
