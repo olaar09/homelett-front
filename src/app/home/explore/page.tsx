@@ -36,7 +36,8 @@ const ExplorePage = () => {
   const authContext = useContext(AuthContext);
   const loadingPage = authContext.loading;
   const userSubs = authContext.currentUser?.active_subscriptions;
-
+  const homeProducts = authContext.currentUser?.home_products ?? [];
+  const resellerProducts = authContext.currentUser?.reseller_products ?? [];
 
   return (
     <>
@@ -71,12 +72,16 @@ const ExplorePage = () => {
           }
 
           {!loadingPage && authContext.currentUser && authContext.currentUser.is_reseller != 1 &&
-            <HomeMenu />
+            <HomeMenu homeProducts={homeProducts} />
           }
 
           {!loadingPage && authContext.currentUser && authContext.currentUser.is_reseller == 1 &&
-            <ResellerOfferings />
+            <HomeMenu homeProducts={resellerProducts} />
           }
+
+          {/* {!loadingPage && authContext.currentUser && authContext.currentUser.is_reseller == 1 &&
+            <ResellerOfferings />
+          } */}
         </div>
       </div>
     </>

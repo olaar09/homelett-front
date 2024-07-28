@@ -12,9 +12,8 @@ import APIUtil from '@/services/APIUtil';
 import UtilService from '@/services/UtilService';
 
 
-const HomeMenu = ({ }) => {
+const HomeMenu = ({ homeProducts }: { homeProducts: IProduct[] }) => {
     const authContext = useContext(AuthContext);
-    const homeProducts = authContext.currentUser?.home_products ?? [];
     const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
     const apiUtils = new APIUtil();
     const utilsService = new UtilService();

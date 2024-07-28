@@ -133,8 +133,7 @@ const ResellerOfferings = () => {
         </div>
       )}
  */}
-      <div className=" h-screen ">
-        <AddWorkflowModal open={openAddModal} onCancel={handleCloseTeam} />
+      <div className="  ">
         {loadingPage && (
           <div className="h-screen   flex flex-col justify-center items-center">
             {" "}
@@ -159,17 +158,7 @@ const ResellerOfferings = () => {
           </div>
         )}
 
-        <div className="px-3 mt-2  flex flex-col ">
-          <Link href={'/home/explore'}>
-            <div className="flex items-center gap-x-2 hover:bg-gray-50  rounded ">
-              <Icon icon={'ion:arrow-back-outline'} />
-              <span className="font-bold">  Available streaming services</span>
-            </div>
-          </Link>
-
-          <span className="text-xs block mt-4 text-foreground-secondary">
-
-          </span>
+        <div className="mt-2  flex flex-col ">
           <Spin spinning={loadingProducts}>
             <Tabs
               defaultActiveKey="1"

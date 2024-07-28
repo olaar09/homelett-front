@@ -41,6 +41,7 @@ export interface IAuthRequest {
   billingCurrentPlan?: IBilling;
   active_subscriptions?: ISubscription[];
   home_products: IProduct[]
+  reseller_products: IProduct[]
   paymentLink?: string;
   token?: string;
   subscriptions: any[];
