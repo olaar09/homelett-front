@@ -30,55 +30,16 @@ import LoadingCard from "../_components/LoadingCard";
 import HomeMenu from "../_components/HomeMenu";
 import { useRouter } from "next/navigation";
 import SingleProductDrawer from "./components/SingleProductDrawer";
+import ResellerOfferings from "../resseller/page";
 
 const ExplorePage = () => {
   const authContext = useContext(AuthContext);
-  const [openBannerProduct, setOpenBannerProduct] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
-
-  const apiUtils = new APIUtil();
-  const utilsService = new UtilService();
-  const router = useRouter()
-
-
   const loadingPage = authContext.loading;
   const userSubs = authContext.currentUser?.active_subscriptions;
-  const homeProducts = authContext.currentUser?.home_products ?? [];
-
-  const onTapMenu = (item: any) => {
-    switch (item.tag) {
-      case 'streaming':
-        router.push('/home/streaming')
-        break;
-      case 'skills':
-      case 'utilities':
-        router.push('/home/digital')
-        router.push('/home/digital')
-        break;
-      case 'yt_automation':
-      case 'forex':
-        setSelectedProduct(item)
-        break;
-      case 'smm':
-        message.success('coming soon..')
-        break;
-      case 'phone':
-        message.success('coming soon..')
-        break;
-      default:
-        break;
-    }
-  }
 
 
   return (
     <>
-      <SingleProductDrawer
-        product={selectedProduct}
-        open={selectedProduct != null}
-        onClose={() => setSelectedProduct(null)}
-      />
-
       <div className=" h-screen overflow-y-auto overflow-hidden">
         {loadingPage && (
           <div className="h-screen   flex flex-col justify-center items-center">
@@ -109,9 +70,12 @@ const ExplorePage = () => {
             <LoadingCard />
           }
 
-          {!loadingPage &&
-            <HomeMenu products={homeProducts} onClick={(item: any) => onTapMenu(item)}
-            />
+          {!loadingPage && authContext.currentUser && authContext.currentUser.is_reseller != 1 &&
+            <HomeMenu />
+          }
+
+          {!loadingPage && authContext.currentUser && authContext.currentUser.is_reseller == 1 &&
+            <ResellerOfferings />
           }
         </div>
       </div>
