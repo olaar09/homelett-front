@@ -177,7 +177,8 @@ class ProductAPIService {
 
   async buyResellerProduct(data: {
     product_id: string;
-    customer_email: string
+    customer_email: string;
+    interval: string
   }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(

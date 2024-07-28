@@ -120,7 +120,8 @@ const ResellerProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }
       setLoading(true);
       await apiUtil.productService.buyResellerProduct({
         product_id: product!.id.toString(),
-        customer_email: email
+        customer_email: email,
+        interval: 'weekly'
       });
       onClose();
       authContext.refreshProfile();
