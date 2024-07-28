@@ -122,10 +122,9 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
           setIsNotAvailable(true);
         } else {
           message.error(
-            `${
-              error?.response?.data?.message ??
-              error?.response?.data?.reason ??
-              "Unable to complete request"
+            `${error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
             }`
           );
         }
@@ -158,7 +157,7 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
     const minimumDuration = selectedProduct?.minimum_duration_month ?? 0;
     return [
       {
-        disabled: minimumDuration > 0,
+        disabled: true,
         key: "Weekly",
         label: (
           <div className="flex items-center gap-x-3">

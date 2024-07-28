@@ -34,7 +34,7 @@ const payOptions: MenuProps["items"] = [
         <div>Weekly</div>
       </div>
     ),
-    disabled: false,
+    disabled: true,
   },
   {
     key: "monthly",
@@ -136,10 +136,9 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
           setIsNotAvailable(true);
         } else {
           message.error(
-            `${
-              error?.response?.data?.message ??
-              error?.response?.data?.reason ??
-              "Unable to complete request"
+            `${error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
             }`
           );
         }
@@ -187,34 +186,35 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
 
     return authContext.currentUser?.is_return_user
       ? [
-          {
-            key: "Weekly",
-            label: (
-              <div className="flex items-center gap-x-3">
-                <Icon icon={"mdi:calendar-weekend"} />
-                <DropDownLabelItem label="Weekly" amount={price} />
-              </div>
-            ),
-          },
-          {
-            key: "Monthly",
-            label: (
-              <div className="flex items-center gap-x-3">
-                <Icon icon={"ic:baseline-calendar-month"} />
-                <DropDownLabelItem label="Monthly" amount={price * 4.3} />
-              </div>
-            ),
-          },
-          {
-            key: "Yearly",
-            label: (
-              <div className="flex items-center gap-x-3">
-                <Icon icon={"ic:baseline-calendar-month"} />
-                <DropDownLabelItem label="Yearly" amount={price * 52.2} />
-              </div>
-            ),
-          },
-        ]
+        {
+          disabled: true,
+          key: "Weekly",
+          label: (
+            <div className="flex items-center gap-x-3">
+              <Icon icon={"mdi:calendar-weekend"} />
+              <DropDownLabelItem label="Weekly" amount={price} />
+            </div>
+          ),
+        },
+        {
+          key: "Monthly",
+          label: (
+            <div className="flex items-center gap-x-3">
+              <Icon icon={"ic:baseline-calendar-month"} />
+              <DropDownLabelItem label="Monthly" amount={price * 4.3} />
+            </div>
+          ),
+        },
+        {
+          key: "Yearly",
+          label: (
+            <div className="flex items-center gap-x-3">
+              <Icon icon={"ic:baseline-calendar-month"} />
+              <DropDownLabelItem label="Yearly" amount={price * 52.2} />
+            </div>
+          ),
+        },
+      ]
       : payOptions;
   };
 

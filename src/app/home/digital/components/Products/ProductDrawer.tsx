@@ -35,7 +35,7 @@ const payOptions: MenuProps["items"] = [
         <div>Weekly</div>
       </div>
     ),
-    disabled: false,
+    disabled: true,
   },
   {
     key: "monthly",
@@ -198,6 +198,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
               <DropDownLabelItem label="Weekly" amount={price} />
             </div>
           ),
+          disabled: true
         },
         {
           key: "Monthly",

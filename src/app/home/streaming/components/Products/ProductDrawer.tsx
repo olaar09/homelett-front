@@ -35,7 +35,7 @@ const payOptions: MenuProps["items"] = [
         <div>Weekly</div>
       </div>
     ),
-    disabled: false,
+    disabled: true,
   },
   {
     key: "monthly",
@@ -191,6 +191,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
     return authContext.currentUser?.is_return_user
       ? [
         {
+          disabled: true,
           key: "Weekly",
           label: (
             <div className="flex items-center gap-x-3">
