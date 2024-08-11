@@ -68,8 +68,8 @@ const HomeMenu = ({ homeProducts }: { homeProducts: IProduct[] }) => {
                 {(homeProducts ?? []).map((item) => {
                     return <div onClick={() => onTapMenu(item)} className="h-40 0 py-3  px-2 flex flex-col border-[0.2px]">
                         <div>
-                            {getAvatar(item.tag)}
-                            {item.type === 'reseller' && <img className='h-5 w-5 rounded-full' src={item.extra_icon} />}
+                            {getAvatar(item.tag, item.title)}
+                            {<img className='h-5 w-5 rounded-full' src={item.extra_icon} />}
                         </div>
                         <div className='mt-1'>
                             <span className='font-bold text-xs'>{item.title}</span>

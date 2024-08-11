@@ -38,7 +38,13 @@ export const getAvatar = (type, logo) => {
         <Brands brands={[...Str.storeBrands].splice(1, 1)} size='small' />
       </div>
 
-    default:
-      break;
+    default: {
+      const all = Str.brands.find((dt) => dt === logo) ?? []
+      console.log(Str.brands);
+      return <div className='w-14 px-3'>
+        <Brands brands={[...all].splice(0, 1)} size='smaller' />
+      </div>
+    }
+
   }
 }
