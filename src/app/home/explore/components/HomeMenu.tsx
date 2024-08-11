@@ -6,11 +6,13 @@ import { Str } from '@/utils/consts';
 import { getAvatar } from '@/utils/helpers';
 import { message } from 'antd';
 import React, { useContext, useState } from 'react';
-import SingleProductDrawer from '../explore/components/SingleProductDrawer';
+import SingleProductDrawer from './SingleProductDrawer';
 import { useRouter } from 'next/navigation';
 import APIUtil from '@/services/APIUtil';
 import UtilService from '@/services/UtilService';
-import ResellerProductDrawer from './ResellerProductDrawer';
+import ResellerProductDrawer from '../../_components/ResellerProductDrawer';
+import ProductChildrenDrawer from './Products/ProductChildrenDrawer';
+import ProductDrawer from './Products/ProductDrawer';
 
 
 const HomeMenu = ({ homeProducts }: { homeProducts: IProduct[] }) => {
@@ -24,9 +26,6 @@ const HomeMenu = ({ homeProducts }: { homeProducts: IProduct[] }) => {
 
     const onTapMenu = (item: IProduct) => {
         switch (item.tag) {
-            case 'streaming':
-                router.push('/home/streaming')
-                break;
             case 'skills':
             case 'utilities':
                 router.push('/home/digital')
@@ -50,7 +49,7 @@ const HomeMenu = ({ homeProducts }: { homeProducts: IProduct[] }) => {
 
     return (
         <>
-            {!isReseller && <SingleProductDrawer
+            {!isReseller && <ProductDrawer
                 product={selectedProduct}
                 open={selectedProduct != null}
                 onClose={() => setSelectedProduct(null)}
@@ -75,7 +74,7 @@ const HomeMenu = ({ homeProducts }: { homeProducts: IProduct[] }) => {
                             <span className='font-bold text-xs'>{item.title}</span>
                         </div>
                         <div>
-                            <span className='text-xs text-foreground-secondary'>{item.total_selection}</span>
+                            <span className='text-xs text-foreground-secondary'>{item.extra}</span>
                         </div>
                     </div>
                 })}

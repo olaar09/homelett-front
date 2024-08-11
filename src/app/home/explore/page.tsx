@@ -27,7 +27,7 @@ import CourseTab from "./components/CourseTab/CourseTab";
 import TradingTab from "./components/TradingTab";
 import ProductDrawer from "./components/Products/ProductDrawer";
 import LoadingCard from "../_components/LoadingCard";
-import HomeMenu from "../_components/HomeMenu";
+import HomeMenu from "./components/HomeMenu";
 import { useRouter } from "next/navigation";
 import SingleProductDrawer from "./components/SingleProductDrawer";
 import ResellerOfferings from "../resseller/page";

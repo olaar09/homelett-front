@@ -86,7 +86,12 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
 
   useEffect(() => {
     if (open) {
-      setSelectedPlatform([]);
+      if (platforms && platforms.length > 0) {
+        setSelectedPlatform([platforms[0].name]);
+      } else {
+        setSelectedPlatform([]);
+      }
+
       setIsNotAvailable(false);
       setIsComplete(false);
       setSelectedInterval("Weekly");
@@ -184,38 +189,38 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
   const getOptions = () => {
     const price = product?.price ?? 0;
 
-    return authContext.currentUser?.is_return_user
-      ? [
-        {
-          disabled: true,
-          key: "Weekly",
-          label: (
-            <div className="flex items-center gap-x-3">
-              <Icon icon={"mdi:calendar-weekend"} />
-              <DropDownLabelItem label="Weekly" amount={price} />
-            </div>
-          ),
-        },
-        {
-          key: "Monthly",
-          label: (
-            <div className="flex items-center gap-x-3">
-              <Icon icon={"ic:baseline-calendar-month"} />
-              <DropDownLabelItem label="Monthly" amount={price * 4.3} />
-            </div>
-          ),
-        },
-        {
-          key: "Yearly",
-          label: (
-            <div className="flex items-center gap-x-3">
-              <Icon icon={"ic:baseline-calendar-month"} />
-              <DropDownLabelItem label="Yearly" amount={price * 52.2} />
-            </div>
-          ),
-        },
-      ]
-      : payOptions;
+    // return authContext.currentUser?.is_return_user
+    return [
+      {
+        disabled: true,
+        key: "Weekly",
+        label: (
+          <div className="flex items-center gap-x-3">
+            <Icon icon={"mdi:calendar-weekend"} />
+            <DropDownLabelItem label="Weekly" amount={price} />
+          </div>
+        ),
+      },
+      {
+        key: "Monthly",
+        label: (
+          <div className="flex items-center gap-x-3">
+            <Icon icon={"ic:baseline-calendar-month"} />
+            <DropDownLabelItem label="Monthly" amount={price * 4.3} />
+          </div>
+        ),
+      },
+      {
+        key: "Yearly",
+        label: (
+          <div className="flex items-center gap-x-3">
+            <Icon icon={"ic:baseline-calendar-month"} />
+            <DropDownLabelItem label="Yearly" amount={price * 52.2} />
+          </div>
+        ),
+      },
+    ]
+    // : payOptions;
   };
 
   const utils = new UtilService();
@@ -288,6 +293,12 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
                 {product?.total_selection}
               </span>
             </div> */}
+
+            <div className="flex flex-col items-start mt-0 mb-3 px-3">
+              <span className="text-block text-xs">
+                {product?.extra}
+              </span>
+            </div>
 
             <div className="px-3  max-h-80 overflow-y-scroll mt-2">
               <span className="block">Terms of use</span>
