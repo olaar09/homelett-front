@@ -228,7 +228,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
         key: "coupon",
         label: (
           <div className="flex items-center gap-x-3">
-            <Icon icon={"bxs:coupon"} />
+            <Icon icon={"bxs:coupon"} className=" text-orange-500" />
             <DropDownLabelItem label={`${coupon.duration} months coupon`} amount={0} />
           </div>
         ),
