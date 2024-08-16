@@ -188,7 +188,11 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
 
   const getOptions = () => {
     const price = product?.price ?? 0;
+    const platformName = (platforms ?? [])[0]?.name
     const coupon = authContext.currentUser?.coupon
+    const isCouponPlatform = ['Canva Pro', 'Youtube premium', 'Spotify', 'Prime video', 'Nord VPN'].includes(platformName)
+    const showCoupon = coupon && isCouponPlatform
+
 
     // return authContext.currentUser?.is_return_user
     return [
@@ -220,7 +224,7 @@ const ProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) => {
           </div>
         ),
       },
-      ...(!coupon ? [] : [{
+      ...(!showCoupon ? [] : [{
         key: "coupon",
         label: (
           <div className="flex items-center gap-x-3">
