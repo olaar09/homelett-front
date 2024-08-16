@@ -24,6 +24,7 @@ export default function Home() {
     fullname: "",
     phone: "",
     password: "",
+    coupon: ""
   });
   const apiService = new APIUtil();
   const query = useSearchParams();
@@ -133,6 +134,7 @@ export default function Home() {
         password: form.password,
         domain: window.location.hostname,
         invite_token: inviteCode,
+        coupon: form.coupon,
         plan_id: 2,
       });
 
@@ -241,6 +243,16 @@ export default function Home() {
                 type="password"
                 placeHolder="Password"
                 onChange={(e) => onChangeForm("password", e.target.value)}
+              />
+            </div>
+
+            <div className="flex flex-col items-start gap-y-2 text-sm w-full">
+              <span>Coupon code</span>
+              <InputField
+                name="coupon"
+                type="coupon"
+                placeHolder="Coupon (Optional)"
+                onChange={(e) => onChangeForm("coupon", e.target.value)}
               />
             </div>
 
