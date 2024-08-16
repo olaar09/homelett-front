@@ -11,6 +11,7 @@ export interface IAuthRequest {
   phone: string;
   company?: string;
   bank_info?: IUserBank;
+  coupon?: ICoupon;
   is_open_ai?: number;
   is_activated?: number;
   is_reseller?: number;
@@ -83,4 +84,11 @@ export interface ISubscriptionCredentials {
   id: number;
   platform: IPlatform;
   credential: ICredential;
+}
+
+
+export interface ICoupon {
+  id: number;
+  coupon: string;
+  duration: string;
 }
