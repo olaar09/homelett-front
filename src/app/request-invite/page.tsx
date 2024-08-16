@@ -24,7 +24,7 @@ export default function Home() {
     fullname: "",
     phone: "",
     password: "",
-    coupon: ""
+    coupon: undefined
   });
   const apiService = new APIUtil();
   const query = useSearchParams();
@@ -134,7 +134,7 @@ export default function Home() {
         password: form.password,
         domain: window.location.hostname,
         invite_token: inviteCode,
-        coupon: form.coupon,
+        coupon: form.coupon && (form.coupon as string).length > 0 ? form.coupon : undefined,
         plan_id: 2,
       });
 
@@ -251,6 +251,7 @@ export default function Home() {
               <InputField
                 name="coupon"
                 type="coupon"
+                required={false}
                 placeHolder="Coupon (Optional)"
                 onChange={(e) => onChangeForm("coupon", e.target.value)}
               />
