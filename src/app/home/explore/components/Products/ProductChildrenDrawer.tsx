@@ -122,10 +122,9 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
           setIsNotAvailable(true);
         } else {
           message.error(
-            `${
-              error?.response?.data?.message ??
-              error?.response?.data?.reason ??
-              "Unable to complete request"
+            `${error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
             }`
           );
         }
@@ -255,7 +254,7 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
               <span className="text-lg">{product?.title}</span>
               {selectedProduct && (
                 <span className=" text-foreground-secondary">
-                  {utils.formatMoney(`${displayedPrice * 100}`, "en-NG", "NGN")}{" "}
+                  {utils.formatMoney(`${displayedPrice}`, "en-NG", "NGN")}{" "}
                   /{" "}
                   <Switch
                     checkedChildren="Weekly"
