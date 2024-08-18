@@ -14,17 +14,17 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   title: "Korn | Convert your money easily to USD",
   description: "Convert your money easily to USD",
-  applicationName: "Bubble",
+  applicationName: "Korn Money",
   referrer: "no-referrer",
   appleWebApp: true,
   formatDetection: { telephone: false },
   icons: {
-    icon: "/logo.png", // /public path
+    icon: "/logo.jpg", // /public path
   },
   // icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
   openGraph: {
     type: "website",
-    title: "Bubble",
+    title: "Korn Money",
     description: "",
     siteName: "",
     url: "",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     siteId: "", // make unique
     creator: "Korn INC",
     description: "",
-    title: "Bubble",
+    title: "Korn Money",
     images: "",
   },
   assets: [
@@ -76,10 +76,10 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="referrer" content="no-referrer" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@Bubble" />
+        <meta name="twitter:site" content="@KornMoney" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
-        <title>Korn- Convert Naira easily yo USD</title>
+        <title>Korn - Convert Naira easily yo USD</title>
         <meta name="robots" content="index,follow" />
         <meta
           name="description"
@@ -87,7 +87,7 @@ export default function RootLayout({
         />
         <meta
           property="og:title"
-          content="Korn- Convert Naira easily to USD"
+          content="Korn - Convert Naira easily to USD"
         />
         <meta
           property="og:description"
@@ -97,9 +97,9 @@ export default function RootLayout({
         <meta property="og:image" content="/images/dashboard-mockup.png" />
         <meta
           property="og:image:alt"
-          content="Korn- Convert your money easily to USD"
+          content="Korn - Convert your money easily to USD"
         />
-        <meta property="og:site_name" content="Bubble" />
+        <meta property="og:site_name" content="Korn Money" />
         <link rel="preconnect" href="https://fonts.bunny.net" />
         <link
           rel="stylesheet"
