@@ -99,7 +99,9 @@ export default function Home() {
               bank_account_name: "",
             },
           },
-          home_products: []
+          streaming: [],
+          reseller_products: [],
+          configs: []
         });
       } else {
         response = await apiService.authService!.login({
@@ -119,7 +121,9 @@ export default function Home() {
               bank_account_name: "",
             },
           },
-          home_products: []
+          streaming: [],
+          reseller_products: [],
+          configs: []
         });
       }
 
