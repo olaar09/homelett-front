@@ -2,7 +2,7 @@
 import { AuthContext } from '@/contexts/AuthContext';
 import UtilService from '@/services/UtilService';
 import { Icon } from '@iconify/react/dist/iconify.js';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import Link from 'next/link';
 import React, { useContext } from 'react';
 
@@ -20,6 +20,11 @@ const KornBalanceCard: React.FC = () => {
     const rate = usdRate ? usdRate.value : 0;
 
     const usdBalance = Number(authContext.currentUser?.finance?.balance ?? 0) / Number(rate)
+
+    const onCashout = () => {
+        message.warning('You do not have any fund yet')
+    }
+
     return (
         <div className="bg-white p-4 rounded-lg shadow-sm h-52 flex flex-col justify-between">
             <div className="flex justify-between items-start">
@@ -44,7 +49,7 @@ const KornBalanceCard: React.FC = () => {
                     </Link>
                 </button>
 
-                <button className="flex-1 bg-gray-100 py-2 rounded-xl">Cash Out</button>
+                <button onClick={onCashout} className="flex-1 bg-gray-100 py-2 rounded-xl">Cash Out</button>
             </div>
         </div>
     );

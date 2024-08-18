@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import { Avatar, Button, Card, Input, Spin, Tag, message } from "antd";
+import { Alert, Avatar, Button, Card, Input, Spin, Tag, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { AuthContext } from "@/contexts/AuthContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -75,10 +75,9 @@ const SavedTeamMembers = () => {
       if (error instanceof AxiosError) {
         console.log(error?.response?.data?.reason);
         message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
+          `${error?.response?.data?.message ??
+          error?.response?.data?.reason ??
+          "Unable to complete request"
           }`
         );
       } else {
@@ -147,11 +146,10 @@ const SavedTeamMembers = () => {
                     >
                       <span>
                         {" "}
-                        {`${
-                          isMoneySent
-                            ? "Confirm your payment instantly"
-                            : "Send deposit amount to the details below"
-                        }`}
+                        {`${isMoneySent
+                          ? "Confirm your payment instantly"
+                          : "Send deposit amount to the details below"
+                          }`}
                       </span>
                     </Tag>
                   </div>
@@ -210,11 +208,10 @@ const SavedTeamMembers = () => {
                             icon={"uil:bolt"}
                           />
                           <span className="text-foreground-inverted text-xs">
-                            {`${
-                              isMoneySent
-                                ? " Confirm payment"
-                                : "I have sent the money"
-                            }`}
+                            {`${isMoneySent
+                              ? " Confirm payment"
+                              : "I have sent the money"
+                              }`}
                           </span>
                         </ACButton>
                       </div>
@@ -229,13 +226,20 @@ const SavedTeamMembers = () => {
             <div className="bg-background-thin min-h-screen py-4">
               <div className="w-full mx-auto mt-0 bg-background-thin">
                 <section className=" flex items-center w-full  px-2 mt-0 flex-wrap gap-y-4 overflow-y-scroll pb-20">
-                  <div className="flex justify-center items-center  px-3  w-full mt-4">
+                  <div className="flex flex-col justify-center items-center  px-3  w-full mt-4 gap-y-3">
                     <Tag
                       color="orange"
-                      className="  flex items-center  justify-center text-center rounded-md"
+                      className="   flex items-center  justify-center text-center rounded-md"
                     >
                       how would you like to pay?
                     </Tag>
+
+                    <Alert
+                      type="success"
+                      className=" text-xs flex items-center  justify-center text-center rounded-md text-wrap break-words"
+                      description="Any fund deposited will automatically be added into your account as USDT"
+                    />
+
                   </div>
 
                   <div className="flex items-center flex-col justify-center w-full gap-y-4">
