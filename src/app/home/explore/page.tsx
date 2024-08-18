@@ -48,6 +48,10 @@ const ExplorePage = () => {
   const utilService = new UtilService()
   const bonusAmount = utilService.formatMoney(`${5000}`, 'en-NG', 'NGN')
 
+  const onOpenVault = () => {
+    message.warning('You do not have any fund yet')
+  }
+
   return (
     <>
       <ProductChildrenDrawer
@@ -78,13 +82,14 @@ const ExplorePage = () => {
               <Alert type="warning" className="text-xs mb-3" message={
                 <div className="flex items-center gap-x-2">
                   <Icon icon={'hugeicons:money-bag-02'} />
-                  <span>Get 30% of your first 3 deposits, up to {bonusAmount}.</span>
+                  <span>Get 30% cash bonus on first 3 deposits, up to {bonusAmount}.</span>
                 </div>
               } />
 
               <KornBalanceCard />
               <div className="grid grid-cols-2 gap-4 mt-8">
                 <KornGridCard
+                  onClick={onOpenVault}
                   title="Vault"
                   value="$0.00"
                   description="8% P.A"
