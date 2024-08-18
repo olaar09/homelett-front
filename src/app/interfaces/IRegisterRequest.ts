@@ -11,6 +11,7 @@ export interface IAuthRequest {
   phone: string;
   company?: string;
   bank_info?: IUserBank;
+  nuban?: IUserBank;
   coupon?: ICoupon;
   is_open_ai?: number;
   is_activated?: number;
@@ -52,6 +53,7 @@ export interface IUserBank {
   bank_name: string;
   bank_account_name: string;
   bank_account_number: string;
+  pending: boolean;
 }
 
 export interface ISubscription {

@@ -23,10 +23,13 @@ const KornBalanceCard: React.FC = () => {
                     <h2 className="text-4xl font-bold mt-4">$0.00</h2>
                     <span className='mt-2 block text-foreground-secondary'>{balance}</span>
                 </div>
-                <a type='link' className='flex items-center gap-x-2 py-0'>
-                    <p className="text-gray-500 text-xs">View Nuban</p>
-                    <Icon className='text-lg text-foreground-secondary' icon={'iconamoon:arrow-right-2'} />
-                </a>
+                <Link href={'/home/add_fund_nuban'}>
+                    <span className='flex items-center gap-x-2 py-0'>
+                        <p className="text-gray-500 text-xs">View Nuban</p>
+                        <Icon className='text-lg text-foreground-secondary' icon={'iconamoon:arrow-right-2'} />
+                    </span>
+                </Link>
+
             </div>
             <div className="mt-4 flex space-x-6">
 
