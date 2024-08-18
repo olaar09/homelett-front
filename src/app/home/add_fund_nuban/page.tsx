@@ -266,7 +266,7 @@ const SavedTeamMembers = () => {
 
 
           {nuban?.bank_account_name && !isPendingNuban &&
-            <div className="bg-background-thin min-h-screen pt-20 py-4 px-3 flex flex-col gap-y-3 flex-col">
+            <div className="bg-background-thin min-h-screen pt-20 py-4 px-3 flex gap-y-3 flex-col">
               <div className="flex justify-center items-center  px-3  w-full mt-4">
                 <Tag
                   color="orange"
@@ -280,9 +280,9 @@ const SavedTeamMembers = () => {
 
 
               <BankInfo
-                bankName={bankInfo?.bank_name ?? ""}
-                accountNumber={bankInfo?.bank_account_number ?? ""}
-                accountName={bankInfo?.bank_account_name ?? ""}
+                bankName={nuban?.bank_name ?? ""}
+                accountNumber={nuban?.bank_account_number ?? ""}
+                accountName={nuban?.bank_account_name ?? ""}
               />
             </div>
           }
