@@ -242,7 +242,7 @@ const SavedTeamMembers = () => {
                       <div className="flex w-full mt-4 items-center justify-center">
                         <div
                           onClick={onSubmit}
-                          className="flex items-center gap-x-2 flex-1  justify-center px-3"
+                          className="flex items-center gap-x-2 flex-1  justify-center px-0"
                         >
                           <ACButton text={""} type={"button"} loading={loading}>
                             <Icon
@@ -265,7 +265,7 @@ const SavedTeamMembers = () => {
           </div>
 
 
-          {false &&
+          {nuban?.bank_account_name && !isPendingNuban &&
             <div className="bg-background-thin min-h-screen pt-20 py-4 px-3 flex flex-col gap-y-3 flex-col">
               <div className="flex justify-center items-center  px-3  w-full mt-4">
                 <Tag
@@ -273,22 +273,17 @@ const SavedTeamMembers = () => {
                   className="  flex items-center  justify-center text-center rounded-md"
                 >
                   <span>
-                    {" "}
-                    {`${isMoneySent
-                      ? "Funds sent through this account will be credited to you"
-                      : "Send deposit amount to the details below"
-                      }`}
+                    Funds sent through this account will be credited to you
                   </span>
                 </Tag>
               </div>
 
-              {!isMoneySent && (
-                <BankInfo
-                  bankName={bankInfo?.bank_name ?? ""}
-                  accountNumber={bankInfo?.bank_account_number ?? ""}
-                  accountName={bankInfo?.bank_account_name ?? ""}
-                />
-              )}
+
+              <BankInfo
+                bankName={bankInfo?.bank_name ?? ""}
+                accountNumber={bankInfo?.bank_account_number ?? ""}
+                accountName={bankInfo?.bank_account_name ?? ""}
+              />
             </div>
           }
         </>
