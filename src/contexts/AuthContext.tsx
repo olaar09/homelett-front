@@ -68,22 +68,13 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     console.log(currentUser);
 
     const queryParams = new URLSearchParams(params).toString();
-    if (currentUser?.is_admin == 1) {
-      router.push(
-        `/home/credentials_request${queryParams ? `?${queryParams}` : ""}`
-      );
-    } else {
-      router.push(`/home/explore${queryParams ? `?${queryParams}` : ""}`);
-    }
+    router.push(`/home/explore${queryParams ? `?${queryParams}` : ""}`);
+
   };
 
   useEffect(() => {
     if (currentUser) {
       if (path === "/login") {
-        goHome(currentUser);
-        return;
-      }
-      if (path === "/home/credentials_request" && currentUser.is_admin != 1) {
         goHome(currentUser);
         return;
       }
