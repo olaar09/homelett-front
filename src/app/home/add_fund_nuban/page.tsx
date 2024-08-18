@@ -99,7 +99,7 @@ const SavedTeamMembers = () => {
     (ls: IBank) => ls.code === formData.bank_name
   )?.name;
 
-  const isPendingNuban = authContext.currentUser?.nuban?.pending || isRequestSent
+  const isPendingNuban = authContext.currentUser?.nuban && authContext.currentUser?.nuban.status == 'pending' || isRequestSent
   const nuban = authContext.currentUser?.nuban
 
   return (
@@ -142,7 +142,7 @@ const SavedTeamMembers = () => {
 
                   {isPendingNuban &&
                     <div className="flex items-center justify-center mt-10">
-                      <span className="text-center block text-sm">We are verifying your details to generate a   Nuban <br /> account  number  please check back in a few hours... </span>
+                      <span className="text-center block text-sm">We are verifying your details to generate a   Nuban <br /> account  number.  Please check back in a few hours... </span>
                     </div>
                   }
 

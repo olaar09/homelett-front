@@ -54,7 +54,7 @@ export interface IUserBank {
   bank_name: string;
   bank_account_name: string;
   bank_account_number: string;
-  pending: boolean;
+  status: 'pending'| 'completed';
 }
 
 export interface ISubscription {
