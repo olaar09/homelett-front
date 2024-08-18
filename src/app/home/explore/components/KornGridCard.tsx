@@ -1,6 +1,7 @@
 // components/KornGridCard.tsx
+import { AuthContext } from '@/contexts/AuthContext';
 import { Tag } from 'antd';
-import React from 'react';
+import React, { useContext } from 'react';
 
 interface KornGridCardProps {
     title: string;

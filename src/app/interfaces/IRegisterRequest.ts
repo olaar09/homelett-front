@@ -42,7 +42,7 @@ export interface IAuthRequest {
   freeTrialLeft?: any;
   billingActive?: boolean;
   active_subscriptions?: ISubscription[];
-  home_products: IProduct[]
+  streaming: IProduct[]
   reseller_products: IProduct[]
   paymentLink?: string;
   token?: string;

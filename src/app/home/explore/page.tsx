@@ -42,7 +42,7 @@ const ExplorePage = () => {
   const authContext = useContext(AuthContext);
   const loadingPage = authContext.loading;
   const userSubs = authContext.currentUser?.active_subscriptions;
-  const homeProducts = authContext.currentUser?.home_products ?? [];
+  const homeProducts = authContext.currentUser?.streaming ?? [];
   const resellerProducts = authContext.currentUser?.reseller_products ?? [];
 
   const utilService = new UtilService()
@@ -55,7 +55,7 @@ const ExplorePage = () => {
   return (
     <>
       <ProductChildrenDrawer
-        product={null}
+        product={homeProducts[0]}
         open={openSubscriptions}
         onClose={function (): void {
           setOpenSubscriptions(false)
