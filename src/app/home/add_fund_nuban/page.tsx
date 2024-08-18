@@ -18,10 +18,9 @@ const { Option } = Select
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
-  const [isP2P, setIsP2P] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [isMoneySent, setIsMoneySent] = useState(false);
+  const [isRequestSent, setIsRequestSent] = useState(false);
 
   const onSetFormData = (key: string, value: any) => {
     setFormData({ ...formData, [key]: value });
@@ -30,25 +29,19 @@ const SavedTeamMembers = () => {
   const router = useRouter();
   const apiUtil = new APIUtil();
 
-  const onLogout = () => {
-    localStorage.clear();
-    router.push("/");
-    authContext.clearUser();
-  };
-
-
-
   const onSubmit = async () => {
     try {
       setLoading(true);
 
-      await apiUtil.profileService.confirmP2P({
-        // amount: formData.amount ?? 0,
-        // bank_account_number: formData.account_number,
+      await apiUtil.profileService.verifyBVNInfo({
+        first_name: formData.first_name,
+        last_name: formData.last_name,
+        bvn: formData.bvn_number,
+        bank_code: formData.bank_name
       });
-      message.success("Deposit successful");
+      message.success("Request successful");
       await authContext.refreshProfile();
-      router.replace("/home/explore");
+      setIsRequestSent(true)
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error?.response?.data?.reason);
@@ -106,7 +99,7 @@ const SavedTeamMembers = () => {
     (ls: IBank) => ls.code === formData.bank_name
   )?.name;
 
-  const isPendingNuban = authContext.currentUser?.nuban?.pending
+  const isPendingNuban = authContext.currentUser?.nuban?.pending || isRequestSent
   const nuban = authContext.currentUser?.nuban
 
   return (
