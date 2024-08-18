@@ -1,103 +1,53 @@
-"use client";
-
-import React, { useContext, useEffect, useRef, useState } from "react";
-import Hero from "./components/Landing/Hero";
-import Section2 from "./components/Landing/Section2";
-import Section3 from "./components/Landing/Section3";
-import Section4 from "./components/Landing/Section4";
-import Section5 from "./components/Landing/Section5";
-import Section6 from "./components/Landing/Section6";
-import Section7 from "./components/Landing/Section7";
-import Footer from "./components/Landing/Footer";
-import { useAppConfig } from "@/contexts/AppConfigContext";
-
+"use client"
+import { Icon } from '@iconify/react/dist/iconify.js';
+import { useState } from 'react';
 
 export default function Home() {
-  const appConfig = useAppConfig()
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="h-full bg-white font-sans text-gray-900 antialiased">
-      <div
-        style={{
-          position: "fixed",
-          zIndex: 9999,
-          top: "16px",
-          left: "16px",
-          right: "16px",
-          bottom: "16px",
-          pointerEvents: "none",
-        }}
-      ></div>
-      <div className="isolate flex min-h-screen flex-col">
-        <header className="sticky z-50 bg-white/90 backdrop-blur-lg inset-x-0 top-0 border-b border-gray-100 py-3">
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between">
-              <div className="shrink-0">
-                <a
-                  className="isomorphic-link isomorphic-link--internal flex items-center gap-x-3"
-                  href="/"
-                >
-                  <img className="h-7 w-auto"
-                    src={`${appConfig.logo}`}
-                    alt=""
-                  />
-                  <span className="text-2xl font-black"> {appConfig.appName}</span>
-                </a>
-              </div>
-              {/* <div className="hidden items-center justify-center gap-4 lg:flex">
-              <a
-                className="isomorphic-link isomorphic-link--internal text-sm font-semibold leading-5 transition-all duration-150 rounded-lg px-2 py-1.5 text-gray-950 hover:bg-gray-100 hover:text-blue-600"
-                href="/features"
-              >
-                Features
-              </a>
-              <a
-                className="isomorphic-link isomorphic-link--internal text-sm font-semibold leading-5 transition-all duration-150 rounded-lg px-2 py-1.5 text-gray-950 hover:bg-gray-100 hover:text-blue-600"
-                href="/integrations"
-              >
-                Integrations
-              </a>
-              <a
-                className="isomorphic-link isomorphic-link--internal text-sm font-semibold leading-5 transition-all duration-150 rounded-lg px-2 py-1.5 text-gray-950 hover:bg-gray-100 hover:text-blue-600"
-                href="/pricing"
-              >
-                Pricing
-              </a>
-              <a
-                className="isomorphic-link isomorphic-link--internal text-sm font-semibold leading-5 transition-all duration-150 rounded-lg px-2 py-1.5 text-gray-950 hover:bg-gray-100 hover:text-blue-600"
-                href="/demo"
-              >
-                Live Demo
-              </a>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="/blog"
-                className="isomorphic-link isomorphic-link--external text-sm font-semibold leading-5 text-gray-950 transition-all duration-150 rounded-lg px-2 py-1.5 hover:bg-gray-100 hover:text-blue-600"
-              >
-                Blog
-              </a>
-            </div> */}
-              <div className="flex items-center justify-end gap-4">
-                <a
-                  href="/login"
-                  className="inline-flex items-center justify-center bg-blue-600 text-sm font-semibold leading-5 text-white shadow-sm transition-all duration-150 rounded-lg px-3 py-1.5 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                >
-                  Login{" "}
-                  <span className="hidden lg:inline-block pl-2">
-                    {" "}
-                    to your account{" "}
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </header>
+    <div className="bg-black min-h-screen flex flex-col items-center text-white">
+      <div className="flex justify-between w-full p-4">
+        <div className=" p-2 rounded flex items-center gap-x-2">
+          <img src='/logo.jpg' className='w-6 rounded-md border' />
+          <span>Korn</span>
+        </div>
 
-        <main>
-          <Hero />
-        </main>
+        <div className="relative">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="bg-gray-100 rounded-full p-2 focus:outline-none"
+          >
+            <div className="w-6 h-6 rounded flex justify-center items-center">
+              <Icon className='text-black' icon={'radix-icons:hamburger-menu'} />
+            </div>
+          </button>
+          {menuOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg py-2">
+              <a href="#" className="block px-4 py-2 hover:bg-gray-200">Login</a>
+              <a href="#" className="block px-4 py-2 hover:bg-gray-200">Create Account</a>
+              <a href="#" className="block px-4 py-2 hover:bg-gray-200">Contact Support</a>
+            </div>
+          )}
+        </div>
       </div>
+
+      <div className="text-center mt-8 md:mt-24 lg:px-10 px-4">
+        <h1 className="text-5xl font-bold">DO MORE WITH YOUR MONEY</h1>
+        <p className="mt-4 text-sm px-8">Grow your money by saving in money in USD</p>
+        <p className=" text-xs max-w-xs mx-auto mt-10 text-foreground-secondary">
+          Korn money is a financial services platform, not a bank. Banking services are provided by Korn's bank partner(s). Prepaid debit cards issued by Safe Haven Microfinance Bank.
+        </p>
+      </div>
+
+      <div className='flex flex-grow  flex-col justify-end pb-10'>
+        <div className="mt-12 md:mt-16 ">
+          <button className="bg-white text-black py-2 px-4 rounded-full text-lg font-bold">
+            Click here to get started
+          </button>
+        </div>
+      </div>
+
     </div>
   );
 }
