@@ -3,11 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+
   ul,
   ol {
     list-style: revert;
   }
 }
+
 :root {
   --primary-rgb: 36, 99, 235;
   --banner-rgb: 36, 99, 235;
@@ -46,18 +48,22 @@
 }
 
 @font-face {
-  font-family: "appFont"; /* A name to use later */
-  src: url("/fonts/CircularBook.woff2"); /* IE9 Compat Modes */
-  src: url("/fonts/CircularBook.woff2") format("embedded-opentype"),
-    url("/fonts/CircularBook.woff2") format("woff2"),
-    url("/fonts/CircularBook.woff2") format("woff");
+  font-family: "appFont";
+  /* A name to use later */
+  src: url("/fonts/font.woff2");
+  /* IE9 Compat Modes */
+  src: url("/fonts/font.woff2") format("embedded-opentype"),
+    url("/fonts/font.woff2") format("woff2"),
+    url("/fonts/font.woff2") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "appBodyFont"; /* A name to use later */
-  src: url("/fonts/Regular.woff"); /* IE9 Compat Modes */
+  font-family: "appBodyFont";
+  /* A name to use later */
+  src: url("/fonts/Regular.woff");
+  /* IE9 Compat Modes */
   src: url("/fonts/Regular.woff"), url("/fonts/Regular.woff"),
     url("/fonts/Regular.woff");
   font-weight: normal;
@@ -76,9 +82,12 @@ html {
   font-family: appFont;
   scroll-behavior: smooth;
 }
+
 ::-webkit-scrollbar {
-  width: 0; /* Remove scrollbar space */
+  width: 0;
+  /* Remove scrollbar space */
 }
+
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
   background: transparent;
@@ -90,6 +99,7 @@ html {
   from {
     width: 0;
   }
+
   to {
     width: 100%;
   }
@@ -104,10 +114,12 @@ html {
 }
 
 @keyframes blink-caret {
+
   from,
   to {
     border-color: transparent;
   }
+
   50% {
     border-color: black;
   }
@@ -124,7 +136,8 @@ html {
 .no-scroll {
   overflow: hidden !important;
   height: 35vh !important;
-  position: relative; /* Prevent scrolling on iOS */
+  position: relative;
+  /* Prevent scrolling on iOS */
   width: 100% !important;
 }
 
@@ -132,9 +145,11 @@ html {
 
 .fade-container {
   position: relative;
-  min-height: 150px; /* Ensures container has a minimum height */
+  min-height: 150px;
+  /* Ensures container has a minimum height */
   overflow: hidden;
-  background-image: url("/home-img.png"); /* Path to your background image */
+  background-image: url("/home-img.png");
+  /* Path to your background image */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -146,12 +161,11 @@ html {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 150px; /* Height of the fade effect */
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgb(var(--background-rgb))
-  );
+  height: 150px;
+  /* Height of the fade effect */
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-rgb)));
 }
 
 @layer utilities {
@@ -188,6 +202,7 @@ html {
   /* border-color: transparent !important;
   box-shadow: none !important;*/
 }
+
 .ant-select-selector {
   /* border-color: transparent !important;
   box-shadow: none !important;*/
@@ -234,13 +249,11 @@ html {
 }
 
 .blur-at-top {
-  -webkit-mask-image: -webkit-gradient(
-    linear,
-    0 0,
-    0 50%,
-    from(rgba(0, 0, 0, 0)),
-    to(rgba(0, 0, 0, 6))
-  );
+  -webkit-mask-image: -webkit-gradient(linear,
+      0 0,
+      0 50%,
+      from(rgba(0, 0, 0, 0)),
+      to(rgba(0, 0, 0, 6)));
 
   background: #fbfbfc;
 }
@@ -279,5 +292,6 @@ html {
 }
 
 .gradient-border-button:hover {
-  background-color: #f0f0f0; /* Change background color on hover */
+  background-color: #f0f0f0;
+  /* Change background color on hover */
 }

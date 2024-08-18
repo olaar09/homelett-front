@@ -34,7 +34,7 @@ export default function Home() {
 
       <div className="text-center mt-8 md:mt-24 lg:px-10 px-4">
         <h1 className="text-5xl font-bold">DO MORE WITH YOUR MONEY</h1>
-        <p className="mt-4 text-sm px-8">Grow your money by saving in money in USD</p>
+        <p className="mt-4 text-sm px-8">Save in USD, Spend in Naira <br /> 🤑 Grow your money 🤑</p>
         <p className=" text-xs max-w-xs mx-auto mt-10 text-foreground-secondary">
           Korn money is a financial services platform, not a bank. Banking services are provided by Korn's bank partner(s). Prepaid debit cards issued by Safe Haven Microfinance Bank.
         </p>
