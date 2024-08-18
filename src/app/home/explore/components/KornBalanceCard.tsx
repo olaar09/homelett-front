@@ -24,6 +24,7 @@ const KornBalanceCard: React.FC = () => {
     const onCashout = () => {
         message.warning('You do not have any fund yet')
     }
+    const isPendingNuban = !authContext.currentUser?.nuban || authContext.currentUser?.nuban.status == 'pending'
 
     return (
         <div className="bg-white p-4 rounded-lg shadow-sm h-52 flex flex-col justify-between">
@@ -35,7 +36,7 @@ const KornBalanceCard: React.FC = () => {
                 </div>
                 <Link href={'/home/add_fund_nuban'}>
                     <span className='flex items-center gap-x-2 py-0'>
-                        <p className="text-gray-500 text-xs">View Nuban</p>
+                        <p className="text-gray-500 text-xs">{isPendingNuban ? 'Verify account' : 'View Nuban'}</p>
                         <Icon className='text-lg text-foreground-secondary' icon={'iconamoon:arrow-right-2'} />
                     </span>
                 </Link>

@@ -151,7 +151,7 @@ const SavedTeamMembers = () => {
 
                       <div className="px-4">
                         <div className="text-xs text-center text-foreground-secondary">
-                          You do not have an account number yet, verify your details to generate account number
+                          You do not have an account number yet, verify your details to generate a personal account number
                         </div>
                       </div>
 
