@@ -180,47 +180,41 @@ export default function Home() {
     <main
       ref={divRef}
       onScroll={handleScroll}
-      className="flex flex-col h-screen overflow-y-scroll items-center   pb-8"
+      className="flex flex-col h-screen overflow-y-scroll items-center   pb-8 bg-black"
     >
       <section className="flex-grow my-4 flex flex-col pt-4 items-center w-full mt-10">
         <div className="flex items-center gap-x-3   px-8   justify-center  lg:w-6/12 mx-auto">
           <Link href={"/"}>
             <div className="flex items-center gap-x-0   px-8   justify-center  lg:w-6/12 mx-auto">
-              <img src={`${appConfig.logo}`} className="w-14 mr-2" />
-              <span className=" text-foreground font-black text-2xl mt-0">
-                {appConfig.appName}
+              <img src={`/logo.jpg`} className="w-10 mr-2 rounded-lg border" />
+              <span className=" text-foreground font-black  text-3xl mt-0 font-bold-family text-white">
+                Korn
               </span>
             </div>
           </Link>
         </div>
 
         <div className="text-center mt-4 px-4 w-full  lg:w-6/12 mx-auto ">
-          <span className=" lg:text-5xl text-2xl font-black">
+          <span className=" text-white lg:text-5xl text-2xl font-white font-bold-family">
             {" "}
             Login to your account
           </span>
         </div>
 
-        <div className=" w-5/12 mx-auto  mt-10 ">
-          <Suspense fallback={<span>loading..</span>}>
-            <GoogleLoginButton onSuccess={googleLogin} />
-          </Suspense>
-        </div>
-
         <div className="my-4 gap-x-3 mt-9 flex items-center justify-between w-5/12 mx-auto px-8">
           <div className=" border-b-[0.5px] border-foreground-secondary flex-1 "></div>
-          <span className=" text-foreground-secondary text-sm">Or</span>
+          <span className=" text-foreground-secondary text-sm"></span>
           <div className=" border-b-[0.5px] border-foreground-secondary flex-1"></div>
         </div>
 
         <form
-          className="lg:w-4/12 w-full mx-auto"
+          className="lg:w-4/12 w-full mx-auto mt-6"
           onSubmit={(e: any) => onSubmitLogin(e)}
           method="post"
         >
           <div className="w-full px-8 flex flex-col gap-y-6">
             <div className="flex flex-col items-start gap-y-2 text-sm">
-              <span>Email address</span>
+              <span className="text-gray-400">Email address</span>
               <InputField
                 name="email"
                 type="email"
@@ -229,7 +223,7 @@ export default function Home() {
               />
             </div>
             <div className="flex flex-col items-start gap-y-2 text-sm">
-              <span>Password</span>
+              <span className="text-gray-400">Password</span>
               <InputField
                 name="password"
                 type="password"
@@ -252,7 +246,7 @@ export default function Home() {
             <div className="flex items-center justify-between">
               <span>
                 <Link href={"/reset-password"}>
-                  <span className="text-sm underline">Forgot password</span>
+                  <span className="text-sm text-gray-500">Forgot password</span>
                 </Link>
               </span>
 
@@ -260,7 +254,7 @@ export default function Home() {
 
               <span>
                 <Link href={"/request-invite"}>
-                  <span className="text-sm underline">New account</span>
+                  <span className="text-sm text-gray-500">New account</span>
                 </Link>
               </span>
             </div>
