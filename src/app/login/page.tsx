@@ -266,8 +266,8 @@ export default function Home() {
 
       <section className="px-6 flex flex-col items-center justify-center gap-y-4 ">
         <span className=" text-foreground-secondary text-sm text-center">
-          By continuing, you are agreeing to {appConfig.appName}'{" "}
-          <span className=" text-banner"> terms of services </span> and{" "}
+          By continuing, you are agreeing to Korn Money{" "}
+          <span className=" text-banner"> <br /> terms of services </span> and{" "}
           <span className=" text-banner">Privacy Policy </span>
         </span>
       </section>
