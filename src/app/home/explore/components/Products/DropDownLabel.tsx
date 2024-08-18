@@ -12,7 +12,7 @@ const DropDownLabelItem = ({
       <span> {label}</span>
       <span>
         {new UtilService().formatMoney(
-          `${Number(amount) * 100}`,
+          `${Number(amount)}`,
           "en-NG",
           "NGN"
         )}
