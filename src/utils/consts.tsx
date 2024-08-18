@@ -1,6 +1,6 @@
 export const Str = {
   earnChannel: "https://t.me/+QvfqIlQfQPEzZDM0",
-  whatsappHelp: "https://t.me/BubbleAfrica",
+  whatsappHelp: "https://t.me/kornmoney",
   CV_TEMPLATES: {
     CV_1: {
       key: "CV_1",
