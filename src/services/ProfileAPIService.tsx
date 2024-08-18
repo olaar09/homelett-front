@@ -53,7 +53,7 @@ class ProfileAPIService {
   }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(
-        `/transactions/verifyBVN`,
+        `/transactions/verify_bvn`,
         data
       );
       return response.data;

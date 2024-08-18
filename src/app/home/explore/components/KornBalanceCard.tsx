@@ -15,12 +15,17 @@ const KornBalanceCard: React.FC = () => {
         "en-NG",
         "NGN"
     )
+
+    const usdRate = authContext.currentUser?.configs?.find((cg) => cg.korn_key == 'usd_rate')
+    const rate = usdRate ? usdRate.value : 0;
+
+    const usdBalance = Number(authContext.currentUser?.finance?.balance ?? 0) / Number(rate)
     return (
         <div className="bg-white p-4 rounded-lg shadow-sm h-52 flex flex-col justify-between">
             <div className="flex justify-between items-start">
                 <div>
                     <p className="text-gray-500">Cash Balance</p>
-                    <h2 className="text-4xl font-bold mt-4">$0.00</h2>
+                    <h2 className="text-4xl font-bold mt-4">{utilService.formatMoney(`${usdBalance}`)}</h2>
                     <span className='mt-2 block text-foreground-secondary'>{balance}</span>
                 </div>
                 <Link href={'/home/add_fund_nuban'}>

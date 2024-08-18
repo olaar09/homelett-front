@@ -1,3 +1,4 @@
+import { IKornConfig } from "./IKornConfig";
 import { IPlatform, IProduct } from "./IProduct";
 
 export interface IJProfile {}
@@ -40,13 +41,13 @@ export interface IAuthRequest {
   };
   freeTrialLeft?: any;
   billingActive?: boolean;
-  billingCurrentPlan?: IBilling;
   active_subscriptions?: ISubscription[];
   home_products: IProduct[]
   reseller_products: IProduct[]
   paymentLink?: string;
   token?: string;
   subscriptions: any[];
+  configs: IKornConfig[]
 }
 
 export interface IUserBank {

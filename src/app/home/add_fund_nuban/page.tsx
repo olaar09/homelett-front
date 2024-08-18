@@ -142,7 +142,7 @@ const SavedTeamMembers = () => {
 
                   {isPendingNuban &&
                     <div className="flex items-center justify-center mt-10">
-                      <span className="text-center block text-sm">Generating Nuban account number, <br /> please check back later... </span>
+                      <span className="text-center block text-sm">We are verifying your details to generate a   Nuban <br /> account  number  please check back in a few hours... </span>
                     </div>
                   }
 
@@ -189,7 +189,7 @@ const SavedTeamMembers = () => {
                         <span className="text-xs">Bank name</span>
                         <Select
                           showSearch
-                          placeholder="Select data plan"
+                          placeholder="Select bank"
                           className="w-full h-9"
                           value={bankName}
                           onChange={(val) => onChangeBank(val)}

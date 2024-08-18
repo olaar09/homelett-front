@@ -1,3 +1,5 @@
+import { IKornConfig } from "./IKornConfig";
+
 interface IPlan {
   name: string;
   description: string;
@@ -28,4 +30,5 @@ interface IAuth {
   has_admin_privileges: boolean;
   phone: string;
   token?: string;
+  config: IKornConfig[]
 }
