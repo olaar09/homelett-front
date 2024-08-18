@@ -250,7 +250,10 @@ export default function Home() {
             <div className="flex items-center justify-between">
               <span>
                 <Link href={"/reset-password"}>
-                  <span className="text-sm text-gray-500">Forgot password</span>
+                  <div className="flex items-center gap-x-2">
+                    <Icon icon={'mdi:forgot-password'} className="text-gray-500" />
+                    <span className="text-sm text-gray-500">Forgot password</span>
+                  </div>
                 </Link>
               </span>
 
@@ -258,7 +261,11 @@ export default function Home() {
 
               <span>
                 <Link href={"/request-invite"}>
-                  <span className="text-sm text-gray-500">New account</span>
+                  <div className="flex items-center gap-x-2">
+                    <Icon icon={'mingcute:user-add-fill'} className="text-gray-500" />
+                    <span className="text-sm text-gray-500">New account</span>
+                  </div>
+
                 </Link>
               </span>
             </div>

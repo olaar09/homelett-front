@@ -11,28 +11,28 @@
 }
 
 :root {
-  --primary-rgb: 36, 99, 235;
-  --banner-rgb: 36, 99, 235;
+  --primary-rgb: 171, 8, 255;
+  --banner-rgb: 171, 8, 255;
   --banner-foreground-rgb: 255, 255, 255;
   --foreground-inverted: 255, 255, 255;
   --foreground-secondary-rgb: 141, 150, 150;
   --foreground-rgb: 29, 29, 35;
   --background-rgb: 255, 255, 255;
   --background-thin-rgb: 251, 251, 252;
-  --link-rgb: 36, 99, 235;
+  --link-rgb: 171, 8, 255;
   --panel-rgb: 36, 36, 36;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary-rgb: 36, 99, 235;
-    --banner-rgb: 36, 99, 235;
+    --primary-rgb: 171, 8, 255;
+    --banner-rgb: 171, 8, 255;
     --banner-foreground-rgb: 255, 255, 255;
     --foreground-inverted: 255, 255, 255;
     --foreground-secondary-rgb: 141, 150, 150;
     --foreground-rgb: 29, 29, 35;
     --background-rgb: 255, 255, 255;
-    --link-rgb: 36, 99, 235;
+    --link-rgb: 171, 8, 255;
     --panel-rgb: 36, 36, 36;
 
     /*     --primary-rgb: 59, 58, 190;
