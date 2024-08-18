@@ -10,7 +10,7 @@ export default () => {
             Built With State Of The Art AI Technology
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
-            Bubble is the top job search AI copilot, built with state of the art
+            Kornis the top job search AI copilot, built with state of the art
             AI technology
           </p>
         </div>
@@ -121,7 +121,7 @@ export default () => {
                 Agentic application
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Bubble propriety AI copilot can navigate different platforms on
+                Kornpropriety AI copilot can navigate different platforms on
                 the web to search and apply autonomously
               </p>
             </div>
@@ -143,7 +143,7 @@ export default () => {
                 Fine tuned models
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Bubble CV & Essay writer, have been fine tuned with over 100k
+                KornCV & Essay writer, have been fine tuned with over 100k
                 Top CV & Essays
               </p>
             </div>
@@ -165,7 +165,7 @@ export default () => {
                 Easy tracking
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Bubble tech ensures easy tracking of applications, responses,
+                Korntech ensures easy tracking of applications, responses,
                 and auto follow up
               </p>
             </div>
@@ -187,7 +187,7 @@ export default () => {
                 Human level writing
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Bubble fine-tuned models texts are indistinguishable from human
+                Kornfine-tuned models texts are indistinguishable from human
                 written.
               </p>
             </div>
@@ -209,7 +209,7 @@ export default () => {
                 Domain knowledge
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Bubble AI knows how to write top CV for specific tech domains
+                KornAI knows how to write top CV for specific tech domains
               </p>
             </div>
           </div>
@@ -230,7 +230,7 @@ export default () => {
                 Non stop application
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Bubble AI copilot doesn't stop. Literarily land your next job
+                KornAI copilot doesn't stop. Literarily land your next job
                 while you sleep!
               </p>
             </div>
@@ -296,7 +296,7 @@ export default () => {
                 Leading AI solution
               </h3>
               <p className="text-sm font-normal text-gray-600 mt-2 sm:text-base">
-                Bubble is the leading AI solution for scholarship & job
+                Kornis the leading AI solution for scholarship & job
                 search. literally find your next scholarship & job while you
                 sleep.
               </p>

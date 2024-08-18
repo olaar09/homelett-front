@@ -12,8 +12,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
-  title: "Bubble | Learn digital skills and upgrade your earning potentials with our digital skills program",
-  description: "Learn digital skills and upgrade your earning potentials with our digital skills program",
+  title: "Korn | Convert your money easily to USD",
+  description: "Convert your money easily to USD",
   applicationName: "Bubble",
   referrer: "no-referrer",
   appleWebApp: true,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     site: "",
     siteId: "", // make unique
-    creator: "Bubble INC",
+    creator: "Korn INC",
     description: "",
     title: "Bubble",
     images: "",
@@ -79,7 +79,7 @@ export default function RootLayout({
         <meta name="twitter:site" content="@Bubble" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
-        <title>Bubble - Enjoy unbeatable prices for your subscriptions</title>
+        <title>Korn- Convert Naira easily yo USD</title>
         <meta name="robots" content="index,follow" />
         <meta
           name="description"
@@ -87,7 +87,7 @@ export default function RootLayout({
         />
         <meta
           property="og:title"
-          content="Bubble - Enjoy unbreatable prices for your subscriptions"
+          content="Korn- Convert Naira easily to USD"
         />
         <meta
           property="og:description"
@@ -97,7 +97,7 @@ export default function RootLayout({
         <meta property="og:image" content="/images/dashboard-mockup.png" />
         <meta
           property="og:image:alt"
-          content="Bubble - Learn digital skills and upgrade your earning potentials with our digital skills program"
+          content="Korn- Convert your money easily to USD"
         />
         <meta property="og:site_name" content="Bubble" />
         <link rel="preconnect" href="https://fonts.bunny.net" />

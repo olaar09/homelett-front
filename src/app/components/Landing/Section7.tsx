@@ -22,7 +22,7 @@ export default () => {
                 </h2>
                 <p className="max-w-lg text-base text-blue-100 mx-auto mt-5 sm:text-lg">
                   Spend less time searching and more time applying. 70% of
-                  Bubble users get an interview in the first month.
+                  Kornusers get an interview in the first month.
                 </p>
               </div>
               <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-4 text-sm font-medium text-white mt-8">

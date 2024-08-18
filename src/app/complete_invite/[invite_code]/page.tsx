@@ -51,14 +51,13 @@ export default function CompleteInvite() {
         console.log(error?.response?.data?.reason);
         setAppError(
           error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
+          error?.response?.data?.reason ??
+          "Unable to complete request"
         );
         message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
+          `${error?.response?.data?.message ??
+          error?.response?.data?.reason ??
+          "Unable to complete request"
           }`
         );
       } else {
@@ -86,15 +85,14 @@ export default function CompleteInvite() {
 
         setAppError(
           error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
+          error?.response?.data?.reason ??
+          "Unable to complete request"
         );
 
         message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
+          `${error?.response?.data?.message ??
+          error?.response?.data?.reason ??
+          "Unable to complete request"
           }`
         );
       } else {
@@ -122,7 +120,7 @@ export default function CompleteInvite() {
     <>
       <Head>
         <meta charSet="utf-8" />
-        <title>Bubble | Complete invite</title>
+        <title>Korn| Complete invite</title>
         <meta name="description" content="Bubble" />
         <meta
           name="viewport"

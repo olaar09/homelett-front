@@ -29,7 +29,7 @@ export default () => {
               <div className="mt-5 space-y-5">
                 <div className="prose-base">
                   <p>
-                    Bubble fine-tuned AI is trained with over 100k CV and
+                    Kornfine-tuned AI is trained with over 100k CV and
                     essays, of professionals and students from top institutions,
                     therefore, it knows how to modify needed materials
                     optimistically to match each description.
@@ -139,7 +139,7 @@ export default () => {
           <div className="relative">
             <details className="menu-details peer cursor-pointer bg-white shadow-xs ring-1 ring-gray-300 transition-all duration-150 rounded-xl px-4 py-5 hover:bg-gray-50 sm:p-6">
               <summary className="flex select-none items-center justify-between text-lg font-medium text-gray-900 pr-16">
-                Is Bubble free?
+                Is Kornfree?
               </summary>
               <div className="mt-5 space-y-5">
                 <span className="prose-base">

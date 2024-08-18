@@ -10,8 +10,8 @@ export default () => {
             Who Can Join?
           </h2>
           <p className="text-base text-gray-700 mt-4 sm:text-lg">
-            Bubble can be used by professionals and students to apply for
-            internship and jobs. However Bubble is specifically fine tuned and
+            Korncan be used by professionals and students to apply for
+            internship and jobs. However Kornis specifically fine tuned and
             most suitable for tech based job applications
           </p>
         </div>

@@ -31,8 +31,14 @@ import HomeMenu from "./components/HomeMenu";
 import { useRouter } from "next/navigation";
 import SingleProductDrawer from "./components/SingleProductDrawer";
 import ResellerOfferings from "../resseller/page";
+import Header from "./components/Header";
+import KornGridCard from "./components/KornGridCard";
+import KornBalanceCard from "./components/KornBalanceCard";
+import KornHeader from "./components/KornHeader";
+import ProductChildrenDrawer from "./components/Products/ProductChildrenDrawer";
 
 const ExplorePage = () => {
+  const [openSubscriptions, setOpenSubscriptions] = useState(false)
   const authContext = useContext(AuthContext);
   const loadingPage = authContext.loading;
   const userSubs = authContext.currentUser?.active_subscriptions;
@@ -41,6 +47,13 @@ const ExplorePage = () => {
 
   return (
     <>
+      <ProductChildrenDrawer
+        product={null}
+        open={openSubscriptions}
+        onClose={function (): void {
+          setOpenSubscriptions(false)
+        }}
+      />
       <div className=" h-screen overflow-y-auto overflow-hidden">
         {loadingPage && (
           <div className="h-screen   flex flex-col justify-center items-center">
@@ -56,33 +69,40 @@ const ExplorePage = () => {
         )}
 
         {!loadingPage && (
-          <>
-            <ExploreHeader />
-            {authContext.currentUser?.is_reseller != 1 && <Highlight userSubs={userSubs} />}
-          </>
+          <div className="bg-gray-100 min-h-screen py-6">
+            <KornHeader />
+            <div className="p-4">
+              <KornBalanceCard />
+              <div className="grid grid-cols-2 gap-4 mt-8">
+                <KornGridCard
+                  title="Vault"
+                  value="$0.00"
+                  description="8% P.A"
+                  icon={<Icon icon={''} />}
+                />
+                <KornGridCard
+                  title="Korn Card"
+                  value=""
+                  description="View card"
+                  icon={<Icon icon={''} />}
+                />
+                <KornGridCard
+                  onClick={() => setOpenSubscriptions(true)}
+                  title="Cheap subscriptions"
+                  value=""
+                  icon={<Icon icon={''} />}
+                />
+                <KornGridCard
+                  title="Buy airtime"
+                  value=""
+                  icon={<Icon icon={''} />}
+                />
+              </div>
+            </div>
+          </div>
         )}
 
-        <div className="px-3 mt-8 h-3/4  flex flex-col  flex-grow overflow-y-auto pb-20">
-          <span className="text-xs text-foreground-secondary">
-            Available services
-          </span>
 
-          {(loadingPage) &&
-            <LoadingCard />
-          }
-
-          {!loadingPage && authContext.currentUser && authContext.currentUser.is_reseller != 1 &&
-            <HomeMenu homeProducts={homeProducts} />
-          }
-
-          {!loadingPage && authContext.currentUser && authContext.currentUser.is_reseller == 1 &&
-            <HomeMenu homeProducts={resellerProducts} />
-          }
-
-          {/* {!loadingPage && authContext.currentUser && authContext.currentUser.is_reseller == 1 &&
-            <ResellerOfferings />
-          } */}
-        </div>
       </div>
     </>
   );

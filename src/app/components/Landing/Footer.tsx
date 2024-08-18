@@ -63,7 +63,7 @@ export default () => {
         </div>
         <div className="flex flex-col items-center gap-4 mt-12 sm:mt-16 md:flex-row md:justify-between">
           <p className="text-sm font-medium text-gray-600">
-            © Bubble 2024 . All rights reserved
+            © Korn2024 . All rights reserved
           </p>
         </div>
       </div>

@@ -18,7 +18,7 @@ class UtilService {
   // Function to format the input value as USD currency
   formatMoney(value: string, locale = "en-US", currency = "USD"): string {
     // Convert the string value to a number and then to a locale string in USD format
-    const numberValue = Number(value) / 100; // Divide by 100 to account for cents
+    const numberValue = Number(value); // Divide by 100 to account for cents
     return this.toLocalString(numberValue, locale, currency);
   }
 }
