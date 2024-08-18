@@ -3,7 +3,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Getting Started
 pm2 start "npm run start" --name "Bubble-front"
 
-PORT=4008 pm2 start "npm run start" --name "sequelbase_messaging"
+PORT=4005 pm2 start "npm run start" --name "korn-next"
 
 
 https://tailwindpdf.com/
