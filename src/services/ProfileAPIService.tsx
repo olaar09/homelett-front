@@ -45,6 +45,23 @@ class ProfileAPIService {
     }
   }
 
+
+  async verifyBVNInfo(data: {
+    bank_code: string,
+    bvn: string, first_name: string,
+    last_name: string
+  }): Promise<string> {
+    try {
+      const response = await this.apiService.post<{ data: any }>(
+        `/transactions/verifyBVN`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async confirmP2P(data: { reference: string }): Promise<string> {
     try {
       const response = await this.apiService.post<{ data: any }>(

@@ -42,10 +42,10 @@ const SavedTeamMembers = () => {
     try {
       setLoading(true);
 
-      /*      await apiUtil.profileService.confirmP2P({
-             // amount: formData.amount ?? 0,
-             // bank_account_number: formData.account_number,
-           }); */
+      await apiUtil.profileService.confirmP2P({
+        // amount: formData.amount ?? 0,
+        // bank_account_number: formData.account_number,
+      });
       message.success("Deposit successful");
       await authContext.refreshProfile();
       router.replace("/home/explore");
@@ -77,7 +77,7 @@ const SavedTeamMembers = () => {
 
   const [formData, setFormData] = useState({
     bank_name: "",
-    bank_account_number: "",
+    account_number: "",
     first_name: "",
     last_name: "",
     bvn_number: ""
@@ -183,7 +183,7 @@ const SavedTeamMembers = () => {
                           placeHolder={`Enter sender account number`}
                           type={""}
                           name={"account_number"}
-                          value={formData.bank_account_number}
+                          value={formData.account_number}
                           required
                           onChange={(val) =>
                             onSetFormData("account_number", val.target.value)
