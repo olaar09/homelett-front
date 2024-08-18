@@ -63,10 +63,9 @@ const EarnReferralPage = () => {
     } catch (error) {
       if (error instanceof AxiosError) {
         message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
+          `${error?.response?.data?.message ??
+          error?.response?.data?.reason ??
+          "Unable to complete request"
           }`
         );
       } else {
@@ -123,7 +122,7 @@ const EarnReferralPage = () => {
           />
         </div>
 
-        <Tag className="w-full rounded-lg py-2">{user?.invite_link}</Tag>
+        {/*  <Tag className="w-full rounded-lg py-2">{user?.invite_link}</Tag> */}
       </div>
 
       {/*   <div className="px-2 flex gap-x-2 items-center justify-center mt-4">

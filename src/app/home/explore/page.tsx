@@ -45,6 +45,8 @@ const ExplorePage = () => {
   const homeProducts = authContext.currentUser?.home_products ?? [];
   const resellerProducts = authContext.currentUser?.reseller_products ?? [];
 
+  const utilService = new UtilService()
+
   return (
     <>
       <ProductChildrenDrawer
@@ -69,7 +71,7 @@ const ExplorePage = () => {
         )}
 
         {!loadingPage && (
-          <div className="bg-gray-100 min-h-screen py-6">
+          <div className="bg-gray-100 min-h-screen pt-6 pb-24">
             <KornHeader />
             <div className="p-4">
               <KornBalanceCard />
@@ -78,24 +80,27 @@ const ExplorePage = () => {
                   title="Vault"
                   value="$0.00"
                   description="8% P.A"
-                  icon={<Icon icon={''} />}
+                  icon={<img className="w-20" src="/dollar.png" />}
                 />
                 <KornGridCard
                   title="Korn Card"
-                  value=""
+                  disabled
+                  value="$0.0"
                   description="View card"
-                  icon={<Icon icon={''} />}
+                  icon={<img className="w-20" src="/card_ic.png" />}
                 />
                 <KornGridCard
                   onClick={() => setOpenSubscriptions(true)}
-                  title="Cheap subscriptions"
-                  value=""
-                  icon={<Icon icon={''} />}
+                  title="Subscriptions"
+                  description={`From ${utilService.formatMoney(`${680}`, 'en-NG', 'NGN')}`}
+                  icon={<img className="w-20" src="/netflix_ic.png" />}
+                  value={""}
                 />
                 <KornGridCard
                   title="Buy airtime"
                   value=""
-                  icon={<Icon icon={''} />}
+                  disabled
+                  icon={<img className="w-20" src="/call.png" />}
                 />
               </div>
             </div>

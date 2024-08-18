@@ -6,7 +6,10 @@ import React from 'react';
 const KornHeader: React.FC = () => {
     return (
         <div className="flex justify-between items-center p-4">
-            <h1 className="text-2xl font-bold">Korn</h1>
+            <div className='flex items-center'>
+                <img src='/logo.jpg' className='w-6 rounded' />
+                <h1 className="text-2xl font-bold">Korn</h1>
+            </div>
 
             <Link href={'/home/profile'}>
                 <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
