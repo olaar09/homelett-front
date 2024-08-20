@@ -27,9 +27,8 @@ const TransactionItem = ({
     <Card
       onClick={onSelectJob}
       hoverable
-      className={`" h-32 border-b border-0 rounded-none flex flex-col relative ${
-        active ? "bg-blue-50" : ""
-      }`}
+      className={`" h-32 border-b border-0 rounded-none flex flex-col relative ${active ? "bg-blue-50" : ""
+        }`}
     >
       <Card.Meta
         avatar={
@@ -38,8 +37,8 @@ const TransactionItem = ({
               backgroundColor: isDebit
                 ? "#f56a00"
                 : isCredit
-                ? "#4096ff"
-                : "orange",
+                  ? "#4096ff"
+                  : "orange",
               verticalAlign: "middle",
             }}
           >
@@ -56,7 +55,7 @@ const TransactionItem = ({
             <span className="text-xs  font-light">
               <span>{isCredit ? "+" : isDebit ? "-" : ""} </span>{" "}
               {new UtilService().formatMoney(
-                `${transaction.amount * 100}`,
+                `${transaction.amount}`,
                 "en-NG",
                 "NGN"
               )}
