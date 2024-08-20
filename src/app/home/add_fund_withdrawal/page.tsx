@@ -35,9 +35,9 @@ const AddFundWithdraw = () => {
       setLoading(true);
 
       await apiUtil.profileService.cashout({
-        amou: formData.amount
+        amount: formData.amount
       });
-      message.success("Request successful");
+      message.success("Request successful. You will be credited within 2 hours");
       await authContext.refreshProfile();
       setIsRequestSent(true)
     } catch (error) {
