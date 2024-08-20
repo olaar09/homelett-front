@@ -34,11 +34,8 @@ const AddFundWithdraw = () => {
     try {
       setLoading(true);
 
-      await apiUtil.profileService.verifyBVNInfo({
-        first_name: formData.first_name,
-        last_name: formData.last_name,
-        bvn: formData.bvn_number,
-        bank_code: formData.bank_name
+      await apiUtil.profileService.cashout({
+        amou: formData.amount
       });
       message.success("Request successful");
       await authContext.refreshProfile();
@@ -70,11 +67,8 @@ const AddFundWithdraw = () => {
 
 
   const [formData, setFormData] = useState({
-    bank_name: "",
-    account_number: "",
-    first_name: "",
-    last_name: "",
-    bvn_number: ""
+    amount: "",
+
   });
 
 
@@ -96,9 +90,7 @@ const AddFundWithdraw = () => {
       message.error("unable to load banks");
     }
   };
-  const bankName = (bankList ?? []).find(
-    (ls: IBank) => ls.code === formData.bank_name
-  )?.name;
+
 
   const isPendingNuban = authContext.currentUser?.nuban && authContext.currentUser?.nuban.status == 'pending' || isRequestSent
   const nuban = authContext.currentUser?.nuban
@@ -174,12 +166,12 @@ const AddFundWithdraw = () => {
                         <InputField
                           placeHolder={`Enter withdrawal amount`}
                           type={"number"}
-                          name={"first_name"}
+                          name={"amount"}
                           isLight
-                          value={formData.first_name}
+                          value={formData.amount}
                           required
                           onChange={(val) =>
-                            onSetFormData("first_name", val.target.value)
+                            onSetFormData("amount", val.target.value)
                           }
                         />
 

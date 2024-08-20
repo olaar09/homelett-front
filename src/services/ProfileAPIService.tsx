@@ -45,6 +45,20 @@ class ProfileAPIService {
     }
   }
 
+  async cashout(data: {
+    amount: string,
+  }): Promise<string> {
+    try {
+      const response = await this.apiService.post<{ data: any }>(
+        `/transactions/cashout`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
 
   async verifyBVNInfo(data: {
     bank_code: string,
