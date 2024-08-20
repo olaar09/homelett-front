@@ -59,7 +59,6 @@ const AddFundWithdraw = () => {
   };
 
   const authLoading = authContext.loading || !authContext.currentUser;
-  const bankInfo = authContext.currentUser?.p2p.bank_info;
 
   const onChangeBank = (value: string) => {
     const bank = (bankList ?? []).find((ls: IBank) => ls.name === value);
@@ -94,7 +93,10 @@ const AddFundWithdraw = () => {
 
 
   const isPendingNuban = authContext.currentUser?.nuban && authContext.currentUser?.nuban.status == 'pending' || isRequestSent
-  const nuban = authContext.currentUser?.nuban
+  const bankInfo = authContext.currentUser?.bank_info
+
+  console.log('peokmdcs;erkfaclms', bankInfo);
+
 
   const utilService = new UtilService()
 
@@ -155,12 +157,6 @@ const AddFundWithdraw = () => {
                   </div>
                   <div className="flex items-center flex-col w-full px-3 gap-y-3 mt-4">
 
-                    {/*     <div className="px-4">
-                      <div className="text-xs text-center text-foreground-secondary">
-                        Enter the Naira amount you wish to withdraw
-                      </div>
-                    </div> */}
-
                     <div className="w-full mb-2">
                       <span className="text-xs block mb-3 text-foreground-secondary">Amount to withdraw in Naira</span>
                       <div className="flex items-center gap-x-3">
@@ -175,10 +171,30 @@ const AddFundWithdraw = () => {
                             onSetFormData("amount", val.target.value)
                           }
                         />
-
                       </div>
-
                     </div>
+
+                    {bankInfo?.bank_account_name &&
+                      <div className="bg-background-thin pt-0 py-4 px-0 flex gap-y-3 flex-col w-full">
+                        <div className="flex justify-center items-center  px-0  w-full mt-4">
+                          <Tag
+                            color="orange"
+                            className="  flex items-center  justify-center text-center rounded-md"
+                          >
+                            <span>
+                              Your money will be credited to this account
+                            </span>
+                          </Tag>
+                        </div>
+
+
+                        <BankInfo
+                          bankName={bankInfo?.bank_name ?? ""}
+                          accountNumber={bankInfo?.bank_account_number ?? ""}
+                          accountName={bankInfo?.bank_account_name ?? ""}
+                        />
+                      </div>
+                    }
 
                     <div className="flex w-full mt-4 items-center justify-center">
                       <div
@@ -202,64 +218,12 @@ const AddFundWithdraw = () => {
               </section>
             </div>
           </div>
-
-          {nuban?.bank_account_name && !isPendingNuban &&
-            <div className="bg-background-thin min-h-screen pt-20 py-4 px-3 flex gap-y-3 flex-col">
-              <div className="flex justify-center items-center  px-3  w-full mt-4">
-                <Tag
-                  color="orange"
-                  className="  flex items-center  justify-center text-center rounded-md"
-                >
-                  <span>
-                    Your money will be credited to this account
-                  </span>
-                </Tag>
-              </div>
-
-
-              <BankInfo
-                bankName={nuban?.bank_name ?? ""}
-                accountNumber={nuban?.bank_account_number ?? ""}
-                accountName={nuban?.bank_account_name ?? ""}
-              />
-            </div>
-          }
         </>
       )}
     </>
   );
 };
 
-const OptionItem = ({
-  title,
-  icon,
-  onClick,
-}: {
-  title: string;
-  icon: string;
-  onClick?: () => void;
-}) => {
-  return (
-    <div
-      onClick={onClick}
-      className="gradient-border-button px-3 py-2 w-full rounded-lg flex justify-between"
-    >
-      <div className="flex items-center gap-x-2">
-        <Icon className="text-2xl pl-2" icon={icon} />
-        <span className="text-center text-xs font-bold ">{title}</span>
-      </div>
-
-      <div className="flex items-center gap-x-2">
-        <div className="flex items-center">
-          <Icon className="text-sm" icon={"uil:bolt"} />
-          <span className="text-center text-xs font-bold"> Instant </span>
-        </div>
-
-        <Icon className="text-2xl pl-2" icon={"ep:arrow-right"} />
-      </div>
-    </div>
-  );
-};
 
 const BankInfo = ({
   bankName,
@@ -282,7 +246,7 @@ const BankInfo = ({
 
   return (
     <div className="w-full flex flex-col h-28">
-      <div className="gradient-border-button px-3 py-2 w-full rounded-lg flex flex-col justify-start gap-y-3">
+      <div className="gradient-border-button px-0 py-2 w-full rounded-lg flex flex-col justify-start gap-y-3">
         {[
           {
             icon: "i-mdi:bank-outline",

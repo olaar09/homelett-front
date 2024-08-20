@@ -173,7 +173,7 @@ const UpdateBankDrawer: React.FC<DrawerProps> = ({
           <div className="px-3">
             <Tag className="text-xs my-1  flex flex-col gap-y-3 py-1">
               <span className="text-xs text-wrap">
-                Ensure this bank info is correct. Kornwill not be liable for
+                Ensure this bank info is correct. we will not be liable for
                 any mistake{" "}
               </span>
             </Tag>

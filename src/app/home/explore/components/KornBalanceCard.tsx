@@ -21,10 +21,13 @@ const KornBalanceCard: React.FC = () => {
     const rate = usdRate ? usdRate.value : 0;
 
     const usdBalance = Number(authContext.currentUser?.finance?.balance ?? 0) / Number(rate)
-    const isPendingNuban = authContext.currentUser?.nuban && authContext.currentUser?.nuban.status == 'pending'
+    const isPendingNuban = !authContext.currentUser?.nuban || authContext.currentUser?.nuban.status == 'pending'
+
     const nuban = authContext.currentUser?.nuban
 
     const bankInfo = authContext.currentUser?.bank_info
+    const isPendingBankInfo = isPendingNuban || !bankInfo
+
 
     const onCashout = () => {
         if (false && isPendingNuban) {
