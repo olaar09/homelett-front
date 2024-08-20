@@ -39,6 +39,7 @@ const AddFundWithdraw = () => {
       });
       message.success("Request successful. You will be credited within 2 hours");
       await authContext.refreshProfile();
+      router.push('/home/explore')
       setIsRequestSent(true)
     } catch (error) {
       if (error instanceof AxiosError) {
