@@ -32,7 +32,7 @@ const KornBalanceCard: React.FC = () => {
         } else if (!bankInfo) {
             message.warning('Please click on profile and add your bank information to withdraw')
         } else {
-            router.push('/home/add_fund')
+            router.push('/home/add_fund_withdrawal')
         }
 
     }
