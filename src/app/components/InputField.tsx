@@ -10,6 +10,7 @@ type InputFieldProps = {
   required?: boolean;
   name: string;
   value?: string;
+  isLight?: boolean;
   onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
@@ -20,6 +21,7 @@ const InputField: React.FC<InputFieldProps> = ({
   type,
   value,
   required = true,
+  isLight = false
 }) => {
   return (
     <div className="relative w-full">
@@ -31,7 +33,8 @@ const InputField: React.FC<InputFieldProps> = ({
         defaultValue={value}
         placeholder={placeHolder}
         onChange={onChange}
-        className="pl-3 text-gray-200 shadow-sm pr-10 bg-transparent py-2 h-9 rounded-md ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none"
+
+        className={`pl-3 text-gray-200 ${isLight ? 'text-gray-800' : 'text-gray-200'} shadow-sm pr-10 bg-transparent py-2 h-9 rounded-md ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none`}
       />
     </div>
   );

@@ -13,6 +13,7 @@ import ACButton from "@/app/components/Button";
 import InputField from "@/app/components/InputField";
 import { IBank } from "@/app/interfaces/IProduct";
 import { useRequest } from "ahooks";
+import UtilService from "@/services/UtilService";
 
 const { Option } = Select
 
@@ -102,6 +103,20 @@ const AddFundWithdraw = () => {
   const isPendingNuban = authContext.currentUser?.nuban && authContext.currentUser?.nuban.status == 'pending' || isRequestSent
   const nuban = authContext.currentUser?.nuban
 
+  const utilService = new UtilService()
+
+  const balance = utilService.formatMoney(
+    `${(authContext.currentUser?.finance?.balance ?? 0)}`,
+    "en-NG",
+    "NGN"
+  )
+
+  const usdRate = authContext.currentUser?.configs?.find((cg) => cg.korn_key == 'usd_rate')
+  const rate = usdRate ? usdRate.value : 0;
+
+  const usdBalance = Number(authContext.currentUser?.finance?.balance ?? 0) / Number(rate)
+
+
   return (
     <>
       {authLoading && (
@@ -127,7 +142,7 @@ const AddFundWithdraw = () => {
                     icon={"octicon:arrow-left-24"}
                     className=" text-xl  text-foreground"
                   />
-                  <span className="text-sm"> Your Withdraw money </span>
+                  <span className="text-sm">  Withdraw money </span>
                 </div>
               </Link>
             </div>
@@ -138,21 +153,29 @@ const AddFundWithdraw = () => {
               <section className=" flex items-center w-full  px-2 mt-0 flex-wrap gap-y-4 overflow-y-scroll pb-20">
                 <div className="flex items-center flex-col justify-center w-full gap-y-4">
 
-                  <div className="flex items-center flex-col w-full px-3 gap-y-3 mt-10">
 
-                    <div className="px-4">
+
+                  <div className="justify-center items-center flex flex-col">
+                    <p className="text-gray-500 text-sm">Your Balance</p>
+                    <h2 className="text-4xl font-bold mt-4">{utilService.formatMoney(`${usdBalance}`)}</h2>
+                    <span className='mt-2 block text-primary text-xs'>Balance in Naira: {balance}</span>
+                  </div>
+                  <div className="flex items-center flex-col w-full px-3 gap-y-3 mt-4">
+
+                    {/*     <div className="px-4">
                       <div className="text-xs text-center text-foreground-secondary">
                         Enter the Naira amount you wish to withdraw
                       </div>
-                    </div>
+                    </div> */}
 
                     <div className="w-full mb-2">
-                      <span className="text-xs">Amount to withdraw</span>
+                      <span className="text-xs block mb-3 text-foreground-secondary">Amount to withdraw in Naira</span>
                       <div className="flex items-center gap-x-3">
                         <InputField
                           placeHolder={`Enter withdrawal amount`}
                           type={"number"}
                           name={"first_name"}
+                          isLight
                           value={formData.first_name}
                           required
                           onChange={(val) =>
@@ -175,7 +198,7 @@ const AddFundWithdraw = () => {
                             icon={"uil:bolt"}
                           />
                           <span className="text-foreground-inverted text-xs">
-                            {`Generate Account number`}
+                            {`Withdraw your money`}
                           </span>
                         </ACButton>
                       </div>

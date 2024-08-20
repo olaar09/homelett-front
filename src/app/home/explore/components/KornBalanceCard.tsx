@@ -50,7 +50,12 @@ const KornBalanceCard: React.FC = () => {
                     </Link>
                 </button>
 
-                <button onClick={onCashout} className="flex-1 bg-gray-100 py-2 rounded-xl">Cash Out</button>
+                <button className="flex-1 bg-gray-100 py-2 rounded-xl">
+                    <Link href="/home/add_fund_withdrawal">
+                        <span> Cash Out</span>
+                    </Link>
+
+                </button>
             </div>
         </div>
     );
