@@ -4,12 +4,13 @@ import UtilService from '@/services/UtilService';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { Button, message } from 'antd';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useContext } from 'react';
 
 const KornBalanceCard: React.FC = () => {
     const authContext = useContext(AuthContext)
     const utilService = new UtilService()
-
+    const router = useRouter();
     const balance = utilService.formatMoney(
         `${(authContext.currentUser?.finance?.balance ?? 0)}`,
         "en-NG",
@@ -20,11 +21,21 @@ const KornBalanceCard: React.FC = () => {
     const rate = usdRate ? usdRate.value : 0;
 
     const usdBalance = Number(authContext.currentUser?.finance?.balance ?? 0) / Number(rate)
+    const isPendingNuban = authContext.currentUser?.nuban && authContext.currentUser?.nuban.status == 'pending'
+    const nuban = authContext.currentUser?.nuban
+
+    const bankInfo = authContext.currentUser?.bank_info
 
     const onCashout = () => {
-        message.warning('You do not have any fund yet')
+        if (false && isPendingNuban) {
+            message.warning('Please click on verify account to verify and activate withdrawal')
+        } else if (!bankInfo) {
+            message.warning('Please click on profile and add your bank information to withdraw')
+        } else {
+            router.push('/home/add_fund')
+        }
+
     }
-    const isPendingNuban = !authContext.currentUser?.nuban || authContext.currentUser?.nuban.status == 'pending'
 
     return (
         <div className="bg-white p-4 rounded-lg shadow-sm h-52 flex flex-col justify-between">
@@ -50,11 +61,8 @@ const KornBalanceCard: React.FC = () => {
                     </Link>
                 </button>
 
-                <button className="flex-1 bg-gray-100 py-2 rounded-xl">
-                    <Link href="/home/add_fund_withdrawal">
-                        <span> Cash Out</span>
-                    </Link>
-
+                <button onClick={onCashout} className="flex-1 bg-gray-100 py-2 rounded-xl">
+                    <span> Cash Out</span>
                 </button>
             </div>
         </div>
