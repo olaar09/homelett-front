@@ -17,7 +17,7 @@ class APIUtil {
   public subscriptionService: SubscriptionAPIService;
 
   constructor() {
-    const service = new APIService("https://api.useapplybase.com/api"); // Initialize ApiService
+    const service = new APIService("https://api.bubble.africa/api"); // Initialize ApiService
     this.productService = new ProductAPIService(service);
     this.profileService = new ProfileAPIService(service);
     this.authService = new AuthAPIService(service);
