@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import { Alert, Spin, Tabs, Tag, message } from "antd";
+import { Alert, Button, Spin, Tabs, Tag, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -36,6 +36,7 @@ import KornGridCard from "./components/KornGridCard";
 import KornBalanceCard from "./components/KornBalanceCard";
 import KornHeader from "./components/KornHeader";
 import ProductChildrenDrawer from "./components/Products/ProductChildrenDrawer";
+import Link from "next/link";
 
 const ExplorePage = () => {
   const [openSubscriptions, setOpenSubscriptions] = useState(false)
@@ -79,12 +80,24 @@ const ExplorePage = () => {
           <div className="bg-gray-100 min-h-screen pt-6 pb-24">
             <KornHeader />
             <div className="p-4">
-              <Alert type="warning" className="text-xs mb-3" message={
+
+              <div className='flex items-center gap-x-2 justify-between mb-3 text-sm'>
+                <span className="text-sm">Balance: {utilService.formatMoney(`${authContext.currentUser?.finance?.balance}`, "en-NG", "NGN")}</span>
+
+                <Link href="/home/add_fund">
+                  <Button type="link" className=" h-8 bg-gray-300 rounded-full  justify-center flex items-center">
+                    <span className="text-foreground"> Add Money </span>
+                    <Icon className="text-foreground text-lg" icon={'iconamoon:arrow-right-2'} />
+                  </Button>
+                </Link>
+              </div>
+
+              {/*  <Alert type="warning" className="text-xs mb-3" message={
                 <div className="flex items-center gap-x-2">
                   <Icon icon={'hugeicons:money-bag-02'} />
                   <span>Get 30% cash bonus on first 3 deposits, up to {bonusAmount}.</span>
                 </div>
-              } />
+              } /> */}
 
               <KornBalanceCard />
               <div className="grid grid-cols-2 gap-4 mt-8">

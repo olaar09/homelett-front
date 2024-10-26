@@ -28,9 +28,8 @@ const KornHeader: React.FC = () => {
                 <h1 className="text-2xl font-bold">Korn</h1>
             </div>
 
-            <Tag className=" h-8 bg-gray-300 rounded-full  justify-center flex items-center">
-                {rate} = {nairaUnit}
-            </Tag>
+
+
 
         </div>
     );
