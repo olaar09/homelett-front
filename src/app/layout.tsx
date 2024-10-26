@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   appleWebApp: true,
   formatDetection: { telephone: false },
   icons: {
-    icon: "/logo.jpg", // /public path
+    icon: "/logo.png", // /public path
   },
   // icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
   openGraph: {

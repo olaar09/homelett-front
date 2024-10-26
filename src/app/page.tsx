@@ -11,7 +11,7 @@ export default function Home() {
     <div className="bg-black min-h-screen flex flex-col items-center text-white">
       <div className="flex justify-between w-full p-4">
         <div className=" p-2 rounded flex items-center gap-x-2">
-          <img src='/logo.jpg' className='w-6 rounded-md border' />
+          <img src='/logo.png' className='w-6 rounded-md border' />
           <span>Bubble</span>
         </div>
 
