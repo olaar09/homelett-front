@@ -38,9 +38,12 @@ import KornHeader from "./components/KornHeader";
 import ProductChildrenDrawer from "./components/Products/ProductChildrenDrawer";
 import Link from "next/link";
 import PlanInfoDrawer from "./components/PlanInfo";
+import SubscriptionInfoDrawer from "./components/SubscriptionInfo";
 
 const ExplorePage = () => {
   const [openSubscriptions, setOpenSubscriptions] = useState(false)
+  const [selectedSubscription, setSelectedSubscription] = useState(null)
+
   const authContext = useContext(AuthContext);
   const loadingPage = authContext.loading;
   const userSubs = authContext.currentUser?.active_subscriptions;
@@ -50,8 +53,8 @@ const ExplorePage = () => {
   const utilService = new UtilService()
   const bonusAmount = utilService.formatMoney(`${5000}`, 'en-NG', 'NGN')
 
-  const onOpenVault = () => {
-    message.warning('You do not have any fund yet')
+  const onOpenVault = (selected: any) => {
+    setSelectedSubscription(selected)
   }
 
   return (
@@ -91,18 +94,26 @@ const ExplorePage = () => {
 
               <KornBalanceCard />
 
+              <SubscriptionInfoDrawer
+                open={selectedSubscription != null} onClose={function (): void {
+                  setSelectedSubscription(null)
+                }}
+                selected={selectedSubscription}
+              />
+
               <div className="mt-8 mb-3">
                 <span className=" text-foreground-secondary">Subscriptions</span>
               </div>
               <div className="grid grid-cols-1 gap-4 ">
                 <KornGridCard
-                  onClick={onOpenVault}
+                  onClick={() => onOpenVault({ title: 'Internet', username: 'qwerty', password: '3@%990300303' })}
                   title="Internet"
                   value="$0.00"
                   description="8% P.A"
                   icon={<img className="w-6" src="/logos/wifi.png" />}
                 />
                 <KornGridCard
+                  onClick={() => onOpenVault({ title: 'Netflix', username: 'qwerty', password: '3@%990300303', profileName: 'Flexty1', profilePin: '2231' })}
                   title="Netflix"
                   disabled
                   value="$0.0"
@@ -110,13 +121,14 @@ const ExplorePage = () => {
                   icon={<img className="w-6" src="/logos/nt.png" />}
                 />
                 <KornGridCard
-                  onClick={() => setOpenSubscriptions(true)}
+                  onClick={() => onOpenVault({ title: 'Prime video', username: 'qwerty', password: '3@%990300303', profileName: 'Flexty2', profilePin: '1231' })}
                   title="Prime video"
                   description={`From ${utilService.formatMoney(`${680}`, 'en-NG', 'NGN')}`}
                   icon={<img className="w-6" src="/logos/pr.jpeg" />}
                   value={""}
                 />
                 <KornGridCard
+                  onClick={() => onOpenVault({ title: 'Spotify', username: 'qwerty', password: '3@%990300303', profileName: 'Flextqa', profilePin: '1231' })}
                   title="Spotify"
                   value=""
                   disabled
