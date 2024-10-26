@@ -12,7 +12,7 @@ export default function Home() {
       <div className="flex justify-between w-full p-4">
         <div className=" p-2 rounded flex items-center gap-x-2">
           <img src='/logo.jpg' className='w-6 rounded-md border' />
-          <span>Korn</span>
+          <span>Bubble</span>
         </div>
 
         <div className="relative">

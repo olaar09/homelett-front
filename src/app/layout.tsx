@@ -12,9 +12,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
-  title: "Korn | Convert your money easily to USD",
-  description: "Convert your money easily to USD",
-  applicationName: "Korn Money",
+  title: "Bubble | Utility management app",
+  description: "Utility management app",
+  applicationName: "Bubble",
   referrer: "no-referrer",
   appleWebApp: true,
   formatDetection: { telephone: false },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   // icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
   openGraph: {
     type: "website",
-    title: "Korn Money",
+    title: "Bubble",
     description: "",
     siteName: "",
     url: "",
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
   twitter: {
     site: "",
     siteId: "", // make unique
-    creator: "Korn INC",
+    creator: "Bubble INC",
     description: "",
-    title: "Korn Money",
+    title: "Bubble",
     images: "",
   },
   assets: [
@@ -76,10 +76,10 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="referrer" content="no-referrer" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@KornMoney" />
+        <meta name="twitter:site" content="@BubbleAfrica" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
-        <title>Korn - Convert Naira easily yo USD</title>
+        <title>Bubble - Utility sharing management</title>
         <meta name="robots" content="index,follow" />
         <meta
           name="description"
@@ -87,7 +87,7 @@ export default function RootLayout({
         />
         <meta
           property="og:title"
-          content="Korn - Convert Naira easily to USD"
+          content="Bubble - Utility sharing management"
         />
         <meta
           property="og:description"
@@ -97,9 +97,9 @@ export default function RootLayout({
         <meta property="og:image" content="/images/dashboard-mockup.png" />
         <meta
           property="og:image:alt"
-          content="Korn - Convert your money easily to USD"
+          content="Bubble - Utility sharing management"
         />
-        <meta property="og:site_name" content="Korn Money" />
+        <meta property="og:site_name" content="Bubble" />
         <link rel="preconnect" href="https://fonts.bunny.net" />
         <link
           rel="stylesheet"

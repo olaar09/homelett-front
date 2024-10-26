@@ -79,7 +79,7 @@ const HeadIcon = ({ onToggle, isOpen }: any) => {
         </div>
         {isOpen && (
           <span className=" text-foreground font-black text-lg mt-0">
-            Korn
+            Bubble
           </span>
         )}
       </div>

@@ -120,7 +120,7 @@ export default function CompleteInvite() {
     <>
       <Head>
         <meta charSet="utf-8" />
-        <title>Korn| Complete invite</title>
+        <title>Bubble | Complete invite</title>
         <meta name="description" content="Bubble" />
         <meta
           name="viewport"
