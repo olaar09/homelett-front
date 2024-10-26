@@ -170,9 +170,9 @@ export default function Home() {
         <div className="flex items-center gap-x-3   px-8   justify-center  lg:w-6/12 mx-auto">
           <Link href={"/"}>
             <div className="flex items-center gap-x-0   px-8   justify-center  lg:w-6/12 mx-auto">
-              <img src={`/logo.jpg`} className="w-10 mr-2 rounded-lg border" />
+              <img src={`/logo.png`} className="w-10 mr-2 rounded-lg border" />
               <span className=" text-foreground font-white  text-3xl mt-0 font-bold-family text-white">
-                Korn
+                Bubble
               </span>
             </div>
           </Link>

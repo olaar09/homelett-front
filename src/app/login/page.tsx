@@ -190,9 +190,9 @@ export default function Home() {
         <div className="flex items-center gap-x-3   px-8   justify-center  lg:w-6/12 mx-auto">
           <Link href={"/"}>
             <div className="flex items-center gap-x-0   px-8   justify-center  lg:w-6/12 mx-auto">
-              <img src={`/logo.jpg`} className="w-10 mr-2 rounded-lg border" />
+              <img src={`/logo.png`} className="w-10 mr-2 rounded-lg border" />
               <span className=" text-foreground font-black  text-3xl mt-0 font-bold-family text-white">
-                Korn
+                Bubble
               </span>
             </div>
           </Link>
@@ -277,7 +277,7 @@ export default function Home() {
 
       <section className="px-6 flex flex-col items-center justify-center gap-y-4 ">
         <span className=" text-foreground-secondary text-sm text-center">
-          By continuing, you are agreeing to Korn Money{" "}
+          By continuing, you are agreeing to Bubble {" "}
           <span className=" text-banner"> <br /> terms of services </span> and{" "}
           <span className=" text-banner">Privacy Policy </span>
         </span>

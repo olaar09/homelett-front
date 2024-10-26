@@ -234,11 +234,7 @@ const SavedTeamMembers = () => {
                       how would you like to pay?
                     </Tag>
 
-                    <Alert
-                      type="success"
-                      className=" text-xs flex items-center  justify-center text-center rounded-md text-wrap break-words"
-                      description="Any fund deposited will automatically be added into your account as USDT"
-                    />
+
 
                   </div>
 
