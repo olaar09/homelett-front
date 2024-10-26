@@ -20,17 +20,13 @@ export const Str = {
     "/logos/canada_icon.webp",
   ],
   brands: [
+    "/logos/wifi.png",
     "/logos/yt.png",
     "/logos/sp.png",
     "/logos/pr.jpeg",
     "/logos/nt.png",
     "/logos/sm.png",
     "/logos/windscribe_logo.jpg",
-    "/logos/windscribe_logo.jpg",
-    "/logos/yt_auto.jpeg",
-    "/logos/forex.png",
-    "/logos/ig.jpeg",
-    "/logos/14pro.jpg"
   ],
   utilityBrands: [
     "/logos/gramma.png",
