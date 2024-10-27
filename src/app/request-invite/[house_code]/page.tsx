@@ -5,16 +5,16 @@ import { Icon } from "@iconify/react";
 
 import { Tag, message } from "antd";
 import { Suspense, useContext, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
 
 import React, { useRef } from "react";
-import ACButton from "../components/Button";
-import InputField from "../components/InputField";
+import ACButton from "../../components/Button";
+import InputField from "../../components/InputField";
 import Link from "next/link";
-import AuthProblem from "../components/Auth/AuthProblem";
+import AuthProblem from "../../components/Auth/AuthProblem";
 import { useAppConfig } from "@/contexts/AppConfigContext";
 
 export default function Home() {
@@ -28,6 +28,8 @@ export default function Home() {
   });
   const apiService = new APIUtil();
   const query = useSearchParams();
+  const params = useParams();
+
   const router = useRouter();
   const authContext = useContext(AuthContext);
   const [scrollYPosition, setScrollYPosition] = useState(0);
@@ -134,6 +136,7 @@ export default function Home() {
         password: form.password,
         domain: window.location.hostname,
         invite_token: inviteCode,
+        house_code: params?.house_code,
         coupon: form.coupon && (form.coupon as string).length > 0 ? form.coupon : undefined,
         plan_id: 2,
       });

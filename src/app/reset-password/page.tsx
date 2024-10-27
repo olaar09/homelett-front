@@ -5,7 +5,6 @@ import { Icon } from "@iconify/react";
 
 import { message } from "antd";
 import { Suspense, useContext, useEffect, useState } from "react";
-import FirebaseContext from "@/contexts/FirebaseContext";
 import { FirebaseError } from "firebase/app";
 import { useRouter, useSearchParams } from "next/navigation";
 import APIService from "@/services/APIService";
@@ -106,10 +105,9 @@ export default function Home() {
         console.log(error);
 
         message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
+          `${error?.response?.data?.message ??
+          error?.response?.data?.reason ??
+          "Unable to complete request"
           }`
         );
       } else {
@@ -163,7 +161,7 @@ export default function Home() {
               </div>
             )}
             <div className="flex flex-col items-start gap-y-2 text-sm">
-              <span>OTP</span>
+              {otpSent && <span>OTP</span>}
               {otpSent && (
                 <InputField
                   name="otp"
@@ -175,7 +173,7 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col items-start gap-y-2 text-sm">
-              <span>Password</span>
+              {otpSent && <span>Password</span>}
               {otpSent && (
                 <InputField
                   name="password"
