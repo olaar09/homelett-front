@@ -34,12 +34,6 @@ const KornBalanceCard: React.FC = () => {
 
     return (
         <>
-            <PlanInfoDrawer
-                open={openPlans}
-                onClose={function (): void {
-                    setOpenPlans(false)
-                }}
-            />
             <div className="bg-white p-4 rounded-lg shadow-sm h-52 flex flex-col justify-between">
                 <div className="flex justify-between items-start">
                     <div>

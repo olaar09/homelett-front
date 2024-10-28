@@ -22,7 +22,7 @@ import UtilService from "@/services/UtilService";
 import { IProduct } from "@/app/interfaces/IProduct";
 import { AuthContext } from "@/contexts/AuthContext";
 import WeeklyWarning from "./WeeklyWarning";
-import OrderComplete from "./OrderComplete";
+import OrderComplete from "../../../../components/OrderComplete";
 import DropDownLabelItem from "./DropDownLabel";
 import { useRouter } from "next/navigation";
 

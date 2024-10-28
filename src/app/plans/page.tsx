@@ -15,6 +15,7 @@ import UtilService from '@/services/UtilService';
 import { IProduct } from '../interfaces/IProduct';
 import { IHousePlan } from '../interfaces/IRegisterRequest';
 import HouseProductDrawer from '../components/HouseProductDrawer';
+import { useRouter } from 'next/navigation';
 const { Option } = Select;
 
 // Define props type for PlanPage
@@ -27,6 +28,7 @@ const PlanPage: React.FC<PlanPageProps> = ({ open, onClose }) => {
     const authContext = useContext(AuthContext)
     const [selected, setSelected] = useState<IHousePlan | null>(null)
     const util = new APIUtil()
+    const router = useRouter();
 
 
     return (
@@ -34,8 +36,11 @@ const PlanPage: React.FC<PlanPageProps> = ({ open, onClose }) => {
             <HouseProductDrawer
                 product={selected}
                 open={selected != null}
-                onClose={function (): void {
+                onClose={function (status: boolean): void {
                     setSelected(null)
+                    if (status) {
+                        router.push('/home/explore')
+                    }
                 }}
             />
 

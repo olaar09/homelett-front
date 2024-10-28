@@ -21,10 +21,10 @@ import { AxiosError } from "axios";
 import UtilService from "@/services/UtilService";
 import { IProduct } from "@/app/interfaces/IProduct";
 import { AuthContext } from "@/contexts/AuthContext";
-import OrderComplete from "../home/digital/components/Products/OrderComplete";
 import WeeklyWarning from "../home/digital/components/Products/WeeklyWarning";
 import DropDownLabelItem from "../home/explore/components/Products/DropDownLabel";
 import { IHousePlan } from "../interfaces/IRegisterRequest";
+import OrderComplete from "./OrderComplete";
 
 const payOptions: MenuProps["items"] = [
     {
@@ -52,7 +52,7 @@ const payOptions: MenuProps["items"] = [
 interface DrawerProps {
     product: IHousePlan | null;
     open: boolean;
-    onClose: () => void;
+    onClose: (status?: boolean) => void;
     /*   onSubscribe: ({
       platforms,
       interval,
@@ -88,7 +88,8 @@ const HouseProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) =
     useEffect(() => {
         if (open) {
             if (platforms && platforms.length > 0) {
-                setSelectedPlatform([platforms[0].title]);
+                //  setSelectedPlatform([platforms[0].title]);
+                setSelectedPlatform([]);
             } else {
                 setSelectedPlatform([]);
             }
@@ -104,7 +105,7 @@ const HouseProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) =
             const price =
                 selectedInterval.toLowerCase() === "weekly"
                     ? Number(product?.plan_price) * 1
-                    : Number(product?.plan_price) * 4.3;
+                    : Number(product?.plan_price) * 4;
 
             setDisplayedPrice(price);
         }
@@ -114,7 +115,7 @@ const HouseProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) =
         const displayedPrice =
             selectedInterval.toLowerCase() === "weekly"
                 ? Number(product?.plan_price) * 1
-                : Number(product?.plan_price) * 4.3;
+                : Number(product?.plan_price) * 4;
 
         setDisplayedPrice(displayedPrice);
     }, [selectedInterval]);
@@ -241,6 +242,7 @@ const HouseProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) =
     };
 
     const utils = new UtilService();
+    const warning = `select at least ${(product?.total_selection_count ?? 0) + 1} options`
     return (
         <>
             <Drawer
@@ -269,14 +271,14 @@ const HouseProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) =
                 }
                 placement="top"
                 height={computedHeight}
-                onClose={onClose}
+                onClose={() => onClose(false)}
                 maskClosable={false}
                 open={open}
             >
                 {isNotAvailable && (
                     <WeeklyWarning loading={loading} onForceMonthly={onForceMonthly} />
                 )}
-                {isComplete && <OrderComplete loading={loading} onClose={onClose} />}
+                {isComplete && <OrderComplete loading={loading} onClose={() => onClose(true)} />}
 
                 {!isNotAvailable && !isComplete && product && (
                     <div className="flex flex-col items-start py-6">
@@ -310,11 +312,7 @@ const HouseProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) =
               </span>
             </div> */}
 
-                        <div className="flex flex-col items-start mt-0 mb-3 px-3">
-                            <span className="text-block text-xs">
-                                {product?.total_selection}
-                            </span>
-                        </div>
+
 
                         <div className="px-3  max-h-80 overflow-y-scroll mt-2">
                             <span className="block">Terms of use</span>
@@ -322,7 +320,7 @@ const HouseProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) =
                                 {!isUltimate && (
                                     <p>
                                         {" "}
-                                        You may select only {product?.total_selection_count} of the
+                                        You may select only {product?.total_selection_count + 1} of the
                                         services presented in the options.
                                     </p>
                                 )}
@@ -336,12 +334,28 @@ const HouseProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) =
 
                             <div className="flex flex-col items-start mt-4">
                                 <span className="text-block text-xs">
-                                    {product?.total_selection}
+                                    {warning}
                                 </span>
                             </div>
                         </div>
 
                         <div className="mt-3 flex flex-col px-3 w-full gap-y-2">
+                            <div
+                                className="w-full flex justify-between items-center gap-x-3 h-10 cursor-pointer hover:bg-slate-100 transition-all duration-100 rounded-md"
+                            >
+                                <div className="flex items-center gap-x-3">
+                                    <img src={'/logos/wifi.png'} className="w-6 h-6" />
+                                    <span className="text-sm">{'Unlimited internet'}</span>
+                                </div>
+
+                                <div>
+                                    <Icon
+                                        icon={'icon-park-solid:check-one'}
+                                        className=" text-gray-500"
+                                    />
+                                </div>
+                            </div>
+
                             {platforms!.map((pl) => (
                                 <div
                                     onClick={() => onToggleService(pl.title)}

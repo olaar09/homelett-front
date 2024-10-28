@@ -22,7 +22,7 @@ import UtilService from "@/services/UtilService";
 import { IProduct } from "@/app/interfaces/IProduct";
 import { AuthContext } from "@/contexts/AuthContext";
 import WeeklyWarning from "./WeeklyWarning";
-import OrderComplete from "./OrderComplete";
+import OrderComplete from "../../../../components/OrderComplete";
 import DropDownLabelItem from "./DropDownLabel";
 
 // Define types for the component props
@@ -122,10 +122,9 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
           setIsNotAvailable(true);
         } else {
           message.error(
-            `${
-              error?.response?.data?.message ??
-              error?.response?.data?.reason ??
-              "Unable to complete request"
+            `${error?.response?.data?.message ??
+            error?.response?.data?.reason ??
+            "Unable to complete request"
             }`
           );
         }

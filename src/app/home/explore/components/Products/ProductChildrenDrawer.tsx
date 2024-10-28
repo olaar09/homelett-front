@@ -22,7 +22,6 @@ import UtilService from "@/services/UtilService";
 import { IProduct } from "@/app/interfaces/IProduct";
 import { AuthContext } from "@/contexts/AuthContext";
 import WeeklyWarning from "./WeeklyWarning";
-import OrderComplete from "./OrderComplete";
 import DropDownLabelItem from "./DropDownLabel";
 
 // Define types for the component props
@@ -242,7 +241,6 @@ const ProductChildrenDrawer: React.FC<DrawerProps> = ({
         {isNotAvailable && (
           <WeeklyWarning loading={loading} onForceMonthly={onForceMonthly} />
         )}
-        {isComplete && <OrderComplete loading={loading} onClose={onClose} />}
 
         {!isNotAvailable && !isComplete && product && (
           <div className="flex flex-col items-start py-2">
