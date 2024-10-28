@@ -1,7 +1,32 @@
 import { IKornConfig } from "./IKornConfig";
 import { IPlatform, IProduct } from "./IProduct";
 
-export interface IJProfile {}
+export interface IJProfile { }
+
+export interface IHouse {
+  id: number,
+  house_code: string,
+  house_name: string,
+  address: string,
+  contact_phone: string,
+  contact_person_name: string,
+  contact_email: string,
+  expected_usage: number,
+  surcharge: number,
+}
+
+export interface IHousePlan {
+  "id": number,
+  "house_id": number,
+  "plan_name": string,
+  "plan_price": number,
+  "plan_description": string,
+  total_selection_count: 0,
+  total_selection: string
+  "products": {
+    bubble_product: IProduct
+  }[]
+}
 
 export interface IAuthRequest {
   id?: string;
@@ -24,6 +49,8 @@ export interface IAuthRequest {
   total_active_invites: number;
   invite_token: string;
   invite_link: string;
+  house?: IHouse,
+  house_plans?: IHousePlan[],
   finance?: {
     balance: number;
     totalSpends: number;
@@ -54,7 +81,7 @@ export interface IUserBank {
   bank_name: string;
   bank_account_name: string;
   bank_account_number: string;
-  status: 'pending'| 'completed';
+  status: 'pending' | 'completed';
 }
 
 export interface ISubscription {

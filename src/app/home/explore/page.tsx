@@ -37,7 +37,7 @@ import KornBalanceCard from "./components/KornBalanceCard";
 import KornHeader from "./components/KornHeader";
 import ProductChildrenDrawer from "./components/Products/ProductChildrenDrawer";
 import Link from "next/link";
-import PlanInfoDrawer from "./components/PlanInfo";
+import PlanInfoDrawer from "../../components/HouseProductDrawer";
 import SubscriptionInfoDrawer from "./components/SubscriptionInfo";
 
 const ExplorePage = () => {
