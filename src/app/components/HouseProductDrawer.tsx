@@ -129,7 +129,7 @@ const HouseProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) =
             setLoading(true);
 
             await apiUtil.productService.buyProduct({
-                product_id: product!.id.toString(),
+                plan_id: product!.id.toString(),
                 interval: key.toLowerCase(),
                 selected_platforms: selectedPlatforms,
             });

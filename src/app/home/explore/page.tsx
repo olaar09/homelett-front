@@ -39,6 +39,7 @@ import ProductChildrenDrawer from "./components/Products/ProductChildrenDrawer";
 import Link from "next/link";
 import PlanInfoDrawer from "../../components/HouseProductDrawer";
 import SubscriptionInfoDrawer from "./components/SubscriptionInfo";
+import moment from "moment";
 
 const ExplorePage = () => {
   const [openSubscriptions, setOpenSubscriptions] = useState(false)
@@ -46,7 +47,7 @@ const ExplorePage = () => {
 
   const authContext = useContext(AuthContext);
   const loadingPage = authContext.loading;
-  const userSubs = authContext.currentUser?.active_subscriptions;
+  const userSubs = authContext.currentUser?.active_sub;
   const homeProducts = authContext.currentUser?.streaming ?? [];
   const resellerProducts = authContext.currentUser?.reseller_products ?? [];
 
@@ -101,46 +102,35 @@ const ExplorePage = () => {
                 selected={selectedSubscription}
               />
 
-              <div className="mt-8 mb-3">
+              <div className="mt-8 mb-3 flex justify-between items-center">
                 <span className=" text-foreground-secondary">Subscriptions</span>
+                <span className="flex items-center gap-x-0">
+                  <Icon icon={'ri:time-line'} className="text-xs"></Icon>
+                  <Tag color='' className='rounded-lg border-0'>  Ends  {moment(userSubs?.plan_end ?? "").format("DD MMM YYYY")}</Tag>
+                </span>
               </div>
-              <div className="grid grid-cols-1 gap-4 ">
-                <KornGridCard
-                  onClick={() => onOpenVault({ title: 'Internet', username: 'qwerty', password: '3@%990300303' })}
-                  title="Internet"
-                  value="$0.00"
-                  description="8% P.A"
-                  icon={<img className="w-6" src="/logos/wifi.png" />}
-                />
-                <KornGridCard
-                  onClick={() => onOpenVault({ title: 'Netflix', username: 'qwerty', password: '3@%990300303', profileName: 'Flexty1', profilePin: '2231' })}
-                  title="Netflix"
-                  disabled
-                  value="$0.0"
-                  description="View card"
-                  icon={<img className="w-6" src="/logos/nt.png" />}
-                />
-                <KornGridCard
-                  onClick={() => onOpenVault({ title: 'Prime video', username: 'qwerty', password: '3@%990300303', profileName: 'Flexty2', profilePin: '1231' })}
-                  title="Prime video"
-                  description={`From ${utilService.formatMoney(`${680}`, 'en-NG', 'NGN')}`}
-                  icon={<img className="w-6" src="/logos/pr.jpeg" />}
-                  value={""}
-                />
-                <KornGridCard
-                  onClick={() => onOpenVault({ title: 'Spotify', username: 'qwerty', password: '3@%990300303', profileName: 'Flextqa', profilePin: '1231' })}
-                  title="Spotify"
-                  value=""
-                  disabled
-                  icon={<img className="w-6" src="/logos/sp.png" />}
-                />
-                <KornGridCard
-                  title="ChatGPT"
-                  value=""
-                  disabled
-                  icon={<img className="w-6" src="/logos/chatgpt.png" />}
-                />
-              </div>
+              {userSubs &&
+                <div className="grid grid-cols-1 gap-4 ">
+                  <KornGridCard
+                    onClick={() => onOpenVault({ title: 'Internet', username: 'qwerty', password: '3@%990300303' })}
+                    title="Internet"
+                    value="$0.00"
+                    description="8% P.A"
+                    icon={<img className="w-6" src="/logos/wifi.png" />}
+                  />
+                  {userSubs.plan.products.map((pd) => {
+                    return <KornGridCard
+                      onClick={() => onOpenVault({ title: pd?.bubble_product?.title, username: 'qwerty', password: '3@%990300303' })}
+                      title={pd?.bubble_product?.title}
+                      value={new UtilService().formatMoney(`${userSubs.plan.plan_price}`)}
+                      description=""
+                      icon={<img className="w-6" src={pd?.bubble_product?.extra_icon} />}
+                    />
+                  })}
+
+
+                </div>
+              }
             </div>
           </div>
         )}

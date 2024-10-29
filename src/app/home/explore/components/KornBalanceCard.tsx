@@ -31,6 +31,7 @@ const KornBalanceCard: React.FC = () => {
     }
 
 
+    const activePlan = authContext.currentUser?.active_sub;
 
     return (
         <>
@@ -53,7 +54,7 @@ const KornBalanceCard: React.FC = () => {
                     <Brands size={"small"} brands={[...Str.brands]} />
 
                     <Link className='flex items-center gap-x-2 cursor-pointer hover:opacity-85 transition-all duration-100' href={'/plans'}>
-                        <span className='font-normal text-sm'>Essential plan</span>
+                        <span className='font-normal text-sm'>{activePlan?.plan.plan_name ?? 'Select a plan'}</span>
                         <Icon icon={'oui:arrow-down'} />
                     </Link>
                 </div>

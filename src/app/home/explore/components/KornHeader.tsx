@@ -29,12 +29,13 @@ const KornHeader: React.FC = () => {
             </div>
 
             <div className='flex items-center gap-x-2 justify-between text-sm'>
-                <Link href="/home/add_fund">
+                <span className=' truncate w-full  px-1 block'> Hi, {authContext.currentUser?.fullname} </span>
+                {/*   <Link href="/home/add_fund">
                     <Button type="link" className=" h-8  bg-gray-300 rounded-full  justify-center flex items-center">
                         <span className="text-foreground text-xs"> Add Money </span>
                         <Icon className="text-foreground text-lg" icon={'iconamoon:arrow-right-2'} />
                     </Button>
-                </Link>
+                </Link> */}
             </div>
         </div>
     );

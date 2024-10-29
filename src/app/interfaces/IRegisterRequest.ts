@@ -51,6 +51,15 @@ export interface IAuthRequest {
   invite_link: string;
   house?: IHouse,
   house_plans?: IHousePlan[],
+  "active_sub": {
+    "id": number,
+    "user_id": number,
+    "product_id": number,
+    "plan_end": string,
+    "is_active": number,
+    "interval": string,
+    "plan": IHousePlan
+  },
   finance?: {
     balance: number;
     totalSpends: number;

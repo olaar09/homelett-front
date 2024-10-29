@@ -238,10 +238,10 @@ const Nav: React.FC<any> = ({ children }) => {
       {
         path:
           true || authContext.currentUser?.is_earner == 1
-            ? "/home/earn"
-            : "/home/earn_referral",
+            ? "http://localhost:3000/home/add_fund "
+            : "http://localhost:3000/home/add_fund",
         icon: "majesticons:money-plus-line",
-        title: "Earn",
+        title: "Add money",
         isNew: false,
       },
       {
