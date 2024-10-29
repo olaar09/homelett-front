@@ -215,7 +215,7 @@ const HouseProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) =
                 label: (
                     <div className="flex items-center gap-x-3">
                         <Icon icon={"ic:baseline-calendar-month"} />
-                        <DropDownLabelItem label="Monthly" amount={price * 4.3} />
+                        <DropDownLabelItem label="Monthly" amount={price * 4} />
                     </div>
                 ),
             },

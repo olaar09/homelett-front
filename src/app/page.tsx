@@ -42,10 +42,13 @@ export default function Home() {
       </div>
 
       <div className="text-center mt-8 md:mt-24 lg:px-10 px-4">
-        <h1 className="text-5xl font-bold-family">DO MORE WITH YOUR MONEY</h1>
-        <p className="mt-4 text-sm px-8">Save in USD, Spend in Naira <br /> 🤑 Grow your money 🤑</p>
+        <h1 className="text-5xl font-bold-family">Plug, Play and Earn</h1>
+        <p className="mt-4 text-sm px-8">Earn  🤑 Money 🤑 When You Share Your Hotspot   with Bubble stations </p>
         <p className=" text-xs max-w-xs mx-auto mt-10 text-foreground-secondary">
-          Korn money is a financial services platform, not a bank. Banking services are provided by Korn's bank partner(s). Prepaid debit cards issued by Safe Haven Microfinance Bank.
+          Bubble station is a  internet sharing device
+          that empowers users to share data with
+          their guests, customers or community at whatever rates
+          you decide.
         </p>
       </div>
       <div className='mt-10'>
@@ -56,7 +59,7 @@ export default function Home() {
         <div className="mt-12 md:mt-16 ">
           <Link href={'/request-invite'}>
             <button className="bg-white font-bold-family text-black py-2 px-4 rounded-full text-lg font-bold">
-              Click here to get started
+              Order a bubble station
             </button>
           </Link>
 
