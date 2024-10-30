@@ -40,10 +40,11 @@ import Link from "next/link";
 import PlanInfoDrawer from "../../components/HouseProductDrawer";
 import SubscriptionInfoDrawer from "./components/SubscriptionInfo";
 import moment from "moment";
+import { ISubscription } from "@/app/interfaces/IRegisterRequest";
 
 const ExplorePage = () => {
   const [openSubscriptions, setOpenSubscriptions] = useState(false)
-  const [selectedSubscription, setSelectedSubscription] = useState(null)
+  const [selectedSubscription, setSelectedSubscription] = useState<ISubscription | undefined>(undefined)
 
   const authContext = useContext(AuthContext);
   const loadingPage = authContext.loading;
@@ -52,10 +53,18 @@ const ExplorePage = () => {
   const resellerProducts = authContext.currentUser?.reseller_products ?? [];
 
   const utilService = new UtilService()
-  const bonusAmount = utilService.formatMoney(`${5000}`, 'en-NG', 'NGN')
 
-  const onOpenVault = (selected: any) => {
-    setSelectedSubscription(selected)
+  const onOpenVault = (selected: IProduct) => {
+    console.log(selected);
+
+    const sub = authContext.currentUser?.active_subscriptions?.find((sub) => sub.product.id == selected.id)
+    if (!sub) {
+      console.log(authContext.currentUser?.active_subscriptions);
+
+      message.error(`No ${selected.title} subscription yet`)
+    } else {
+      setSelectedSubscription(sub)
+    }
   }
 
   return (
@@ -96,8 +105,8 @@ const ExplorePage = () => {
               <KornBalanceCard />
 
               <SubscriptionInfoDrawer
-                open={selectedSubscription != null} onClose={function (): void {
-                  setSelectedSubscription(null)
+                open={selectedSubscription != undefined} onClose={function (): void {
+                  setSelectedSubscription(undefined)
                 }}
                 selected={selectedSubscription}
               />
@@ -111,18 +120,18 @@ const ExplorePage = () => {
               </div>
               {userSubs &&
                 <div className="grid grid-cols-1 gap-4 ">
-                  <KornGridCard
-                    onClick={() => onOpenVault({ title: 'Internet', username: 'qwerty', password: '3@%990300303' })}
+                  {/* <KornGridCard
+                    onClick={() => onOpenVault()}
                     title="Internet"
                     value="$0.00"
                     description="8% P.A"
                     icon={<img className="w-6" src="/logos/wifi.png" />}
-                  />
-                  {userSubs.plan.products.map((pd) => {
+                  /> */}
+                  {(userSubs?.plan?.products ?? []).map((pd) => {
                     return <KornGridCard
-                      onClick={() => onOpenVault({ title: pd?.bubble_product?.title, username: 'qwerty', password: '3@%990300303' })}
+                      onClick={() => onOpenVault(pd.bubble_product)}
                       title={pd?.bubble_product?.title}
-                      value={new UtilService().formatMoney(`${userSubs.plan.plan_price}`)}
+                      value={new UtilService().formatMoney(`${userSubs?.plan?.plan_price}`)}
                       description=""
                       icon={<img className="w-6" src={pd?.bubble_product?.extra_icon} />}
                     />
