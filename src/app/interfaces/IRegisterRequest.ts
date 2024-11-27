@@ -13,6 +13,7 @@ export interface IHouse {
   contact_email: string,
   expected_usage: number,
   surcharge: number,
+  token_per_kw: number,
 }
 
 export interface IHousePlan {

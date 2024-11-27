@@ -35,10 +35,12 @@ import moment from "moment";
 import { ISubscription } from "@/app/interfaces/IRegisterRequest";
 import IconButton from "./components/IconButton";
 import TransactionList from "./components/TransactionList";
+import PurchaseTokenDrawer from "./components/PurchaseTokenDrawer";
 
 const ExplorePage = () => {
   const [openSubscriptions, setOpenSubscriptions] = useState(false)
   const [selectedSubscription, setSelectedSubscription] = useState<ISubscription | undefined>(undefined)
+  const [tokenDrawerOpen, setTokenDrawerOpen] = useState(false);
 
   const authContext = useContext(AuthContext);
   const loadingPage = authContext.loading;
@@ -46,6 +48,7 @@ const ExplorePage = () => {
   const userTransactions = authContext.currentUser?.recent_transactions ?? [];
   const homeProducts = authContext.currentUser?.streaming ?? [];
   const resellerProducts = authContext.currentUser?.reseller_products ?? [];
+  const tokenPerKw = authContext.currentUser?.house?.token_per_kw ?? 0;
 
   const utilService = new UtilService()
   const router = useRouter()
@@ -75,6 +78,11 @@ const ExplorePage = () => {
         onClose={function (): void {
           setOpenSubscriptions(false)
         }}
+      />
+      <PurchaseTokenDrawer
+        open={tokenDrawerOpen}
+        onClose={() => setTokenDrawerOpen(false)}
+        tokenPerKw={tokenPerKw}
       />
       <div className=" h-screen overflow-y-auto overflow-hidden">
         {loadingPage && (
@@ -114,7 +122,7 @@ const ExplorePage = () => {
                   <IconButton
                     icon="mdi:electricity-circle"
                     label="Buy Token"
-                    onClick={() => message.info('Buy token feature coming soon')}
+                    onClick={() => setTokenDrawerOpen(true)}
                   />
                   <IconButton
                     icon="solar:card-bold"
