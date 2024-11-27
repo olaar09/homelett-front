@@ -79,7 +79,7 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
             placement="bottom"
             onClose={onClose}
             open={open}
-            height={400}
+            height={500}
             className="rounded-t-xl"
         >
             <div className="p-6">
@@ -94,17 +94,22 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                         <span className="text-sm font-medium text-gray-900">₦{tokenPerKw}.00</span>
                     </div>
 
-                    <InputField
-                        placeHolder="Enter meter number"
-                        type="text"
-                        name="meterNumber"
-                        disabled={authContext.currentUser?.meter_number ? true : false}
-                        readOnly={authContext.currentUser?.meter_number ? true : false}
-                        value={meterNumber}
-                        onChange={(e) => setMeterNumber(e.target.value)}
-                    />
+                    <div className='space-y-2 mt-3'>
+                        <span className='block text-xs'>Meter number</span>
+                        <InputField
+                            placeHolder="Enter meter number"
+                            type="text"
+                            name="meterNumber"
+                            disabled={authContext.currentUser?.meter_number ? true : false}
+                            readOnly={authContext.currentUser?.meter_number ? true : false}
+                            value={meterNumber}
+                            onChange={(e) => setMeterNumber(e.target.value)}
+                        />
 
-                    <div className="space-y-2">
+                    </div>
+
+                    <div className="space-y-2 mt-1">
+                        <span className='block text-xs'>Recharge Amount</span>
                         <InputField
                             placeHolder="Enter token amount (min. ₦5,000)"
                             type="number"
@@ -132,7 +137,7 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                     <button
                         onClick={handlePurchase}
                         disabled={loading || !tokenAmount || tokenAmount < 5000}
-                        className={`mt-2 w-full bg-blue-500 text-white py-3 rounded-lg flex items-center justify-center gap-x-2 hover:bg-blue-600 transition-colors ${(loading || !tokenAmount || tokenAmount < 5000) ? 'opacity-50 cursor-not-allowed' : ''
+                        className={`mt-0 w-full bg-blue-500 text-white py-3 rounded-lg flex items-center justify-center gap-x-2 hover:bg-blue-600 transition-colors ${(loading || !tokenAmount || tokenAmount < 5000) ? 'opacity-50 cursor-not-allowed' : ''
                             }`}
                     >
                         {loading ? (
