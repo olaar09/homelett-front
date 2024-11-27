@@ -42,21 +42,18 @@ const KornBalanceCard: React.FC = () => {
                         <h2 className="text-xs font-thin mt-1">{authContext.currentUser?.house?.address}</h2>
                         <span className='mt-4 block text-foreground-secondary'>Balance : {balance}</span>
                     </div>
-                    <div className="mt-0 flex gap-x-6">
-                        <Tag color='green' className='border-0 flex gap-x-2 items-center'>
-                            <Icon icon={'lets-icons:check-fill'} />
-                            <span> Systems are active</span>
-                        </Tag>
-                    </div>
+
 
                 </div>
                 <div className="mt-4 flex justify-between gap-x-6 px-2">
-                    <Brands size={"small"} brands={[...Str.brands]} />
+                    <Brands size={"small"} brands={[...Str.brands.slice(0, 4)]} />
 
-                    <Link className='flex items-center gap-x-2 cursor-pointer hover:opacity-85 transition-all duration-100' href={'/plans'}>
-                        <span className='font-normal text-sm'>{activePlan?.plan?.plan_name ?? 'Select a plan'}</span>
-                        <Icon icon={'oui:arrow-down'} />
-                    </Link>
+                    <Tag color='green' className='border-0 flex gap-x-2 items-center'>
+                        <Link className='flex items-center gap-x-2 cursor-pointer hover:opacity-85 transition-all duration-100' href={'/plans'}>
+                            <span className='font-normal text-sm'>{activePlan?.plan?.plan_name ?? 'Select a plan'}</span>
+                            <Icon icon={'oui:arrow-down'} />
+                        </Link>
+                    </Tag>
                 </div>
             </div>
         </>

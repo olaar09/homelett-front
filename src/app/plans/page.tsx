@@ -69,7 +69,7 @@ const PlanPage: React.FC<PlanPageProps> = ({ open, onClose }) => {
                                         <Brands size={'small'} brands={['/logos/wifi.png', ...extraIcons]} />
                                     </div>
 
-                                    <span className='text-xs'>{opt.plan_name}</span>
+                                    <span className='text-xs'>{opt?.plan_name}</span>
                                     <p className='text-xs text-foreground-secondary'>{new UtilService().formatMoney(`${opt.plan_price}`)}</p>
 
                                     <p className='pt-3 pb-1 text-foreground-secondary text-xs'>{opt.plan_description}</p>
