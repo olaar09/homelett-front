@@ -4,6 +4,8 @@ import { Icon } from '@iconify/react';
 import InputField from '@/app/components/InputField';
 import { usePaystackPayment } from "react-paystack";
 import APIUtil from "@/services/APIUtil";
+import { AxiosError } from 'axios';
+import { ITransferPaymentInfo } from '@/app/interfaces/IProduct';
 
 export type PaymentType = 'direct_deposit' | 'paystack' | null;
 
@@ -22,6 +24,8 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
 }) => {
     const [amount, setAmount] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [newBankInfo, setNewBankInfo] = useState<ITransferPaymentInfo | null>(null);
+
     const apiUtil = new APIUtil();
 
     const config = {
@@ -38,7 +42,7 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
             message.error("Minimum amount is 200 naira");
             return;
         }
-        onClose();
+        generateDirectDepositPaymentDetails();
     };
 
     const handlePaystackPayment = () => {
@@ -74,6 +78,29 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
             setLoading(false);
         }
     };
+
+
+    const generateDirectDepositPaymentDetails = async () => {
+        try {
+            setLoading(true);
+            const paymentData = await apiUtil.transactionService.generateGroupPayment(amount)
+            setNewBankInfo(paymentData);
+        }
+        catch (error) {
+            if (error instanceof AxiosError) {
+                message.error(
+                    `${error?.response?.data?.message ??
+                    error?.response?.data?.reason ??
+                    "Unable to complete request"
+                    }`
+                );
+            } else {
+                message.error("Unable to complete request");
+            }
+        } finally {
+            setLoading(false);
+        }
+    }
 
     return (
         <Drawer

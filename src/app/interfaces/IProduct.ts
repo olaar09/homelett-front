@@ -32,6 +32,24 @@ export interface IBank {
   longcode: string;
 }
 
+interface BankDetails {
+  slug: string;
+  name: string;
+  id: number;
+}
+
+
+export interface ITransferPaymentInfo {
+  reference: string;
+  status: string;
+  display_text: string;
+  account_name: string;
+  account_number: string;
+  bank: BankDetails;
+  account_expires_at: string;
+}
+
+
 export interface ITransaction {
   id: number;
   type: string;

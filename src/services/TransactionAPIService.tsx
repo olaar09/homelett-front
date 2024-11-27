@@ -1,4 +1,4 @@
-import { IBank, IProduct, ITransaction } from "@/app/interfaces/IProduct";
+import { IBank, IProduct, ITransaction, ITransferPaymentInfo } from "@/app/interfaces/IProduct";
 import ApiService from "./APIService";
 
 class TransactionAPIService {
@@ -23,6 +23,17 @@ class TransactionAPIService {
       throw error;
     }
   } */
+
+  async generateGroupPayment(amount: number): Promise<ITransferPaymentInfo | null> {
+    try {
+      const text = await this.apiService.post<{
+        data: any;
+      }>(`/transactions/initiate_transfer_payment`, { amount: amount });
+      return text.data as ITransferPaymentInfo;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async fetchBanks(): Promise<IBank[] | null> {
     try {
