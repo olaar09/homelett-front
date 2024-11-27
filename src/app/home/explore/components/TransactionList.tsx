@@ -10,13 +10,27 @@ interface TransactionListProps {
 const TransactionList: React.FC<TransactionListProps> = ({ transactions }) => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [drawerContent, setDrawerContent] = useState<string | null>(null);
+    const [copied, setCopied] = useState(false);
 
     const toggleDrawer = (content: string | null) => {
         if (content) {
             setDrawerContent(content);
             setDrawerOpen(true);
+            setCopied(false);
         } else {
             setDrawerOpen(false);
+        }
+    };
+
+    const handleCopy = async () => {
+        if (drawerContent) {
+            try {
+                await navigator.clipboard.writeText(drawerContent);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
         }
     };
 
@@ -81,9 +95,26 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions }) => {
                 className="rounded-t-xl"
             >
                 <div className="p-6">
-                    <div className="flex items-center mb-4">
-                        <Icon icon="mdi:information-outline" className="text-blue-500 mr-2 text-xl" />
-                        <h4 className="text-lg font-semibold text-gray-900">Details</h4>
+                    <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center">
+                            <Icon icon="mdi:information-outline" className="text-blue-500 mr-2 text-xl" />
+                            <h4 className="text-lg font-semibold text-gray-900">Details</h4>
+                        </div>
+                        <button
+                            onClick={handleCopy}
+                            className={`flex items-center gap-x-1 px-3 py-1.5 rounded-md transition-colors ${copied
+                                    ? 'bg-green-100 text-green-700'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
+                        >
+                            <Icon
+                                icon={copied ? "mdi:check" : "mdi:content-copy"}
+                                className="text-lg"
+                            />
+                            <span className="text-sm font-medium">
+                                {copied ? 'Copied!' : 'Copy'}
+                            </span>
+                        </button>
                     </div>
                     <div className="text-sm text-gray-800 leading-relaxed">
                         {drawerContent}
