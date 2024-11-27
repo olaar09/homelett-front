@@ -242,7 +242,7 @@ const SavedTeamMembers = () => {
                     <OptionItem
                       onClick={() => onSetIsP2P()}
                       icon={"mdi:bank"}
-                      title="P2p bank transfer"
+                      title="Direct bank transfer"
                     />
                     <Link
                       href={authContext.currentUser.paymentLink!}

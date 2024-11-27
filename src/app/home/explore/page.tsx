@@ -10,14 +10,6 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import AddWorkflowModal from "../_components/AddWorkflowModal";
 import ExploreHeader from "./components/Header";
 
-import { AndroidOutlined, AppleOutlined } from "@ant-design/icons";
-import Highlight from "./components/Highlight/Subscriptions";
-import Brands from "@/app/components/Brands";
-import Chip from "@/app/components/Chip";
-import { Str } from "@/utils/consts";
-import ProductItem from "./components/Products/ProductItem";
-import EntertainmentTab from "./components/EntertainmentTab";
-import EarnTab from "./components/EarnTab";
 import { IProduct } from "@/app/interfaces/IProduct";
 import AirtimeTab from "./components/AirtimeTab/AirtimeTab";
 import NoticeDrawers from "./components/Notice/NoticeDrawer";
@@ -56,6 +48,7 @@ const ExplorePage = () => {
   const resellerProducts = authContext.currentUser?.reseller_products ?? [];
 
   const utilService = new UtilService()
+  const router = useRouter()
 
   const onOpenVault = (selected: IProduct) => {
     console.log(selected);
@@ -68,6 +61,10 @@ const ExplorePage = () => {
     } else {
       setSelectedSubscription(sub)
     }
+  }
+
+  const onAddFund = () => {
+    router.push('/home/add_fund')
   }
 
   return (
@@ -112,7 +109,7 @@ const ExplorePage = () => {
                   <IconButton
                     icon="solar:wallet-money-bold"
                     label="Fund"
-                    onClick={() => message.info('Fund feature coming soon')}
+                    onClick={onAddFund}
                   />
                   <IconButton
                     icon="mdi:electricity-circle"
