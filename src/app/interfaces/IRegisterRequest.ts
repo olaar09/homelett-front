@@ -1,5 +1,5 @@
 import { IKornConfig } from "./IKornConfig";
-import { IPlatform, IProduct } from "./IProduct";
+import { IPlatform, IProduct, ITransaction } from "./IProduct";
 
 export interface IJProfile { }
 
@@ -50,6 +50,7 @@ export interface IAuthRequest {
   invite_token: string;
   invite_link: string;
   house?: IHouse,
+  recent_transactions: ITransaction[],
   house_plans?: IHousePlan[],
   "active_sub": {
     "id": number,

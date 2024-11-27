@@ -48,10 +48,10 @@ const KornBalanceCard: React.FC = () => {
                 <div className="mt-4 flex justify-between gap-x-6 px-2">
                     <Brands size={"small"} brands={[...Str.brands.slice(0, 4)]} />
 
-                    <Tag color='green' className='border-0 flex gap-x-2 items-center'>
+                    <Tag color='green' className=' flex gap-x-2 items-center'>
                         <Link className='flex items-center gap-x-2 cursor-pointer hover:opacity-85 transition-all duration-100' href={'/plans'}>
-                            <span className='font-normal text-sm'>{activePlan?.plan?.plan_name ?? 'Select a plan'}</span>
-                            <Icon icon={'oui:arrow-down'} />
+                            <Icon className='text-sm' icon={'icon-park-solid:plan'} />
+                            <span className='font-normal text-xs'>{activePlan?.plan?.plan_name ?? 'Flex Pay'}</span>
                         </Link>
                     </Tag>
                 </div>

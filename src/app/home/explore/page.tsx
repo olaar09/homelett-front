@@ -41,6 +41,8 @@ import PlanInfoDrawer from "../../components/HouseProductDrawer";
 import SubscriptionInfoDrawer from "./components/SubscriptionInfo";
 import moment from "moment";
 import { ISubscription } from "@/app/interfaces/IRegisterRequest";
+import IconButton from "./components/IconButton";
+import TransactionList from "./components/TransactionList";
 
 const ExplorePage = () => {
   const [openSubscriptions, setOpenSubscriptions] = useState(false)
@@ -49,6 +51,7 @@ const ExplorePage = () => {
   const authContext = useContext(AuthContext);
   const loadingPage = authContext.loading;
   const userSubs = authContext.currentUser?.active_sub;
+  const userTransactions = authContext.currentUser?.recent_transactions ?? [];
   const homeProducts = authContext.currentUser?.streaming ?? [];
   const resellerProducts = authContext.currentUser?.reseller_products ?? [];
 
@@ -104,6 +107,31 @@ const ExplorePage = () => {
 
               <KornBalanceCard />
 
+              <div className="mt-8">
+                <div className="grid grid-cols-4 gap-4">
+                  <IconButton
+                    icon="solar:wallet-money-bold"
+                    label="Fund"
+                    onClick={() => message.info('Fund feature coming soon')}
+                  />
+                  <IconButton
+                    icon="mdi:electricity-circle"
+                    label="Buy Token"
+                    onClick={() => message.info('Buy token feature coming soon')}
+                  />
+                  <IconButton
+                    icon="solar:card-bold"
+                    label="Subscription"
+                    onClick={() => setOpenSubscriptions(true)}
+                  />
+                  <IconButton
+                    icon="solar:chat-round-dots-bold"
+                    label="Support"
+                    onClick={() => message.info('Support feature coming soon')}
+                  />
+                </div>
+              </div>
+
               <SubscriptionInfoDrawer
                 open={selectedSubscription != undefined} onClose={function (): void {
                   setSelectedSubscription(undefined)
@@ -111,36 +139,21 @@ const ExplorePage = () => {
                 selected={selectedSubscription}
               />
 
-              <div className="mt-8 mb-3 flex justify-between items-center">
-                <span className=" text-foreground-secondary">Subscriptions</span>
-                <span className="flex items-center gap-x-0">
-                  <Icon icon={'ri:time-line'} className="text-xs"></Icon>
-                  <Tag color='' className='rounded-lg border-0'>  Ends  {moment(userSubs?.plan_end ?? "").format("DD MMM YYYY")}</Tag>
-                </span>
+              <div className="mt-8">
+                {userTransactions.length > 0 && (
+                  <div className="mt-10 mb-3 flex justify-between items-center px-2">
+                    <div className="flex items-center gap-x-2">
+                      <Icon icon={'ri:time-line'} className="text-xs"></Icon>
+                      <span className=" text-gray-800 text-xs">Recent transactions</span>
+                    </div>
+                  </div>
+                )}
+                <>
+                  <TransactionList transactions={userTransactions} />
+                </>
               </div>
-              {userSubs &&
-                <div className="grid grid-cols-1 gap-4 ">
-                  {/* <KornGridCard
-                    onClick={() => onOpenVault()}
-                    title="Internet"
-                    value="$0.00"
-                    description="8% P.A"
-                    icon={<img className="w-6" src="/logos/wifi.png" />}
-                  /> */}
-                  {(userSubs?.plan?.products ?? []).map((pd) => {
-                    return <KornGridCard
-                      onClick={() => onOpenVault(pd.bubble_product)}
-                      title={pd?.bubble_product?.title}
-                      value={new UtilService().formatMoney(`${userSubs?.plan?.plan_price}`)}
-                      description=""
-                      icon={<img className="w-6" src={pd?.bubble_product?.extra_icon} />}
-                    />
-                  })}
-
-
-                </div>
-              }
             </div>
+
           </div>
         )}
 

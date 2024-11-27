@@ -44,6 +44,7 @@ export interface ITransaction {
   reference: string;
   created_at: string;
   title: string;
+  value?: string;
 }
 
 export interface IAssignedPlatform {
