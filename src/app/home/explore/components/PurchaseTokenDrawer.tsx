@@ -98,6 +98,8 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                         placeHolder="Enter meter number"
                         type="text"
                         name="meterNumber"
+                        disabled={authContext.currentUser?.meter_number ? true : false}
+                        readOnly={authContext.currentUser?.meter_number ? true : false}
                         value={meterNumber}
                         onChange={(e) => setMeterNumber(e.target.value)}
                     />
