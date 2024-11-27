@@ -24,6 +24,16 @@ class TransactionAPIService {
     }
   } */
 
+  async completePayment(reference: string): Promise<any> {
+    try {
+      return await this.apiService.post("/transactions/completePaystack", {
+        reference,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async generateGroupPayment(amount: number): Promise<ITransferPaymentInfo | null> {
     try {
       const text = await this.apiService.post<{
