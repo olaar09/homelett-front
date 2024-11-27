@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext } from 'react';
+import React, { useState, useMemo, useContext, useEffect } from 'react';
 import { Drawer, message } from 'antd';
 import { Icon } from '@iconify/react';
 import InputField from '@/app/components/InputField';
@@ -17,18 +17,22 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
     const [meterNumber, setMeterNumber] = useState('');
     const [tokenAmount, setTokenAmount] = useState<number>(0);
     const [loading, setLoading] = useState(false);
+    const apiUtil = new APIUtil()
+    const authContext = useContext(AuthContext)
 
     const kilowatts = useMemo(() => {
         if (!tokenAmount || tokenAmount < 5000) return 0;
         return Number((tokenAmount / tokenPerKw).toFixed(2));
     }, [tokenAmount, tokenPerKw]);
 
+    useEffect(() => {
+        setMeterNumber(authContext.currentUser?.meter_number ?? '')
+    }, [authContext.currentUser])
+
     const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value ? Number(e.target.value) : '';
         setTokenAmount(Number(value));
     };
-    const apiUtil = new APIUtil()
-    const authContext = useContext(AuthContext)
 
 
     const handlePurchase = () => {
@@ -94,6 +98,7 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                         placeHolder="Enter meter number"
                         type="text"
                         name="meterNumber"
+                        value={meterNumber}
                         onChange={(e) => setMeterNumber(e.target.value)}
                     />
 
@@ -102,7 +107,7 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                             placeHolder="Enter token amount (min. ₦5,000)"
                             type="number"
                             name="tokenAmount"
-                            value={`${tokenAmount}`}
+                            value={tokenAmount === 0 ? '' : tokenAmount.toString()}
                             onChange={handleAmountChange}
                         />
 
