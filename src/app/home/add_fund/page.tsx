@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import { Alert, Avatar, Button, Card, Input, Spin, Tag, message } from "antd";
+import { Alert, Avatar, Button, Card, Input, Spin, Tag, message, Drawer } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { AuthContext } from "@/contexts/AuthContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -11,11 +11,15 @@ import Link from "next/link";
 import { AxiosError } from "axios";
 import ACButton from "@/app/components/Button";
 import InputField from "@/app/components/InputField";
+import FundAccountDrawer from './components/FundAccountDrawer';
+import { PaymentType } from './components/FundAccountDrawer';
+
 
 const SavedTeamMembers = () => {
   const authContext = useContext(AuthContext);
   const [isP2P, setIsP2P] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [amount, setAmount] = useState(0);
 
   const [isMoneySent, setIsMoneySent] = useState(false);
 
@@ -23,6 +27,9 @@ const SavedTeamMembers = () => {
     account_number: "",
     amount: null,
   });
+
+  const [amountDrawerOpen, setAmountDrawerOpen] = useState(false);
+  const [selectedPaymentType, setSelectedPaymentType] = useState<PaymentType>(null);
 
   const onSetFormData = (key: string, value: any) => {
     setFormData({ ...formData, [key]: value });
@@ -90,6 +97,11 @@ const SavedTeamMembers = () => {
 
   const authLoading = authContext.loading || !authContext.currentUser;
   const bankInfo = authContext.currentUser?.p2p.bank_info;
+
+  const handlePaymentOptionClick = (type: PaymentType) => {
+    setSelectedPaymentType(type);
+    setAmountDrawerOpen(true);
+  };
 
   return (
     <>
@@ -229,27 +241,23 @@ const SavedTeamMembers = () => {
                   <div className="flex flex-col justify-center items-center  px-3  w-full mt-4 gap-y-3">
                     <Tag
                       color="orange"
-                      className="   flex items-center  justify-center text-center rounded-md"
+                      className="flex items-center justify-center text-center rounded-md"
                     >
                       how would you like to pay?
                     </Tag>
-
-
-
                   </div>
 
                   <div className="flex items-center flex-col justify-center w-full gap-y-4">
                     <OptionItem
-                      onClick={() => onSetIsP2P()}
+                      onClick={() => handlePaymentOptionClick('direct_deposit')}
                       icon={"mdi:bank"}
                       title="Direct bank transfer"
                     />
-                    <Link
-                      href={authContext.currentUser.paymentLink!}
-                      className="w-full"
-                    >
-                      <OptionItem icon={"ion:card"} title="Paystack payment" />
-                    </Link>
+                    <OptionItem
+                      onClick={() => handlePaymentOptionClick('paystack')}
+                      icon={"ion:card"}
+                      title="Paystack payment"
+                    />
                   </div>
                 </section>
               </div>
@@ -257,6 +265,16 @@ const SavedTeamMembers = () => {
           )}
         </>
       )}
+
+      <FundAccountDrawer
+        open={amountDrawerOpen}
+        onClose={() => {
+          setAmountDrawerOpen(false);
+          setSelectedPaymentType(null);
+        }}
+        userEmail={authContext.currentUser?.email ?? ""}
+        paymentType={selectedPaymentType}
+      />
     </>
   );
 };
