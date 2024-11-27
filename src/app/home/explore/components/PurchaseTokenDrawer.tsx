@@ -1,7 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import { Drawer, message } from 'antd';
 import { Icon } from '@iconify/react';
 import InputField from '@/app/components/InputField';
+import { AxiosError } from 'axios';
+import APIUtil from "@/services/APIUtil";
+import { AuthContext } from '@/contexts/AuthContext';
+
 
 interface PurchaseTokenDrawerProps {
     open: boolean;
@@ -23,6 +27,9 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
         const value = e.target.value ? Number(e.target.value) : '';
         setTokenAmount(Number(value));
     };
+    const apiUtil = new APIUtil()
+    const authContext = useContext(AuthContext)
+
 
     const handlePurchase = () => {
         if (!meterNumber || !tokenAmount) {
@@ -35,13 +42,31 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
             return;
         }
 
-        setLoading(true);
-        // Simulate API call
-        setTimeout(() => {
-            message.success("Token purchased successfully!");
+        onBuyToken()
+    };
+
+
+    const onBuyToken = async () => {
+        try {
+            setLoading(true);
+            await apiUtil.transactionService.buyToken(Number(tokenAmount).toString(), meterNumber);
+            authContext.refreshProfile()
+            message.success("Purchase successful");
+            onClose()
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                message.error(
+                    `${error?.response?.data?.message ??
+                    error?.response?.data?.reason ??
+                    "Unable to confirm deposit"
+                    }`
+                );
+            } else {
+                message.error("Unable to confirm deposit");
+            }
+        } finally {
             setLoading(false);
-            onClose();
-        }, 2000);
+        }
     };
 
     return (

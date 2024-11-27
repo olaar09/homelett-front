@@ -24,6 +24,18 @@ class TransactionAPIService {
     }
   } */
 
+
+  async buyToken(amount: string, meterNumber: string): Promise<any> {
+    try {
+      return await this.apiService.post("/transactions/buy_token", {
+        amount,
+        meter_number: meterNumber
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async completePayment(reference: string): Promise<any> {
     try {
       return await this.apiService.post("/transactions/completePaystack", {
