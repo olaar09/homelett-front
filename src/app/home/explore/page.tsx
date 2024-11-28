@@ -80,6 +80,7 @@ const ExplorePage = () => {
           setOpenSubscriptions(false)
         }}
       />
+
       <PurchaseTokenDrawer
         open={tokenDrawerOpen}
         onClose={() => setTokenDrawerOpen(false)}
@@ -128,7 +129,7 @@ const ExplorePage = () => {
                   <IconButton
                     icon="solar:card-bold"
                     label="Subscription"
-                    onClick={() => setOpenSubscriptions(true)}
+                    onClick={() => message.info('Subscription feature coming soon')}
                   />
                   <IconButton
                     icon="solar:chat-round-dots-bold"
