@@ -36,6 +36,7 @@ import { ISubscription } from "@/app/interfaces/IRegisterRequest";
 import IconButton from "./components/IconButton";
 import TransactionList from "./components/TransactionList";
 import PurchaseTokenDrawer from "./components/PurchaseTokenDrawer";
+import { Str } from "@/utils/consts";
 
 const ExplorePage = () => {
   const [openSubscriptions, setOpenSubscriptions] = useState(false)
@@ -132,7 +133,7 @@ const ExplorePage = () => {
                   <IconButton
                     icon="solar:chat-round-dots-bold"
                     label="Support"
-                    onClick={() => message.info('Support feature coming soon')}
+                    onClick={() => window.open(Str.whatsappHelp, '_blank')}
                   />
                 </div>
               </div>
