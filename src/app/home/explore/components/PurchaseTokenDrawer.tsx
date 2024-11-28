@@ -25,6 +25,10 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
         return Number((tokenAmount / tokenPerKw).toFixed(2));
     }, [tokenAmount, tokenPerKw]);
 
+    const serviceCharge = useMemo(() => {
+        return authContext.currentUser?.active_sub ? 0 : 500;
+    }, [authContext.currentUser]);
+
     useEffect(() => {
         setMeterNumber(authContext.currentUser?.meter_number ?? '')
     }, [authContext.currentUser])
@@ -109,7 +113,12 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                     </div>
 
                     <div className="space-y-2 mt-1">
-                        <span className='block text-xs'>Recharge Amount</span>
+                        <div className='flex items-center gap-x-1 justify-between' >
+                            <span className='block text-xs'>Recharge Amount</span>
+                            {serviceCharge > 0 && (
+                                <span className='text-xs text-orange-600'>+ ₦{serviceCharge} service charge</span>
+                            )}
+                        </div>
                         <InputField
                             placeHolder="Enter token amount (min. ₦5,000)"
                             type="number"
@@ -146,6 +155,7 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                             <>
                                 <Icon icon="mdi:cart" className="text-xl" />
                                 <span className="font-medium">Purchase Token</span>
+                                {tokenAmount >= 5000 && <span className='text-white font-medium'>(₦ {tokenAmount + serviceCharge})</span>}
                             </>
                         )}
                     </button>
