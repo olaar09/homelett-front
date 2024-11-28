@@ -35,7 +35,32 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions }) => {
     };
 
     if (transactions.length === 0) {
-        return <div className="text-center text-gray-500">No transactions available</div>;
+        return (
+            <div className="flex flex-col items-center justify-center py-16">
+                <div className="relative mb-6">
+                    <Icon
+                        icon="mdi:receipt-text-outline"
+                        className="text-gray-200 text-7xl"
+                    />
+                    <Icon
+                        icon="mdi:currency-ngn"
+                        className="text-gray-300 text-2xl absolute -top-2 -right-2"
+                    />
+                </div>
+                <div className="text-center">
+                    <h3 className="text-gray-700 text-lg font-semibold mb-2">
+                        No Transactions Yet
+                    </h3>
+                    <p className="text-gray-500 text-sm mb-6">
+                        Your transaction history will appear here once you make your first purchase
+                    </p>
+                    <div className="flex items-center justify-center gap-2 text-gray-400 text-xs">
+                        <Icon icon="mdi:information-outline" className="text-base" />
+                        <span>Transactions are updated in real-time</span>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     return (
@@ -103,8 +128,8 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions }) => {
                         <button
                             onClick={handleCopy}
                             className={`flex items-center gap-x-1 px-3 py-1.5 rounded-md transition-colors ${copied
-                                    ? 'bg-green-100 text-green-700'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                ? 'bg-green-100 text-green-700'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                 }`}
                         >
                             <Icon
