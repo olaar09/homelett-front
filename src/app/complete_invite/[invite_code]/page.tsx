@@ -78,7 +78,7 @@ export default function CompleteInvite() {
       setSubmittingInvite(false);
       message.success("Login success");
       localStorage.setItem("token", response.data.token!);
-      route.push("/home/explore");
+      route.push("/home/dashboard");
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error?.response?.data?.reason);

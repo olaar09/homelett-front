@@ -131,7 +131,7 @@ const AddFundWithdraw = () => {
         <>
           {
             <div className="w-full  py-1 flex items-center justify-between px-2">
-              <Link href={"/home/explore"}>
+              <Link href={"/home/dashboard"}>
                 <div className="flex items-center gap-x-2  px-2 py-2">
                   <Icon
                     icon={"octicon:arrow-left-24"}

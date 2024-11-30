@@ -226,9 +226,9 @@ const Nav: React.FC<any> = ({ children }) => {
   const getMobileMenu = () => {
     return [
       {
-        path: "/home/explore",
+        path: "/home/dashboard",
         icon: "icon-park-solid:all-application",
-        title: "Explore",
+        title: "Dashboard",
       },
       {
         path: "/home/transactions",
@@ -359,9 +359,9 @@ const Nav: React.FC<any> = ({ children }) => {
                 <div className="flex flex-col items-start gap-y-2 py-5 w-full px-2 ">
                   {authContext.currentUser &&
                     !authContext.currentUser?.is_admin && (
-                      <Link className="w-full" href={"/home/explore"}>
+                      <Link className="w-full" href={"/home/dashboard"}>
                         <NavMenu
-                          path="/home/explore"
+                          path="/home/dashboard"
                           icon={"icon-park-solid:all-application"}
                           title="Explore"
                         />

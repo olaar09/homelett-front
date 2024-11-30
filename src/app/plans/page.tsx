@@ -45,7 +45,7 @@ const PlanPage: React.FC<PlanPageProps> = ({ open, onClose }) => {
             />
 
             <div className="w-full  py-1 ">
-                <Link href={"/home/explore"}>
+                <Link href={"/home/dashboard"}>
                     <div className="flex items-center gap-x-2  px-2 py-2">
                         <Icon
                             icon={"octicon:arrow-left-24"}

@@ -77,7 +77,7 @@ const SavedTeamMembers = () => {
       });
       message.success("Deposit successful");
       await authContext.refreshProfile();
-      router.replace("/home/explore");
+      router.replace("/home/dashboard");
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error?.response?.data?.reason);
@@ -122,7 +122,7 @@ const SavedTeamMembers = () => {
         <>
           {
             <div className="w-full  py-1 flex items-center justify-between px-2">
-              <Link href={"/home/explore"}>
+              <Link href={"/home/dashboard"}>
                 <div className="flex items-center gap-x-2  px-2 py-2">
                   <Icon
                     icon={"octicon:arrow-left-24"}
