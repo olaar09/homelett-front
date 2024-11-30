@@ -126,11 +126,17 @@ export default function Home() {
           configs: []
         });
       }
-
       localStorage.setItem("token", response.data.token!);
       message.success("Login successful");
+
+      console.log(response.data);
+      if (response.data.is_admin == 1) {
+        router.push("/home/super_dashboard");
+      } else {
+        router.push("/home/dashboard");
+      }
       await authContext.refreshProfile();
-      router.push("/home/dashboard");
+
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error);

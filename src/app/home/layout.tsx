@@ -359,11 +359,11 @@ const Nav: React.FC<any> = ({ children }) => {
                 <div className="flex flex-col items-start gap-y-2 py-5 w-full px-2 ">
                   {authContext.currentUser &&
                     !authContext.currentUser?.is_admin && (
-                      <Link className="w-full" href={"/home/dashboard"}>
+                      <Link className="w-full" href={"/home/super_dashboard"}>
                         <NavMenu
-                          path="/home/dashboard"
+                          path="/home/super_dashboard"
                           icon={"icon-park-solid:all-application"}
-                          title="Explore"
+                          title="Dashboard"
                         />
                       </Link>
                     )}

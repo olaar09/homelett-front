@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/plots": "^2.3.2",
     "@iconify/react": "^5.0.1",
     "@react-oauth/google": "^0.12.1",
     "@react-three/fiber": "^8.16.2",

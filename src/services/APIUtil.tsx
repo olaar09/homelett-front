@@ -8,9 +8,10 @@ import ProductAPIService from "./ProductAPIService";
 import TransactionAPIService from "./TransactionAPIService";
 import SubscriptionAPIService from "./SubscriptionAPIService";
 import HouseAPIService from "./HouseAPIService";
-
+import DashboardAPIService from "./DashboardAPIService";
 class APIUtil {
   public productService: ProductAPIService;
+  public dashboardService: DashboardAPIService;
   public transactionService: TransactionAPIService;
   public profileService: ProfileAPIService;
   public houseService: HouseAPIService;
@@ -21,6 +22,7 @@ class APIUtil {
   constructor() {
     const service = new APIService("https://api.bubble.africa/api"); // Initialize ApiService
     this.productService = new ProductAPIService(service);
+    this.dashboardService = new DashboardAPIService(service);
     this.profileService = new ProfileAPIService(service);
     this.houseService = new HouseAPIService(service);
     this.authService = new AuthAPIService(service);

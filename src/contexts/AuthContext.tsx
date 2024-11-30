@@ -68,7 +68,11 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     console.log(currentUser);
 
     const queryParams = new URLSearchParams(params).toString();
-    router.push(`/home/explore${queryParams ? `?${queryParams}` : ""}`);
+    if (currentUser.is_admin == 1) {
+      router.push(`/home/super_dashboard${queryParams ? `?${queryParams}` : ""}`);
+    } else {
+      router.push(`/home/dashboard${queryParams ? `?${queryParams}` : ""}`);
+    }
 
   };
 
