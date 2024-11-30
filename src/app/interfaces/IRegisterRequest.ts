@@ -14,6 +14,10 @@ export interface IHouse {
   expected_usage: number,
   surcharge: number,
   token_per_kw: number,
+  bank_name: string,
+  bank_account: string,
+  account_name: string,
+  residents: { email: string, fullname: string, phone: string }[]
 }
 
 export interface IHousePlan {

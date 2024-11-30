@@ -10,10 +10,11 @@ import IconButton from "./components/IconButton";
 import SubscriptionInfoDrawer from "./components/SubscriptionInfo";
 import { Str } from "@/utils/consts";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { ISubscription } from "@/app/interfaces/IRegisterRequest";
+import { IHouse, ISubscription } from "@/app/interfaces/IRegisterRequest";
 import { IProduct } from "@/app/interfaces/IProduct";
 import AdminInfoCard from "./components/AdminInfoCard";
 import NewHouseDrawer from './components/NewHouseDrawer';
+import HouseDetailsDrawer from './components/HouseDetailsDrawer';
 
 const AdminPage = () => {
     const [openSubscriptions, setOpenSubscriptions] = useState(false);
@@ -21,6 +22,7 @@ const AdminPage = () => {
     const [tokenDrawerOpen, setTokenDrawerOpen] = useState(false);
     const [drawerVisible, setDrawerVisible] = useState(false);
     const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+    const [selectedHouse, setSelectedHouse] = useState<IHouse | null>(null);
 
     const authContext = useContext(AuthContext);
     const loadingPage = authContext.loading;
@@ -56,6 +58,14 @@ const AdminPage = () => {
             message.success('House code copied to clipboard!');
             setTimeout(() => setCopiedIndex(null), 2000);
         });
+    };
+
+    const openHouseDetails = (house: IHouse) => {
+        setSelectedHouse(house);
+    };
+
+    const closeHouseDetails = () => {
+        setSelectedHouse(null);
     };
 
     return (
@@ -121,7 +131,11 @@ const AdminPage = () => {
                                 {houses.length > 0 ? (
                                     <ul className="">
                                         {houses.map((house, index) => (
-                                            <li key={index} className="flex flex-col justify-between p-4 mb-4 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-colors duration-200">
+                                            <li
+                                                key={index}
+                                                className="flex flex-col justify-between p-4 mb-4 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-colors duration-200"
+                                                onClick={() => openHouseDetails(house)}
+                                            >
                                                 <div className="flex justify-between items-center">
                                                     <p className="text-gray-800 font-medium">{house.house_name}</p>
                                                     <div className="flex items-center">
@@ -173,6 +187,11 @@ const AdminPage = () => {
                 )}
             </div>
             <NewHouseDrawer visible={drawerVisible} onClose={closeDrawer} />
+            <HouseDetailsDrawer
+                visible={selectedHouse !== null}
+                house={selectedHouse}
+                onClose={closeHouseDetails}
+            />
         </>
     );
 };
