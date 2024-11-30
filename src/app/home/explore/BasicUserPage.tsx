@@ -52,6 +52,7 @@ const BasicUserPage = () => {
                 open={tokenDrawerOpen}
                 onClose={() => setTokenDrawerOpen(false)}
                 tokenPerKw={tokenPerKw}
+                isAdmin={false}
             />
 
             <div className="h-screen overflow-y-auto overflow-hidden">

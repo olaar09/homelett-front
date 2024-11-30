@@ -20,9 +20,10 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
     const [loading, setLoading] = useState(false);
     const apiUtil = new APIUtil()
     const authContext = useContext(AuthContext)
+    const minTokenAmount = isAdmin ? 1000 : 5000;
 
     const kilowatts = useMemo(() => {
-        if (!tokenAmount || tokenAmount < 5000) return 0;
+        if (!tokenAmount || tokenAmount < minTokenAmount) return 0;
         return Number((tokenAmount / tokenPerKw).toFixed(2));
     }, [tokenAmount, tokenPerKw]);
 
@@ -46,8 +47,8 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
             return;
         }
 
-        if (tokenAmount < 5000) {
-            message.error("Minimum token amount is 5,000 Naira");
+        if (tokenAmount < minTokenAmount) {
+            message.error(`Minimum token amount is ${new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN' }).format(minTokenAmount)}`);
             return;
         }
 
@@ -94,10 +95,12 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                         <h4 className="text-lg font-semibold text-gray-900">Enter Details</h4>
                     </div>
 
-                    <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                        <span className="text-sm text-gray-600">Cost per kW</span>
-                        <span className="text-sm font-medium text-gray-900">₦{tokenPerKw}.00</span>
-                    </div>
+                    {!isAdmin && (
+                        <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span className="text-sm text-gray-600">Cost per kW</span>
+                            <span className="text-sm font-medium text-gray-900">₦{tokenPerKw}.00</span>
+                        </div>
+                    )}
 
                     <div className='space-y-2 mt-3'>
                         <span className='block text-xs'>Meter number</span>
@@ -117,7 +120,7 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                     <div className="space-y-2 mt-1">
                         <div className='flex items-center gap-x-1 justify-between' >
                             <span className='block text-xs'>Recharge Amount</span>
-                            {serviceCharge > 0 && (
+                            {!isAdmin && serviceCharge > 0 && (
                                 <span className='text-xs text-orange-600'>+ ₦{serviceCharge} service charge</span>
                             )}
                         </div>
@@ -131,14 +134,16 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
 
                         <div className="h-6">
                             {tokenAmount > 0 && (
-                                <div className={`text-sm ${tokenAmount < 5000 ? 'text-red-500' : 'text-green-600'}`}>
-                                    {tokenAmount < 5000 ? (
-                                        'Minimum amount is ₦5,000'
+                                <div className={`text-sm ${tokenAmount < minTokenAmount ? 'text-red-500' : 'text-green-600'}`}>
+                                    {tokenAmount < minTokenAmount ? (
+                                        `Minimum amount is ${new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN' }).format(minTokenAmount)}`
                                     ) : (
-                                        <div className="flex items-center gap-x-1">
-                                            <Icon icon="mdi:lightning-bolt" className="text-yellow-500" />
-                                            <span>You will get approximately {kilowatts} kilowatts</span>
-                                        </div>
+                                        !isAdmin && tokenAmount >= minTokenAmount && (
+                                            <div className="flex items-center gap-x-1">
+                                                <Icon icon="mdi:lightning-bolt" className="text-yellow-500" />
+                                                <span>You will get approximately {kilowatts} kilowatts</span>
+                                            </div>
+                                        )
                                     )}
                                 </div>
                             )}
@@ -147,8 +152,8 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
 
                     <button
                         onClick={handlePurchase}
-                        disabled={loading || !tokenAmount || tokenAmount < 5000}
-                        className={`mt-0 w-full bg-blue-500 text-white py-3 rounded-lg flex items-center justify-center gap-x-2 hover:bg-blue-600 transition-colors ${(loading || !tokenAmount || tokenAmount < 5000) ? 'opacity-50 cursor-not-allowed' : ''
+                        disabled={loading || !tokenAmount || tokenAmount < minTokenAmount}
+                        className={`mt-0 w-full bg-blue-500 text-white py-3 rounded-lg flex items-center justify-center gap-x-2 hover:bg-blue-600 transition-colors ${(loading || !tokenAmount || tokenAmount < minTokenAmount) ? 'opacity-50 cursor-not-allowed' : ''
                             }`}
                     >
                         {loading ? (
@@ -156,8 +161,8 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                         ) : (
                             <>
                                 <Icon icon="mdi:cart" className="text-xl" />
-                                <span className="font-medium">Purchase Token</span>
-                                {tokenAmount >= 5000 && <span className='text-white font-medium'>(₦ {tokenAmount + serviceCharge})</span>}
+                                <span className="font-medium">{isAdmin ? 'Generate token' : 'Purchase Token'}</span>
+                                {!isAdmin && tokenAmount >= minTokenAmount && <span className='text-white font-medium'>(₦ {tokenAmount + serviceCharge})</span>}
                             </>
                         )}
                     </button>

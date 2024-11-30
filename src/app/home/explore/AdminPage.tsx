@@ -70,6 +70,7 @@ const AdminPage = () => {
                 open={tokenDrawerOpen}
                 onClose={() => setTokenDrawerOpen(false)}
                 tokenPerKw={tokenPerKw}
+                isAdmin={authContext.currentUser?.is_house_admin == 1}
             />
 
             <div className="h-screen overflow-y-auto overflow-hidden">
