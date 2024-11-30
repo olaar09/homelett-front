@@ -53,6 +53,14 @@ const HouseDetailsDrawer: React.FC<HouseDetailsDrawerProps> = ({ visible, house,
         }
     }
 
+    const copyToClipboard = (text: string, type: 'phone' | 'email') => {
+        navigator.clipboard.writeText(text).then(() => {
+            message.success(`${type === 'phone' ? 'Phone number' : 'Email'} copied to clipboard`);
+        }).catch(() => {
+            message.error('Failed to copy to clipboard');
+        });
+    };
+
     useEffect(() => {
         if (visible && house) {
             fetchHouseDetails();
@@ -85,7 +93,7 @@ const HouseDetailsDrawer: React.FC<HouseDetailsDrawerProps> = ({ visible, house,
                 {activeSegment === 'Information' && (
                     <div className="w-full p-6 bg-white rounded-lg shadow-sm space-y-4">
                         <InfoItem
-                            icon={<Icon icon="material-symbols-light:home-outline" width="24" />}
+                            icon={<Icon icon="ic:round-home" width="24" />}
                             label="Address"
                             value={houseDetails?.address}
                         />
@@ -110,7 +118,7 @@ const HouseDetailsDrawer: React.FC<HouseDetailsDrawerProps> = ({ visible, house,
                             value={houseDetails?.bank_name}
                         />
                         <InfoItem
-                            icon={<Icon icon="ph:id-card-duotone" width="24" />}
+                            icon={<Icon icon="fluent:rename-28-filled" width="24" />}
                             label="Account Name"
                             value={houseDetails?.account_name}
                         />
@@ -122,27 +130,41 @@ const HouseDetailsDrawer: React.FC<HouseDetailsDrawerProps> = ({ visible, house,
                     </div>
                 )}
                 {activeSegment === 'Residents' && (
-                    <div className="w-full p-6 bg-white rounded-lg shadow-sm space-y-4">
-                        {houseDetails?.residents.map((resident, index) => (
-                            <div key={index} className="p-4 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
-                                <div className="flex items-center space-x-3 mb-2">
-                                    <div className="text-blue-500 text-lg">
-                                        <Icon icon="ph:user-circle-duotone" width="24" />
+                    <div className="w-full h-[calc(100vh-200px)] flex flex-col">
+                        <div className="flex-1 overflow-y-auto">
+                            <div className="p-6 space-y-4">
+                                {houseDetails?.residents.map((resident, index) => (
+                                    <div key={index} className="p-4 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div className="flex items-center space-x-3 mb-2">
+                                            <div className="text-gray-300 text-lg">
+                                                <Icon icon="ph:user-circle-duotone" width="24" />
+                                            </div>
+                                            <h3 className="text-sm font-medium text-gray-800">{resident.fullname}</h3>
+                                        </div>
+                                        <div className="ml-9 space-y-2">
+                                            <div
+                                                className="flex items-center space-x-2 text-gray-600 cursor-pointer hover:bg-gray-200 p-1 rounded-md transition-colors"
+                                                onClick={() => copyToClipboard(resident.phone, 'phone')}
+                                                title="Click to copy phone number"
+                                            >
+                                                <Icon icon="ph:phone-duotone" className="text-gray-500" width="20" />
+                                                <span className='text-xs'>{resident.phone}</span>
+                                                <Icon icon="ph:copy" className="text-gray-400 hover:text-gray-600" width="14" />
+                                            </div>
+                                            <div
+                                                className="flex items-center space-x-2 text-gray-600 cursor-pointer hover:bg-gray-200 p-1 rounded-md transition-colors"
+                                                onClick={() => copyToClipboard(resident.email, 'email')}
+                                                title="Click to copy email"
+                                            >
+                                                <Icon icon="ph:envelope-duotone" className="text-gray-500" width="20" />
+                                                <span className='text-xs'>{resident.email}</span>
+                                                <Icon icon="ph:copy" className="text-gray-400 hover:text-gray-600" width="14" />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <h3 className="text-sm font-medium text-gray-800">{resident.fullname}</h3>
-                                </div>
-                                <div className="ml-9 space-y-2">
-                                    <div className="flex items-center space-x-2 text-gray-600">
-                                        <Icon icon="ph:phone-duotone" className="text-blue-500" width="20" />
-                                        <span className='text-xs'>{resident.phone}</span>
-                                    </div>
-                                    <div className="flex items-center space-x-2 text-gray-600">
-                                        <Icon icon="ph:envelope-duotone" className="text-blue-500" width="20" />
-                                        <span className='text-xs'>{resident.email}</span>
-                                    </div>
-                                </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
                     </div>
                 )}
                 {activeSegment === 'Transactions' && (
