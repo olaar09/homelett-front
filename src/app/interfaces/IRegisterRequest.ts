@@ -4,8 +4,8 @@ import { IPlatform, IProduct, ITransaction } from "./IProduct";
 export interface IJProfile { }
 
 export interface IHouse {
-  id: number,
-  house_code: string,
+  id?: number,
+  house_code?: string,
   house_name: string,
   address: string,
   contact_phone: string,
@@ -51,6 +51,8 @@ export interface IAuthRequest {
   total_active_invites: number;
   invite_token: string;
   invite_link: string;
+  is_house_admin: number;
+  houses?: IHouse[];
   house?: IHouse,
   recent_transactions: ITransaction[],
   house_plans?: IHousePlan[],

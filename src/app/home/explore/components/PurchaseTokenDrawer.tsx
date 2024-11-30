@@ -11,9 +11,10 @@ interface PurchaseTokenDrawerProps {
     open: boolean;
     onClose: () => void;
     tokenPerKw: number;
+    isAdmin?: boolean;
 }
 
-const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose, tokenPerKw }) => {
+const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose, tokenPerKw, isAdmin = false }) => {
     const [meterNumber, setMeterNumber] = useState('');
     const [tokenAmount, setTokenAmount] = useState<number>(0);
     const [loading, setLoading] = useState(false);
@@ -79,7 +80,7 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
 
     return (
         <Drawer
-            title="Purchase Token"
+            title={isAdmin ? 'Generate token' : "Purchase Token"}
             placement="bottom"
             onClose={onClose}
             open={open}
@@ -104,9 +105,10 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                             placeHolder="Enter meter number"
                             type="text"
                             name="meterNumber"
-                            disabled={authContext.currentUser?.meter_number ? true : false}
-                            readOnly={authContext.currentUser?.meter_number ? true : false}
+                            disabled={!isAdmin && authContext.currentUser?.meter_number ? true : false}
+                            readOnly={!isAdmin && authContext.currentUser?.meter_number ? true : false}
                             value={meterNumber}
+                            required={isAdmin}
                             onChange={(e) => setMeterNumber(e.target.value)}
                         />
 

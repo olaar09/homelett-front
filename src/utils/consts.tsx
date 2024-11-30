@@ -1,6 +1,7 @@
 export const Str = {
   earnChannel: "https://t.me/+QvfqIlQfQPEzZDM0",
   whatsappHelp: "https://wa.link/ejqshz",
+  signupUrl: "https://trycouch.com/signup",
   CV_TEMPLATES: {
     CV_1: {
       key: "CV_1",
