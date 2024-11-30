@@ -63,6 +63,10 @@ export interface ITransaction {
   created_at: string;
   title: string;
   value?: string;
+  user: {
+    fullname: string;
+    email: string;
+  }
 }
 
 export interface IAssignedPlatform {

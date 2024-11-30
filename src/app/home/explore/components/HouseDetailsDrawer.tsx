@@ -168,8 +168,54 @@ const HouseDetailsDrawer: React.FC<HouseDetailsDrawerProps> = ({ visible, house,
                     </div>
                 )}
                 {activeSegment === 'Transactions' && (
-                    <div style={{ width: '33%', padding: '10px', textAlign: 'center' }}>
-                        {/* Display transactions here */}
+                    <div className="w-full h-[calc(100vh-200px)] flex flex-col">
+                        <div className="flex-1 overflow-y-auto">
+                            <div className="p-6 space-y-4">
+                                {houseDetails?.transactions?.map((transaction, index) => (
+                                    <div key={index} className="p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all border border-gray-100">
+                                        <div className="flex items-center space-x-3 mb-3">
+                                            <div className={`p-2 rounded-full ${transaction.type === 'INCOME' ? 'bg-green-50 text-green-500' : 'bg-red-50 text-red-500'}`}>
+                                                <Icon icon={transaction.type === 'INCOME' ? "ph:arrow-down-left-bold" : "ph:arrow-up-right-bold"} width="24" />
+                                            </div>
+                                            <div className="flex-1">
+                                                <h3 className="text-sm font-semibold text-gray-800">
+                                                    {transaction.title}
+                                                </h3>
+                                                <p className="text-xs text-gray-500 mt-0.5">
+                                                    {new Date(transaction.created_at).toLocaleDateString('en-NG', {
+                                                        day: 'numeric',
+                                                        month: 'short',
+                                                        year: 'numeric',
+                                                        hour: '2-digit',
+                                                        minute: '2-digit'
+                                                    })}
+                                                </p>
+                                            </div>
+                                            <div className={`text-sm font-bold px-3 py-1.5 rounded-full ${transaction.type === 'INCOME'
+                                                ? 'bg-green-50 text-green-600'
+                                                : 'bg-red-50 text-red-600'
+                                                }`}>
+                                                {transaction.type === 'INCOME' ? '+' : '-'} ₦{transaction.amount.toLocaleString()}
+                                            </div>
+                                        </div>
+                                        <div className=" flex items-center justify-start gap-x-4 mt-2 ml-11">
+
+                                            <div className="flex items-center space-x-2 text-gray-600">
+                                                <Icon icon="ph:user-circle-duotone" className="text-gray-400" width="18" />
+                                                <span className="text-xs font-medium">{transaction.description}</span>
+                                            </div>
+
+                                            <div className="flex items-center space-x-2 text-gray-600">
+                                                <Icon icon="ph:check-circle-duotone" className="text-gray-400" width="18" />
+                                                <span className="text-xs font-medium">{transaction.status}</span>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>

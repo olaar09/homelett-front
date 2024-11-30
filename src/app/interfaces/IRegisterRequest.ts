@@ -18,6 +18,7 @@ export interface IHouse {
   bank_account: string,
   account_name: string,
   residents: { email: string, fullname: string, phone: string }[]
+  transactions: ITransaction[]
 }
 
 export interface IHousePlan {
