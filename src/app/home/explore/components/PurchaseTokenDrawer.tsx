@@ -34,7 +34,11 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
     }, [authContext.currentUser]);
 
     useEffect(() => {
-        setMeterNumber(authContext.currentUser?.meter_number ?? '')
+        if (isAdmin) {
+            setMeterNumber('');
+        } else {
+            setMeterNumber(authContext.currentUser?.meter_number ?? '')
+        }
     }, [authContext.currentUser])
 
     const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,7 +134,7 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
 
                         <div className="space-y-2 mt-1">
                             <div className='flex items-center gap-x-1 justify-between' >
-                                <span className='block text-xs'>Recharge Amount</span>
+                                <span className='block text-xs'>Recharge {isAdmin ? 'Quantity' : 'Amount'}</span>
                                 {!isAdmin && serviceCharge > 0 && (
                                     <span className='text-xs text-orange-600'>+ ₦{serviceCharge} service charge</span>
                                 )}
