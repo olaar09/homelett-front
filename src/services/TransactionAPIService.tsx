@@ -25,10 +25,11 @@ class TransactionAPIService {
   } */
 
 
-  async buyToken(amount: string, meterNumber: string): Promise<any> {
+  async buyToken(meterNumber: string, amount?: string, quantity?: string,): Promise<any> {
     try {
       return await this.apiService.post("/transactions/buy_token", {
         amount,
+        quantity,
         meter_number: meterNumber
       });
     } catch (error) {
