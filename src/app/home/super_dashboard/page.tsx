@@ -2,20 +2,14 @@
 
 import { Icon } from "@iconify/react";
 import { useContext, useEffect, useRef, useState } from "react";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
 
 import { Button, Card, Popconfirm, Statistic, Table, Tag, message, Spin, Row, Col } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { useRequest } from "ahooks";
 import { AuthContext } from "@/contexts/AuthContext";
-import LoadingOverlay from "@/app/components/LoadingOverlay";
-import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
-import { useRouter } from "next/navigation";
-import CredentialsTable from "../_components/CredentialsTable";
-import RejectCredentialModal from "./CredentialRejectModal";
-import DashboardTable from "../_components/DashboardTable";
+
 import { HomeOutlined, UserOutlined, BankOutlined, DollarOutlined } from "@ant-design/icons";
+import { Column } from '@ant-design/charts';
 const { Meta } = Card;
 
 const DashboardSummary = () => {
@@ -41,7 +35,7 @@ const DashboardSummary = () => {
     ready: currentAuth.currentUser != null && currentAuth.currentUser != undefined,
   });
 
-  if (loadingDashboardSummary) {
+  if (loadingDashboardSummary || !dashboardSummary) {
     return (
       <div className="min-h-screen bg-gray-50 p-6 flex items-center justify-center">
         <Spin size="large" />
@@ -141,26 +135,11 @@ const DashboardSummary = () => {
         />
       </Card>
 
+      {/* Houses Overview Chart */}
+
+
       {/* Monthly Transactions Card */}
-      <Card bordered={false} title="Monthly Overview" className="mb-6">
-        <Row gutter={16}>
-          <Col span={12}>
-            <Statistic
-              title="Total Transactions"
-              value={dashboardSummary?.total_month_transactions}
-              prefix={<BankOutlined />}
-            />
-          </Col>
-          <Col span={12}>
-            <Statistic
-              title="Total Amount"
-              value={dashboardSummary?.total_month_transactions_amount}
-              prefix="₦"
-              precision={2}
-            />
-          </Col>
-        </Row>
-      </Card>
+
     </div>
   );
 };

@@ -14,6 +14,9 @@ class DashboardAPIService {
       const text = await this.apiService.get<{ data: any }>(
         `/dashboard/summary`
       );
+
+      console.log(text);
+
       return text.data;
     } catch (error) {
       throw error;
