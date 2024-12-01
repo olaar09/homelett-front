@@ -39,7 +39,7 @@ const InputField: React.FC<InputFieldProps> = ({
         onChange={onChange}
         disabled={disabled}
         readOnly={readOnly}
-        className={`pl-3 text-gray-100 ${isLight ? 'text-gray-100' : 'text-gray-100'} shadow-sm pr-10 bg-transparent py-2 h-9 rounded-md ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none`}
+        className={`pl-3 text-gray-800 ${isLight ? 'text-gray-800' : 'text-gray-200'} shadow-sm pr-10 bg-transparent py-2 h-9 rounded-md ring-[0.5px] ring-secondary focus:outline-none focus:ring-primary focus:ring-2 w-full  text-sm text-foreground placeholder:text-foreground-secondary transition-all duration-150 appearance-none`}
       />
     </div>
   );
