@@ -1,71 +1,43 @@
 "use client"
-import { Str } from '@/utils/consts';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import Link from 'next/link';
-import { useState } from 'react';
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
-    <div className="bg-black min-h-screen flex flex-col items-center text-white">
-      <div className="flex justify-between w-full p-4">
-        <div className=" p-2 rounded flex items-center gap-x-2">
-          <img src='/logo.png' className='w-6 rounded-md border' />
-          <span>Bubble</span>
-        </div>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 p-6">
+      <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center">
+        <img
+          src="/logo.png"
+          alt="Bubble Logo"
+          className="w-16 h-16 mx-auto mb-6"
+        />
 
-        <div className="relative">
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="bg-gray-100 rounded-full p-2 focus:outline-none"
-          >
-            <div className="w-6 h-6 rounded flex justify-center items-center">
-              <Icon className='text-black' icon={'radix-icons:hamburger-menu'} />
-            </div>
-          </button>
-          {menuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg py-2">
-              <Link href={'/login'}>
-                <span className="block px-4 py-2 hover:bg-gray-200">Login</span>
-              </Link>
-              <Link href={'/request-invite'}>
-                <span className="block px-4 py-2 hover:bg-gray-200">Create Account</span>
-              </Link>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8">
+          Login or sign up to get started
+        </h1>
 
-              <Link href={Str.whatsappHelp}>
-                <span className="block px-4 py-2 hover:bg-gray-200">Contact Support</span>
-              </Link>
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="text-center mt-8 md:mt-24 lg:px-10 px-4">
-        <h1 className="text-5xl font-bold-family">Plug, Play and Earn</h1>
-        <p className="mt-4 text-sm px-8">Earn  🤑 Money 🤑 When You Share Your Hotspot   with Bubble stations </p>
-        <p className=" text-xs max-w-xs mx-auto mt-10 text-foreground-secondary">
-          Bubble station is a  internet sharing device
-          that empowers users to share data with
-          their guests, customers or community at whatever rates
-          you decide.
-        </p>
-      </div>
-      <div className='mt-10'>
-        <img className='w-40' src='/shopping-bag.png' />
-        <img className='w-40' src="/dollar.png" />
-      </div>
-      <div className='flex flex-grow  flex-col justify-end pb-10'>
-        <div className="mt-12 md:mt-16 ">
-          <Link href={'/request-invite'}>
-            <button className="bg-white font-bold-family text-black py-2 px-4 rounded-full text-lg font-bold">
-              Order a bubble station
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href="/login" className="w-full sm:w-auto">
+            <button className="w-full group hover:bg-blue-600 bg-blue-500 text-white py-3 px-8 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg">
+              <Icon
+                icon="solar:login-2-line-duotone"
+                className="w-5 h-5 group-hover:scale-110 transition-transform"
+              />
+              Login
             </button>
           </Link>
 
+          <Link href="/request-invite" className="w-full sm:w-auto">
+            <button className="w-full group hover:bg-purple-600 bg-purple-500 text-white py-3 px-8 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg">
+              <Icon
+                icon="solar:user-plus-rounded-line-duotone"
+                className="w-5 h-5 group-hover:scale-110 transition-transform"
+              />
+              Sign up
+            </button>
+          </Link>
         </div>
       </div>
-
     </div>
   );
 }
