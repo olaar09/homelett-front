@@ -11,11 +11,13 @@ import { AxiosError } from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
 
 import React, { useRef } from "react";
-import ACButton from "../../components/Button";
-import InputField from "../../components/InputField";
+
+
 import Link from "next/link";
-import AuthProblem from "../../components/Auth/AuthProblem";
 import { useAppConfig } from "@/contexts/AppConfigContext";
+import AuthProblem from "../components/Auth/AuthProblem";
+import ACButton from "../components/Button";
+import InputField from "../components/InputField";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -24,7 +26,7 @@ export default function Home() {
     fullname: "",
     phone: "",
     password: "",
-    coupon: undefined
+    invite_token: ""
   });
   const apiService = new APIUtil();
   const query = useSearchParams();
@@ -135,9 +137,9 @@ export default function Home() {
         company_name: form.email,
         password: form.password,
         domain: window.location.hostname,
-        invite_token: inviteCode,
-        house_code: params?.house_code,
-        coupon: form.coupon && (form.coupon as string).length > 0 ? form.coupon : undefined,
+        invite_token: form.invite_token,
+        house_code: params?.invite_token,
+        coupon: undefined,
         plan_id: 2,
       });
 
@@ -209,6 +211,18 @@ export default function Home() {
                 <span className="font-bold text-md"> {inviteCode}</span>
               </Tag>
             )}
+
+            <div className="flex flex-col items-start gap-y-2 text-sm w-full">
+              <span className="text-gray-400">House code</span>
+              <InputField
+                name="invite_token"
+                type="text"
+                placeHolder="House code"
+                onChange={(e) => onChangeForm("invite_token", e.target.value)}
+              />
+            </div>
+
+
             <div className="flex flex-col items-start gap-y-2 text-sm w-full">
               <span className="text-gray-400">Full name</span>
               <InputField
