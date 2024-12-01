@@ -19,7 +19,7 @@ class AuthAPIService {
     }
   }
 
-  async reqInvite(data: any): Promise<{ data: IAuth }> {
+  async reqInvite(data: any): Promise<{ data: any }> {
     try {
       return await this.apiService.post("/auth/request-invite", {
         ...data,
