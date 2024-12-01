@@ -139,8 +139,8 @@ export default function Home() {
         password: form.password,
         domain: window.location.hostname,
         invite_token: form.invite_token,
-        house_code: params?.invite_token,
-        meter_number: params?.meter_number,
+        house_code: form?.invite_token,
+        meter_number: form?.meter_number,
         coupon: undefined,
         plan_id: 2,
       });
