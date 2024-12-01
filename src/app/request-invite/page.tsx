@@ -26,7 +26,8 @@ export default function Home() {
     fullname: "",
     phone: "",
     password: "",
-    invite_token: ""
+    invite_token: "",
+    meter_number: ""
   });
   const apiService = new APIUtil();
   const query = useSearchParams();
@@ -139,6 +140,7 @@ export default function Home() {
         domain: window.location.hostname,
         invite_token: form.invite_token,
         house_code: params?.invite_token,
+        meter_number: params?.meter_number,
         coupon: undefined,
         plan_id: 2,
       });
@@ -219,6 +221,16 @@ export default function Home() {
                 type="text"
                 placeHolder="House code"
                 onChange={(e) => onChangeForm("invite_token", e.target.value)}
+              />
+            </div>
+
+            <div className="flex flex-col items-start gap-y-2 text-sm w-full">
+              <span className="text-gray-400">Meter number</span>
+              <InputField
+                name="meter_number"
+                type="text"
+                placeHolder="Meter number"
+                onChange={(e) => onChangeForm("meter_number", e.target.value)}
               />
             </div>
 
