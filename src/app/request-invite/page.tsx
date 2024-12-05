@@ -42,6 +42,7 @@ export default function Home() {
   const inviteCode = query.get("invite");
   const divRef = useRef<any>(null);
 
+
   // Function to handle scroll event
   const handleScroll = () => {
     if (divRef.current) {
@@ -64,9 +65,14 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // Prefill invite_token from query parameter
+    const houseCode = query.get("house");
+    if (houseCode) {
+      setForm((prevForm) => ({ ...prevForm, invite_token: houseCode }));
+    }
+
     // just trigger this so that the initial state
     // is updated as soon as the component is mounted
-    // related: https://stackoverflow.com/a/63408216
     handleScroll();
 
     window.addEventListener("scroll", handleScroll);
@@ -219,6 +225,7 @@ export default function Home() {
               <InputField
                 name="invite_token"
                 type="text"
+                value={form.invite_token}
                 placeHolder="House code"
                 onChange={(e) => onChangeForm("invite_token", e.target.value)}
               />
