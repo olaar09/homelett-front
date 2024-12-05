@@ -225,6 +225,8 @@ export default function Home() {
               <InputField
                 name="invite_token"
                 type="text"
+                readOnly={true}
+                required={true}
                 value={form.invite_token}
                 placeHolder="House code"
                 onChange={(e) => onChangeForm("invite_token", e.target.value)}
