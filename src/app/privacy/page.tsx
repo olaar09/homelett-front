@@ -25,7 +25,7 @@ export default function Home() {
                   className="isomorphic-link isomorphic-link--internal flex items-center gap-x-3"
                   href="/"
                 >
-                  <img className="h-7 w-auto" src="/logo.png" alt="" />
+                  <img className="h-7 w-auto" src="/favicon.svg" alt="" />
                   <span className="text-2xl font-black"> Bubble</span>
                 </a>
               </div>

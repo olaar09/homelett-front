@@ -128,7 +128,7 @@ export default function Home() {
         <div className="flex items-center gap-x-3   px-8   justify-center  lg:w-6/12 mx-auto">
           <Link href={"/"}>
             <div className="flex items-center gap-x-0   px-8   justify-center  lg:w-6/12 mx-auto">
-              <img src="/logo.png" className="w-14 mr-2" />
+              <img src="/favicon.svg" className="w-14 mr-2" />
               <span className=" text-foreground font-black text-2xl mt-0">
                 Bubble
               </span>

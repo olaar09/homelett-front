@@ -75,7 +75,7 @@ const HeadIcon = ({ onToggle, isOpen }: any) => {
     <div className="flex items-center gap-x-0  h-14   border-b  w-full justify-between px-3 relative">
       <div className="flex items-center">
         <div className="w-6 flex items-center justify-center gap-x-3">
-          <img src="/logo.png" className="w-4 mr-2" />
+          <img src="/favicon.svg" className="w-4 mr-2" />
         </div>
         {isOpen && (
           <span className=" text-foreground font-black text-lg mt-0">

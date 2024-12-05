@@ -171,22 +171,22 @@ export default function Home() {
     <main
       ref={divRef}
       onScroll={handleScroll}
-      className="flex flex-col h-screen overflow-y-scroll items-center bg-black   pb-8"
+      className="flex flex-col h-screen overflow-y-scroll items-center bg-white   pb-8"
     >
       <section className="flex-grow my-4 flex flex-col pt-4 items-center w-full mt-10">
         <div className="flex items-center gap-x-3   px-8   justify-center  lg:w-6/12 mx-auto">
           <Link href={"/"}>
             <div className="flex items-center gap-x-0   px-8   justify-center  lg:w-6/12 mx-auto">
-              <img src={`/logo.png`} className="w-10 mr-2 rounded-lg border" />
-              <span className=" text-foreground font-white  text-3xl mt-0 font-bold-family text-white">
-                Bubble
+              <img src={`/favicon.svg`} className="w-10 mr-2 rounded-lg border" />
+              <span className=" text-foreground font-white  text-3xl mt-0 font-bold-family text-black">
+                LetBase
               </span>
             </div>
           </Link>
         </div>
 
         <div className="text-center mt-4 px-4 w-full  lg:w-6/12 mx-auto ">
-          <span className=" text-white lg:text-5xl text-2xl font-white font-bold-family">
+          <span className=" text-black lg:text-5xl text-2xl font-white font-bold-family">
             {" "}
             Create an account
           </span>
