@@ -6,7 +6,7 @@ import { StepProps } from "@/app/interfaces/IRegister"
 export function RentAgreementStep({ data, onUpdate, onNext, onPrev }: StepProps) {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        if (data.rentAgreement) {
+        if (data.rent_agreement) {
             onNext()
         } else {
             alert("You must agree to the terms to continue.")
@@ -33,18 +33,18 @@ export function RentAgreementStep({ data, onUpdate, onNext, onPrev }: StepProps)
                 <div className="flex items-center space-x-2">
                     <Checkbox
                         id="rentAgreement"
-                        checked={data.rentAgreement}
-                        onCheckedChange={(checked) => onUpdate({ rentAgreement: checked as boolean })}
+                        checked={data.rent_agreement}
+                        onCheckedChange={(checked) => onUpdate({ rent_agreement: checked as boolean })}
                     />
                     <Label htmlFor="rentAgreement">I have read and agree to the terms of the rent agreement</Label>
                 </div>
             </div>
             <div className="flex justify-between">
                 <Button type="button" onClick={onPrev} variant="outline">
-                    Previous
+                    View summary
                 </Button>
-                <Button type="submit" disabled={!data.rentAgreement}>
-                    Next
+                <Button type="submit" disabled={!data.rent_agreement}>
+                    Complete onboarding
                 </Button>
             </div>
         </form>
