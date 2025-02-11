@@ -61,6 +61,8 @@ export interface IAuthRequest {
   onboarding_step: number;
   house_id?: any;
   house?: IHouse;
+  kyc?: IKYCRequest;
+  next_of_kin?: INextOfKinRequest;
 /*   
   company?: string;
   bank_info?: IUserBank;

@@ -140,6 +140,7 @@ export default function RegisterForm({
         <RentAgreementStep
             key="rent"
             data={formData}
+            house={house}
             onUpdate={handleUpdateData}
             onNext={handleNext}
             onPrev={handlePrev}
