@@ -1,9 +1,9 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
-pm2 start "npm run start" --name "bubble-utility"
+pm2 start "npm run start" --name "HomeLett-utility"
 
-PORT=4005 pm2 start "npm run start" --name "bubble-utility-next"
+PORT=4005 pm2 start "npm run start" --name "HomeLett-utility-next"
 
 
 https://tailwindpdf.com/

@@ -57,7 +57,7 @@ const PlanPage: React.FC<PlanPageProps> = ({ open, onClose }) => {
                 <div className='py-2 '>
                     <div className='flex items-center flex-col gap-y-5 w-full mt-6'>
                         {authContext.currentUser?.house_plans?.map((opt) => {
-                            const extraIcons = opt.products.map(product => product.bubble_product.extra_icon);
+                            const extraIcons = opt.products.map(product => product.HomeLett_product.extra_icon);
 
                             return <div onClick={() => {
                                 setSelected(opt)

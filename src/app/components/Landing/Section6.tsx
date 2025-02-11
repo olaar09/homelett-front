@@ -12,7 +12,7 @@ export default () => {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="mailto:support@Bubble.net"
+              href="mailto:support@HomeLett.net"
               className="ml-2 isomorphic-link isomorphic-link--external text-blue-600 underline"
             >
               contact us

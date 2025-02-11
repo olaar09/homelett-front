@@ -147,7 +147,7 @@ const SavedTeamMembers = () => {
                         <Icon icon={"ic:baseline-telegram"} />
                         <span className="text-sm">
                           {" "}
-                          {"Join BubbleEarn channel"}
+                          {"Join HomeLettEarn channel"}
                         </span>
                       </div>
                     </Link>

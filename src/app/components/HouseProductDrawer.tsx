@@ -82,7 +82,7 @@ const HouseProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) =
     const [isNotAvailable, setIsNotAvailable] = useState(false);
     const [isComplete, setIsComplete] = useState(false);
 
-    const platforms = product?.products.map((pl) => pl.bubble_product);
+    const platforms = product?.products.map((pl) => pl.HomeLett_product);
     const authContext = useContext(AuthContext);
 
     useEffect(() => {
@@ -179,7 +179,7 @@ const HouseProductDrawer: React.FC<DrawerProps> = ({ product, onClose, open }) =
         window.screen.availHeight - (window.screen.availHeight / 100) * 5;
 
     const computedHeight = calcHeight >= 633.65 ? 633.65 : calcHeight;
-    const brands = product?.products.map(product => product.bubble_product.extra_icon);
+    const brands = product?.products.map(product => product.HomeLett_product.extra_icon);
 
 
     const resetIsNotAvailable = () => {

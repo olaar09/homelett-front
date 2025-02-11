@@ -1,15 +1,13 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import firebase from "firebase/compat/app";
 import "firebase/auth";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { message } from "antd";
-import { IProfile } from "@/app/interfaces/IProfile";
-import APIService from "@/services/APIService";
 import APIUtil from "@/services/APIUtil";
 import { IAuthRequest, IJProfile } from "@/app/interfaces/IRegisterRequest";
 import { AxiosError } from "axios";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
+import { STEPS } from "@/app/request-invite/[house_slug]/page";
 
 interface IAuthContext {
   dataSources?: IDataSourceItem[] | null;
@@ -53,7 +51,6 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const authenticated = !!currentUser;
   const router = useRouter();
   const path = usePathname();
-  const params = useSearchParams();
 
   useEffect(() => {
     if (currentUser) {
@@ -64,16 +61,13 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     }
   }, [currentUser]);
 
-  const goHome = (currentUser: any) => {
-    console.log(currentUser);
-
-    const queryParams = new URLSearchParams(params).toString();
-    if (currentUser.is_admin == 1) {
-      router.push(`/home/super_dashboard${queryParams ? `?${queryParams}` : ""}`);
+  const goHome = (currentUser: IAuthRequest) => {
+    console.log(".....currentUser.....", currentUser);
+    if (currentUser.onboarding_step >= STEPS.length) {
+      router.push(`/dashboard`);
     } else {
-      router.push(`/home/dashboard${queryParams ? `?${queryParams}` : ""}`);
+      router.push(`/request-invite/${currentUser.house?.house_slug}`);
     }
-
   };
 
   useEffect(() => {
@@ -119,11 +113,12 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   const fetchDataSource = async () => { };
 
   const fetchCurrentUserProfile = async () => {
-    const queryParams = new URLSearchParams(params).toString();
     setLoading(true);
     try {
       const user = await apiService.profileService.loadProfile();
       if (user) {
+        console.log(".....user.....", user);
+
         setCurrentUser(user.data);
         if (path === "/login") {
           goHome(user.data);
@@ -140,15 +135,6 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         }
       }
     } catch (error) {
-      /* if (error instanceof AxiosError) {
-        console.log(error);
-
-        message.error(
-          `${error?.response?.data?.message ?? "Unable to complete request"}`
-        );
-      } else {
-        message.error("Unable to fetch user");
-      } */
       if (
         path !== "/" &&
         !path.includes("login") &&

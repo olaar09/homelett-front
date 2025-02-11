@@ -1,0 +1,183 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { useParams, useRouter } from "next/navigation"
+import RegisterForm from "../components/Form"
+import { Progress } from "@/components/ui/progress"
+import type { RegisterFormData } from "@/app/interfaces/IRegister"
+import { IAuthRequest } from "../../interfaces/IRegisterRequest"
+import { ArrowLeft } from "lucide-react"
+import { HomeLettAvatar } from "../../components/Landing/HomeLettAvatar"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { useRequest } from "ahooks"
+import APIService from "@/services/APIService"
+import APIUtil from "@/services/APIUtil"
+import { message } from "antd"
+import { LoadingAndErrorStates } from "@/app/components/LoadingState"
+
+export const STEPS = ["House Information", "Bio Information", "Contact Details", "Next of Kin", "Legal Agreements"]
+
+export default function RegisterPage() {
+  const [currentStep, setCurrentStep] = useState(0)
+  const [formData, setFormData] = useState<RegisterFormData>({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    password: "",
+    currentAddress: "",
+    previousAddress: "",
+    city: "",
+    state: "",
+    kinName: "",
+    kinRelationship: "",
+    kinPhone: "",
+    kinAddress: "",
+    rentAgreement: false,
+    paymentAgreement: false,
+  })
+  const [currentUser, setCurrentUser] = useState<IAuthRequest | null>(null)
+  const router = useRouter()
+  const params = useParams()
+  const { house_slug } = params;
+
+  const apiUtils = new APIUtil()
+
+  const {
+    data: house,
+    error: housesError,
+    loading: loadingHouse,
+    refresh: refreshHouse,
+  } = useRequest(() => getHouse());
+
+  const getHouse = async (): Promise<any> => {
+    try {
+      const data = await apiUtils.houseService.getHouseBySlug(`${house_slug}`)
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if (token) {
+      // Fetch current user data
+      fetchCurrentUser(token)
+    }
+  }, [])
+
+  const fetchCurrentUser = async (token: string) => {
+    try {
+      // Replace this with your actual API call
+      const response = await fetch("/user", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      if (response.ok) {
+        const userData: any = await response.json()
+        setCurrentUser(userData)
+        setCurrentStep(userData.onboardingStep)
+
+        // Pre-fill form data with user information
+        setFormData((prevData) => ({
+          ...prevData,
+          fullname: userData.fullname,
+          email: userData.email,
+          // Add other fields as necessary
+        }))
+      } else {
+        // Handle error or invalid token
+        // localStorage.removeItem("token")
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error)
+      //localStorage.removeItem("token")
+    }
+  }
+
+  const progress = ((currentStep + 1) / STEPS.length) * 100
+
+  // Redirect to dashboard if user has completed onboarding
+  useEffect(() => {
+    if (currentUser && currentUser.onboarding_step >= STEPS.length) {
+      router.push("/dashboard")
+    }
+  }, [currentUser, router])
+
+  if (currentUser && currentUser.onboarding_step >= STEPS.length) {
+    return null // Prevent rendering while redirecting
+  }
+
+  if (housesError || loadingHouse) {
+    return <div className="flex flex-col items-center justify-center h-screen">
+
+      <LoadingAndErrorStates
+        isLoading={loadingHouse}
+        error={housesError != null}
+        errorMessage={'Unable to load house. Please contact your landlord for the correct link to signup'}
+        onRetry={refreshHouse}
+      />
+
+    </div>
+
+  }
+
+
+
+  return (
+    <div className="relative min-h-screen bg-white flex flex-col">
+      <div className="absolute top-0 left-0 w-full bg-white z-10 p-x-10">
+        <Link href="/">
+          <Button variant="ghost" size="icon">
+            <ArrowLeft className="h-10 w-10" />
+          </Button>
+        </Link>
+      </div>
+      <div className="flex-grow flex  items-center justify-center px-4">
+        <div className="w-full max-w-2xl space-y-4">
+          <div className="flex justify-start items-center gap-x-2">
+            <HomeLettAvatar isGen={false} name={"HomeLett"} avatarSrc={"/favicon.png"} width="w-8" height="h-8" />
+            <div className="text-2xl font-bold">{currentUser ? "Complete Your Profile" : "Create an account"}</div>
+          </div>
+
+          <div className="mb-0 space-y-4">
+            <Progress value={progress} className="h-2" />
+            <div className="hidden sm:flex justify-between text-sm text-muted-foreground">
+              {STEPS.map((step, index) => (
+                <div key={step} className={`${index <= currentStep ? "text-primary" : "text-muted-foreground"}`}>
+                  {step}
+                </div>
+              ))}
+            </div>
+            <div className="sm:hidden text-sm text-muted-foreground">
+              <p className="font-medium text-primary">
+                Step {currentStep + 1} of {STEPS.length}: {STEPS[currentStep]}
+              </p>
+            </div>
+          </div>
+          <RegisterForm
+            currentStep={currentStep}
+            setCurrentStep={setCurrentStep}
+            formData={formData}
+            setFormData={setFormData}
+            totalSteps={STEPS.length}
+            currentUser={currentUser}
+            house={house}
+          />
+        </div>
+      </div>
+
+      <section className="px-6 py-4 flex flex-col items-center justify-center gap-y-4 ">
+        <span className=" text-foreground-secondary text-sm text-center">
+          By continuing, you are agreeing to Homelett {" "}
+          <span className=" text-banner"> <br /> terms of services </span> and{" "}
+          <span className=" text-banner">Privacy Policy </span>
+        </span>
+      </section>
+    </div>
+  )
+}
+

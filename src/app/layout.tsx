@@ -12,19 +12,19 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
-  title: "Bubble | Utility management app",
+  title: "HomeLett | Utility management app",
   description: "Utility management app",
-  applicationName: "Bubble",
+  applicationName: "HomeLett",
   referrer: "no-referrer",
   appleWebApp: true,
   formatDetection: { telephone: false },
   icons: {
-    icon: "/favicon.svg", // /public path
+    icon: "/favicon.png", // /public path
   },
   // icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
   openGraph: {
     type: "website",
-    title: "Bubble",
+    title: "HomeLett",
     description: "",
     siteName: "",
     url: "",
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
   twitter: {
     site: "",
     siteId: "", // make unique
-    creator: "Bubble INC",
+    creator: "HomeLett INC",
     description: "",
-    title: "Bubble",
+    title: "HomeLett",
     images: "",
   },
   assets: [
@@ -76,10 +76,10 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="referrer" content="no-referrer" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@BubbleAfrica" />
+        <meta name="twitter:site" content="@HomeLettAfrica" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
-        <title>Bubble - Utility sharing management</title>
+        <title>HomeLett - Utility sharing management</title>
         <meta name="robots" content="index,follow" />
         <meta
           name="description"
@@ -87,19 +87,19 @@ export default function RootLayout({
         />
         <meta
           property="og:title"
-          content="Bubble - Utility sharing management"
+          content="HomeLett - Utility sharing management"
         />
         <meta
           property="og:description"
           content=""
         />
-        <meta property="og:url" content="https://Bubble.net/partners" />
+        <meta property="og:url" content="https://HomeLetttt.net/partners" />
         <meta property="og:image" content="/images/dashboard-mockup.png" />
         <meta
           property="og:image:alt"
-          content="Bubble - Utility sharing management"
+          content="HomeLett - Utility sharing management"
         />
-        <meta property="og:site_name" content="Bubble" />
+        <meta property="og:site_name" content="HomeLett" />
         <link rel="preconnect" href="https://fonts.bunny.net" />
         <link
           rel="stylesheet"

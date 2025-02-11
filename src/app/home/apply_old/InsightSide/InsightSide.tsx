@@ -28,7 +28,7 @@ const items: MenuProps["items"] = [
     ),
   },
   {
-    key: "Bubble",
+    key: "HomeLett",
     label: (
       <div className="flex items-center gap-x-3">
         <Icon icon={"mdi:gesture-touch-box"} />
@@ -83,10 +83,9 @@ const InsightSide = ({
       if (error instanceof AxiosError) {
         console.log(error?.response?.data?.reason);
         message.error(
-          `${
-            error?.response?.data?.message ??
-            error?.response?.data?.reason ??
-            "Unable to complete request"
+          `${error?.response?.data?.message ??
+          error?.response?.data?.reason ??
+          "Unable to complete request"
           }`
         );
       } else {
@@ -228,9 +227,8 @@ const InsightSide = ({
             </div>
           )}
           <div
-            className={`mt-6 relative flex flex-col gap-y-3  ${
-              isShowAll ? " h-auto" : " lg:h-72 h-60 overflow-hidden"
-            } `}
+            className={`mt-6 relative flex flex-col gap-y-3  ${isShowAll ? " h-auto" : " lg:h-72 h-60 overflow-hidden"
+              } `}
           >
             <Suitability
               type="active"
@@ -352,12 +350,12 @@ const Suitability = ({
               range < 40
                 ? "exception"
                 : range < 60
-                ? "normal"
-                : range < 80
-                ? "active"
-                : range < 90
-                ? "success"
-                : "success"
+                  ? "normal"
+                  : range < 80
+                    ? "active"
+                    : range < 90
+                      ? "success"
+                      : "success"
             }
             percent={range}
             size="small"

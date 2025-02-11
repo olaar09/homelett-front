@@ -54,11 +54,14 @@ class AuthAPIService {
     }
   }
 
-  async register(data: IAuthRequest): Promise<{ data: IAuth }> {
+  async register(data: IAuthRequest): Promise<{ data: any }> {
     try {
       return await this.apiService.post("/auth/register", {
         email: data.email,
         password: data.password,
+        phone: data.phone,
+        first_name: data.first_name,
+        last_name: data.last_name,
         is_bubble: true,
       });
     } catch (error) {

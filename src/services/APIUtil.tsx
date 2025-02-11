@@ -20,7 +20,8 @@ class APIUtil {
   public subscriptionService: SubscriptionAPIService;
 
   constructor() {
-    const service = new APIService("https://api.bubble.africa/api"); // Initialize ApiService
+    const service = new APIService("http://localhost:3001"); // Initialize ApiService
+    this.productService = new ProductAPIService(service);
     this.productService = new ProductAPIService(service);
     this.dashboardService = new DashboardAPIService(service);
     this.profileService = new ProfileAPIService(service);

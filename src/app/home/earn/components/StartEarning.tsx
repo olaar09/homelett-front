@@ -49,7 +49,7 @@ const StartEarning = ({
             <Icon icon={"ic:baseline-telegram"} className="" />
             <span className="  text-sm">
               {" "}
-              Join BubbleEarn group to learn more{" "}
+              Join HomeLettEarn group to learn more{" "}
             </span>
           </div>
         </Button>

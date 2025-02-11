@@ -1,43 +1,42 @@
-"use client"
-import { Icon } from '@iconify/react/dist/iconify.js';
-import Link from 'next/link';
+import { LogIn, UserPlus } from "lucide-react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import HomeFooter from "./components/Landing/HomeFooter"
+import { HomeLettAvatar } from "./components/Landing/HomeLettAvatar"
 
-export default function Home() {
+export default function AuthPage() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 p-6">
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center">
-        <img
-          src="/favicon.svg"
-          alt="Bubble Logo"
-          className="w-16 h-16 mx-auto mb-6"
-        />
+    <div className="relative min-h-screen bg-white">
+      <div className="flex min-h-[calc(100vh-120px)] items-center justify-center p-4">
+        <Card className="w-full max-w-md space-y-8 p-8 shadow-none border-none">
+          <div className="flex justify-center">
+            <HomeLettAvatar name="HomeLett" avatarSrc="/favicon.png" isGen={false} width="w-20" height="h-20" />
+          </div>
 
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8">
-          Login or sign up to get started
-        </h1>
+          <div className="text-center">
+            <h1 className="text-xl font-bold tracking-tight text-gray-900">Welcome to Homelett Residences</h1>
+          </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/login" className="w-full sm:w-auto">
-            <button className="w-full group  bg-gray-500 text-white py-3 px-8 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg">
-              <Icon
-                icon="solar:login-2-line-duotone"
-                className="w-5 h-5 group-hover:scale-110 transition-transform"
-              />
-              Login
-            </button>
-          </Link>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Link href="/login" className="w-full">
+              <Button variant="secondary" size="lg" className="w-full gap-2 text-sm">
+                <LogIn className="h-5 w-5" />
+                Existing resident
+              </Button>
+            </Link>
 
-          <Link href="/request-invite" className="w-full sm:w-auto">
-            <button className="w-full group  bg-gray-500 text-white py-3 px-8 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg">
-              <Icon
-                icon="solar:user-plus-rounded-line-duotone"
-                className="w-5 h-5 group-hover:scale-110 transition-transform"
-              />
-              Sign up
-            </button>
-          </Link>
-        </div>
+            <Link href="/request-invite/new-resident" className="w-full">
+              <Button variant="secondary" size="lg" className="w-full gap-2 text-sm">
+                <UserPlus className="h-5 w-5" />
+                New resident
+              </Button>
+            </Link>
+          </div>
+        </Card>
       </div>
+      <HomeFooter />
     </div>
-  );
+  )
 }
+

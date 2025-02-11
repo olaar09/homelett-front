@@ -106,7 +106,7 @@ class ProfileAPIService {
 
   async loadProfile(): Promise<{ data: IAuthRequest }> {
     try {
-      const user = await this.apiService.get("/user");
+      const user = await this.apiService.get("/user/profile");
       return user as { data: IAuthRequest };
     } catch (error) {
       throw error;

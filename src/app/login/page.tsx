@@ -4,22 +4,19 @@ import { Icon } from "@iconify/react";
 //import GoogleSignIn from "./components/Auth/GoogleSignin1";
 
 import { message } from "antd";
-import { Suspense, useContext, useEffect, useState } from "react";
-import { FirebaseError } from "firebase/app";
+import { useContext, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import APIService from "@/services/APIService";
 import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
 
-import { useScroll } from "ahooks";
 import React, { useRef } from "react";
-import GoogleLoginButton from "../components/Auth/GoogleSignin";
-import InputField from "../components/InputField";
 import Link from "next/link";
-import ACButton from "../components/Button";
 import AuthProblem from "../components/Auth/AuthProblem";
 import { useAppConfig } from "@/contexts/AppConfigContext";
+import { LoginForm } from "./components/Form";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -101,7 +98,19 @@ export default function Home() {
           },
           streaming: [],
           reseller_products: [],
-          configs: []
+          configs: [],
+          is_house_admin: 0,
+          onboardingStep: 0,
+          recent_transactions: [],
+          active_sub: {
+            id: 0,
+            user_id: 0,
+            product_id: 0,
+            plan_end: "",
+            is_active: 0,
+            interval: "",
+            plan: null
+          }
         });
       } else {
         response = await apiService.authService!.login({
@@ -123,7 +132,19 @@ export default function Home() {
           },
           streaming: [],
           reseller_products: [],
-          configs: []
+          configs: [],
+          is_house_admin: 0,
+          onboardingStep: 0,
+          recent_transactions: [],
+          active_sub: {
+            id: 0,
+            user_id: 0,
+            product_id: 0,
+            plan_end: "",
+            is_active: 0,
+            interval: "",
+            plan: null
+          }
         });
       }
       localStorage.setItem("token", response.data.token!);
@@ -190,100 +211,26 @@ export default function Home() {
     <main
       ref={divRef}
       onScroll={handleScroll}
-      className="flex flex-col h-screen overflow-y-scroll items-center   pb-8 bg-white"
+      className="flex flex-col h-screen overflow-y-scroll items-center   pb-8 bg-white relative"
     >
+      <div className="absolute top-0 left-0 w-full bg-white z-10 p-x-10">
+        <Link href="/">
+          <Button variant="ghost" size="icon">
+            <ArrowLeft className="h-10 w-10" />
+          </Button>
+        </Link>
+      </div>
       <section className="flex-grow my-4 flex flex-col pt-4 items-center w-full mt-10">
-        <div className="flex items-center gap-x-3   px-8   justify-center  lg:w-6/12 mx-auto">
-          <Link href={"/"}>
-            <div className="flex items-center gap-x-0   px-8   justify-center  lg:w-6/12 mx-auto">
-              <img src={`/favicon.svg`} className="w-10 mr-2 rounded-lg border" />
-              <span className=" text-foreground font-black  text-3xl mt-0 font-bold-family text-black">
-                LetBase
-              </span>
-            </div>
-          </Link>
+        <div className="w-full max-w-md">
+          <LoginForm onChangeForm={onChangeForm} onSubmitLogin={onSubmitLogin} />
         </div>
-
-        <div className="text-center mt-4 px-4 w-full  lg:w-6/12 mx-auto ">
-          <span className=" text-black lg:text-5xl text-2xl font-white font-bold-family">
-            {" "}
-            Login to your account
-          </span>
-        </div>
-
-        <div className="my-4 gap-x-3 mt-9 flex items-center justify-between w-5/12 mx-auto px-8">
-          <div className=" border-b-[0.5px] border-foreground-secondary flex-1 "></div>
-          <span className=" text-foreground-secondary text-sm"></span>
-          <div className=" border-b-[0.5px] border-foreground-secondary flex-1"></div>
-        </div>
-
-        <form
-          className="lg:w-4/12 w-full mx-auto mt-6"
-          onSubmit={(e: any) => onSubmitLogin(e)}
-          method="post"
-        >
-          <div className="w-full px-8 flex flex-col gap-y-6">
-            <div className="flex flex-col items-start gap-y-2 text-sm">
-              <span className="text-gray-400">Email address</span>
-              <InputField
-                name="email"
-                type="email"
-                placeHolder="Email address"
-                onChange={(e) => onChangeForm("email", e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col items-start gap-y-2 text-sm">
-              <span className="text-gray-400">Password</span>
-              <InputField
-                name="password"
-                type="password"
-                required={true}
-                placeHolder="Password"
-                onChange={(e) => onChangeForm("password", e.target.value)}
-              />
-            </div>
-            <ACButton
-              text={
-                query.get("is_new") === "true"
-                  ? "Sign up with email"
-                  : "Login with email"
-              }
-              type={"submit"}
-              loading={loading}
-              children={undefined}
-            />
-
-            <div className="flex items-center justify-between">
-              <span>
-                <Link href={"/reset-password"}>
-                  <div className="flex items-center gap-x-2">
-                    <Icon icon={'mdi:forgot-password'} className="text-gray-500" />
-                    <span className="text-sm text-gray-500">Forgot password</span>
-                  </div>
-                </Link>
-              </span>
-
-              <span>.</span>
-
-              <span>
-                <Link href={"/request-invite"}>
-                  <div className="flex items-center gap-x-2">
-                    <Icon icon={'mingcute:user-add-fill'} className="text-gray-500" />
-                    <span className="text-sm text-gray-500">New account</span>
-                  </div>
-
-                </Link>
-              </span>
-            </div>
-          </div>
-        </form>
 
         <AuthProblem />
       </section>
 
       <section className="px-6 flex flex-col items-center justify-center gap-y-4 ">
         <span className=" text-foreground-secondary text-sm text-center">
-          By continuing, you are agreeing to LetBase {" "}
+          By continuing, you are agreeing to Homelett {" "}
           <span className=" text-banner"> <br /> terms of services </span> and{" "}
           <span className=" text-banner">Privacy Policy </span>
         </span>

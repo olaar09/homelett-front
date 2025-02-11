@@ -31,7 +31,7 @@ interface DrawerProps {
 }
 
 const InfoDrawer: React.FC<DrawerProps> = ({
-  onClose = () => {},
+  onClose = () => { },
   open,
   onClick,
   title = "How referral works",
@@ -59,7 +59,7 @@ const InfoDrawer: React.FC<DrawerProps> = ({
           </Tag>
           <span className="text-sm text-foreground-secondary">
             Simply share your link with friends and family and instantly earn
-            cash when they buy any plan on bubble. <br />{" "}
+            cash when they buy any plan on HomeLett. <br />{" "}
           </span>
           <span className=" text-foreground block text-center w-full">
             The referral cash-out are as follows:{" "}

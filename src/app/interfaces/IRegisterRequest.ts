@@ -7,6 +7,7 @@ export interface IHouse {
   id?: number,
   house_code?: string,
   house_name: string,
+  house_slug: string,
   address: string,
   contact_phone: string,
   contact_person_name: string,
@@ -30,7 +31,7 @@ export interface IHousePlan {
   total_selection_count: 0,
   total_selection: string
   "products": {
-    bubble_product: IProduct
+    HomeLett_product: IProduct
   }[]
 }
 
@@ -41,6 +42,11 @@ export interface IAuthRequest {
   email: string;
   password: string;
   phone: string;
+  first_name: string;
+  last_name: string;
+  onboarding_step: number;
+  house?: IHouse;
+/*   
   company?: string;
   bank_info?: IUserBank;
   meter_number?: string;
@@ -57,6 +63,7 @@ export interface IAuthRequest {
   invite_token: string;
   invite_link: string;
   is_house_admin: number;
+  onboardingStep: number;
   houses?: IHouse[];
   house?: IHouse,
   recent_transactions: ITransaction[],
@@ -68,7 +75,7 @@ export interface IAuthRequest {
     "plan_end": string,
     "is_active": number,
     "interval": string,
-    "plan": IHousePlan
+    "plan": IHousePlan | null
   },
   finance?: {
     balance: number;
@@ -93,7 +100,7 @@ export interface IAuthRequest {
   paymentLink?: string;
   token?: string;
   subscriptions: any[];
-  configs: IKornConfig[]
+  configs: IKornConfig[] */
 }
 
 export interface IUserBank {
