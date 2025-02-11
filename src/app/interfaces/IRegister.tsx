@@ -7,20 +7,20 @@ export type RegisterFormData = {
     password: string
 
     // Contact Details
-    currentAddress: string
-    previousAddress: string
-    city: string
-    state: string
+    current_address: string
+    work_address: string
+    occupation: string
+    nin: string
 
     // Next of Kin
-    kinName: string
-    kinRelationship: string
-    kinPhone: string
-    kinAddress: string
+    kin_name: string
+    kin_relationship: string
+    kin_phone: string
+    kin_address: string
 
     // Agreements
-    rentAgreement: boolean
-    paymentAgreement: boolean
+    rent_agreement: boolean
+    payment_agreement: boolean
 }
 
 export type StepProps = {

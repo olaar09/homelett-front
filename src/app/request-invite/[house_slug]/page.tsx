@@ -16,6 +16,7 @@ import APIUtil from "@/services/APIUtil"
 import { message } from "antd"
 import { LoadingAndErrorStates } from "@/app/components/LoadingState"
 import { IModule } from "@/app/interfaces/IHouse"
+import { useAuth } from "@/contexts/AuthContext"
 
 // Replace the static STEPS constant with a function
 const getSteps = (house: any) => {
@@ -37,21 +38,22 @@ export default function RegisterPage() {
     email: "",
     phone: "",
     password: "",
-    currentAddress: "",
-    previousAddress: "",
-    city: "",
-    state: "",
-    kinName: "",
-    kinRelationship: "",
-    kinPhone: "",
-    kinAddress: "",
-    rentAgreement: false,
-    paymentAgreement: false,
+    current_address: "",
+    work_address: "",
+    occupation: "",
+    nin: "",
+    kin_name: "",
+    kin_relationship: "",
+    kin_phone: "",
+    kin_address: "",
+    rent_agreement: false,
+    payment_agreement: false,
   })
   const [currentUser, setCurrentUser] = useState<IAuthRequest | null>(null)
   const router = useRouter()
   const params = useParams()
   const { house_slug } = params;
+  const { loading: userLoading } = useAuth()
 
   const apiUtils = new APIUtil()
 
@@ -129,7 +131,7 @@ export default function RegisterPage() {
     return <div className="flex flex-col items-center justify-center h-screen">
 
       <LoadingAndErrorStates
-        isLoading={loadingHouse}
+        isLoading={loadingHouse || userLoading}
         error={housesError != null}
         errorMessage={'Unable to load house. Please contact your landlord for the correct link to signup'}
         onRetry={refreshHouse}

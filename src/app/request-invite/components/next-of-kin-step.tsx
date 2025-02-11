@@ -2,11 +2,70 @@ import type React from "react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { StepProps } from "@/app/interfaces/IRegister"
-export function NextOfKinStep({ data, onUpdate, onNext, onPrev }: StepProps) {
-    const handleSubmit = (e: React.FormEvent) => {
+import { RegisterFormData, StepProps } from "@/app/interfaces/IRegister"
+import { useAuth } from "@/contexts/AuthContext"
+import { AxiosError } from "axios"
+import { message } from "antd"
+import APIUtil from "@/services/APIUtil"
+import { useState } from "react"
+
+export const onAddNextOfKin = async (formData: any) => {
+    const apiService = new APIUtil()
+    console.log(".....formData.....", formData);
+    try {
+        let response;
+        response = await apiService.authService!.addNextOfKin({
+            kin_name: formData.kin_name,
+            kin_relationship: formData.kin_relationship,
+            kin_phone: formData.kin_phone,
+            kin_address: formData.kin_address,
+        });
+    } catch (error) {
+        console.error("Error during Next of Kin:", error);
+        throw error;
+    }
+};
+
+
+export function NextOfKinStep({ onNext, onPrev }: StepProps) {
+
+    const authContext = useAuth()
+    const [isLoading, setIsLoading] = useState(false)
+
+    const [formData, setFormData] = useState({
+        kin_name: "",
+        kin_relationship: "",
+        kin_phone: "",
+        kin_address: "",
+    })
+
+    const onUpdate = (data: Partial<RegisterFormData>) => {
+        setFormData({ ...formData, ...data })
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        onNext()
+
+        try {
+            setIsLoading(true)
+            await onAddNextOfKin(formData)
+            await authContext.refreshProfile();
+            onNext()
+        } catch (error) {
+            console.log(".....error.....", error);
+            if (error instanceof AxiosError) {
+                message.error(
+                    `${error?.response?.data?.message ??
+                    error?.response?.data?.reason ??
+                    "Unable to complete request"
+                    }`
+                );
+            } else {
+                message.error("Unable to complete request");
+            }
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     return (
@@ -16,8 +75,8 @@ export function NextOfKinStep({ data, onUpdate, onNext, onPrev }: StepProps) {
                 <Input
                     id="kinName"
                     placeholder="John Doe"
-                    value={data.kinName}
-                    onChange={(e) => onUpdate({ kinName: e.target.value })}
+                    value={formData.kin_name}
+                    onChange={(e) => onUpdate({ kin_name: e.target.value })}
                     required
                 />
             </div>
@@ -26,8 +85,8 @@ export function NextOfKinStep({ data, onUpdate, onNext, onPrev }: StepProps) {
                 <Input
                     id="kinRelationship"
                     placeholder="Spouse, Parent, Sibling, etc."
-                    value={data.kinRelationship}
-                    onChange={(e) => onUpdate({ kinRelationship: e.target.value })}
+                    value={formData.kin_relationship}
+                    onChange={(e) => onUpdate({ kin_relationship: e.target.value })}
                     required
                 />
             </div>
@@ -37,8 +96,8 @@ export function NextOfKinStep({ data, onUpdate, onNext, onPrev }: StepProps) {
                     id="kinPhone"
                     type="tel"
                     placeholder="+234..."
-                    value={data.kinPhone}
-                    onChange={(e) => onUpdate({ kinPhone: e.target.value })}
+                    value={formData.kin_phone}
+                    onChange={(e) => onUpdate({ kin_phone: e.target.value })}
                     required
                 />
             </div>
@@ -47,16 +106,15 @@ export function NextOfKinStep({ data, onUpdate, onNext, onPrev }: StepProps) {
                 <Input
                     id="kinAddress"
                     placeholder="123 Main St, City, State, ZIP"
-                    value={data.kinAddress}
-                    onChange={(e) => onUpdate({ kinAddress: e.target.value })}
+                    value={formData.kin_address}
+                    onChange={(e) => onUpdate({ kin_address: e.target.value })}
                     required
                 />
             </div>
             <div className="flex justify-between">
-                <Button type="button" onClick={onPrev} variant="outline">
-                    Previous
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                    Next
                 </Button>
-                <Button type="submit">Next</Button>
             </div>
         </form>
     )

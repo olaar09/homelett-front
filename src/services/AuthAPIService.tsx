@@ -1,5 +1,5 @@
 import ApiService from "./APIService";
-import { IAuthRequest } from "@/app/interfaces/IRegisterRequest";
+import { IAuthRequest, IKYCRequest, INextOfKinRequest } from "@/app/interfaces/IRegisterRequest";
 
 class AuthAPIService {
   private apiService: ApiService;
@@ -8,7 +8,7 @@ class AuthAPIService {
     this.apiService = apiService;
   }
 
-  async googleSignIn(idToken: string): Promise<{ data: IAuth }> {
+  async googleSignIn(idToken: string): Promise<{ data: any }> {
     try {
       return await this.apiService.post("/auth/google", {
         id_token: idToken,
@@ -33,7 +33,7 @@ class AuthAPIService {
   async resetPassword(data: {
     otp: string;
     password: string;
-  }): Promise<{ data: IAuth }> {
+  }): Promise<{ data: any }> {
     try {
       return await this.apiService.post("/auth/reset-password", {
         otp: data.otp,
@@ -70,7 +70,26 @@ class AuthAPIService {
     }
   }
 
-  async login(data: IAuthRequest): Promise<{ data: IAuth }> {
+  async addNextOfKin(data: INextOfKinRequest): Promise<{ data: any }> {
+    try {
+      return await this.apiService.post("/user/next-of-kin", {
+        ...data,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+  async addKYC(data: IKYCRequest): Promise<{ data: any }> {
+    try {
+      return await this.apiService.post("/user/kyc", {
+        ...data,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async login(data: IAuthRequest): Promise<{ data: any }> {
     try {
       return await this.apiService.post("/auth/login", {
         email: data.email,

@@ -35,6 +35,20 @@ export interface IHousePlan {
   }[]
 }
 
+export interface IKYCRequest {
+  nin: string;
+  current_address: string;
+  work_address: string;
+  occupation: string;
+}
+
+export interface INextOfKinRequest {
+  kin_name: string;
+  kin_address: string;
+  kin_relationship: string;
+  kin_phone: string;
+}
+
 export interface IAuthRequest {
   id?: string;
   fullname?: string;

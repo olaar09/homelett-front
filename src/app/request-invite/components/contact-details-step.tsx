@@ -2,11 +2,72 @@ import type React from "react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { StepProps } from "@/app/interfaces/IRegister"
-export function ContactDetailsStep({ data, onUpdate, onNext, onPrev }: StepProps) {
-    const handleSubmit = (e: React.FormEvent) => {
+import { RegisterFormData, StepProps } from "@/app/interfaces/IRegister"
+import { useAuth } from "@/contexts/AuthContext"
+import { useState } from "react"
+import APIUtil from "@/services/APIUtil"
+import { AxiosError } from "axios"
+import { message } from "antd"
+
+
+export const onAddKYC = async (formData: any) => {
+    const apiService = new APIUtil()
+    console.log(".....formData.....", formData);
+    try {
+        let response;
+        response = await apiService.authService!.addKYC({
+            current_address: formData.current_address,
+            work_address: formData.work_address,
+            occupation: formData.occupation,
+            nin: formData.nin,
+        });
+    } catch (error) {
+        console.error("Error during KYC:", error);
+        throw error;
+    }
+};
+
+
+
+export function ContactDetailsStep({ onNext, onPrev }: StepProps) {
+    const authContext = useAuth()
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        onNext()
+
+        try {
+            setIsLoading(true)
+            await onAddKYC(formData)
+            await authContext.refreshProfile();
+            onNext()
+        } catch (error) {
+            console.log(".....error.....", error);
+            if (error instanceof AxiosError) {
+                message.error(
+                    `${error?.response?.data?.message ??
+                    error?.response?.data?.reason ??
+                    "Unable to complete request"
+                    }`
+                );
+            } else {
+                message.error("Unable to complete request");
+            }
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const [isLoading, setIsLoading] = useState(false)
+
+    const [formData, setFormData] = useState({
+        current_address: "",
+        work_address: "",
+        occupation: "",
+        nin: "",
+    })
+
+    const onUpdate = (data: Partial<RegisterFormData>) => {
+        setFormData({ ...formData, ...data })
     }
 
     return (
@@ -16,45 +77,44 @@ export function ContactDetailsStep({ data, onUpdate, onNext, onPrev }: StepProps
                 <Input
                     id="currentAddress"
                     placeholder="123 Main St, City, State, ZIP"
-                    value={data.currentAddress}
-                    onChange={(e) => onUpdate({ currentAddress: e.target.value })}
+                    value={formData.current_address}
+                    onChange={(e) => onUpdate({ current_address: e.target.value })}
                     required
                 />
             </div>
             <div className="space-y-2">
-                <Label htmlFor="previousAddress">Previous Address (if applicable)</Label>
+                <Label htmlFor="previousAddress">Occupation</Label>
                 <Input
-                    id="previousAddress"
-                    placeholder="456 Elm St, City, State, ZIP"
-                    value={data.previousAddress}
-                    onChange={(e) => onUpdate({ previousAddress: e.target.value })}
-                />
-            </div>
-            <div className="space-y-2">
-                <Label htmlFor="city">City</Label>
-                <Input
-                    id="city"
-                    placeholder="New York"
-                    value={data.city}
-                    onChange={(e) => onUpdate({ city: e.target.value })}
+                    id="occupation"
+                    placeholder="Software Engineer"
+                    value={formData.occupation}
+                    onChange={(e) => onUpdate({ occupation: e.target.value })}
                     required
                 />
             </div>
             <div className="space-y-2">
-                <Label htmlFor="state">State</Label>
+                <Label htmlFor="city">Work Address</Label>
                 <Input
-                    id="state"
-                    placeholder="NY"
-                    value={data.state}
-                    onChange={(e) => onUpdate({ state: e.target.value })}
+                    id="work_address"
+                    placeholder="Victoria Island, Lagos.."
+                    value={formData.work_address}
+                    onChange={(e) => onUpdate({ work_address: e.target.value })}
+                />
+            </div>
+            <div className="space-y-2">
+                <Label htmlFor="nin">NIN</Label>
+                <Input
+                    id="nin"
+                    placeholder="0992999992993"
+                    value={formData.nin}
+                    onChange={(e) => onUpdate({ nin: e.target.value })}
                     required
                 />
             </div>
             <div className="flex justify-between">
-                <Button type="button" onClick={onPrev} variant="outline">
-                    Previous
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                    Next
                 </Button>
-                <Button type="submit">Next</Button>
             </div>
         </form>
     )
