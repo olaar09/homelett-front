@@ -9,10 +9,10 @@ import router from "next/router"
 import { useAuth } from "@/contexts/AuthContext"
 import APIUtil from "@/services/APIUtil"
 import { useState } from "react"
+import { useParams } from "next/navigation"
 
 
-
-export const onSignupUser = async (formData: any) => {
+export const onSignupUser = async (formData: any, house_id: string) => {
     const apiService = new APIUtil()
     console.log(".....formData.....", formData);
     try {
@@ -24,7 +24,7 @@ export const onSignupUser = async (formData: any) => {
             first_name: formData.first_name,
             last_name: formData.last_name,
             onboarding_step: 0,
-            house: undefined
+            house_id: house_id
         });
 
         // Add debugging logs
@@ -48,7 +48,9 @@ export const onSignupUser = async (formData: any) => {
 
 
 
-export function BioInfoStep({ onNext }: StepProps) {
+export function BioInfoStep({ onNext, house_id }: StepProps) {
+
+
     const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         first_name: "",
@@ -69,7 +71,7 @@ export function BioInfoStep({ onNext }: StepProps) {
 
         try {
             setIsLoading(true)
-            await onSignupUser(formData)
+            await onSignupUser(formData, house_id!)
             await authContext.refreshProfile();
             onNext()
         } catch (error) {

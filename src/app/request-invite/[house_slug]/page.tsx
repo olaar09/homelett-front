@@ -15,8 +15,19 @@ import APIService from "@/services/APIService"
 import APIUtil from "@/services/APIUtil"
 import { message } from "antd"
 import { LoadingAndErrorStates } from "@/app/components/LoadingState"
+import { IModule } from "@/app/interfaces/IHouse"
 
-export const STEPS = ["House Information", "Bio Information", "Contact Details", "Next of Kin", "Legal Agreements"]
+// Replace the static STEPS constant with a function
+const getSteps = (house: any) => {
+  const baseSteps = ["House Information", "Bio Information"];
+
+  // Check if KYC is required for this house
+  if (house?.modules?.some((module: IModule) => module.name.toLowerCase() === 'kyc')) {
+    return [...baseSteps, "KYC information", "Next of Kin", "Legal Agreements"];
+  }
+
+  return [...baseSteps, "Legal Agreements"];
+}
 
 export default function RegisterPage() {
   const [currentStep, setCurrentStep] = useState(0)
@@ -98,16 +109,19 @@ export default function RegisterPage() {
     }
   }
 
-  const progress = ((currentStep + 1) / STEPS.length) * 100
+  // Get dynamic steps based on house configuration
+  const steps = house ? getSteps(house) : [];
 
-  // Redirect to dashboard if user has completed onboarding
+  const progress = ((currentStep + 1) / steps.length) * 100;
+
+  // Update the useEffect for redirect
   useEffect(() => {
-    if (currentUser && currentUser.onboarding_step >= STEPS.length) {
+    if (currentUser && currentUser.onboarding_step >= steps.length) {
       router.push("/dashboard")
     }
-  }, [currentUser, router])
+  }, [currentUser, router, steps])
 
-  if (currentUser && currentUser.onboarding_step >= STEPS.length) {
+  if (currentUser && currentUser.onboarding_step >= steps.length) {
     return null // Prevent rendering while redirecting
   }
 
@@ -146,7 +160,7 @@ export default function RegisterPage() {
           <div className="mb-0 space-y-4">
             <Progress value={progress} className="h-2" />
             <div className="hidden sm:flex justify-between text-sm text-muted-foreground">
-              {STEPS.map((step, index) => (
+              {steps.map((step, index) => (
                 <div key={step} className={`${index <= currentStep ? "text-primary" : "text-muted-foreground"}`}>
                   {step}
                 </div>
@@ -154,7 +168,7 @@ export default function RegisterPage() {
             </div>
             <div className="sm:hidden text-sm text-muted-foreground">
               <p className="font-medium text-primary">
-                Step {currentStep + 1} of {STEPS.length}: {STEPS[currentStep]}
+                Step {currentStep + 1} of {steps.length}: {steps[currentStep]}
               </p>
             </div>
           </div>
@@ -163,7 +177,7 @@ export default function RegisterPage() {
             setCurrentStep={setCurrentStep}
             formData={formData}
             setFormData={setFormData}
-            totalSteps={STEPS.length}
+            totalSteps={steps.length}
             currentUser={currentUser}
             house={house}
           />

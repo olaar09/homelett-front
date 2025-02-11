@@ -28,5 +28,6 @@ export type StepProps = {
     onUpdate: (data: Partial<RegisterFormData>) => void
     onNext: () => void
     onPrev: () => void
+    house_id?: string
 }
 

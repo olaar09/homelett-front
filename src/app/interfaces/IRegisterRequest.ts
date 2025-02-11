@@ -45,6 +45,7 @@ export interface IAuthRequest {
   first_name: string;
   last_name: string;
   onboarding_step: number;
+  house_id?: any;
   house?: IHouse;
 /*   
   company?: string;

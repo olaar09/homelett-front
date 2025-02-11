@@ -1,4 +1,5 @@
 export interface IHouse {
+    id: any
     house_code: string
     house_name: string
     contact_phone: string

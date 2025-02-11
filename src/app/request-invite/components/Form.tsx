@@ -62,11 +62,8 @@ export default function RegisterForm({
                         setCurrentStep(currentStep + 1)
                     }
                     break
-                case 1:
-                    setCurrentStep(currentStep + 1)
-                    break
                 default:
-                    break
+                    setCurrentStep(currentStep + 1)
             }
         }
     }
@@ -122,15 +119,24 @@ export default function RegisterForm({
             onUpdate={handleUpdateData}
             onNext={handleNext}
             onPrev={handlePrev}
+            house_id={house.id}
         />,
-        <ContactDetailsStep
-            key="contact"
-            data={formData}
-            onUpdate={handleUpdateData}
-            onNext={handleNext}
-            onPrev={handlePrev}
-        />,
-        <NextOfKinStep key="kin" data={formData} onUpdate={handleUpdateData} onNext={handleNext} onPrev={handlePrev} />,
+        ...(house.modules.some(module => module.name.toLowerCase() === 'kyc') ? [
+            <ContactDetailsStep
+                key="contact"
+                data={formData}
+                onUpdate={handleUpdateData}
+                onNext={handleNext}
+                onPrev={handlePrev}
+            />,
+            <NextOfKinStep
+                key="kin"
+                data={formData}
+                onUpdate={handleUpdateData}
+                onNext={handleNext}
+                onPrev={handlePrev}
+            />,
+        ] : []),
         <RentAgreementStep
             key="rent"
             data={formData}
@@ -156,7 +162,7 @@ export default function RegisterForm({
                     </Button>
                 )}
             </CardHeader> */}
-            <CardContent className="p-0">{steps[currentStep]}</CardContent>
+            <CardContent className="p-0 h-96">{steps[currentStep]}</CardContent>
         </Card>
     )
 }
