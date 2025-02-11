@@ -62,25 +62,25 @@ export function SummaryModal({ isOpen, onClose, house }: SummaryModalProps) {
                         </div>
 
                         {/* Next of Kin */}
-                        {currentUser?.next_of_kin?.kin_name && (
+                        {currentUser?.nextOfKin?.kin_name && (
                             <div className="space-y-2">
                                 <h3 className="font-semibold text-sm text-muted-foreground">Next of Kin</h3>
                                 <div className="space-y-2">
                                     <div className="flex items-center gap-2">
                                         <UserPlus className="h-4 w-4 text-primary" />
-                                        <span>{currentUser?.next_of_kin?.kin_name}</span>
+                                        <span>{currentUser?.nextOfKin?.kin_name}</span>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <Phone className="h-4 w-4 text-primary" />
-                                        <span>{currentUser?.next_of_kin?.kin_phone}</span>
+                                        <span>{currentUser?.nextOfKin?.kin_phone}</span>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <Map className="h-4 w-4 text-primary" />
-                                        <span>{currentUser?.next_of_kin?.kin_address}</span>
+                                        <span>{currentUser?.nextOfKin?.kin_address}</span>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <User2 className="h-4 w-4 text-primary" />
-                                        <span>{currentUser?.next_of_kin?.kin_relationship}</span>
+                                        <span>{currentUser?.nextOfKin?.kin_relationship}</span>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@ export function SummaryModal({ isOpen, onClose, house }: SummaryModalProps) {
 
                         {currentUser?.kyc?.nin && (
                             <div className="space-y-2">
-                                <h3 className="font-semibold text-sm text-muted-foreground">Next of Kin</h3>
+                                <h3 className="font-semibold text-sm text-muted-foreground">KYC information</h3>
                                 <div className="space-y-2">
                                     <div className="flex items-center gap-2">
                                         <UserPlus className="h-4 w-4 text-primary" />

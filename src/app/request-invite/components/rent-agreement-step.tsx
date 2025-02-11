@@ -6,6 +6,7 @@ import { StepProps } from "@/app/interfaces/IRegister"
 import { IHouse } from "@/app/interfaces/IHouse"
 import { SummaryModal } from "./summary-modal"
 import { useState } from "react"
+import { SignatureUpload } from "./signature-upload"
 
 interface RentAgreementStepProps extends StepProps {
     house: IHouse
@@ -13,14 +14,22 @@ interface RentAgreementStepProps extends StepProps {
 
 export function RentAgreementStep({ onNext, onPrev, house, data, onUpdate }: RentAgreementStepProps) {
     const [showSummary, setShowSummary] = useState(false)
+    const [showSignatureModal, setShowSignatureModal] = useState(false)
+    const [signature, setSignature] = useState<File | null>(null)
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        if (data.rent_agreement) {
-            onNext()
-        } else {
+        if (!data.rent_agreement) {
             alert("You must agree to the terms to continue.")
+            return
         }
+
+        if (!signature) {
+            setShowSignatureModal(true)
+            return
+        }
+
+        onNext()
     }
 
     const agreementContent = house.modules?.find(module => module.name === 'kyc') ? (
@@ -85,11 +94,20 @@ export function RentAgreementStep({ onNext, onPrev, house, data, onUpdate }: Ren
                     >
                         View Summary
                     </Button>
-                    <Button type="submit" disabled={!data.rent_agreement}>
-                        Complete onboarding
+                    <Button
+                        type="submit"
+                        disabled={!data.rent_agreement}
+                    >
+                        {signature ? 'Complete onboarding' : 'Upload Signature'}
                     </Button>
                 </div>
             </form>
+
+            <SignatureUpload
+                isOpen={showSignatureModal}
+                onClose={() => setShowSignatureModal(false)}
+                onSignatureValidated={(file) => setSignature(file)}
+            />
 
             <SummaryModal
                 isOpen={showSummary}

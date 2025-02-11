@@ -62,7 +62,7 @@ export interface IAuthRequest {
   house_id?: any;
   house?: IHouse;
   kyc?: IKYCRequest;
-  next_of_kin?: INextOfKinRequest;
+  nextOfKin?: INextOfKinRequest;
 /*   
   company?: string;
   bank_info?: IUserBank;
