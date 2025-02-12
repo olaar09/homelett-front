@@ -39,12 +39,12 @@ export function RentAgreementStep({ onNext, onPrev, house, data, onUpdate }: Ren
 
     const agreementContent = house.modules?.find(module => module.name === 'kyc') ? (
         <div className="h-40 overflow-y-auto border p-4 rounded-md">
-            <h4 className="font-semibold mb-2">Tenancy Agreement</h4>
-            <p>
+            <h4 className="font-semibold mb-2 text-[0.78rem]">Tenancy Agreement</h4>
+            <p className="text-[0.78rem]">
                 This Tenancy Agreement outlines the terms and conditions for residing in the property.
                 Key aspects include:
             </p>
-            <ul className="list-disc pl-5 mt-2">
+            <ul className="list-disc pl-5 mt-2 text-[0.78rem]">
                 <li>Rent payment terms and schedule</li>
                 <li>Security deposit requirements</li>
                 <li>Maintenance responsibilities</li>
@@ -54,12 +54,12 @@ export function RentAgreementStep({ onNext, onPrev, house, data, onUpdate }: Ren
         </div>
     ) : (
         <div className="h-40 overflow-y-auto border p-4 rounded-md">
-            <h4 className="font-semibold mb-2">Service Level Agreement</h4>
-            <p>
+            <h4 className="font-semibold mb-2 text-[0.78rem]">Service Level Agreement</h4>
+            <p className="text-[0.78rem]">
                 This Service Level Agreement defines the terms of service provision.
                 Key aspects include:
             </p>
-            <ul className="list-disc pl-5 mt-2">
+            <ul className="list-disc pl-5 mt-2 text-[0.78rem]">
                 <li>Service description and scope</li>
                 <li>Service delivery timeline</li>
                 <li>Performance metrics</li>
@@ -73,20 +73,20 @@ export function RentAgreementStep({ onNext, onPrev, house, data, onUpdate }: Ren
         <div className="space-y-6">
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">
+                    <h3 className="text-[0.78rem] font-semibold">
                         {house.modules?.find(module => module.name === 'kyc') ? 'Tenancy Agreement' : 'Service Level Agreement'}
                     </h3>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-[0.78rem] text-gray-600">
                         Please read the following agreement carefully and check the box below to indicate your agreement.
                     </p>
                     {agreementContent}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 text-[0.78rem]">
                         <Checkbox
                             id="rentAgreement"
                             checked={data.rent_agreement}
                             onCheckedChange={(checked) => onUpdate({ rent_agreement: checked as boolean })}
                         />
-                        <Label htmlFor="rentAgreement">
+                        <Label className="text-[0.78rem]" htmlFor="rentAgreement">
                             I have read and agree to the terms of the {house.modules?.find(module => module.name === 'kyc') ? 'tenancy' : 'service level'} agreement
                         </Label>
                     </div>
@@ -97,13 +97,15 @@ export function RentAgreementStep({ onNext, onPrev, house, data, onUpdate }: Ren
                         variant="outline"
                         onClick={() => setShowSummary(true)}
                     >
-                        View Summary
+                        <span className="text-[0.78rem]">View Summary</span>
                     </Button>
                     <Button
                         type="submit"
                         disabled={!data.rent_agreement}
                     >
-                        {signature ? 'Complete onboarding' : 'Upload Signature'}
+                        <span className="text-[0.78rem]">
+                            {signature ? 'Complete onboarding' : 'Upload Signature'}
+                        </span>
                     </Button>
                 </div>
             </form>

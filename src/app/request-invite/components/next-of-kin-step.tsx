@@ -70,50 +70,54 @@ export function NextOfKinStep({ onNext, onPrev }: StepProps) {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-                <Label htmlFor="kinName">Next of Kin Name</Label>
+            <div className="space-y-2 ">
+                <Label className="text-[0.78rem]" htmlFor="kinName">Next of Kin Name</Label>
                 <Input
                     id="kinName"
                     placeholder="John Doe"
                     value={formData.kin_name}
+                    className="text-[0.78rem]"
                     onChange={(e) => onUpdate({ kin_name: e.target.value })}
                     required
                 />
             </div>
             <div className="space-y-2">
-                <Label htmlFor="kinRelationship">Relationship</Label>
+                <Label className="text-[0.78rem]" htmlFor="kinRelationship">Relationship</Label>
                 <Input
                     id="kinRelationship"
                     placeholder="Spouse, Parent, Sibling, etc."
                     value={formData.kin_relationship}
+                    className="text-[0.78rem]"
                     onChange={(e) => onUpdate({ kin_relationship: e.target.value })}
                     required
                 />
             </div>
             <div className="space-y-2">
-                <Label htmlFor="kinPhone">Phone Number</Label>
+                <Label className="text-[0.78rem]" htmlFor="kinPhone">Phone Number</Label>
                 <Input
                     id="kinPhone"
                     type="tel"
                     placeholder="+234..."
                     value={formData.kin_phone}
+                    className="text-[0.78rem]"
                     onChange={(e) => onUpdate({ kin_phone: e.target.value })}
                     required
                 />
             </div>
             <div className="space-y-2">
-                <Label htmlFor="kinAddress">Address</Label>
+                <Label className="text-[0.78rem]" htmlFor="kinAddress">Address</Label>
                 <Input
                     id="kinAddress"
                     placeholder="123 Main St, City, State, ZIP"
                     value={formData.kin_address}
+                    className="text-[0.78rem]"
                     onChange={(e) => onUpdate({ kin_address: e.target.value })}
                     required
                 />
             </div>
             <div className="flex justify-between">
                 <Button type="submit" className="w-full" disabled={isLoading}>
-                    Next
+                    <span className="text-sm">Next</span>
                 </Button>
             </div>
         </form>

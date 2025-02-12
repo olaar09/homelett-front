@@ -73,40 +73,45 @@ export function ContactDetailsStep({ onNext, onPrev }: StepProps) {
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-                <Label htmlFor="currentAddress">Current Address</Label>
+                <Label className="text-[0.78rem]" htmlFor="currentAddress">Current Address</Label>
                 <Input
                     id="currentAddress"
                     placeholder="123 Main St, City, State, ZIP"
                     value={formData.current_address}
+                    className="text-[0.78rem]"
                     onChange={(e) => onUpdate({ current_address: e.target.value })}
                     required
                 />
             </div>
             <div className="space-y-2">
-                <Label htmlFor="previousAddress">Occupation</Label>
+                <Label className="text-[0.78rem]" htmlFor="previousAddress">Occupation</Label>
                 <Input
                     id="occupation"
                     placeholder="Software Engineer"
                     value={formData.occupation}
+                    className="text-[0.78rem]"
                     onChange={(e) => onUpdate({ occupation: e.target.value })}
                     required
                 />
             </div>
             <div className="space-y-2">
-                <Label htmlFor="city">Work Address</Label>
+                <Label className="text-[0.78rem]" htmlFor="city">Work Address</Label>
                 <Input
                     id="work_address"
                     placeholder="Victoria Island, Lagos.."
                     value={formData.work_address}
+                    className="text-[0.78rem]"
                     onChange={(e) => onUpdate({ work_address: e.target.value })}
+                    required
                 />
             </div>
             <div className="space-y-2">
-                <Label htmlFor="nin">NIN</Label>
+                <Label className="text-[0.78rem]" htmlFor="nin">NIN</Label>
                 <Input
                     id="nin"
                     placeholder="0992999992993"
                     value={formData.nin}
+                    className="text-[0.78rem]"
                     onChange={(e) => onUpdate({ nin: e.target.value })}
                     required
                 />

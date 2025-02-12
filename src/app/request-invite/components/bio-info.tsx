@@ -96,11 +96,12 @@ export function BioInfoStep({ onNext, house_id }: StepProps) {
         <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex flex-col md:flex-row gap-x-2 items-center w-full space-y-4 md:space-y-0">
                 <div className="w-full md:w-1/2">
-                    <Label htmlFor="first_name">First Name</Label>
+                    <Label className="text-[0.78rem]" htmlFor="first_name">First Name</Label>
                     <Input
                         id="first_name"
                         type="text"
                         placeholder="John "
+                        className="text-[0.78rem]"
                         value={formData.first_name}
                         onChange={(e) => onUpdate({ first_name: e.target.value })}
                         required
@@ -108,11 +109,12 @@ export function BioInfoStep({ onNext, house_id }: StepProps) {
                 </div>
 
                 <div className="w-full md:w-1/2">
-                    <Label htmlFor="last_name">Last Name</Label>
+                    <Label className="text-[0.78rem]" htmlFor="last_name">Last Name</Label>
                     <Input
                         id="last_name"
                         type="text"
                         placeholder="Doe"
+                        className="text-[0.78rem]"
                         value={formData.last_name}
                         onChange={(e) => onUpdate({ last_name: e.target.value })}
                         required
@@ -120,32 +122,35 @@ export function BioInfoStep({ onNext, house_id }: StepProps) {
                 </div>
             </div>
             <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label className="text-[0.78rem]" htmlFor="email">Email</Label>
                 <Input
                     id="email"
                     type="email"
                     placeholder="m@example.com"
+                    className="text-[0.78rem]"
                     value={formData.email}
                     onChange={(e) => onUpdate({ email: e.target.value })}
                     required
                 />
             </div>
             <div className="space-y-2">
-                <Label htmlFor="phone">Phone Number</Label>
+                <Label className="text-[0.78rem]" htmlFor="phone">Phone Number</Label>
                 <Input
                     id="phone"
                     type="tel"
                     placeholder="+234..."
+                    className="text-[0.78rem]"
                     value={formData.phone}
                     onChange={(e) => onUpdate({ phone: e.target.value })}
                     required
                 />
             </div>
             <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label className="text-[0.78rem]" htmlFor="password">Password</Label>
                 <Input
                     id="password"
                     type="password"
+                    className="text-[0.78rem]"
                     value={formData.password}
                     onChange={(e) => onUpdate({ password: e.target.value })}
                     required

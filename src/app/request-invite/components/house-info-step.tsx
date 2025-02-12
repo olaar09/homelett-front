@@ -27,11 +27,11 @@ export default function PropertyCard({ house, onNext }: { house: IHouse, onNext:
                         <div className="space-y-8">
                             <div className="flex items-center gap-2">
                                 <Home className="h-5 w-5 text-primary" />
-                                <h2 className="text-sm font-semibold tracking-tight">{house.house_name}</h2>
+                                <h2 className="text-[0.78rem] font-semibold tracking-tight">{house.house_name}</h2>
                             </div>
                             <div className="flex items-center gap-2">
                                 <MapPin className="h-5 w-5 text-primary" />
-                                <h2 className="text-sm font-semibold tracking-tight">{house.address}</h2>
+                                <h2 className="text-[0.78rem] font-semibold tracking-tight">{house.address}</h2>
                             </div>
                         </div>
 
@@ -49,7 +49,7 @@ export default function PropertyCard({ house, onNext }: { house: IHouse, onNext:
                                                 const { icon: Icon, color } = getServiceConfig(service.name);
                                                 return <Icon className={`h-5 w-5 ${color}`} />;
                                             })()}
-                                            <span className="text-sm font-medium">{service.name}</span>
+                                            <span className="text-[0.78rem] font-medium">{service.name}</span>
                                         </div>
                                     </Button>
                                 </motion.div>
@@ -59,8 +59,8 @@ export default function PropertyCard({ house, onNext }: { house: IHouse, onNext:
                 </CardContent>
 
                 <CardFooter className="pt-4 pb-6 px-0">
-                    <Button className="w-full py-6 text-lg font-medium" size="lg" onClick={onNext}>
-                        Get Started
+                    <Button className="w-full py-6 text-lg font-medium" size="sm" onClick={onNext}>
+                        <span className="text-sm">Get Started</span>
                     </Button>
                 </CardFooter>
             </Card>
