@@ -30,7 +30,6 @@ class APIService {
 
       // Automatically handle Content-Type for FormData
       if ((options.data instanceof FormData)) {
-        alert('form data')
         headers["Content-Type"] = "multipart/form-data";
       }
 

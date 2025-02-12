@@ -25,7 +25,7 @@ export function SummaryModal({ isOpen, onClose, house }: SummaryModalProps) {
                 <DialogHeader>
                     <DialogTitle>Application Summary</DialogTitle>
                 </DialogHeader>
-                <ScrollArea className="max-h-[60vh] px-1">
+                <ScrollArea className="max-h-[60vh] px-1 text-[0.78rem]">
                     <div className="space-y-6 py-4">
                         {/* House Details */}
                         <div className="space-y-2">

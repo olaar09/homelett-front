@@ -5,6 +5,8 @@ import { useAuth } from "@/contexts/AuthContext"
 import APIUtil from "@/services/APIUtil"
 import { AxiosError } from "axios"
 import { message } from "antd"
+import { Loader2 } from "lucide-react"
+
 interface SignatureUploadProps {
     isOpen: boolean
     onClose: () => void
@@ -59,18 +61,26 @@ export function SignatureUpload({ isOpen, onClose, onSignatureValidated }: Signa
                             </ul>
                         </p>
                     </div>
-                    <input
-                        type="file"
-                        accept="image/*"
-                        disabled={isLoading}
-                        onChange={handleFileChange}
-                        className="mt-1 block w-full text-sm text-gray-500
-                            file:mr-4 file:py-2 file:px-4
-                            file:rounded-md file:border-0
-                            file:text-sm file:font-semibold
-                            file:bg-primary file:text-white
-                            hover:file:bg-primary/90"
-                    />
+                    <div className="relative">
+                        <input
+                            type="file"
+                            accept="image/*"
+                            disabled={isLoading}
+                            onChange={handleFileChange}
+                            className={`mt-1 block w-full text-sm text-gray-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-md file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-primary file:text-white
+                                ${isLoading ? 'cursor-not-allowed opacity-50' : 'hover:file:bg-primary/90'}
+                                `}
+                        />
+                        {isLoading && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-white/50">
+                                <Loader2 className="h-5 w-5 animate-spin text-primary" />
+                            </div>
+                        )}
+                    </div>
                 </div>
             </DialogContent>
         </Dialog>
