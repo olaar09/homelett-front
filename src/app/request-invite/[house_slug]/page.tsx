@@ -24,10 +24,10 @@ const getSteps = (house: any) => {
 
   // Check if KYC is required for this house
   if (house?.modules?.some((module: IModule) => module.name.toLowerCase() === 'kyc')) {
-    return [...baseSteps, "KYC information", "Next of Kin", "Legal Agreements"];
+    return [...baseSteps, "KYC information", "Next of Kin", "Legal Agreements", 'Success'];
   }
 
-  return [...baseSteps, "Legal Agreements"];
+  return [...baseSteps, "Legal Agreements", 'Success'];
 }
 
 export default function RegisterPage() {
@@ -114,7 +114,9 @@ export default function RegisterPage() {
   // Get dynamic steps based on house configuration
   const steps = house ? getSteps(house) : [];
 
-  const progress = ((currentStep + 1) / steps.length) * 100;
+  const progress = currentStep >= steps.length
+    ? 100
+    : ((currentStep + 1) / steps.length) * 100;
 
   // Update the useEffect for redirect
   useEffect(() => {
@@ -163,14 +165,22 @@ export default function RegisterPage() {
             <Progress value={progress} className="h-2" />
             <div className="hidden sm:flex justify-between text-sm text-muted-foreground">
               {steps.map((step, index) => (
-                <div key={step} className={`${index <= currentStep ? "text-primary" : "text-muted-foreground"}`}>
+                <div
+                  key={step}
+                  className={`${currentStep >= steps.length || index <= currentStep
+                    ? "text-primary"
+                    : "text-muted-foreground"
+                    }`}
+                >
                   {step}
                 </div>
               ))}
             </div>
             <div className="sm:hidden text-sm text-muted-foreground">
               <p className="font-medium text-primary">
-                Step {currentStep + 1} of {steps.length}: {steps[currentStep]}
+                Step {Math.min(currentStep + 1, steps.length)} of {steps.length}: {
+                  steps[Math.min(currentStep, steps.length - 1)]
+                }
               </p>
             </div>
           </div>

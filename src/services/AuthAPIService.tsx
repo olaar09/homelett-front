@@ -79,11 +79,20 @@ class AuthAPIService {
       throw error;
     }
   }
+
   async addKYC(data: IKYCRequest): Promise<{ data: any }> {
     try {
       return await this.apiService.post("/user/kyc", {
         ...data,
       });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async uploadSignature(file: File): Promise<any> {
+    try {
+      return await this.apiService.postFile('/user/upload-signature', file)
     } catch (error) {
       throw error;
     }

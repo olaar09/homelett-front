@@ -17,6 +17,11 @@ export function RentAgreementStep({ onNext, onPrev, house, data, onUpdate }: Ren
     const [showSignatureModal, setShowSignatureModal] = useState(false)
     const [signature, setSignature] = useState<File | null>(null)
 
+    const onSignatureValidated = () => {
+        // setSignature(file)
+        onNext()
+    }
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         if (!data.rent_agreement) {
@@ -106,7 +111,7 @@ export function RentAgreementStep({ onNext, onPrev, house, data, onUpdate }: Ren
             <SignatureUpload
                 isOpen={showSignatureModal}
                 onClose={() => setShowSignatureModal(false)}
-                onSignatureValidated={(file) => setSignature(file)}
+                onSignatureValidated={onSignatureValidated}
             />
 
             <SummaryModal

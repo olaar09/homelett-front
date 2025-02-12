@@ -1,7 +1,10 @@
 import { useState } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-
+import { useAuth } from "@/contexts/AuthContext"
+import APIUtil from "@/services/APIUtil"
+import { AxiosError } from "axios"
+import { message } from "antd"
 interface SignatureUploadProps {
     isOpen: boolean
     onClose: () => void
@@ -9,13 +12,33 @@ interface SignatureUploadProps {
 }
 
 export function SignatureUpload({ isOpen, onClose, onSignatureValidated }: SignatureUploadProps) {
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const apiUtil = new APIUtil()
+    const authContext = useAuth()
+    const [isLoading, setIsLoading] = useState(false)
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
+        console.log("file", file);
 
-        //upload file to nestjs server
-        if (file) {
-            onSignatureValidated(file)
+        try {
+            setIsLoading(true)
+            await apiUtil.authService.uploadSignature(file!)
+            await authContext.refreshProfile();
+            message.success("Signature uploaded successfully");
             onClose()
+            onSignatureValidated(file!)
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                message.error(
+                    `${error?.response?.data?.message ??
+                    error?.response?.data?.reason ??
+                    "Unable to complete request"
+                    }`
+                );
+            } else {
+                message.error("Unable to complete request");
+            }
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -39,6 +62,7 @@ export function SignatureUpload({ isOpen, onClose, onSignatureValidated }: Signa
                     <input
                         type="file"
                         accept="image/*"
+                        disabled={isLoading}
                         onChange={handleFileChange}
                         className="mt-1 block w-full text-sm text-gray-500
                             file:mr-4 file:py-2 file:px-4

@@ -22,15 +22,28 @@ class APIService {
     console.log(localStorage.getItem("token"));
     const url = `${this.apiBaseUrl}${endpoint}`;
     try {
+
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+
+      // Automatically handle Content-Type for FormData
+      if ((options.data instanceof FormData)) {
+        alert('form data')
+        headers["Content-Type"] = "multipart/form-data";
+      }
+
+
+
       const axiosOptions: AxiosRequestConfig = {
         url: url,
         method: options.method,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: headers,
         data: options.data,
       };
+
+
 
       if (options.method === "HEAD") {
         const response: AxiosResponse = await axios.head(url, axiosOptions);
@@ -47,6 +60,22 @@ class APIService {
 
   public get<T>(endpoint: string): Promise<T> {
     return this.request<T>(endpoint, { method: "GET" });
+  }
+
+  public async postFile<T>(endpoint: string, file: File, additionalData?: Record<string, any>): Promise<T> {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    if (additionalData) {
+      Object.entries(additionalData).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+    }
+
+    return await this.request<T>(endpoint, {
+      method: "POST",
+      data: formData,
+    });
   }
 
   public async post<T>(endpoint: string, data: Object): Promise<T> {

@@ -15,11 +15,10 @@ import { PaymentAgreementStep } from "./payment-agreement-step"
 import { NextOfKinStep } from "./next-of-kin-step"
 import { IHouse } from "@/app/interfaces/IHouse"
 import HouseInfoStep from "./house-info-step"
-import { message } from "antd"
-import { AxiosError } from "axios"
-import router from "next/router"
+
 import { useAuth } from "@/contexts/AuthContext"
 import APIUtil from "@/services/APIUtil"
+import { SuccessStep } from "./success-step"
 
 
 
@@ -75,18 +74,6 @@ export default function RegisterForm({
         }
     }
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        setIsLoading(true)
-        // Add your registration logic here
-        console.log("Form submitted:", formData)
-        if (currentUser) {
-            // Update the user's onboarding step to completed
-            await updateOnboardingStep(currentUser.id!, totalSteps)
-        }
-        // Redirect to dashboard or show completion message
-        setTimeout(() => setIsLoading(false), 1000)
-    }
 
     const updateOnboardingStep = async (userId: string, step: number) => {
         try {
@@ -145,6 +132,14 @@ export default function RegisterForm({
             onNext={handleNext}
             onPrev={handlePrev}
         />,
+        <SuccessStep
+            key="success"
+            houseName={house.house_name}
+        />,
+
+
+
+
         /*         <PaymentAgreementStep
                     key="payment"
                     data={formData}
@@ -156,15 +151,19 @@ export default function RegisterForm({
 
     return (
         <Card className="w-full border-none shadow-none p-0">
-            {/* <CardHeader className="space-y-1">
-                {currentStep > 0 && (
-                    <Button variant="ghost" size="icon" onClick={handlePrev}>
-                        <ArrowLeft className="h-4 w-4" />
-                    </Button>
-                )}
-            </CardHeader> */}
-            <CardContent className="p-0 h-96">{steps[currentStep]}</CardContent>
-        </Card>
+            {currentStep < totalSteps - 1 && (
+                <CardHeader className="space-y-1">
+                    {currentStep > 0 && (
+                        <Button variant="ghost" size="icon" onClick={handlePrev}>
+                            <ArrowLeft className="h-4 w-4" />
+                        </Button>
+                    )}
+                </CardHeader>
+            )}
+            <CardContent className="p-0 h-96">
+                {steps[Math.min(currentStep, steps.length - 1)]}
+            </CardContent>
+        </Card >
     )
 }
 
