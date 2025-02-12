@@ -184,8 +184,6 @@ export default function Home() {
       localStorage.setItem("token", response.data.token!);
       message.success("Login successful");
       await authContext.refreshProfile();
-      await authContext.refreshDataSource();
-
       router.push("/home/dashboard");
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -220,15 +218,15 @@ export default function Home() {
           </Button>
         </Link>
       </div>
-      <section className="flex-grow my-4 flex flex-col pt-4 items-center w-full mt-10">
-        <div className="w-full max-w-md">
+      <section className="flex-grow my-4 flex flex-col pt-4 items-center w-full mt-10 text-[0.7rem]">
+        <div className="w-full max-w-md text-[0.7rem]">
           <LoginForm onChangeForm={onChangeForm} onSubmitLogin={onSubmitLogin} />
         </div>
 
         <AuthProblem />
       </section>
 
-      <section className="px-6 flex flex-col items-center justify-center gap-y-4 ">
+      <section className="px-6 flex flex-col items-center justify-center gap-y-4 text-[0.7rem]">
         <span className=" text-foreground-secondary text-sm text-center">
           By continuing, you are agreeing to Homelett {" "}
           <span className=" text-banner"> <br /> terms of services </span> and{" "}

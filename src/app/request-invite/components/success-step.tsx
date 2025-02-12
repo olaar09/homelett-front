@@ -32,16 +32,16 @@ export function SuccessStep({ houseName }: SuccessStepProps) {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                    <Link href="/login" className="w-full">
+                    <Link href="/home/dashboard" className="w-full">
                         <Button className="w-full" size="lg">
                             Login to Dashboard
                         </Button>
                     </Link>
-                    <Link href="/" className="w-full">
+                    {/*     <Link href="/home/dashboard" className="w-full">
                         <Button variant="outline" className="w-full" size="lg">
                             Back to Home
                         </Button>
-                    </Link>
+                    </Link> */}
                 </div>
             </CardContent>
         </Card>

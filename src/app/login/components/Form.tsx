@@ -22,7 +22,7 @@ export function LoginForm({ onSubmitLogin, onChangeForm }: {
     }
 
     return (
-        <Card className="w-full py-7 border-none shadow-none">
+        <Card className="w-full py-7 border-none shadow-none text-[0.78rem]">
             <div className="flex justify-center">
                 <HomeLettAvatar name="HomeLett" avatarSrc="/favicon.png" isGen={false} width="w-20" height="h-20" />
             </div>
@@ -35,15 +35,15 @@ export function LoginForm({ onSubmitLogin, onChangeForm }: {
             </CardHeader>
             <CardContent>
                 <form onSubmit={onSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="email">Email</Label>
-                        <Input onChange={(e) => onChangeForm("email", e.target.value)} id="email" type="email" placeholder="m@example.com" required />
+                    <div className="space-y-2 text-[0.78rem]">
+                        <Label className="text-[0.78rem]" htmlFor="email">Email</Label>
+                        <Input className="text-[0.78rem]" onChange={(e) => onChangeForm("email", e.target.value)} id="email" type="email" placeholder="m@example.com" required />
                     </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="password">Password</Label>
-                        <Input id="password" type="password" required onChange={(e) => onChangeForm("password", e.target.value)} />
+                    <div className="space-y-2 text-[0.78rem]">
+                        <Label className="text-[0.78rem]" htmlFor="password">Password</Label>
+                        <Input className="text-[0.78rem]" id="password" type="password" required onChange={(e) => onChangeForm("password", e.target.value)} />
                     </div>
-                    <Button className="w-full" type="submit" disabled={isLoading}>
+                    <Button className="w-full " type="submit" disabled={isLoading}>
                         {isLoading ? "Logging in..." : "Login"}
                     </Button>
                 </form>
