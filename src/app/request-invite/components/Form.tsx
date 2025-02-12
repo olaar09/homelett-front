@@ -151,7 +151,7 @@ export default function RegisterForm({
 
     return (
         <Card className="w-full border-none shadow-none p-0">
-            {currentStep < totalSteps - 1 && (
+            {/*   {currentStep < totalSteps - 1 && (
                 <CardHeader className="space-y-1">
                     {currentStep > 0 && (
                         <Button variant="ghost" size="icon" onClick={handlePrev}>
@@ -159,7 +159,7 @@ export default function RegisterForm({
                         </Button>
                     )}
                 </CardHeader>
-            )}
+            )} */}
             <CardContent className="p-0 h-96">
                 {steps[Math.min(currentStep, steps.length - 1)]}
             </CardContent>

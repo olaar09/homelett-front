@@ -6,7 +6,7 @@ import RegisterForm from "../components/Form"
 import { Progress } from "@/components/ui/progress"
 import type { RegisterFormData } from "@/app/interfaces/IRegister"
 import { IAuthRequest } from "../../interfaces/IRegisterRequest"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, X } from "lucide-react"
 import { HomeLettAvatar } from "../../components/Landing/HomeLettAvatar"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -147,18 +147,28 @@ export default function RegisterPage() {
 
   return (
     <div className="relative min-h-screen bg-white flex flex-col">
-      <div className="absolute top-0 left-0 w-full bg-white z-10 p-x-10">
+      <div className="absolute top-0 left-0 w-full bg-white z-10 p-x-10 hidden sm:block">
         <Link href="/">
           <Button variant="ghost" size="icon">
             <ArrowLeft className="h-10 w-10" />
           </Button>
         </Link>
       </div>
-      <div className="flex-grow flex  items-center justify-center px-4">
+      <div className="flex-grow flex  items-start  pt-4 md:pt-0 md:items-center justify-center px-4">
         <div className="w-full max-w-2xl space-y-4">
-          <div className="flex justify-start items-center gap-x-2">
-            <HomeLettAvatar isGen={false} name={"HomeLett"} avatarSrc={"/favicon.png"} width="w-8" height="h-8" />
-            <div className="text-2xl font-bold">{currentUser ? "Complete Your Profile" : "Create an account"}</div>
+          <div className="flex justify-between items-center gap-x-2">
+            <div className="flex items-center gap-x-2">
+              <HomeLettAvatar isGen={false} name={"HomeLett"} avatarSrc={"/favicon.png"} width="w-8" height="h-8" />
+              <div className="text-2xl font-bold">{currentUser ? "Complete Your Profile" : "Create an account"}</div>
+            </div>
+
+            <div className="flex items-center gap-x-2 md:hidden">
+              <Link href="/">
+                <Button variant="ghost" size="icon">
+                  <X className="h-10 w-10" />
+                </Button>
+              </Link>
+            </div>
           </div>
 
           <div className="mb-0 space-y-4">
