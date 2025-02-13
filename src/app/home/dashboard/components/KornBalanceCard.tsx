@@ -70,9 +70,9 @@ export default function KornBalanceCard() {
                     </div>
 
                     <Link href="/home/add_fund">
-                        <div className="flex items-center gap-1">
-                            <Wallet2 className="h-3.5 w-3.5" />
-                            <span className="text-[0.78rem] font-semibold text-slate-800 ">Fund Wallet</span>
+                        <div className="flex items-center gap-x-2 bg-black rounded-2xl px-2 py-1">
+                            <Wallet2 className="h-3.5 w-3.5 text-white" />
+                            <span className="text-[0.78rem] font-semibold text-white">Fund Wallet</span>
                         </div>
                     </Link>
                 </div>

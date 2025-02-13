@@ -24,7 +24,7 @@ const KornHeader: React.FC = () => {
     return (
         <div className="flex justify-between items-center p-4">
             <div className='flex items-center'>
-                <img src='/favicon.png' className='w-8 rounded' />
+                <img src='/icon_no_bg.png' className='w-8 rounded' />
                 <h1 className="text-2xl font-bold"></h1>
             </div>
 
