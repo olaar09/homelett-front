@@ -13,8 +13,8 @@ import { Bell, Building2, ChevronDown, ChevronUp, MapPin, Wallet, Wallet2 } from
 
 const notifications = [
     {
-        title: "Payment Successful",
-        message: "Your wallet has been credited with ₦50,000",
+        title: "Onboarding Successful",
+        message: "You have successfully onboarded to HomeLett",
         time: "2 mins ago"
     },
     {
