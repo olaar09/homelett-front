@@ -96,7 +96,6 @@ const SavedTeamMembers = () => {
   };
 
   const authLoading = authContext.loading || !authContext.currentUser;
-  const bankInfo = authContext.currentUser?.p2p.bank_info;
 
   const handlePaymentOptionClick = (type: PaymentType) => {
     setSelectedPaymentType(type);
@@ -131,138 +130,37 @@ const SavedTeamMembers = () => {
                   <span className="text-sm"> Fund your account </span>
                 </div>
               </Link>
-
-              {isP2P && (
-                <div
-                  onClick={onChangeMethod}
-                  className="flex items-center gap-x-2 "
-                >
-                  <Icon className="text-sm" icon={"uil:bolt"} />
-
-                  <span className="text-foreground-secondary text-xs">
-                    Change method
-                  </span>
-                </div>
-              )}
             </div>
           }
 
-          {isP2P && (
-            <div className="bg-background-thin min-h-screen py-4">
-              <div className="w-full mx-auto mt-0 bg-background-thin">
-                <section className=" flex items-center w-full  px-2 mt-0 flex-wrap gap-y-4 overflow-y-scroll pb-20">
-                  <div className="flex justify-center items-center  px-3  w-full mt-4">
-                    <Tag
-                      color="orange"
-                      className="  flex items-center  justify-center text-center rounded-md"
-                    >
-                      <span>
-                        {" "}
-                        {`${isMoneySent
-                          ? "Confirm your payment instantly"
-                          : "Send deposit amount to the details below"
-                          }`}
-                      </span>
-                    </Tag>
-                  </div>
 
-                  <div className="flex items-center flex-col justify-center w-full gap-y-4">
-                    {!isMoneySent && (
-                      <BankInfo
-                        bankName={bankInfo?.bank_name ?? ""}
-                        accountNumber={bankInfo?.bank_account_number ?? ""}
-                        accountName={bankInfo?.bank_account_name ?? ""}
-                      />
-                    )}
+          <div className="bg-background-thin min-h-screen py-4">
+            <div className="w-full mx-auto mt-0 bg-background-thin">
+              <section className=" flex items-center w-full  px-2 mt-0 flex-wrap gap-y-4 overflow-y-scroll pb-20">
+                <div className="flex flex-col justify-center items-center  px-3  w-full mt-4 gap-y-3">
+                  <Tag
+                    color="orange"
+                    className="flex items-center justify-center text-center rounded-md"
+                  >
+                    how would you like to pay?
+                  </Tag>
+                </div>
 
-                    {isMoneySent && (
-                      <div className="flex items-center flex-col w-full px-3 gap-y-3">
-                        <div className="w-full">
-                          <span className="text-xs">Sender account number</span>
-                          <InputField
-                            placeHolder={`Enter sender account number`}
-                            type={""}
-                            name={"account_number"}
-                            value={formData.account_number}
-                            required
-                            onChange={(val) =>
-                              onSetFormData("account_number", val.target.value)
-                            }
-                          />
-                        </div>
-
-                        <div className="w-full">
-                          <span className="text-xs">
-                            Sent amount (Enter exactly the sent amount)
-                          </span>
-                          <InputField
-                            placeHolder={`Enter amount`}
-                            type={""}
-                            name={"account_number"}
-                            value={formData.amount}
-                            required
-                            onChange={(val) =>
-                              onSetFormData("amount", val.target.value)
-                            }
-                          />
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="flex w-full mt-4 items-center justify-center">
-                      <div
-                        onClick={onYesButton}
-                        className="flex items-center gap-x-2 flex-1  justify-center px-3"
-                      >
-                        <ACButton text={""} type={"button"} loading={loading}>
-                          <Icon
-                            className="text-sm text-foreground-inverted"
-                            icon={"uil:bolt"}
-                          />
-                          <span className="text-foreground-inverted text-xs">
-                            {`${isMoneySent
-                              ? " Confirm payment"
-                              : "I have sent the money"
-                              }`}
-                          </span>
-                        </ACButton>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </div>
+                <div className="flex items-center flex-col justify-center w-full gap-y-4">
+                  <OptionItem
+                    onClick={() => handlePaymentOptionClick('direct_deposit')}
+                    icon={"mdi:bank"}
+                    title="Direct bank transfer"
+                  />
+                  <OptionItem
+                    onClick={() => handlePaymentOptionClick('paystack')}
+                    icon={"ion:card"}
+                    title="Paystack payment"
+                  />
+                </div>
+              </section>
             </div>
-          )}
-
-          {!isP2P && (
-            <div className="bg-background-thin min-h-screen py-4">
-              <div className="w-full mx-auto mt-0 bg-background-thin">
-                <section className=" flex items-center w-full  px-2 mt-0 flex-wrap gap-y-4 overflow-y-scroll pb-20">
-                  <div className="flex flex-col justify-center items-center  px-3  w-full mt-4 gap-y-3">
-                    <Tag
-                      color="orange"
-                      className="flex items-center justify-center text-center rounded-md"
-                    >
-                      how would you like to pay?
-                    </Tag>
-                  </div>
-
-                  <div className="flex items-center flex-col justify-center w-full gap-y-4">
-                    <OptionItem
-                      onClick={() => handlePaymentOptionClick('direct_deposit')}
-                      icon={"mdi:bank"}
-                      title="Direct bank transfer"
-                    />
-                    <OptionItem
-                      onClick={() => handlePaymentOptionClick('paystack')}
-                      icon={"ion:card"}
-                      title="Paystack payment"
-                    />
-                  </div>
-                </section>
-              </div>
-            </div>
-          )}
+          </div>
         </>
       )}
 

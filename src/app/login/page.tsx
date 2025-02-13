@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 
 import { message } from "antd";
 import { useContext, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import APIUtil from "@/services/APIUtil";
 import { AxiosError } from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -22,7 +22,6 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
   const apiService = new APIUtil();
-  const query = useSearchParams();
   const router = useRouter();
   const authContext = useContext(AuthContext);
   const appConfig = useAppConfig()
@@ -77,87 +76,17 @@ export default function Home() {
     e.preventDefault();
     setLoading(true);
     try {
-      let response;
-      if (query.get("is_new") === "true") {
-        response = await apiService.authService!.register({
-          email: form.email,
-          password: form.password,
-          phone: "",
-          subscriptions: [],
-          is_return_user: 0,
-          total_invites: 0,
-          total_active_invites: 0,
-          invite_token: "",
-          invite_link: "",
-          p2p: {
-            bank_info: {
-              bank_name: "",
-              bank_account_number: "",
-              bank_account_name: "",
-            },
-          },
-          streaming: [],
-          reseller_products: [],
-          configs: [],
-          is_house_admin: 0,
-          onboardingStep: 0,
-          recent_transactions: [],
-          active_sub: {
-            id: 0,
-            user_id: 0,
-            product_id: 0,
-            plan_end: "",
-            is_active: 0,
-            interval: "",
-            plan: null
-          }
-        });
-      } else {
-        response = await apiService.authService!.login({
-          email: form.email,
-          password: form.password,
-          phone: "",
-          subscriptions: [],
-          is_return_user: 0,
-          total_invites: 0,
-          total_active_invites: 0,
-          invite_token: "",
-          invite_link: "",
-          p2p: {
-            bank_info: {
-              bank_name: "",
-              bank_account_number: "",
-              bank_account_name: "",
-            },
-          },
-          streaming: [],
-          reseller_products: [],
-          configs: [],
-          is_house_admin: 0,
-          onboardingStep: 0,
-          recent_transactions: [],
-          active_sub: {
-            id: 0,
-            user_id: 0,
-            product_id: 0,
-            plan_end: "",
-            is_active: 0,
-            interval: "",
-            plan: null
-          }
-        });
-      }
+      const response = await apiService.authService!.login({
+        email: form.email,
+        password: form.password,
+      });
+
       localStorage.setItem("token", response.data.token!);
       message.success("Login successful");
-
-      console.log(response.data);
-      if (response.data.is_admin == 1) {
-        router.push("/home/super_dashboard");
-      } else {
-        router.push("/home/dashboard");
-      }
       await authContext.refreshProfile();
 
+      console.log(response.data);
+      router.push("/home/dashboard");
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error);
@@ -176,34 +105,7 @@ export default function Home() {
     }
   };
 
-  const googleLogin = async (IdToken: string) => {
-    setLoading(true);
 
-    try {
-      const response = await apiService.authService!.googleSignIn(IdToken);
-      localStorage.setItem("token", response.data.token!);
-      message.success("Login successful");
-      await authContext.refreshProfile();
-      router.push("/home/dashboard");
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log("IS ERROR", error);
-        console.log("IS ERROR MESSAGE", error.message);
-
-        message.error(
-          `${error?.response?.data?.message ??
-          error?.response?.data?.reason ??
-          "Unable to complete request"
-          }`
-        );
-      } else {
-        console.log("IS ERROR MESSAGE");
-        message.error("Unable to complete sign in");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <main

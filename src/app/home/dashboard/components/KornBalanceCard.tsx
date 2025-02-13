@@ -1,63 +1,128 @@
 "use client"
-// components/KornBalanceCard.tsx
-import Brands from '@/app/components/Brands';
-import { AuthContext } from '@/contexts/AuthContext';
-import UtilService from '@/services/UtilService';
-import { Str } from '@/utils/consts';
-import { Icon } from '@iconify/react/dist/iconify.js';
-import { Button, message, Tag } from 'antd';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import React, { useContext, useState } from 'react';
-import PlanInfoDrawer from '../../../components/HouseProductDrawer';
 
-const KornBalanceCard: React.FC = () => {
+import { useContext, useState } from "react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { Icon } from "@iconify/react/dist/iconify.js"
+import { AuthContext } from "@/contexts/AuthContext"
+import UtilService from "@/services/UtilService"
+import { Str } from "@/utils/consts"
+import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Bell, Building2, ChevronDown, ChevronUp, MapPin, Wallet, Wallet2 } from 'lucide-react'
+
+const notifications = [
+    {
+        title: "Payment Successful",
+        message: "Your wallet has been credited with ₦50,000",
+        time: "2 mins ago"
+    },
+    {
+        title: "New Feature",
+        message: "You can now schedule automatic payments",
+        time: "1 hour ago"
+    },
+    {
+        title: "Upcoming Payment",
+        message: "Your next payment is due in 3 days",
+        time: "2 hours ago"
+    }
+] // Replace with your notifications data
+
+export default function KornBalanceCard() {
     const authContext = useContext(AuthContext)
     const utilService = new UtilService()
-    const router = useRouter();
+    const router = useRouter()
+    const [isActivitiesOpen, setIsActivitiesOpen] = useState(false)
+
     const balance = utilService.formatMoney(
-        `${(authContext.currentUser?.finance?.balance ?? 0)}`,
+        `${authContext.currentUser?.finance?.balance ?? 0}`,
         "en-NG",
         "NGN"
     )
 
-    const usdRate = authContext.currentUser?.configs?.find((cg) => cg.korn_key == 'usd_rate')
-    const rate = usdRate ? usdRate.value : 0;
-    const [openPlans, setOpenPlans] = useState(false)
-
-
-    const onOpenPlansModal = () => {
-        setOpenPlans(true)
-    }
-
-
-    const activePlan = authContext.currentUser?.active_sub;
-
     return (
-        <>
-            <div className="bg-white p-4 rounded-lg shadow-sm h-52 flex flex-col justify-between">
-                <div className="flex justify-between items-start">
-                    <div>
-                        <p className="text-gray-500">{authContext.currentUser?.house?.house_name} </p>
-                        <h2 className="text-xs font-thin mt-1">{authContext.currentUser?.house?.address}</h2>
-                        <span className='mt-4 block text-foreground-secondary'>Balance : {balance}</span>
+        <Card className="w-full overflow-hidden bg-gradient-to-br from-white to-slate-50/20">
+            <CardContent className="p-5">
+                {/* Header Section */}
+                <div className="flex items-start justify-between mb-6">
+                    <div className="space-y-1">
+                        <div className="flex items-center gap-1.5 text-[0.78rem] text-slate-600">
+                            <Building2 className="h-3.5 w-3.5" />
+                            <span>{authContext.currentUser?.house?.house_name}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-[0.72rem] text-slate-500">
+                            <MapPin className="h-3 w-3" />
+                            <span>{authContext.currentUser?.house?.address}</span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Balance Section */}
+                <div className="mb-6 text-center flex justify-between items-center">
+                    {/*     <div className="flex items-center justify-center gap-2 text-[0.78rem] text-slate-600 mb-1">
+                        <Wallet className="h-3.5 w-3.5" />
+                        <span>Available Balance</span>
+                    </div> */}
+                    <div className="flex items-center gap-2">
+                        <Wallet className="h-3.5 w-3.5" />
+                        <div className="text-[0.78rem] font-semibold text-slate-800 ">{balance}</div>
                     </div>
 
-
+                    <Link href="/home/add_fund">
+                        <div className="flex items-center gap-1">
+                            <Wallet2 className="h-3.5 w-3.5" />
+                            <span className="text-[0.78rem] font-semibold text-slate-800 ">Fund Wallet</span>
+                        </div>
+                    </Link>
                 </div>
-                <div className="mt-4 flex justify-between gap-x-6 px-2">
-                    <Brands size={"small"} brands={[...Str.brands.slice(0, 4)]} />
 
-                    <Tag color='green' className=' flex gap-x-2 items-center'>
-                        <Link className='flex items-center gap-x-2 cursor-pointer hover:opacity-85 transition-all duration-100' href={'/plans'}>
-                            <Icon className='text-sm' icon={'icon-park-solid:plan'} />
-                            <span className='font-normal text-xs'>{activePlan?.plan?.plan_name ?? 'Flex Pay'}</span>
-                        </Link>
-                    </Tag>
+                {/* Notifications Section */}
+                <div className="space-y-3">
+                    <button
+                        className="w-full flex items-center justify-between text-[0.78rem] text-slate-600 hover:text-slate-800 transition-colors"
+                        onClick={() => setIsActivitiesOpen(!isActivitiesOpen)}
+                    >
+                        <div className="flex items-center gap-2">
+                            <Bell className="h-3.5 w-3.5" />
+                            <span>Recent Activities</span>
+                        </div>
+                        {isActivitiesOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                    </button>
+
+                    {isActivitiesOpen && (
+                        notifications.length === 0 ? (
+                            <div className="bg-white/50 backdrop-blur-sm rounded-lg border border-slate-100 p-4 text-center">
+                                <p className="text-[0.78rem] text-slate-500">You&apos;re all caught up!</p>
+                            </div>
+                        ) : (
+                            <div className="relative h-[120px]">
+                                {notifications.map((notification, index) => (
+                                    <div
+                                        key={index}
+                                        className={`absolute left-0 right-0 bg-white rounded-lg border border-slate-100 p-3 shadow-sm transition-all duration-300 cursor-pointer
+                                ${index === 0 ? 'top-0 z-30 hover:-translate-y-1' :
+                                                index === 1 ? 'top-2 z-20 hover:-translate-y-3' :
+                                                    'top-4 z-10 hover:-translate-y-5'}`}
+                                        style={{
+                                            transform: `scale(${1 - index * 0.05})`,
+                                            opacity: 1 - index * 0.2
+                                        }}
+                                    >
+                                        <div className="space-y-1">
+                                            <p className="text-[0.78rem] font-medium text-slate-700 truncate">{notification.title}</p>
+                                            <p className="text-[0.72rem] text-slate-500 truncate">{notification.message}</p>
+                                        </div>
+                                        <p className="text-[0.65rem] text-slate-400 mt-2">{notification.time}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )
+                    )}
                 </div>
-            </div>
-        </>
-    );
-};
 
-export default KornBalanceCard;
+                {/* Footer Section */}
+            </CardContent>
+        </Card>
+    )
+}

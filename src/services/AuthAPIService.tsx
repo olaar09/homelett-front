@@ -98,7 +98,7 @@ class AuthAPIService {
     }
   }
 
-  async login(data: IAuthRequest): Promise<{ data: any }> {
+  async login(data: { email: string, password: string }): Promise<{ data: any }> {
     try {
       return await this.apiService.post("/auth/login", {
         email: data.email,

@@ -40,11 +40,13 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
         setNewBankInfo(null);
     }, [paymentType]);
 
+    const isProduction = process.env.NODE_ENV === 'production';
+
     const config = {
         reference: new Date().getTime().toString(),
         email: userEmail,
         amount: amount * 100,
-        publicKey: "pk_live_9e5eb617e571c17f13bb79edec147f2dbe40bfe7",
+        publicKey: isProduction ? "pk_live_9e5eb617e571c17f13bb79edec147f2dbe40bfe7" : "pk_test_0bd51a9b53a2c80ead3d84d11b27e4f51659e5f5",
     };
 
     const initializePayment = usePaystackPayment(config);
@@ -84,7 +86,7 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
             await apiUtil.transactionService.completePayment(reference);
             authContext.refreshProfile()
             message.success("Payment successful");
-            router.push('/home/explore')
+            router.push('/home/dashboard')
         } catch (error) {
             if (error instanceof AxiosError) {
                 message.error(

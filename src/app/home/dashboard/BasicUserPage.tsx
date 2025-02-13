@@ -70,10 +70,10 @@ const BasicUserPage = () => {
 
                             <div className="mt-8">
                                 <div className="grid grid-cols-4 gap-4">
-                                    <IconButton icon="solar:wallet-money-bold" label="Fund" onClick={onAddFund} />
-                                    <IconButton icon="mdi:electricity-circle" label="Buy Token" onClick={() => setTokenDrawerOpen(true)} />
-                                    <IconButton icon="solar:card-bold" label="Subscription" onClick={() => message.info('Subscription feature coming soon')} />
-                                    <IconButton icon="solar:chat-round-dots-bold" label="Support" onClick={() => window.open(Str.whatsappHelp, '_blank')} />
+                                    <IconButton icon="mdi:electricity-circle" label="Electricity" onClick={() => setTokenDrawerOpen(true)} />
+                                    <IconButton icon="solar:wallet-money-bold" label="Internet" onClick={onAddFund} />
+                                    <IconButton icon="solar:card-bold" label="Payments" onClick={() => message.info('Subscription feature coming soon')} />
+                                    <IconButton icon="solar:chat-round-dots-bold" label="Report issue" onClick={() => window.open(Str.whatsappHelp, '_blank')} />
                                 </div>
                             </div>
 
