@@ -5,9 +5,10 @@ import { useRouter } from "next/navigation"
 
 interface SuccessStepProps {
     houseName: string
+    invite_code: string
 }
 
-export function SuccessStep({ houseName }: SuccessStepProps) {
+export function SuccessStep({ houseName, invite_code }: SuccessStepProps) {
     const router = useRouter()
 
     return (

@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import type { RegisterFormData } from "@/app/interfaces/IRegister"
 import { BioInfoStep, onSignupUser } from "./bio-info"
 
-import { IAuthRequest } from "../../interfaces/IRegisterRequest"
+import { IAuthRequest, IHouseInvite } from "../../interfaces/IRegisterRequest"
 import { ContactDetailsStep } from "./contact-details-step"
 import { RentAgreementStep } from "./rent-agreement-step"
 import { NextOfKinStep } from "./next-of-kin-step"
@@ -28,8 +28,7 @@ interface RegisterFormProps {
     setFormData: (data: RegisterFormData) => void
     totalSteps: number
     currentUser: IAuthRequest | null
-    house: IHouse
-    sku?: IHouseSKU
+    invite: IHouseInvite
 }
 
 export default function RegisterForm({
@@ -39,10 +38,10 @@ export default function RegisterForm({
     setFormData,
     totalSteps,
     currentUser,
-    house,
-    sku
+    invite
 }: RegisterFormProps) {
     const [isLoading, setIsLoading] = useState(false)
+    const { house, sku } = invite
     const apiService = new APIUtil()
     const authContext = useAuth()
 
@@ -75,26 +74,6 @@ export default function RegisterForm({
         }
     }
 
-
-    const updateOnboardingStep = async (userId: string, step: number) => {
-        try {
-            // Replace this with your actual API call
-            const response = await fetch(`/user/${userId}/onboarding`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-                body: JSON.stringify({ step }),
-            })
-            if (!response.ok) {
-                throw new Error("Failed to update onboarding step")
-            }
-        } catch (error) {
-            console.error("Error updating onboarding step:", error)
-        }
-    }
-
     const steps: ReactElement[] = [
         <HouseInfoStep
             key="house-info"
@@ -110,6 +89,7 @@ export default function RegisterForm({
             onPrev={handlePrev}
             house_id={house.id}
             sku_id={sku?.id}
+            invite_code={invite.invite.invite_code}
         />,
         ...(house.modules.some(module => module.name.toLowerCase() === 'kyc') ? [
             <ContactDetailsStep
@@ -118,6 +98,7 @@ export default function RegisterForm({
                 onUpdate={handleUpdateData}
                 onNext={handleNext}
                 onPrev={handlePrev}
+                invite_code={invite.invite.invite_code}
             />,
             <NextOfKinStep
                 key="kin"
@@ -125,6 +106,7 @@ export default function RegisterForm({
                 onUpdate={handleUpdateData}
                 onNext={handleNext}
                 onPrev={handlePrev}
+                invite_code={invite.invite.invite_code}
             />,
         ] : []),
         <RentAgreementStep
@@ -134,10 +116,12 @@ export default function RegisterForm({
             onUpdate={handleUpdateData}
             onNext={handleNext}
             onPrev={handlePrev}
+            invite_code={invite.invite.invite_code}
         />,
         <SuccessStep
             key="success"
             houseName={house.house_name}
+            invite_code={invite.invite.invite_code}
         />,
 
 

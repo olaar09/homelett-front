@@ -5,7 +5,7 @@ export type RegisterFormData = {
     email: string
     phone: string
     password: string
-
+    meter_number: string
     // Contact Details
     current_address: string
     work_address: string
@@ -28,6 +28,7 @@ export type StepProps = {
     onUpdate: (data: Partial<RegisterFormData>) => void
     onNext: () => void
     onPrev: () => void
+    invite_code: string
     house_id?: string
     sku_id?: number
 }

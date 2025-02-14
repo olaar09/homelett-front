@@ -46,6 +46,7 @@ export default function RegisterPage() {
     kin_relationship: "",
     kin_phone: "",
     kin_address: "",
+    meter_number: "",
     rent_agreement: false,
     payment_agreement: false,
   })
@@ -64,8 +65,6 @@ export default function RegisterPage() {
     refresh: refreshHouse,
   } = useRequest(() => getHouseInvite());
 
-  const house = houseInvite?.house
-  const sku = houseInvite?.sku
 
   const getHouseInvite = async (): Promise<any> => {
     try {
@@ -87,7 +86,7 @@ export default function RegisterPage() {
 
 
   // Get dynamic steps based on house configuration
-  const steps = house ? getSteps(house) : [];
+  const steps = houseInvite?.house ? getSteps(houseInvite.house) : [];
 
   const progress = currentStep >= steps.length
     ? 100
@@ -176,8 +175,7 @@ export default function RegisterPage() {
             setFormData={setFormData}
             totalSteps={steps.length}
             currentUser={currentUser}
-            house={house}
-            sku={sku}
+            invite={houseInvite}
           />
         </div>
       </div>

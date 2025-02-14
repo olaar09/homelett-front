@@ -76,10 +76,11 @@ export interface IAuthRequest {
   house?: IHouse;
   kyc?: IKYCRequest;
   nextOfKin?: INextOfKinRequest;
+  meter_number?: string;
+  invite_code?: string;
 /*   
   company?: string;
   bank_info?: IUserBank;
-  meter_number?: string;
   nuban?: IUserBank;
   coupon?: ICoupon;
   is_open_ai?: number;

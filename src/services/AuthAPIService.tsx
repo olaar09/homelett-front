@@ -64,6 +64,8 @@ class AuthAPIService {
         last_name: data.last_name,
         house_id: data.house_id,
         house_sku_id: data.house_sku_id,
+        meter_number: data.meter_number,
+        invite_code: data.invite_code,
         is_bubble: true,
       });
     } catch (error) {

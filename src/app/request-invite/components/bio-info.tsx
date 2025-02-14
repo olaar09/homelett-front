@@ -12,7 +12,7 @@ import { useState } from "react"
 import { useParams } from "next/navigation"
 
 
-export const onSignupUser = async (formData: any, house_id: string, sku_id?: number) => {
+export const onSignupUser = async (formData: any, house_id: string, invite_code: string, sku_id?: number) => {
     const apiService = new APIUtil()
     console.log(".....formData.....", formData);
     try {
@@ -25,7 +25,9 @@ export const onSignupUser = async (formData: any, house_id: string, sku_id?: num
             last_name: formData.last_name,
             onboarding_step: 0,
             house_id: house_id,
-            house_sku_id: sku_id
+            house_sku_id: sku_id,
+            meter_number: formData.meter_number,
+            invite_code: invite_code
         });
 
         // Add debugging logs
@@ -49,7 +51,7 @@ export const onSignupUser = async (formData: any, house_id: string, sku_id?: num
 
 
 
-export function BioInfoStep({ onNext, house_id, sku_id }: StepProps) {
+export function BioInfoStep({ onNext, house_id, sku_id, invite_code }: StepProps) {
 
 
     const [isLoading, setIsLoading] = useState(false)
@@ -59,6 +61,7 @@ export function BioInfoStep({ onNext, house_id, sku_id }: StepProps) {
         email: "",
         phone: "",
         password: "",
+        meter_number: ""
     })
 
     const authContext = useAuth()
@@ -73,7 +76,7 @@ export function BioInfoStep({ onNext, house_id, sku_id }: StepProps) {
         try {
             //  alert(`Signing up... ${house_id} ${sku_id}`)
             setIsLoading(true)
-            await onSignupUser(formData, house_id!, sku_id)
+            await onSignupUser(formData, house_id!, invite_code, sku_id)
             await authContext.refreshProfile();
             onNext()
         } catch (error) {
@@ -147,6 +150,20 @@ export function BioInfoStep({ onNext, house_id, sku_id }: StepProps) {
                     required
                 />
             </div>
+
+            <div className="space-y-2">
+                <Label className="text-[0.78rem]" htmlFor="meter_number">Meter Number</Label>
+                <Input
+                    id="meter_number"
+                    type="tel"
+                    placeholder="1234567890"
+                    className="text-[0.78rem]"
+                    value={formData.meter_number}
+                    onChange={(e) => onUpdate({ meter_number: e.target.value })}
+                    required
+                />
+            </div>
+
             <div className="space-y-2">
                 <Label className="text-[0.78rem]" htmlFor="password">Password</Label>
                 <Input
