@@ -1,11 +1,9 @@
 import { INewSubject } from "@/app/interfaces/INewSubject";
 import ApiService from "./APIService";
-import { IAuthRequest, IHouse } from "@/app/interfaces/IRegisterRequest";
+import { IAuthRequest, IHouseInvite } from "@/app/interfaces/IRegisterRequest";
+import { IHouse } from "@/app/interfaces/IHouse";
 
-interface House {
-  id: string;
-  // Add other house properties as needed
-}
+
 
 class HouseAPIService {
   private apiService: ApiService;
@@ -49,11 +47,15 @@ class HouseAPIService {
     }
   }
 
-  async getHouseBySlug(slug: string): Promise<House> {
+  async getHouseInvite(slug: string): Promise<IHouseInvite> {
+    return this.apiService.get(`/houses/invite/${slug}`);
+  }
+
+  async getHouseBySlug(slug: string): Promise<IHouse> {
     return this.apiService.get(`/houses/${slug}`);
   }
 
-  async getHouse(id: string): Promise<House> {
+  async getHouse(id: string): Promise<IHouse> {
     return this.apiService.get(`/houses/${id}`);
   }
 

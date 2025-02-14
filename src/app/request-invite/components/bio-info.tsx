@@ -12,7 +12,7 @@ import { useState } from "react"
 import { useParams } from "next/navigation"
 
 
-export const onSignupUser = async (formData: any, house_id: string) => {
+export const onSignupUser = async (formData: any, house_id: string, sku_id?: number) => {
     const apiService = new APIUtil()
     console.log(".....formData.....", formData);
     try {
@@ -24,7 +24,8 @@ export const onSignupUser = async (formData: any, house_id: string) => {
             first_name: formData.first_name,
             last_name: formData.last_name,
             onboarding_step: 0,
-            house_id: house_id
+            house_id: house_id,
+            house_sku_id: sku_id
         });
 
         // Add debugging logs
@@ -48,7 +49,7 @@ export const onSignupUser = async (formData: any, house_id: string) => {
 
 
 
-export function BioInfoStep({ onNext, house_id }: StepProps) {
+export function BioInfoStep({ onNext, house_id, sku_id }: StepProps) {
 
 
     const [isLoading, setIsLoading] = useState(false)
@@ -70,8 +71,9 @@ export function BioInfoStep({ onNext, house_id }: StepProps) {
         e.preventDefault()
 
         try {
+            //  alert(`Signing up... ${house_id} ${sku_id}`)
             setIsLoading(true)
-            await onSignupUser(formData, house_id!)
+            await onSignupUser(formData, house_id!, sku_id)
             await authContext.refreshProfile();
             onNext()
         } catch (error) {

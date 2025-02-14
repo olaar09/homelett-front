@@ -7,7 +7,7 @@ import APIUtil from "@/services/APIUtil";
 import { IAuthRequest, IJProfile } from "@/app/interfaces/IRegisterRequest";
 import { AxiosError } from "axios";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
-import { STEPS } from "@/app/request-invite/[house_slug]/page";
+import { STEPS } from "@/app/request-invite/[house_invite]/page";
 
 interface IAuthContext {
   dataSources?: IDataSourceItem[] | null;

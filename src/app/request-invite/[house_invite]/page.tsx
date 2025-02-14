@@ -15,11 +15,11 @@ import APIService from "@/services/APIService"
 import APIUtil from "@/services/APIUtil"
 import { message } from "antd"
 import { LoadingAndErrorStates } from "@/app/components/LoadingState"
-import { IModule } from "@/app/interfaces/IHouse"
+import { IHouse, IModule } from "@/app/interfaces/IHouse"
 import { useAuth } from "@/contexts/AuthContext"
 
 // Replace the static STEPS constant with a function
-const getSteps = (house: any) => {
+const getSteps = (house: IHouse) => {
   const baseSteps = ["House Information", "Bio Information"];
 
   // Check if KYC is required for this house
@@ -52,64 +52,39 @@ export default function RegisterPage() {
   const [currentUser, setCurrentUser] = useState<IAuthRequest | null>(null)
   const router = useRouter()
   const params = useParams()
-  const { house_slug } = params;
+  const { house_invite } = params;
   const { loading: userLoading } = useAuth()
 
   const apiUtils = new APIUtil()
 
   const {
-    data: house,
+    data: houseInvite,
     error: housesError,
     loading: loadingHouse,
     refresh: refreshHouse,
-  } = useRequest(() => getHouse());
+  } = useRequest(() => getHouseInvite());
 
-  const getHouse = async (): Promise<any> => {
+  const house = houseInvite?.house
+  const sku = houseInvite?.sku
+
+  const getHouseInvite = async (): Promise<any> => {
     try {
-      const data = await apiUtils.houseService.getHouseBySlug(`${house_slug}`)
+      const data = await apiUtils.houseService.getHouseInvite(`${house_invite}`)
       return data;
     } catch (error) {
       throw error;
     }
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      // Fetch current user data
-      fetchCurrentUser(token)
-    }
-  }, [])
-
-  const fetchCurrentUser = async (token: string) => {
-    try {
-      // Replace this with your actual API call
-      const response = await fetch("/user", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      if (response.ok) {
-        const userData: any = await response.json()
-        setCurrentUser(userData)
-        setCurrentStep(userData.onboardingStep)
-
-        // Pre-fill form data with user information
-        setFormData((prevData) => ({
-          ...prevData,
-          fullname: userData.fullname,
-          email: userData.email,
-          // Add other fields as necessary
-        }))
-      } else {
-        // Handle error or invalid token
-        // localStorage.removeItem("token")
+  /*   const getHouse = async (): Promise<any> => {
+      try {
+        const data = await apiUtils.houseService.getHouseBySlug(`${house_invite}`)
+        return data;
+      } catch (error) {
+        throw error;
       }
-    } catch (error) {
-      console.error("Error fetching user data:", error)
-      //localStorage.removeItem("token")
-    }
-  }
+    }; */
+
 
   // Get dynamic steps based on house configuration
   const steps = house ? getSteps(house) : [];
@@ -202,6 +177,7 @@ export default function RegisterPage() {
             totalSteps={steps.length}
             currentUser={currentUser}
             house={house}
+            sku={sku}
           />
         </div>
       </div>

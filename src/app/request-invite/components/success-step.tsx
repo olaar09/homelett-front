@@ -1,13 +1,15 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle2 } from "lucide-react"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 interface SuccessStepProps {
     houseName: string
 }
 
 export function SuccessStep({ houseName }: SuccessStepProps) {
+    const router = useRouter()
+
     return (
         <Card className="border-none shadow-none">
             <CardContent className="space-y-8 pt-6">
@@ -32,11 +34,13 @@ export function SuccessStep({ houseName }: SuccessStepProps) {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                    <Link href="/home/dashboard" className="w-full">
-                        <Button className="w-full" size="lg">
-                            Login to Dashboard
-                        </Button>
-                    </Link>
+                    <Button
+                        className="w-full"
+                        size="lg"
+                        onClick={() => router.push("/home/dashboard")}
+                    >
+                        Login to Dashboard
+                    </Button>
                     {/*     <Link href="/home/dashboard" className="w-full">
                         <Button variant="outline" className="w-full" size="lg">
                             Back to Home

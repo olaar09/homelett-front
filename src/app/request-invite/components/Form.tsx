@@ -11,7 +11,6 @@ import { BioInfoStep, onSignupUser } from "./bio-info"
 import { IAuthRequest } from "../../interfaces/IRegisterRequest"
 import { ContactDetailsStep } from "./contact-details-step"
 import { RentAgreementStep } from "./rent-agreement-step"
-import { PaymentAgreementStep } from "./payment-agreement-step"
 import { NextOfKinStep } from "./next-of-kin-step"
 import { IHouse } from "@/app/interfaces/IHouse"
 import HouseInfoStep from "./house-info-step"
@@ -19,7 +18,7 @@ import HouseInfoStep from "./house-info-step"
 import { useAuth } from "@/contexts/AuthContext"
 import APIUtil from "@/services/APIUtil"
 import { SuccessStep } from "./success-step"
-
+import { IHouseSKU } from "@/app/interfaces/IRegisterRequest"
 
 
 interface RegisterFormProps {
@@ -30,6 +29,7 @@ interface RegisterFormProps {
     totalSteps: number
     currentUser: IAuthRequest | null
     house: IHouse
+    sku?: IHouseSKU
 }
 
 export default function RegisterForm({
@@ -40,6 +40,7 @@ export default function RegisterForm({
     totalSteps,
     currentUser,
     house,
+    sku
 }: RegisterFormProps) {
     const [isLoading, setIsLoading] = useState(false)
     const apiService = new APIUtil()
@@ -98,6 +99,7 @@ export default function RegisterForm({
         <HouseInfoStep
             key="house-info"
             house={house}
+            sku={sku}
             onNext={handleNext}
         />,
         <BioInfoStep
@@ -107,6 +109,7 @@ export default function RegisterForm({
             onNext={handleNext}
             onPrev={handlePrev}
             house_id={house.id}
+            sku_id={sku?.id}
         />,
         ...(house.modules.some(module => module.name.toLowerCase() === 'kyc') ? [
             <ContactDetailsStep

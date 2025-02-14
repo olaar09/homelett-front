@@ -1,25 +1,37 @@
+import { IHouse } from "./IHouse";
 import { IKornConfig } from "./IKornConfig";
 import { IPlatform, IProduct, ITransaction } from "./IProduct";
 
 export interface IJProfile { }
 
-export interface IHouse {
-  id?: number,
-  house_code?: string,
-  house_name: string,
-  house_slug: string,
-  address: string,
-  contact_phone: string,
-  contact_person_name: string,
-  contact_email: string,
-  expected_usage: number,
-  surcharge: number,
-  token_per_kw: number,
-  bank_name: string,
-  bank_account: string,
-  account_name: string,
-  residents: { email: string, fullname: string, phone: string }[]
-  transactions: ITransaction[]
+export interface IHouseSKU {
+  id: number,
+  name: string,
+  description: string,
+  price: number,
+  service_charge: number,
+  house_id: number,
+  created_at: string,
+  updated_at: string
+}
+
+
+export interface IHouseInvite {
+  invite: {
+    id: number,
+    email: string,
+    phone: string,
+    house_id: number,
+    house_sku_id: number,
+    status: string,
+    created_at: string,
+    updated_at: string,
+    invite_code: string,
+    house: IHouse,
+    house_sku: IHouseSKU
+  },  
+  house: IHouse,
+  sku: IHouseSKU
 }
 
 export interface IHousePlan {
@@ -60,6 +72,7 @@ export interface IAuthRequest {
   last_name: string;
   onboarding_step: number;
   house_id?: any;
+  house_sku_id?: number;
   house?: IHouse;
   kyc?: IKYCRequest;
   nextOfKin?: INextOfKinRequest;

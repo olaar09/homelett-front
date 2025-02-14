@@ -29,5 +29,6 @@ export type StepProps = {
     onNext: () => void
     onPrev: () => void
     house_id?: string
+    sku_id?: number
 }
 
