@@ -27,7 +27,7 @@ class TransactionAPIService {
 
   async buyToken(meterNumber: string, amount?: string, quantity?: string,): Promise<any> {
     try {
-      return await this.apiService.post("/transactions/buy_token", {
+      return await this.apiService.post("/tokens/buy", {
         amount,
         quantity,
         meter_number: meterNumber
@@ -39,7 +39,7 @@ class TransactionAPIService {
 
   async completePayment(reference: string): Promise<any> {
     try {
-      return await this.apiService.post("/user/complete_paystack_payment", {
+      return await this.apiService.post("/transactions/complete_paystack_payment", {
         reference,
       });
     } catch (error) {
@@ -51,7 +51,7 @@ class TransactionAPIService {
     try {
       const text = await this.apiService.post<{
         data: any;
-      }>(`/user/generate_bank_payment`, { amount: amount });
+      }>(`/transactions/generate_bank_payment`, { amount: amount });
       return text.data as ITransferPaymentInfo;
     } catch (error) {
       throw error;
@@ -69,11 +69,11 @@ class TransactionAPIService {
     }
   }
 
-  async fetchTransaction(): Promise<ITransaction[] | null> {
+  async fetchTransactions(): Promise<ITransaction[] | null> {
     try {
       const text = await this.apiService.get<{
         data: { data: ITransaction[] };
-      }>(`/transactions/list`);
+      }>(`/transactions/history`);
       return text.data.data;
     } catch (error) {
       throw error;

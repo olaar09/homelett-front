@@ -21,20 +21,12 @@ const BasicUserPage = () => {
 
     const authContext = useContext(AuthContext);
     const loadingPage = authContext.loading;
-    const userTransactions = authContext.currentUser?.recent_transactions ?? [];
-    const homeProducts = authContext.currentUser?.streaming ?? [];
+    const userTransactions = authContext.currentUser?.transactions ?? [];
     const tokenPerKw = authContext.currentUser?.house?.token_per_kw ?? 0;
 
     const router = useRouter();
 
-    const onOpenVault = (selected: IProduct) => {
-        const sub = authContext.currentUser?.active_subscriptions?.find((sub) => sub.product.id == selected.id);
-        if (!sub) {
-            message.error(`No ${selected.title} subscription yet`);
-        } else {
-            setSelectedSubscription(sub);
-        }
-    };
+
 
     const onAddFund = () => {
         router.push('/home/add_fund');
@@ -42,11 +34,6 @@ const BasicUserPage = () => {
 
     return (
         <>
-            <ProductChildrenDrawer
-                product={homeProducts[0]}
-                open={openSubscriptions}
-                onClose={() => setOpenSubscriptions(false)}
-            />
 
             <PurchaseTokenDrawer
                 open={tokenDrawerOpen}

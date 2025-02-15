@@ -79,6 +79,8 @@ export interface IAuthRequest {
   nextOfKin?: INextOfKinRequest;
   meter_number?: string;
   invite_code?: string;
+  transactions: ITransaction[];
+  is_house_admin?: number;
 /*   
   company?: string;
   bank_info?: IUserBank;

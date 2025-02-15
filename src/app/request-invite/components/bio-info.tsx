@@ -27,7 +27,8 @@ export const onSignupUser = async (formData: any, house_id: string, invite_code:
             house_id: house_id,
             house_sku_id: sku_id,
             meter_number: formData.meter_number,
-            invite_code: invite_code
+            invite_code: invite_code,
+            transactions: []
         });
 
         // Add debugging logs
