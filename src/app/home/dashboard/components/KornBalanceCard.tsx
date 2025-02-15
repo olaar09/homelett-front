@@ -9,7 +9,7 @@ import UtilService from "@/services/UtilService"
 import { Str } from "@/utils/consts"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Bell, Building2, ChevronDown, ChevronUp, MapPin, Wallet, Wallet2 } from 'lucide-react'
+import { Bell, Building2, ChevronDown, ChevronUp, Lamp, MapPin, Wallet, Wallet2 } from 'lucide-react'
 
 const notifications = [
     {
@@ -46,7 +46,7 @@ export default function KornBalanceCard() {
             <CardContent className="p-5">
                 {/* Header Section */}
                 <div className="flex items-start justify-between mb-6">
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                         <div className="flex items-center gap-1.5 text-[0.78rem] text-slate-600">
                             <Building2 className="h-3.5 w-3.5" />
                             <span>{authContext.currentUser?.house?.house_name}</span>
@@ -55,6 +55,12 @@ export default function KornBalanceCard() {
                             <MapPin className="h-3 w-3" />
                             <span>{authContext.currentUser?.house?.address}</span>
                         </div>
+                        {authContext.currentUser?.sku &&
+                            <div className="flex items-center gap-1.5 text-[0.72rem] text-slate-500">
+                                <Lamp className="h-3 w-3" />
+                                <span>{authContext.currentUser?.sku?.name}</span>
+                            </div>
+                        }
                     </div>
                 </div>
 
@@ -78,7 +84,7 @@ export default function KornBalanceCard() {
                 </div>
 
                 {/* Notifications Section */}
-                <div className="space-y-3">
+                {/*  <div className="space-y-3">
                     <button
                         className="w-full flex items-center justify-between text-[0.78rem] text-slate-600 hover:text-slate-800 transition-colors"
                         onClick={() => setIsActivitiesOpen(!isActivitiesOpen)}
@@ -119,7 +125,7 @@ export default function KornBalanceCard() {
                             </div>
                         )
                     )}
-                </div>
+                </div> */}
 
                 {/* Footer Section */}
             </CardContent>

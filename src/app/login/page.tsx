@@ -24,7 +24,6 @@ export default function Home() {
   const apiService = new APIUtil();
   const router = useRouter();
   const authContext = useContext(AuthContext);
-  const appConfig = useAppConfig()
   const [scrollYPosition, setScrollYPosition] = useState(0);
   const [rotationDegrees, setRotationDegrees] = useState("");
 
@@ -81,7 +80,7 @@ export default function Home() {
         password: form.password,
       });
 
-      localStorage.setItem("token", response.data.token!);
+      localStorage.setItem("token", response.data.access_token!);
       message.success("Login successful");
       await authContext.refreshProfile();
 

@@ -7,7 +7,6 @@ import APIUtil from "@/services/APIUtil";
 import { IAuthRequest, IJProfile } from "@/app/interfaces/IRegisterRequest";
 import { AxiosError } from "axios";
 import { IDataSourceItem } from "@/app/interfaces/IDatasourceItem";
-import { STEPS } from "@/app/request-invite/[house_invite]/page";
 
 interface IAuthContext {
   dataSources?: IDataSourceItem[] | null;
@@ -63,10 +62,10 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
 
   const goHome = (currentUser: IAuthRequest) => {
     console.log(".....currentUser.....", currentUser);
-    if (currentUser.onboarding_step >= STEPS.length) {
-      router.push(`/dashboard`);
+    if (currentUser.onboarding_step >= 5) {
+      router.push(`/home/dashboard`);
     } else {
-      router.push(`/request-invite/${currentUser.house?.house_slug}`);
+      router.push(`/request-invite/${currentUser.house?.slug}`);
     }
   };
 

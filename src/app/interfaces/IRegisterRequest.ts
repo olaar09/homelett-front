@@ -74,6 +74,7 @@ export interface IAuthRequest {
   house_id?: any;
   house_sku_id?: number;
   house?: IHouse;
+  sku?: IHouseSKU;
   kyc?: IKYCRequest;
   nextOfKin?: INextOfKinRequest;
   meter_number?: string;
