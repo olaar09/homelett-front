@@ -26,7 +26,8 @@ const ListTransactions = () => {
 
   const getTransactions = async (): Promise<any> => {
     try {
-      const data = await apiUtils.transactionService.fetchTransaction();
+      const data = await apiUtils.transactionService.fetchTransactions();
+      console.log('transactions', data);
       return data;
     } catch (error) {
       message.error("unable to load transactions");

@@ -71,10 +71,8 @@ class TransactionAPIService {
 
   async fetchTransactions(): Promise<ITransaction[] | null> {
     try {
-      const text = await this.apiService.get<{
-        data: { data: ITransaction[] };
-      }>(`/transactions/history`);
-      return text.data.data;
+      const text = await this.apiService.get<{ data: ITransaction[] }>(`/transactions/history`);
+      return text.data;
     } catch (error) {
       throw error;
     }

@@ -87,7 +87,8 @@ const AddFundWithdraw = () => {
       const data = await apiUtil.transactionService.fetchBanks();
       return data;
     } catch (error) {
-      message.error("unable to load banks");
+      console.log('error', error);
+      //   message.error("unable to load banks");
     }
   };
 
