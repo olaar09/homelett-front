@@ -233,23 +233,29 @@ const Nav: React.FC<any> = ({ children }) => {
       {
         path: "/home/transactions",
         icon: "uim:history",
-        title: "History",
+        title: "All History",
       },
+      /*  {
+         path:
+           true || authContext.currentUser?.is_earner == 1
+             ? "http://localhost:3000/home/add_fund "
+             : "http://localhost:3000/home/add_fund",
+         icon: "majesticons:money-plus-line",
+         title: "Add money",
+         isNew: false,
+       }, */
       {
-        path:
-          true || authContext.currentUser?.is_earner == 1
-            ? "http://localhost:3000/home/add_fund "
-            : "http://localhost:3000/home/add_fund",
-        icon: "majesticons:money-plus-line",
-        title: "Add money",
+        path: "/home/house-issues",
+        icon: "bi:tools",
+        title: "House issues",
         isNew: false,
       },
-      {
-        path: Str.whatsappHelp,
-        icon: "ic:baseline-telegram",
-        title: "Support",
-        isNew: false,
-      },
+      /*  {
+         path: "/home/house-payments",
+         icon: "bi:tools",
+         title: "House payments",
+         isNew: false,
+       }, */
       {
         path: "/home/profile",
         icon: "iconamoon:profile-fill",

@@ -10,6 +10,7 @@ import SubscriptionAPIService from "./SubscriptionAPIService";
 import HouseAPIService from "./HouseAPIService";
 import DashboardAPIService from "./DashboardAPIService";
 import { HousePaymentService } from "./HousePaymentService";
+import { HouseIssueService } from "./HouseIssueService";
 
 class APIUtil {
   public productService: ProductAPIService;
@@ -21,6 +22,7 @@ class APIUtil {
   public authService: AuthAPIService;
   public housePaymentService: HousePaymentService;
   public subscriptionService: SubscriptionAPIService;
+  public houseIssueService: HouseIssueService;
 
   constructor() {
     const service = new APIService("http://localhost:3001"); // Initialize ApiService
@@ -34,6 +36,7 @@ class APIUtil {
     this.subscriptionService = new SubscriptionAPIService(service);
     this.housePaymentService = new HousePaymentService(service);
     this.workflowService = new WorkflowAPIService(service);
+    this.houseIssueService = new HouseIssueService(service);
   }
 }
 

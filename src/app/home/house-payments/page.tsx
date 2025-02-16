@@ -29,7 +29,7 @@ export default function HousePaymentsPage() {
                 </Link>
             </div>
 
-            {(isLoading || error) && (!payments) &&
+            {(isLoading || error) &&
                 <div className="flex items-center justify-center min-h-screen">
                     <LoadingAndErrorStates
                         isLoading={isLoading}

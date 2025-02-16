@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { message } from "antd";
 import { AuthContext } from "@/contexts/AuthContext";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { IProduct } from "@/app/interfaces/IProduct";
 import ProductChildrenDrawer from "./components/Products/ProductChildrenDrawer";
 import PurchaseTokenDrawer from "./components/PurchaseTokenDrawer";
@@ -25,16 +25,19 @@ const BasicUserPage = () => {
     const tokenPerKw = authContext.currentUser?.house?.token_per_kw ?? 0;
 
     const router = useRouter();
-
-
+    const searchParams = useSearchParams();
+    const showIssueModal = searchParams.get('report_issue') === 'true';
 
     const onPayments = () => {
         router.push('/home/house-payments');
     };
 
+    const handleReportIssue = () => {
+        router.push('/home/house-issues?report_issue=true');
+    };
+
     return (
         <>
-
             <PurchaseTokenDrawer
                 open={tokenDrawerOpen}
                 onClose={() => setTokenDrawerOpen(false)}
@@ -60,7 +63,7 @@ const BasicUserPage = () => {
                                     <IconButton icon="mdi:electricity-circle" label="Electricity" onClick={() => setTokenDrawerOpen(true)} />
                                     <IconButton icon="solar:wallet-money-bold" label="Internet" onClick={() => message.info('Internet feature coming soon')} />
                                     <IconButton icon="solar:card-bold" label="Payments" onClick={onPayments} />
-                                    <IconButton icon="solar:chat-round-dots-bold" label="Report issue" onClick={() => window.open(Str.whatsappHelp, '_blank')} />
+                                    <IconButton icon="solar:chat-round-dots-bold" label="Report issue" onClick={handleReportIssue} />
                                 </div>
                             </div>
 
