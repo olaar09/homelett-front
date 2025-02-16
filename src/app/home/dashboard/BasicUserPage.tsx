@@ -28,8 +28,8 @@ const BasicUserPage = () => {
 
 
 
-    const onAddFund = () => {
-        router.push('/home/add_fund');
+    const onPayments = () => {
+        router.push('/home/house-payments');
     };
 
     return (
@@ -59,7 +59,7 @@ const BasicUserPage = () => {
                                 <div className="grid grid-cols-4 gap-4">
                                     <IconButton icon="mdi:electricity-circle" label="Electricity" onClick={() => setTokenDrawerOpen(true)} />
                                     <IconButton icon="solar:wallet-money-bold" label="Internet" onClick={() => message.info('Internet feature coming soon')} />
-                                    <IconButton icon="solar:card-bold" label="Payments" onClick={() => message.info('Payments feature coming soon')} />
+                                    <IconButton icon="solar:card-bold" label="Payments" onClick={onPayments} />
                                     <IconButton icon="solar:chat-round-dots-bold" label="Report issue" onClick={() => window.open(Str.whatsappHelp, '_blank')} />
                                 </div>
                             </div>

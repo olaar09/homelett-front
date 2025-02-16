@@ -9,6 +9,8 @@ import TransactionAPIService from "./TransactionAPIService";
 import SubscriptionAPIService from "./SubscriptionAPIService";
 import HouseAPIService from "./HouseAPIService";
 import DashboardAPIService from "./DashboardAPIService";
+import { HousePaymentService } from "./HousePaymentService";
+
 class APIUtil {
   public productService: ProductAPIService;
   public dashboardService: DashboardAPIService;
@@ -17,6 +19,7 @@ class APIUtil {
   public houseService: HouseAPIService;
   public workflowService: WorkflowAPIService;
   public authService: AuthAPIService;
+  public housePaymentService: HousePaymentService;
   public subscriptionService: SubscriptionAPIService;
 
   constructor() {
@@ -29,7 +32,7 @@ class APIUtil {
     this.authService = new AuthAPIService(service);
     this.transactionService = new TransactionAPIService(service);
     this.subscriptionService = new SubscriptionAPIService(service);
-
+    this.housePaymentService = new HousePaymentService(service);
     this.workflowService = new WorkflowAPIService(service);
   }
 }
