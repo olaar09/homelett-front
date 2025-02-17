@@ -56,7 +56,7 @@ export default function HouseIssuesPage() {
         <div className="space-y-6 px-4">
             <div className="w-full  py-1 flex items-center justify-between ">
                 <Link href={"/home/dashboard"}>
-                    <div className="flex items-center gap-x-2  px-2 py-2">
+                    <div className="flex items-center gap-x-2  px-0 py-2">
                         <Icon
                             icon={"octicon:arrow-left-24"}
                             className=" text-xl  text-foreground"
