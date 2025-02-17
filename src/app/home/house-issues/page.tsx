@@ -67,10 +67,11 @@ export default function HouseIssuesPage() {
             </div>
 
             <div className="flex items-center justify-between">
-                <h1 className="text-2xl font-semibold tracking-tight">House Issues</h1>
+                <h1 className="text-sm font-semibold tracking-tight">House Issues</h1>
                 <Button
                     onClick={() => setIsCreateModalOpen(true)}
                     className="gap-2"
+                    size="sm"
                 >
                     <Plus className="h-4 w-4" />
                     New Issue

@@ -8,7 +8,7 @@ interface IssueItemProps {
 
 const IssueItem: React.FC<IssueItemProps> = ({ issue }) => {
     return (
-        <div className="bg-white p-4 rounded-lg shadow-sm">
+        <div className="bg-white py-4 rounded-lg shadow-sm">
             <div className="flex justify-between items-start mb-2">
                 <div>
                     <h3 className="text-sm font-medium text-gray-900 mb-1">
