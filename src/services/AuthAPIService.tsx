@@ -101,6 +101,14 @@ class AuthAPIService {
     }
   }
 
+  async uploadFile(file: File): Promise<any> {
+    try {
+      return await this.apiService.postFile('/user/upload-file', file)
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async login(data: { email: string, password: string }): Promise<{ data: any }> {
     try {
       return await this.apiService.post("/auth/login", {

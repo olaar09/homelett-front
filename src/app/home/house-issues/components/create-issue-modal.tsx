@@ -38,9 +38,12 @@ export function CreateIssueModal({ isOpen, onClose, onSubmit }: CreateIssueModal
 
         try {
             setIsLoading(true)
-            const fileUrl = await apiUtil.authService.uploadSignature(file!)
+            const fileUrl = await apiUtil.authService.uploadFile(file!)
+
+            console.log('fileUrl', fileUrl.data);
+
             message.success("File uploaded successfully");
-            setFormData({ ...formData, image_url: fileUrl })
+            setFormData({ ...formData, image_url: fileUrl.data })
             // await authContext.refreshProfile();
             //  onClose()
         } catch (error) {
