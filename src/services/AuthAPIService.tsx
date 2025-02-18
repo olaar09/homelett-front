@@ -75,7 +75,7 @@ class AuthAPIService {
 
   async addNextOfKin(data: INextOfKinRequest): Promise<{ data: any }> {
     try {
-      return await this.apiService.post("/user/next-of-kin", {
+      return await this.apiService.post("/user-onboarding/next-of-kin", {
         ...data,
       });
     } catch (error) {
@@ -85,7 +85,7 @@ class AuthAPIService {
 
   async addKYC(data: IKYCRequest): Promise<{ data: any }> {
     try {
-      return await this.apiService.post("/user/kyc", {
+      return await this.apiService.post("/user-onboarding/kyc", {
         ...data,
       });
     } catch (error) {
@@ -95,7 +95,7 @@ class AuthAPIService {
 
   async uploadSignature(file: File): Promise<any> {
     try {
-      return await this.apiService.postFile('/user/upload-signature', file)
+      return await this.apiService.postFile('/user-onboarding/upload-signature', file)
     } catch (error) {
       throw error;
     }
