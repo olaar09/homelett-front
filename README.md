@@ -1,9 +1,11 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
-pm2 start "npm run start" --name "HomeLett-utility"
+pm2 start "npm run start" --name "HomeLett-resident"
 
 PORT=4005 pm2 start "npm run start" --name "HomeLett-utility-next"
+
+NODE_ENV=production PORT=4003 pm2 start npm --name "HomeLett-resident" -- start
 
 
 https://tailwindpdf.com/
