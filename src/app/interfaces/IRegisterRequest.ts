@@ -24,6 +24,8 @@ export interface IHouseInvite {
     house_id: number,
     house_sku_id: number,
     status: string,
+    license_start: string,
+    license_end: string,
     created_at: string,
     updated_at: string,
     invite_code: string,

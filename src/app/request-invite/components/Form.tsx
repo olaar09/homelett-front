@@ -116,6 +116,7 @@ export default function RegisterForm({
             onUpdate={handleUpdateData}
             onNext={handleNext}
             onPrev={handlePrev}
+            invite={invite}
             invite_code={invite.invite.invite_code}
         />,
         <SuccessStep

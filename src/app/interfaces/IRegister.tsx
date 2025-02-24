@@ -1,3 +1,5 @@
+import { IHouseInvite } from "./IRegisterRequest"
+
 export type RegisterFormData = {
     // Bio Info
     first_name: string
@@ -29,6 +31,7 @@ export type StepProps = {
     onNext: () => void
     onPrev: () => void
     invite_code: string
+    invite?: IHouseInvite
     house_id?: string
     sku_id?: number
 }
