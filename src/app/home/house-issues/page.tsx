@@ -10,9 +10,11 @@ import { useHouseIssues } from "@/hooks/useHouseIssues"
 import { LoadingAndErrorStates } from "../../components/LoadingState"
 import { Icon } from "@iconify/react/dist/iconify.js"
 import Link from "next/link"
+import { useAuth } from "@/contexts/AuthContext"
 
 export default function HouseIssuesPage() {
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+    const { currentUser } = useAuth()
     const { issues, isLoading, error, retry, createIssue } = useHouseIssues()
     const router = useRouter()
     const searchParams = useSearchParams()
@@ -26,7 +28,11 @@ export default function HouseIssuesPage() {
 
     const handleCreateIssue = async (data: any) => {
         try {
-            await createIssue(data)
+            await createIssue({
+                ...data,
+                house_id: currentUser!.house!.id,
+                house_sku_id: currentUser!.sku!.id
+            })
             setIsCreateModalOpen(false)
             // Clear the query parameter
             router.replace('/home/house-issues')
