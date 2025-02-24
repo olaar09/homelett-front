@@ -29,6 +29,7 @@ interface RegisterFormProps {
     totalSteps: number
     currentUser: IAuthRequest | null
     invite: IHouseInvite
+    refreshHouse: () => any
 }
 
 export default function RegisterForm({
@@ -38,7 +39,8 @@ export default function RegisterForm({
     setFormData,
     totalSteps,
     currentUser,
-    invite
+    invite,
+    refreshHouse
 }: RegisterFormProps) {
     const [isLoading, setIsLoading] = useState(false)
     const { house, sku } = invite
@@ -118,11 +120,13 @@ export default function RegisterForm({
             onPrev={handlePrev}
             invite={invite}
             invite_code={invite.invite.invite_code}
+            refreshHouse={refreshHouse}
         />,
         <SuccessStep
             key="success"
             houseName={house.house_name}
             invite_code={invite.invite.invite_code}
+            document_path={invite.invite.document_path}
         />,
 
 

@@ -10,6 +10,7 @@ import { SignatureUpload } from "./signature-upload"
 import { useAuth } from "@/contexts/AuthContext"
 import { LicenseAgreementContent } from "./license-agreement-content"
 import { ServiceAgreementContent } from "./service-agreement-content"
+import APIUtil from "@/services/APIUtil"
 
 interface RentAgreementStepProps extends StepProps {
     house: IHouse & {
@@ -19,9 +20,10 @@ interface RentAgreementStepProps extends StepProps {
         description?: string;
         sku?: string;
     }
+    refreshHouse: () => Promise<void>
 }
 
-export function RentAgreementStep({ onNext, onPrev, house, data, onUpdate, invite }: RentAgreementStepProps) {
+export function RentAgreementStep({ onNext, onPrev, house, data, onUpdate, invite, refreshHouse }: RentAgreementStepProps) {
     const [showSummary, setShowSummary] = useState(false)
     const [showSignatureModal, setShowSignatureModal] = useState(false)
     const [signature, setSignature] = useState<File | null>(null)
@@ -29,8 +31,14 @@ export function RentAgreementStep({ onNext, onPrev, house, data, onUpdate, invit
 
     const isKycHouse = house.modules?.find(module => module.name === 'kyc')
 
-    const onSignatureValidated = () => {
-        onNext()
+    const onSignatureValidated = async (documentPath: string) => {
+        try {
+            await refreshHouse()
+            onNext()
+        } catch (error) {
+            console.error('Error refreshing house invite:', error)
+            onNext()
+        }
     }
 
     const handleSubmit = (e: React.FormEvent) => {

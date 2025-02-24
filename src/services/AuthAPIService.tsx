@@ -8,6 +8,7 @@ class AuthAPIService {
     this.apiService = apiService;
   }
 
+
   async googleSignIn(idToken: string): Promise<{ data: any }> {
     try {
       return await this.apiService.post("/auth/google", {

@@ -26,6 +26,7 @@ export interface IHouseInvite {
     status: string,
     license_start: string,
     license_end: string,
+    document_path?: string,
     created_at: string,
     updated_at: string,
     invite_code: string,

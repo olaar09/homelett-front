@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 import RegisterForm from "../components/Form"
 import { Progress } from "@/components/ui/progress"
 import type { RegisterFormData } from "@/app/interfaces/IRegister"
-import { IAuthRequest } from "../../interfaces/IRegisterRequest"
+import { IAuthRequest, IHouseInvite } from "../../interfaces/IRegisterRequest"
 import { ArrowLeft, X } from "lucide-react"
 import { HomeLettAvatar } from "../../components/Landing/HomeLettAvatar"
 import { Button } from "@/components/ui/button"
@@ -176,6 +176,7 @@ export default function RegisterPage() {
             totalSteps={steps.length}
             currentUser={currentUser}
             invite={houseInvite}
+            refreshHouse={refreshHouse}
           />
         </div>
       </div>

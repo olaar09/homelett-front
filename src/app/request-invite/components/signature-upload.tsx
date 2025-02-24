@@ -10,7 +10,7 @@ import { Loader2 } from "lucide-react"
 interface SignatureUploadProps {
     isOpen: boolean
     onClose: () => void
-    onSignatureValidated: (file: File) => void
+    onSignatureValidated: (documentPath: string) => void
 }
 
 export function SignatureUpload({ isOpen, onClose, onSignatureValidated }: SignatureUploadProps) {
@@ -100,11 +100,11 @@ export function SignatureUpload({ isOpen, onClose, onSignatureValidated }: Signa
             // Create a File object from the blob
             const file = new File([blob], 'signature.png', { type: 'image/png' })
 
-            await apiUtil.authService.uploadSignature(file)
+            const response = await apiUtil.authService.uploadSignature(file)
             await authContext.refreshProfile()
             message.success("Signature saved successfully")
             onClose()
-            onSignatureValidated(file)
+            onSignatureValidated(response.data.document_path)
         } catch (error) {
             if (error instanceof AxiosError) {
                 message.error(

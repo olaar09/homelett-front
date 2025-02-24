@@ -27,7 +27,7 @@ export type RegisterFormData = {
 
 export type StepProps = {
     data: RegisterFormData
-    onUpdate: (data: Partial<RegisterFormData>) => void
+    onUpdate: (data: Partial<RegisterFormData>, invite_code?: string) => void
     onNext: () => void
     onPrev: () => void
     invite_code: string
