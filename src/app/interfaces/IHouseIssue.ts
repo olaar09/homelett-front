@@ -7,6 +7,8 @@ export interface IHouseIssue {
     resolution?: string
     landlord_deductable: number
     user_deductable: number
+    house_id: number
+    house_sku_id: number
     status: 'pending' | 'in_progress' | 'resolved' | 'cancelled'
     created_at: string
 } 

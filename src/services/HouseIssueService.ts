@@ -28,7 +28,7 @@ export class HouseIssueService {
 
     async createHouseIssue(data: Partial<IHouseIssue>): Promise<IHouseIssue> {
         try {
-            const response = await this.api.post<{ data: IHouseIssue }>('/house-issues', data)
+            const response = await this.api.post<{ data: IHouseIssue }>(`/house-issues/house/${data.house_id}`, data)
             return response.data;
         } catch (error) {
             throw error;
