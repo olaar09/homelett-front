@@ -5,7 +5,7 @@ pm2 start "npm run start" --name "HomeLett-resident"
 
 PORT=4005 pm2 start "npm run start" --name "HomeLett-utility-next"
 
-NODE_ENV=production PORT=4003 pm2 start npm --name "HomeLett-resident" -- start
+NODE_ENV=production PORT=4003 pm2 start npm --name "homeLett-resident" -- start
 
 
 https://tailwindpdf.com/

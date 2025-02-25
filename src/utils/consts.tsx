@@ -2,7 +2,7 @@ export const Str = {
   earnChannel: "https://t.me/+QvfqIlQfQPEzZDM0",
   whatsappHelp: "https://wa.link/ejqshz",
   signupUrl: "https://app.letbase.co/request-invite",
-  baseUrl: 'http://localhost:3001',
+  baseUrlDev: 'http://localhost:3001',
   baseUrlProd: 'https://api.homelett.co',
   CV_TEMPLATES: {
     CV_1: {
