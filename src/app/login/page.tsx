@@ -121,7 +121,7 @@ export default function Home() {
       </div>
       <section className="flex-grow my-4 flex flex-col pt-4 items-center w-full mt-10 text-[0.7rem]">
         <div className="w-full max-w-md text-[0.7rem]">
-          <LoginForm onChangeForm={onChangeForm} onSubmitLogin={onSubmitLogin} />
+          <LoginForm onChangeForm={onChangeForm} onSubmitLogin={onSubmitLogin} isLoading={loading} />
         </div>
 
         <AuthProblem />

@@ -9,15 +9,14 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { HomeLettAvatar } from "@/app/components/Landing/HomeLettAvatar"
 
-export function LoginForm({ onSubmitLogin, onChangeForm }: {
+export function LoginForm({ onSubmitLogin, onChangeForm, isLoading }: {
     onSubmitLogin: (e: React.FormEvent) => void,
-    onChangeForm: (key: string, e: string) => void
+    onChangeForm: (key: string, e: string) => void,
+    isLoading: boolean
 }) {
-    const [isLoading, setIsLoading] = useState(false)
 
     async function onSubmit(e: React.FormEvent) {
         e.preventDefault()
-        setIsLoading(true)
         onSubmitLogin(e)
     }
 

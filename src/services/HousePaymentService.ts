@@ -7,7 +7,7 @@ export class HousePaymentService {
     private api: ApiService;
 
     constructor(apiService: ApiService) {
-         this.api = apiService;
+        this.api = apiService;
     }
 
     async getHousePayments(): Promise<IHousePayment[]> {

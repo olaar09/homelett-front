@@ -39,7 +39,7 @@ class TransactionAPIService {
 
   async completePayment(reference: string): Promise<any> {
     try {
-      return await this.apiService.post("/transactions/complete_paystack_payment", {
+      return await this.apiService.post("/transactions/paystack/complete", {
         reference,
       });
     } catch (error) {
@@ -51,7 +51,7 @@ class TransactionAPIService {
     try {
       const text = await this.apiService.post<{
         data: any;
-      }>(`/transactions/generate_bank_payment`, { amount: amount });
+      }>(`/transactions/bank/generate`, { amount: amount });
       return text.data as ITransferPaymentInfo;
     } catch (error) {
       throw error;

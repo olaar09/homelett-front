@@ -10,7 +10,7 @@ export class HouseIssueService {
 
     async getHouseIssues(): Promise<IHouseIssue[]> {
         try {
-            const response = await this.api.get<{ data: IHouseIssue[] }>('/house-issues')
+            const response = await this.api.get<{ data: IHouseIssue[] }>('/house-issues/user')
             return response.data;
         } catch (error) {
             throw error;
