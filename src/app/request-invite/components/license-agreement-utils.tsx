@@ -49,6 +49,7 @@ export const getSectionContent = (currentUser: IAuthRequest, invite: IHouseInvit
             return (
                 <div className="space-y-2">
                     <div>The yearly license fee for the property shall be ₦{currentUser?.sku?.price?.toLocaleString()}</div>
+                    <div>The yearly service charge for your occupancy shall be ₦{currentUser?.sku?.service_charge?.toLocaleString()}</div>
                     <div>The full license fee is due within 7 days after the current license expires.</div>
                     <div>Payment shall be made via bank transfer to the details provided by the Licensor.</div>
                     <div>If payment is not received within 7 days of the due date, this Agreement automatically terminates, and the Licensee must vacate the premises immediately.</div>
