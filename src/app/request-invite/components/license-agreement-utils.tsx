@@ -60,7 +60,7 @@ export const getSectionContent = (currentUser: IAuthRequest, invite: IHouseInvit
         case 5:
             return (
                 <div className="space-y-2">
-                    <div>A security deposit of ₦{((currentUser?.sku?.price || 0) * 0.5).toLocaleString()} is required before occupancy.</div>
+                    <div>A security deposit of ₦{((currentUser?.sku?.price || 0) * 0.1).toLocaleString()} is required before occupancy.</div>
                     <div>The deposit will be used for damages, repairs, or replacement of items due to misuse or neglect by the Licensee.</div>
                     <div>Refund of the security deposit (if any) will only be processed after the Licensee vacates the premises and a new Licensee takes over the unit.</div>
                 </div>
