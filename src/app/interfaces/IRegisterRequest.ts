@@ -77,6 +77,9 @@ export interface IAuthRequest {
   house_id?: any;
   house_sku_id?: number;
   house?: IHouse;
+  finance?: {
+    balance: number;
+  };
   sku?: IHouseSKU;
   kyc?: IKYCRequest;
   nextOfKin?: INextOfKinRequest;
@@ -84,6 +87,7 @@ export interface IAuthRequest {
   invite_code?: string;
   transactions: ITransaction[];
   is_house_admin?: number;
+  has_activated_meter?: number;
 /*   
   company?: string;
   bank_info?: IUserBank;

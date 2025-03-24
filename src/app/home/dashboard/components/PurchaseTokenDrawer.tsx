@@ -23,15 +23,23 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
     const minTokenAmount = isAdmin ? 5 : 5000;
     const [modalVisible, setModalVisible] = useState(false);
     const [responseText, setResponseText] = useState('');
+    const [serviceCharge, setServiceCharge] = useState(0);
+    const SERVICE_CHARGE_PERCENTAGE = 0.08;
 
     const kilowatts = useMemo(() => {
         if (!tokenAmount || tokenAmount < minTokenAmount) return 0;
         return Number((tokenAmount / tokenPerKw).toFixed(2));
     }, [tokenAmount, tokenPerKw]);
 
-    const serviceCharge = useMemo(() => {
-        return authContext.currentUser?.active_sub ? 0 : 500;
-    }, [authContext.currentUser]);
+    /*     const serviceCharge = useMemo(() => {
+            return authContext.currentUser?.active_sub ? 0 : 500;
+        }, [authContext.currentUser]); */
+
+    useEffect(() => {
+        const calculatedServiceCharge = tokenAmount * SERVICE_CHARGE_PERCENTAGE;
+        setServiceCharge(Math.min(Math.max(calculatedServiceCharge, 500), 5000));
+    }, [tokenAmount]);
+
 
     useEffect(() => {
         if (isAdmin) {
@@ -136,7 +144,7 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                             <div className='flex items-center gap-x-1 justify-between' >
                                 <span className='block text-xs'>Recharge {isAdmin ? 'Quantity' : 'Amount'}</span>
                                 {!isAdmin && serviceCharge > 0 && (
-                                    <span className='text-xs text-orange-600'>+ ₦{serviceCharge} service charge</span>
+                                    <span className='text-xs text-orange-600'>+ ₦{serviceCharge} processing fee</span>
                                 )}
                             </div>
                             <InputField

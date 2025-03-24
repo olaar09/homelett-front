@@ -41,6 +41,8 @@ export default function KornBalanceCard() {
         "NGN"
     )
 
+    const requiresMeterActivation = authContext.currentUser?.house?.is_meter_financed === 1 && authContext.currentUser?.has_activated_meter === 0
+
     return (
         <Card className="w-full overflow-hidden bg-gradient-to-br from-white to-slate-50/20">
             <CardContent className="p-5">
@@ -82,6 +84,15 @@ export default function KornBalanceCard() {
                         </div>
                     </Link>
                 </div>
+
+                {requiresMeterActivation &&
+                    <div className="flex items-center justify-between px-0 py-1 bg-yellow-50 rounded-lg border border-yellow-200">
+                        <div className="flex items-center gap-x-1">
+                            <Icon icon="solar:danger-triangle-bold" className="text-yellow-600 text-xl" />
+                            <span className="text-yellow-700  text-xs">Buy electricity  at least ₦25k to activate your meter</span>
+                        </div>
+                    </div>
+                }
 
                 {/* Notifications Section */}
                 {/*  <div className="space-y-3">

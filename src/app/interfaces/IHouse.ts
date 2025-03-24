@@ -13,6 +13,7 @@ export interface IHouse {
     slug: string
     address: string
     modules: IModule[]
+    is_meter_financed?: number;
 } 
 
 export interface IModule {
