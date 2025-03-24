@@ -40,7 +40,7 @@ const SavedTeamMembers = () => {
       const data = await apiUtils.transactionService.fetchBanks();
       return data;
     } catch (error) {
-      message.error("unable to load banks");
+      // message.error("unable to load banks");
     }
   };
 
