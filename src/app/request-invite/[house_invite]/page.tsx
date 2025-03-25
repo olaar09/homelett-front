@@ -181,13 +181,13 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      <section className="px-6 py-4 flex flex-col items-center justify-center gap-y-4 ">
+      {/*  <section className="px-6 py-4 flex flex-col items-center justify-center gap-y-4 ">
         <span className=" text-foreground-secondary text-sm text-center">
           By continuing, you are agreeing to Homelett {" "}
           <span className=" text-banner"> <br /> terms of services </span> and{" "}
           <span className=" text-banner">Privacy Policy </span>
         </span>
-      </section>
+      </section> */}
     </div>
   )
 }
