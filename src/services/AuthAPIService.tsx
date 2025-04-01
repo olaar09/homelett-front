@@ -68,6 +68,7 @@ class AuthAPIService {
         meter_number: data.meter_number,
         invite_code: data.invite_code,
         is_bubble: true,
+        is_utility_signup: data.is_utility_signup,
       });
     } catch (error) {
       throw error;

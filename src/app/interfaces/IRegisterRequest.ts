@@ -75,6 +75,7 @@ export interface IAuthRequest {
   last_name: string;
   onboarding_step: number;
   house_id?: any;
+  is_utility_signup?: boolean;
   house_sku_id?: number;
   house?: IHouse;
   finance?: {

@@ -5,11 +5,10 @@ import { useRouter } from "next/navigation"
 
 interface SuccessStepProps {
     houseName: string
-    invite_code: string
     document_path?: string
 }
 
-export function SuccessStep({ houseName, invite_code, document_path }: SuccessStepProps) {
+export function SuccessStep({ houseName, document_path }: SuccessStepProps) {
     const router = useRouter()
 
     const handleDownload = () => {
@@ -31,7 +30,7 @@ export function SuccessStep({ houseName, invite_code, document_path }: SuccessSt
                             <h2 className="text-2xl font-semibold tracking-tight">
                                 Onboarding Complete!
                             </h2>
-                            <p className="text-orange-600 text-xs">Your signed agreement will be sent to your email.</p>
+                            {document_path && <p className="text-orange-600 text-xs">Your signed agreement will be sent to your email.</p>}
                         </div>
 
                         <p className="text-sm text-muted-foreground mt-4">

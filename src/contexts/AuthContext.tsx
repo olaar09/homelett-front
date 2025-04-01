@@ -137,7 +137,8 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
       if (
         path !== "/" &&
         !path.includes("login") &&
-        !path.includes("request-invite")
+        !path.includes("request-invite") &&
+        !path.includes("request-utility-invite")
       ) {
         router.push(`/`);
         return;

@@ -6,19 +6,16 @@ import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import type { RegisterFormData } from "@/app/interfaces/IRegister"
-import { BioInfoStep, onSignupUser } from "./bio-info"
 
 import { IAuthRequest, IHouseInvite } from "../../interfaces/IRegisterRequest"
-import { ContactDetailsStep } from "./contact-details-step"
-import { RentAgreementStep } from "./rent-agreement-step"
-import { NextOfKinStep } from "./next-of-kin-step"
+
 import { IHouse } from "@/app/interfaces/IHouse"
-import HouseInfoStep from "./house-info-step"
 
 import { useAuth } from "@/contexts/AuthContext"
 import APIUtil from "@/services/APIUtil"
-import { SuccessStep } from "./success-step"
-import { IHouseSKU } from "@/app/interfaces/IRegisterRequest"
+import { SuccessStep } from "@/app/request-invite/components/success-step"
+import HouseInfoStep from "@/app/request-invite/components/house-info-step"
+import { BioInfoStep } from "@/app/request-invite/components/bio-info"
 
 
 interface RegisterFormProps {
@@ -28,7 +25,7 @@ interface RegisterFormProps {
     setFormData: (data: RegisterFormData) => void
     totalSteps: number
     currentUser: IAuthRequest | null
-    invite: IHouseInvite
+    invite: IHouse
     refreshHouse: () => any
 }
 
@@ -43,7 +40,7 @@ export default function RegisterForm({
     refreshHouse
 }: RegisterFormProps) {
     const [isLoading, setIsLoading] = useState(false)
-    const { house, sku } = invite
+    const house = invite
     const apiService = new APIUtil()
     const authContext = useAuth()
 
@@ -80,7 +77,7 @@ export default function RegisterForm({
         <HouseInfoStep
             key="house-info"
             house={house}
-            sku={sku}
+            sku={undefined}
             onNext={handleNext}
         />,
         <BioInfoStep
@@ -90,47 +87,15 @@ export default function RegisterForm({
             onNext={handleNext}
             onPrev={handlePrev}
             house_id={house.id}
-            sku_id={sku?.id}
-            invite_code={invite.invite.invite_code}
-        />,
-        ...(house.modules.some(module => module.name.toLowerCase() === 'kyc') ? [
-            <ContactDetailsStep
-                key="contact"
-                data={formData}
-                onUpdate={handleUpdateData}
-                onNext={handleNext}
-                onPrev={handlePrev}
-                invite_code={invite.invite.invite_code}
-            />,
-            <NextOfKinStep
-                key="kin"
-                data={formData}
-                onUpdate={handleUpdateData}
-                onNext={handleNext}
-                onPrev={handlePrev}
-                invite_code={invite.invite.invite_code}
-            />,
-        ] : []),
-        <RentAgreementStep
-            key="rent"
-            data={formData}
-            house={house}
-            onUpdate={handleUpdateData}
-            onNext={handleNext}
-            onPrev={handlePrev}
-            invite={invite}
-            invite_code={invite.invite.invite_code}
-            refreshHouse={refreshHouse}
+            sku_id={undefined}
+            invite_code={undefined}
+            is_utility_signup={true}
         />,
         <SuccessStep
             key="success"
             houseName={house.house_name}
-            document_path={invite.invite.document_path}
+            document_path={undefined}
         />,
-
-
-
-
         /*         <PaymentAgreementStep
                     key="payment"
                     data={formData}

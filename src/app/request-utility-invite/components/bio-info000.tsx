@@ -53,7 +53,7 @@ export const onSignupUser = async (formData: any, house_id: string, invite_code?
 
 
 
-export function BioInfoStep({ onNext, house_id, sku_id, invite_code, is_utility_signup }: StepProps) {
+export function BioInfoStep({ onNext, house_id, sku_id, invite_code }: StepProps) {
 
 
     const [isLoading, setIsLoading] = useState(false)
@@ -78,7 +78,7 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code, is_utility_
         try {
             //  alert(`Signing up... ${house_id} ${sku_id}`)
             setIsLoading(true)
-            await onSignupUser(formData, house_id!, invite_code, sku_id, is_utility_signup)
+            await onSignupUser(formData, house_id!, invite_code, sku_id)
             await authContext.refreshProfile();
             onNext()
         } catch (error) {

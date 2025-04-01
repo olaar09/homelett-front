@@ -30,9 +30,10 @@ export type StepProps = {
     onUpdate: (data: Partial<RegisterFormData>, invite_code?: string) => void
     onNext: () => void
     onPrev: () => void
-    invite_code: string
+    invite_code?: string
     invite?: IHouseInvite
     house_id?: string
     sku_id?: number
+    is_utility_signup?: boolean
 }
 
