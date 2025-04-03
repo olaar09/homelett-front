@@ -118,7 +118,7 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                             <h4 className="text-lg font-semibold text-gray-900">Enter Details</h4>
                         </div>
 
-                        {!isAdmin && (
+                        {!isAdmin && false && (
                             <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                                 <span className="text-sm text-gray-600">Cost per kW</span>
                                 <span className="text-sm font-medium text-gray-900">₦{tokenPerKw}.00</span>
