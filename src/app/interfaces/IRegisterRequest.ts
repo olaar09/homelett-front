@@ -78,6 +78,7 @@ export interface IAuthRequest {
   is_utility_signup?: boolean;
   house_sku_id?: number;
   house?: IHouse;
+  invite?: IHouseInvite;
   finance?: {
     balance: number;
   };
