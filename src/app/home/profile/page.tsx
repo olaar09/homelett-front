@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Avatar, Button, Card, Spin, message } from "antd";
 import APIUtil from "@/services/APIUtil";
 import { useRequest } from "ahooks";
-import { AuthContext } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import AddTeamModal from "./components/AddTeamModal";
 import { useRouter } from "next/navigation";
@@ -12,9 +12,11 @@ import Link from "next/link";
 import { Str } from "@/utils/consts";
 import UpdateBankDrawer from "./components/UpdateBankDrawer";
 import { IBank } from "@/app/interfaces/IProduct";
+import { Modal } from "antd";
 
 const SavedTeamMembers = () => {
-  const authContext = useContext(AuthContext);
+  const authContext = useAuth();
+  const [isReferralModalOpen, setIsReferralModalOpen] = useState(false);
   const [openBankModal, setOpenBankModal] = useState(false);
   const apiUtils = new APIUtil();
   const router = useRouter();
@@ -118,7 +120,7 @@ const SavedTeamMembers = () => {
                       </span>
                     </div>
 
-                    {!authContext.currentUser.bank_info && (
+                    {/* {!authContext.currentUser.bank_info && (
                       <div
                         onClick={onUpdateBank}
                         className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-10 w-full rounded-lg mx-auto"
@@ -126,14 +128,40 @@ const SavedTeamMembers = () => {
                         <Icon icon={"streamline:bank-solid"} />
                         <span className="text-sm"> {"Add bank details"}</span>
                       </div>
-                    )}
+                    )} */}
 
-                    <Link href={"/home/earn_referral"}>
-                      <div className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-4 w-full rounded-lg mx-auto">
-                        <Icon icon={"tdesign:money"} />
-                        <span className="text-sm"> {"Refer and earn"}</span>
+                    <div
+                      onClick={() => setIsReferralModalOpen(true)}
+                      className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-4 w-full rounded-lg mx-auto cursor-pointer hover:bg-gray-50"
+                    >
+                      <Icon icon={"tdesign:money"} />
+                      <span className="text-sm">Refer and earn</span>
+                    </div>
+
+                    <Modal
+                      title="Refer and Earn"
+                      open={isReferralModalOpen}
+                      onCancel={() => setIsReferralModalOpen(false)}
+                      footer={null}
+                    >
+                      <div className="py-6 space-y-4">
+                        <div className="flex items-center gap-x-3">
+                          <Icon icon={"ph:money-fill"} className="text-2xl text-green-600" />
+                          <div>
+                            <h3 className="font-medium">₦50,000 Cash Reward</h3>
+                            <p className="text-sm text-gray-600">For introducing any shared apartment to use our meters</p>
+                          </div>
+                        </div>
+                        
+                        <div className="bg-gray-50 p-4 rounded-lg">
+                          <p className="text-sm font-medium">Contact us to get started:</p>
+                          <p className="text-sm mt-2">
+                            <Icon icon={"ph:phone-fill"} className="inline-block mr-2" />
+                            <a href="tel:+2348065342749" className="text-blue-600 hover:underline">+234 806 534 2749</a>
+                          </p>
+                        </div>
                       </div>
-                    </Link>
+                    </Modal>
 
                     <Link href={Str.whatsappHelp}>
                       <div className="flex items-center flex-row gap-x-3 justify-center py-2 h-12 border border-gray-200 mt-4 w-full rounded-lg mx-auto">
