@@ -62,6 +62,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
 
   const goHome = (currentUser: IAuthRequest) => {
     console.log(".....currentUser.....", currentUser);
+    // alert(currentUser)
     if (currentUser.onboarding_step >= 5) {
       router.push(`/home/dashboard`);
     } else {

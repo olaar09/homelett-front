@@ -32,7 +32,7 @@ export interface IHouseInvite {
     invite_code: string,
     house: IHouse,
     house_sku: IHouseSKU
-  },  
+  },
   house: IHouse,
   sku: IHouseSKU
 }
@@ -73,12 +73,14 @@ export interface IAuthRequest {
   phone: string;
   first_name: string;
   last_name: string;
+  unit_name?: string;
   onboarding_step: number;
   house_id?: any;
   is_utility_signup?: boolean;
   house_sku_id?: number;
   house?: IHouse;
   invite?: IHouseInvite;
+  user?: any;
   finance?: {
     balance: number;
   };
@@ -90,60 +92,60 @@ export interface IAuthRequest {
   transactions: ITransaction[];
   is_house_admin?: number;
   has_activated_meter?: number;
-/*   
-  company?: string;
-  bank_info?: IUserBank;
-  nuban?: IUserBank;
-  coupon?: ICoupon;
-  is_open_ai?: number;
-  is_activated?: number;
-  is_reseller?: number;
-  is_return_user: number;
-  is_admin?: number;
-  is_earner?: number;
-  total_invites: number;
-  total_active_invites: number;
-  invite_token: string;
-  invite_link: string;
-  is_house_admin: number;
-  onboardingStep: number;
-  houses?: IHouse[];
-  house?: IHouse,
-  recent_transactions: ITransaction[],
-  house_plans?: IHousePlan[],
-  "active_sub": {
-    "id": number,
-    "user_id": number,
-    "product_id": number,
-    "plan_end": string,
-    "is_active": number,
-    "interval": string,
-    "plan": IHousePlan | null
-  },
-  finance?: {
-    balance: number;
-    totalSpends: number;
-    totalDeposits: number;
-    totalPayouts: number;
-    pendingPayouts: number;
-    totalReferralEarning: number;
-  };
-  p2p: {
-    bank_info: {
-      bank_name: string;
-      bank_account_number: string;
-      bank_account_name: string;
+  /*   
+    company?: string;
+    bank_info?: IUserBank;
+    nuban?: IUserBank;
+    coupon?: ICoupon;
+    is_open_ai?: number;
+    is_activated?: number;
+    is_reseller?: number;
+    is_return_user: number;
+    is_admin?: number;
+    is_earner?: number;
+    total_invites: number;
+    total_active_invites: number;
+    invite_token: string;
+    invite_link: string;
+    is_house_admin: number;
+    onboardingStep: number;
+    houses?: IHouse[];
+    house?: IHouse,
+    recent_transactions: ITransaction[],
+    house_plans?: IHousePlan[],
+    "active_sub": {
+      "id": number,
+      "user_id": number,
+      "product_id": number,
+      "plan_end": string,
+      "is_active": number,
+      "interval": string,
+      "plan": IHousePlan | null
+    },
+    finance?: {
+      balance: number;
+      totalSpends: number;
+      totalDeposits: number;
+      totalPayouts: number;
+      pendingPayouts: number;
+      totalReferralEarning: number;
     };
-  };
-  freeTrialLeft?: any;
-  billingActive?: boolean;
-  active_subscriptions?: ISubscription[];
-  streaming: IProduct[]
-  reseller_products: IProduct[]
-  paymentLink?: string;
-  token?: string;
-  subscriptions: any[];
-  configs: IKornConfig[] */
+    p2p: {
+      bank_info: {
+        bank_name: string;
+        bank_account_number: string;
+        bank_account_name: string;
+      };
+    };
+    freeTrialLeft?: any;
+    billingActive?: boolean;
+    active_subscriptions?: ISubscription[];
+    streaming: IProduct[]
+    reseller_products: IProduct[]
+    paymentLink?: string;
+    token?: string;
+    subscriptions: any[];
+    configs: IKornConfig[] */
 }
 
 export interface IUserBank {

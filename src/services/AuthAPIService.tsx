@@ -63,6 +63,7 @@ class AuthAPIService {
         phone: data.phone,
         first_name: data.first_name,
         last_name: data.last_name,
+        unit_name: data.unit_name,
         house_id: data.house_id,
         house_sku_id: data.house_sku_id,
         meter_number: data.meter_number,

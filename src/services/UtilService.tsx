@@ -12,7 +12,7 @@ class UtilService {
   formatMoneyNoSymbol(value: string, locale = "en-US"): string {
     // Convert the string value to a number and then to a locale string in USD format
     const numberValue = Number(value) / 100; // Divide by 100 to account for cents
-    return numberValue.toLocaleString(locale, { minimumFractionDigits: 2 });
+    return numberValue?.toLocaleString(locale, { minimumFractionDigits: 2 });
   }
 
   // Function to format the input value as USD currency

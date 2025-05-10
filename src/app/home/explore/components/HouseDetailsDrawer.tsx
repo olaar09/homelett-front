@@ -195,7 +195,7 @@ const HouseDetailsDrawer: React.FC<HouseDetailsDrawerProps> = ({ visible, house,
                                                 ? 'bg-green-50 text-green-600'
                                                 : 'bg-red-50 text-red-600'
                                                 }`}>
-                                                {transaction.type === 'INCOME' ? '+' : '-'} ₦{transaction.amount.toLocaleString()}
+                                                {transaction.type === 'INCOME' ? '+' : '-'} ₦{transaction.amount?.toLocaleString()}
                                             </div>
                                         </div>
                                         <div className=" flex items-center justify-start gap-x-4 mt-2 ml-11">

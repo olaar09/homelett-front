@@ -8,6 +8,7 @@ export type RegisterFormData = {
     phone: string
     password: string
     meter_number: string
+    unit_name?: string
     // Contact Details
     current_address: string
     work_address: string

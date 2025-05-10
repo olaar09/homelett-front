@@ -25,6 +25,7 @@ export const onSignupUser = async (formData: any, house_id: string, invite_code?
             last_name: formData.last_name,
             onboarding_step: 0,
             house_id: house_id,
+            unit_name: formData.unit_name,
             house_sku_id: sku_id,
             meter_number: formData.meter_number,
             invite_code: invite_code,
@@ -63,7 +64,8 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code, is_utility_
         email: "",
         phone: "",
         password: "",
-        meter_number: ""
+        meter_number: "",
+        unit_name: ""
     })
 
     const authContext = useAuth()
@@ -163,6 +165,18 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code, is_utility_
                     value={formData.meter_number}
                     onChange={(e) => onUpdate({ meter_number: e.target.value })}
                     required
+                />
+            </div>
+
+            <div className="space-y-2">
+                <Label className="text-[0.78rem]" htmlFor="unit_name">Unit Name (optional)</Label>
+                <Input
+                    id="unit_name"
+                    type="text"
+                    placeholder="Unit Name"
+                    className="text-[0.78rem]"
+                    value={formData.unit_name}
+                    onChange={(e) => onUpdate({ unit_name: e.target.value })}
                 />
             </div>
 
