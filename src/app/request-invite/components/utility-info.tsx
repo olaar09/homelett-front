@@ -174,6 +174,7 @@ export function SubmitBioInfoStep({ onNext, onUpdate, data, house_id, sku_id, in
                     className="text-[0.78rem]"
                     value={formData.unit_name}
                     onChange={(e) => onUpdateData({ unit_name: e.target.value })}
+                    required
                 />
             </div>
 
