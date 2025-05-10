@@ -195,8 +195,8 @@ const SavedTeamMembers = () => {
                             <Icon icon={"solar:user-speak-rounded-bold"} className="text-xl text-blue-600" />
                             Get Started Now
                           </h4>
-                          <a 
-                            href="tel:+2348065342749" 
+                          <a
+                            href="tel:+2348065342749"
                             className="flex items-center gap-x-3 bg-white p-3 rounded-lg hover:bg-blue-50 transition-all transform hover:scale-[1.02] group shadow-sm"
                           >
                             <div className="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg shadow-md group-hover:shadow-lg transition-all">
@@ -204,7 +204,7 @@ const SavedTeamMembers = () => {
                             </div>
                             <div>
                               <p className="text-sm font-medium text-gray-900">Call us now</p>
-                              <p className="text-blue-600 font-medium">+234 806 534 2749</p>
+                              <p className="text-blue-600 font-medium">+234 811 275 5857</p>
                             </div>
                           </a>
                         </div>
