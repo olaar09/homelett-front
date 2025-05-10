@@ -20,7 +20,7 @@ import RegisterForm from "../components/Form"
 
 // Replace the static STEPS constant with a function
 const getSteps = (house: IHouse) => {
-  const baseSteps = ["House Information", "Bio Information"];
+  const baseSteps = ["House Information", "Bio Information", "Utility information"];
 
   // Check if KYC is required for this house
   if (house?.modules?.some((module: IModule) => module.name.toLowerCase() === 'kyc')) {
@@ -39,6 +39,7 @@ export default function RegisterPage() {
     phone: "",
     password: "",
     current_address: "",
+    unit_name: "",
     work_address: "",
     occupation: "",
     nin: "",

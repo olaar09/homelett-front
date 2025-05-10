@@ -54,38 +54,33 @@ export const onSignupUser = async (formData: any, house_id: string, invite_code?
 
 
 
-export function BioInfoStep({ onNext, house_id, sku_id, invite_code, is_utility_signup }: StepProps) {
+export function BioInfoStep({ onNext, onUpdate, data }: StepProps) {
 
 
     const [isLoading, setIsLoading] = useState(false)
-    const [formData, setFormData] = useState({
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone: "",
-        password: "",
-        meter_number: "",
-        unit_name: ""
-    })
+    const [formData, setFormData] = useState(data)
 
     const authContext = useAuth()
 
-    const onUpdate = (data: Partial<RegisterFormData>) => {
-        setFormData({ ...formData, ...data })
+    const onUpdateData = (newData: Partial<RegisterFormData>) => {
+        setFormData({ ...formData, ...newData })
+        onUpdate(newData)
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
         try {
+
+            console.log(".....formData.....", formData);
             //  alert(`Signing up... ${house_id} ${sku_id}`)
-            setIsLoading(true)
-            await onSignupUser(formData, house_id!, invite_code, sku_id, is_utility_signup)
-            await authContext.refreshProfile();
+            // setIsLoading(true)
+            // await onSignupUser(formData, house_id!, invite_code, sku_id, is_utility_signup)
+            // await authContext.refreshProfile();
             onNext()
         } catch (error) {
             console.log(".....error.....", error);
-            if (error instanceof AxiosError) {
+            /* if (error instanceof AxiosError) {
                 message.error(
                     `${error?.response?.data?.message ??
                     error?.response?.data?.reason ??
@@ -94,9 +89,9 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code, is_utility_
                 );
             } else {
                 message.error("Unable to complete request");
-            }
+            } */
         } finally {
-            setIsLoading(false)
+            //  setIsLoading(false)
         }
     }
 
@@ -112,7 +107,7 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code, is_utility_
                         placeholder="John "
                         className="text-[0.78rem]"
                         value={formData.first_name}
-                        onChange={(e) => onUpdate({ first_name: e.target.value })}
+                        onChange={(e) => onUpdateData({ first_name: e.target.value })}
                         required
                     />
                 </div>
@@ -125,7 +120,7 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code, is_utility_
                         placeholder="Doe"
                         className="text-[0.78rem]"
                         value={formData.last_name}
-                        onChange={(e) => onUpdate({ last_name: e.target.value })}
+                        onChange={(e) => onUpdateData({ last_name: e.target.value })}
                         required
                     />
                 </div>
@@ -138,7 +133,7 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code, is_utility_
                     placeholder="m@example.com"
                     className="text-[0.78rem]"
                     value={formData.email}
-                    onChange={(e) => onUpdate({ email: e.target.value })}
+                    onChange={(e) => onUpdateData({ email: e.target.value })}
                     required
                 />
             </div>
@@ -150,12 +145,12 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code, is_utility_
                     placeholder="+234..."
                     className="text-[0.78rem]"
                     value={formData.phone}
-                    onChange={(e) => onUpdate({ phone: e.target.value })}
+                    onChange={(e) => onUpdateData({ phone: e.target.value })}
                     required
                 />
             </div>
 
-            <div className="space-y-2">
+            {/*    <div className="space-y-2">
                 <Label className="text-[0.78rem]" htmlFor="meter_number">Meter Number</Label>
                 <Input
                     id="meter_number"
@@ -166,9 +161,9 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code, is_utility_
                     onChange={(e) => onUpdate({ meter_number: e.target.value })}
                     required
                 />
-            </div>
+            </div> */}
 
-            <div className="space-y-2">
+            {/*  <div className="space-y-2">
                 <Label className="text-[0.78rem]" htmlFor="unit_name">Unit Name (optional)</Label>
                 <Input
                     id="unit_name"
@@ -178,9 +173,9 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code, is_utility_
                     value={formData.unit_name}
                     onChange={(e) => onUpdate({ unit_name: e.target.value })}
                 />
-            </div>
+            </div> */}
 
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
                 <Label className="text-[0.78rem]" htmlFor="password">Password</Label>
                 <Input
                     id="password"
@@ -190,7 +185,7 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code, is_utility_
                     onChange={(e) => onUpdate({ password: e.target.value })}
                     required
                 />
-            </div>
+            </div> */}
             <Button type="submit" className="w-full" disabled={isLoading}>
                 Next
             </Button>

@@ -16,6 +16,7 @@ import APIUtil from "@/services/APIUtil"
 import { SuccessStep } from "@/app/request-invite/components/success-step"
 import HouseInfoStep from "@/app/request-invite/components/house-info-step"
 import { BioInfoStep } from "@/app/request-invite/components/bio-info"
+import { SubmitBioInfoStep } from "@/app/request-invite/components/utility-info"
 
 
 interface RegisterFormProps {
@@ -50,6 +51,7 @@ export default function RegisterForm({
 
 
     const handleNext = async () => {
+        console.log("currentStep", formData)
         if (currentStep < totalSteps - 1) {
             switch (currentStep) {
                 case 0:
@@ -82,6 +84,17 @@ export default function RegisterForm({
         />,
         <BioInfoStep
             key="bio"
+            data={formData}
+            onUpdate={handleUpdateData}
+            onNext={handleNext}
+            onPrev={handlePrev}
+            house_id={house.id}
+            sku_id={undefined}
+            invite_code={undefined}
+            is_utility_signup={true}
+        />,
+        <SubmitBioInfoStep
+            key="submitBio"
             data={formData}
             onUpdate={handleUpdateData}
             onNext={handleNext}

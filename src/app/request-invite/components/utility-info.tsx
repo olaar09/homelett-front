@@ -25,6 +25,7 @@ export const onSignupUser = async (formData: any, house_id: string, invite_code?
             last_name: formData.last_name,
             onboarding_step: 0,
             house_id: house_id,
+            unit_name: formData.unit_name,
             house_sku_id: sku_id,
             meter_number: formData.meter_number,
             invite_code: invite_code,
@@ -53,23 +54,19 @@ export const onSignupUser = async (formData: any, house_id: string, invite_code?
 
 
 
-export function BioInfoStep({ onNext, house_id, sku_id, invite_code }: StepProps) {
+export function SubmitBioInfoStep({ onNext, onUpdate, data, house_id, sku_id, invite_code, is_utility_signup }: StepProps) {
 
 
     const [isLoading, setIsLoading] = useState(false)
-    const [formData, setFormData] = useState({
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone: "",
-        password: "",
-        meter_number: ""
-    })
+    const [formData, setFormData] = useState(data)
 
     const authContext = useAuth()
 
-    const onUpdate = (data: Partial<RegisterFormData>) => {
-        setFormData({ ...formData, ...data })
+    const onUpdateData = (newData: Partial<RegisterFormData>) => {
+        /*         console.log(".....newData.....", newData, data, formData);
+                console.log({ ...data, ...formData, ...newData }); */
+        setFormData({ ...formData, ...newData })
+        onUpdate(newData)
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -77,8 +74,10 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code }: StepProps
 
         try {
             //  alert(`Signing up... ${house_id} ${sku_id}`)
+
+            console.log(".....formData submit.....", formData);
             setIsLoading(true)
-            await onSignupUser(formData, house_id!, invite_code, sku_id)
+            await onSignupUser(formData, house_id!, invite_code, sku_id, is_utility_signup)
             await authContext.refreshProfile();
             onNext()
         } catch (error) {
@@ -101,7 +100,7 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code }: StepProps
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="flex flex-col md:flex-row gap-x-2 items-center w-full space-y-4 md:space-y-0">
+            {/*  <div className="flex flex-col md:flex-row gap-x-2 items-center w-full space-y-4 md:space-y-0">
                 <div className="w-full md:w-1/2">
                     <Label className="text-[0.78rem]" htmlFor="first_name">First Name</Label>
                     <Input
@@ -110,7 +109,7 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code }: StepProps
                         placeholder="John "
                         className="text-[0.78rem]"
                         value={formData.first_name}
-                        onChange={(e) => onUpdate({ first_name: e.target.value })}
+                        onChange={(e) => onUpdateData({ first_name: e.target.value })}
                         required
                     />
                 </div>
@@ -123,12 +122,12 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code }: StepProps
                         placeholder="Doe"
                         className="text-[0.78rem]"
                         value={formData.last_name}
-                        onChange={(e) => onUpdate({ last_name: e.target.value })}
+                        onChange={(e) => onUpdateData({ last_name: e.target.value })}
                         required
                     />
                 </div>
-            </div>
-            <div className="space-y-2">
+            </div> */}
+            {/*   <div className="space-y-2">
                 <Label className="text-[0.78rem]" htmlFor="email">Email</Label>
                 <Input
                     id="email"
@@ -136,11 +135,11 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code }: StepProps
                     placeholder="m@example.com"
                     className="text-[0.78rem]"
                     value={formData.email}
-                    onChange={(e) => onUpdate({ email: e.target.value })}
+                    onChange={(e) => onUpdateData({ email: e.target.value })}
                     required
                 />
-            </div>
-            <div className="space-y-2">
+            </div> */}
+            {/*  <div className="space-y-2">
                 <Label className="text-[0.78rem]" htmlFor="phone">Phone Number</Label>
                 <Input
                     id="phone"
@@ -148,10 +147,10 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code }: StepProps
                     placeholder="+234..."
                     className="text-[0.78rem]"
                     value={formData.phone}
-                    onChange={(e) => onUpdate({ phone: e.target.value })}
+                    onChange={(e) => onUpdateData({ phone: e.target.value })}
                     required
                 />
-            </div>
+            </div> */}
 
             <div className="space-y-2">
                 <Label className="text-[0.78rem]" htmlFor="meter_number">Meter Number</Label>
@@ -161,8 +160,20 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code }: StepProps
                     placeholder="1234567890"
                     className="text-[0.78rem]"
                     value={formData.meter_number}
-                    onChange={(e) => onUpdate({ meter_number: e.target.value })}
+                    onChange={(e) => onUpdateData({ meter_number: e.target.value })}
                     required
+                />
+            </div>
+
+            <div className="space-y-2">
+                <Label className="text-[0.78rem]" htmlFor="unit_name">Unit Name (optional)</Label>
+                <Input
+                    id="unit_name"
+                    type="text"
+                    placeholder="Unit Name"
+                    className="text-[0.78rem]"
+                    value={formData.unit_name}
+                    onChange={(e) => onUpdateData({ unit_name: e.target.value })}
                 />
             </div>
 
@@ -173,7 +184,19 @@ export function BioInfoStep({ onNext, house_id, sku_id, invite_code }: StepProps
                     type="password"
                     className="text-[0.78rem]"
                     value={formData.password}
-                    onChange={(e) => onUpdate({ password: e.target.value })}
+                    onChange={(e) => onUpdateData({ password: e.target.value })}
+                    required
+                />
+            </div>
+
+            <div className="space-y-2">
+                <Label className="text-[0.78rem]" htmlFor="confirm_password">Confirm Password</Label>
+                <Input
+                    id="confirm_password"
+                    type="password"
+                    className="text-[0.78rem]"
+                    value={formData.password}
+                    onChange={(e) => onUpdateData({ password: e.target.value })}
                     required
                 />
             </div>

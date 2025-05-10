@@ -19,6 +19,7 @@ import { useAuth } from "@/contexts/AuthContext"
 import APIUtil from "@/services/APIUtil"
 import { SuccessStep } from "./success-step"
 import { IHouseSKU } from "@/app/interfaces/IRegisterRequest"
+import { SubmitBioInfoStep } from "./utility-info"
 
 
 interface RegisterFormProps {
@@ -92,6 +93,17 @@ export default function RegisterForm({
             house_id={house.id}
             sku_id={sku?.id}
             invite_code={invite.invite.invite_code}
+        />,
+        <SubmitBioInfoStep
+            key="submitBio"
+            data={formData}
+            onUpdate={handleUpdateData}
+            onNext={handleNext}
+            onPrev={handlePrev}
+            house_id={house.id}
+            sku_id={undefined}
+            invite_code={undefined}
+            is_utility_signup={true}
         />,
         ...(house.modules.some(module => module.name.toLowerCase() === 'kyc') ? [
             <ContactDetailsStep
