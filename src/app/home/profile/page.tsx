@@ -139,26 +139,74 @@ const SavedTeamMembers = () => {
                     </div>
 
                     <Modal
-                      title="Refer and Earn"
+                      title={<div className="flex items-center gap-x-2">
+                        <Icon icon={"streamline:money-cash-coins-stack"} className="text-2xl text-green-600" />
+                        <span>Earn Big Rewards</span>
+                      </div>}
                       open={isReferralModalOpen}
                       onCancel={() => setIsReferralModalOpen(false)}
                       footer={null}
                     >
-                      <div className="py-6 space-y-4">
-                        <div className="flex items-center gap-x-3">
-                          <Icon icon={"ph:money-fill"} className="text-2xl text-green-600" />
-                          <div>
-                            <h3 className="font-medium">₦50,000 Cash Reward</h3>
-                            <p className="text-sm text-gray-600">For introducing any shared apartment to use our meters</p>
+                      <div className="py-6 space-y-6">
+                        {/* Reward Amount Section */}
+                        <div className="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 p-6 rounded-xl border border-green-100 relative overflow-hidden">
+                          <div className="absolute right-0 top-0 opacity-10">
+                            <Icon icon={"ph:currency-circle-dollar-fill"} className="text-8xl text-green-600" />
+                          </div>
+                          <div className="flex items-center gap-x-4">
+                            <div className="p-3 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg shadow-lg">
+                              <Icon icon={"solar:money-bag-bold"} className="text-3xl text-white" />
+                            </div>
+                            <div>
+                              <h3 className="text-2xl font-bold text-green-700">Up to ₦1M</h3>
+                              <p className="text-green-600 font-medium">Cash Reward</p>
+                            </div>
                           </div>
                         </div>
-                        
-                        <div className="bg-gray-50 p-4 rounded-lg">
-                          <p className="text-sm font-medium">Contact us to get started:</p>
-                          <p className="text-sm mt-2">
-                            <Icon icon={"ph:phone-fill"} className="inline-block mr-2" />
-                            <a href="tel:+2348065342749" className="text-blue-600 hover:underline">+234 806 534 2749</a>
-                          </p>
+
+                        {/* How it Works Section */}
+                        <div className="space-y-4">
+                          <h4 className="font-medium flex items-center gap-x-2">
+                            <Icon icon={"solar:lightbulb-bold"} className="text-2xl text-yellow-500" />
+                            How it Works
+                          </h4>
+                          <div className="pl-4 border-l-2 border-yellow-200 space-y-4">
+                            <div className="flex items-start gap-x-3">
+                              <div className="p-2 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg shadow-md mt-1">
+                                <Icon icon={"solar:home-angle-bold"} className="text-lg text-white" />
+                              </div>
+                              <p className="text-gray-600">Introduce any shared apartment to use our smart meters</p>
+                            </div>
+                            <div className="flex items-start gap-x-3">
+                              <div className="p-2 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg shadow-md mt-1">
+                                <Icon icon={"solar:dollar-minimalistic-bold"} className="text-lg text-white" />
+                              </div>
+                              <p className="text-gray-600">Earn up to ₦1,000,000 in rewards!</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Contact Section */}
+                        <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 p-4 rounded-xl border border-blue-100 relative overflow-hidden">
+                          <div className="absolute right-0 bottom-0 opacity-10">
+                            <Icon icon={"solar:call-chat-rounded-bold"} className="text-8xl text-blue-600" />
+                          </div>
+                          <h4 className="font-medium flex items-center gap-x-2 mb-3">
+                            <Icon icon={"solar:user-speak-rounded-bold"} className="text-xl text-blue-600" />
+                            Get Started Now
+                          </h4>
+                          <a 
+                            href="tel:+2348065342749" 
+                            className="flex items-center gap-x-3 bg-white p-3 rounded-lg hover:bg-blue-50 transition-all transform hover:scale-[1.02] group shadow-sm"
+                          >
+                            <div className="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg shadow-md group-hover:shadow-lg transition-all">
+                              <Icon icon={"solar:phone-bold"} className="text-xl text-white" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium text-gray-900">Call us now</p>
+                              <p className="text-blue-600 font-medium">+234 806 534 2749</p>
+                            </div>
+                          </a>
                         </div>
                       </div>
                     </Modal>
