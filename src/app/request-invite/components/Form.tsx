@@ -102,7 +102,7 @@ export default function RegisterForm({
             onPrev={handlePrev}
             house_id={house.id}
             sku_id={undefined}
-            invite_code={undefined}
+            invite_code={invite.invite.invite_code}
             is_utility_signup={true}
         />,
         ...(house.modules.some(module => module.name.toLowerCase() === 'kyc') ? [
