@@ -24,7 +24,7 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
     const [modalVisible, setModalVisible] = useState(false);
     const [responseText, setResponseText] = useState('');
     const [serviceCharge, setServiceCharge] = useState(0);
-    const SERVICE_CHARGE_PERCENTAGE = 0.08;
+    const SERVICE_CHARGE_PERCENTAGE = 0.03;
 
     const kilowatts = useMemo(() => {
         if (!tokenAmount || tokenAmount < minTokenAmount) return 0;
