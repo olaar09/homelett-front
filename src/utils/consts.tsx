@@ -4,6 +4,8 @@ export const Str = {
   signupUrl: "https://app.letbase.co/request-invite",
   baseUrlDev: 'https://api.homelett.co',
   baseUrlProd: 'https://api.homelett.co',
+  HOUSE_DEFAULT_SURCHARGE: 0.006,
+  TOKEN_PROCESSING_CHARGE: 0.006,
   CV_TEMPLATES: {
     CV_1: {
       key: "CV_1",

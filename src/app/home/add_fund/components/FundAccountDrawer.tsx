@@ -25,6 +25,7 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
     paymentType
 }) => {
     const [amount, setAmount] = useState(0);
+    const [paymentFee, setPaymentFee] = useState(0);
     const [loading, setLoading] = useState(false);
     const [newBankInfo, setNewBankInfo] = useState<ITransferPaymentInfo | null>(null);
     const router = useRouter()
@@ -45,7 +46,7 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
     const config = {
         reference: new Date().getTime().toString(),
         email: userEmail,
-        amount: amount * 100,
+        amount: (amount + paymentFee) * 100,
         publicKey: isProduction ? "pk_live_9e5eb617e571c17f13bb79edec147f2dbe40bfe7" : "pk_test_0bd51a9b53a2c80ead3d84d11b27e4f51659e5f5",
     };
 
@@ -207,8 +208,17 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
                                 placeHolder={"Enter deposit amount"}
                                 type={"number"}
                                 name={"amount"}
-                                onChange={(e) => setAmount(Number(e.target?.value ?? 0))}
+                                onChange={(e) => {
+                                    const value = Number(e.target?.value ?? 0);
+                                    setAmount(value);
+                                    setPaymentFee(value > 0 ? (value * 0.015) + 100 : 0);
+                                }}
                             />
+                            {amount > 0 && (
+                                <div className="text-sm text-gray-600">
+                                    Processing fee: ₦{paymentFee.toFixed(2)}
+                                </div>
+                            )}
 
                             <button
                                 onClick={paymentType === 'direct_deposit' ? handleDirectDeposit : handlePaystackPayment}

@@ -5,6 +5,7 @@ import InputField from '@/app/components/InputField';
 import { AxiosError } from 'axios';
 import APIUtil from "@/services/APIUtil";
 import { AuthContext } from '@/contexts/AuthContext';
+import { Str } from '@/utils/consts';
 
 
 interface PurchaseTokenDrawerProps {
@@ -24,16 +25,16 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
     const [modalVisible, setModalVisible] = useState(false);
     const [responseText, setResponseText] = useState('');
     const [serviceCharge, setServiceCharge] = useState(0);
-    const SERVICE_CHARGE_PERCENTAGE = 0.03;
+    const auth = useContext(AuthContext)
+
+    const houseSurcharge = isNaN(Number(auth.currentUser?.house?.surcharge)) ? Str.HOUSE_DEFAULT_SURCHARGE : Number(auth.currentUser?.house?.surcharge);
+    const tokenProcessingCharge = isNaN(Number(auth.currentUser?.house?.token_surcharge)) ? Str.TOKEN_PROCESSING_CHARGE : Number(auth.currentUser?.house?.token_surcharge);
+    const SERVICE_CHARGE_PERCENTAGE = houseSurcharge + tokenProcessingCharge;
 
     const kilowatts = useMemo(() => {
         if (!tokenAmount || tokenAmount < minTokenAmount) return 0;
         return Number((tokenAmount / tokenPerKw).toFixed(2));
     }, [tokenAmount, tokenPerKw]);
-
-    /*     const serviceCharge = useMemo(() => {
-            return authContext.currentUser?.active_sub ? 0 : 500;
-        }, [authContext.currentUser]); */
 
     useEffect(() => {
         const calculatedServiceCharge = tokenAmount * SERVICE_CHARGE_PERCENTAGE;

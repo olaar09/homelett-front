@@ -13,8 +13,11 @@ export interface IHouse {
     slug: string
     address: string
     modules: IModule[]
+    surcharge?: number;
+    token_surcharge?: number;
+    service_charge?: number;
     is_meter_financed?: number;
-} 
+}
 
 export interface IModule {
     id: number

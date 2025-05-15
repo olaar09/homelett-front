@@ -15,7 +15,7 @@ export default function AuthPage() {
           </div>
 
           <div className="text-center">
-            <h1 className="text-xl font-bold tracking-tight text-gray-900">Welcome to Homelett Residences</h1>
+            <h1 className="text-xl font-bold tracking-tight text-gray-900">Welcome to Homelett</h1>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
