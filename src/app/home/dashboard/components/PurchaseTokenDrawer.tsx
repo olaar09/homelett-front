@@ -145,7 +145,7 @@ const PurchaseTokenDrawer: React.FC<PurchaseTokenDrawerProps> = ({ open, onClose
                             <div className='flex items-center gap-x-1 justify-between' >
                                 <span className='block text-xs'>Recharge {isAdmin ? 'Quantity' : 'Amount'}</span>
                                 {!isAdmin && serviceCharge > 0 && (
-                                    <span className='text-xs text-orange-600'>+ ₦{serviceCharge} processing fee</span>
+                                    <span className='text-xs text-orange-600'>+ ₦{serviceCharge.toFixed(2)} processing fee</span>
                                 )}
                             </div>
                             <InputField
