@@ -216,7 +216,7 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
                             />
                             {amount > 0 && (
                                 <div className="text-sm text-gray-600">
-                                    Processing fee: ₦{paymentFee.toFixed(2)}
+                                    Payment fee: ₦{paymentFee.toFixed(2)}
                                 </div>
                             )}
 
