@@ -2,7 +2,7 @@ export const Str = {
   earnChannel: "https://t.me/+QvfqIlQfQPEzZDM0",
   whatsappHelp: "https://wa.link/ejqshz",
   signupUrl: "https://app.letbase.co/request-invite",
-  baseUrlDev: 'https://api.homelett.co',
+  baseUrlDev: 'http://localhost:3001',
   baseUrlProd: 'https://api.homelett.co',
   HOUSE_DEFAULT_SURCHARGE: 0.006,
   TOKEN_PROCESSING_CHARGE: 0.006,

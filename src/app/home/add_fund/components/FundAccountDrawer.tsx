@@ -30,6 +30,8 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
     const [newBankInfo, setNewBankInfo] = useState<ITransferPaymentInfo | null>(null);
     const router = useRouter()
     const apiUtil = new APIUtil();
+    const user = useContext(AuthContext);
+
 
     useEffect(() => {
         if (!open) {
@@ -81,6 +83,7 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
         }
     };
 
+
     const completePayment = async (reference: string) => {
         try {
             setLoading(true);
@@ -129,6 +132,19 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
 
     const authContext = useContext(AuthContext);
 
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        if (value === "") {
+            setAmount(0);
+            setPaymentFee(0);
+        } else {
+            const paymentProcessingCharge = isNaN(Number(user?.currentUser?.house?.deposit_surcharge)) ? 0.015 : Number(user?.currentUser?.house?.deposit_surcharge);
+            const flatFee = paymentProcessingCharge > 0 ? 100 : 0;
+            const totalFee = (Number(value) * paymentProcessingCharge) + flatFee;
+            setAmount(Number(value));
+            setPaymentFee(totalFee);
+        }
+    };
 
 
     return (
@@ -208,13 +224,9 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
                                 placeHolder={"Enter deposit amount"}
                                 type={"number"}
                                 name={"amount"}
-                                onChange={(e) => {
-                                    const value = Number(e.target?.value ?? 0);
-                                    setAmount(value);
-                                    setPaymentFee(value > 0 ? (value * 0.015) + 100 : 0);
-                                }}
+                                onChange={handleInputChange}
                             />
-                            {amount > 0 && (
+                            {paymentFee > 0 && (
                                 <div className="text-sm text-gray-600">
                                     Payment fee: ₦{paymentFee.toFixed(2)}
                                 </div>

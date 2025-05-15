@@ -14,6 +14,7 @@ export interface IHouse {
     address: string
     modules: IModule[]
     surcharge?: number;
+    deposit_surcharge?: number;
     token_surcharge?: number;
     service_charge?: number;
     is_meter_financed?: number;
