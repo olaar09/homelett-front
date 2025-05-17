@@ -49,6 +49,13 @@ const FundAccountDrawer: React.FC<FundAccountDrawerProps> = ({
         reference: new Date().getTime().toString(),
         email: userEmail,
         amount: (amount + paymentFee) * 100,
+        metadata: {
+            custom_fields: [
+                {
+                    real_amount: amount,
+                },
+            ],
+        },
         publicKey: isProduction ? "pk_live_9e5eb617e571c17f13bb79edec147f2dbe40bfe7" : "pk_test_0bd51a9b53a2c80ead3d84d11b27e4f51659e5f5",
     };
 
