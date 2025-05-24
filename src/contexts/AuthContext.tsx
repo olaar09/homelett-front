@@ -66,7 +66,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     if (currentUser.onboarding_step >= 5) {
       router.push(`/home/dashboard`);
     } else {
-      router.push(`/request-invite/${currentUser.invite?.invite.invite_code}`);
+      router.push(`/request-invite/${currentUser.invite_code}`);
     }
   };
 
