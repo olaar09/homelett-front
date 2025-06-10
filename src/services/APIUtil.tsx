@@ -29,7 +29,7 @@ class APIUtil {
     const isProduction = process.env.NODE_ENV === 'production';
     const baseUrl = isProduction
       ? Str.baseUrlProd
-      : Str.baseUrlDev;
+      : Str.baseUrlProd;
 
     const service = new APIService(baseUrl); // Initialize ApiService
     this.productService = new ProductAPIService(service);

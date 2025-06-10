@@ -2,14 +2,12 @@
 
 import React, { useContext, useEffect } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
-import BasicUserPage from "./BasicUserPage";
-import AdminPage from "./AdminPage";
+import MobileAppDownloadPage from "./MobileAppDownloadPage";
 import { useRouter } from "next/navigation";
 
 const ExplorePage = () => {
   const authContext = useContext(AuthContext);
   const router = useRouter();
-  const isAdmin = authContext.currentUser?.is_house_admin === 1; // Assuming there's a role property
 
   useEffect(() => {
     if (authContext.currentUser && authContext.currentUser.onboarding_step < 6) {
@@ -25,7 +23,7 @@ const ExplorePage = () => {
 
   return (
     <>
-      {isAdmin ? <AdminPage /> : <BasicUserPage />}
+      <MobileAppDownloadPage />
     </>
   );
 };
