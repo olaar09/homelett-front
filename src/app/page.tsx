@@ -26,7 +26,7 @@ export default function AuthPage() {
               </Button>
             </Link>
 
-            <Link href="/request-invite/new-resident" className="w-full">
+            <Link href="/download-app" className="w-full">
               <Button variant="secondary" size="lg" className="w-full gap-2 text-sm">
                 <UserPlus className="h-5 w-5" />
                 New resident

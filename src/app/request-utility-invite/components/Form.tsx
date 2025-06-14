@@ -13,10 +13,10 @@ import { IHouse } from "@/app/interfaces/IHouse"
 
 import { useAuth } from "@/contexts/AuthContext"
 import APIUtil from "@/services/APIUtil"
-import { SuccessStep } from "@/app/request-invite/components/success-step"
-import HouseInfoStep from "@/app/request-invite/components/house-info-step"
-import { BioInfoStep } from "@/app/request-invite/components/bio-info"
-import { SubmitBioInfoStep } from "@/app/request-invite/components/utility-info"
+import { SuccessStep } from "@/app/_hidden_request-invite/components/success-step"
+import HouseInfoStep from "@/app/_hidden_request-invite/components/house-info-step"
+import { BioInfoStep } from "@/app/_hidden_request-invite/components/bio-info"
+import { SubmitBioInfoStep } from "@/app/_hidden_request-invite/components/utility-info"
 
 
 interface RegisterFormProps {

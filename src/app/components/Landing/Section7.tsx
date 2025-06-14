@@ -93,10 +93,10 @@ export default () => {
               </ul>
               <div className="mt-8">
                 <a
-                  href="/request-invite"
+                  href="/download-app"
                   className="inline-flex items-center justify-center bg-white text-lg font-semibold text-blue-600 shadow-sm transition-all duration-150 rounded-xl px-8 py-4 hover:bg-blue-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
-                  Request Access
+                  Get Started
                 </a>
               </div>
             </div>

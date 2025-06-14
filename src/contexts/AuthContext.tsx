@@ -66,7 +66,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     if (currentUser.onboarding_step >= 6) {
       router.push(`/home/dashboard`);
     } else {
-      router.push(`/request-invite/${currentUser.invite_code}`);
+      router.push(`/download-app`);
     }
   };
 
@@ -128,7 +128,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
         if (
           path !== "/" &&
           !path.includes("login") &&
-          !path.includes("request-invite")
+          !path.includes("download-app")
         ) {
           router.push(`/`);
           return;
@@ -138,7 +138,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
       if (
         path !== "/" &&
         !path.includes("login") &&
-        !path.includes("request-invite") &&
+        !path.includes("download-app") &&
         !path.includes("request-utility-invite")
       ) {
         router.push(`/`);

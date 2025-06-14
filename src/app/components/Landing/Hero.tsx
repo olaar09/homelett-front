@@ -38,7 +38,7 @@ const Hero = () => {
               Netflix movies
             </li>
           </ul>
-          <Link href={"/request-invite"}>
+          <Link href={"/download-app"}>
             <div className="mt-6 sm:mt-8 w-full">
               <span className="inline-flex items-center justify-center bg-blue-600 text-lg font-semibold text-white shadow-sm transition-all duration-150 rounded-xl px-8 py-3 lg:w-4/12 w-full hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
                 Get started

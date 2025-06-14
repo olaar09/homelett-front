@@ -11,8 +11,8 @@ const ExplorePage = () => {
 
   useEffect(() => {
     if (authContext.currentUser && authContext.currentUser.onboarding_step < 6) {
-      // Redirect to the invite page if onboarding is not complete
-      router.push(`/request-invite/${authContext.currentUser.invite_code}`);
+      // Redirect to the download app page if onboarding is not complete
+      router.push(`/download-app`);
     }
   }, [authContext.currentUser, router]);
 
