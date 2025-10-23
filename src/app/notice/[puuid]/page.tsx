@@ -21,6 +21,24 @@ const NoticePage: React.FC<NoticePageProps> = () => {
     const apiUtil = new APIUtil();
     const maxRetries = 3;
 
+    // Helper function to format notice type
+    const formatNoticeType = (noticeType: string): string => {
+        const typeMap: Record<string, string> = {
+            'rent_increase': 'Rent Increase Notice',
+            'eviction': 'Eviction Notice',
+            'maintenance': 'Maintenance Notice',
+            'utility': 'Utility Notice',
+            'termination': 'Lease Termination Notice',
+            'renewal': 'Lease Renewal Notice',
+            'inspection': 'Inspection Notice',
+            'repair': 'Repair Notice',
+            'payment': 'Payment Notice',
+            'violation': 'Violation Notice'
+        };
+
+        return typeMap[noticeType] || noticeType.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) + ' ';
+    };
+
     const fetchNoticeData = async () => {
         if (!puuid) {
             setError('Invalid contract ID');
@@ -73,10 +91,13 @@ const NoticePage: React.FC<NoticePageProps> = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+            <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                    <p className="text-gray-600">Loading contract...</p>
+                    <div className="relative">
+                        <div className="w-16 h-16 border-4 border-blue-200 rounded-full animate-spin border-t-blue-500"></div>
+                        <div className="absolute inset-0 w-16 h-16 border-4 border-transparent rounded-full animate-ping border-t-blue-300"></div>
+                    </div>
+                    <p className="text-gray-600 mt-4 text-lg font-medium">Loading contract...</p>
                 </div>
             </div>
         );
@@ -84,20 +105,24 @@ const NoticePage: React.FC<NoticePageProps> = () => {
 
     if (error) {
         return (
-            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                <div className="text-center max-w-md mx-auto p-6">
-                    <div className="text-red-500 text-6xl mb-4">⚠️</div>
-                    <h1 className="text-2xl font-bold text-gray-900 mb-2">Error Loading Contract</h1>
-                    <p className="text-gray-600 mb-6">{error}</p>
+            <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
+                <div className="text-center max-w-md mx-auto p-8">
+                    <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg className="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                        </svg>
+                    </div>
+                    <h1 className="text-2xl font-bold text-gray-900 mb-3">Error Loading Contract</h1>
+                    <p className="text-gray-600 mb-8">{error}</p>
 
                     {retryCount < maxRetries ? (
                         <div className="space-y-4">
                             <p className="text-sm text-gray-500">
                                 Retrying... ({retryCount + 1}/{maxRetries})
                             </p>
-                            <div className="animate-pulse bg-blue-100 h-2 rounded">
+                            <div className="w-full bg-blue-100 rounded-full h-2">
                                 <div
-                                    className="bg-blue-600 h-2 rounded transition-all duration-1000"
+                                    className="bg-blue-500 h-2 rounded-full transition-all duration-1000 ease-out"
                                     style={{ width: `${((retryCount + 1) / maxRetries) * 100}%` }}
                                 ></div>
                             </div>
@@ -105,7 +130,7 @@ const NoticePage: React.FC<NoticePageProps> = () => {
                     ) : (
                         <button
                             onClick={handleRetry}
-                            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                            className="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl"
                         >
                             Try Again
                         </button>
@@ -117,10 +142,14 @@ const NoticePage: React.FC<NoticePageProps> = () => {
 
     if (!contractData) {
         return (
-            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                <div className="text-center max-w-md mx-auto p-6">
-                    <div className="text-gray-400 text-6xl mb-4">📄</div>
-                    <h1 className="text-2xl font-bold text-gray-900 mb-2">No Contract Found</h1>
+            <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
+                <div className="text-center max-w-md mx-auto p-8">
+                    <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <h1 className="text-2xl font-bold text-gray-900 mb-3">No Contract Found</h1>
                     <p className="text-gray-600">The requested contract could not be found or is not available.</p>
                 </div>
             </div>
@@ -128,65 +157,43 @@ const NoticePage: React.FC<NoticePageProps> = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            <div className="max-w-4xl mx-auto p-6">
-                {/* Header */}
-                <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-                    <h1 className="text-3xl font-bold text-gray-900 mb-2">Contract Notice</h1>
-                    <div className="flex items-center space-x-4 text-sm text-gray-600">
-                        <span className="flex items-center">
-                            <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                            Status: {contractData.status}
-                        </span>
-                        <span>Contract ID: {puuid}</span>
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+            {/* Elegant Header */}
+            <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 px-6 py-4 shadow-sm">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                        <div>
+                            <h1 className="text-sm font-semibold text-gray-800">
+                                {contractData?.notice_type ? formatNoticeType(contractData.notice_type) : 'Contract Notice'}
+                            </h1>
+                            {contractData && (
+                                <div className="flex items-center space-x-3 mt-1">
+                                    <span className="text-xs text-gray-500 font-medium">{contractData.tenant_name}</span>
+                                    <span className="text-xs text-gray-400">•</span>
+                                    <span className="text-xs text-gray-500">{contractData.house_name}</span>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className="text-sm text-gray-500 font-mono">
+                        {puuid.slice(0, 8)}...
                     </div>
                 </div>
-
-                {/* PDF Viewer */}
-                {pdfUrl && (
-                    <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-                        <h2 className="text-xl font-semibold text-gray-900 mb-4">Contract Document</h2>
-                        <div className="border rounded-lg overflow-hidden">
-                            <iframe
-                                src={pdfUrl}
-                                className="w-full h-96"
-                                title="Contract PDF"
-                            />
-                        </div>
-                        <div className="mt-4 flex space-x-4">
-                            <a
-                                href={pdfUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                            >
-                                Open in New Tab
-                            </a>
-                            <a
-                                href={pdfUrl}
-                                download
-                                className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
-                            >
-                                Download PDF
-                            </a>
-                        </div>
-                    </div>
-                )}
-
-                {/* Signature Section */}
-                {contractData.tenant_signature && (
-                    <div className="bg-white rounded-lg shadow-sm p-6">
-                        <h2 className="text-xl font-semibold text-gray-900 mb-4">Tenant Signature</h2>
-                        <div className="border rounded-lg p-4 bg-gray-50">
-                            <img
-                                src={contractData.tenant_signature}
-                                alt="Tenant Signature"
-                                className="max-w-full h-auto border rounded"
-                            />
-                        </div>
-                    </div>
-                )}
             </div>
+
+            {/* PDF Viewer */}
+            {pdfUrl && (
+                <div className="h-[calc(100vh-80px)] w-full relative">
+                    <div className="absolute inset-0 bg-white rounded-t-2xl shadow-2xl overflow-hidden">
+                        <iframe
+                            src={pdfUrl}
+                            className="w-full h-full border-0"
+                            title="Contract PDF"
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
