@@ -146,7 +146,7 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
                     <div className="flex items-center space-x-3">
                         <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                         <div>
-                            <h1 className="text-xl font-semibold text-gray-800">Rental Agreement</h1>
+                            <h1 className="text-sm font-semibold text-gray-800">Rental Agreement</h1>
                             {contractData && (
                                 <div className="flex items-center space-x-3 mt-1">
                                     <span className="text-xs text-gray-500 font-medium">{contractData.tenant_name}</span>
