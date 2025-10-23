@@ -2,48 +2,27 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import type { Viewport } from "next";
-import { AuthProvider } from "@/contexts/AuthContext";
-import { Suspense } from "react";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import Head from "next/head";
-import { AppConfigProvider } from "@/contexts/AppConfigContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  manifest: "/manifest.json",
-  title: "HomeLett | Utility management app",
-  description: "Utility management app",
+  title: "HomeLett | Contract Signing",
+  description: "Digital contract signing platform for rental agreements and notices",
   applicationName: "HomeLett",
-  referrer: "no-referrer",
-  appleWebApp: true,
-  formatDetection: { telephone: false },
   icons: {
-    icon: "/favicon.png", // /public path
+    icon: "/favicon.png",
   },
-  // icons: ["/vercel.svg", "/vercel.svg", "/vercel.svg"],
   openGraph: {
     type: "website",
-    title: "HomeLett",
-    description: "",
-    siteName: "",
-    url: "",
-    images: "",
+    title: "HomeLett Contract Signing",
+    description: "Digital contract signing platform for rental agreements and notices",
+    siteName: "HomeLett",
   },
   twitter: {
-    site: "",
-    siteId: "", // make unique
     creator: "HomeLett INC",
-    description: "",
-    title: "HomeLett",
-    images: "",
+    description: "Digital contract signing platform for rental agreements and notices",
+    title: "HomeLett Contract Signing",
   },
-  assets: [
-    "css/style-3L7QEW2Y.css",
-    "/css/app-IQIUDFNW.css",
-    "/css/fonts-YCCUU2CX.css",
-    "/css/cooltipz.min-7ME7X4VP.css",
-  ],
 };
 
 export const viewport: Viewport = {
@@ -51,19 +30,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  // Also supported by less commonly used
-  // interactiveWidget: 'resizes-visual',
 };
-/* <!-- apple splash screen images -->
-<!--
-<link rel='apple-touch-startup-image' href='/images/apple_splash_2048.png' sizes='2048x2732' />
-<link rel='apple-touch-startup-image' href='/images/apple_splash_1668.png' sizes='1668x2224' />
-<link rel='apple-touch-startup-image' href='/images/apple_splash_1536.png' sizes='1536x2048' />
-<link rel='apple-touch-startup-image' href='/images/apple_splash_1125.png' sizes='1125x2436' />
-<link rel='apple-touch-startup-image' href='/images/apple_splash_1242.png' sizes='1242x2208' />
-<link rel='apple-touch-startup-image' href='/images/apple_splash_750.png' sizes='750x1334' />
-<link rel='apple-touch-startup-image' href='/images/apple_splash_640.png' sizes='640x1136' />
---> */
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -71,49 +39,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="referrer" content="no-referrer" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@HomeLettAfrica" />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="en_US" />
-        <title>HomeLett - Utility sharing management</title>
-        <meta name="robots" content="index,follow" />
-        <meta
-          name="description"
-          content=""
-        />
-        <meta
-          property="og:title"
-          content="HomeLett - Utility sharing management"
-        />
-        <meta
-          property="og:description"
-          content=""
-        />
-        <meta property="og:url" content="https://HomeLetttt.net/partners" />
-        <meta property="og:image" content="/images/dashboard-mockup.png" />
-        <meta
-          property="og:image:alt"
-          content="HomeLett - Utility sharing management"
-        />
-        <meta property="og:site_name" content="HomeLett" />
-        <link rel="preconnect" href="https://fonts.bunny.net" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900"
-        />
-      </Head>
       <body className={inter.className}>
-        <GoogleOAuthProvider clientId="655083840359-3mq2i1jhtj7ehodfadm4b232pnetm1ka.apps.googleusercontent.com">
-          <Suspense fallback={<span></span>}>
-            <AppConfigProvider>
-              <AuthProvider>{children} </AuthProvider>{" "}
-            </AppConfigProvider>
-          </Suspense>
-        </GoogleOAuthProvider>
+        {children}
       </body>
     </html>
   );

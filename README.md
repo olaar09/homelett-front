@@ -1,44 +1,112 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# HomeLett Contract Signing Platform
 
-## Getting Started
-pm2 start "npm run start" --name "HomeLett-resident"
+A digital contract signing platform for rental agreements and notices built with Next.js and TypeScript.
 
-PORT=4005 pm2 start "npm run start" --name "HomeLett-utility-next"
+## Features
 
-NODE_ENV=production PORT=4003 pm2 start npm --name "homeLett-resident" -- start
+- **Contract Notices**: View and access rental notices with PDF viewing capabilities
+- **Rental Agreements**: Access rental agreements and manage housing contracts
+- **Secure Access**: Protected with secure authentication and encryption
+- **Mobile Friendly**: Responsive design for all devices
+- **Error Handling**: Automatic retry logic with exponential backoff
+- **PDF Integration**: Built-in PDF viewer with download capabilities
 
+## API Endpoints
 
-https://tailwindpdf.com/
+The platform integrates with the following API endpoints:
 
-First, run the development server:
+### Notices
+- `GET /notices/public/{puuid}` - Fetch notice data by unique identifier
+
+### Agreements
+- `GET /agreements/public/{puuid}` - Fetch agreement data by unique identifier
+
+## Usage
+
+### Accessing Contracts
+
+1. **Notice Page**: Navigate to `/notice/[puuid]` where `puuid` is your contract identifier
+2. **Agreement Page**: Navigate to `/agreement/[puuid]` where `puuid` is your contract identifier
+
+### Example URLs
+- Notice: `https://your-domain.com/notice/123e4567-e89b-12d3-a456-426614174000`
+- Agreement: `https://your-domain.com/agreement/123e4567-e89b-12d3-a456-426614174000`
+
+## API Response Format
+
+```json
+{
+  "status": "success",
+  "data": {
+    "status": "published",
+    "generated_path": "/uploads/notices/notice_123.pdf",
+    "tenant_signature": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+  }
+}
+```
+
+## Development
+
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── notice/[puuid]/     # Notice page with dynamic routing
+│   ├── agreement/[puuid]/   # Agreement page with dynamic routing
+│   ├── layout.tsx          # Root layout
+│   └── page.tsx           # Home page
+├── services/
+│   ├── APIService.tsx      # Base API service
+│   ├── APIUtil.tsx        # API utility manager
+│   └── ContractAPIService.tsx # Contract-specific API calls
+└── utils/
+    ├── consts.tsx         # Constants and configuration
+    └── helpers.js        # Utility functions
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Error Handling
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The platform includes comprehensive error handling:
 
-## Deploy on Vercel
+- **Loading States**: Visual feedback during data fetching
+- **Retry Logic**: Automatic retry with exponential backoff (up to 3 attempts)
+- **Empty States**: User-friendly messages when no data is found
+- **Error States**: Clear error messages with retry options
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technologies Used
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Next.js 14**: React framework with App Router
+- **TypeScript**: Type-safe JavaScript
+- **Tailwind CSS**: Utility-first CSS framework
+- **Axios**: HTTP client for API requests
+- **Firebase**: Authentication and backend services
+
+## License
+
+© 2024 HomeLett. All rights reserved.
