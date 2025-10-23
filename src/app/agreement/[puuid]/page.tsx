@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import APIUtil from '@/services/APIUtil';
 import { ContractData } from '@/interfaces';
@@ -17,6 +17,10 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
     const [error, setError] = useState<string | null>(null);
     const [retryCount, setRetryCount] = useState(0);
     const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+    const [showSignatureModal, setShowSignatureModal] = useState(false);
+    const [isSigning, setIsSigning] = useState(false);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [isDrawing, setIsDrawing] = useState(false);
 
     const apiUtil = new APIUtil();
     const maxRetries = 3;
@@ -69,6 +73,89 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
     const handleRetry = () => {
         setRetryCount(0);
         fetchAgreementData();
+    };
+
+    // Signature functionality
+    const startDrawing = (e: React.MouseEvent<HTMLCanvasElement>) => {
+        setIsDrawing(true);
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        ctx.beginPath();
+        ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    };
+
+    const draw = (e: React.MouseEvent<HTMLCanvasElement>) => {
+        if (!isDrawing) return;
+
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.stroke();
+    };
+
+    const stopDrawing = () => {
+        setIsDrawing(false);
+    };
+
+    const clearSignature = () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    };
+
+    const saveSignature = async () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        setIsSigning(true);
+        try {
+            const signatureData = canvas.toDataURL('image/png');
+
+            // Here you would typically send the signature to your API
+            // For now, we'll just update the local state
+            if (contractData) {
+                setContractData({
+                    ...contractData,
+                    tenant_signature: signatureData
+                });
+            }
+
+            setShowSignatureModal(false);
+        } catch (error) {
+            console.error('Error saving signature:', error);
+        } finally {
+            setIsSigning(false);
+        }
+    };
+
+    const openSignatureModal = () => {
+        setShowSignatureModal(true);
+        // Initialize canvas
+        setTimeout(() => {
+            const canvas = canvasRef.current;
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            ctx.strokeStyle = '#374151';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+        }, 100);
     };
 
     if (loading) {
@@ -171,6 +258,63 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
                             className="w-full h-full border-0"
                             title="Agreement PDF"
                         />
+                    </div>
+                </div>
+            )}
+
+            {/* Signature Button - Only show when tenant_signature is null */}
+            {contractData && (
+                <div className="fixed bottom-5 left-0  right-0 z-10 px-4">
+                    <button
+                        onClick={openSignatureModal}
+                        className="bg-emerald-600 text-white text-center px-8 py-3 rounded-xl hover:bg-emerald-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 w-full"
+                    >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
+                        <span>Add Signature</span>
+                    </button>
+                </div>
+            )}
+
+            {/* Signature Modal */}
+            {showSignatureModal && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+                    <div className="bg-white rounded-2xl p-6 w-full max-w-md">
+                        <h2 className="text-xl font-semibold text-gray-800 mb-4">Sign Agreement</h2>
+                        <div className="border-2 border-dashed border-gray-300 rounded-lg mb-4">
+                            <canvas
+                                ref={canvasRef}
+                                width={400}
+                                height={200}
+                                className="w-full h-48 cursor-crosshair"
+                                onMouseDown={startDrawing}
+                                onMouseMove={draw}
+                                onMouseUp={stopDrawing}
+                                onMouseLeave={stopDrawing}
+                            />
+                        </div>
+                        <div className="flex space-x-3">
+                            <button
+                                onClick={clearSignature}
+                                className="flex-1 bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+                            >
+                                Clear
+                            </button>
+                            <button
+                                onClick={() => setShowSignatureModal(false)}
+                                className="flex-1 bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={saveSignature}
+                                disabled={isSigning}
+                                className="flex-1 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-50"
+                            >
+                                {isSigning ? 'Saving...' : 'Save'}
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
