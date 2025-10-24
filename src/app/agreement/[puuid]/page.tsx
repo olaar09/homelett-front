@@ -410,14 +410,24 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
 
                             {/* Download Button */}
                             <button
-                                onClick={() => {
+                                onClick={async () => {
                                     if (pdfUrl) {
-                                        const link = document.createElement('a');
-                                        link.href = pdfUrl;
-                                        link.download = `agreement-${puuid.slice(0, 8)}.pdf`;
-                                        document.body.appendChild(link);
-                                        link.click();
-                                        document.body.removeChild(link);
+                                        try {
+                                            const response = await fetch(pdfUrl);
+                                            const blob = await response.blob();
+                                            const url = window.URL.createObjectURL(blob);
+                                            const link = document.createElement('a');
+                                            link.href = url;
+                                            link.download = `agreement-${puuid.slice(0, 8)}.pdf`;
+                                            document.body.appendChild(link);
+                                            link.click();
+                                            document.body.removeChild(link);
+                                            window.URL.revokeObjectURL(url);
+                                        } catch (error) {
+                                            console.error('Download failed:', error);
+                                            // Fallback to opening in new tab
+                                            window.open(pdfUrl, '_blank');
+                                        }
                                     }
                                 }}
                                 className="w-full bg-emerald-600 text-white px-8 py-4 rounded-xl hover:bg-emerald-700 transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl flex items-center justify-center space-x-3"
@@ -425,7 +435,7 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
-                                <span>Download Signed Agreement</span>
+                                <span>Download Agreement</span>
                             </button>
                         </div>
                     </div>
