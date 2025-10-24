@@ -286,16 +286,26 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
             {contractData && (
                 <div className="fixed bottom-5 left-0 right-0 z-10 px-4">
                     <button
-                        onClick={() => {
+                        onClick={async () => {
                             if (contractData.tenant_signature) {
                                 // Download the agreement
                                 if (pdfUrl) {
-                                    const link = document.createElement('a');
-                                    link.href = pdfUrl;
-                                    link.download = `agreement-${puuid.slice(0, 8)}.pdf`;
-                                    document.body.appendChild(link);
-                                    link.click();
-                                    document.body.removeChild(link);
+                                    try {
+                                        const response = await fetch(pdfUrl);
+                                        const blob = await response.blob();
+                                        const url = window.URL.createObjectURL(blob);
+                                        const link = document.createElement('a');
+                                        link.href = url;
+                                        link.download = `agreement-${puuid.slice(0, 8)}.pdf`;
+                                        document.body.appendChild(link);
+                                        link.click();
+                                        document.body.removeChild(link);
+                                        window.URL.revokeObjectURL(url);
+                                    } catch (error) {
+                                        console.error('Download failed:', error);
+                                        // Fallback to opening in new tab
+                                        window.open(pdfUrl, '_blank');
+                                    }
                                 }
                             } else {
                                 // Open signature modal
@@ -303,8 +313,8 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
                             }
                         }}
                         className={`text-white text-center px-8 py-3 rounded-xl transition-all duration-200 font-medium shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 w-full ${contractData.tenant_signature
-                                ? 'bg-blue-600 hover:bg-blue-700'
-                                : 'bg-emerald-600 hover:bg-emerald-700'
+                            ? 'bg-blue-600 hover:bg-blue-700'
+                            : 'bg-emerald-600 hover:bg-emerald-700'
                             }`}
                     >
                         {contractData.tenant_signature ? (
