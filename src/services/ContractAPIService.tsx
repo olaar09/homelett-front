@@ -25,6 +25,18 @@ class ContractAPIService {
     public async getAgreement(puuid: string): Promise<ContractResponse> {
         return await this.apiService.get<ContractResponse>(`/agreements/public/${puuid}`);
     }
+
+    /**
+     * Update tenant signature for an agreement
+     * @param puuid - The unique identifier for the agreement
+     * @param signature - The base64 signature data
+     * @returns Promise<ContractResponse>
+     */
+    public async updateTenantSignature(puuid: string, signature: string): Promise<ContractResponse> {
+        return await this.apiService.put<ContractResponse>(`/agreements/${puuid}/tenant-signature`, {
+            tenant_signature: signature
+        });
+    }
 }
 
 export default ContractAPIService;

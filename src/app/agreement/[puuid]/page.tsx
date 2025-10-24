@@ -19,6 +19,7 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
     const [pdfUrl, setPdfUrl] = useState<string | null>(null);
     const [showSignatureModal, setShowSignatureModal] = useState(false);
     const [isSigning, setIsSigning] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [isDrawing, setIsDrawing] = useState(false);
 
@@ -76,7 +77,7 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
     };
 
     // Signature functionality
-    const startDrawing = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
         setIsDrawing(true);
         const canvas = canvasRef.current;
         if (!canvas) return;
@@ -85,11 +86,14 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
+        const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+        const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+
         ctx.beginPath();
-        ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.moveTo(clientX - rect.left, clientY - rect.top);
     };
 
-    const draw = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
         if (!isDrawing) return;
 
         const canvas = canvasRef.current;
@@ -99,7 +103,10 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+        const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+
+        ctx.lineTo(clientX - rect.left, clientY - rect.top);
         ctx.stroke();
     };
 
@@ -125,18 +132,26 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
         try {
             const signatureData = canvas.toDataURL('image/png');
 
-            // Here you would typically send the signature to your API
-            // For now, we'll just update the local state
-            if (contractData) {
-                setContractData({
-                    ...contractData,
-                    tenant_signature: signatureData
-                });
-            }
+            // Send signature to API
+            const response = await apiUtil.contractService.updateTenantSignature(puuid, signatureData);
 
-            setShowSignatureModal(false);
+            if (response.status === 'success') {
+                // Update local state
+                if (contractData) {
+                    setContractData({
+                        ...contractData,
+                        tenant_signature: signatureData
+                    });
+                }
+
+                setShowSignatureModal(false);
+                setShowSuccessModal(true);
+            } else {
+                throw new Error('Failed to save signature');
+            }
         } catch (error) {
             console.error('Error saving signature:', error);
+            // You might want to show an error message to the user here
         } finally {
             setIsSigning(false);
         }
@@ -144,7 +159,7 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
 
     const openSignatureModal = () => {
         setShowSignatureModal(true);
-        // Initialize canvas
+        // Initialize canvas after modal opens
         setTimeout(() => {
             const canvas = canvasRef.current;
             if (!canvas) return;
@@ -152,17 +167,22 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
             const ctx = canvas.getContext('2d');
             if (!ctx) return;
 
+            // Set canvas properties
             ctx.strokeStyle = '#374151';
             ctx.lineWidth = 2;
             ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            // Clear any existing content
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }, 100);
     };
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50 flex items-center justify-center">
+            <div className="fixed inset-0 bg-gradient-to-br from-slate-50 to-emerald-50 flex items-center justify-center">
                 <div className="text-center">
-                    <div className="relative">
+                    <div className="relative mx-auto w-16 h-16">
                         <div className="w-16 h-16 border-4 border-emerald-200 rounded-full animate-spin border-t-emerald-500"></div>
                         <div className="absolute inset-0 w-16 h-16 border-4 border-transparent rounded-full animate-ping border-t-emerald-300"></div>
                     </div>
@@ -262,17 +282,46 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
                 </div>
             )}
 
-            {/* Signature Button - Only show when tenant_signature is null */}
+            {/* Signature/Download Button */}
             {contractData && (
-                <div className="fixed bottom-5 left-0  right-0 z-10 px-4">
+                <div className="fixed bottom-5 left-0 right-0 z-10 px-4">
                     <button
-                        onClick={openSignatureModal}
-                        className="bg-emerald-600 text-white text-center px-8 py-3 rounded-xl hover:bg-emerald-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 w-full"
+                        onClick={() => {
+                            if (contractData.tenant_signature) {
+                                // Download the agreement
+                                if (pdfUrl) {
+                                    const link = document.createElement('a');
+                                    link.href = pdfUrl;
+                                    link.download = `agreement-${puuid.slice(0, 8)}.pdf`;
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                }
+                            } else {
+                                // Open signature modal
+                                openSignatureModal();
+                            }
+                        }}
+                        className={`text-white text-center px-8 py-3 rounded-xl transition-all duration-200 font-medium shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 w-full ${contractData.tenant_signature
+                                ? 'bg-blue-600 hover:bg-blue-700'
+                                : 'bg-emerald-600 hover:bg-emerald-700'
+                            }`}
                     >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                        </svg>
-                        <span>Add Signature</span>
+                        {contractData.tenant_signature ? (
+                            <>
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <span>Download Agreement</span>
+                            </>
+                        ) : (
+                            <>
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                </svg>
+                                <span>Add Signature</span>
+                            </>
+                        )}
                     </button>
                 </div>
             )}
@@ -292,6 +341,10 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
                                 onMouseMove={draw}
                                 onMouseUp={stopDrawing}
                                 onMouseLeave={stopDrawing}
+                                onTouchStart={startDrawing}
+                                onTouchMove={draw}
+                                onTouchEnd={stopDrawing}
+                                style={{ touchAction: 'none' }}
                             />
                         </div>
                         <div className="flex space-x-3">
@@ -313,6 +366,56 @@ const AgreementPage: React.FC<AgreementPageProps> = () => {
                                 className="flex-1 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-50"
                             >
                                 {isSigning ? 'Saving...' : 'Save'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Success Modal */}
+            {showSuccessModal && (
+                <div className="fixed inset-0 bg-black/50 flex items-end justify-center z-50">
+                    <div className="bg-white rounded-t-3xl w-full max-w-md h-[85vh] flex flex-col">
+                        {/* Handle bar */}
+                        <div className="flex justify-center pt-4 pb-2">
+                            <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
+                        </div>
+
+                        {/* Content */}
+                        <div className="flex-1 flex flex-col items-center justify-center px-8 text-center">
+                            <div className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-8">
+                                <svg className="w-12 h-12 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+
+                            <h2 className="text-3xl font-bold text-gray-800 mb-4">Signature Saved!</h2>
+                            <p className="text-gray-600 mb-8 text-lg">Your signature has been successfully saved to the agreement.</p>
+
+                            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6 mb-8 w-full">
+                                <p className="text-emerald-700 font-medium text-lg">
+                                    The agreement is now complete and signed.
+                                </p>
+                            </div>
+
+                            {/* Download Button */}
+                            <button
+                                onClick={() => {
+                                    if (pdfUrl) {
+                                        const link = document.createElement('a');
+                                        link.href = pdfUrl;
+                                        link.download = `agreement-${puuid.slice(0, 8)}.pdf`;
+                                        document.body.appendChild(link);
+                                        link.click();
+                                        document.body.removeChild(link);
+                                    }
+                                }}
+                                className="w-full bg-emerald-600 text-white px-8 py-4 rounded-xl hover:bg-emerald-700 transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl flex items-center justify-center space-x-3"
+                            >
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <span>Download Signed Agreement</span>
                             </button>
                         </div>
                     </div>
