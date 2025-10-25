@@ -46,9 +46,6 @@ export default function LeftHero() {
                         </svg>
                     </button>
                 </div>
-
-                {/* Address Input Field */}
-                {/*       <AddressInput /> */}
             </div>
         </div>
     );
