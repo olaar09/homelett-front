@@ -48,7 +48,7 @@ export default function LeftHero() {
                 </div>
 
                 {/* Address Input Field */}
-                <AddressInput />
+                {/*       <AddressInput /> */}
             </div>
         </div>
     );

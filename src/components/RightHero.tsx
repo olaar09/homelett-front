@@ -8,12 +8,12 @@ const transactionTypes = {
 
 const RightHero = () => {
     const transactions = [
-        { type: "PRE-PAY", company: "Capital Construction", amount: "$11419.00", method: "ACH", angle: 0, distance: 180 },
-        { type: "WAIVER REQUEST", company: "Clean Glass Co", angle: 60, distance: 180 },
-        { type: "PAYMENT", company: "Top Roofing Inc", amount: "$4389.00", method: "AM EX", angle: 120, distance: 180 },
-        { type: "PRE-PAY", company: "Precision Co", amount: "$4389.00", method: "VISA", angle: 180, distance: 180 },
-        { type: "PAYMENT", company: "Arg Constructions", amount: "$1880.00", method: "ACH", angle: 240, distance: 180 },
-        { type: "PAYMENT", company: "Elite Concrete", amount: "$8419.00", method: "VISA", angle: 300, distance: 180 },
+        { type: "PRE-PAY", company: "Capital Construction", amount: "$11419.00", method: "ACH", angle: 0, distance: 220 },
+        { type: "WAIVER REQUEST", company: "Clean Glass Co", angle: 60, distance: 220 },
+        { type: "PAYMENT", company: "Top Roofing Inc", amount: "$4389.00", method: "AM EX", angle: 120, distance: 220 },
+        { type: "PRE-PAY", company: "Precision Co", amount: "$4389.00", method: "VISA", angle: 180, distance: 220 },
+        { type: "PAYMENT", company: "Arg Constructions", amount: "$1880.00", method: "ACH", angle: 240, distance: 220 },
+        { type: "PAYMENT", company: "Elite Concrete", amount: "$8419.00", method: "VISA", angle: 300, distance: 220 },
     ];
 
     // Calculate positions based on angle and distance from center (in pixels)
