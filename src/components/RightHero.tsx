@@ -55,10 +55,33 @@ const RightHero = () => {
                     0% { background-position: -200% center; }
                     100% { background-position: 200% center; }
                 }
+                @keyframes pulse-line {
+                    0% {
+                        stroke-dashoffset: 0;
+                        opacity: 0.3;
+                    }
+                    50% {
+                        opacity: 1;
+                    }
+                    100% {
+                        stroke-dashoffset: -10;
+                        opacity: 0.3;
+                    }
+                }
             `}</style>
             <div className="relative w-full h-[600px] overflow-hidden">
                 {/* SVG for connecting lines */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
+                    <defs>
+                        <linearGradient id="lineGradient" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stopColor="#7c9687" stopOpacity="0.2">
+                                <animate attributeName="stop-opacity" values="0.2;0.6;0.2" dur="2s" repeatCount="indefinite" />
+                            </stop>
+                            <stop offset="100%" stopColor="#8fa396" stopOpacity="0.7">
+                                <animate attributeName="stop-opacity" values="0.7;0.2;0.7" dur="2s" repeatCount="indefinite" />
+                            </stop>
+                        </linearGradient>
+                    </defs>
                     {transactions.map((transaction, index) => {
                         const coords = getLineCoordinates(transaction.angle, transaction.distance);
                         return (
@@ -68,10 +91,13 @@ const RightHero = () => {
                                 y1="50%"
                                 x2={`${coords.x}%`}
                                 y2={`${coords.y}%`}
-                                stroke="#e5e7eb"
-                                strokeWidth="1.5"
-                                strokeDasharray="3,3"
-                                opacity="0.5"
+                                stroke="url(#lineGradient)"
+                                strokeWidth="2"
+                                strokeDasharray="4,2"
+                                opacity="0.8"
+                                style={{
+                                    animation: `pulse-line 2s ease-in-out infinite ${index * 0.2}s`
+                                }}
                             />
                         );
                     })}
@@ -79,8 +105,8 @@ const RightHero = () => {
 
                 {/* Central Handle Circle */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-                    <div className="w-24 h-24 bg-white border-2 rounded-full flex items-center justify-center relative" style={{ borderColor: '#289264' }}>
-                        <span className="font-semibold text-base" style={{ color: '#289264' }}>Homelett</span>
+                    <div className="w-24 h-24 bg-white border-2 rounded-full flex items-center justify-center relative" style={{ borderColor: '#dbe8e3' }}>
+                        <span className="font-semibold text-base" style={{ color: '#9db3aa' }}>Homelett</span>
                     </div>
                 </div>
 
