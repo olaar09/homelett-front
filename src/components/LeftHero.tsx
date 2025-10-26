@@ -1,7 +1,14 @@
+'use client';
+
 import Image from 'next/image';
 import AddressInput from './AddressInput';
+import TrustedBy from './TrustedBy';
 
-export default function LeftHero() {
+interface LeftHeroProps {
+    onDownloadClick: () => void;
+}
+
+export default function LeftHero({ onDownloadClick }: LeftHeroProps) {
     return (
         <div className="space-y-6 md:space-y-8 pt-8 md:pt-16 lg:pt-24">
             {/* Hero Section */}
@@ -34,17 +41,28 @@ export default function LeftHero() {
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 md:mb-8">
                     {/* Primary Button */}
-                    <button className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#289264] text-white font-medium rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto">
+                    <button
+                        onClick={onDownloadClick}
+                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#289264] text-white font-medium rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto"
+                    >
                         <span className="text-sm md:text-base text-white"> Download App</span>
                         <Image src="/material-symbols-light--mobile-outline.svg" alt="Download App" width={20} height={20} className="w-5 h-5 text-white" />
                     </button>
 
                     {/* Secondary Button */}
-                    <button className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-black font-medium rounded-lg hover:bg-gray-200 transition-colors w-full sm:w-auto">
+                    <a 
+                        href="https://wa.me/2348112755857"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-black font-medium rounded-lg hover:bg-gray-200 transition-colors w-full sm:w-auto"
+                    >
                         <span className="text-sm md:text-base"> Contact Support</span>
                         <Image src="/material-symbols-light--support-agent-sharp.svg" alt="Support" width={20} height={20} className="w-5 h-5" />
-                    </button>
+                    </a>
                 </div>
+
+                {/* TrustedBy Section */}
+                <TrustedBy />
             </div>
         </div >
     );
