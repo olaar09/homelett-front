@@ -1,8 +1,17 @@
+import Image from 'next/image';
+
 export default function Header() {
     return (
         <header className="px-4 py-4 flex items-center justify-between max-w-7xl mx-auto">
-            <div className="flex items-center">
-                <span className="text-xl font-semibold text-black">Homelett</span>
+            <div className="flex items-center space-x-2">
+                <Image
+                    src="/icon.svg"
+                    alt="Homelett Logo"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6"
+                />
+                <span className="text-xl font-semibold text-[#289264]">Homelett</span>
             </div>
 
             {/* Desktop Navigation */}

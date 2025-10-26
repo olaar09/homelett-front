@@ -47,12 +47,56 @@ const TrustedBy = () => {
             ),
             text: "evolve credit",
             color: "#8B5CF6"
+        },
+        {
+            name: "Paystack",
+            icon: (
+                <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+                    <rect x="4" y="8" width="24" height="16" rx="3" fill="#003B88" />
+                    <path d="M10 14h12M10 18h12" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+            ),
+            text: "paystack",
+            color: "#003B88"
+        },
+        {
+            name: "Interswitch",
+            icon: (
+                <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="12" stroke="#FF6900" strokeWidth="2.5" />
+                    <path d="M12 12h8M12 16h8M12 20h6" stroke="#FF6900" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+            ),
+            text: "interswitch",
+            color: "#FF6900"
+        },
+        {
+            name: "Kuda Bank",
+            icon: (
+                <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 4C9 4 4 9 4 16C4 23 9 28 16 28C23 28 28 23 28 16C28 9 23 4 16 4Z" fill="#40196D" />
+                    <path d="M16 10V22M10 16H22" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+                </svg>
+            ),
+            text: "kuda",
+            color: "#40196D"
+        },
+        {
+            name: "TeamApt",
+            icon: (
+                <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+                    <rect x="6" y="6" width="20" height="20" rx="4" fill="#00AEEF" />
+                    <path d="M12 16l4 4 8-8" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+            ),
+            text: "teamapt",
+            color: "#00AEEF"
         }
     ];
 
     return (
         <div className="py-12 px-4 w-full">
-            <div className="max-w-4xl mr-auto">
+            <div className="max-w-7xl mr-auto">
                 <p className="text-sm text-gray-500 mb-6">Trusted by</p>
                 <div className="flex flex-wrap items-center justify-start gap-8 lg:gap-12">
                     {companies.map((company, index) => (

@@ -1,19 +1,23 @@
 import React from "react";
+import Image from 'next/image';
 
 const transactionTypes = {
-    "PRE-PAY": { icon: "🏢", color: "#fefefe", typeColor: "text-gray-600", gradientFrom: "#ffffff", gradientMid: "#f8f8f8", gradientTo: "#f5f5f5" },
-    "PAYMENT": { icon: "💳", color: "#fefefe", typeColor: "text-gray-600", gradientFrom: "#ffffff", gradientMid: "#f8f8f8", gradientTo: "#f5f5f5" },
-    "WAIVER REQUEST": { icon: "📄", color: "#fefefe", typeColor: "text-gray-600", gradientFrom: "#ffffff", gradientMid: "#f8f8f8", gradientTo: "#f5f5f5" },
+    "Rent Collection": { icon: "💰", color: "#F0F9F4" },
+    "Billing": { icon: "📋", color: "#F0F4FF" },
+    "Utility Metering": { icon: "⚡", color: "#FFFBEB" },
+    "Document Signing": { icon: "📝", color: "#F5F3FF" },
+    "Record Keeping": { icon: "📊", color: "#F0FDF4" },
+    "Analytics": { icon: "📈", color: "#FEF2F2" },
 };
 
 const RightHero = () => {
     const transactions = [
-        { type: "PRE-PAY", company: "Capital Construction", amount: "$11419.00", method: "ACH", angle: 0, distance: 200 },
-        { type: "WAIVER REQUEST", company: "Clean Glass Co", angle: 60, distance: 200 },
-        { type: "PAYMENT", company: "Top Roofing Inc", amount: "$4389.00", method: "AM EX", angle: 120, distance: 200 },
-        { type: "PRE-PAY", company: "Precision Co", amount: "$4389.00", method: "VISA", angle: 180, distance: 200 },
-        { type: "PAYMENT", company: "Arg Constructions", amount: "$1880.00", method: "ACH", angle: 240, distance: 200 },
-        { type: "PAYMENT", company: "Elite Concrete", amount: "$8419.00", method: "VISA", angle: 300, distance: 200 },
+        { type: "Rent Collection", company: "Capital Construction", amount: "$11419.00", method: "ACH", angle: 0, distance: 200 },
+        { type: "Billing", company: "Clean Glass Co", angle: 60, distance: 200 },
+        { type: "Utility Metering", company: "Top Roofing Inc", amount: "$4389.00", method: "AM EX", angle: 120, distance: 200 },
+        { type: "Document Signing", company: "Precision Co", amount: "$4389.00", method: "VISA", angle: 180, distance: 200 },
+        { type: "Record Keeping", company: "Arg Constructions", amount: "$1880.00", method: "ACH", angle: 240, distance: 200 },
+        { type: "Analytics", company: "Elite Concrete", amount: "$8419.00", method: "VISA", angle: 300, distance: 200 },
     ];
 
     // Calculate positions based on angle and distance from center (in pixels)
@@ -106,7 +110,13 @@ const RightHero = () => {
                 {/* Central Handle Circle */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
                     <div className="w-24 h-24 bg-white border-2 rounded-full flex items-center justify-center relative" style={{ borderColor: '#dbe8e3' }}>
-                        <span className="font-semibold text-base" style={{ color: '#9db3aa' }}>Homelett</span>
+                        <Image
+                            src="/icon.svg"
+                            alt="Homelett App Icon"
+                            width={32}
+                            height={32}
+                            className="w-8 h-8"
+                        />
                     </div>
                 </div>
 
@@ -121,40 +131,12 @@ const RightHero = () => {
                             className="absolute z-20"
                             style={cardStyle}
                         >
-                            <div className="p-3 rounded-lg border border-gray-200 w-[140px] min-h-[130px] flex flex-col justify-between relative overflow-hidden"
+                            <div className="p-4 rounded-lg w-[120px] h-[120px] flex flex-col items-center justify-center text-center"
                                 style={{
                                     backgroundColor: typeInfo.color,
-                                    background: `linear-gradient(110deg, ${typeInfo.gradientFrom} 0%, ${typeInfo.gradientMid} 25%, ${typeInfo.gradientTo} 50%, ${typeInfo.gradientMid} 75%, ${typeInfo.gradientFrom} 100%)`,
-                                    backgroundSize: '200% 100%',
-                                    animation: 'subtle-shimmer 4s ease-in-out infinite'
                                 }}>
-                                <div className="relative z-10">
-                                    <div className="flex items-center gap-1.5 mb-1.5">
-                                        <span className="text-lg">{typeInfo.icon}</span>
-                                        <span className={`text-xs font-medium ${typeInfo.typeColor}`}>{transaction.type}</span>
-                                    </div>
-
-                                    {transaction.amount && (
-                                        <div className="text-sm font-bold text-gray-900 mb-1.5">{transaction.amount}</div>
-                                    )}
-
-                                    {!transaction.amount && (
-                                        <div className="text-sm font-bold text-gray-900 mb-1.5 opacity-0">Placeholder</div>
-                                    )}
-
-                                    <div className="flex items-center justify-between gap-1.5 mb-1">
-                                        {transaction.method && (
-                                            <span className={`px-1.5 py-0.5 rounded-full text-xs font-medium ${transaction.method === "ACH" ? "bg-gray-200 text-gray-700" :
-                                                transaction.method === "VISA" ? "bg-blue-600 text-white" :
-                                                    transaction.method === "AM EX" ? "bg-blue-500 text-white" :
-                                                        "bg-orange-500 text-white"
-                                                }`}>
-                                                {transaction.method}
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-                                <div className="text-xs font-medium text-gray-700 relative z-10">{transaction.company}</div>
+                                <div className="text-3xl mb-2">{typeInfo.icon}</div>
+                                <div className="text-xs font-medium text-gray-700">{transaction.type}</div>
                             </div>
                         </div>
                     );
