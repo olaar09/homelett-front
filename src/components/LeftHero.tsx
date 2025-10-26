@@ -50,7 +50,7 @@ export default function LeftHero({ onDownloadClick }: LeftHeroProps) {
                     </button>
 
                     {/* Secondary Button */}
-                    <a 
+                    <a
                         href="https://wa.me/2348112755857"
                         target="_blank"
                         rel="noopener noreferrer"

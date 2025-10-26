@@ -6,22 +6,22 @@ import type { Viewport } from "next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "HomeLett | Contract Signing",
-  description: "Digital contract signing platform for rental agreements and notices",
+  title: "HomeLett | Propel your real estate business",
+  description: "Propel your real estate business",
   applicationName: "HomeLett",
   icons: {
     icon: "/favicon.png",
   },
   openGraph: {
     type: "website",
-    title: "HomeLett Contract Signing",
-    description: "Digital contract signing platform for rental agreements and notices",
+    title: "HomeLett Propel your real estate business",
+    description: "Propel your real estate business",
     siteName: "HomeLett",
   },
   twitter: {
-    creator: "HomeLett INC",
-    description: "Digital contract signing platform for rental agreements and notices",
-    title: "HomeLett Contract Signing",
+    creator: "HomeLett Limited",
+    description: "Propel your real estate business",
+    title: "HomeLett Propel your real estate business",
   },
 };
 
