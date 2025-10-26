@@ -1,6 +1,4 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import firebase from "firebase/compat/app";
-import "firebase/auth";
 
 type RequestOptions = {
   method: "GET" | "POST" | "PUT" | "HEAD" | "DELETE";
